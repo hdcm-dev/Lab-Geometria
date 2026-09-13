@@ -1,6 +1,6 @@
 # PRODUCT-MANIFEST — Fábrica de Geometría
 
-**Plantilla de referencia:** `PRODUCT-MANIFEST-template.md` versión **6.1** (Framework SDD)
+**Plantilla de referencia:** `PRODUCT-MANIFEST-template.md` versión **6.1** (Framework SDD), que es la que declara la procedencia de §1.1
 
 Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §13, según `Intake-Rules.md` §4 y `Master-Prompt.md` §3. No se completa a mano.
 
@@ -17,9 +17,9 @@ Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-G
 | Unidad de entrega principal | — | `GeometriaFactory-Api` |
 | Intake (origen) | — | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **5.0** (de su §13.1, §13.2 y §13.3 se deriva este manifiesto) |
 | Documento | — | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` |
-| Versión | — | 7.1 |
+| Versión | — | 7.0 |
 | Fecha | — | 2026-09-13 |
-| Estado | — | **Aprobado** (confirmado por el Product Owner el 2026-08-16). Migraciones 6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0, 10.0 → 13.3 y **13.7 → 13.16** cerradas (la procedencia pasó de 13.3 a 13.7 sin migrar el 2026-08-27, por la salida `C` de la quinta reanudación) |
+| Estado | — | **Aprobado** (confirmado por el Product Owner el 2026-08-16). Migraciones 6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0 y **10.0 → 13.3** cerradas, y **procedencia actualizada a 13.7 sin migrar** el 2026-08-27, por la salida `C` de la quinta reanudación |
 
 `Slug-Producto` es el único campo derivado: se obtiene de `Nombre-Producto` con el algoritmo de `Master-Prompt.md` §3.2 (`Fábrica de Geometría` → `Fabrica-De-Geometria`). `Raiz-Codigo` y `Artefacto-Agrupacion` se leen declarados del intake (cabecera y perfil de convención de §13), no se derivan.
 
@@ -27,89 +27,89 @@ Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-G
 
 ### §1.1 Procedencia del framework
 
-**Reescrita el 2026-09-13 por la fase M5 de la octava migración normativa de este destino, 13.7 → 13.16**
-(`Master-Prompt-Migracion.md` 2.10 §9), **con la cadena completa**: intake **5.0** (M2), este manifiesto
-**7.0** re-derivado (M3), y los veintidós documentos de `SDD/Docs/` del plan escritos con su estado previo
-archivado (M4), sin ninguna fila del plan sin resolver
-([`../Docs/Audit/Plan-Migracion-13.7-a-13.16.md`](../Docs/Audit/Plan-Migracion-13.7-a-13.16.md) 1.4 §4.1).
-El audit de cierre de M4 aprobó con observaciones y sin P0
-([`../Docs/Audit/Informe-Migracion-13.7-a-13.16.md`](../Docs/Audit/Informe-Migracion-13.7-a-13.16.md) 1.1 §9), y
-el trámite completo —plan, mesa, propuestas, aprobación del Product Owner y aplicación— está en
-[`../Expedientes/0001-Migracion-Normativa-A-13.16/`](../Expedientes/0001-Migracion-Normativa-A-13.16/README.md).
-Las versiones de esta tabla se leyeron del conjunto vigente en `IA.SDD` `main` `8c55a1e` contra el
-snapshot `_legacy/13.7/` del framework (evidencia E-002 del expediente), no del `CHANGELOG.md`.
+**Actualizada el 2026-08-27 por la salida `C` del orquestador de reanudación, y NO por una migración.**
+Es el caso que `Master-Prompt-Reanudacion.md` §4 llama *«actualizar la procedencia sin migrar»*, y que
+**sólo procede cuando se verificó artefacto por artefacto que el salto no alcanza al destino**. Esa
+verificación no se afirma acá: está escrita, artefacto por artefacto y con el motivo por el que cada
+uno queda afuera, en
+[`../Docs/Audit/Estado-Del-Destino-2026-08-27.md`](../Docs/Audit/Estado-Del-Destino-2026-08-27.md) §6.
 
-**El salto 13.7 → 13.16 movió dieciséis artefactos y ninguno subió major.** Siete alcanzaron el corpus
-y los nueve restantes son de proceso o ya estaban ejercidos:
+**El salto 13.3 → 13.7 movió ocho artefactos y no tocó ninguno del destino.** Los cuatro incrementos
+son **minor** y los cuatro declaran su bloque «Impacto sobre destinos existentes» **vacío**: la **13.4**
+y la **13.5** con la palabra «Ninguno», y la **13.6** y la **13.7** con la fórmula *«Ninguno forzado por
+la publicación, y no es una migración»*. La **13.7** lo dice además con el caso de este destino escrito
+por su nombre: *«un destino cuya reanudación anterior corrió sin mesa **no queda no conforme**: la fase
+no existía»*.
 
-| Artefacto que se movió | 13.7 | **13.16** | Qué alcanzó en el destino |
+| Artefacto que se movió | 13.3 | **13.7** | Por qué no alcanza al destino |
 |---|---|---|---|
-| `Root-Rules` | 8.6 | **8.7** | **Sí**: ciclo de origen (§11, §12.1, §12.2) en las **118** filas de ítems diferidos de ocho documentos y en los **8** bloques verticales de `CU-08001` a `CU-08008`, con el tratamiento retroactivo de `Migracion-Rules.md` §4.9 (95 derivadas, 23 no derivables); campo 7 de `ADR-14001` a `ADR-14004` |
-| `Intake-Rules` | 4.2 | **4.3** | **Sí**: el proyecto de código de otro ecosistema, la marca del insumo de construcción y las dos clases de arista, en el intake 5.0 §13.2 y §13.3 |
-| `Rules-Arquitectura-Tecnica` | 4.5 | **4.6** | **Sí**: `Vista-Producto.md` 1.11 §2 y §3 |
-| `Rules-Devops` | 6.1 | **6.2** | **Sí**: `Pipeline-Producto.md` 1.9 §4, la arista `Visor → Web` con único generador y el modo `SkipVisorBuild` |
-| `Rules-Examples` | 6.5 | **6.6** | **Sí, verificada sin cambio**: las tres propiedades de §3.6 se cumplen sobre los veinte samples, probadas fallando (E-014) |
-| `PRODUCT-INTAKE-template` | 3.5 | **3.6** | **Sí**: §13.2, §13.3 y §16.1 del intake 5.0, con bump major (caso (b) de `Master-Prompt.md` §13, aprobación explícita del Product Owner en la actuación 011) |
-| `PRODUCT-MANIFEST-template` | 6.0 | **6.1** | **Sí**: la re-derivación 7.0 de este documento — §1.2 perfil por ecosistema, §2.B una tabla con solución de código, §3 un grafo con dos clases, §4 dos validaciones nuevas |
-| `Master-Prompt` | 8.14 | **8.19** | De proceso: base de la corrida, comprobaciones 7 y 8 de la compuerta, §13.1; §15 con las dos clases de arista |
-| `Master-Prompt-Migracion` | 2.9 | **2.10** | Gobernó esta migración |
-| `Migracion-Rules` | 3.19 | **3.20** | Gobernó esta migración (§4.8, §4.9) |
-| `Mesa-Rules` | 1.0 | **1.3** | Gobernó la mesa de M1 ([`../Docs/Audit/Mesa-2026-09-13.md`](../Docs/Audit/Mesa-2026-09-13.md)) |
-| `Master-Prompt-Reanudacion` | 1.10 | **1.13** | No: no hubo reanudación en curso |
-| `Vocabulario-Rules` | 3.2 | **3.3** | De proceso: toda afirmación de colisión lleva comando |
-| `Rules-Contexto` | 4.5 | **4.6** | Ya ejercida sobre `Roadmap-Producto.md` por la séptima reanudación |
-| `Rules-Backlog-Tecnico` | 5.1 | **5.3** | Ya ejercida: los dos backlogs técnicos y las `BT` del proyecto `Api` en archivo |
-| `Catalogo-De-Criterios` | 1.14 | **1.18** | Índice: no define criterios |
+| `Master-Prompt` | 8.12 | **8.14** | Gobierna cómo se genera y se audita, no la forma de ningún documento |
+| `Master-Prompt-Migracion` | 2.8 | **2.9** | M1 pasa a convocar la mesa. No hay migración en curso |
+| `Master-Prompt-Reanudacion` | 1.9 | **1.10** | Entra la fase `R1.5`. Es el prompt que produjo esta actualización |
+| `Root-Rules` | 8.4 | **8.6** | La 8.5 fija cómo se acuña un identificador de rol **del catálogo del framework** y la 8.6 agrega `AG-00970`. Ninguna toca la forma de un artefacto del destino |
+| `Catalogo-De-Criterios` | 1.13 | **1.14** | Índice: no define criterios |
+| `Maqueta-Rules` | 4.4 | **4.5** | Rotula sus ítems como sustituibles. La Fase B2 de `GeometriaFactory-Web` está confirmada y cerrada |
+| `Rules-Base-Conocimiento` | 2.0 | **2.2** | Las **dos** unidades de entrega declaran `usa_llm == false` |
+| **`Mesa-Rules`** | — | **1.0** | Regla nueva. **Gobierna la fase `R1.5` y no un artefacto del corpus**, y su registro entra al destino como artefacto propio: [`../Docs/Audit/Mesa-2026-08-27.md`](../Docs/Audit/Mesa-2026-08-27.md) |
 
-**Los otros nueve artefactos de la tabla de abajo no se movieron**, ni renombró ninguno el salto
-(leídos los ocho bloques «Impacto sobre destinos existentes» de 13.8 a 13.16).
+**Los otros 16 artefactos de la tabla de abajo no se movieron**, ni las dos plantillas.
 
-**De dónde parte este salto.** La procedencia anterior declaraba **13.7** desde el 2026-08-27 por la salida
-`C` del orquestador de reanudación —*actualizar la procedencia sin migrar*, verificado artefacto por
-artefacto en [`../Docs/Audit/Estado-Del-Destino-2026-08-27.md`](../Docs/Audit/Estado-Del-Destino-2026-08-27.md) §6—,
-sobre la **13.3** que había escrito la fase M5 de la séptima migración, 10.0 → 13.3, el 2026-08-25. El
-detalle de cada una vive en las filas **5.3**, **5.1** y **5.0** del control de cambios de este documento,
-no acá: **una procedencia que arrastra la historia de todas las anteriores deja de decir contra qué rige el
-destino hoy**.
+**Cómo se llegó a la 13.3, que es de dónde parte este salto.** La procedencia la reescribió la fase
+**M5** de la **séptima** migración normativa de este destino, **10.0 → 13.3**, el 2026-08-25 — la
+primera que atravesó **tres saltos major**, con `Root-Rules` **7.0 → 8.4**, `Rules-Backlog-Tecnico`
+**4.4 → 5.1** y `Rules-Devops` **5.0 → 6.1**, y con sus tres superficies medidas sobre el árbol: las
+**144** `US-*.md` partidas en `## 5. Prioridad` y `## 5.b Estimación`, las **10** subsecciones `.b` de
+la 09 y las **5** filas del mapa de documentación con la forma nueva de `AG`. Su informe es
+[`../Docs/Audit/Informe-Migracion-10.0-a-13.3.md`](../Docs/Audit/Informe-Migracion-10.0-a-13.3.md), y
+el detalle de aquella reescritura vive en la entrada **5.0** y **5.1** del control de cambios de este
+documento, no acá: **una procedencia que arrastra la historia de todas las anteriores deja de decir
+contra qué rige el destino hoy**.
+
+**Y una constancia sobre la 11.0 que no es de forma y por eso sobrevive a este resumen.** La partición
+del ítem de estimación destapó que **`PA-01` estaba vencido desde el 2026-08-14** y que **las 144
+historias lo citaban**. Se cerró contrastando contra el hecho y no eligiendo un valor: `equipo_n = 1`,
+ninguna capacidad numérica declarada, y **ocho etapas planificadas, construidas, demostradas y cerradas
+sin una sola estimación**. La decisión de retirar el punto es del Product Owner, del 2026-08-25, y está
+registrada como `D11` en
+[`../Docs/Audit/A3-Decisiones-Del-Product-Owner.md`](../Docs/Audit/A3-Decisiones-Del-Product-Owner.md) §4.
 
 | Artefacto del framework | Versión |
 |---|---|
-| Framework SDD (conjunto) | **13.16** |
-| `Master-Prompt` | **8.19** |
-| `Master-Prompt-Migracion` | **2.10** |
-| `Master-Prompt-Reanudacion` | **1.13** |
-| `Root-Rules` | **8.7** |
-| `Rules-Contexto` | **4.6** |
+| Framework SDD (conjunto) | **13.7** |
+| `Master-Prompt` | **8.14** |
+| `Master-Prompt-Migracion` | **2.9** |
+| `Master-Prompt-Reanudacion` | **1.10** |
+| `Root-Rules` | **8.6** |
+| `Rules-Contexto` | 4.5 |
 | `Rules-Necesidades-Negocio` | 4.4 |
 | `Rules-Especificacion-Funcional` | 5.5 |
 | `Rules-UX-UI-DX` | 5.5 |
-| `Rules-Arquitectura-Tecnica` | **4.6** |
-| `Rules-Backlog-Tecnico` | **5.3** |
+| `Rules-Arquitectura-Tecnica` | 4.5 |
+| `Rules-Backlog-Tecnico` | 5.1 |
 | `Rules-Plan-Sprint` | 5.5 |
 | `Rules-Calidad-Y-Pruebas` | 4.6 |
-| `Rules-Devops` | **6.2** |
-| `Rules-Examples` | **6.6** |
+| `Rules-Devops` | 6.1 |
+| `Rules-Examples` | 6.5 |
 | `Rules-Documentacion` | 5.5 |
-| `Mesa-Rules` | **1.3** — gobierna la mesa que M1 convoca y no un artefacto del corpus; su registro entra al destino como artefacto propio en `SDD/Docs/Audit/` |
-| Reglas transversales aplicadas | `Intake-Rules` **4.3**, `Vocabulario-Rules` **3.3**, `Maqueta-Rules` 4.5 y `Deriva-Rules` 5.4 (Fase B2 confirmada para la unidad de entrega `GeometriaFactory-Web`). **`Migracion-Rules` 3.20 gobernó la octava migración de este árbol** —6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0, 10.0 → 13.3 y 13.7 → 13.16—, con sus informes en `SDD/Docs/Audit/` |
-| `Catalogo-De-Criterios` | **1.18** — **índice, no regla**: no define criterios y no gobierna ningún artefacto de este destino |
-| `Rules-Base-Conocimiento` | 2.2 — **no alcanza al destino**: no hay orquestador que lea la regla y las **dos** unidades de entrega declaran `usa_llm == false`. Se lista para que su ausencia no se lea como omisión |
-| `PRODUCT-INTAKE-template` | **3.6** |
-| `PRODUCT-MANIFEST-template` | **6.1** |
+| **`Mesa-Rules`** | **1.0** — **entra por primera vez a esta tabla y sí alcanza al destino**, aunque no a su corpus: gobierna la fase `R1.5` de la reanudación, que corrió el 2026-08-27 y dejó su registro en `SDD/Docs/Audit/` |
+| Reglas transversales aplicadas | `Intake-Rules` 4.2, `Vocabulario-Rules` 3.2, `Maqueta-Rules` **4.5** y `Deriva-Rules` 5.4 (Fase B2 confirmada para la unidad de entrega `GeometriaFactory-Web`). **`Migracion-Rules` 2.9 no aplica hoy**: no hay migración en curso, y este árbol atravesó **siete** —6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0 y 10.0 → 13.3—, con sus informes en `SDD/Docs/Audit/` |
+| `Catalogo-De-Criterios` | **1.14** — **índice, no regla**: no define criterios y no gobierna ningún artefacto de este destino |
+| `Rules-Base-Conocimiento` | **2.2** — **no alcanza al destino**: no hay orquestador que lea la regla y las **dos** unidades de entrega declaran `usa_llm == false`. Se lista para que su ausencia no se lea como omisión |
+| `PRODUCT-INTAKE-template` | 3.5 |
+| `PRODUCT-MANIFEST-template` | 6.0 |
 
 `Rules-Prompts-AI` no lleva fila: la categoría 04 queda omitida por gating (`usa_llm` == false en las **dos** unidades de entrega, ver §5).
 
-**Qué cambió respecto de la procedencia anterior.** **Se movieron dieciséis de los veinticinco artefactos
-listados** y ninguno entra ni sale de la tabla. **Siete alcanzaron el corpus** y todos quedaron migrados,
-que es la condición sin la cual esta tabla no se podía tocar (`Migracion-Rules.md` §4.6).
+**Qué cambió respecto de la procedencia anterior.** **Se movieron siete de los veinticuatro artefactos
+listados**, y `Mesa-Rules` entra nuevo. **Ninguno de los siete alcanza un artefacto del corpus**, que es
+la condición sin la cual esta tabla no se podía tocar.
 
-**Lo que la migración deja declarado y no resuelto**, para que esta tabla no se lea como «sin deuda»:
-`DD-1` a `DD-9` de [`../Docs/Audit/Mesa-2026-09-13.md`](../Docs/Audit/Mesa-2026-09-13.md) §8 —entre ellas
-las **116** cabeceras de trazabilidad que siguen citando este documento o el intake con número de versión
-(`DD-8`) y `visor.bundle.js` en el intake (`DD-5`)—, y los dos huecos que la clasificación de
-`Migracion-Rules.md` §4.8 elevó al Product Owner y rigen por su default como huecos del ciclo
-(`PA-09` de `Api/06`, `PD-04` de `Api/09`). Ninguna es una fila del plan sin resolver: son ítems diferidos
-con su forma de `Root-Rules.md` §12.2.
+**Y una constancia sobre el intake, para que no se lea como una cita desactualizada.** El campo «Intake
+(origen)» de §1 y la §2 de este documento citan `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **3.0**, y el
+intake está en **3.1** desde el 2026-08-27. **La cita es correcta y no se toca**: registra **de qué
+versión se derivó** este manifiesto, que es un hecho histórico. La 3.1 fue un parche de **cabecera**
+—la línea de plantilla de referencia— que **no movió ninguna sección del intake**.
+
 
 #### Decisiones de reconciliación
 
@@ -295,7 +295,6 @@ correspondiente.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
-| 7.1 | 2026-09-13 | **Migración normativa 13.7 → 13.16, fase M5: cierre de procedencia** (`Master-Prompt-Migracion.md` 2.10 §9). §1.1 se reescribe con los **25 artefactos** en su versión de la 13.16 (E-002 de EXP-0001): dieciséis se movieron, ninguno major, siete alcanzaron el corpus y los siete quedaron migrados —intake 5.0, este manifiesto 7.0, `Vista-Producto.md` 1.11, `Pipeline-Producto.md` 1.9, 118 filas y 8 bloques con ciclo de origen, `ADR-14001` a `14004` revisados, `Rules-Examples` §3.6 verificada sin cambio—. **La procedencia se escribe porque la cadena está completa**: ninguna fila del plan 1.4 sin resolver (§4.1) y audit de cierre sin P0 (`Informe-Migracion-13.7-a-13.16.md` 1.1). §1.1 deja de narrar el salto 13.3 → 13.7 y la constancia sobre la cita «3.0 / 3.1» del intake —que la 7.0 había dejado contradicha con el campo «Intake (origen)» **5.0** (`M6-20`)—: las dos viven en las filas 5.3, 5.1 y 5.0 de este control. La línea 3 deja de decir que la plantilla «declara la procedencia de §1.1» (`M6-20`). El campo Estado suma la octava migración. **Lo no resuelto queda declarado en §1.1** (`DD-1` a `DD-9`, dos huecos elevados con default). Estado anterior en `_legacy/2026-09-13/PRODUCT-MANIFEST-Fabrica-De-Geometria-v7.0.md`. Sube **minor**, con el precedente de la 2.1 sobre la 2.0: la migración tomó su major en M3 y el cierre de procedencia no cambia la derivación. | Orquestador de migración normativa SDD |
 | 7.0 | 2026-09-13 | **Migración normativa 13.7 → 13.16, fase M3** (`Master-Prompt-Migracion.md` 2.10 §7): **re-derivado del intake 5.0** sobre la plantilla **6.1**. **§1.2**: perfil de convención **por ecosistema**, .NET y npm, con capitalización. **§2.B**: una sola tabla para `GeometriaFactory.sln`, con la columna «Solución de código» de la plantilla; el visor entra a ella por el insumo de construcción, y la dependencia `GeometriaFactory-Visor` de `GeometriaFactory-Web` lleva su marca. **§2.1**: la identidad del visor sigue el perfil npm, sin excepción. **§3**: un solo grafo con dos clases —siete referencias de proyecto y un insumo de construcción, generador `GeometriaFactory-Web`—, `GeometriaFactory-Visor` en el nivel 0, y sin «grafo del proyecto Node.js» aparte. **§4**: la aciclicidad cuenta las dos clases y entran las dos validaciones nuevas, que se cumplen. **§2 deja de repetir la nota sobre la cita «2.0» del intake**, que es registro de la fila 5.1 de este control de cambios. **La procedencia de §1.1 no se toca**: es de M5. Estado anterior en `_legacy/2026-09-13/PRODUCT-MANIFEST-Fabrica-De-Geometria-v6.1.md`. Sube **major** con el intake. | Orquestador de migración normativa SDD |
 | 6.1 | 2026-09-13 | **Re-derivado del intake 4.6**: §2.B declara qué más agrupa `GeometriaFactory.sln` además de los siete proyectos de código —pruebas, `E2ETests` y los veinte samples, nueve construidos y once nodos sin construcción— y por qué no son filas de la tabla. La 6.0 no lo decía, y la aplicación del 2026-09-12 había dejado once carpetas de `samples/` fuera del agrupador. **Las siete filas, las ocho aristas, sus clases y el orden topológico no cambian.** Estado anterior en `_legacy/2026-09-13/`. Sube **minor** con el intake. | Orquestador, sobre decisión del Product Owner del 2026-09-11 |
 | 6.0 | 2026-09-12 | **Re-derivado del intake 4.0** (`Master-Prompt.md` §13, caso (a)): el visor pasa a `GeometriaFactory.sln` como **nodo sin construcción** por decisión del Product Owner del 2026-09-11; §2.B reordena su bloque, §3 reexpresa la clase «activo de construcción» —sigue siendo una, pero ahora la expresa un `.csproj` con un target y ya no un guion invocado a mano— y §4 ajusta la validación de aciclicidad. **Las ocho aristas, sus clases y el orden topológico no cambian.** Estado anterior en `_legacy/2026-09-12/`. Sube **major** con el intake. | Orquestador, sobre decisión del Product Owner |

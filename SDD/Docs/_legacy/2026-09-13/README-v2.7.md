@@ -3,9 +3,9 @@
 | Campo | Valor |
 | --- | --- |
 | Producto | Fábrica de Geometría |
-| Versión del documento | 2.8 |
+| Versión del documento | 2.7 |
 | Estado | Aprobado |
-| Fecha | 2026-09-13 |
+| Fecha | 2026-09-12 |
 | Stack principal | C# sobre .NET 10 —Blazor Interactive Server en el front, ASP.NET Core en el servicio de datos—, Entity Framework Core sobre SQLite, y TypeScript con webpack en el visor |
 | Composición | **2 unidades de entrega** y **7 proyectos de código** (ver §2) |
 | Unidad de entrega principal | `GeometriaFactory-Api` |
@@ -173,7 +173,7 @@ El producto está **especificado y en construcción**. La documentación está e
 | 11-Documentacion | Producto y las dos | **Planificado** |
 | Vista y pipeline de producto | Producto | Aprobado |
 
-**El árbol atravesó ocho migraciones normativas, las ocho cerradas** —6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0, 10.0 → 13.3 y **13.7 → 13.16** ([`Audit/Informe-Migracion-13.7-a-13.16.md`](Audit/Informe-Migracion-13.7-a-13.16.md), **APROBADO CON OBSERVACIONES**, 2026-09-13, con su trámite en [`../Expedientes/0001-Migracion-Normativa-A-13.16/`](../Expedientes/0001-Migracion-Normativa-A-13.16/README.md))—. Entre la séptima y la octava la procedencia pasó de 13.3 a **13.7 sin migrar** (quinta reanudación, salida `C`). La octava alcanzó el intake (5.0), el manifiesto (7.0, 7.1), `Producto/Vista-Producto.md`, `Producto/Pipeline-Producto.md`, los ítems diferidos de ocho documentos y de los ocho `CU-0800N`, y los cuatro ADR de apartamiento; dejó declaradas las deudas `DD-1` a `DD-9` de [`Audit/Mesa-2026-09-13.md`](Audit/Mesa-2026-09-13.md) §8. Sus informes están en [`Audit/`](Audit/) y la procedencia vigente —**SDD 13.16**— la declara el manifiesto §1.1.
+**El árbol atravesó siete migraciones normativas, las siete cerradas** —6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0 y 10.0 → 13.3 ([`Audit/Informe-Migracion-10.0-a-13.3.md`](Audit/Informe-Migracion-10.0-a-13.3.md), **APROBADO CON HALLAZGOS**, 2026-08-25)—. Desde entonces la procedencia se actualizó **sin migrar** hasta **SDD 13.7** (quinta reanudación, salida `C`), verificada de nuevo en la séptima reanudación contra **SDD 13.14**: cero saltos major con impacto entre medio. Sus informes están en [`Audit/`](Audit/) y la procedencia vigente la declara el manifiesto §1.1.
 
 ### 7.2 Construcción
 
@@ -267,7 +267,6 @@ Veintiún términos para leer el resto sin tropezar. No reemplaza a los glosario
 
 | Versión | Fecha | Descripción del cambio |
 | --- | --- | --- |
-| 2.8 | 2026-09-13 | **§7.1 declara la octava migración normativa, 13.7 → 13.16, cerrada** con la procedencia en SDD 13.16 (fase M5, manifiesto 7.1), qué alcanzó y qué deuda dejó declarada. Un párrafo reescrito; nada más cambia. Estado anterior en `_legacy/2026-09-13/README-v2.7.md`. Sube minor. |
 | 2.7 | 2026-09-12 | **§1 deja de afirmar «no hay clientes de terceros» y «sin versionado de rutas»** (tarea `BT-00027`). La premisa fue cierta hasta `PRODUCT-INTAKE` 4.2; desde el 2026-09-12 hay aplicaciones propias además del front (`ADR-00009`) y la superficie pública se versiona en la ruta por `/v{MAJOR}/` ([`ADR-00010`](Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)). Una sola frase reescrita, con la fecha desde la que rige; nada más cambia. Sube minor. |
 | 2.6 | 2026-09-12 | **Séptima reanudación, salida `A` — corrige DIV-03 del informe de estado.** §7 enunciaba estado en prosa contra su propia tabla: decía «etapa `e`» cuando §7.2 ya declaraba `a` a `h` cerradas y «séptima migración en curso» cuando `Informe-Migracion-10.0-a-13.3.md` está **APROBADO CON HALLAZGOS** desde el 2026-08-25. Deja de enunciar estado y remite a §7.2 y al informe de migración; corrige la cabecera (manifiesto **6.0**, intake **4.2**, antes citaba 4.0/3.0); suma responsable de §7 (`Master-Prompt-Reanudacion.md` §1.1). Sube minor: corrige afirmaciones, no cambia ninguna decisión. | Orquestador de reanudación SDD |
 | 2.5 | 2026-08-31 | **Corrige la emisión 2.4 el mismo día: el punto que queda NO es `D5`.** El volumen de la comisión está **decidido desde el 2026-08-20**, cerrado **por INCOGNOSCIBLE** —no se sabe, no se puede saber, no se fija número—, en el commit `b4a4804` y sobre cinco documentos que **`A3` nunca reflejó**, que es de donde la 2.4 lo leyó. **El punto que queda vivo es su consecuencia**: el **caudal de 20 peticiones por minuto**, que se derivaba de «una comisión operando durante una clase» y **perdió ese fundamento** al cerrarse `D5`. Queda **provisorio**, y su evento de cierre es **`PT-05`, en la fase `i`** — o sea que, a diferencia de lo que la 2.4 afirmaba, **sí tiene dónde mirarse**. **Y la sección gana su ejemplo más nítido de lo que viene documentando**, esta vez producido por quien la escribió: el error no fue omitir la verificación contra el árbol sino **hacerla y concluir al revés**, porque `D4` y `D8` se decidieron **con un no** y en el árbol *decidido que no* y *sin decidir* **se ven idénticos**. |
