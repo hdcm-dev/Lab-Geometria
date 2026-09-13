@@ -79,7 +79,7 @@ Motivación upstream: `PRODUCT-INTAKE` **4.4** §17.1.P.3 (filas «Quién la con
 | Métrica | Objetivo | Cómo se mide |
 | --- | --- | --- |
 | Clases de identidad que la guardia admite | Exactamente **2** (los dos valores de `Role`) | Inspección de `Role.cs` y de la guardia de admisión |
-| Puntos de acceso que aceptan una credencial sin persona (clave de API, `client_credentials`) | Exactamente **0** | Inspección de los quince puntos; `git grep -n -i "client_credentials\|api key\|ApiKey" -- src` sin resultado en código de producción |
+| Puntos de acceso que aceptan una credencial sin persona (clave de API, `client_credentials`) | Exactamente **0** | Inspección de los quince puntos; `git grep -n -i -e client_credentials -e "api key" -e ApiKey -- src` sin resultado en código de producción |
 | Puntos fuera de la guardia | Exactamente **4**, sin cambio | Prueba de inspección de [`ADR-00003`](ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md) |
 | Reclamos de la credencial | Exactamente **4**, sin cambio | `CU-00022` `CA-06` |
 | Usos de «alumno» renombrados por esta decisión | Exactamente **0** | Recuentos de §10 antes y después |
