@@ -8,7 +8,9 @@ namespace GeometriaFactory.Api.Composition;
 
 /// <summary>
 /// El límite de tasa del contrato REST: **por persona autenticada** para quien presenta un acceso
-/// firmado, y **por dirección de origen** para quien no lo presenta (`BT-00029`).
+/// firmado, y **por dirección de origen** para quien no lo presenta (`BT-00029`). El canje suma
+/// además un límite de fallos **por cuenta**, que vive en <see cref="CredentialAttemptThrottle"/>
+/// (`ADR-00011`).
 /// </summary>
 /// <remarks>
 /// POR QUÉ EXISTE, Y POR QUÉ RECIÉN AHORA. `ADR-00005` §2 aceptó no tener límite de caudal «porque
@@ -41,11 +43,16 @@ namespace GeometriaFactory.Api.Composition;
 /// se hace. Sin esa llave se conservan sólo las de bucle local del marco, y la cabecera de cualquier
 /// otro origen se ignora: creerle a todos dejaría que un cliente eligiera su propia partición.
 ///
-/// EL FRONT ES UN SOLO ORIGEN, Y ESO ACOTA LO ESTRICTO QUE PUEDE SER EL LÍMITE POR DIRECCIÓN.
+/// UN ORIGEN PUEDE SER UNA COMISIÓN ENTERA, Y POR ESO NINGÚN LÍMITE POR DIRECCIÓN PUEDE SER ESTRICTO.
 /// `GeometriaFactory.Web` habla con este servicio servidor a servidor y no reenvía la dirección del
-/// navegador: para la partición por origen, una comisión entera que canjea credenciales a través del
-/// front es **una** dirección. Los umbrales por dirección están elegidos para que ese caso quepa; que
-/// el front reenvíe el origen real es una decisión de esa pieza y no de ésta.
+/// navegador: para la partición por origen, toda la comisión que entra por el front es **una**
+/// dirección. Y aunque la reenviara, en la facultad los alumnos salen por un mismo NAT. `BT-00029`
+/// lo sabía y aun así dejó el canje en treinta por minuto por origen: en producción el front agotó
+/// ese cupo por la clase entera, y la comisión se quedó afuera por un límite pensado contra un
+/// atacante, que choca con `RN-B1`. La corrección (`ADR-00011`) mueve la protección a donde apunta el
+/// ataque —la cuenta— y deja los topes por origen **holgados**, del tamaño de una comisión detrás de
+/// una sola dirección: sirven contra quien rocía muchas cuentas o inunda el servicio, no contra una
+/// clase.
 ///
 /// EL EXCESO RESPONDE `429` CON `Retry-After` EN SEGUNDOS Y SIN CUERPO. No lleva código del contrato
 /// porque el conjunto cerrado no declara ninguno para una cuota y esta capa no inventa códigos
@@ -66,10 +73,12 @@ public static class ContractRateLimiting
     public const string ContractPolicy = "contrato";
 
     /// <summary>
-    /// La política del canje de credenciales (`A-01`), **más estricta y siempre por dirección**: es
-    /// el único punto que recibe una contraseña en claro, el blanco natural de la fuerza bruta, y
-    /// cada intento cuesta una derivación anclada (`ADR-06004`) que el servicio paga aunque la
-    /// contraseña sea incorrecta. Reemplaza a <see cref="ContractPolicy"/> sobre ese punto.
+    /// La política del canje de credenciales (`A-01`), **propia y siempre por dirección**: es el tope
+    /// de intentos que un origen puede hacer contra cuentas cualesquiera, cada uno con una derivación
+    /// anclada (`ADR-06004`) que el servicio paga aunque la contraseña sea incorrecta. Reemplaza a
+    /// <see cref="ContractPolicy"/> sobre ese punto. **No es la defensa contra la fuerza bruta sobre
+    /// una cuenta**: ésa es <see cref="CredentialAttemptThrottle"/>, porque un origen puede ser una
+    /// comisión entera.
     /// </summary>
     public const string CredentialExchangePolicy = "canje";
 
@@ -92,6 +101,10 @@ public static class ContractRateLimiting
         configuration.GetSection(RateLimitingOptions.SectionName).Bind(options);
         options.Validate();
         services.AddSingleton(options);
+
+        // UNA SOLA INSTANCIA PARA TODO EL PROCESO: la cuota por cuenta es estado del servicio, y dos
+        // instancias serían dos cuotas para la misma cuenta.
+        services.AddSingleton<CredentialAttemptThrottle>();
 
         // LOS PROXIES CONOCIDOS SE SUMAN A LOS DEL MARCO Y NO LOS REEMPLAZAN: el bucle local sigue
         // siendo de confianza, que es lo que los guiones de desarrollo y los E2E usan.
@@ -118,7 +131,7 @@ public static class ContractRateLimiting
             limiter.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
             limiter.OnRejected = (context, _) =>
             {
-                context.HttpContext.Response.Headers.RetryAfter = RetryAfterSeconds(context, options);
+                context.HttpContext.Response.Headers.RetryAfter = RetryAfterSeconds(context.Lease, options.WindowSeconds);
                 return ValueTask.CompletedTask;
             };
 
@@ -168,11 +181,16 @@ public static class ContractRateLimiting
     /// segundo de menos manda al consumidor a recibir otro `429`. Si el limitador no supo decirlo,
     /// se responde la ventana entera, que es la espera que seguro alcanza.
     /// </summary>
-    private static string RetryAfterSeconds(OnRejectedContext context, RateLimitingOptions options)
+    /// <remarks>
+    /// LA VENTANA DESLIZANTE DEL MARCO NO INFORMA LA ESPERA, y se midió: su arrendamiento rechazado no
+    /// trae el metadato, así que en la práctica la respuesta es la ventana entera —60 en el contrato,
+    /// la de fallos en la cuenta—. Se deja la lectura del metadato para el limitador que sí lo traiga.
+    /// </remarks>
+    internal static string RetryAfterSeconds(RateLimitLease lease, int windowSeconds)
     {
-        var seconds = context.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter)
+        var seconds = lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter) && retryAfter > TimeSpan.Zero
             ? Math.Max(1, (int)Math.Ceiling(retryAfter.TotalSeconds))
-            : options.WindowSeconds;
+            : windowSeconds;
 
         return seconds.ToString(CultureInfo.InvariantCulture);
     }
@@ -188,6 +206,13 @@ public static class ContractRateLimiting
 /// volumen de la comisión se cerró como incognoscible—. Cada umbral de abajo es un múltiplo de esa
 /// cifra elegido con un criterio escrito, y cuando `PT-05` mida el uso real se ajustan por
 /// configuración, sin tocar este archivo.
+///
+/// LOS TOPES POR ORIGEN NO SE DERIVAN DE ESA CIFRA SINO DE UNA COMISIÓN DETRÁS DE UNA DIRECCIÓN, y
+/// desde `ADR-00011`. El tamaño de la comisión **no tiene cifra**: el Product Owner cerró `D5` por
+/// incognoscible el 2026-08-20 (`SDD/Docs/README.md` §8). La que se usa es la mayor que el producto
+/// midió: el corte de **334 alumnos** de `Audit/Medicion-Volumen-De-Comision-2026-08-31.md`, que
+/// declara que el servicio sobra a ese volumen. Redondeada a trescientos, es una comisión de
+/// «cientos» —el escenario más grande que esa medición contempla— entrando junta en el mismo minuto.
 /// </remarks>
 public sealed class RateLimitingOptions
 {
@@ -210,21 +235,42 @@ public sealed class RateLimitingOptions
     public int PermitsPerPerson { get; set; } = 60;
 
     /// <summary>
-    /// Peticiones por ventana para una dirección de origen sin acceso válido. **120**: el front es
-    /// una sola dirección para la comisión entera y todo su tráfico anónimo —el canje, el registro, la
-    /// sonda del aprovisionamiento— cuenta contra ella, así que la cifra tiene que dejar entrar a una
-    /// comisión al principio de una clase. Lo que un origen anónimo hace en este servicio son lecturas
-    /// baratas y el registro; el punto caro tiene su propia cuota, más baja.
+    /// Peticiones por ventana para una dirección de origen sin acceso válido. **1200**: trescientos
+    /// alumnos detrás de una dirección —el front, o el NAT de la facultad—, cuatro peticiones anónimas
+    /// cada uno en el minuto en que entran: la sonda del aprovisionamiento, el registro, el cambio de
+    /// la contraseña provisoria y un reintento. Era **120** hasta `ADR-00011`, y con la comisión
+    /// entera detrás del front eso eran treinta alumnos. Lo que un origen anónimo hace acá son
+    /// lecturas baratas y altas; los dos puntos que comprueban contraseña tienen además la cuota por
+    /// cuenta, que es la que para la fuerza bruta.
     /// </summary>
-    public int PermitsPerAddress { get; set; } = 120;
+    public int PermitsPerAddress { get; set; } = 1200;
 
     /// <summary>
-    /// Canjes de credenciales por ventana para una dirección de origen. **30**: cada intento cuesta
-    /// una derivación PBKDF2 anclada, y treinta por minuto es lo que deja pasar a una comisión que entra
-    /// junta por el front y acota un diccionario a mil ochocientos intentos por hora por dirección, que
-    /// contra una contraseña derivada con el coste de `ADR-06004` no es un ataque sino una espera.
+    /// Canjes de credenciales por ventana para una dirección de origen, contra cuentas cualesquiera.
+    /// **600**: trescientos alumnos detrás de una dirección, con un error de tipeo cada uno. Era **30**
+    /// hasta `ADR-00011`, y ese número dejaba entrar a treinta alumnos por minuto a la comisión entera.
+    /// El tope ya no es la defensa de una cuenta —ésa es <see cref="CredentialFailuresPerAccount"/>—
+    /// sino la del servicio contra quien rocía cuentas: seiscientas derivaciones por minuto desde un
+    /// origen es lo máximo que ese origen le puede hacer pagar al procesador.
     /// </summary>
-    public int CredentialExchangePermitsPerAddress { get; set; } = 30;
+    public int CredentialExchangePermitsPerAddress { get; set; } = 600;
+
+    /// <summary>
+    /// Intentos **fallidos** por cuenta en su ventana, desde cualquier origen. **10**: alcanza para
+    /// equivocarse varias veces al tipear sin quedar afuera, y con la ventana de abajo acota un
+    /// diccionario a cuarenta contraseñas por hora por cuenta, que contra `ADR-06004` no es un ataque.
+    /// Los ingresos correctos no cuentan. Es la cifra baja que OWASP pide para el *login throttling*
+    /// por cuenta; no hay NFR del que derivarla, y se deja configurable.
+    /// </summary>
+    public int CredentialFailuresPerAccount { get; set; } = 10;
+
+    /// <summary>
+    /// El largo de la ventana de fallos por cuenta, en segundos. **900**, quince minutos: una ventana
+    /// de un minuto devolvería los diez intentos cada minuto —seiscientos por hora por cuenta—, y la
+    /// cifra de arriba dejaría de ser baja. Quien se trabó espera un cuarto de hora o le pide al
+    /// docente el reseteo de la contraseña.
+    /// </summary>
+    public int CredentialFailureWindowSeconds { get; set; } = 900;
 
     /// <summary>
     /// Un umbral en cero o negativo no es «sin límite»: es una configuración que no puede querer
@@ -236,6 +282,8 @@ public sealed class RateLimitingOptions
         Require(PermitsPerPerson, nameof(PermitsPerPerson));
         Require(PermitsPerAddress, nameof(PermitsPerAddress));
         Require(CredentialExchangePermitsPerAddress, nameof(CredentialExchangePermitsPerAddress));
+        Require(CredentialFailuresPerAccount, nameof(CredentialFailuresPerAccount));
+        Require(CredentialFailureWindowSeconds, nameof(CredentialFailureWindowSeconds));
     }
 
     private static void Require(int value, string name)

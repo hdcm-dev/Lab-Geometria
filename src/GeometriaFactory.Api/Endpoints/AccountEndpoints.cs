@@ -209,6 +209,7 @@ public static class AccountEndpoints
             HttpContext context,
             ChangeOwnPasswordUseCase changeOwnPassword,
             PasswordDerivation credentials,
+            Composition.CredentialAttemptThrottle failedAttempts,
             ISystemClock clock,
             ILoggerFactory loggerFactory,
             CancellationToken cancellationToken) =>
@@ -257,13 +258,39 @@ public static class AccountEndpoints
             }
             else
             {
+                // LA FORMA SIN SESIÓN COMPRUEBA UNA CONTRASEÑA POR CORREO, IGUAL QUE EL CANJE, y lleva
+                // la misma cuota por cuenta: sin ella, este punto sería la puerta lateral para tantear
+                // la contraseña que el canje ya no deja tantear (`ADR-00011`).
+                var refusal = failedAttempts.Refusal(request.Email, context);
+                if (refusal is not null)
+                {
+                    log.LogInformation("Cambio de contraseña rechazado: la cuenta agotó sus intentos fallidos en la ventana.");
+                    return refusal;
+                }
+
+                // SÓLO CUENTA COMO FALLO LA CONTRASEÑA VIGENTE QUE NO VERIFICÓ, incluida la cuenta que
+                // no existe, donde la comprobación ni se invoca. Una contraseña nueva que no cumple la
+                // regla llega después de verificar la vigente: quien la escribió ya la sabe, y
+                // contarle ese error lo dejaría afuera por elegir mal.
+                var verified = false;
+
                 result = await changeOwnPassword
                     .ExecuteWithCurrentCredentialAsync(
                         request.Email,
-                        storedValue => credentials.Verify(request.CurrentPassword, storedValue),
+                        storedValue =>
+                        {
+                            var check = credentials.Verify(request.CurrentPassword, storedValue);
+                            verified = check == CredentialCheck.Matches;
+                            return check;
+                        },
                         () => credentials.Derive(request.NewPassword) ?? string.Empty,
                         cancellationToken)
                     .ConfigureAwait(false);
+
+                if (!result.Succeeded && !verified)
+                {
+                    failedAttempts.RecordFailure(request.Email);
+                }
             }
 
             if (!result.Succeeded)
