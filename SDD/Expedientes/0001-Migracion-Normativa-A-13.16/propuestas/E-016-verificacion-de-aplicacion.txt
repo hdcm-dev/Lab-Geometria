@@ -1,0 +1,33 @@
+
+== A-6 · configuraciones de la solución ==
+
+El árbol de solución está completo.
+== snapshots
+?? SDD/Docs/Producto/Adrs/_legacy/2026-09-13/
+?? SDD/Docs/Producto/_legacy/2026-09-13/
+?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/_legacy/
+?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/_legacy/2026-09-13/
+?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/_legacy/2026-09-13/
+?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/_legacy/
+?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/_legacy/2026-09-13/
+?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/_legacy/2026-09-13/
+?? SDD/Intake/_legacy/2026-09-13/PRODUCT-INTAKE-Fabrica-De-Geometria-v4.6.md
+?? SDD/Intake/_legacy/2026-09-13/PRODUCT-MANIFEST-Fabrica-De-Geometria-v6.1.md
+== enlaces rotos en los archivos tocados
+archivos 16 enlaces rotos 0
+== ocurrencias vivas de «activo de construcción» tras aplicar
+SDD/Docs/Handoff-Checkout.md:606:| `X-1` | ~~**Cuántas aristas de compilación tiene el producto.** El manifi
+SDD/Docs/Handoff-Checkout.md:775:| 1.7 | 2026-08-31 | **Cierra `X-1`, la discrepancia más vieja del checkout:
+SDD/Docs/Producto/11-Documentacion/README.md:196:| ~~Cuántas aristas de compilación tiene el producto, siete
+SDD/Docs/Producto/11-Documentacion/README.md:213:| 1.4 | 2026-08-31 | **Cierra el primero de los tres puntos a
+SDD/Docs/Producto/Vista-Producto.md:65:| Aristas de compilación | **8**, de dos clases: **7** referencias de 
+SDD/Docs/Producto/Vista-Producto.md:263:| 1.10 | 2026-09-12 | **§3.1 deja de decir que ningún `.csproj` pued
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-G
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-G
+SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md:426:**El visor pertenece a `GeometriaFactory.sln` porque `Ge
+SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md:1962:| 5.0 | 2026-09-13 | **Migración normativa 13.7 → 13
+SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md:1969:| 4.0 | 2026-09-12 | **Reescritura de §13.2 y §13.3 p
+SDD/Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md:300:| 6.0 | 2026-09-12 | **Re-derivado del intake 4.0** (`
+changelog.md:1132:  en el agrupador; la ruta `visor/`, la identidad npm y la clase «activo de construcción»
+evidencia/2026-09-12-estructura-solucion/README.md:16:`visor/` sigue en la raíz (apartamiento vigente); la ar
+visor/geometriafactory-visor.csproj:15:    siendo un activo de construcción (manifiesto §3), no una referenc

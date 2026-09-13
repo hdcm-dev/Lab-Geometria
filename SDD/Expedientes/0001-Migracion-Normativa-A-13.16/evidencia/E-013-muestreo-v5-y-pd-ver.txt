@@ -1,0 +1,9 @@
+$ muestreo de v5 (semilla 13): para 3 filas derivadas, ¿la fila con su Id está en el archivo del commit y no en su padre?; 1 no derivable con su comando
+DER PA-04 GeometriaFactory-Domain 914cc43 Proyectos/GeometriaFactory-Domain/06-Backlog-Tecnico/Product-Backlog.md → fila en commit: True, en padre: False
+DER PA-02 GeometriaFactory-Application 818997f Proyectos/GeometriaFactory-Application/06-Backlog-Tecnico/Product-Backlog.md → fila en commit: True, en padre: False
+DER PA-07 GeometriaFactory-Visor 914cc43 Proyectos/GeometriaFactory-Visor/06-Backlog-Tecnico/Product-Backlog.md → fila en commit: True, en padre: False
+ND  PD-01 GeometriaFactory-Web → el padre del primer alta del fragmento ya tiene la fila PD-01 en SDD/Docs/Proyectos/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md
+$ grep -n "^| \*\*Decidido" Estrategia-Versionado.md (Api)
+234:| **Decidido · 2026-09-12** | **Opción (b), manual.** La crea **quien fusi
+243:| **Decidido · 2026-09-12** | **El conjunto amplio.** `src/**`, `visor/**`,
+254:| **Decidido · 2026-09-12** | **Sin etiquetas retroactivas.** Ni `89f3ab3` 

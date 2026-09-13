@@ -1,0 +1,4 @@
+$ git grep -n -E "\bMN-[0-9]" -- SDD/Docs SDD/Intake ; echo "exit=$?"
+exit=1
+$ ls SDD/Docs/Audit/Mesa-2026-09-13*.md
+ls: no se puede acceder a 'SDD/Docs/Audit/Mesa-2026-09-13*.md': No existe el fichero o el directorio

@@ -1,0 +1,33 @@
+$ bash E-014b-check36.sh <árbol>   — sobre el árbol del destino (base b9675d8 + commits de la corrida, sin código tocado)
+C-1 · toda carpeta samples/<seg>/<NN-…> tiene README.md
+  carpetas revisadas: 20
+C-2 · ningún .csproj de sample tiene Exec o Target fuera de comentarios (verificación no enganchada a la construcción)
+C-3 · los anfitriones del visor cargan el artefacto construido (visor/dist) y no una copia versionada
+resultado: CUMPLE
+exit=0
+
+$ probada fallando, sobre un worktree descartable en el scratchpad:
+# (1) borrar samples/visor/01-basico/README.md
+C-1 · toda carpeta samples/<seg>/<NN-…> tiene README.md
+  FALTA README: samples/visor/01-basico/
+  carpetas revisadas: 20
+C-2 · ningún .csproj de sample tiene Exec o Target fuera de comentarios (verificación no enganchada a la construcción)
+C-3 · los anfitriones del visor cargan el artefacto construido (visor/dist) y no una copia versionada
+resultado: NO CUMPLE
+exit=1
+# (2) agregar <Target Name="Verificar"><Exec Command="npm run verify"/></Target> a samples/api/01-basico/Sample.Api.Basico.csproj
+C-1 · toda carpeta samples/<seg>/<NN-…> tiene README.md
+  carpetas revisadas: 20
+C-2 · ningún .csproj de sample tiene Exec o Target fuera de comentarios (verificación no enganchada a la construcción)
+  ENGANCHE: samples/api/01-basico/Sample.Api.Basico.csproj
+C-3 · los anfitriones del visor cargan el artefacto construido (visor/dist) y no una copia versionada
+resultado: NO CUMPLE
+exit=1
+# (3) cambiar el anfitrión de visor/02-intermedio para cargar una copia local
+C-1 · toda carpeta samples/<seg>/<NN-…> tiene README.md
+  carpetas revisadas: 20
+C-2 · ningún .csproj de sample tiene Exec o Target fuera de comentarios (verificación no enganchada a la construcción)
+C-3 · los anfitriones del visor cargan el artefacto construido (visor/dist) y no una copia versionada
+  NO CARGA visor/dist: samples/visor/02-intermedio/index.html
+resultado: NO CUMPLE
+exit=1

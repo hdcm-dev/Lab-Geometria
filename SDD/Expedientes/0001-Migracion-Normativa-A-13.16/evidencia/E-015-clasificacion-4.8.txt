@@ -1,0 +1,125 @@
+# E-015 · Clasificación §4.8 de los huecos con ciclo de origen derivado (Migracion-Rules.md 3.20 §4.8)
+# Paso 3: versión del framework vigente en el destino en el commit del ciclo: git show <hash>:SDD/Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md, fila «Framework SDD (conjunto)».
+# Paso 1-2: la exigencia de cada fila es la del ítem de su categoría que la tabla de puntos abiertos declara pendiente; su fila existe PORQUE esa exigencia regía al declararse.
+# Criterio de §4.8: exigencia anterior o igual a la versión del ciclo → hueco del ciclo; posterior → norma posterior. Sólo se eleva lo que ninguna de las dos alcanza.
+| Documento | Línea (base) | Id | Estado (celda) | Commit del ciclo | Conjunto en el ciclo | Clasificación |
+|---|---|---|---|---|---|---|
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1189 | PA-01 | **Cerrado** el 2026-08-20 · **A2b, por l | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1190 | PA-02 | **Cerrado** | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1191 | PA-03 | **Cerrado** | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1192 | PA-04 | **Vigente, y reformulado el 2026-08-26 p | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1193 | PA-05 | **Cerrado** el 2026-08-20 · Se adopta ** | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1194 | PA-06 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1195 | PA-07 | **Cerrado** el 2026-08-20 · **A2, por le | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1196 | PA-08 | **Vigente.** La fase `i` está planificad | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1197 | PA-09 | **Cerrado** el 2026-08-26 · **decisión d | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1198 | PA-10 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1208 | PA-01 | **Cerrado** el 2026-08-20 · **A2, por le | ee73c99 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1209 | PA-02 | **Cerrado** el 2026-08-26 · **decisión d | ee73c99 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1210 | PA-03 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1211 | PA-04 | **Cerrado** el 2026-09-12 · **decisión ` | ee73c99 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1219 | PA-01 | **Cerrado** el 2026-08-20 · **A2, por le | e176845 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1220 | PA-02 | **Cerrado** el 2026-08-20 · **A2, por le | e176845 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1221 | PA-03 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1222 | PA-04 | **Vigente.** Evento **declarado el 2026- | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1223 | PA-05 | **Cerrado** el 2026-08-26 · **decisión d | e176845 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1224 | PA-06 | **Cerrado** el 2026-09-12 · **decisión ` | e176845 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1232 | PA-01 | **Cerrado** el 2026-08-20 · **A2, por le | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1233 | PA-02 | **Cerrado** el 2026-08-20 · **A2, por le | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1234 | PA-03 | **Cerrado** el 2026-08-20 · **A2b, por l | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1235 | PA-04 | **Vigente.** Evento **declarado el 2026- | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1236 | PA-05 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1237 | PA-06 | **Cerrado** el 2026-08-20 · **A2, verifi | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1238 | PA-07 | **Vigente.** Evento **declarado el 2026- | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1239 | PA-08 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1240 | PA-09 | **Vigente.** Evento **declarado el 2026- | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1241 | PA-10 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1242 | PA-11 | **Cerrado** el 2026-08-26 · **decisión d | 0a71935 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 741 | PA-01 | **Cerrado** el 2026-08-25 · **por lectur | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 742 | PA-02 | **Cerrado** el 2026-08-20 · **A2b, por l | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 743 | PA-03 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 744 | PA-04 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 745 | PA-05 | **Vigente, y reformulado el 2026-08-26 p | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 746 | PA-06 | **Cerrado** el 2026-08-20 · Se adopta ** | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 747 | PA-07 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 748 | PA-08 | **Cerrado** el 2026-08-20 · **A2, por le | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 749 | PA-09 | **Vigente.** La fase `i` está planificad | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 750 | PA-10 | **Cerrado** el 2026-08-26 · **decisión d | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 758 | PA-01 | **Cerrado** el 2026-08-25 · **por lectur | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 759 | PA-02 | **Cerrado** el 2026-08-20 · **A2, por le | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 760 | PA-03 | **Vigente.** Evento **reasignado a la fa | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 761 | PA-04 | **Cerrado** el 2026-08-26 · **decisión d | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 762 | PA-05 | **Cerrado.** No era un evento faltante:  | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 763 | PA-06 | **Cerrado** el 2026-08-20 · **A2b, por l | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 769 | PA-01 | **Cerrado** el 2026-08-25 · **por lectur | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 770 | PA-02 | **Cerrado** el 2026-08-20 · **A2, por le | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 771 | PA-03 | **Cerrado** el 2026-08-20 · **A2, por le | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 772 | PA-04 | **Vigente.** Evento **reasignado a la fa | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 773 | PA-05 | **Cerrado** el 2026-08-26 · **decisión d | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 774 | PA-06 | **Vigente.** Evento **declarado el 2026- | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 775 | PA-07 | **Cerrado** el 2026-08-20 · **A2b, por l | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 781 | PA-01 | **Cerrado** el 2026-08-25 · **por lectur | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 782 | PA-02 | **Cerrado** el 2026-08-20 · **A2, por le | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 783 | PA-03 | **Cerrado** el 2026-08-20 · **A2b, por l | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 784 | PA-04 | **Vigente.** Evento **declarado el 2026- | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 785 | PA-05 | **Cerrado** | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 786 | PA-06 | **Cerrado** el 2026-08-20 · **A2, verifi | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 787 | PA-07 | **Vigente.** Evento **declarado el 2026- | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 788 | PA-08 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 789 | PA-09 | **Cerrado** el 2026-08-26 · **decisión d | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 790 | PA-10 | **Cerrado** el 2026-08-20 · **A2, verifi | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 562 | PD-01 | **Vigente.** La fase `i` está planificad | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 563 | PD-02 | **Cerrado en parte** el 2026-08-20 · **A | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 564 | PD-03 | **Cerrado** el 2026-08-26 · **decisión d | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 565 | PD-04 | **Vigente, y reformulado el 2026-08-26 p | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 566 | PD-05 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 574 | PD-01 | **Cerrado** el 2026-08-20 · **A2b, por l | 1f5df1a | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 575 | PD-02 | **Cerrado** el 2026-08-26 · **decisión d | 1f5df1a | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 576 | PD-03 | **Cerrado con un NO** el 2026-08-20 · El | 1f5df1a | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 584 | PD-01 | **Cerrado** el 2026-08-20 · **A2b, por l | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 585 | PD-02 | **Cerrado** el 2026-08-26 · **decisión d | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 586 | PD-03 | **Vigente.** Evento **reasignado a la fa | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 594 | PD-01 | **Cerrado** el 2026-08-20 · **A2b, por l | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 595 | PD-02 | **Cerrado** el 2026-08-26 · **decisión d | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 596 | PD-03 | **Cerrado** el 2026-08-20 · **A2b, por l | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 597 | PD-04 | **Vigente.** Evento **declarado el 2026- | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 598 | PD-05 | **Vigente.** No hubo emisión nueva de la | aa154ef | 6.0 | hueco del ciclo |
+| GeometriaFactory-Api/09-Devops/Supply-Chain-Seguridad.md | 73 | `PD-10` | **Vigente.** La fase `i` no ocurrió | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 601 | PA-01 | **Cerrado** el 2026-08-20 · **A2b, por l | e176845 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 602 | PA-02 | ~~**Vigente, y su evento reasignado el 2 | e176845 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 603 | PA-03 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 604 | PA-04 | **NO APLICA**, con la figura de [`../../ | e176845 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 605 | PA-05 | **Cerrado** el 2026-08-20 · **A2b, por l | e176845 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 606 | PA-06 | **Cerrado por INCOGNOSCIBLE** el 2026-08 | e176845 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 607 | PA-07 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 615 | PA-01 | **Cerrado** el 2026-08-20 · **A2b, por l | ee73c99 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 616 | PA-02 | **Cerrado** el 2026-08-20 · **A2, por le | ee73c99 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 617 | PA-03 | **NO APLICA**, con la figura de [`../../ | ee73c99 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 618 | PA-04 | **NO APLICA**, con la figura de [`../../ | ee73c99 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 619 | PA-05 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 661 | PA-01 | **Cerrado** el 2026-08-25 · **por lectur | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 662 | PA-02 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 663 | PA-03 | **Cerrado** el 2026-08-20 · **A2b, por l | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 664 | PA-04 | ~~**Vigente, y su evento reasignado el 2 | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 665 | PA-05 | **Cerrado por lectura** el **2026-08-27* | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 666 | PA-06 | **NO APLICA**, con la figura de [`../../ | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 667 | PA-07 | **Cerrado** el 2026-08-20 · **A2b, por l | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 668 | PA-08 | **Cerrado por INCOGNOSCIBLE** el 2026-08 | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 669 | PA-09 | **Cerrado** el 2026-08-20 · **A2, por le | 818997f | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 675 | PA-01 | **Cerrado** el 2026-08-25 · **por lectur | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 676 | PA-02 | **Cerrado** el 2026-08-20 · **A2b, por l | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 677 | PA-03 | **Cerrado** el 2026-08-20 · **A2, por le | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 678 | PA-04 | **NO APLICA**, con la figura de [`../../ | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 679 | PA-05 | **NO APLICA**, con la figura de [`../../ | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 680 | PA-06 | **Cerrado** | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 681 | PA-07 | **Cerrado** el 2026-08-20 · **A2, por le | 914cc43 | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md | 389 | PD-01 | **Cerrado** el 2026-08-11 | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+| GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md | 390 | PD-02 | **Cerrado** el 2026-08-20 · **A2, por le | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md | 391 | PD-03 | **Cerrado en parte** el 2026-08-20 · **A | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md | 392 | PD-04 | **Cerrado** el 2026-08-20 · **A2, por le | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md | 393 | PD-05 | ~~**Vigente, y su evento reasignado el 2 | 87fbb3b | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md | 401 | PD-01 | **Cerrado en parte** el 2026-08-20 · **A | 1f5df1a | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md | 402 | PD-02 | **Cerrado** el 2026-08-20 · **A2, por le | 1f5df1a | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md | 403 | PD-03 | **Cerrado** el 2026-08-20 · **A2b, por l | 1f5df1a | 6.0 | hueco del ciclo |
+| GeometriaFactory-Web/09-Devops/Supply-Chain-Seguridad.md | 60 | `PD-10` | **Vigente.** La fase `i` no ocurrió | — | — | sin ciclo de origen (§4.9): no se clasifica ni se eleva |
+# Totales: 118 huecos; abiertos (por celda de estado) 23, cerrados 95; hueco del ciclo 95; norma posterior 0; sin ciclo de origen 23; ELEVADOS 0. Criterio §6: elevados (0) < total (118).
