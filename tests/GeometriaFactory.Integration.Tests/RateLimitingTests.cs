@@ -17,15 +17,19 @@ namespace GeometriaFactory.Integration.Tests;
 
 /// <summary>
 /// El límite de tasa del contrato (`BT-00029`): por persona autenticada, por dirección de origen sin
-/// acceso, con la cuota propia del canje, el `429` con `Retry-After`, y `/salud` afuera.
+/// acceso, con la cuota propia del canje, el `429` con `Retry-After`, y `/salud` afuera. Y desde
+/// `ADR-00011`, los fallos por cuenta y los topes por origen que dejan entrar a una comisión detrás
+/// de una sola dirección.
 /// </summary>
 /// <remarks>
 /// SE MIDE CON LOS UMBRALES POR OMISIÓN Y NO CON UNOS BAJADOS PARA LA PRUEBA. Las cifras que estas
-/// pruebas exceden —60 por persona, 120 por origen, 30 canjes por origen— son las que
+/// pruebas exceden —60 por persona, 1200 por origen, 600 canjes por origen, 10 fallos por cuenta— son las que
 /// `Contratos-REST.md` §4.1 declara y las que `appsettings.json` trae; una batería que bajara los
 /// umbrales a tres verificaría que el limitador existe, no que el producto tiene la cuota que dice
-/// tener. El servidor en memoria responde en milisegundos, así que las ciento veinte peticiones caben
-/// de sobra en una ventana de un minuto.
+/// tener. Y acá eso importa más que en ningún lado: el defecto que corrigió `ADR-00011` fue una cifra
+/// por origen demasiado baja para una clase, y sólo una prueba con la cifra real lo ve. El servidor en
+/// memoria responde en milisegundos, así que las mil doscientas peticiones caben de sobra en una
+/// ventana de un minuto.
 ///
 /// LA DIRECCIÓN DEL ZÓCALO SE SIMULA, PORQUE EL SERVIDOR EN MEMORIA NO TIENE NINGUNA. `TestServer`
 /// deja `RemoteIpAddress` en nulo, y sin dirección no hay forma de mostrar que dos orígenes tienen
@@ -43,6 +47,7 @@ public sealed class RateLimitingTests : IDisposable
     private const string AdministratorEmail = "docente@frre.utn.edu.ar";
     private const string AdministratorPassword = "la-que-eligio-el-docente";
     private const string SetupOrigin = "192.0.2.1";
+    private const string StudentPassword = "la-que-eligio-la-alumna";
 
     private readonly string _storePath = DataServiceHarness.ReserveStorePath();
     private readonly List<OriginAwareHarness> _harnesses = [];
@@ -70,8 +75,10 @@ public sealed class RateLimitingTests : IDisposable
 
         Assert.Equal(60, defaults.WindowSeconds);
         Assert.Equal(60, defaults.PermitsPerPerson);
-        Assert.Equal(120, defaults.PermitsPerAddress);
-        Assert.Equal(30, defaults.CredentialExchangePermitsPerAddress);
+        Assert.Equal(1200, defaults.PermitsPerAddress);
+        Assert.Equal(600, defaults.CredentialExchangePermitsPerAddress);
+        Assert.Equal(10, defaults.CredentialFailuresPerAccount);
+        Assert.Equal(900, defaults.CredentialFailureWindowSeconds);
     }
 
     /// <summary>
@@ -83,6 +90,8 @@ public sealed class RateLimitingTests : IDisposable
     [InlineData("RateLimiting:PermitsPerAddress", "-5")]
     [InlineData("RateLimiting:CredentialExchangePermitsPerAddress", "0")]
     [InlineData("RateLimiting:WindowSeconds", "0")]
+    [InlineData("RateLimiting:CredentialFailuresPerAccount", "0")]
+    [InlineData("RateLimiting:CredentialFailureWindowSeconds", "-1")]
     public void AThresholdBelowOneStopsTheStartupNamingTheKey(string key, string value)
     {
         var configuration = new ConfigurationBuilder()
@@ -235,32 +244,171 @@ public sealed class RateLimitingTests : IDisposable
     }
 
     /// <summary>
-    /// El canje tiene su propia cuota, más estricta, siempre por origen: el trigésimo primer intento
-    /// desde una dirección recibe `429` aunque la cuota general del origen esté lejos; otra dirección
-    /// sigue recibiendo el `401` genérico.
+    /// El defecto de `BT-00029`, que `ADR-00011` corrige: **una comisión entera detrás de un origen**
+    /// —el front, o el NAT de la facultad— canjea cuentas distintas y ninguna recibe `429` hasta el
+    /// tope holgado del origen. Con la cuota de treinta por origen, el trigésimo primer alumno de la
+    /// clase se quedaba afuera. Recién el intento que excede el tope recibe `429`, y otro origen sigue
+    /// en `401`.
     /// </summary>
     [Fact]
-    public async Task TheCredentialExchangeHasItsOwnStricterQuotaPerOrigin()
+    public async Task AWholeCommissionBehindOneOriginIsNotLimitedUntilTheGenerousOriginCap()
     {
         var harness = Harness();
         using var client = harness.CreateClient();
         var options = harness.Services.GetRequiredService<RateLimitingOptions>();
-        var attempt = new CredentialExchangeRequest("nadie@frre.utn.edu.ar", "no-es");
 
-        Assert.True(options.CredentialExchangePermitsPerAddress < options.PermitsPerAddress);
+        // La clase más grande que el tope tiene que dejar entrar: trescientos alumnos con un error
+        // de tipeo cada uno (`RateLimitingOptions.CredentialExchangePermitsPerAddress`).
+        Assert.True(options.CredentialExchangePermitsPerAddress >= 600);
 
         for (var i = 0; i < options.CredentialExchangePermitsPerAddress; i++)
         {
-            using var refused = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "203.0.113.20", body: attempt));
+            using var refused = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "203.0.113.20",
+                body: new CredentialExchangeRequest($"alumno{i}@frre.utn.edu.ar", "no-es")));
             Assert.Equal(HttpStatusCode.Unauthorized, refused.StatusCode);
         }
 
-        using var limited = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "203.0.113.20", body: attempt));
+        using var limited = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "203.0.113.20",
+            body: new CredentialExchangeRequest("uno-mas@frre.utn.edu.ar", "no-es")));
         Assert.Equal(HttpStatusCode.TooManyRequests, limited.StatusCode);
         AssertRetryAfter(limited, options.WindowSeconds);
 
-        using var elsewhere = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "203.0.113.21", body: attempt));
+        using var elsewhere = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "203.0.113.21",
+            body: new CredentialExchangeRequest("uno-mas@frre.utn.edu.ar", "no-es")));
         Assert.Equal(HttpStatusCode.Unauthorized, elsewhere.StatusCode);
+    }
+
+    /// <summary>
+    /// Y la clase entra de verdad: cuentas reales, habilitadas, canjeando con su contraseña correcta
+    /// desde el mismo origen, **más que la cuota vieja de treinta**, todas en `200`.
+    /// </summary>
+    [Fact]
+    public async Task RealAccountsBehindOneOriginSignInBeyondTheOldQuotaOfThirty()
+    {
+        var harness = Harness();
+        using var client = harness.CreateClient();
+        await WorldAsync(client, "primera@frre.utn.edu.ar", "segunda@frre.utn.edu.ar");
+
+        var statuses = new List<HttpStatusCode>();
+
+        for (var i = 0; i < 40; i++)
+        {
+            var email = i % 2 == 0 ? "primera@frre.utn.edu.ar" : "segunda@frre.utn.edu.ar";
+            using var response = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "172.23.0.2",
+                body: new CredentialExchangeRequest(email, StudentPassword)));
+            statuses.Add(response.StatusCode);
+        }
+
+        Assert.All(statuses, status => Assert.Equal(HttpStatusCode.OK, status));
+    }
+
+    /// <summary>
+    /// La fuerza bruta sobre **una cuenta** se corta aunque cada intento venga de otro origen: la
+    /// partición es el correo normalizado (`ADR-06003`), así que mayúsculas y espacios no la esquivan.
+    /// Después del décimo fallo, **ni la contraseña correcta** entra —recibe `429`, sin cuerpo y con
+    /// `Retry-After`—; otra cuenta, desde el mismo origen, sigue entrando.
+    /// </summary>
+    [Fact]
+    public async Task TheSameAccountIsLimitedAfterItsFailuresFromAnyOrigin()
+    {
+        var harness = Harness();
+        using var client = harness.CreateClient();
+        await WorldAsync(client, "primera@frre.utn.edu.ar", "segunda@frre.utn.edu.ar");
+        var options = harness.Services.GetRequiredService<RateLimitingOptions>();
+
+        for (var i = 0; i < options.CredentialFailuresPerAccount; i++)
+        {
+            var written = i % 2 == 0 ? "primera@frre.utn.edu.ar" : "  PRIMERA@frre.UTN.edu.ar ";
+            using var refused = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", $"198.51.100.{i + 1}",
+                body: new CredentialExchangeRequest(written, "no-es")));
+            Assert.Equal(HttpStatusCode.Unauthorized, refused.StatusCode);
+        }
+
+        using var limited = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "198.51.100.200",
+            body: new CredentialExchangeRequest("primera@frre.utn.edu.ar", StudentPassword)));
+        Assert.Equal(HttpStatusCode.TooManyRequests, limited.StatusCode);
+        AssertRetryAfter(limited, options.CredentialFailureWindowSeconds);
+        Assert.Empty(await limited.Content.ReadAsStringAsync());
+
+        using var otherAccount = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "198.51.100.200",
+            body: new CredentialExchangeRequest("segunda@frre.utn.edu.ar", StudentPassword)));
+        Assert.Equal(HttpStatusCode.OK, otherAccount.StatusCode);
+    }
+
+    /// <summary>
+    /// El `429` por cuenta **no dice si la cuenta existe**: una cuenta registrada y un correo que
+    /// nadie registró reciben el rechazo en el mismo intento, con el mismo código, la misma cabecera
+    /// y el mismo cuerpo vacío.
+    /// </summary>
+    [Fact]
+    public async Task TheAccountRefusalIsIndistinguishableForAnExistingAndAnUnknownAccount()
+    {
+        var harness = Harness();
+        using var client = harness.CreateClient();
+        await WorldAsync(client, "primera@frre.utn.edu.ar", "segunda@frre.utn.edu.ar");
+        var options = harness.Services.GetRequiredService<RateLimitingOptions>();
+
+        var existing = await ExhaustAsync(client, "primera@frre.utn.edu.ar", "198.51.100.10", options.CredentialFailuresPerAccount + 1);
+        var unknown = await ExhaustAsync(client, "nadie@frre.utn.edu.ar", "198.51.100.11", options.CredentialFailuresPerAccount + 1);
+
+        Assert.Equal(existing, unknown);
+        Assert.Equal(options.CredentialFailuresPerAccount, existing.FirstLimitedAttempt);
+        Assert.Equal((int)HttpStatusCode.TooManyRequests, existing.Status);
+        Assert.True(existing.HasRetryAfter);
+        Assert.Equal(string.Empty, existing.Body);
+    }
+
+    /// <summary>
+    /// Los ingresos correctos **no gastan** la cuota por cuenta: una persona —o un guion propio del
+    /// docente— que canjea bien muchas veces no se bloquea, y después sigue teniendo todos sus fallos.
+    /// </summary>
+    [Fact]
+    public async Task SuccessfulSignInsDoNotSpendTheAccountQuota()
+    {
+        var harness = Harness();
+        using var client = harness.CreateClient();
+        await WorldAsync(client, "primera@frre.utn.edu.ar", "segunda@frre.utn.edu.ar");
+        var options = harness.Services.GetRequiredService<RateLimitingOptions>();
+
+        for (var i = 0; i < options.CredentialFailuresPerAccount * 2; i++)
+        {
+            using var allowed = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "198.51.100.20",
+                body: new CredentialExchangeRequest("primera@frre.utn.edu.ar", StudentPassword)));
+            Assert.Equal(HttpStatusCode.OK, allowed.StatusCode);
+        }
+
+        var outcome = await ExhaustAsync(client, "primera@frre.utn.edu.ar", "198.51.100.20", options.CredentialFailuresPerAccount + 1);
+        Assert.Equal(options.CredentialFailuresPerAccount, outcome.FirstLimitedAttempt);
+    }
+
+    /// <summary>
+    /// La forma sin sesión del cambio de contraseña propia comprueba la contraseña vigente por correo,
+    /// y **comparte la cuota de la cuenta** con el canje: sin eso sería la puerta lateral para
+    /// tantear lo que el canje ya no deja tantear. Diez vigentes equivocadas ahí, y el canje correcto
+    /// recibe `429`.
+    /// </summary>
+    [Fact]
+    public async Task TheCredentialFormOfThePasswordChangeSharesTheAccountQuota()
+    {
+        var harness = Harness();
+        using var client = harness.CreateClient();
+        await WorldAsync(client, "primera@frre.utn.edu.ar", "segunda@frre.utn.edu.ar");
+        var options = harness.Services.GetRequiredService<RateLimitingOptions>();
+
+        for (var i = 0; i < options.CredentialFailuresPerAccount; i++)
+        {
+            using var refused = await client.SendAsync(Request(HttpMethod.Post, "/v1/cuenta/contrasena", $"198.51.100.{i + 30}",
+                body: new OwnPasswordChangeRequest("no-es", "otra-que-elegiria", "primera@frre.utn.edu.ar")));
+            Assert.Equal(HttpStatusCode.Unauthorized, refused.StatusCode);
+        }
+
+        using var limitedChange = await client.SendAsync(Request(HttpMethod.Post, "/v1/cuenta/contrasena", "198.51.100.99",
+            body: new OwnPasswordChangeRequest("no-es", "otra-que-elegiria", "primera@frre.utn.edu.ar")));
+        Assert.Equal(HttpStatusCode.TooManyRequests, limitedChange.StatusCode);
+
+        using var limitedExchange = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "198.51.100.99",
+            body: new CredentialExchangeRequest("primera@frre.utn.edu.ar", StudentPassword)));
+        Assert.Equal(HttpStatusCode.TooManyRequests, limitedExchange.StatusCode);
     }
 
     // ------------------------------------------------------------------- lo que queda afuera --
@@ -383,6 +531,31 @@ public sealed class RateLimitingTests : IDisposable
 
     private sealed record World(string FirstToken, Guid FirstId, string SecondToken);
 
+    private sealed record Exhaustion(int FirstLimitedAttempt, int Status, bool HasRetryAfter, string Body);
+
+    /// <summary>
+    /// Canjea con una contraseña equivocada hasta <paramref name="attempts"/> veces y devuelve en qué
+    /// intento —contando desde cero— llegó el primer `429`, y cómo era esa respuesta.
+    /// </summary>
+    private static async Task<Exhaustion> ExhaustAsync(HttpClient client, string email, string origin, int attempts)
+    {
+        for (var i = 0; i < attempts; i++)
+        {
+            using var response = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", origin,
+                body: new CredentialExchangeRequest(email, "no-es")));
+
+            if (response.StatusCode == HttpStatusCode.TooManyRequests)
+            {
+                return new Exhaustion(i, (int)response.StatusCode, response.Headers.Contains("Retry-After"),
+                    await response.Content.ReadAsStringAsync());
+            }
+
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        return new Exhaustion(-1, 0, false, string.Empty);
+    }
+
     /// <summary>
     /// Un administrador y dos alumnas habilitadas con acceso, preparados desde un origen que ninguna
     /// prueba usa después para contar. Diez peticiones anónimas y cuatro canjes: lejos de toda cuota.
@@ -412,7 +585,7 @@ public sealed class RateLimitingTests : IDisposable
         Assert.Equal(HttpStatusCode.OK, enabled.StatusCode);
         var provisional = (await enabled.Content.ReadFromJsonAsync<AccountStatusChangeResponse>())!.ProvisionalPassword!;
 
-        const string Chosen = "la-que-eligio-la-alumna";
+        const string Chosen = StudentPassword;
         using var change = await client.SendAsync(Request(HttpMethod.Post, "/v1/cuenta/contrasena", SetupOrigin,
             body: new OwnPasswordChangeRequest(provisional, Chosen, email)));
         Assert.Equal(HttpStatusCode.OK, change.StatusCode);

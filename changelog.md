@@ -1642,3 +1642,46 @@ Evidencia en `evidencia/2026-09-13-dc5-samples/`.
   de su creación es lo único que ejercita `Services/StartupObservations.cs` en las pruebas. Medido en los dos
   sentidos sobre `main` y sobre la rama. Probablemente explica el 1491 «igual» de la evidencia del 2026-09-12. **No se
   corrige en esta rama**: `src/` y `coverage.sh` quedan fuera del alcance.
+
+## El canje se limita por cuenta, y el origen tolera una comisión (fix) — 2026-09-13
+
+**Rama:** `fix/canje-por-cuenta` (sobre `b58dec3`, `main` = `v1.1.1`). Corrige un defecto de producción
+introducido por **`BT-00029`** (`v1.1.0`). Decisión en
+[`ADR-00011`](SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00011-El-Canje-Se-Protege-Por-Cuenta-Y-El-Origen-Tolera-Una-Comision.md).
+
+### Corregido
+
+- **La cuota del canje dejaba afuera a una clase.** La política `canje` particionaba por dirección de origen con
+  30 intentos por minuto, y los puntos anónimos con 120. El front no reenvía la dirección del navegador —en
+  producción todo ingreso llega desde el contenedor del front— y en la facultad los alumnos salen por un mismo
+  NAT: la comisión entera compartía un cupo de treinta canjes por minuto, contra `RN-B1`. El E2E del banco local
+  lo detectó y estaba en rojo desde la fusión #198 (5 de 32, `429` en la preparación, la limpieza y el desenlace).
+  **La causa**: particionar la defensa contra la fuerza bruta por origen detrás de un intermediario propio y de
+  un NAT de aula. Las entradas anteriores de este registro no se reescriben.
+
+### Cambiado
+
+- **Defensa por cuenta**: `Composition/CredentialAttemptThrottle.cs`, un `PartitionedRateLimiter` inyectado —10
+  intentos **fallidos** por correo normalizado (`EmailIdentity.Normalize`, `ADR-06003`) cada 900 s, desde
+  cualquier origen— que `A-01` y la forma sin sesión de `A-05` consultan sobre el cuerpo ya enlazado, antes de
+  buscar la cuenta y de derivar. Los ingresos correctos no gastan cuota; el `429` es el mismo para una cuenta
+  existente y una inexistente.
+- **Topes por origen holgados**: `PermitsPerAddress` 120 → **1200**, `CredentialExchangePermitsPerAddress` 30 →
+  **600**, para trescientos alumnos detrás de una dirección (corte de 334 de
+  `Audit/Medicion-Volumen-De-Comision-2026-08-31.md`; `D5` cerrada por incognoscible). `PermitsPerPerson` no
+  cambia. La mitigación por variable de entorno de producción queda igual a los valores por omisión y sobra.
+- `appsettings.json`; `Contratos-REST.md` **1.11** §4.1; `Arquitectura-Unidad-Entrega.md` **3.14** §8.1;
+  `Decisiones-Arquitectura.md` y `README.md` de `05` **2.3**; ficha `BT-00029` **1.4** (control de cambios).
+
+### Verificado
+
+- `dotnet build GeometriaFactory.sln -c Release -p:SkipVisorBuild=true`: **0 advertencias, 0 errores**;
+  `dotnet test`: **Domain 94/94, Application 56/56, Integración 403/403 = 553/553** (`main`: 546; en
+  `RateLimitingTests` se reemplaza la prueba del canje por origen y entran seis pruebas y dos casos de teoría).
+- **Probadas fallando**: las pruebas nuevas contra el `src/` de `main` (umbrales de cuenta como constantes) →
+  **6 de 19 en rojo**: comisión detrás de un origen, cuentas reales más allá de treinta, misma cuenta desde
+  orígenes distintos, `429` indistinguible, cuota compartida con `A-05` y umbrales por omisión.
+  `SuccessfulSignInsDoNotSpendTheAccountQuota` pasa también sobre `main`, por coincidencia aritmética (20
+  ingresos + 10 fallos = el cupo de 30 por origen), y no cuenta como probada fallando.
+- **E2E del banco local** (`gf-e2e:local`, Playwright 1.49 + SDK 10, chromium): **32/32**, ningún `429`; 42
+  canjes desde un solo origen en la corrida.

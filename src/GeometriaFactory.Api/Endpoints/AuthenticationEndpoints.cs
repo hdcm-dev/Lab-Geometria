@@ -40,6 +40,8 @@ public static class AuthenticationEndpoints
             CredentialExchangeRequest request,
             ResolveSignInUseCase resolveSignIn,
             PasswordDerivation credentials,
+            Composition.CredentialAttemptThrottle failedAttempts,
+            HttpContext context,
             AccessTokenIssuer accessTokens,
             ISystemClock clock,
             ILoggerFactory loggerFactory,
@@ -61,6 +63,16 @@ public static class AuthenticationEndpoints
                     Domain.Values.ConditionCode.RequiredFieldMissing, now, [.. missing]);
             }
 
+            // ANTES DE BUSCAR LA CUENTA Y ANTES DE DERIVAR: la cuenta que agotó sus fallos recibe
+            // `429` sin que el servicio pague la derivación. Se consulta por el correo escrito,
+            // exista la cuenta o no, así que el rechazo no dice nada sobre ella (`ADR-00011`).
+            var refusal = failedAttempts.Refusal(request!.Email, context);
+            if (refusal is not null)
+            {
+                log.LogInformation("Canje rechazado: la cuenta agotó sus intentos fallidos en la ventana.");
+                return refusal;
+            }
+
             // Pasos 2 a 4 — admisibilidad primero y comprobación de credencial después, que es el
             // orden de `Api CU-01` §4. La comprobación se le pasa a la capa de aplicación como
             // función: el valor derivado no sale de ahí y la comparación no entra.
@@ -73,6 +85,10 @@ public static class AuthenticationEndpoints
 
             if (!resolution.Succeeded)
             {
+                // Todo desenlace no satisfactorio del canje es un intento fallido contra la cuenta:
+                // correo desconocido, cuenta no admisible y contraseña equivocada cuentan igual,
+                // porque distinguirlos en la cuota sería distinguirlos hacia afuera.
+                failedAttempts.RecordFailure(request.Email);
                 log.LogInformation("Canje rechazado con el motivo {Condition}.", resolution.ConditionCode);
                 return ContractTranslation.Problem(resolution.ConditionCode, now);
             }
@@ -99,10 +115,11 @@ public static class AuthenticationEndpoints
         })
         .WithName("ExchangeCredentials")
         .AllowAnonymous()
-        // LA CUOTA DEL CANJE ES PROPIA Y MÁS ESTRICTA QUE LA DEL GRUPO, siempre por dirección de
-        // origen: es el único punto que recibe una contraseña en claro y cada intento cuesta una
-        // derivación anclada, se acierte o no. Declararla acá reemplaza a la del grupo `/v1` sobre
-        // este punto; las cifras y su fundamento están en `ContractRateLimiting`.
+        // LA CUOTA DEL CANJE POR ORIGEN ES PROPIA, y es un tope holgado: cada intento cuesta una
+        // derivación anclada, se acierte o no, y un origen puede ser una comisión entera detrás del
+        // front o de un NAT. La defensa de la cuenta es la de arriba, por cuenta. Declararla acá
+        // reemplaza a la del grupo `/v1` sobre este punto; las cifras y su fundamento están en
+        // `ContractRateLimiting`.
         .RequireRateLimiting(Composition.ContractRateLimiting.CredentialExchangePolicy);
 
         return endpoints;
