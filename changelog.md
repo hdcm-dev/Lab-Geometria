@@ -1505,3 +1505,40 @@ es una etiqueta, un despliegue y una ratificación del Product Owner.
   las dos direcciones probadas fallando) y la de producción sobre `8e5e2f9`. `Mini-Plan.md` **3.3**
   (§3.5, una celda de `Estado`). Con esto, `BT-00034` y `BT-00035` —que dependen sólo de `BT-00032`—
   quedan destrabadas.
+
+## La deprecación del contrato queda escrita: un cuatrimestre, `Deprecation` y `Sunset` — 2026-09-13
+
+**Rama:** `fase-k/bt-00035-deprecacion` (`BT-00035`, fase `k`, sobre `1748503` = `v1.1.0`). Tarea `docs`:
+**sin cambio de código**. Ejecuta la decisión `D-02` del Product Owner (mesa del ciclo 2, §8, default
+aceptado) y la remisión de `ADR-00010` §2.1 punto 4. **Hoy sólo existe `/v1/` y nada está deprecado**: esta
+entrada escribe la regla que regirá el día que exista `/v2/`, y no cambia ninguna respuesta.
+
+### Agregado
+
+- **`SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Estrategia-Versionado.md` 6.0, §6.b «La
+  deprecación del contrato REST»**, ítem propio, en ocho filas: `/v{N+1}/` se abre **sólo por un cambio Mayor**
+  de `Contratos-REST.md` §6, que sube `MAJOR` del producto; `/v{N}/` **convive un cuatrimestre como mínimo
+  desde que `/v{N+1}/` entra a producción** —cuatro meses calendario, prorrogable al fin del cuatrimestre
+  lectivo, nunca acortable—; desde esa fusión **toda respuesta de `/v{N}/` lleva `Deprecation: @<epoch>`**
+  (`draft-ietf-httpapi-deprecation-header`) **y `Sunset: <fecha HTTP>`** (RFC 8594), sobre el grupo entero,
+  y este registro anuncia las dos fechas en una entrada `BREAKING`; al vencer, `/v{N}/` responde **`410`**
+  y no `404` —fue contrato, se anunció y se retiró a propósito; la forma sin prefijo nunca lo fue—, y el
+  código **entra a los once de `Contratos-REST.md` §4 por la tarea del primer retiro, no por ésta**; dos
+  prefijos como máximo; **`/salud`, `/openapi/v1.json` y `/documentacion` no se deprecan**; cómo se
+  materializa en código lo decide la tarea que abra `/v{N+1}/`. §1.1 y §6.1 remiten a §6.b en lugar de decir
+  que `BT-00035` «la escribe». Sube major por el precedente de la 5.0: entra una regla, no sólo estructura.
+
+### Cambiado
+
+- **`Contratos-REST.md` 1.10**: §3.1 remite a la política; §4 declara `Deprecation` y `Sunset` como cabeceras
+  **futuras** que ninguna respuesta lleva hoy, con la medición contra producción transcripta, y que `410` no es
+  el duodécimo código; §6 precisa su remisión. Sigue habiendo once códigos y diecisiete puntos.
+- **`ADR-00010` 1.2**: §7 pasa de «remitido a `BT-00035`» a «decidido por `BT-00035`», con la cita a
+  `Estrategia-Versionado.md` 6.0 §6.b. El cuerpo de la decisión no cambia.
+- **`BT-00035` → `Done`** (2.0), con el criterio verificado en sus tres partes.
+
+### Verificado
+
+- `curl -s -D - -o /dev/null https://api-geometria.aplicada.stream/salud` y `…/v1/aprovisionamiento` →
+  `HTTP/2 200`, **sin `Deprecation` ni `Sunset`** (`HEAD` responde `405`, `allow: GET`).
+- `git tag -l` → las seis etiquetas, **sin cambios**; `git diff --stat main` **sin `src/`**.
