@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Contratos-REST.md
-**Versión:** 1.9
+**Versión:** 1.10
 **Estado:** Aprobado
 **Fecha:** 2026-09-13
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -127,6 +127,8 @@ Los diecisiete son los de [`../02-Especificacion-Funcional/Definicion-Superficie
 
 **Sin prefijo no hay contrato.** Una petición a la ruta sin versión —`/cuentas`, `/trabajos`, las que valieron hasta el 2026-09-12— responde **`404`** como cualquier ruta inexistente: **sin redirección** y sin cuerpo del contrato. Redirigir mantendría viva la forma sin versión bajo otro nombre, que es lo que `ADR-00010` §2.1 punto 5 excluye. Tampoco responde `401`: la guardia no reconoce esas rutas porque no existen.
 
+**Y cuando exista `/v{N+1}/`, `/v{N}/` no desaparece de un día para otro.** Convive **un cuatrimestre como mínimo** desde que `/v{N+1}/` entra a producción, con `Deprecation` y `Sunset` en cada respuesta, y al vencer responde `410` y no `404`, porque fue contrato y la forma sin prefijo nunca lo fue. La política —cuándo se abre un prefijo, desde cuándo se cuenta el plazo, qué lleva cada respuesta, qué se retira y qué no— está en [`../09-Devops/Estrategia-Versionado.md`](../09-Devops/Estrategia-Versionado.md) **6.0** §6.b (`BT-00035`, sobre `D-02`). **Hoy sólo existe `/v1/` y nada está deprecado.**
+
 **La comparación en las dos direcciones es una prueba y no una lectura.** `ContractRoutePrefixTests` (batería de integración) transcribe esta tabla —verbo y ruta pública, a mano— y la contrasta con lo que el host enruta de verdad: toda ruta publicada está en la tabla o entre las tres exentas, todo punto de la tabla está publicado con esa ruta, y toda ruta publicada lleva `/v1/` salvo las tres exentas. Un punto agregado al código sin entrar acá falla; un punto declarado acá sin mapear falla; una cuarta ruta sin prefijo falla aunque tenga motivo, hasta que el motivo se escriba en `ContractRoutePrefix`.
 
 ## 4. Los once códigos de respuesta
@@ -146,6 +148,24 @@ Los diecisiete son los de [`../02-Especificacion-Funcional/Definicion-Superficie
 | `503` | El servicio no puede atender: el almacén no está disponible, o el arranque todavía no lo dejó en condiciones | **[derivado]** |
 
 **Once códigos: dos de la fuente y nueve de derivación**, con el matiz declarado del `404`, cuyo **número** es derivado y cuya **obligación** no lo es.
+
+**Dos cabeceras futuras y un código futuro, que ninguna respuesta lleva hoy.** La política de deprecación de [`../09-Devops/Estrategia-Versionado.md`](../09-Devops/Estrategia-Versionado.md) §6.b prevé que, cuando exista `/v{N+1}/`, toda respuesta de `/v{N}/` lleve `Deprecation` (`draft-ietf-httpapi-deprecation-header`) y `Sunset` (RFC 8594), y que al retirarse responda `410`. **Nada de eso está en esta superficie hoy**: sólo existe `/v1/`, no hay nada deprecado, y **`410` no es el duodécimo código** —entra a esta tabla, y a §5.1 como respuesta sin código del contrato, por la tarea técnica del primer retiro, no por ésta—. Medido contra producción el 2026-09-13 (`HEAD` responde `405`, `allow: GET`; se lee la respuesta de `GET`):
+
+```
+$ curl -s -D - -o /dev/null https://api-geometria.aplicada.stream/salud
+HTTP/2 200
+date: Sun, 13 Sep 2026 03:18:47 GMT
+content-type: application/json; charset=utf-8
+server: cloudflare
+cf-cache-status: DYNAMIC
+report-to: {"group":"cf-nel",…}
+nel: {"report_to":"cf-nel",…}
+cf-ray: a3a401af9a1f0b6d-EZE
+alt-svc: h3=":443"; ma=86400
+
+$ curl -s -D - -o /dev/null https://api-geometria.aplicada.stream/v1/aprovisionamiento | grep -i -c "deprecation\|sunset"
+0
+```
 
 **Un código que esta superficie no usa, y su ausencia es informativa.** No hay respuesta de entidad no procesable: el conjunto de causas que otro producto pondría ahí —un texto del alumno que no verifica— **no es un fallo en éste** (§5.3). **El `429` fue la segunda ausencia hasta el 2026-09-13**, con el fundamento de [`ADR-00005`](Adrs/ADR-00005-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md) §2 —«el único cliente legítimo es la pieza pública y el alcance es de aula»—; esa premisa cayó con la fase `k` (la superficie se publica bajo `/v1/` para aplicaciones propias además del front, [`ADR-00009`](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md) y [`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)), y `BT-00029` lo incorpora con la forma de §4.1. `ADR-00005` no se reescribe acá: su decisión de no paginar sigue vigente; lo que queda superado es sólo su párrafo sobre el caudal, y se deja constancia en esta fila.
 
@@ -271,7 +291,7 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | Agregar un código al conjunto cerrado | Menor | Entra a la tabla de §5 con su destino |
 | Corregir un punto para que cumpla lo que ya declaraba | Parche | Ninguna |
 
-**Compatibilidad hacia atrás: dentro de un mismo `/v{MAJOR}/` no hay convivencia de dos formas de un punto; entre dos `MAJOR` sí la hay, por un plazo, con aviso de deprecación** ([`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) §2.1 punto 4; plazo y mecanismo en `Estrategia-Versionado.md`, `BT-00035`). Para las dos piezas que compilan contra el ensamblado, la política sigue siendo corregir los dos lados en la misma fusión. **Cada fusión que cambia código de producción recibe una etiqueta** (evento fijado por `BT-00033` en `Estrategia-Versionado.md`), y la reversión es volver a la etiqueta anterior y reconstruir.
+**Compatibilidad hacia atrás: dentro de un mismo `/v{MAJOR}/` no hay convivencia de dos formas de un punto; entre dos `MAJOR` sí la hay, por un plazo, con aviso de deprecación** ([`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) §2.1 punto 4; plazo y mecanismo en `Estrategia-Versionado.md` **6.0** §6.b: un cuatrimestre desde que `/v{N+1}/` entra a producción, `Deprecation` y `Sunset`, `410` al retirar; `BT-00035`). Para las dos piezas que compilan contra el ensamblado, la política sigue siendo corregir los dos lados en la misma fusión. **Cada fusión que cambia código de producción recibe una etiqueta** (evento fijado por `BT-00033` en `Estrategia-Versionado.md`), y la reversión es volver a la etiqueta anterior y reconstruir.
 
 **Tres clases de cambio que la compilación compartida no detecta**, y cada una con su mecanismo: la **configuración de intercambio**, fijada de un solo lado en §2.2; el **esquema del almacén**, verificado al arrancar con su linaje, que detiene el arranque si no cierra; y las **rutas**, ejercidas por la batería de integración contra el servicio real.
 
@@ -305,3 +325,4 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | 1.7 | 2026-09-12 | **§6 deja de afirmar «no se versionan las rutas» y «no hay clientes de terceros»** (tarea `BT-00027`). Adopta la convención de [`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) —`/v{MAJOR}/`, `MAJOR` del producto— y relee la compatibilidad hacia atrás: una forma por punto dentro de un `MAJOR`, convivencia entre `MAJOR` con plazo (`BT-00035`), etiqueta por fusión que cambia código de producción (`BT-00033`). **Ninguna ruta de §3 cambia**: el prefijo lo implementa `BT-00032`. La tabla de clases de cambio de §6 no cambia. Sube minor. |
 | 1.8 | 2026-09-12 | **§3.1 publica las rutas bajo `/v1/`** (tarea `BT-00032`, implementa [`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)). Tabla de los diecisiete puntos con su ruta pública: **dieciséis bajo `/v1/` y `A-16` exento**. Decide lo que `ADR-00010` §7 remitió a esta tarea: `/salud` no se versiona —es del arranque y la salud, `ADR-00007` §2 punto 3 y `05` §3.4, y lo piden los `healthcheck`— y `/openapi/v1.json` y `/documentacion` tampoco —describen la superficie, `ADR-08008`—. Declara el `404` sin redirección de la petición sin prefijo y la prueba `ContractRoutePrefixTests` que compara la tabla contra lo publicado en las dos direcciones. §6 deja de decir «este documento no las cambia todavía»; §7 suma `ADR-00010` a las ADR que lo gobiernan. **Ningún verbo, cuerpo, papel ni código cambia.** Sube minor. |
 | 1.9 | 2026-09-13 | **§4 pasa de diez a once códigos: entra el `429`** (tarea `BT-00029`, implementa el NFR «Caudal sostenido» de `05` §8.1 sobre [`ADR-06002`](Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md)). **§4.1 nuevo**: la cuota por persona autenticada (reclamo `sub`, [`ADR-00003`](Adrs/ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md)) o por dirección de origen sin acceso, nunca por una clave de aplicación ([`ADR-00009`](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md)); la cuota propia y más estricta del canje; las cuatro cifras por omisión con su fundamento y su llave de configuración; el `Retry-After` sin cuerpo; la confianza en `X-Forwarded-For` sólo desde una red declarada, y la obligación del despliegue de declararla; `/salud` y el explorador fuera; la batería que lo verifica con los umbrales reales. **El párrafo de §4 que declaraba el `429` como ausencia informativa se reescribe**: su fundamento —`ADR-00005` §2, «el único cliente legítimo es la pieza pública»— cayó con la fase `k`, y se deja constancia en lugar de reescribir la ADR. **§5.1 pasa de dos a tres respuestas sin código**. §7: once códigos, `ADR-00009` entre las que gobiernan, y la salvedad sobre `ADR-00005`. Ningún punto, verbo, papel ni traducción de §5 cambia. Sube minor. |
+| 1.10 | 2026-09-13 | **Remisión a la política de deprecación** (tarea `BT-00035`, sobre `D-02`). **§3.1** suma un párrafo: cuando exista `/v{N+1}/`, `/v{N}/` convive un cuatrimestre como mínimo con `Deprecation` y `Sunset`, y al vencer responde `410`; la política vive en [`../09-Devops/Estrategia-Versionado.md`](../09-Devops/Estrategia-Versionado.md) **6.0** §6.b. **§4** declara que `Deprecation` y `Sunset` son cabeceras **futuras** que ninguna respuesta lleva hoy y que **`410` no entra a los once códigos por esta versión** —lo hará la tarea del primer retiro—, con la medición contra producción del 2026-09-13 transcripta (`/salud` y `/v1/aprovisionamiento`, `200`, cero cabeceras de deprecación). **§6** precisa la remisión que ya tenía. **Ningún punto, verbo, papel, código de respuesta ni fila de §5 cambia; sigue habiendo once códigos.** Sube minor. |
