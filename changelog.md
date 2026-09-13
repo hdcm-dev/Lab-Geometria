@@ -1455,8 +1455,8 @@ que toda aplicación que consuma `/v1/` tiene que estar preparada para recibir y
   sin código; el párrafo que declaraba el `429` como ausencia informativa se reescribe con constancia de por qué
   cayó su fundamento (`ADR-00005` §2: «el único cliente legítimo es la pieza pública»). **`ADR-00005` no se
   reescribe**: su decisión de no paginar sigue vigente y sólo su párrafo sobre el caudal queda superado.
-- **`Definicion-Superficie-HTTP.md` 1.12**: la fila del `429` en §4, transversal a los dieciséis puntos bajo
-  `/v1/` y por eso sin tocar la columna de códigos de §3. **`Arquitectura-Unidad-Entrega.md` 3.12**: §8.1, fila
+- **`Definicion-Superficie-HTTP.md` 1.13**: la fila del `429` en §4, transversal a los dieciséis puntos bajo
+  `/v1/` y por eso sin tocar la columna de códigos de §3. **`Arquitectura-Unidad-Entrega.md` 3.13**: §8.1, fila
   «Caudal sostenido», una celda: el NFR gana su mecanismo; la cifra no cambia y sigue provisoria.
 
 ### Verificado
