@@ -1,0 +1,28 @@
+$ grep "Versión (de las reglas|de la plantilla)" en _legacy/13.7 contra main de IA.SDD (8c55a1e)
+IA.SDD HEAD 8c55a1e4c21138462d30abb32e64c79323bbb3e5 Merge pull request #64 from hdcm-dev/intervencion/08-reporte-30
+SDD/Devs/Orchestrator/Master-Prompt-Migracion.md	13.7=2.9	13.16=2.10	CAMBIÓ
+SDD/Devs/Orchestrator/Master-Prompt-Reanudacion.md	13.7=1.10	13.16=1.13	CAMBIÓ
+SDD/Devs/Orchestrator/Master-Prompt.md	13.7=8.14	13.16=8.19	CAMBIÓ
+SDD/Devs/Rules/Catalogo-De-Criterios.md	13.7=1.14	13.16=1.18	CAMBIÓ
+SDD/Devs/Rules/Deriva-Rules.md	13.7=5.4	13.16=5.4	
+SDD/Devs/Rules/Intake-Rules.md	13.7=4.2	13.16=4.3	CAMBIÓ
+SDD/Devs/Rules/Maqueta-Rules.md	13.7=4.5	13.16=4.5	
+SDD/Devs/Rules/Mesa-Rules.md	13.7=1.0	13.16=1.3	CAMBIÓ
+SDD/Devs/Rules/Migracion-Rules.md	13.7=3.19	13.16=3.20	CAMBIÓ
+SDD/Devs/Rules/Root-Rules.md	13.7=8.6	13.16=8.7	CAMBIÓ
+SDD/Devs/Rules/Rules-Arquitectura-Tecnica.md	13.7=4.5	13.16=4.6	CAMBIÓ
+SDD/Devs/Rules/Rules-Backlog-Tecnico.md	13.7=5.1	13.16=5.3	CAMBIÓ
+SDD/Devs/Rules/Rules-Base-Conocimiento.md	13.7=2.2	13.16=2.2	
+SDD/Devs/Rules/Rules-Calidad-Y-Pruebas.md	13.7=4.6	13.16=4.6	
+SDD/Devs/Rules/Rules-Contexto.md	13.7=4.5	13.16=4.6	CAMBIÓ
+SDD/Devs/Rules/Rules-Devops.md	13.7=6.1	13.16=6.2	CAMBIÓ
+SDD/Devs/Rules/Rules-Documentacion.md	13.7=5.5	13.16=5.5	
+SDD/Devs/Rules/Rules-Especificacion-Funcional.md	13.7=5.5	13.16=5.5	
+SDD/Devs/Rules/Rules-Examples.md	13.7=6.5	13.16=6.6	CAMBIÓ
+SDD/Devs/Rules/Rules-Necesidades-Negocio.md	13.7=4.4	13.16=4.4	
+SDD/Devs/Rules/Rules-Plan-Sprint.md	13.7=5.5	13.16=5.5	
+SDD/Devs/Rules/Rules-Prompts-AI.md	13.7=4.6	13.16=4.6	
+SDD/Devs/Rules/Rules-UX-UI-DX.md	13.7=5.5	13.16=5.5	
+SDD/Devs/Rules/Vocabulario-Rules.md	13.7=3.2	13.16=3.3	CAMBIÓ
+SDD/Devs/Intake/PRODUCT-INTAKE-template.md	13.7=3.5	13.16=3.6	CAMBIÓ
+SDD/Devs/Intake/PRODUCT-MANIFEST-template.md	13.7=6.0	13.16=6.1	CAMBIÓ

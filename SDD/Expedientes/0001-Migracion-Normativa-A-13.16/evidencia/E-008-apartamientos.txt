@@ -1,0 +1,28 @@
+$ para cada SDD/Docs/Producto/Adrs/ADR-1400[1-5]-*.md: estado, campos 4-6 y commit de introducción (git log main --reverse -- <archivo> | head -1)
+--- SDD/Docs/Producto/Adrs/ADR-14001-Archivado-Central-De-La-Migracion.md
+**Estado:** Aceptado
+| **4 · Disparadores que superarían la decisión** | Este apartamiento queda superado cuando **el framework declare cómo se archiva una migración estructural** —el caso en que la carpeta de origen de un documento deja de existir—, o cuando **una migración posterior de este destino vuelva a archivar de forma central**, porque entonces el archivado central deja de ser una excepción de una 
+| **5 · Estado** | **`vigente`** |
+| **6 · Saltos de versión que sobrevivió** | **3** — sobrevivió **8.11 → 9.9**, **9.12 → 10.0** y **10.0 → 13.3**. **Revisado por la fase M4 de la migración 10.0 → 13.3, el 2026-08-25**, con resultado **no contemplado**: el campo 4 se contrastó contra las entradas **10.1 a 13.3** del `CHANGELOG.md` del framework y ninguna cumple el disparador. El incremento es de **+2** y no de +1 
+introducido: f0f30ca 2026-08-16 docs(sdd): cierra los tres P1 de la migración, cada uno por su salida
+--- SDD/Docs/Producto/Adrs/ADR-14002-Familias-Propias-Del-Intake-Con-Ancho-De-Origen.md
+**Estado:** Aceptado
+| **4 · Disparadores que superarían la decisión** | Declarado en **§4, «Qué lo reabre»**: que alguna de estas familias **pase a tener artefacto propio generado** —un archivo por invariante, como lo tienen hoy las reglas de negocio—. Esa familia se renumera entonces, por el mismo motivo por el que `RN` se renumeró |
+| **5 · Estado** | **`vigente`** |
+| **6 · Saltos de versión que sobrevivió** | **3** — sobrevivió **8.11 → 9.9**, **9.12 → 10.0** y **10.0 → 13.3**. **Revisado por la fase M4 de la migración 10.0 → 13.3, el 2026-08-25**, con resultado **no contemplado**: el campo 4 se contrastó contra las entradas **10.1 a 13.3** del `CHANGELOG.md` del framework y ninguna cumple el disparador. El incremento es de **+2** y no de +1 
+introducido: f0f30ca 2026-08-16 docs(sdd): cierra los tres P1 de la migración, cada uno por su salida
+--- SDD/Docs/Producto/Adrs/ADR-14003-Direccion-Del-Backend-Por-IP-Dinamica.md
+**Estado:** **Aceptado** — aprobado por el Product Owner el 2026-08-18
+| **4 · Disparadores que superarían la decisión** | Cualquiera de los dos: que el servidor propio obtenga una **IP pública estática**, o que se configure un **nombre DDNS** y `API_BASE_URL` pase a apuntar a ese nombre. En los dos casos la actualización manual deja de hacer falta y este apartamiento queda superado |
+| **5 · Estado** | **`vigente`** |
+| **6 · Saltos de versión que sobrevivió** | **2** — se emitió en el conjunto **9.12** y sobrevivió **9.12 → 10.0** y **10.0 → 13.3**. **Revisado por la fase M4 de la migración 10.0 → 13.3, el 2026-08-25**, con resultado **no contemplado**: el campo 4 se contrastó contra las entradas **10.1 a 13.3** del `CHANGELOG.md` del framework y ninguna cumple el disparador. El incremento es de
+introducido: 4cc596b 2026-08-18 prerrequisitos de la fase `i`: las puertas antes de publicar, y dos cosas que decían otra cosa
+--- SDD/Docs/Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md
+**Estado:** **Aceptado** — aprobado por el Product Owner el 2026-08-26
+| **4 · Disparadores que superarían la decisión** | Cualquiera de los dos: que **el framework incorpore la figura del ítem sin objeto** —con lo cual esto deja de ser un apartamiento y pasa a ser la regla—, o que **este producto adopte una herramienta declarativa de infraestructura**, con lo cual el ítem recupera sujeto y se contesta |
+| **5 · Estado** | **`vigente`** desde el **2026-08-26**, cuando el Product Owner aceptó el ADR. Hasta entonces el documento estuvo `Propuesto` y este campo lo declaraba así, porque **un apartamiento no rige antes de ser aceptado** |
+| **6 · Saltos de versión que sobrevivió** | **0** — se emite en el conjunto **13.3** |
+introducido: 407240a 2026-08-24 docs(sdd): ronda 2 del corte 09 — el audit rechazó, y tenía razón en los cinco
+--- SDD/Docs/Producto/Adrs/ADR-14005-Familias-Acunadas-Por-El-Destino-Con-Ambito-De-Proyecto.md
+**Estado:** **RETIRADO** el 2026-08-29 por decisión del Product Owner, **sin haber sido aceptado**. El apartamiento que proponía dejó de hacer falta: las dos familias se renumeraron al mapa de bloq
+introducido: aa3abd3 2026-08-29 docs(sdd): mesa evaluadora 2026-08-29 — y el instrumento de cobertura estaba roto

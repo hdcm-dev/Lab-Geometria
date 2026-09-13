@@ -1,0 +1,14 @@
+$ git rev-parse main origin/main; git rev-list --left-right --count main...origin/main; git status --porcelain | wc -l; git branch -r --no-merged origin/main; git branch --merged main
+# fecha: 2026-09-13T12:15:22-03:00
+b9675d870aa6e3b2af19f4d9d684fd2e1393ff18
+b9675d870aa6e3b2af19f4d9d684fd2e1393ff18
+0	0
+porcelain: 1
+remotas sin fusionar:
+  origin/archivo/reanudacion-6-2026-09-12
+locales fusionadas en main:
++ main
+* migracion/a-13.16
+$ git -C ../Lab-Geometria worktree list
+/home/fernando/workspaces/workspace-dev/PROG2/Geometria/Lab-Geometria          b9675d8 [main]
+/home/fernando/workspaces/workspace-dev/PROG2/Geometria/Lab-Geometria-mig1316  b9675d8 [migracion/a-13.16]

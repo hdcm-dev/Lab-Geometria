@@ -1,0 +1,1066 @@
+# Derivación en seco del ciclo de origen (Migracion-Rules.md 3.20 §4.9), sobre main b9675d8. Script: E-006b-derivar_ciclo.py
+# comando por fila: git log main --format='%h\t%ad\t%s' --date=short -S"<fragmento>"  → el más antiguo
+[
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1189,
+  "id": "PA-01",
+  "frag": "filas de la superficie son propuesta derivada rotulada fila",
+  "commits": 1,
+  "oldest": "0a71935\t2026-08-10\tFase C de Infrastructure y Api, e intake 1.18",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1190,
+  "id": "PA-02",
+  "frag": "el gobierno de cuentas, el reseteo y la revisión de la comis",
+  "commits": 2,
+  "oldest": "8520aa7\t2026-08-10\tFase B de GeometriaFactory-Api",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1191,
+  "id": "PA-03",
+  "frag": "Qué código del contrato recibe un envío o una reedición forz",
+  "commits": 4,
+  "oldest": "8520aa7\t2026-08-10\tFase B de GeometriaFactory-Api",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1192,
+  "id": "PA-04",
+  "frag": "que caduque dentro de la sesión de trabajo de una clase y qu",
+  "commits": 3,
+  "oldest": "0a71935\t2026-08-10\tFase C de Infrastructure y Api, e intake 1.18",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1193,
+  "id": "PA-05",
+  "frag": "un solo límite para todo el producto, tomado de configuració",
+  "commits": 5,
+  "oldest": "0a71935\t2026-08-10\tFase C de Infrastructure y Api, e intake 1.18",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1194,
+  "id": "PA-06",
+  "frag": ", con el fundamento de que con dos la colección demuestra qu",
+  "commits": 1,
+  "oldest": "219c38d\t2026-08-12\tpropagación de las tres decisiones: 167 documentos, 420 lugares",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1195,
+  "id": "PA-07",
+  "frag": "Declarados abiertos aguas arriba y anclados en la etapa",
+  "commits": 1,
+  "oldest": "0a71935\t2026-08-10\tFase C de Infrastructure y Api, e intake 1.18",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1196,
+  "id": "PA-08",
+  "frag": "construcción de la imagen en destino desde el repositorio",
+  "commits": 10,
+  "oldest": "0a71935\t2026-08-10\tFase C de Infrastructure y Api, e intake 1.18",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1197,
+  "id": "PA-09",
+  "frag": "latencia, caudal, arranque en frío, cobertura y forma de la",
+  "commits": 3,
+  "oldest": "0a71935\t2026-08-10\tFase C de Infrastructure y Api, e intake 1.18",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1198,
+  "id": "PA-10",
+  "frag": "Coincide punto por punto con lo que esta categoría publica e",
+  "commits": 1,
+  "oldest": "802731e\t2026-08-10\tFase C: se levanta el rechazo, y la vista de producto",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1208,
+  "id": "PA-01",
+  "frag": "El intake los declara abiertos y los ata al punto de control",
+  "commits": 3,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1209,
+  "id": "PA-02",
+  "frag": "siguen pendientes de confirmación del Product Owner en",
+  "commits": 4,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1210,
+  "id": "PA-03",
+  "frag": "La categoría 02 había adoptado la columna, que es lo que la",
+  "commits": 2,
+  "oldest": "2a27568\t2026-08-11\tauditoría de los 47 puntos abiertos y unificación de los índices de la 11",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1211,
+  "id": "PA-04",
+  "frag": "a partir de las convenciones de mensaje de confirmación no e",
+  "commits": 6,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1219,
+  "id": "PA-01",
+  "frag": "no es una regla nueva ni una decisión de alcance, es un nomb",
+  "commits": 2,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1220,
+  "id": "PA-02",
+  "frag": "Declarados abiertos aguas arriba y atados al punto de contro",
+  "commits": 3,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1221,
+  "id": "PA-03",
+  "frag": ", que el correo se guarda tal como la persona lo escribió, y",
+  "commits": 3,
+  "oldest": "2a27568\t2026-08-11\tauditoría de los 47 puntos abiertos y unificación de los índices de la 11",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1222,
+  "id": "PA-04",
+  "frag": ", que ninguna fuente declara como atributo del trabajo y que",
+  "commits": 2,
+  "oldest": "2a27568\t2026-08-11\tauditoría de los 47 puntos abiertos y unificación de los índices de la 11",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1223,
+  "id": "PA-05",
+  "frag": "los 500 ms del caso de uso más pesado y la cobertura mínima",
+  "commits": 5,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1224,
+  "id": "PA-06",
+  "frag": "a partir de las convenciones de mensaje de confirmación no e",
+  "commits": 6,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1232,
+  "id": "PA-01",
+  "frag": ", porque no puede nombrar un tipo que no declara sin contrad",
+  "commits": 2,
+  "oldest": "0a71935\t2026-08-10\tFase C de Infrastructure y Api, e intake 1.18",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1233,
+  "id": "PA-02",
+  "frag": "Declarados abiertos aguas arriba y atados al punto de contro",
+  "commits": 3,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1234,
+  "id": "PA-03",
+  "frag": "parámetros versionados junto al valor derivado, sin valor po",
+  "commits": 7,
+  "oldest": "0a71935\t2026-08-10\tFase C de Infrastructure y Api, e intake 1.18",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1235,
+  "id": "PA-04",
+  "frag": "Un tipo fuera del conjunto produce error de validación, que",
+  "commits": 5,
+  "oldest": "d168363\t2026-08-10\tFase B de GeometriaFactory-Infrastructure",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1236,
+  "id": "PA-05",
+  "frag": "el corte pertenece al borde del proceso, y dos límites disti",
+  "commits": 2,
+  "oldest": "2a27568\t2026-08-11\tauditoría de los 47 puntos abiertos y unificación de los índices de la 11",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1237,
+  "id": "PA-06",
+  "frag": "verificarla contra un registro de provisorias anteriores, po",
+  "commits": 9,
+  "oldest": "d168363\t2026-08-10\tFase B de GeometriaFactory-Infrastructure",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1238,
+  "id": "PA-07",
+  "frag": "es una decisión de operación que la fuente dejó abierta",
+  "commits": 5,
+  "oldest": "d168363\t2026-08-10\tFase B de GeometriaFactory-Infrastructure",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1239,
+  "id": "PA-08",
+  "frag": "Los dos recuentos de escenarios que esta categoría levantó p",
+  "commits": 2,
+  "oldest": "802731e\t2026-08-10\tFase C: se levanta el rechazo, y la vista de producto",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1240,
+  "id": "PA-09",
+  "frag": "Si el Product Owner la quisiera, entraría por el dominio y n",
+  "commits": 5,
+  "oldest": "d168363\t2026-08-10\tFase B de GeometriaFactory-Infrastructure",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1241,
+  "id": "PA-10",
+  "frag": "sería indistinguible de un trabajo verificado sin discrepanc",
+  "commits": 9,
+  "oldest": "d168363\t2026-08-10\tFase B de GeometriaFactory-Infrastructure",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 1242,
+  "id": "PA-11",
+  "frag": "siguen pendientes de confirmación del Product Owner en",
+  "commits": 4,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 741,
+  "id": "PA-01",
+  "frag": null,
+  "commits": 0,
+  "oldest": null,
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 742,
+  "id": "PA-02",
+  "frag": "únicas cosas que una fuente declara son el punto de canje, c",
+  "commits": 5,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 743,
+  "id": "PA-03",
+  "frag": "BT-00015 pierde su motivo de elevación y conserva el de prop",
+  "commits": 2,
+  "oldest": "841cd5b\t2026-08-15\tdocs(sdd): pasada de renumeración de identificadores, migración 6.0 a 8.2",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 744,
+  "id": "PA-04",
+  "frag": null,
+  "commits": 0,
+  "oldest": null,
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 745,
+  "id": "PA-05",
+  "frag": "La vigencia exacta del acceso firmado",
+  "commits": 8,
+  "oldest": "8520aa7\t2026-08-10\tFase B de GeometriaFactory-Api",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 746,
+  "id": "PA-06",
+  "frag": "un solo límite para todo el producto, tomado de configuració",
+  "commits": 5,
+  "oldest": "0a71935\t2026-08-10\tFase C de Infrastructure y Api, e intake 1.18",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 747,
+  "id": "PA-07",
+  "frag": ", que es la lectura que la categoría 02 ya había adoptado y",
+  "commits": 2,
+  "oldest": "219c38d\t2026-08-12\tpropagación de las tres decisiones: 167 documentos, 420 lugares",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 748,
+  "id": "PA-08",
+  "frag": "Los nombres de tipos y de espacios de nombres, y las version",
+  "commits": 2,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 749,
+  "id": "PA-09",
+  "frag": "La construcción de la imagen en destino desde el repositorio",
+  "commits": 4,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 750,
+  "id": "PA-10",
+  "frag": "latencia, caudal, arranque en frío, cobertura y forma de la",
+  "commits": 3,
+  "oldest": "0a71935\t2026-08-10\tFase C de Infrastructure y Api, e intake 1.18",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 758,
+  "id": "PA-01",
+  "frag": "Queda por decidir si se adopta alguna al cerrarse las primer",
+  "commits": 4,
+  "oldest": "914cc43\t2026-08-10\tFase D de los tres proyectos de nivel 0",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 759,
+  "id": "PA-02",
+  "frag": ", que el intake deja abiertos y ata al punto de control de l",
+  "commits": 3,
+  "oldest": "914cc43\t2026-08-10\tFase D de los tres proyectos de nivel 0",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 760,
+  "id": "PA-03",
+  "frag": "a partir de las convenciones de mensaje de confirmación",
+  "commits": 11,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 761,
+  "id": "PA-04",
+  "frag": "tiempo de la batería de pruebas y cobertura mínima",
+  "commits": 3,
+  "oldest": "914cc43\t2026-08-10\tFase D de los tres proyectos de nivel 0",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 762,
+  "id": "PA-05",
+  "frag": "Este backlog hereda la lectura de 02 y no la resuelve",
+  "commits": 3,
+  "oldest": "914cc43\t2026-08-10\tFase D de los tres proyectos de nivel 0",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 763,
+  "id": "PA-06",
+  "frag": "El criterio de comparación de dos correos",
+  "commits": 11,
+  "oldest": "0b61076\t2026-08-09\tIncorpora la documentación de especificación SDD al control de versiones",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 769,
+  "id": "PA-01",
+  "frag": "Queda por decidir si se adopta alguna al cerrarse las primer",
+  "commits": 4,
+  "oldest": "914cc43\t2026-08-10\tFase D de los tres proyectos de nivel 0",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 770,
+  "id": "PA-02",
+  "frag": "confirma que el puerto existe, declara que su ausencia en el",
+  "commits": 3,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 771,
+  "id": "PA-03",
+  "frag": "Los nombres definitivos de tipos y de espacios de nombres",
+  "commits": 5,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 772,
+  "id": "PA-04",
+  "frag": "a partir de las convenciones de mensaje de confirmación",
+  "commits": 11,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 773,
+  "id": "PA-05",
+  "frag": "los 500 ms del caso de uso más pesado y la cobertura mínima",
+  "commits": 5,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 774,
+  "id": "PA-06",
+  "frag": "el intake los sostiene como verificables en prueba y el mode",
+  "commits": 3,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 775,
+  "id": "PA-07",
+  "frag": "No es de este proyecto de código decidirlo",
+  "commits": 3,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 781,
+  "id": "PA-01",
+  "frag": null,
+  "commits": 0,
+  "oldest": null,
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 782,
+  "id": "PA-02",
+  "frag": "Los nombres definitivos de tipos y de espacios de nombres, y",
+  "commits": 3,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 783,
+  "id": "PA-03",
+  "frag": "parámetros versionados junto al valor derivado, sin valor po",
+  "commits": 7,
+  "oldest": "0a71935\t2026-08-10\tFase C de Infrastructure y Api, e intake 1.18",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 784,
+  "id": "PA-04",
+  "frag": "que los escenarios ejercitan son los que la pieza que dibuja",
+  "commits": 8,
+  "oldest": "d168363\t2026-08-10\tFase B de GeometriaFactory-Infrastructure",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 785,
+  "id": "PA-05",
+  "frag": "y el valor y su forma de rechazo los fija la categoría 05 de",
+  "commits": 3,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 786,
+  "id": "PA-06",
+  "frag": "verificarla contra un registro de provisorias anteriores, po",
+  "commits": 9,
+  "oldest": "d168363\t2026-08-10\tFase B de GeometriaFactory-Infrastructure",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 787,
+  "id": "PA-07",
+  "frag": "La frecuencia del respaldo y la fecha de última modificación",
+  "commits": 3,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 788,
+  "id": "PA-08",
+  "frag": ", con el fundamento que la categoría 02 había declarado",
+  "commits": 3,
+  "oldest": "219c38d\t2026-08-12\tpropagación de las tres decisiones: 167 documentos, 420 lugares",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 789,
+  "id": "PA-09",
+  "frag": "Convertido en trabajo como BT-06023",
+  "commits": 3,
+  "oldest": "841cd5b\t2026-08-15\tdocs(sdd): pasada de renumeración de identificadores, migración 6.0 a 8.2",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 790,
+  "id": "PA-10",
+  "frag": "y lo declara como derivación, porque el intake la muestra do",
+  "commits": 3,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 562,
+  "id": "PD-01",
+  "frag": "requiere que el motor de contenedores del destino resuelva l",
+  "commits": 1,
+  "oldest": "87fbb3b\t2026-08-11\tFase F de los cuatro restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 563,
+  "id": "PD-02",
+  "frag": "ejecutor de pruebas, recolector de cobertura, generador del",
+  "commits": 1,
+  "oldest": "87fbb3b\t2026-08-11\tFase F de los cuatro restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 564,
+  "id": "PD-03",
+  "frag": "Confirmados, los cuatro pasan a bloqueantes sin ningún otro",
+  "commits": 3,
+  "oldest": "87fbb3b\t2026-08-11\tFase F de los cuatro restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 565,
+  "id": "PD-04",
+  "frag": "es un valor de configuración del ambiente",
+  "commits": 1,
+  "oldest": "87fbb3b\t2026-08-11\tFase F de los cuatro restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 566,
+  "id": "PD-05",
+  "frag": ", sin volver automático el despliegue conjunto",
+  "commits": 1,
+  "oldest": "aa154ef\t2026-08-11\tpropagación del intake 1.22 y cierre de la Fase F",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 574,
+  "id": "PD-01",
+  "frag": "ejecutor de pruebas, recolector de cobertura y reglas de aná",
+  "commits": 3,
+  "oldest": "1f5df1a\t2026-08-11\tFase F de los tres proyectos de nivel 0, e intake 1.21",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 575,
+  "id": "PD-02",
+  "frag": "Confirmados, los dos pasan a bloqueantes sin ningún otro cam",
+  "commits": 3,
+  "oldest": "1f5df1a\t2026-08-11\tFase F de los tres proyectos de nivel 0, e intake 1.21",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 576,
+  "id": "PD-03",
+  "frag": "Si el mutation score entra alguna vez al pipeline",
+  "commits": 2,
+  "oldest": "1f5df1a\t2026-08-11\tFase F de los tres proyectos de nivel 0, e intake 1.21",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 584,
+  "id": "PD-01",
+  "frag": "ejecutor de pruebas, recolector de cobertura y reglas de aná",
+  "commits": 3,
+  "oldest": "1f5df1a\t2026-08-11\tFase F de los tres proyectos de nivel 0, e intake 1.21",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 585,
+  "id": "PD-02",
+  "frag": "Confirmados, los dos pasan a bloqueantes sin ningún otro cam",
+  "commits": 3,
+  "oldest": "1f5df1a\t2026-08-11\tFase F de los tres proyectos de nivel 0, e intake 1.21",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 586,
+  "id": "PD-03",
+  "frag": "a partir de las convenciones de mensaje de confirmación",
+  "commits": 11,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 594,
+  "id": "PD-01",
+  "frag": "ejecutor de pruebas, recolector de cobertura, reglas de anál",
+  "commits": 2,
+  "oldest": "87fbb3b\t2026-08-11\tFase F de los cuatro restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 595,
+  "id": "PD-02",
+  "frag": "Confirmados, los tres pasan a bloqueantes sin ningún otro ca",
+  "commits": 2,
+  "oldest": "87fbb3b\t2026-08-11\tFase F de los cuatro restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 596,
+  "id": "PD-03",
+  "frag": "es una dependencia externa del artefacto del servidor propio",
+  "commits": 2,
+  "oldest": "87fbb3b\t2026-08-11\tFase F de los cuatro restantes",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 597,
+  "id": "PD-04",
+  "frag": "4 · GeometriaFactory-Infrastructure declara",
+  "commits": 3,
+  "oldest": "7400ac2\t2026-08-16\tdocs(sdd): M2 migra el intake a la plantilla 3.0, de un eje a dos",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "line": 598,
+  "id": "PD-05",
+  "frag": "las siete ADR de acá no cubren publicación ni canales, de mo",
+  "commits": 2,
+  "oldest": "aa154ef\t2026-08-11\tpropagación del intake 1.22 y cierre de la Fase F",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Supply-Chain-Seguridad.md",
+  "line": 73,
+  "id": "`PD-10`",
+  "frag": "porque ninguna de las herramientas ancladas del producto lo",
+  "commits": 1,
+  "oldest": "407240a\t2026-08-24\tdocs(sdd): ronda 2 del corte 09 — el audit rechazó, y tenía razón en los cinco",
+  "unit": "GeometriaFactory-Api"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 601,
+  "id": "PA-01",
+  "frag": "y declara que se ancla al crear el andamiaje y se registra e",
+  "commits": 1,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 602,
+  "id": "PA-02",
+  "frag": ", y si no pasa la salida es bajar la versión objetivo del fr",
+  "commits": 1,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 603,
+  "id": "PA-03",
+  "frag": "nombres literales, conjuntos cerrados por nombre, nulos emit",
+  "commits": 1,
+  "oldest": "2a27568\t2026-08-11\tauditoría de los 47 puntos abiertos y unificación de los índices de la 11",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 604,
+  "id": "PA-04",
+  "frag": "que dicen a partir de cuándo se muestra un indicador, no cuá",
+  "commits": 1,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 605,
+  "id": "PA-05",
+  "frag": "lo que sigue abierto es si se confirman como valores del pro",
+  "commits": 1,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 606,
+  "id": "PA-06",
+  "frag": "el diseño de los dos listados supone decenas y no cientos, y",
+  "commits": 3,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 607,
+  "id": "PA-07",
+  "frag": "lo derivó a 09 y alcanzaba a esta pieza porque el bundle viv",
+  "commits": 1,
+  "oldest": "2a27568\t2026-08-11\tauditoría de los 47 puntos abiertos y unificación de los índices de la 11",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 615,
+  "id": "PA-01",
+  "frag": "El intake declara que se ancla y se registra, y que si es po",
+  "commits": 2,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 616,
+  "id": "PA-02",
+  "frag": "de las funciones internas, de las clases y de los campos del",
+  "commits": 4,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 617,
+  "id": "PA-03",
+  "frag": "Hasta que exista, la propiedad se verifica de forma cualitat",
+  "commits": 4,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 618,
+  "id": "PA-04",
+  "frag": "capacidad gráfica tridimensional",
+  "commits": 24,
+  "oldest": "0b61076\t2026-08-09\tIncorpora la documentación de especificación SDD al control de versiones",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md",
+  "line": 619,
+  "id": "PA-05",
+  "frag": "7 · GeometriaFactory-Visor admitía las dos y le ponía condic",
+  "commits": 2,
+  "oldest": "7400ac2\t2026-08-16\tdocs(sdd): M2 migra el intake a la plantilla 3.0, de un eje a dos",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 661,
+  "id": "PA-01",
+  "frag": null,
+  "commits": 0,
+  "oldest": null,
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 662,
+  "id": "PA-02",
+  "frag": "había elevado la misma tensión desde el otro lado de la fach",
+  "commits": 3,
+  "oldest": "1eda507\t2026-08-11\tpropagación de F-13 a Must Have y cierre de la Fase D",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 663,
+  "id": "PA-03",
+  "frag": "La versión exacta de la biblioteca de componentes de interfa",
+  "commits": 5,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 664,
+  "id": "PA-04",
+  "frag": "bajar la versión objetivo del front y no la del backend",
+  "commits": 8,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 665,
+  "id": "PA-05",
+  "frag": "Convertido en trabajo como BT-10012, que adopta y no decide",
+  "commits": 2,
+  "oldest": "841cd5b\t2026-08-15\tdocs(sdd): pasada de renumeración de identificadores, migración 6.0 a 8.2",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 666,
+  "id": "PA-06",
+  "frag": "El umbral numérico de tiempo de respuesta",
+  "commits": 3,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 667,
+  "id": "PA-07",
+  "frag": "El punto de quiebre principal y la proporción de la escena",
+  "commits": 2,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 668,
+  "id": "PA-08",
+  "frag": "el diseño de los dos listados supone decenas y no cientos, y",
+  "commits": 3,
+  "oldest": "e176845\t2026-08-10\tFase C de Application y Web, e intake 1.17",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 669,
+  "id": "PA-09",
+  "frag": "Alcanza a esta pieza porque el bundle vive en su directorio",
+  "commits": 2,
+  "oldest": "818997f\t2026-08-11\tFase D de los cuatro proyectos restantes",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 675,
+  "id": "PA-01",
+  "frag": null,
+  "commits": 0,
+  "oldest": null,
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 676,
+  "id": "PA-02",
+  "frag": "que se adopta, y el cambio de interfaz que exija si es poste",
+  "commits": 3,
+  "oldest": "914cc43\t2026-08-10\tFase D de los tres proyectos de nivel 0",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 677,
+  "id": "PA-03",
+  "frag": "de las funciones internas, de las clases y de los campos del",
+  "commits": 4,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 678,
+  "id": "PA-04",
+  "frag": "Hasta que exista, la propiedad se verifica de forma cualitat",
+  "commits": 4,
+  "oldest": "ee73c99\t2026-08-10\tFase C de los tres proyectos de nivel 0, e intake 1.16",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 679,
+  "id": "PA-05",
+  "frag": "no hay nada que construir, sólo una declaración que el Produ",
+  "commits": 3,
+  "oldest": "914cc43\t2026-08-10\tFase D de los tres proyectos de nivel 0",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 680,
+  "id": "PA-06",
+  "frag": "había elevado la misma tensión desde el otro lado de la fach",
+  "commits": 3,
+  "oldest": "1eda507\t2026-08-11\tpropagación de F-13 a Must Have y cierre de la Fase D",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+  "line": 681,
+  "id": "PA-07",
+  "frag": "Si el bundle generado se versiona en el repositorio o se ign",
+  "commits": 4,
+  "oldest": "914cc43\t2026-08-10\tFase D de los tres proyectos de nivel 0",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "line": 389,
+  "id": "PD-01",
+  "frag": "el Product Owner la confirmó en el intake",
+  "commits": 1,
+  "oldest": "aa154ef\t2026-08-11\tpropagación del intake 1.22 y cierre de la Fase F",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "line": 390,
+  "id": "PD-02",
+  "frag": "del directorio de salida del empaquetado y del bundle copiad",
+  "commits": 1,
+  "oldest": "87fbb3b\t2026-08-11\tFase F de los cuatro restantes",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "line": 391,
+  "id": "PD-03",
+  "frag": "cadenas de herramientas, empaquetador, cliente de subida y g",
+  "commits": 1,
+  "oldest": "87fbb3b\t2026-08-11\tFase F de los cuatro restantes",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "line": 392,
+  "id": "PD-04",
+  "frag": "navegador con capacidad gráfica tridimensional y conductor c",
+  "commits": 3,
+  "oldest": "1f5df1a\t2026-08-11\tFase F de los tres proyectos de nivel 0, e intake 1.21",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "line": 393,
+  "id": "PD-05",
+  "frag": ", y su desenlace alcanza al ensamblado de contratos",
+  "commits": 1,
+  "oldest": "87fbb3b\t2026-08-11\tFase F de los cuatro restantes",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "line": 401,
+  "id": "PD-01",
+  "frag": "empaquetador, ejecutor de pruebas, conductor de navegador y",
+  "commits": 2,
+  "oldest": "1f5df1a\t2026-08-11\tFase F de los tres proyectos de nivel 0, e intake 1.21",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "line": 402,
+  "id": "PD-02",
+  "frag": "navegador con capacidad gráfica tridimensional y conductor c",
+  "commits": 3,
+  "oldest": "1f5df1a\t2026-08-11\tFase F de los tres proyectos de nivel 0, e intake 1.21",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "line": 403,
+  "id": "PD-03",
+  "frag": "que se ancla, y el cambio de interfaz que exija si es poster",
+  "commits": 2,
+  "oldest": "1f5df1a\t2026-08-11\tFase F de los tres proyectos de nivel 0, e intake 1.21",
+  "unit": "GeometriaFactory-Web"
+ },
+ {
+  "doc": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Supply-Chain-Seguridad.md",
+  "line": 60,
+  "id": "`PD-10`",
+  "frag": "Elegir generador exige resolver cómo inventariar lo que está",
+  "commits": 1,
+  "oldest": "407240a\t2026-08-24\tdocs(sdd): ronda 2 del corte 09 — el audit rechazó, y tenía razón en los cinco",
+  "unit": "GeometriaFactory-Web"
+ }
+]
