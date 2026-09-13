@@ -1,0 +1,25 @@
+
+== A-1 · proyectos de src/, tests/ y visor/ ==
+
+== A-2 y A-3 · carpetas de samples/<segmento>/<NN-…> ==
+  FALLA  samples/api/01-basico tiene 0 archivos de proyecto; tiene que tener uno (un nodo inerte si el sample no es .NET)
+  FALLA  samples/api/02-intermedio tiene 0 archivos de proyecto; tiene que tener uno (un nodo inerte si el sample no es .NET)
+  FALLA  samples/api/03-avanzado tiene 0 archivos de proyecto; tiene que tener uno (un nodo inerte si el sample no es .NET)
+  FALLA  samples/api/04-cliente-http-basico tiene 0 archivos de proyecto; tiene que tener uno (un nodo inerte si el sample no es .NET)
+  FALLA  samples/contracts/01-basico tiene 0 archivos de proyecto; tiene que tener uno (un nodo inerte si el sample no es .NET)
+  FALLA  samples/contracts/02-intermedio tiene 0 archivos de proyecto; tiene que tener uno (un nodo inerte si el sample no es .NET)
+  FALLA  samples/contracts/03-avanzado tiene 0 archivos de proyecto; tiene que tener uno (un nodo inerte si el sample no es .NET)
+  FALLA  samples/visor/01-basico tiene 0 archivos de proyecto; tiene que tener uno (un nodo inerte si el sample no es .NET)
+  FALLA  samples/visor/02-intermedio tiene 0 archivos de proyecto; tiene que tener uno (un nodo inerte si el sample no es .NET)
+  FALLA  samples/visor/03-avanzado tiene 0 archivos de proyecto; tiene que tener uno (un nodo inerte si el sample no es .NET)
+  FALLA  samples/web/01-datos-seed tiene 0 archivos de proyecto; tiene que tener uno (un nodo inerte si el sample no es .NET)
+  20 carpetas de sample revisadas
+
+== A-4 · todo nodo nombra un archivo que existe ==
+
+== A-5 · los nodos NoTargets son inertes ==
+
+== A-6 · configuraciones de la solución ==
+
+11 control(es) no pasan. Cada línea FALLA de arriba nombra qué falta.
+exit=1
