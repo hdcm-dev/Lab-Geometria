@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aceptado
 **Fecha:** 2026-09-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05), sobre decisión del Product Owner del 2026-09-12 (`E-04`)
@@ -90,7 +90,8 @@ Las cuatro prácticas son las que la mesa relevó con fuente (`Audit/Mesa-2026-0
 - **Convención impuesta:** dentro de un mismo `/v{MAJOR}/` vive **una** forma de cada punto. Convivir es entre `MAJOR` distintos, y sólo durante el plazo de deprecación.
 - **Convención impuesta:** la versión no se negocia por cabecera, media type ni fecha. La ruta es el único lugar.
 - **Convención impuesta, heredada de `ADR-00008`:** todo cambio del ensamblado de contratos entra con el despliegue de `Api` y `Web` en la misma fusión; la colección de peticiones se actualiza en la misma intervención en que cambia la superficie, sin inventar datos de prueba.
-- **Remitido, no decidido acá:** el evento de etiqueta y la herramienta (`BT-00033`, `Estrategia-Versionado.md`); el plazo de convivencia y la cabecera `Deprecation` (`BT-00035`, `Estrategia-Versionado.md`); qué responde una petición sin prefijo, y si el punto de salud y la descripción generada quedan bajo el prefijo (`BT-00032`, con la batería en verde).
+- **Remitido, no decidido acá:** el evento de etiqueta y la herramienta (`BT-00033`, `Estrategia-Versionado.md`); el plazo de convivencia y la cabecera `Deprecation` (`BT-00035`, `Estrategia-Versionado.md`).
+- **Decidido por `BT-00032`, y ratificado por el Product Owner el 2026-09-12:** una petición sin prefijo a un punto del contrato responde **`404`, sin redirección**; y **tres rutas quedan exentas del prefijo**: `/salud` (`A-16`), `/openapi/v1.json` y `/documentacion`. `/salud` es del arranque y la salud y no del contrato —lo piden los `healthcheck` y es donde se informa la versión contra la que §8 compara el prefijo—; las otras dos describen la superficie y no son parte de ella. La decisión está escrita en [`../Contratos-REST.md`](../Contratos-REST.md) **1.8** §3.1, y el código la enumera en `ContractRoutePrefix.ExemptRoutes` con `ContractRoutePrefixTests` comprobando que son exactamente tres.
 - **Consecuencia de nivel Producto, declarada y no ejecutada acá:** [`ADR-08003`](../../../../Producto/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) sostiene la misma premisa derogada y obliga a `GeometriaFactory-Contracts`; su reescritura es de la categoría de Producto (`BT-00027` §2).
 
 ## 8. Métricas de validación
@@ -157,3 +158,4 @@ SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Decisione
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-09-12 | Emisión inicial, **Aceptado** por decisión del Product Owner del 2026-09-12 (`E-04`, `Audit/Mesa-2026-09-12-ciclo-2.md` §8; `PRODUCT-INTAKE` **4.3** §17.1.P.3, fila «Versionado del contrato»). Registra el cambio de premisa respecto de `ADR-00008` —dejó de ser cierto «no hay clientes de terceros»: hay aplicaciones propias además del front, `ADR-00009`, y no compilan contra el ensamblado—, adopta `/v{MAJOR}/` para la superficie pública con el `MAJOR` del producto, deroga la regla 1 de `ADR-00008` y sus dos primeras métricas, conserva sus reglas 2 a 5 y su ausencia declarada, y remite el evento de etiqueta a `BT-00033` y la deprecación a `BT-00035`. Evalúa cinco alternativas con las fuentes de la mesa §3.2, declara cuatro trade-offs, fija seis métricas y deja en §10 los comandos de verificación y el vocabulario medido. Tarea `BT-00027`. |
+| 1.1 | 2026-09-12 | **§7 deja de remitir a `BT-00032` la decisión sobre el punto de salud y la descripción generada, y la asienta como decidida**: `/salud`, `/openapi/v1.json` y `/documentacion` quedan exentas del prefijo, y la petición sin prefijo responde `404` sin redirección, con la cita a [`../Contratos-REST.md`](../Contratos-REST.md) 1.8 §3.1 donde `BT-00032` la escribió. La ratificó el Product Owner («ok, encargate de todo») al cerrar `BT-00032` 2.0, con `v1.0.0` sobre `8e5e2f9` en producción y `/salud` respondiendo `1.0.0+8e5e2f9…` sin prefijo. El ítem «Remitido» de §7 conserva lo que sigue remitido (`BT-00033`, `BT-00035`). **El cuerpo de la decisión (§2), las alternativas, los trade-offs y las métricas no cambian.** Sube minor. |

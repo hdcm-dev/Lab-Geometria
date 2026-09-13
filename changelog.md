@@ -1378,3 +1378,41 @@ que cierra las dos tareas es un despliegue del Product Owner y tres decisiones s
 
 - `git tag -l` sigue devolviendo las cinco del 2026-08-18: **ninguna etiqueta se creó en esta corrida**.
   La próxima es `v1.0.0`, sobre la fusión de `BT-00032`, a mano.
+
+## `v1.0.0` en producción — 2026-09-13
+
+**Rama:** `fase-k/cierre-bt-00032` (`BT-00032`, fase `k`). Sin cambio de código: lo que cierra la tarea
+es una etiqueta, un despliegue y una ratificación del Product Owner.
+
+### Etiquetado
+
+- **`v1.0.0` existe.** Etiqueta anotada creada sobre `8e5e2f9` —la fusión #195, la primera con el
+  contrato bajo `/v1/`— y empujada: `git rev-parse v1.0.0^{commit}` = `8e5e2f9`; GitHub
+  `refs/tags/v1.0.0` → objeto `295e7c0`. Es la **primera etiqueta manual** bajo `Estrategia-Versionado.md`
+  5.1 (`PD-VER-01`: la crea quien fusiona, con el número que MinVer imprime) y la salida de `0.x` que la
+  entrada anterior dejó anunciada. `git tag -l` pasa de cinco a seis.
+
+### Desplegado
+
+- **Producción reconstruida desde `main` = `8e5e2f9`** (`docker compose up -d --build`,
+  `~/docker/lab-geometria`); ambos contenedores `healthy`. Verificado el 2026-09-13 02:48–02:52 UTC
+  contra `https://api-geometria.aplicada.stream`: **`/salud` → `{"ready":true,"version":"1.0.0+8e5e2f947c05d83b1e33cb40e35bf89bac70ef71",…}`** —el
+  sello de la etiqueta, calculado por MinVer sobre `v1.0.0` sin altura—; `GET /v1/trabajos` sin acceso →
+  `401`; `GET /trabajos` sin prefijo → `404`; `POST /v1/auth/token` con credencial falsa → `401`;
+  `GET /openapi/v1.json` → `200`; el front `/estado` → `200` y muestra `1.0.0+8e5e2f9…`. El log del web
+  registra `GET http://lab-geometria-api:8080/v1/aprovisionamiento` y `GET …/salud`: el cliente antepone
+  `v1/` al contrato y no a la salud, sin que `API_BASE_URL` haya cambiado.
+
+### Ratificado por el Product Owner («ok, encargate de todo», 2026-09-12)
+
+- **Las tres exenciones del prefijo dejan de ser un `SI NO RESPONDÉS`.** `/salud` (`A-16`),
+  `/openapi/v1.json` y `/documentacion` quedan fuera de `/v1/`, como `Contratos-REST.md` 1.8 §3.1 lo
+  escribió y `ContractRoutePrefix.ExemptRoutes` lo enumera. **`/salud` no se versiona.** `ADR-00010` **1.1**
+  §7 deja de remitir esa decisión a `BT-00032` y la asienta como decidida.
+
+### Cerrado
+
+- **`BT-00032` → `Done`** (2.0): los cuatro criterios cumplidos, con la evidencia de la rama (532/532,
+  las dos direcciones probadas fallando) y la de producción sobre `8e5e2f9`. `Mini-Plan.md` **3.3**
+  (§3.5, una celda de `Estado`). Con esto, `BT-00034` y `BT-00035` —que dependen sólo de `BT-00032`—
+  quedan destrabadas.
