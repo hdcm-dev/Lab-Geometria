@@ -32,9 +32,30 @@ RUN dotnet restore src/GeometriaFactory.Api/GeometriaFactory.Api.csproj
 # Va DESPUÉS del restore para no invalidarle la caché en cada commit.
 COPY .gi[t] ./.git/
 
+# LA VERSIÓN TAMBIÉN SALE DEL ÁRBOL, y necesita más árbol que la revisión. `Directory.Build.props`
+# adopta MinVer: la versión SemVer se calcula desde la última etiqueta `v*` alcanzable y la altura
+# hasta ella. La revisión se lee con un solo commit; la versión no.
+#
+# Y EL CONTEXTO LLEGA RECORTADO. Cuando se construye desde la URL del repositorio, BuildKit hace el
+# checkout con `--depth=1 --no-tags` aunque se pida conservar el `.git`: un commit, cero etiquetas.
+# MinVer sobre eso calcula `0.0.0-alpha.0` SIN ADVERTIR —medido el 2026-09-12—, y `/salud` informaría
+# una versión que no es la del producto, con la misma falla sin síntoma que motivó sellar la revisión.
+#
+# POR ESO, SI EL CLON ES SUPERFICIAL, SE COMPLETA ANTES DE PUBLICAR. `.git/shallow` existe sólo en
+# ese caso; sobre un clon completo `--unshallow` falla y no hay nada que completar. El `origin` es el
+# que dejó quien construyó —BuildKit apunta a la URL del repositorio— y la red ya se usó para el
+# `restore`. Si igual no se puede completar, LA CONSTRUCCIÓN NO SE ROMPE: se avisa y la versión sale
+# como `0.0.0-alpha.0`, que es una versión visiblemente falsa y no una silenciosamente parecida.
 RUN set -eu; \
     revision="$SOURCE_REVISION_ID"; \
-    if [ -f .git/HEAD ]; then revision="$(git -c safe.directory='*' rev-parse HEAD)"; fi; \
+    if [ -f .git/HEAD ]; then \
+      revision="$(git -c safe.directory='*' rev-parse HEAD)"; \
+      if [ -f .git/shallow ]; then \
+        echo "El clon es superficial: se completa el historial y las etiquetas para calcular la versión"; \
+        git -c safe.directory='*' fetch --unshallow --tags origin \
+          || echo "AVISO: no se pudo completar el historial; la versión saldrá como 0.0.0-alpha.0"; \
+      fi; \
+    fi; \
     echo "Sellando la imagen con la revisión $revision"; \
     dotnet publish src/GeometriaFactory.Api/GeometriaFactory.Api.csproj \
       -c Release -o /publish --no-restore \
