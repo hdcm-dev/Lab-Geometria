@@ -1334,6 +1334,31 @@ el evento de etiqueta de `BT-00033`; esta rama no etiqueta).
 su única divergencia ya declarada (`D-3`) y **17 operaciones** en el documento OpenAPI, `web/01-datos-seed`
 **CONFORME 13/13**, todos contra el servicio de esta rama en un puerto propio; `git tag -l` sin cambios.
 Los E2E de Playwright no se corrieron localmente (corren en CI). Detalle en la ficha `BT-00032`, §8.
+## CORS no aplica hoy, y queda declarado por qué — 2026-09-12
+
+**Rama:** `fase-k/bt-00030-cors` (`BT-00030`, fase `k`, sobre `8e5e2f9`). Tarea de indagación:
+**sin cambio de código**.
+
+### Cambiado
+
+- `SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
+  **3.12**: la fila de §9.1 del riesgo «que se agregue un punto de acceso pensado para el navegador, o
+  se configure el intercambio de origen cruzado» declara en su mitigación **por qué CORS no aplica hoy**:
+  ningún cliente propio es JavaScript de navegador desde otro origen (`ADR-00009`; el front es Blazor
+  Server y llama servidor a servidor; una aplicación MAUI no es un navegador). Entra **§9.1.1** con la
+  medición y la condición que lo reabre: si aparece ese cliente, política **por origen explícito**,
+  nunca `AllowAnyOrigin` con credenciales.
+- `02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` **1.12**: la fila «CORS» de §7 lleva la
+  condición del intake 4.4 y remite a `05` §9.1.
+- `BT-00030` → **`Done`** (2.0), por la primera de las dos vías de su caja temporal: la declaración.
+
+### Verificado
+
+- `git grep -niE "cors" -- src/` → **0** ocurrencias.
+- `curl -si -X OPTIONS https://api-geometria.aplicada.stream/salud -H "Origin: https://evil.example.com"`
+  → `405`, `allow: GET`, **sin `Access-Control-Allow-Origin`**; el contenedor `lab-geometria-api` en
+  `:8080` responde igual (`Server: Kestrel`).
+
 ## Producción reconstruida desde `main`: la versión es la de MinVer y OpenAPI/Scalar están publicados — 2026-09-13
 
 **Rama:** `fase-k/cierre-bt-00031-00033` (`BT-00031` y `BT-00033`, fase `k`). Sin cambio de código: lo
