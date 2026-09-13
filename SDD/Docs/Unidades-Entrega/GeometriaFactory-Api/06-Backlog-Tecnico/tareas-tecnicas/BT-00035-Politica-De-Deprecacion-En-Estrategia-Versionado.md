@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00035-Politica-De-Deprecacion-En-Estrategia-Versionado.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Ready
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
@@ -19,7 +19,7 @@ Política de deprecación en `Estrategia-Versionado.md`.
 
 ## 2. Justificación
 
-`Mesa-2026-09-12-ciclo-2.md` §4 ítem 10; [`ADR-00008`](../../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §1 punto 1 vigente («no hay deprecación gradual: no hay a quién dársela»), premisa que BT-00027 reescribe y que esta tarea, dependiente de BT-00032, ejecuta sobre `Estrategia-Versionado.md`; `PRODUCT-INTAKE` **4.3**
+`Mesa-2026-09-12-ciclo-2.md` §4 ítem 10; [`ADR-00008`](../../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §2 punto 1 vigente («no hay deprecación gradual: no hay a quién dársela»), premisa que BT-00027 reescribe y que esta tarea, dependiente de BT-00032, ejecuta sobre `Estrategia-Versionado.md`; `PRODUCT-INTAKE` **4.3**
 
 ## 3. Criterios de aceptación
 
@@ -44,7 +44,7 @@ Política de deprecación en `Estrategia-Versionado.md`.
 | US que la consumen | **Infraestructura compartida**: cierra el ítem 10 del plan de la fila `k` |
 | CU upstream | — (sin CU: política de deprecación) |
 | Puntos de acceso que toca | Ninguno |
-| Fuente de arquitectura | [`ADR-00008`](../../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §1 punto 1 (a reescribir por BT-00027) |
+| Fuente de arquitectura | [`ADR-00008`](../../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §2 punto 1 (a reescribir por BT-00027) |
 
 ## 8. Control de cambios
 
@@ -52,3 +52,4 @@ Política de deprecación en `Estrategia-Versionado.md`.
 | --- | --- | --- |
 | 1.0 | 2026-09-12 | **Extracción a archivo individual** de la fila BT-00035 de [`../Backlog-Tecnico.md`](../Backlog-Tecnico.md) v3.0 §3.1, por cruce del umbral de treinta `BT` que fija `Rules-Backlog-Tecnico.md` §3.3 para el bloque `00xxx` (`GeometriaFactory-Api`, 35 tareas con la apertura de la fase `k`). **Contenido transpuesto sin reescritura** desde la fila del catálogo (§3.1), la épica EP-T06 de §2.1 y la fila correspondiente de la matriz de trazabilidad (§4.1). Autocorrección de la misma corrida (`Master-Prompt.md` §8.1), `ORIGEN DEL HECHO: de la corrida`, base `9167e68`. Evidencia en [`../../../../Audit/Apertura-Fase-k-2026-09-12.md`](../../../../Audit/Apertura-Fase-k-2026-09-12.md). |
 | 1.1 | 2026-09-12 | **Evaluación de DoR** (`Definition-Of-Ready.md` §2.1) y **corrección de fuente**. §2 y §7 citaban el registro de mesa y «`PRODUCT-INTAKE` 4.3» sin sección, ninguno admitido. `ADR-00008` §1 punto 1, vigente, declara hoy «no hay deprecación gradual: no hay a quién dársela» — es la premisa exacta que BT-00027 reescribe y que esta política ejecuta sobre `Estrategia-Versionado.md`. Se agrega esa cita. **Ningún criterio de aceptación cambia**. Pasa a **Ready**. Evidencia en [`../../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../../Audit/DoR-Tramo-k-2026-09-12.md). |
+| 1.2 | 2026-09-12 | **Corrección de cita, detectada por el orquestador contra el árbol.** §2 y §7 (v1.1) citaban «`ADR-00008` §1 punto 1» para la frase «no hay deprecación gradual: no hay a quién dársela». Esa frase vive en **§2 «Decisión», regla 1** (línea 27 del ADR), no en §1 («Contexto»). Se corrigen las dos citas vigentes a `ADR-00008` §2 punto 1. **No se reescribe la fila 1.1**: esta fila declara la corrección. **Ningún criterio de aceptación cambia**. Sigue **Ready**. Evidencia y corrección en [`../../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../../Audit/DoR-Tramo-k-2026-09-12.md), sección BT-00035. |

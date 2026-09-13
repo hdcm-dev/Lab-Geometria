@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00030-Declarar-Cors-Condicional-Al-Cliente-Que-Aparezca-D-01.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Ready
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
@@ -24,7 +24,7 @@ Declarar CORS, condicional al cliente que aparezca (`D-01`).
 ## 3. Criterios de aceptación
 
 - Mientras `D-01` siga abierto, el documento de arquitectura declara **explícitamente por qué CORS no aplica hoy** (no hay cliente de navegador de otro origen conocido)
-- si `D-01` cierra con un cliente JavaScript de otro origen, se agrega una política por origen explícito (OWASP CORS Cheat Sheet) antes de habilitar cualquier origen. **Caja temporal: hasta que `D-01` cierre**
+- si `D-01` cierra con un cliente JavaScript de otro origen, se agrega una política por origen explícito (OWASP CORS Cheat Sheet) antes de habilitar cualquier origen. **Caja temporal: la etapa `k`, que cierra en su punto de control, con `D-01` cerrado o con la declaración de por qué CORS no aplica**
 
 ## 4. Dependencias
 
@@ -32,7 +32,7 @@ Declarar CORS, condicional al cliente que aparezca (`D-01`).
 
 ## 5. Tipo
 
-`indagación`. si `D-01` cierra con un cliente JavaScript de otro origen, se agrega una política por origen explícito (OWASP CORS Cheat Sheet) antes de habilitar cualquier origen. **Caja temporal: hasta que `D-01` cierre**.
+`indagación`. si `D-01` cierra con un cliente JavaScript de otro origen, se agrega una política por origen explícito (OWASP CORS Cheat Sheet) antes de habilitar cualquier origen. **Caja temporal: la etapa `k`, que cierra en su punto de control, con `D-01` cerrado o con la declaración de por qué CORS no aplica**.
 
 ## 6. Estimación
 
@@ -53,3 +53,4 @@ Declarar CORS, condicional al cliente que aparezca (`D-01`).
 | --- | --- | --- |
 | 1.0 | 2026-09-12 | **Extracción a archivo individual** de la fila BT-00030 de [`../Backlog-Tecnico.md`](../Backlog-Tecnico.md) v3.0 §3.1, por cruce del umbral de treinta `BT` que fija `Rules-Backlog-Tecnico.md` §3.3 para el bloque `00xxx` (`GeometriaFactory-Api`, 35 tareas con la apertura de la fase `k`). **Contenido transpuesto sin reescritura** desde la fila del catálogo (§3.1), la épica EP-T06 de §2.1 y la fila correspondiente de la matriz de trazabilidad (§4.1). Autocorrección de la misma corrida (`Master-Prompt.md` §8.1), `ORIGEN DEL HECHO: de la corrida`, base `9167e68`. Evidencia en [`../../../../Audit/Apertura-Fase-k-2026-09-12.md`](../../../../Audit/Apertura-Fase-k-2026-09-12.md). |
 | 1.1 | 2026-09-12 | **Evaluación de DoR** (`Definition-Of-Ready.md` §2.1) y **corrección de fuente**. §2 y §7 citaban sólo el ítem diferido `D-01`, que no es punto abierto de `05` §11 y no es fuente admitida por el criterio 1 en la letra. Existe una fuente admitida que sostiene la misma tarea: `05` §9.1 ya trae el riesgo «que se agregue un punto de acceso pensado para el navegador, o se configure el intercambio de origen cruzado», con probabilidad baja e impacto muy alto, mitigado hoy por las tres ausencias declaradas de la superficie de 02. Se agrega esa cita en §2 y en §7, conservando `D-01` como condición adicional (quién es el cliente, no si CORS aplica hoy). **Ningún criterio de aceptación cambia**: la tarea sigue siendo de tipo `indagación` con caja temporal hasta que `D-01` cierre, que es la excepción de DoR §3.1 para este tipo de tarea. Pasa a **Ready**. Evidencia en [`../../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../../Audit/DoR-Tramo-k-2026-09-12.md). |
+| 1.2 | 2026-09-12 | **Corrección del criterio 6, detectada por el orquestador contra el árbol.** El «Sí» de v1.1 descansaba en una equivalencia no admitida por la letra del criterio 6 de `Definition-Of-Ready.md` §2.1: «caja temporal expresada en etapas o en el punto de control que la cierra», y «hasta que `D-01` cierre» no fija techo, porque `D-01` es un ítem diferido «sin evento ocurrido todavía» (`Mesa-2026-09-12-ciclo-2.md`). Las demás indagaciones de la unidad anclan la caja a una etapa o a una puerta (`BT-00005`/`07`/`09`/`10`: «la etapa `a`»; `BT-00025`: «antes de fijar la puerta en 09»; `BT-00026`: «antes de la etapa de despliegue real»). Se corrige la caja, en los dos lugares donde aparecía (criterios de aceptación y §5), a: «la etapa `k`, que cierra en su punto de control, con `D-01` cerrado o con la declaración de por qué CORS no aplica». El primer criterio de aceptación ya obligaba a esa declaración mientras `D-01` siga abierto, así que la corrección no cambia ningún comportamiento exigido: sólo repara la letra del criterio 6. Sigue **Ready**. Evidencia y corrección en [`../../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../../Audit/DoR-Tramo-k-2026-09-12.md), fila del criterio 6 de BT-00030. |
