@@ -1505,3 +1505,43 @@ es una etiqueta, un despliegue y una ratificación del Product Owner.
   las dos direcciones probadas fallando) y la de producción sobre `8e5e2f9`. `Mini-Plan.md` **3.3**
   (§3.5, una celda de `Estado`). Con esto, `BT-00034` y `BT-00035` —que dependen sólo de `BT-00032`—
   quedan destrabadas.
+
+## Sample de onboarding: un cliente propio contra `/v1/`, sin el código fuente — 2026-09-13
+
+**Rama:** `fase-k/bt-00034-sample-onboarding` (`BT-00034`, fase `k`, sobre `1748503` = `v1.1.0`). Realiza la
+regla 5 de `ADR-00010` §2.2 —«el sample de onboarding de `BT-00034` la ejerce contra `/v1/`»— y la convención
+de `ADR-00009` §7: el sample describe **el canje de credenciales de una persona**, no una clave de cliente.
+**Sólo documentación y muestras**: `src/` no se toca y no hay etiqueta nueva.
+
+### Agregado
+
+- **`samples/api/04-cliente-http-basico/`**, el cuarto sample de la API y **el primero que corre sin el
+  repositorio**: `curl`, `bash`, `awk` y `sed`, con la carpeta copiada a cualquier directorio. Cinco pasos en un
+  solo comando: descubre el contrato desde `/openapi/v1.json` y lista sus **17** operaciones (**16** bajo
+  `/v1/`, `/salud` exenta); canjea las credenciales de **una persona** por `POST /v1/auth/token`; lista
+  `GET /v1/trabajos`; envía `E-1` del intake §20 —copia byte a byte del de `api/02-intermedio`— y recibe `201`
+  con el trabajo en `Pendiente`, dos advertencias y ningún error; y agota la cuota de la persona a propósito
+  hasta el `429`, leyendo `Retry-After` (entre 1 y 60, sin cuerpo). Dirección en `API_BASE_URL` (por omisión
+  la superficie publicada), credenciales en `API_EMAIL` y `API_PASSWORD`; nada de eso está escrito, y el
+  acceso firmado se usa y no se imprime. `verificar.sh` compara contra `esperado/salida.txt` y corre solo.
+  El slug es `cliente-http-basico`, el que `Rules-Examples.md` §2.3 reserva para el cliente HTTP de una
+  `rest-api`, agregado como carpeta extra y no como renombre.
+- **`10-Examples/ejemplo-04-cliente-http-basico-api.md` 1.0**, con `VER-00004` en la forma completa de
+  `Rules-Examples.md` §4.6 (`recorre`/`no_recorre` por caso de uso, `discrimina` por aserción) y la
+  `evidencia` de la corrida. **`SD-00004`** en `Matriz-Sensado-Deriva.md` 2.3, directamente en `Verificado`.
+
+### Cambiado
+
+- **`10-Examples/README.md` 2.1**: fila del cuarto en §2 y §3, párrafo en §1, desvío 4 en §6. Los recuentos de
+  los tres primeros no cambian. **`samples/README.md` 2.1**: veinte carpetas, diecisiete corriendo.
+- **`BT-00034` → `Done`** (2.0), con los comandos con que se levantó el servicio y se preparó la persona.
+
+### Verificado
+
+Contra el servicio de la rama en `127.0.0.1:5081` (`mcr.microsoft.com/dotnet/sdk:10.0`, `--network host`,
+`ASPNETCORE_ENVIRONMENT=Production`, `Documentacion__Publicada=true`, almacén y clave de firma propios,
+umbrales del límite de tasa por omisión), **desde una copia de la carpeta fuera del repositorio**:
+**CONFORME 6/6**, salida 0; el `429` llegó en la 61.ª petición de la persona con `Retry-After: 60`.
+`verificar.sh` probado fallando (`NO CONFORME`, salida 1) y `run.sh` sin credenciales (salida 2). El documento
+OpenAPI de producción se leyó (`200`, 17 operaciones, las mismas); **la corrida completa contra producción no se
+hizo**, porque el paso 5 gasta la cuota a propósito. `git tag -l` sin cambios.
