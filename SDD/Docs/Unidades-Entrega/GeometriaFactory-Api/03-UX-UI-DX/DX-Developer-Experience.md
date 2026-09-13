@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** DX-Developer-Experience.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -28,7 +28,7 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 
 ### 1.1 Quién interviene acá
 
-No hay integradores externos y no los va a haber: el intake declara que **no hay clientes de terceros** y que por eso no hay versionado de rutas. Pero este proyecto de código tiene, a diferencia de las tres capas que ensambla, **un consumidor real que no es él mismo**: la pieza pública, que lo alcanza por HTTP y que se compila contra el mismo ensamblado de contratos.
+No hay integradores externos: el intake declaraba hasta su versión 4.2 que **no hay clientes de terceros** y que por eso no había versionado de rutas; **desde el 2026-09-12 esa premisa está superada** —hay **aplicaciones propias además del front**, que actúan en nombre de las mismas dos personas ([`ADR-00009`](../05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md)) y no compilan contra el ensamblado, y por eso la superficie pública se versiona en la ruta por `/v{MAJOR}/` ([`ADR-00010`](../05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md))—. Este proyecto de código tiene entonces, a diferencia de las tres capas que ensambla, **consumidores reales que no son él mismo**: la pieza pública, que lo alcanza por HTTP y se compila contra el mismo ensamblado de contratos, y toda aplicación propia que lo alcance por su ruta.
 
 | Tipo de developer | Quién es acá | Qué necesita de esta documentación |
 | --- | --- | --- |
@@ -870,5 +870,6 @@ No hay canal de issues externo ni encuesta a developers de adopción: el equipo 
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.2 | 2026-09-12 | **§1.1 deja de afirmar «no hay clientes de terceros» y «no los va a haber»** (tarea `BT-00027`). La premisa fue cierta hasta `PRODUCT-INTAKE` 4.2; desde el 2026-09-12 hay aplicaciones propias además del front (`ADR-00009`) y la superficie pública se versiona por `/v{MAJOR}/` ([`ADR-00010`](../05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)). Un párrafo reescrito; la tabla de tipos de developer no cambia en esta entrada. Sube minor. |
 | 2.1 | 2026-08-29 | **Tramo `R-3a` del renombre `F-03`** —«los 101 códigos de condición van a inglés», decisión del Product Owner del 2026-08-12, reconfirmada el 2026-08-29—, que **reanuda los tramos que la [`Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **1.5** suspendió el 2026-08-13**. **17 ocurrencias** pasan de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Tres ocurrencias quedan en castellano y es correcto**: están dentro de «…», y §4.1 reconoce la cita textual por esa marca. Son discutibles —lo que la comilla encierra es la pregunta de un lector, no una fuente ajena— y se dejan tal cual en lugar de decidirlo de paso. **Ninguna palabra de prosa cambia**: el control de diff verificó que las 362 líneas modificadas del tramo difieren **exactamente** en un par del glosario y en nada más. | AG-00030 |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4). Pasa de ser el documento de un proyecto de código a ser el de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto **sin reescritura**. Entra **§0**. Los absorbidos quedan archivados. Sube **major**. |

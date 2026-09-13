@@ -2,11 +2,14 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md
-**Versión:** 1.0
-**Estado:** Aprobado
+**Versión:** 1.1
+**Estado:** Superado parcialmente por [`ADR-00010`](ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) desde 2026-09-12 — la regla 1 de §2 queda derogada; las reglas 2 a 5 y la ausencia declarada subsisten
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Despliegue
+**Superada por:** [`ADR-00010`](ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) §2.3, que declara regla por regla qué deroga y qué conserva
+
+> **Aviso de lectura (2026-09-12).** La premisa de §1 —«no hay clientes de terceros»— dejó de ser cierta con `PRODUCT-INTAKE` **4.3** y **4.4**: hay **aplicaciones propias además del front** ([`ADR-00009`](ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md)) que **no compilan contra el ensamblado de contratos**. En consecuencia, la **regla 1** de §2 («una sola versión de la superficie vive a la vez», sin prefijo ni deprecación), las convenciones de §7 que la aplican y las **dos primeras métricas** de §8 quedan **derogadas** por [`ADR-00010`](ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md), que adopta `/v{MAJOR}/` para la superficie pública. **Subsisten** las reglas 2 a 5 —el despliegue conjunto entre `Api` y `Web`, las tres clases de cambio que la compilación no detecta, la etiqueta por fusión (con el evento que `BT-00033` fija en `Estrategia-Versionado.md`) y la colección de peticiones— y la ausencia declarada de la pasarela de reenvío. El texto de abajo se conserva íntegro como registro de la decisión tal como se tomó.
 
 ---
 
@@ -34,7 +37,7 @@ Motivación upstream: NB-00008; `PRODUCT-INTAKE` §9 (X-9), §14 (RA-01), §17.1
 
 ## 3. Estado
 
-**Propuesto** desde 2026-08-10.
+**Propuesto** desde 2026-08-10. **Superado parcialmente** desde 2026-09-12 por [`ADR-00010`](ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md): ver el aviso de lectura de la cabecera.
 
 ## 4. Alternativas consideradas
 
@@ -92,3 +95,4 @@ Motivación upstream: NB-00008; `PRODUCT-INTAKE` §9 (X-9), §14 (RA-01), §17.1
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra la ausencia de versionado de rutas **con su sustituto** —el despliegue conjunto— y nombra los **tres** lugares donde la compilación compartida no protege, cada uno con su mecanismo: la configuración de intercambio, el esquema del almacén y las rutas. Sostiene la ausencia declarada de la pasarela de reenvío con su condición de reingreso. Evalúa cinco alternativas, declara cuatro trade-offs y fija seis métricas de validación. |
+| 1.1 | 2026-09-12 | **Superada parcialmente por [`ADR-00010`](ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)** (tarea `BT-00027`). La premisa «no hay clientes de terceros» (§1, §4) dejó de ser cierta con `PRODUCT-INTAKE` **4.3**/**4.4** y `ADR-00009`: hay aplicaciones propias además del front que no compilan contra el ensamblado. Cambia el **Estado** de la cabecera y de §3, entra el aviso de lectura con el mapa de lo derogado —regla 1 de §2, las convenciones de §7 que la aplican y las dos primeras métricas de §8— y de lo que subsiste —reglas 2 a 5 y la ausencia declarada—, y el enlace cruzado en los dos sentidos. **No se borra ni se reescribe ningún texto**: el cuerpo queda como registro de la decisión tal como se tomó. Sube minor. |

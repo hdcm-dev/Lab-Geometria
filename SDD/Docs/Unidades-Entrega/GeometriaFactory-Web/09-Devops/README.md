@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 2.3
+**Versión:** 2.4
 **Estado:** Aprobado
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero DevOps Senior + Deploy Engineer (AG-09)
@@ -60,7 +60,7 @@
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
-| `Guia-Publicacion-Openapi.md` | **Omitido** | `Rules-Devops.md` §2.2 lo admite como artefacto secundario para servicios, no para `web-monolith`, y acá no tendría sujeto por partida doble: esta unidad **no expone contrato a nadie** (intake §14) y el contrato del producto es un **ensamblado compartido**, no una descripción publicada. El intake §17.1.P.3 · GeometriaFactory-Api declara que **no hay versionado de rutas porque no hay clientes de terceros** |
+| `Guia-Publicacion-Openapi.md` | **Omitido** | `Rules-Devops.md` §2.2 lo admite como artefacto secundario para servicios, no para `web-monolith`, y acá no tendría sujeto por partida doble: esta unidad **no expone contrato a nadie** (intake §14) y el contrato del producto es un **ensamblado compartido**, no una descripción publicada. *(Hasta el 2026-09-12 esta celda agregaba que el intake declara «no hay versionado de rutas porque no hay clientes de terceros»; la premisa quedó superada por [`ADR-00010`](../../GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) —la API versiona su superficie pública por `/v{MAJOR}/`— y no afecta esta omisión, que se sostiene en los dos motivos anteriores)* |
 | `Guia-Publicacion-Image-Docker.md` | **No es de esta sección** | La única imagen de contenedor del producto es la del backend. Su guía vive en la categoría 09 de `GeometriaFactory-Api` |
 | `Pipeline-Producto.md` | **No es de esta sección** | Artefacto de nivel producto (`Rules-Devops.md` §2.1 y §4.9), emitido una sola vez bajo `Producto/` al cierre del bucle de proyectos de código |
 
@@ -129,3 +129,4 @@ Se listan acá porque son lo que esta categoría agregó al corpus, y para que s
 | 2.2 | 2026-08-24 | **Ronda 3 del corte 09 de la migración 10.0 → 13.3**, sobre el re-audit independiente, que pasó de RECHAZADO a **APROBADO CON HALLAZGOS**: el P0 y los cinco P1 quedaron cerrados y aparecieron cuatro P2 y tres P3. **Misma reparación que en la unidad hermana** (**P3**): `Pipeline-CI-CD.md` pasa de **1.1** a **3.3** y `Guia-Publicacion-Front-Ftp.md` de **1.0** a **1.2**. **Y entra la fila de `Guia-Publicacion-Bundle-Visor.md`**, que existe en la carpeta y **faltaba en esta tabla desde la emisión del índice**: el audit lo levantó al contar los archivos contra las filas. |
 | 2.1 | 2026-08-24 | **Sincronización del índice con la ronda 2 del corte 09 de la migración 10.0 → 13.3.** Las tres filas de la tabla de documentos publicaban versiones **1.0 y 1.1** mientras los documentos iban por **2.x**: el desfasaje era **anterior** al corte, y el audit independiente lo levantó como **P3** porque la ronda 1 lo amplió en seis filas sin tocarlo ni declararlo. Quedan en las versiones que los documentos tienen hoy. **No se toca ninguna otra fila**: un índice que se corrige de más deja de ser comparable con el estado que describía. |
 | 2.3 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **3 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
+| 2.4 | 2026-09-12 | **§3, fila `Guia-Publicacion-Openapi.md`, deja de afirmar «no hay versionado de rutas porque no hay clientes de terceros»** (tarea `BT-00027`). Premisa superada por [`ADR-00010`](../../GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md); la omisión se sostiene en sus otros dos motivos. Una celda. Sube minor. |

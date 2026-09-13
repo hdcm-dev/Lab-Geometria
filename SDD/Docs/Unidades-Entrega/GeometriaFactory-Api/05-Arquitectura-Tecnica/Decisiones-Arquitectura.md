@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Decisiones-Arquitectura.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -43,10 +43,11 @@ Cada decisión vive en un archivo individual bajo [`Adrs/`](Adrs/). Este documen
 | [ADR-00005](Adrs/ADR-00005-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md) | Sin paginación, con su condición de reingreso declarada | Comunicación | Propuesto | 2026-08-10 |
 | [ADR-00006](Adrs/ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md) | Composición de raíz única: ciclos de vida y configuración en un solo lugar | Persistencia | Propuesto | 2026-08-10 |
 | [ADR-00007](Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) | Arranque en dos fases, y un punto de salud que no exige acceso | Despliegue | Propuesto | 2026-08-10 |
-| [ADR-00008](Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) | Sin versionado de rutas, con despliegue conjunto como regla operativa | Despliegue | Propuesto | 2026-08-10 |
+| [ADR-00008](Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) | Sin versionado de rutas, con despliegue conjunto como regla operativa | Despliegue | **Superado parcialmente** por ADR-00010 (regla 1 derogada; reglas 2 a 5 subsisten) | 2026-08-10 |
 | [ADR-00009](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md) | La API autentica personas, no aplicaciones | Seguridad | **Aceptado** | 2026-09-12 |
+| [ADR-00010](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) | Versión en la ruta, sólo el MAJOR, para la superficie pública | Comunicación | **Aceptado** | 2026-09-12 |
 
-**Nueve ADR, ninguna superada y ninguna rechazada.** La novena entra el 2026-09-12 por decisión del Product Owner y nace `Aceptado`.
+**Diez ADR, una superada parcialmente y ninguna rechazada.** La novena y la décima entran el 2026-09-12 por decisión del Product Owner y nacen `Aceptado`; la décima supera parcialmente a `ADR-00008`, que conserva sus reglas 2 a 5.
 
 ### 1.2 `GeometriaFactory-Infrastructure`
 
@@ -78,7 +79,7 @@ La guía de la categoría fija un mínimo de **cinco** ADR para este tipo, con s
 | **Paginación** | [ADR-00005](Adrs/ADR-00005-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md), que la registra **como decisión de no paginar, con su condición de reingreso medible**. Una ausencia sin sustituto sería un pendiente; con sustituto es una decisión |
 | **Manejo de errores** | [ADR-00004](Adrs/ADR-00004-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md) |
 
-Las **tres** restantes las agrega esta categoría porque el producto las necesitaba y ninguna fuente las tenía resueltas: el **formato de intercambio** ([ADR-00002](Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md)), que dos proyectos de código reasignaron acá; el **arranque en dos fases** ([ADR-00007](Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md)); y la **política de versionado de la frontera** ([ADR-00008](Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md)).
+Las **tres** restantes las agrega esta categoría porque el producto las necesitaba y ninguna fuente las tenía resueltas: el **formato de intercambio** ([ADR-00002](Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md)), que dos proyectos de código reasignaron acá; el **arranque en dos fases** ([ADR-00007](Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md)); y la **política de versionado de la frontera** ([ADR-00008](Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md), superada parcialmente el 2026-09-12 por [ADR-00010](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md), que versiona la superficie pública por `/v{MAJOR}/` y conserva el despliegue conjunto entre las piezas que compilan contra el ensamblado).
 
 ## 3. La categoría de decisión que queda vacía, y por qué
 
@@ -94,7 +95,7 @@ Las **tres** restantes las agrega esta categoría porque el producto las necesit
 
 ### 4.1 `GeometriaFactory-Api`
 
-Tabla de consulta rápida, para no tener que abrir las ocho.
+Tabla de consulta rápida, para no tener que abrir las diez.
 
 | Si la pregunta es… | La respuesta está en |
 | --- | --- |
@@ -109,7 +110,7 @@ Tabla de consulta rápida, para no tener que abrir las ocho.
 | Dónde se conectan los cuatro puertos con sus adaptadores | [ADR-00006](Adrs/ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md) |
 | Qué pasa si falta la clave de firma o el volumen del almacén | [ADR-00006](Adrs/ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md) y [ADR-00007](Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md): **el servicio no arranca** |
 | Qué responde el punto de salud, y qué no responde | [ADR-00007](Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) |
-| Qué reemplaza al versionado de rutas | [ADR-00008](Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md): el **despliegue conjunto** |
+| Cómo se versiona la superficie pública, y qué subsiste del despliegue conjunto | [ADR-00010](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md): **`/v{MAJOR}/`, con el `MAJOR` del producto**; el despliegue conjunto de [ADR-00008](Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) sigue entre `Api` y `Web` |
 | Quién se autentica contra la superficie, y desde qué aplicaciones | [ADR-00009](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md): **personas, no aplicaciones** — dos papeles, `POST /auth/token` desde cualquier aplicación propia, sin claves de API ni `client_credentials` |
 
 ### 4.2 `GeometriaFactory-Infrastructure`
@@ -237,3 +238,4 @@ Las dos categorías sin ADR se declaran vacías con su motivo, para que nadie la
 | --- | --- | --- |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4). Pasa de ser el documento de un proyecto de código a ser el de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con las capas juntas. Los documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |
 | 2.1 | 2026-09-12 | **Entra `ADR-00009`** (La API autentica personas, no aplicaciones; `Aceptado` por decisión del Product Owner del 2026-09-12) a la tabla de §1.1 y a la de consulta rápida de §4.1. Las ocho anteriores no cambian. Sube minor. |
+| 2.2 | 2026-09-12 | **Entra `ADR-00010`** (Versión en la ruta, sólo el MAJOR, para la superficie pública; `Aceptado` por decisión del Product Owner del 2026-09-12, `E-04`) a la tabla de §1.1 y a la de consulta rápida de §4.1; **`ADR-00008` pasa a `Superado parcialmente`** (regla 1 derogada; reglas 2 a 5 subsisten). §2.1 lo anota en la política de versionado de la frontera. Tarea `BT-00027`. Sube minor. |
