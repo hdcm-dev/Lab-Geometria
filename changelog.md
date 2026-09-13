@@ -1685,3 +1685,22 @@ introducido por **`BT-00029`** (`v1.1.0`). Decisión en
   ingresos + 10 fallos = el cupo de 30 por origen), y no cuenta como probada fallando.
 - **E2E del banco local** (`gf-e2e:local`, Playwright 1.49 + SDK 10, chromium): **32/32**, ningún `429`; 42
   canjes desde un solo origen en la corrida.
+
+## Punto de control de la fase `k`: OK del Product Owner — 2026-09-13
+
+**Rama:** `migracion/a-13.16` (sobre `b9675d8`, `main` = `v1.1.1`). Sin cambio de código: lo que cierra la fase
+es el OK explícito del Product Owner en el punto de control, que `Roadmap-Producto.md` §5.1 exige para toda
+transición y que la 1.12 había dejado pendiente sin afirmarlo por él.
+
+### Cerrado
+
+- **Fase `k` · exposición pública de la API y versionado del contrato.** Testimonio literal del Product
+  Owner, 2026-09-13: «tenés el ok de la fase K». `Roadmap-Producto.md` **1.13** (§3 y §2.1, fila `k`);
+  `Mini-Plan.md` de `GeometriaFactory-Api` **3.5** (§3.5). Asentado como actuación 002 del expediente
+  `SDD/Expedientes/0001-Migracion-Normativa-A-13.16/`.
+
+### Corregido
+
+- `Roadmap-Producto.md` §2.1, fila `k`: la celda de release seguía diciendo «Pendiente. Ninguno de los diez
+  ítems está construido» después de que la 1.12 declarara el entregable realizado en §3. Las entradas
+  anteriores de este registro no se reescriben.
