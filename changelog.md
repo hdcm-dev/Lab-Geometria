@@ -1279,3 +1279,48 @@ Owner en `SDD/Docs/Audit/Mesa-2026-09-12-ciclo-2.md` §8.
 `dotnet build` Release 0 advertencias (igual que `main`); `dotnet test` 522/522; MinVer sobre `HEAD`
 `0.8.1-alpha.0.135`; imagen del servicio construida sobre `cfb11f7` desde un clon superficial sin
 etiquetas responde `/salud` con `0.8.1-alpha.0.133+cfb11f75…`; `git tag -l` sin cambios. Detalle en la ficha, §8 fila 1.2.
+
+## Producción reconstruida desde `main`: la versión es la de MinVer y OpenAPI/Scalar están publicados — 2026-09-13
+
+**Rama:** `fase-k/cierre-bt-00031-00033` (`BT-00031` y `BT-00033`, fase `k`). Sin cambio de código: lo
+que cierra las dos tareas es un despliegue del Product Owner y tres decisiones suyas.
+
+### Desplegado
+
+- **El Product Owner reconstruyó producción desde `main` = `ce1c68f`** (fusión #193, la adopción de
+  MinVer) con `docker compose up -d --build` en `~/docker/lab-geometria` y **`Documentacion__Publicada=true`**
+  en el `.env`. Verificado el 2026-09-13 02:23 UTC contra `https://api-geometria.aplicada.stream`:
+  `/salud` → `{"ready":true,"version":"0.8.1-alpha.0.135+ce1c68f3a37275c57861c7f2a86035a8f4699001",…}`;
+  `/openapi/v1.json` → `200`; `/documentacion` → `302` (la redirección del explorador Scalar, no un
+  punto de la superficie); `docker compose ps` → `lab-geometria-api healthy · lab-geometria-web healthy`.
+  Antes, `/salud` decía `1.0.0+5c95dab…` y `/openapi/v1.json` daba `404`.
+- **La altura 135 es la prueba de que el `Dockerfile` hizo su trabajo**: BuildKit deja el clon
+  `--depth=1 --no-tags`, y sin el `git fetch --unshallow --tags origin` la versión habría sido
+  `0.0.0-alpha.0`. Salió `v0.8.0` + 135 fusiones, que es lo que `main` es.
+
+### Decidido por el Product Owner («ok, encargate de todo y sigue», 2026-09-12)
+
+- **`PD-VER-01` · la etiqueta es manual.** La crea quien fusiona código de producción a `main`, en el
+  mismo acto, con el número que MinVer imprime. **El job de CI no se implementa.**
+- **`PD-VER-02` · el conjunto amplio.** `Directory.Build.props`, los `*.csproj`, `GeometriaFactory.sln`
+  y `deploy/Dockerfile*` **cuentan** como código de producción, además de `src/**` y `visor/**`.
+- **`PD-VER-03` · sin etiquetas retroactivas.** Ni `89f3ab3` ni `5c95dab` se etiquetan; la propuesta
+  `v0.9.0`/`v0.9.1` queda registrada como descartada. El número no se puede calcular —cero `feat`/`fix`
+  en 129 fusiones— y la regla rige desde su fecha, como en su momento con `c`, `d` y `f`.
+- **La salida de `0.x` la hace `BT-00032`**: la primera fusión con las rutas públicas bajo `/v1/` se
+  etiqueta **`v1.0.0`**, porque por `ADR-00010` el `MAJOR` de la ruta es el `MAJOR` del producto. El
+  hueco `0.9.x` es deliberado y queda declarado en `Estrategia-Versionado.md` §3.c.
+
+### Cerrado
+
+- **`BT-00031` → `Done`** (1.3): los cuatro criterios cumplidos en producción; el recuento de puntos
+  fuera de la guardia sigue en 4.
+- **`BT-00033` → `Done`** (1.3): `/salud` con la versión real en producción, el evento de etiqueta
+  declarado y decidido, y el tercer criterio cerrado por su segunda vía —declarado por qué no—.
+- `Estrategia-Versionado.md` **5.1** (§3.c: las tres decisiones y la regla de `v1.0.0`; la deprecación
+  sigue siendo `BT-00035`), `Mini-Plan.md` **3.2** (§3.5, dos celdas de `Estado`).
+
+### Lo que queda
+
+- `git tag -l` sigue devolviendo las cinco del 2026-08-18: **ninguna etiqueta se creó en esta corrida**.
+  La próxima es `v1.0.0`, sobre la fusión de `BT-00032`, a mano.
