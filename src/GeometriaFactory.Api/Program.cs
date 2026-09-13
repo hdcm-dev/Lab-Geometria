@@ -9,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCompositionRoot(builder.Configuration);
 
+// El límite de tasa del contrato y la confianza en `X-Forwarded-For`. Qué se limita, por qué
+// sujeto y con qué cifras lo decide `ContractRateLimiting`; acá sólo se registra y se conecta.
+builder.Services.AddContractRateLimiting(builder.Configuration);
+
 // La descripción navegable de la superficie. Qué se publica y dónde lo decide `ApiDocumentation`.
 builder.Services.AddApiDocumentation();
 
@@ -67,8 +71,23 @@ if (!EF.IsDesignTime)
 // enlace de la petición al tipo del contrato falla más abajo que el enrutamiento.
 app.UseExceptionHandler(_ => { });
 
+// ANTES QUE NADA QUE MIRE LA DIRECCIÓN DE ORIGEN: detrás del túnel toda petición llega del
+// contenedor del túnel, y la dirección real viaja en `X-Forwarded-For`. Sólo se le cree a los
+// proxies que la configuración declara (`ContractRateLimiting`); sin esa llave, la partición por
+// origen del límite de tasa colapsa en una sola dirección y esta línea no lo puede evitar.
+app.UseForwardedHeaders();
+
 app.UseRouting();
 app.UseAuthentication();
+
+// DESPUÉS DE AUTENTICAR Y ANTES DE AUTORIZAR, y las dos posiciones son deliberadas. Después de
+// autenticar, porque la partición por persona lee el reclamo de identidad del acceso presentado y
+// antes de ese paso no hay principal. Antes de autorizar, porque una petición rechazada por la
+// guardia también gasta cuota: quien tantea la guardia con accesos inventados cuenta contra su
+// dirección de origen, y no obtiene `401` gratis e ilimitados. Sólo alcanza a los puntos que
+// declaran política —el grupo `/v1` de abajo—: `/salud` y el explorador no pasan por acá.
+app.UseRateLimiter();
+
 app.UseAuthorization();
 
 // El paso 5 de la guardia: la comprobación del cambio de contraseña pendiente, aplicada a TODO
@@ -88,7 +107,11 @@ app.MapHealthEndpoint();
 // relativa y el grupo se la completa. Cuando el producto estrene otro `MAJOR`, acá se abre un
 // segundo grupo y conviven el plazo que `Estrategia-Versionado.md` fije; hasta entonces hay uno.
 // Sin el prefijo, la ruta no existe: `404`, sin redirección (`ContractRoutePrefixTests`).
-var contrato = app.MapGroup(ContractRoutePrefix.Value);
+// Y EL GRUPO ENTERO LLEVA EL LÍMITE DE TASA, por la misma razón que lleva el prefijo: un punto
+// nuevo lo hereda sin que nadie tenga que acordarse. La única excepción, el canje, declara la suya
+// —más estricta— en su propio contrato de punto (`ContractRateLimiting.CredentialExchangePolicy`).
+var contrato = app.MapGroup(ContractRoutePrefix.Value)
+    .RequireRateLimiting(ContractRateLimiting.ContractPolicy);
 
 contrato.MapAuthenticationEndpoints();
 contrato.MapAccountEndpoints();

@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Definicion-Superficie-HTTP.md
-**Versión:** 1.12
+**Versión:** 1.13
 **Estado:** Aprobado
-**Fecha:** 2026-09-12
+**Fecha:** 2026-09-13
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.34** (§4.1 RN-00013 y su fila de control de cambios 1.34: **con qué se autentica el cambio forzado**, que es lo que reconcilia §3 con `CU-00001` §6), **1.26** §17.1.P.3 · GeometriaFactory-Api (protocolo, consumidor, ausencia de CORS y de WebSockets, punto de canje y punto de salud), §17.1.P.5 · GeometriaFactory-Api (flujo, reclamos, respuestas, autorización, secretos), §17.1.P.2 · GeometriaFactory-Api, §17.1.P.6 · GeometriaFactory-Api, §17.1.P.9 · GeometriaFactory-Api, §17.1.P.10 · GeometriaFactory-Api, §17.1.P.11 · GeometriaFactory-Api, §9 (X-9), §14 (**RA-01, RA-02, RA-03**), §4.1 (RN-00003, RN-00006, RN-00009, RN-00013, **RN-00016**), §4 (**F-04** precisada, F-03); `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/` completo, y en particular la §6 de sus ocho contratos de uso y `CU-00006` §6 y §10, de donde sale el **conjunto cerrado de diecisiete códigos**; `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md` §4 y §6; `Unidades-Entrega/GeometriaFactory-Api/03-UX-UI-DX/DX-Error-Messages.md` §1.3 y §2.3, que declara que la traducción de sus condiciones hacia afuera del proceso pertenece a este proyecto de código
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `10-Examples` de GeometriaFactory-Api
@@ -17,7 +17,7 @@
 - [1. Por qué este documento existe](#1-por-qué-este-documento-existe)
 - [2. Qué declara una fuente y qué es derivación de esta categoría](#2-qué-declara-una-fuente-y-qué-es-derivación-de-esta-categoría)
 - [3. Los dieciséis puntos de acceso](#3-los-dieciséis-puntos-de-acceso)
-- [4. Los diez códigos de respuesta](#4-los-diez-códigos-de-respuesta)
+- [4. Los once códigos de respuesta](#4-los-once-códigos-de-respuesta)
 - [5. Las dos traducciones](#5-las-dos-traducciones)
 - [6. La tabla de traducción de los diecisiete códigos](#6-la-tabla-de-traducción-de-los-diecisiete-códigos)
 - [7. Lo que esta superficie no tiene, y por qué](#7-lo-que-esta-superficie-no-tiene-y-por-qué)
@@ -131,7 +131,7 @@ gratuita sobre la única pieza cara del producto.
 
 **Por qué el envío son dos puntos y no uno.** Porque el trabajo nuevo no trae identificador y el reenvío sí, y esa diferencia decide qué puede fallar: un reenvío puede referirse a un trabajo que no existe o que ya no está en `Borrador`, y un alta no. Comparten el tipo de solicitud y no comparten su tabla de respuestas.
 
-## 4. Los diez códigos de respuesta
+## 4. Los once códigos de respuesta
 
 | Código | Qué significa en esta superficie | Origen |
 | --- | --- | --- |
@@ -143,12 +143,13 @@ gratuita sobre la única pieza cara del producto.
 | `403` | **Con motivo**, ante la cuenta que no admite acceso, ante el papel que el punto no admite y ante la cuenta con cambio de contraseña pendiente | **Declarado** por el intake §17.1.P.5 · GeometriaFactory-Api para la cuenta `Pendiente` o `Bloqueada`; los otros dos son derivación |
 | `404` | Lo pedido no existe **o no es del solicitante, o está fuera de lo que ve**, sin que la respuesta permita distinguir los tres casos | **[derivado en el número; la obligación es de RN-00003]** |
 | `409` | La operación es legítima y el estado no la admite: el correo ocupado, el administrador ya configurado, el estado que no admite desenlace, el que no admite eliminar, el reseteo que no aplica | **[derivado]** |
+| `429` | **La persona autenticada o la dirección de origen excedió su cuota de peticiones en la ventana**; `Retry-After` dice cuántos segundos esperar. **Transversal a los dieciséis puntos bajo `/v1/`** y no propio de ninguna fila de §3, por lo que no se agrega a la columna de códigos de cada punto; `A-16` queda fuera. Las cuotas, su fundamento y su configuración están en [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) §4.1 | **[derivado]** de `05` §8.1, fila «Caudal sostenido»; tarea `BT-00029` |
 | `500` | Un defecto que el producto no previó. **Nunca lleva detalle de implementación** | **[derivado]** |
 | `503` | El servicio no puede atender: el almacén no está disponible, o el arranque todavía no dejó el almacén en condiciones | **[derivado]** |
 
-**Diez códigos.** Dos son de la fuente y ocho son derivación, con el matiz declarado del `404` en §2.
+**Once códigos.** Dos son de la fuente y nueve son derivación, con el matiz declarado del `404` en §2.
 
-**Dos códigos que esta superficie no usa, y su ausencia es informativa.** No hay `422`: el conjunto de causas que otro producto pondría ahí —un texto del alumno que no verifica— **no es un fallo en éste**, y §5 lo explica. Y no hay `429`: ninguna fuente declara límite de caudal, el caudal previsto es de una comisión durante una clase, y agregarlo sería una decisión que nadie tomó.
+**Un código que esta superficie no usa, y su ausencia es informativa.** No hay `422`: el conjunto de causas que otro producto pondría ahí —un texto del alumno que no verifica— **no es un fallo en éste**, y §5 lo explica. **El `429` fue la segunda ausencia hasta el 2026-09-13**, porque «ninguna fuente declara límite de caudal» y el único cliente era el front; con la superficie publicada bajo `/v1/` para aplicaciones propias ([`../05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md`](../05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md)) la tarea `BT-00029` lo incorpora sobre el NFR «Caudal sostenido» de `05` §8.1.
 
 ## 5. Las dos traducciones
 
@@ -259,4 +260,5 @@ Los **cinco** primeros son propios de este documento y están recogidos en el í
 | 1.9 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **20 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.10 | 2026-09-12 | **§2 y §7 dejan de afirmar «no hay versionado de rutas, porque no hay clientes de terceros»** (tarea `BT-00027`). La premisa fue cierta hasta `PRODUCT-INTAKE` 4.2; desde el 2026-09-12 hay aplicaciones propias además del front (`ADR-00009`) y la superficie pública se versiona en la ruta por `/v{MAJOR}/` ([`ADR-00010`](../05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)). La fila de §2 se reescribe con la decisión y su fuente; la fila de §7 pasa a ausencia **superada**, con lo que subsiste (despliegue conjunto). **Ninguna ruta de §3 cambia en este documento**: el prefijo lo lleva a código `BT-00032`. Sube minor. |
 | 1.11 | 2026-09-12 | **Las rutas de §3 llevan el prefijo `/v1/`** (tarea `BT-00032`, que implementa [`ADR-00010`](../05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)). Dieciséis filas cambian su ruta por la misma con `/v1` antepuesto; **`A-16` (`/salud`) no lo lleva**, por decisión de `Contratos-REST.md` §3.1 (es del arranque y no del contrato). El párrafo nuevo de §3 dice que el prefijo no es derivación de esta categoría y qué responde una petición sin él. **Ningún verbo, intención, papel, código ni CU cambia**, y los rótulos **[derivado]** / **[declarada por la fuente]** siguen predicándose de lo que va después del prefijo. Sube minor. |
+| 1.13 | 2026-09-13 | **§4 pasa de diez a once códigos: entra el `429`** (tarea `BT-00029`). Una fila nueva en la tabla, que declara el código **transversal a los dieciséis puntos bajo `/v1/`** y por eso **no toca la columna de códigos de ninguna fila de §3**; `A-16` queda fuera. El párrafo de las ausencias informativas pasa de dos a una y deja constancia de por qué el `429` dejó de serlo. Las cuotas, su fundamento, su configuración y la batería que las verifica viven en `Contratos-REST.md` **1.9** §4.1 y no se duplican acá. **Ningún punto, verbo, ruta, papel ni CU cambia.** Sube minor. |
 | 1.12 | 2026-09-12 | **§7, fila «CORS», se alinea con `PRODUCT-INTAKE` 4.4 y remite a `05` §9.1** (tarea `BT-00030`). La fila decía sólo «RA-01» y la condición que el intake dejó escrita el 2026-09-12 —que la ausencia rige mientras ningún cliente propio sea JavaScript de navegador desde otro origen (`ADR-00009`)— no estaba acá. La celda «Por qué» suma la condición y remite a [`Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §9.1 y §9.1.1, donde vive la declaración de por qué no aplica hoy con su medición; la celda «Qué la repone» suma la forma exigida si la condición se da: política por origen explícito, nunca `AllowAnyOrigin` con credenciales. **La ausencia no se retira y sigue siendo ausencia**: ninguna ruta de §3 ni código de §6 cambia. Sube minor. |

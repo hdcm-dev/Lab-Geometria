@@ -1404,6 +1404,70 @@ que cierra las dos tareas es un despliegue del Product Owner y tres decisiones s
 - `git tag -l` sigue devolviendo las cinco del 2026-08-18: **ninguna etiqueta se creó en esta corrida**.
   La próxima es `v1.0.0`, sobre la fusión de `BT-00032`, a mano.
 
+## Límite de tasa por persona autenticada o por dirección de origen — 2026-09-13
+
+**Rama:** `fase-k/bt-00029-rate-limiting` (`BT-00029`, fase `k`, sobre `8e5e2f9` = `v1.0.0`). Realiza el NFR
+«Caudal sostenido» de `05` §8.1 sobre el riesgo del único escritor del almacén (`ADR-06002`). **No es un cambio
+mayor del contrato**: ningún punto, verbo, cuerpo ni papel cambia; entra un código de respuesta nuevo, `429`,
+que toda aplicación que consuma `/v1/` tiene que estar preparada para recibir y respetar con `Retry-After`.
+
+### Agregado
+
+- **`GeometriaFactory.Api`: `Composition/ContractRateLimiting.cs`**, con `Microsoft.AspNetCore.RateLimiting`
+  (nativo del marco, sin paquete). Dos políticas: **`contrato`**, aplicada al grupo `/v1` entero desde
+  `Program.cs`, que particiona **por persona** —el reclamo `sub` del acceso firmado, `ADR-00003`— cuando la
+  petición trae acceso válido y **por dirección de origen** cuando no (los cuatro puntos anónimos, y también la
+  petición que la guardia va a rechazar: el limitador corre después de autenticar y antes de autorizar, así
+  tantear la guardia gasta cuota); y **`canje`**, propia y más estricta, siempre por origen, declarada sobre
+  `POST /v1/auth/token` en `AuthenticationEndpoints`, porque es el único punto que recibe una contraseña en
+  claro y cada intento cuesta una derivación anclada. **Nunca por una clave de aplicación**, que no existe
+  (`ADR-00009`).
+- **Umbrales derivados del NFR y configurables** (`RateLimiting__*`, escritos en `appsettings.json`): ventana
+  **deslizante de 60 s**; **60 por minuto por persona** (el triple del caudal de una comisión: una persona a
+  mano no llega, un guion en bucle sí); **120 por minuto por origen** (el front es una sola dirección para la
+  comisión entera y no reenvía la del navegador, y la cifra tiene que dejar entrar a la comisión al principio
+  de una clase); **30 canjes por minuto por origen** (deja pasar a esa comisión y acota un diccionario a 1.800
+  intentos por hora por dirección). Un umbral en cero o negativo **detiene el arranque nombrando la llave**,
+  como la clave de firma. Cuando `PT-05` mida el uso real se ajustan por configuración.
+- **`429` con `Retry-After` en segundos enteros y sin cuerpo**: tercera respuesta sin código del contrato
+  (`Contratos-REST.md` §5.1), al lado del `401` de la guardia. `/salud` y el explorador **quedan fuera**: la
+  cuota es del grupo `/v1` y no global, para que el `healthcheck` no apague un contenedor sano.
+- **`UseForwardedHeaders` al principio de la tubería.** `X-Forwarded-For` se honra **sólo desde las redes que
+  `ForwardedHeaders__KnownNetworks__<n>` declare**, más el bucle local del marco. Detrás del túnel de
+  Cloudflare, para el zócalo toda petición viene del contenedor del túnel: **sin esa llave la partición por
+  origen colapsa en una sola dirección**. La red no está en la imagen porque es topología del host:
+  **declararla es obligación del despliegue** (`ForwardedHeaders__KnownNetworks__0=172.23.0.0/16` en la
+  composición de `~/docker/lab-geometria`, la red `jump-host-demos-net` donde conviven el túnel y el servicio).
+- **`RateLimitingTests`** (integración, **14** pruebas), **con los umbrales por omisión y no con unos bajados
+  para la prueba**: `429` y `Retry-After` en [1, 60] a la 61.ª petición de una persona, la 121.ª de un origen y
+  el 31.º canje; otra persona y otro origen siguen en `200`; la misma persona desde otra dirección sigue en
+  `429`; la petición que la guardia rechaza gasta cuota; `/salud` responde `200` más veces que cualquier cuota;
+  `X-Forwarded-For` se honra desde una red declarada y se ignora desde otra; **una ráfaga concurrente de sesenta
+  escrituras de una persona llega entera al único escritor sin ningún `5xx` y el almacén tiene exactamente las
+  sesenta**; los valores por omisión son los que el contrato declara; un umbral en cero y una red que no es
+  CIDR detienen el arranque. **Probada fallando**: sin las dos `RequireRateLimiting` fallan 7 de 14.
+  `DataServiceHarness` deja de ser `sealed` y admite configuración adicional para simular el zócalo.
+
+### Cambiado
+
+- **`Contratos-REST.md` 1.9**: §4 pasa de diez a once códigos; **§4.1 nuevo** con la cuota, su sujeto, las
+  cifras, el fundamento, la configuración, `X-Forwarded-For` y lo que queda fuera; §5.1 pasa a tres respuestas
+  sin código; el párrafo que declaraba el `429` como ausencia informativa se reescribe con constancia de por qué
+  cayó su fundamento (`ADR-00005` §2: «el único cliente legítimo es la pieza pública»). **`ADR-00005` no se
+  reescribe**: su decisión de no paginar sigue vigente y sólo su párrafo sobre el caudal queda superado.
+- **`Definicion-Superficie-HTTP.md` 1.13**: la fila del `429` en §4, transversal a los dieciséis puntos bajo
+  `/v1/` y por eso sin tocar la columna de códigos de §3. **`Arquitectura-Unidad-Entrega.md` 3.13**: §8.1, fila
+  «Caudal sostenido», una celda: el NFR gana su mecanismo; la cifra no cambia y sigue provisoria.
+
+### Verificado
+
+`dotnet build` Release **0 advertencias**; `dotnet test` **546/546** (Domain 94, Application 56, Integración
+396; `main` tenía 532, los catorce nuevos son `RateLimitingTests`); contra el servicio de esta rama en
+`127.0.0.1:5081` con almacén propio: `api/01-basico` **CONFORME 13/13** y `api/02-intermedio` **CONFORME** con
+su `D-1` ya declarada (**ningún `429` en los 52 pedidos de los dos samples**); `curl`: el canje responde `429`
+con `Retry-After: 60` y `Content-Length: 0` al agotar los 30 de la ventana, `/v1/aprovisionamiento` al agotar
+los 120 del origen, y `/salud` responde `200` **200 de 200 veces**; `git tag -l` sin cambios. Los E2E de
+Playwright y `api/03-avanzado` no se corrieron localmente. Detalle en la ficha `BT-00029`, §8.
 ## `v1.0.0` en producción — 2026-09-13
 
 **Rama:** `fase-k/cierre-bt-00032` (`BT-00032`, fase `k`). Sin cambio de código: lo que cierra la tarea

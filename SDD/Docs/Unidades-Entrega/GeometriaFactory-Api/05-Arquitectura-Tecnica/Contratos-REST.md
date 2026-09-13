@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Contratos-REST.md
-**Versión:** 1.8
+**Versión:** 1.9
 **Estado:** Aprobado
-**Fecha:** 2026-09-12
+**Fecha:** 2026-09-13
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 
 ---
@@ -18,9 +18,10 @@
   - [2.2 El formato de intercambio y su configuración](#22-el-formato-de-intercambio-y-su-configuración)
 - [3. Operaciones: los diecisiete puntos de acceso](#3-operaciones-los-diecisiete-puntos-de-acceso)
   - [3.1 Las rutas públicas: dieciséis bajo `/v1/` y una exenta](#31-las-rutas-públicas-dieciséis-bajo-v1-y-una-exenta)
-- [4. Los diez códigos de respuesta](#4-los-diez-códigos-de-respuesta)
+- [4. Los once códigos de respuesta](#4-los-once-códigos-de-respuesta)
+  - [4.1 El límite de tasa: `429` por persona o por origen](#41-el-límite-de-tasa-429-por-persona-o-por-origen)
 - [5. Manejo de errores: la tabla de traducción de los diecisiete códigos](#5-manejo-de-errores-la-tabla-de-traducción-de-los-diecisiete-códigos)
-  - [5.1 Las dos respuestas sin código del contrato](#51-las-dos-respuestas-sin-código-del-contrato)
+  - [5.1 Las tres respuestas sin código del contrato](#51-las-tres-respuestas-sin-código-del-contrato)
   - [5.2 Los dos huecos declarados del conjunto cerrado, cerrados](#52-los-dos-huecos-declarados-del-conjunto-cerrado-cerrados)
   - [5.3 Las dos señales que no son fallos](#53-las-dos-señales-que-no-son-fallos)
   - [5.4 Lo que ninguna respuesta puede decir](#54-lo-que-ninguna-respuesta-puede-decir)
@@ -128,7 +129,7 @@ Los diecisiete son los de [`../02-Especificacion-Funcional/Definicion-Superficie
 
 **La comparación en las dos direcciones es una prueba y no una lectura.** `ContractRoutePrefixTests` (batería de integración) transcribe esta tabla —verbo y ruta pública, a mano— y la contrasta con lo que el host enruta de verdad: toda ruta publicada está en la tabla o entre las tres exentas, todo punto de la tabla está publicado con esa ruta, y toda ruta publicada lleva `/v1/` salvo las tres exentas. Un punto agregado al código sin entrar acá falla; un punto declarado acá sin mapear falla; una cuarta ruta sin prefijo falla aunque tenga motivo, hasta que el motivo se escriba en `ContractRoutePrefix`.
 
-## 4. Los diez códigos de respuesta
+## 4. Los once códigos de respuesta
 
 | Código | Qué significa en esta superficie | Origen |
 | --- | --- | --- |
@@ -140,12 +141,37 @@ Los diecisiete son los de [`../02-Especificacion-Funcional/Definicion-Superficie
 | `403` | **Con motivo**, ante la cuenta que no admite acceso, ante el papel que el punto no admite y ante la cuenta con cambio de contraseña pendiente | **Declarado** por el intake §17.1.P.5 · GeometriaFactory-Api para la cuenta `Pendiente` o `Bloqueado`; los otros dos son derivación |
 | `404` | Lo pedido no existe, **o no es del solicitante, o está fuera de lo que ve**, sin que la respuesta permita distinguir los tres casos | **[derivado en el número; la obligación es de `RN-00003`]** |
 | `409` | La operación es legítima y el estado no la admite | **[derivado]** |
+| `429` | **La persona o el origen excedió su cuota de peticiones en la ventana**, y la respuesta dice en `Retry-After` cuántos segundos esperar. Sin cuerpo y sin código del contrato (§4.1, §5.1) | **[derivado]** de `05` §8.1, fila «Caudal sostenido»; tarea `BT-00029` |
 | `500` | Un defecto que el producto no previó. **Nunca lleva detalle de implementación** | **[derivado]** |
 | `503` | El servicio no puede atender: el almacén no está disponible, o el arranque todavía no lo dejó en condiciones | **[derivado]** |
 
-**Diez códigos: dos de la fuente y ocho de derivación**, con el matiz declarado del `404`, cuyo **número** es derivado y cuya **obligación** no lo es.
+**Once códigos: dos de la fuente y nueve de derivación**, con el matiz declarado del `404`, cuyo **número** es derivado y cuya **obligación** no lo es.
 
-**Dos códigos que esta superficie no usa, y su ausencia es informativa.** No hay respuesta de entidad no procesable: el conjunto de causas que otro producto pondría ahí —un texto del alumno que no verifica— **no es un fallo en éste** (§5.3). Y no hay respuesta de exceso de peticiones: ninguna fuente declara límite de caudal, el previsto es de una comisión durante una clase, y agregarlo sería una decisión que nadie tomó ([`ADR-00005`](Adrs/ADR-00005-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md)).
+**Un código que esta superficie no usa, y su ausencia es informativa.** No hay respuesta de entidad no procesable: el conjunto de causas que otro producto pondría ahí —un texto del alumno que no verifica— **no es un fallo en éste** (§5.3). **El `429` fue la segunda ausencia hasta el 2026-09-13**, con el fundamento de [`ADR-00005`](Adrs/ADR-00005-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md) §2 —«el único cliente legítimo es la pieza pública y el alcance es de aula»—; esa premisa cayó con la fase `k` (la superficie se publica bajo `/v1/` para aplicaciones propias además del front, [`ADR-00009`](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md) y [`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)), y `BT-00029` lo incorpora con la forma de §4.1. `ADR-00005` no se reescribe acá: su decisión de no paginar sigue vigente; lo que queda superado es sólo su párrafo sobre el caudal, y se deja constancia en esta fila.
+
+### 4.1 El límite de tasa: `429` por persona o por origen
+
+**Desde `BT-00029` (2026-09-13), todo punto bajo `/v1/` tiene una cuota de peticiones por ventana, y excederla responde `429`.** Es la realización del NFR «Caudal sostenido» de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §8.1 —20 peticiones por minuto para una comisión, [ASUNCIÓN] provisoria— sobre el riesgo del único escritor del almacén ([`ADR-06002`](Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md)). Lo realiza `Microsoft.AspNetCore.RateLimiting`, nativo del marco, en `Composition/ContractRateLimiting.cs`.
+
+**El sujeto de la cuota es la persona, y cuando no hay persona, la dirección de origen. Nunca una clave de aplicación, que no existe** ([`ADR-00009`](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md)).
+
+| Partición | Cuándo aplica | Cuota por omisión | Llave de configuración |
+| --- | --- | --- | --- |
+| **Por persona** | La petición trae un acceso firmado válido: la partición es el reclamo `sub` de la credencial de cuatro reclamos ([`ADR-00003`](Adrs/ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md)). Dos pestañas de la misma persona comparten cuota; dos personas detrás de la misma dirección, no | **60 por minuto** | `RateLimiting__PermitsPerPerson` |
+| **Por origen** | La petición no trae acceso válido: los cuatro puntos anónimos (`A-01`, `A-02`, `A-03`, `A-17`) y también una petición a un punto bajo la guardia con acceso ausente, vencido o mal firmado. **La petición que la guardia rechaza con `401` también gasta cuota**: el limitador corre antes de autorizar | **120 por minuto** | `RateLimiting__PermitsPerAddress` |
+| **El canje, por origen** | `A-01` (`POST /v1/auth/token`) reemplaza la cuota anterior por una **propia y más estricta**, siempre por dirección: es el único punto que recibe una contraseña en claro y cada intento cuesta una derivación anclada ([`ADR-06004`](Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md)), se acierte o no | **30 por minuto** | `RateLimiting__CredentialExchangePermitsPerAddress` |
+
+La ventana es de **un minuto** (`RateLimiting__WindowSeconds`, 60) y **deslizante**, no fija: con ventana fija quien agota la cuota en el último segundo la tiene entera en el primero siguiente y el pico real es el doble del declarado. No hay cola: la petición que excede se rechaza y el consumidor decide cuándo volver.
+
+**Los umbrales salen del NFR y no de una medición, y se declara.** Por persona, **el triple** del caudal previsto para la comisión entera: una petición por segundo sostenida durante un minuto, que una persona operando la pantalla a mano no alcanza —cada acción del front son una o dos peticiones— y un guion que reintenta en bucle sí. Por origen, **seis veces** el NFR, porque `GeometriaFactory.Web` habla con esta superficie servidor a servidor y **no reenvía la dirección del navegador**: para la partición por origen, una comisión entera que canjea credenciales a través del front es **una** dirección, y la cifra tiene que dejarla entrar al principio de una clase. Para el canje, treinta por minuto es lo que deja pasar a esa misma comisión y acota un diccionario a mil ochocientos intentos por hora por dirección, que contra una contraseña derivada con el coste de `ADR-06004` no es un ataque sino una espera. Cuando `PT-05` mida el uso real, las cuatro cifras se ajustan **por configuración**, sin tocar el código; `appsettings.json` las trae escritas para que quien despliega las vea.
+
+**La respuesta `429` lleva `Retry-After` en segundos enteros, redondeados hacia arriba, y no lleva cuerpo.** No lleva código del contrato porque el conjunto cerrado no declara ninguno para una cuota y esta capa no inventa códigos ([`ADR-00004`](Adrs/ADR-00004-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md)): es la tercera respuesta sin código de §5.1. Lo que el consumidor necesita —cuándo volver— lo dice la cabecera.
+
+**La dirección de origen es la de `X-Forwarded-For`, y sólo se le cree a un proxy conocido.** El servicio corre detrás del túnel de Cloudflare, y para el zócalo toda petición viene del contenedor del túnel: sin `UseForwardedHeaders` la partición por origen **colapsa en una sola** y el límite se aplica a Internet entero como si fuera un cliente. Las redes de confianza llegan por configuración —`ForwardedHeaders__KnownNetworks__0=<red de la composición>`— y **no están en la imagen**, porque son topología del host (`deploy/compose.yaml` explica el reparto). Sin esa llave sólo se confía en el bucle local y la cabecera de cualquier otro origen se ignora: creerle a todos dejaría que un cliente eligiera su propia partición. **Declararla es obligación del despliegue**, y la ficha `BT-00029` la deja escrita.
+
+**`/salud` queda fuera, con el explorador.** La cuota se aplica al grupo `/v1` y no globalmente: el `healthcheck` de las dos composiciones sondea `/salud` cada 30 segundos y un límite que lo alcanzara podría apagar un contenedor sano ([`ADR-00007`](Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) §2 punto 3; §3.1 de este documento). Un punto nuevo bajo `/v1/` hereda la cuota sin que nadie tenga que acordarse, por la misma razón por la que hereda el prefijo.
+
+**Lo verifica `RateLimitingTests`** (batería de integración, catorce pruebas) **con los umbrales por omisión y no con unos bajados para la prueba**: la sexagésima primera petición de una persona, la ciento veintiuna de un origen y el trigésimo primer canje reciben `429` con `Retry-After` entre 1 y 60; otra persona y otro origen siguen en `200`; la misma persona desde otra dirección sigue en `429`; `/salud` responde `200` más veces que cualquier cuota; `X-Forwarded-For` se honra desde una red declarada y se ignora desde cualquier otra; una ráfaga concurrente de sesenta escrituras de una persona llega entera al único escritor sin ningún `5xx` y la sexagésima primera no llega; y un umbral en cero detiene el arranque nombrando la llave.
 
 ## 5. Manejo de errores: la tabla de traducción de los diecisiete códigos
 
@@ -179,14 +205,15 @@ El conjunto cerrado lo declara `GeometriaFactory-Contracts` y tiene **diecisiete
 
 **Que el código genérico haya bajado de cuatro destinos a dos es la medida del cierre de §5.2**: los dos destinos que se fueron existían **sólo** porque el conjunto cerrado no tenía un código propio para esos caminos.
 
-### 5.1 Las dos respuestas sin código del contrato
+### 5.1 Las tres respuestas sin código del contrato
 
 | Respuesta | Cuándo | Por qué no lleva código |
 | --- | --- | --- |
 | `401` de la guardia | No hay credencial, la credencial venció, o su firma no corresponde | El conjunto cerrado **no declara ninguno** que describa una credencial ausente o inválida, y **esta capa no inventa códigos**. Lo que el consumidor necesita saber es que tiene que volver a canjear credenciales, y eso lo dice el número |
 | `400` de petición ilegible | El cuerpo no se puede leer, un valor no pertenece a un conjunto cerrado, llega un campo desconocido, o el cuerpo excede el límite | Ocurre **antes** de que la petición llegue a ser el tipo del contrato: no hay contrato con el que hablar todavía |
+| `429` del límite de tasa | La persona o el origen excedió su cuota de la ventana (§4.1) | El conjunto cerrado **no declara ninguno** para una cuota, y **esta capa no inventa códigos**. Lo que el consumidor necesita saber —cuándo volver— lo dice `Retry-After`, y el cuerpo va vacío como en el `401` de la guardia |
 
-**Las dos son deliberadas y se declaran para que su ausencia de código no se lea como un olvido.**
+**Las tres son deliberadas y se declaran para que su ausencia de código no se lea como un olvido.**
 
 ### 5.2 Los dos huecos declarados del conjunto cerrado, **cerrados**
 
@@ -254,13 +281,13 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | --- | --- |
 | CU que lo materializan | **Once** de los doce de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §5. `CU-00012` lo **ejercita** en lugar de exponerlo |
 | Puntos de acceso | **Diecisiete**: A-01 a A-03 y A-05 a A-18. `A-04` retirado y **no reciclado** |
-| Códigos de respuesta | **Diez** distintos, de §4 |
+| Códigos de respuesta | **Once** distintos, de §4; el `429` desde `BT-00029` (§4.1) |
 | Códigos del contrato | **Diecisiete** vivos sobre **veinte** identificadores emitidos por `GeometriaFactory-Contracts`; **dieciséis con destino acá y uno sin él** |
 | CU de la capa de aplicación | Los **once**, con el reparto de la columna de §3 y la correspondencia de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.4 |
 | RN que cubre | RN-00001 a RN-00016, las **dieciséis**, con el reparto de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.2. **Trece** tienen tramo acá; RN-00005, RN-00014 y RN-00016 no. **Dos** se rompen desde acá: RN-00003 y RN-00013 |
 | Invariantes | INV-01 a INV-09, los **nueve**, con el aporte declarado en [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.3 |
 | Reglas de arquitectura | **Las tres.** `RA-01` la sostiene y es el único que puede romperla; `RA-02` no tiene tramo acá y se declara; `RA-03` se ejerce en §5.4 |
-| ADR que lo gobiernan | ADR-00002, ADR-00003, ADR-00004, ADR-00005, ADR-00008 (reglas 2 a 5), ADR-00010 |
+| ADR que lo gobiernan | ADR-00002, ADR-00003, ADR-00004, ADR-00005 (salvo su párrafo sobre el caudal, superado por §4.1), ADR-00008 (reglas 2 a 5), ADR-00009, ADR-00010 |
 | Consumidor | **Uno solo**: `GeometriaFactory-Web`, servidor a servidor, por HTTP en tiempo de ejecución |
 | Tests previstos en 08 | **Una prueba por código del conjunto cerrado**, no una por punto de acceso; la inspección de la tabla de §5 en las dos direcciones; las tres comparaciones de respuestas indistinguibles; la prueba de texto original byte a byte y la de rechazo sin truncamiento; la de eliminación forzada en sus dos alcances; y la colección de peticiones reproducible como ejercicio de punta a punta |
 
@@ -277,3 +304,4 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | 1.6 | 2026-08-31 | **§5.2 cita el apartamiento en lugar de constatar el desvío.** Los dos destinos de más del código genérico están declarados desde hoy con la forma de `Root-Rules.md` §11 en `ADR-00004` **2.0** §2.1 —seis campos, con sus tres alternativas descartadas y sus tres disparadores—, de modo que este párrafo deja de elevar un hueco y pasa a apuntar a su decisión. Sube minor. |
 | 1.7 | 2026-09-12 | **§6 deja de afirmar «no se versionan las rutas» y «no hay clientes de terceros»** (tarea `BT-00027`). Adopta la convención de [`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) —`/v{MAJOR}/`, `MAJOR` del producto— y relee la compatibilidad hacia atrás: una forma por punto dentro de un `MAJOR`, convivencia entre `MAJOR` con plazo (`BT-00035`), etiqueta por fusión que cambia código de producción (`BT-00033`). **Ninguna ruta de §3 cambia**: el prefijo lo implementa `BT-00032`. La tabla de clases de cambio de §6 no cambia. Sube minor. |
 | 1.8 | 2026-09-12 | **§3.1 publica las rutas bajo `/v1/`** (tarea `BT-00032`, implementa [`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)). Tabla de los diecisiete puntos con su ruta pública: **dieciséis bajo `/v1/` y `A-16` exento**. Decide lo que `ADR-00010` §7 remitió a esta tarea: `/salud` no se versiona —es del arranque y la salud, `ADR-00007` §2 punto 3 y `05` §3.4, y lo piden los `healthcheck`— y `/openapi/v1.json` y `/documentacion` tampoco —describen la superficie, `ADR-08008`—. Declara el `404` sin redirección de la petición sin prefijo y la prueba `ContractRoutePrefixTests` que compara la tabla contra lo publicado en las dos direcciones. §6 deja de decir «este documento no las cambia todavía»; §7 suma `ADR-00010` a las ADR que lo gobiernan. **Ningún verbo, cuerpo, papel ni código cambia.** Sube minor. |
+| 1.9 | 2026-09-13 | **§4 pasa de diez a once códigos: entra el `429`** (tarea `BT-00029`, implementa el NFR «Caudal sostenido» de `05` §8.1 sobre [`ADR-06002`](Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md)). **§4.1 nuevo**: la cuota por persona autenticada (reclamo `sub`, [`ADR-00003`](Adrs/ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md)) o por dirección de origen sin acceso, nunca por una clave de aplicación ([`ADR-00009`](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md)); la cuota propia y más estricta del canje; las cuatro cifras por omisión con su fundamento y su llave de configuración; el `Retry-After` sin cuerpo; la confianza en `X-Forwarded-For` sólo desde una red declarada, y la obligación del despliegue de declararla; `/salud` y el explorador fuera; la batería que lo verifica con los umbrales reales. **El párrafo de §4 que declaraba el `429` como ausencia informativa se reescribe**: su fundamento —`ADR-00005` §2, «el único cliente legítimo es la pieza pública»— cayó con la fase `k`, y se deja constancia en lugar de reescribir la ADR. **§5.1 pasa de dos a tres respuestas sin código**. §7: once códigos, `ADR-00009` entre las que gobiernan, y la salvedad sobre `ADR-00005`. Ningún punto, verbo, papel ni traducción de §5 cambia. Sube minor. |
