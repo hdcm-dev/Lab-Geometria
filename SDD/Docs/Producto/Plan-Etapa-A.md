@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Plan-Etapa-A.md
-**Versión:** 1.12
+**Versión:** 1.13
 **Estado:** Propuesto
 **Fecha:** 2026-08-13
 **Nivel:** Producto
@@ -276,7 +276,7 @@ Los nombres de los cuatro conjuntos cerrados y el de `ObservationKind` son **pro
 
 ```text
 Lab-Geometria/
-├── GeometriaFactory.sln                              agrupador; los 6 proyectos .NET + los 3 de prueba (desde el 2026-09-12 también los samples .csproj, E2ETests y el nodo del visor; ver 1.12)
+├── GeometriaFactory.sln                              agrupador; los 6 proyectos .NET + los 3 de prueba (desde el 2026-09-12 también los samples .csproj, E2ETests y el nodo del visor; desde el 2026-09-13 los once samples restantes como nodos sin construcción; ver 1.12 y 1.13)
 ├── changelog.md                                      se actualiza en la rama de la etapa
 ├── Directory.Build.props                             [APARTAMIENTO AP-01]
 ├── .editorconfig                                     [APARTAMIENTO AP-01]
@@ -609,6 +609,7 @@ A eso se suma la **inspección del contenido servido**: en todo lo que el navega
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.13 | 2026-09-13 | **La 1.12 enumeró el agrupador incompleto, porque lo estaba.** Entraban los nueve `Sample.*.csproj` y quedaban afuera las once carpetas de `samples/` que no eran proyectos .NET (`visor/0N`, `api/0N`, `contracts/0N`, `web/01-datos-seed`). Desde el 2026-09-13 cada una tiene un nodo sin construcción (`Sample.Visor.Basico`, `Sample.Api.ClienteHttpBasico` y demás) anidado en `samples/<segmento>`, y `GeometriaFactory.sln` pasa de 20 a **31** proyectos. El árbol de la etapa `a` se anota, no se reescribe. Sube minor. |
 | 1.12 | 2026-09-12 | **El agrupador ya no es «6 + 3».** Por decisión del Product Owner del 2026-09-11 (intake 4.0) entran a `GeometriaFactory.sln` los nueve `Sample.*.csproj` (construidos con la solución, `QG-03` medido sin cambio), `tests/GeometriaFactory.E2ETests` (visible, sin `.Build.0`: se corre por su ruta) y `visor/geometriafactory-visor.csproj` como nodo sin construcción. El árbol de la etapa `a` se anota, no se reescribe: describe lo que la etapa hizo. Sube minor. |
 | 1.11 | 2026-08-31 | **Cierra el riesgo `R-01`, y el cierre es un hallazgo sobre este plan: se resolvió el primer día de la etapa `a` y la fila siguió abierta dieciocho días.** `R-01` preguntaba si el archivo de proyecto de `Api` declararía la referencia a `Application` o la recibiría transitivamente, y declaraba que **se materializaba el primer día de la etapa `a`**. Se materializó: `GeometriaFactory.Api.csproj` la declara **directa**. La etapa `a` cerró el **2026-08-13** y el desenlace **quedó en un archivo de proyecto y no en un documento**, que es exactamente la forma en que un riesgo resuelto sobrevive a su resolución. Verificado el 2026-08-31: son **ocho aristas de dos clases**, y `PRODUCT-MANIFEST` §2 tenía razón. Se emite con el manifiesto **5.4** y `Vista-Producto.md` **1.9**. **Ninguna decisión del plan cambia**: el plan hizo lo correcto, sólo no lo anotó. |
 | 1.10 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **5 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`Norma-De-Nomenclatura.md`](Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |

@@ -1581,3 +1581,64 @@ entrada escribe la regla que regirá el día que exista `/v2/`, y no cambia ning
 - `curl -s -D - -o /dev/null https://api-geometria.aplicada.stream/salud` y `…/v1/aprovisionamiento` →
   `HTTP/2 200`, **sin `Deprecation` ni `Sunset`** (`HEAD` responde `405`, `allow: GET`).
 - `git tag -l` → las seis etiquetas, **sin cambios**; `git diff --stat main` **sin `src/`**.
+
+## Los veinte samples bajo el árbol de solución, y una puerta para que no vuelva a faltar ninguno — 2026-09-13
+
+**Rama:** `estructura/dc5-samples-en-la-solucion` (sobre `1ce1b2c`). Completa la decisión **DC-5** del Product
+Owner del 2026-09-11 —«todos los proyectos quedan bajo el árbol de solución de Visual Studio, aunque sea bajo
+carpetas virtuales»—, que la reestructuración del 2026-09-12 aplicó a medias. **`src/` no se toca.**
+Evidencia en `evidencia/2026-09-13-dc5-samples/`.
+
+### Corregido
+
+- **El mensaje de `6cc6f86` —«todo entra al árbol de solución»— era inexacto, y la entrada del 2026-09-12 de
+  este registro lo repitió.** Entraron el nodo del visor, los nueve `Sample.*.csproj` y `E2ETests`; **quedaron
+  afuera las diez carpetas de `samples/` que no eran proyectos .NET** —`visor/01-basico`, `visor/02-intermedio`,
+  `visor/03-avanzado`, `api/01-basico`, `api/02-intermedio`, `api/03-avanzado`, `contracts/01-basico`,
+  `contracts/02-intermedio`, `contracts/03-avanzado` y `web/01-datos-seed`—, que la especificación que ese
+  commit implementaba (`Especificacion-Estructura-Solucion.md` §6.1) incluía por nombre: «`api/`, `web/` y
+  `visor/0N` como `SolutionItems` o nodos inertes». **La undécima, `api/04-cliente-http-basico`, entró el
+  2026-09-13 y quedó afuera también**, porque nada miraba. Ninguna construcción ni prueba lo podía notar: una
+  solución a la que le falta un nodo construye igual. La entrada del 2026-09-12 no se reescribe; se corrige acá.
+
+### Agregado
+
+- **Once nodos sin construcción**, uno por carpeta, anidados en las carpetas de solución nuevas
+  `samples/visor`, `samples/api`, `samples/contracts` y `samples/web`: `Sample.Visor.{Basico,Intermedio,Avanzado}`,
+  `Sample.Api.{Basico,Intermedio,Avanzado,ClienteHttpBasico}`, `Sample.Contracts.{Basico,Intermedio,Avanzado}` y
+  `Sample.Web.DatosSeed`. El nombre sigue el precedente de `Sample.Domain.Basico`: `Sample.<Segmento>.<Nivel>`,
+  con el slug en PascalCase cuando no es un nivel. La forma es la del visor (opción D de P-7):
+  `Microsoft.Build.NoTargets/3.7.56`, `EnableDefaultItems=false`, un `None Include="**/*"` sin `bin/`, `obj/` ni
+  `node_modules/`, **sin `Exec`, sin `Target`, sin `ProjectReference` y sin `verify` enganchado a `Build`**.
+  `GeometriaFactory.sln` pasa de **20 a 31** proyectos, editado a mano con GUID nuevos: las configuraciones de
+  solución siguen siendo `Debug|Any CPU` y `Release|Any CPU`, iguales a `main`.
+- **`scripts/verify-solution-tree.sh`**, paso propio de `ci.yml` antes de `QG-01`, sin .NET. Falla si un
+  `.csproj` de `src/`, `tests/` o `visor/` no está en la solución (A-1), si una carpeta `samples/<segmento>/<NN-…>`
+  no tiene exactamente un archivo de proyecto en la solución (A-2) o no cuelga de `samples/<segmento>` (A-3), si
+  la solución nombra un archivo que no existe (A-4), si un nodo NoTargets declara `Exec`, `Target` o
+  `ProjectReference` (A-5), o si aparecen plataformas `x64`/`x86` (A-6). **Probada fallando** sobre `main` (once
+  carpetas, salida 1) y sobre copias con cinco defectos inyectados (salida 1 en los cinco).
+
+### Cambiado
+
+- `samples/README.md` **2.2** (declara las veinte carpetas y la forma de los inertes), `PRODUCT-INTAKE` **4.6**
+  (§16, una línea), `PRODUCT-MANIFEST` **6.1** re-derivado (§2.B dice qué más agrupa la solución y por qué no son
+  filas) con `_legacy/2026-09-13/`, y `Plan-Etapa-A` **1.13**. `Directory.Build.props`: el comentario de MinVer
+  pasa de «veinte» a «treinta y un» proyectos.
+
+### Verificado
+
+- `dotnet sln list`: **20 → 31** proyectos, los veinte samples anidados en `samples/<segmento>`; configuraciones de
+  solución iguales a `main` (`diff` vacío).
+- `dotnet build GeometriaFactory.sln -c Release -p:SkipVisorBuild=true`: **0 advertencias, 0 errores**;
+  `dotnet test --no-build`: **546/546**, como `main`. Los once nodos no dejan ningún `.dll`. La primera construcción
+  falló con `MSB4025` en los tres nodos del visor —el comentario decía `npm --prefix`, y un comentario XML no admite
+  `--`— y se corrigió antes de medir.
+- `scripts/verify-solution-tree.sh`: salida **1** sobre `main` (once carpetas), **0** en la rama y **1** en las cinco
+  copias con un defecto inyectado.
+- `scripts/coverage.sh`: **líneas iguales en los seis proyectos** con árbol fresco (`Web` 1504/1828 antes y después).
+  **Condición de medición encontrada**: `QG-03` de `GeometriaFactory.Web` baja trece líneas (1504 → 1491) cuando el
+  anillo de claves de `src/GeometriaFactory.Web/App_Data/claves/` ya existe de una corrida anterior, porque el aviso
+  de su creación es lo único que ejercita `Services/StartupObservations.cs` en las pruebas. Medido en los dos
+  sentidos sobre `main` y sobre la rama. Probablemente explica el 1491 «igual» de la evidencia del 2026-09-12. **No se
+  corrige en esta rama**: `src/` y `coverage.sh` quedan fuera del alcance.

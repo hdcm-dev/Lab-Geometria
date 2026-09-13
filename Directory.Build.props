@@ -48,7 +48,7 @@
     completan el historial cuando el contexto llega recortado.
 
     Vive acá y no en cada `.csproj` por el mismo motivo que el resto del archivo: una sola vez
-    para los veinte proyectos de la solución. La versión del paquete está anclada exacta por la
+    para los treinta y un proyectos de la solución. La versión del paquete está anclada exacta por la
     regla de anclaje de arriba, y `PrivateAssets="All"` evita que viaje como dependencia de nada.
   -->
   <ItemGroup>

@@ -1,0 +1,14 @@
+
+== A-1 · proyectos de src/, tests/ y visor/ ==
+
+== A-2 y A-3 · carpetas de samples/<segmento>/<NN-…> ==
+  20 carpetas de sample revisadas
+
+== A-4 · todo nodo nombra un archivo que existe ==
+
+== A-5 · los nodos NoTargets son inertes ==
+
+== A-6 · configuraciones de la solución ==
+
+El árbol de solución está completo.
+exit=0

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+
+  <!--
+    NODO DE SOLUCIÓN DEL SAMPLE `visor/01-basico`: visible en `GeometriaFactory.sln`, INERTE en la
+    construcción.
+
+    Existe por la decisión del Product Owner del 2026-09-11 (DC-5): todos los proyectos quedan bajo
+    el árbol de solución, aunque sea bajo carpetas virtuales. La reestructuración del 2026-09-12 sumó
+    los samples que ya eran `.csproj` y dejó afuera los que no lo son; desde el 2026-09-13 cada uno
+    tiene un nodo con la forma del visor (`visor/geometriafactory-visor.csproj`, opción D de P-7).
+    Un Solution Folder con `SolutionItems` habría sido una lista archivo por archivo que envejece
+    en silencio: este nodo lista los archivos del sample por glob y no hace nada más.
+
+    CÓMO SE CORRE EL SAMPLE NO LO DICE ESTE ARCHIVO: lo dice su README (`npm run verify` desde `samples/visor/01-basico`). Acá no hay
+    `Exec`, no hay `Target`, no hay `ProjectReference`, y la verificación del sample NO se engancha
+    a `Build`: con Playwright sin navegador instalado rompería `dotnet build` de toda la solución (`MSB3073`, reproducido en la Feature 20), y el contrato carga el bundle que genera `GeometriaFactory.Web.csproj`.
+
+    QUE NINGUNA CARPETA QUEDE AFUERA OTRA VEZ lo sostiene `scripts/verify-solution-tree.sh`, que falla
+    en la integración continua si un `samples/<segmento>/<NN-…>` no tiene nodo en la solución.
+
+    `EnableDefaultItems=false` apaga el glob por omisión; el `None` toma todo el sample y excluye
+    `bin/`, `obj/` y `node_modules/`, que no son del sample sino de quien lo construye o lo corre.
+  -->
+
+  <PropertyGroup>
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="**/*" Exclude="bin/**;obj/**;node_modules/**;$(MSBuildProjectFile)" />
+  </ItemGroup>
+
+</Project>

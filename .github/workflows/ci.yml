@@ -68,6 +68,12 @@ jobs:
         with:
           node-version: '22'
 
+      # DC-5 · TODO PROYECTO Y TODA CARPETA DE SAMPLE TIENEN NODO EN LA SOLUCIÓN. Va antes de construir
+      # porque una solución a la que le falta un nodo construye igual: la reestructuración del
+      # 2026-09-12 dejó once carpetas de `samples/` afuera y ninguna puerta lo notó. No necesita .NET.
+      - name: Árbol de solución · todo proyecto y todo sample tienen nodo en GeometriaFactory.sln
+        run: bash scripts/verify-solution-tree.sh
+
       - name: Puerta QG-01 · construir sin advertencias, con el bundle del visor
         run: ./scripts/build.sh
 
