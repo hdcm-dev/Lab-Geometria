@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md
-**Versión:** 1.10
+**Versión:** 1.9
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -126,7 +126,6 @@ No hay actor humano. El administrador y el alumno pertenecen a los casos de uso 
 > **2 · Por qué no se puede hoy:** **ningún registro de reconexión de la consolidación lo conserva**, y reconstruirlo comparando prosa es interpretación y no evidencia. El pronóstico se escribió antes de que existieran las historias reales.
 > **3 · Quién lo cierra:** la categoría 06 de las dos unidades de entrega, que es la que las acuñó.
 > **4 · En qué evento se cierra:** la **próxima emisión de la 06**, o la **Fase J**, lo que ocurra primero.
-> **5 · Ciclo de origen:** derivado (`Migracion-Rules.md` 3.20 §4.9) del alta de este bloque: «docs(sdd): mesa evaluadora 2026-08-29 — y el instrumento de cobertura » (2026-08-29) · producto · base `aa3abd3`.
 
 ## 10. Notas y supuestos
 
@@ -144,7 +143,6 @@ No hay actor humano. El administrador y el alumno pertenecen a los casos de uso 
 
 | Versión | Fecha | Descripción | Autor |
 | --- | --- | --- | --- |
-| 1.10 | 2026-09-13 | **Migración normativa 13.7 → 13.16, fase M4, fila PM-06** (`Root-Rules.md` 8.7 §12.2 punto 5; `Migracion-Rules.md` §4.9): el ítem diferido de §9 suma el campo **5 · Ciclo de origen**, derivado del alta del bloque en este archivo (`aa3abd3`, 2026-08-29). Ninguna otra línea cambia. Sube minor. Estado anterior en `_legacy/2026-09-13/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena-v1.9.md` |
 | 1.9 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **20 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. | AG-00050 |
 | 1.8 | 2026-08-29 | **Parche `P-02` de la mesa evaluadora del 2026-08-29** ([`../../Audit/Mesa-2026-08-29.md`](../../Audit/Mesa-2026-08-29.md), hallazgo `H-02`, evidencia **E2**, severidad **S2**). La fila «Historias de usuario a generar en 06» de §9 anunciaba historias del rango `08` **que nunca se acuñaron**. La celda pasa a declarar el hecho, y la correspondencia una a una queda como **ítem diferido** con sus cuatro campos. **Ninguna otra sección cambia.** | Orquestador de mesa |
 | 1.6 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **6** ocurrencias a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. | Orquestador SDD |

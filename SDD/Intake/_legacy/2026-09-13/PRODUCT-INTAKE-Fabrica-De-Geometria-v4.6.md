@@ -1,6 +1,6 @@
 # PRODUCT-INTAKE — Fábrica de Geometría
 
-**Plantilla de referencia:** `PRODUCT-INTAKE-template.md` versión **3.6** (Framework SDD), sobre la que este documento se re-expresó en la migración normativa 13.7 → 13.16 (entrada **5.0**). La subsección **§17.P.13**, que la plantilla declara **opcional**, sigue sin adoptarse. **No confundir este número con la versión del documento**, que es la de su cabecera
+**Plantilla de referencia:** `PRODUCT-INTAKE-template.md` versión **3.5** (Framework SDD), que es la que declara la procedencia de [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](PRODUCT-MANIFEST-Fabrica-De-Geometria.md) §1.1. Este documento se emitió sobre la **3.4** en la migración 8.11 → 9.9, y el delta hasta la 3.5 es la subsección **§17.P.13**, que la plantilla declara **opcional** y este intake no adopta. **No confundir este número con la versión del documento**, que es la de su cabecera y hoy coincide por casualidad
 
 ## Cabecera del documento
 
@@ -14,7 +14,7 @@
 | Repositorio | `https://github.com/hdcm-dev/Lab-Geometria.git` |
 | Lead técnico | El mismo docente, asistido por agente IA (Requerimientos Técnicos §1: «1 docente + agente IA») |
 | Documento | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` |
-| Versión | 5.0 |
+| Versión | 4.6 |
 | Fecha | 2026-09-13 |
 | Stack principal | .NET 10 — Blazor Interactive Server (front) + API REST con Clean Architecture (backend) + TypeScript/webpack (visor 3D) |
 | Estado | **Aprobado** |
@@ -414,16 +414,16 @@ La composición se lee directamente de RT §4.1 y §4.2, que declaran Clean Arch
 | `Nombre-Proyecto-Codigo` | Solución de código | Stack | Rol en la arquitectura | Dependencias de compilación | Compone |
 |---|---|---|---|---|---|
 | **GeometriaFactory-Api** | `GeometriaFactory.sln` | ASP.NET Core sobre .NET 10 | Host REST: endpoints, autenticación y composición de raíz | GeometriaFactory-Application, GeometriaFactory-Infrastructure, GeometriaFactory-Contracts | GeometriaFactory-Api |
-| **GeometriaFactory-Web** | `GeometriaFactory.sln` | Blazor Interactive Server sobre .NET 10, con MudBlazor | Front: páginas y componentes. Es hoja del grafo y punto de entrada del usuario final | GeometriaFactory-Contracts, GeometriaFactory-Visor (insumo de construcción) | GeometriaFactory-Web |
+| **GeometriaFactory-Web** | `GeometriaFactory.sln` | Blazor Interactive Server sobre .NET 10, con MudBlazor | Front: páginas y componentes. Es hoja del grafo y punto de entrada del usuario final | GeometriaFactory-Contracts, GeometriaFactory-Visor | GeometriaFactory-Web |
 | **GeometriaFactory-Domain** | `GeometriaFactory.sln` | C# sobre .NET 10, biblioteca de clases | Entidades e invariantes del dominio (Alumno, Trabajo, Pieza, Componente, Observación). Es el centro de la regla de dependencias | — | GeometriaFactory-Api |
 | **GeometriaFactory-Application** | `GeometriaFactory.sln` | C# sobre .NET 10, biblioteca de clases | Casos de uso y puertos (`IWorkRepository`, `IFigureValidator`, `ISystemClock`) | GeometriaFactory-Domain | GeometriaFactory-Api |
 | **GeometriaFactory-Infrastructure** | `GeometriaFactory.sln` | C# sobre .NET 10, con EF Core y proveedor SQLite | EF Core con SQLite, seguridad (derivación de clave y emisión de JWT) y validador de figuras | GeometriaFactory-Application, GeometriaFactory-Domain | GeometriaFactory-Api |
 | **GeometriaFactory-Contracts** | `GeometriaFactory.sln` | C# sobre .NET 10, biblioteca de tipos de datos | DTOs de la API. Es lo que impide que el front conozca el dominio | — | GeometriaFactory-Api, GeometriaFactory-Web |
-| **GeometriaFactory-Visor** | `GeometriaFactory.sln` | Node.js con TypeScript y webpack | Produce el bundle del visor 3D. Es un **visualizador puro**: sin configuración, sin red y sin conocimiento del sistema (RA-02) | — | GeometriaFactory-Web |
+| **GeometriaFactory-Visor** | `GeometriaFactory.sln`, como **nodo sin construcción** (un archivo de proyecto `Microsoft.Build.NoTargets` en `visor/`, que sólo lista las fuentes) | Node.js con TypeScript y webpack | Produce el bundle del visor 3D. Es un **visualizador puro**: sin configuración, sin red y sin conocimiento del sistema (RA-02) | — | GeometriaFactory-Web |
 
 **Los proyectos de código no llevan valor D8**, y esta emisión los deja sin él: el tipo describe una forma de entrega, y un proyecto de código no se entrega, se compila. Los cinco que la emisión 1.34 declaraba `library` no perdieron nada de su rol: lo que perdieron es un atributo que el modelo de dos ejes le asigna a la unidad que los contiene.
 
-**El visor pertenece a `GeometriaFactory.sln` porque `GeometriaFactory-Web` toma su artefacto como insumo de construcción** (`Intake-Rules.md` 4.3 §4): la construcción de la solución genera el bundle a través del front, en el mismo comando, y su **único generador** es `GeometriaFactory.Web.csproj`, con un target propio (`Web ADR-10008`). Por eso la arista `Visor → Web` es un **insumo de construcción** y no una referencia de proyecto (manifiesto §3): entre proyectos de ecosistemas distintos es la única clase posible. **Que el agrupador lo muestre es forma del repositorio, no pertenencia.** El Product Owner decidió el 2026-09-11 que **todos los proyectos de código queden bajo el árbol de solución, aunque sea bajo carpetas virtuales**, y la forma elegida —un nodo de proyecto sin construcción, que lista las fuentes por patrón y no ejecuta nada— hace que el visor se vea en el agrupador sin que ese nodo corra `npm`. Hasta la versión 3.4 este párrafo decía que el visor no pertenecía a ninguna solución de código, «para que la solución .NET y el proyecto Node no se estorben»; hasta la 4.6, que la arista era un «activo de construcción», el nombre que este destino le dio antes de que el framework la nombrara (SDD 13.16). Sigue siendo un paquete Node.js con TypeScript y webpack (RT §3, §8.2), en `visor/` (§13.3).
+**El visor está en `GeometriaFactory.sln` desde el 2026-09-12, y sigue siendo un paquete Node.js aparte.** Hasta la versión 3.4 este párrafo decía que no pertenecía a ninguna solución de código, «para que la solución .NET y el proyecto Node no se estorben». El Product Owner decidió el 2026-09-11 que **todos los proyectos de código queden bajo el árbol de solución, aunque sea bajo carpetas virtuales**, y la forma elegida —un nodo de proyecto sin construcción, que lista las fuentes por patrón y no ejecuta nada— cumple las dos cosas a la vez: el visor se ve en el agrupador y `dotnet build GeometriaFactory.sln` no corre `npm`. Quien genera el bundle es `GeometriaFactory.Web.csproj` con un target propio (`Web ADR-10008`), y por eso la arista `Visor → Web` sigue siendo un **activo de construcción** y no una referencia de proyecto (manifiesto §3). Sigue siendo un paquete Node.js con TypeScript y webpack (RT §3, §8.2), en `visor/` (§13.3).
 
 **Grafo de dependencias de compilación (acíclico).** La regla de Clean Architecture es que las dependencias apuntan siempre hacia adentro, `Api → Infrastructure → Application → Domain`, y `Domain` sin dependencias (RT §4.1):
 
@@ -437,7 +437,7 @@ flowchart TB
     CON["GeometriaFactory-Contracts"]
     VIS["GeometriaFactory-Visor<br/>Node.js"]
     WEB --> CON
-    WEB -. insumo de construcción .-> VIS
+    WEB --> VIS
     API --> APP
     API --> INFRA
     API --> CON
@@ -453,8 +453,6 @@ flowchart TB
 - nivel 2: GeometriaFactory-Infrastructure
 - nivel 3: GeometriaFactory-Api
 
-**Ocho aristas, de dos clases**, que cuentan igual para la aciclicidad y para el orden: **siete referencias de proyecto** y **un insumo de construcción**, `Visor → Web` (línea punteada), con `GeometriaFactory-Web` como único generador.
-
 **El grafo de compilación no lleva la arista `Web → Api`**, que es de runtime y vive en §13.1. Es la distinción que §14 desarrolla.
 
 ### §13.3 Matriz de composición
@@ -468,15 +466,14 @@ Derivada de la columna «Compone» de §13.2. Se publica para revisión:
 
 **`GeometriaFactory-Contracts` es el único proyecto compartido**, y es lo primero que hay que mirar antes de cambiarlo: **su modificación alcanza a las dos entregas**. Es coherente con lo que ya era: «el contrato compartido entre los dos procesos desplegables y el único tipo que cruza la frontera HTTP».
 
-Perfil de convención de nombres de código, **uno por ecosistema** (`PRODUCT-INTAKE-template.md` 3.6; `PRODUCT-MANIFEST-template.md` 6.1 §1.2). La regla de nombres no cambia —raíz, separador, sufijo—: cambian los parámetros.
+Perfil de convención de nombres de código:
 
-| Parámetro | Ecosistema .NET | Ecosistema npm | Notas |
-|---|---|---|---|
-| `Raiz-Codigo` | `GeometriaFactory` | `geometriafactory`: la misma raíz, con la forma que el ecosistema exige | **Declarado**, no derivado: decisión del Product Owner del 2026-08-08, ya reflejada en RT §1 y §4.2. Ver la nota de identidad de la cabecera |
-| Separador de segmentos | `.` | `-` | .NET: convención de espacios de nombres de .NET; npm: convención de `package.json` |
-| Capitalización | PascalCase | minúscula | La que cada ecosistema exige a sus nombres de proyecto o de paquete (§13.3, identidades) |
-| Prefijo de paquetes redistribuibles | `Aplicada` (valor por defecto del framework) | — | Sin uso: no hay redistribuibles |
-| Extensión del agrupador | `.sln` | Ninguna: el paquete pertenece a la solución de código de su consumidor, por el insumo de construcción | Compone `Artefacto-Agrupacion` = `GeometriaFactory.sln` (RT §4.2) |
+| Parámetro | Valor | Notas |
+|---|---|---|
+| `Raiz-Codigo` | `GeometriaFactory` | **Declarado**, no derivado: decisión del Product Owner del 2026-08-08, ya reflejada en RT §1 y §4.2. Ver la nota de identidad de la cabecera |
+| Separador de segmentos | `.` | Convención de espacios de nombres de .NET |
+| Prefijo de paquetes redistribuibles | `Aplicada` (valor por defecto del framework) | Sin uso: no hay redistribuibles |
+| Extensión del agrupador | `.sln` | Compone `Artefacto-Agrupacion` = `GeometriaFactory.sln` (RT §4.2) |
 
 Identidades de código resultantes, que coinciden con los directorios de §16:
 
@@ -490,11 +487,11 @@ Identidades de código resultantes, que coinciden con los directorios de §16:
 | GeometriaFactory-Web | `GeometriaFactory.Web` | `src/GeometriaFactory.Web/` |
 | GeometriaFactory-Visor | `geometriafactory-visor` | `visor/` |
 
-**`GeometriaFactory-Visor`, el único proyecto de código de otro ecosistema.** Es un paquete Node.js con TypeScript y webpack (RT §3, §8.2). Tres consecuencias, y sólo la primera es de nombre:
+**Excepción declarada para GeometriaFactory-Visor.** Es el único proyecto de código que no pertenece al ecosistema .NET: es un paquete Node.js con TypeScript y webpack (RT §3, §8.2). Dos consecuencias:
 
-1. Su identidad de código sigue **el perfil del ecosistema npm** de arriba —minúscula con guion—, `geometriafactory-visor`, y no la forma `<Raiz-Codigo>.<Sufijo>` del perfil .NET: aplicar `GeometriaFactory.Visor` produciría un nombre de paquete npm fuera de convención. Hasta la 4.6 esto se declaraba como excepción; con el perfil por ecosistema es la regla.
-2. Su carpeta es `visor/` en la raíz del repositorio, no `src/geometriafactory-visor/`, porque así lo fija el árbol de RT §4.2. No entra en `/src` para que la solución .NET y el proyecto Node no se estorben. **Decisión del destino**, que el perfil no cubre (asentada con la entrada 4.0).
-3. Su archivo de proyecto en `GeometriaFactory.sln` se llama `geometriafactory-visor.csproj`, con la `Identidad-Codigo` y no con la forma `<Raiz-Codigo>.<Sufijo>`, para que el agrupador muestre el mismo nombre que `package.json`. Es un nodo sin construcción (§13.2): la extensión `.csproj` es la única que la herramienta de línea de comandos admite en el agrupador, y no implica que compile C#. **Decisión del destino**, asentada con la entrada 4.0; su formalización como decisión de arquitectura es deuda declarada (`SDD/Docs/Audit/Mesa-2026-09-13.md`, `DD-1`).
+1. Su identidad de código no sigue `<Raiz-Codigo>.<Sufijo>` sino la convención de `package.json`, que es minúscula con guiones. Aplicar `GeometriaFactory.Visor` produciría un nombre de paquete npm fuera de convención.
+2. Su carpeta es `visor/` en la raíz del repositorio, no `src/geometriafactory-visor/`, porque así lo fija el árbol de RT §4.2. No entra en `/src` para que la solución .NET y el proyecto Node no se estorben.
+3. Su archivo de proyecto en `GeometriaFactory.sln` se llama `geometriafactory-visor.csproj`, con la `Identidad-Codigo` y no con la forma `<Raiz-Codigo>.<Sufijo>`, para que el agrupador muestre el mismo nombre que `package.json`. Es un nodo sin construcción (§13.2): la extensión `.csproj` es la única que la herramienta de línea de comandos admite en el agrupador, y no implica que compile C#.
 
 Su salida, `visor.bundle.js`, se copia a `src/GeometriaFactory.Web/wwwroot/js/` y **no se edita a mano**: es un artefacto generado (RT §5.2 R6).
 
@@ -670,46 +667,21 @@ Lab-Geometria/                         nombre del repositorio, no del producto (
     └── Maquetas/                      sólo si alguna unidad de entrega ejecuta la Fase B2
 ```
 
-**Correspondencia con §13:** los seis proyectos de código .NET tienen su carpeta en `/src` con su `Identidad-Codigo` exacta; el séptimo, `GeometriaFactory-Visor`, vive en `visor/` por la decisión de ruta de §13.3, punto 2. La estructura sigue las convenciones del ecosistema: `.sln` en la raíz, `src/` y `tests/` separados, un `.csproj` por carpeta.
+**Correspondencia con §13:** los seis proyectos de código .NET tienen su carpeta en `/src` con su `Identidad-Codigo` exacta; el séptimo, `GeometriaFactory-Visor`, vive en `visor/` por la excepción declarada en §13. La estructura sigue las convenciones del ecosistema: `.sln` en la raíz, `src/` y `tests/` separados, un `.csproj` por carpeta.
 
 **Los proyectos de `tests/` no son proyectos de código del producto.** Son la materialización de la estrategia de testing de cada proyecto de código (§17 P.6) y por eso no aparecen en §13: no tienen rol de producto ni se despliegan.
 
 ### §16.1 Materialización de `/samples`
 
-Los tipos D8 presentes en §13.1 son `rest-api` (`GeometriaFactory-Api`) y `web-monolith` (`GeometriaFactory-Web`). Los samples se materializan **por el tipo de la unidad de entrega**, y cada uno nombra el proyecto de código que ejercita (plantilla 3.6). **Los veinte están en `GeometriaFactory.sln`** (`Rules-Examples.md` 6.6 §3.6): nueve **con construcción** —proyectos `Microsoft.NET.Sdk`— y once **sin construcción** —nodos `Microsoft.Build.NoTargets` inertes—. Ninguno engancha su verificación a la construcción de la solución, `scripts/verify-solution-tree.sh` falla si una carpeta queda afuera, y las tres comprobaciones de §3.6 están medidas en `SDD/Expedientes/0001-Migracion-Normativa-A-13.16/evidencia/E-014`.
+Los tipos D8 presentes en §13 son `rest-api`, `web-monolith` y `library`.
 
-| Sample | Unidad de entrega (tipo D8) | Proyecto de código que ejercita | Nivel | Entrada al agrupador |
-|---|---|---|---|---|
-| `samples/api/01-basico` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Api | Básico | sin construcción (nodo `Microsoft.Build.NoTargets`) |
-| `samples/api/02-intermedio` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Api | Intermedio | sin construcción (nodo `Microsoft.Build.NoTargets`) |
-| `samples/api/03-avanzado` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Api | Avanzado | sin construcción (nodo `Microsoft.Build.NoTargets`) |
-| `samples/api/04-cliente-http-basico` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Api | Básico (por capacidad: `cliente-http-basico`) | sin construcción (nodo `Microsoft.Build.NoTargets`) |
-| `samples/application/01-basico` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Application | Básico | con construcción (`Microsoft.NET.Sdk`) |
-| `samples/application/02-intermedio` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Application | Intermedio | con construcción (`Microsoft.NET.Sdk`) |
-| `samples/application/03-avanzado` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Application | Avanzado | con construcción (`Microsoft.NET.Sdk`) |
-| `samples/contracts/01-basico` | `GeometriaFactory-Api` (`rest-api`) y `GeometriaFactory-Web` (`web-monolith`) | GeometriaFactory-Contracts | Básico | sin construcción (nodo `Microsoft.Build.NoTargets`) |
-| `samples/contracts/02-intermedio` | `GeometriaFactory-Api` (`rest-api`) y `GeometriaFactory-Web` (`web-monolith`) | GeometriaFactory-Contracts | Intermedio | sin construcción (nodo `Microsoft.Build.NoTargets`) |
-| `samples/contracts/03-avanzado` | `GeometriaFactory-Api` (`rest-api`) y `GeometriaFactory-Web` (`web-monolith`) | GeometriaFactory-Contracts | Avanzado | sin construcción (nodo `Microsoft.Build.NoTargets`) |
-| `samples/domain/01-basico` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Domain | Básico | con construcción (`Microsoft.NET.Sdk`) |
-| `samples/domain/02-intermedio` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Domain | Intermedio | con construcción (`Microsoft.NET.Sdk`) |
-| `samples/domain/03-avanzado` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Domain | Avanzado | con construcción (`Microsoft.NET.Sdk`) |
-| `samples/infrastructure/01-basico` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Infrastructure | Básico | con construcción (`Microsoft.NET.Sdk`) |
-| `samples/infrastructure/02-intermedio` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Infrastructure | Intermedio | con construcción (`Microsoft.NET.Sdk`) |
-| `samples/infrastructure/03-avanzado` | `GeometriaFactory-Api` (`rest-api`) | GeometriaFactory-Infrastructure | Avanzado | con construcción (`Microsoft.NET.Sdk`) |
-| `samples/visor/01-basico` | `GeometriaFactory-Web` (`web-monolith`) | GeometriaFactory-Visor | Básico | sin construcción (nodo `Microsoft.Build.NoTargets`) |
-| `samples/visor/02-intermedio` | `GeometriaFactory-Web` (`web-monolith`) | GeometriaFactory-Visor | Intermedio | sin construcción (nodo `Microsoft.Build.NoTargets`) |
-| `samples/visor/03-avanzado` | `GeometriaFactory-Web` (`web-monolith`) | GeometriaFactory-Visor | Avanzado | sin construcción (nodo `Microsoft.Build.NoTargets`) |
-| `samples/web/01-datos-seed` | `GeometriaFactory-Web` (`web-monolith`) | GeometriaFactory-Web | Básico | sin construcción (nodo `Microsoft.Build.NoTargets`) |
-
-**Qué hay en `/samples`, por proyecto de código.** Hasta la 4.6 esta tabla llevaba el tipo D8 **por proyecto** —`library` para cinco de ellos—, contra §13.2 del mismo documento; la columna pasa a ser la unidad de entrega que el proyecto compone, y el contenido de cada fila **no cambia**:
-
-| Proyecto de código | Unidad de entrega (tipo D8) | Qué hay en `/samples` |
+| Proyecto de código | Tipo D8 | Qué hay en `/samples` |
 |---|---|---|
-| GeometriaFactory-Api | `GeometriaFactory-Api` (`rest-api`) | Colección de peticiones HTTP reproducible con los escenarios **E-1 a E-8** como cuerpo: alta de trabajo, envío con JSON válido e inválido, y aprobación y rechazo por el administrador, con los códigos de respuesta esperados |
-| GeometriaFactory-Visor | `GeometriaFactory-Web` (`web-monolith`) | **Página integradora sin backend**: un HTML que carga el bundle y un JSON pegado a mano y dibuja. Es una propiedad exigida explícitamente por RT §8.3 y por el criterio de aceptación de la etapa `g`, no un agregado de conveniencia |
-| GeometriaFactory-Web | `GeometriaFactory-Web` (`web-monolith`) | **`/samples/web/`, con un solo sample** [AMPLIADO 2026-08-11]. La redacción anterior —«no produce sample propio: el guion de demostración cumple ese papel»— **sigue siendo cierta de la demostración**, que es lo que RF §9.3 regula. Lo que faltaba es otra cosa: una muestra **que se corra sola**, sin una persona ejecutando el guion. Lleva **uno solo** y no los tres de la progresión, porque el segundo que la guía de la categoría prevé se apoya en un punto de extensión visual que este proyecto no tiene: el punto de extensión del producto vive en el visor |
-| Domain, Contracts | `GeometriaFactory-Api` (`rest-api`); `Contracts` compone además `GeometriaFactory-Web` (`web-monolith`), §13.3 | **`/samples/domain/` y `/samples/contracts/`** [AMPLIADO 2026-08-11]. La redacción anterior —«sin samples propios: no son consumidas por integradores externos»— resolvía bien la pregunta de la **audiencia externa** y de ahí se seguía que no hacían falta samples. La Fase G mostró que hay una **segunda audiencia declarada** por la guía de la categoría: el equipo que construye y los agentes que codifican contra la especificación. Y hay una consecuencia mecánica: sin categoría 10 estos dos quedan **sin ninguna sonda de deriva**, porque tampoco tienen maqueta. Su verificación sigue viviendo en `tests/`; los samples no la reemplazan, la ilustran |
-| Application, Infrastructure | `GeometriaFactory-Api` (`rest-api`) | **`/samples/application/` y `/samples/infrastructure/`** [AMPLIADO 2026-08-11]. La revisión que 1.23 dejó anotada se hizo al emitir su Fase G y los dos términos se cumplen: la segunda audiencia declarada por la guía, y que sin categoría 10 quedan **sin ninguna sonda de deriva** por no tener maqueta. **`Infrastructure` tiene además un motivo propio**: §18 le asigna la muestra **`S-3`**, de modo que la redacción anterior de esta fila contradecía a §18 dentro del mismo documento. Su verificación sigue viviendo en `tests/`; los samples la ilustran, no la reemplazan |
+| GeometriaFactory-Api | `rest-api` | Colección de peticiones HTTP reproducible con los escenarios **E-1 a E-8** como cuerpo: alta de trabajo, envío con JSON válido e inválido, y aprobación y rechazo por el administrador, con los códigos de respuesta esperados |
+| GeometriaFactory-Visor | `library` | **Página integradora sin backend**: un HTML que carga el bundle y un JSON pegado a mano y dibuja. Es una propiedad exigida explícitamente por RT §8.3 y por el criterio de aceptación de la etapa `g`, no un agregado de conveniencia |
+| GeometriaFactory-Web | `web-monolith` | **`/samples/web/`, con un solo sample** [AMPLIADO 2026-08-11]. La redacción anterior —«no produce sample propio: el guion de demostración cumple ese papel»— **sigue siendo cierta de la demostración**, que es lo que RF §9.3 regula. Lo que faltaba es otra cosa: una muestra **que se corra sola**, sin una persona ejecutando el guion. Lleva **uno solo** y no los tres de la progresión, porque el segundo que la guía de la categoría prevé se apoya en un punto de extensión visual que este proyecto no tiene: el punto de extensión del producto vive en el visor |
+| Domain, Contracts | `library` | **`/samples/domain/` y `/samples/contracts/`** [AMPLIADO 2026-08-11]. La redacción anterior —«sin samples propios: no son consumidas por integradores externos»— resolvía bien la pregunta de la **audiencia externa** y de ahí se seguía que no hacían falta samples. La Fase G mostró que hay una **segunda audiencia declarada** por la guía de la categoría: el equipo que construye y los agentes que codifican contra la especificación. Y hay una consecuencia mecánica: sin categoría 10 estos dos quedan **sin ninguna sonda de deriva**, porque tampoco tienen maqueta. Su verificación sigue viviendo en `tests/`; los samples no la reemplazan, la ilustran |
+| Application, Infrastructure | `library` | **`/samples/application/` y `/samples/infrastructure/`** [AMPLIADO 2026-08-11]. La revisión que 1.23 dejó anotada se hizo al emitir su Fase G y los dos términos se cumplen: la segunda audiencia declarada por la guía, y que sin categoría 10 quedan **sin ninguna sonda de deriva** por no tener maqueta. **`Infrastructure` tiene además un motivo propio**: §18 le asigna la muestra **`S-3`**, de modo que la redacción anterior de esta fila contradecía a §18 dentro del mismo documento. Su verificación sigue viviendo en `tests/`; los samples la ilustran, no la reemplazan |
 
 ---
 # Parte C — Técnica por unidad de entrega
@@ -1146,7 +1118,7 @@ Se compone de **3** proyectos de código: `GeometriaFactory-Web`, `GeometriaFact
 |---|---|---|
 | **GeometriaFactory-Web** | `GeometriaFactory.Web` | Front Blazor Interactive Server en el hosting público. Único punto de contacto del navegador |
 | **GeometriaFactory-Contracts** | `GeometriaFactory.Contracts` | DTOs de la API, compartidos por los dos procesos desplegables |
-| **GeometriaFactory-Visor** | `geometriafactory-visor` (paquete Node; perfil del ecosistema npm, §13.3) | Bundle JavaScript del visor 3D. **Visualizador puro** (RA-02) |
+| **GeometriaFactory-Visor** | `geometriafactory-visor` (paquete Node; excepción declarada en §13) | Bundle JavaScript del visor 3D. **Visualizador puro** (RA-02) |
 
 ### §17.2.P.1 Stack tecnológico
 
@@ -1815,8 +1787,8 @@ Negocio (Parte A):
 - [x] §12 define **17** términos del dominio, y §12.1 verifica el choque de vocabulario contra los seis términos normativos, declarando el de «proyecto» con su resolución.
 
 Composición (Parte B):
-- [x] §13 enumera las 2 unidades de entrega, cada una con uno de los 8 valores D8, y los 7 proyectos de código sin D8; señala la principal (`GeometriaFactory-Api`), cada arista de compilación declara su clase, el insumo de construcción tiene un único generador y el grafo es acíclico.
-- [x] §13 declara el perfil de convención de nombres **por ecosistema**; no hay colisión de `Nombre-Proyecto-Codigo` ni de `Identidad-Codigo`; la ruta y el nodo de `GeometriaFactory-Visor` están declarados con su fundamento (§13.3).
+- [x] §13 enumera los 7 proyectos de código, cada uno con uno de los 8 valores D8, señala el principal (`GeometriaFactory-Api`) y el grafo de dependencias es acíclico.
+- [x] §13 declara el perfil de convención de nombres; no hay colisión de `Nombre-Proyecto-Codigo` ni de `Identidad-Codigo`; la excepción de `GeometriaFactory-Visor` está declarada con su fundamento.
 - [x] §14 describe la composición y los contratos entre proyectos de código, coherentes con las aristas de §13.
 - [x] §15 garantiza valor demostrable end-to-end: la etapa `a` atraviesa la jerarquía completa como walking skeleton y de la `c` en adelante toda etapa es hito demostrable.
 - [x] §16 publica el árbol `tree` derivado de la jerarquía y de la convención de nombres, con §16.1.
@@ -1919,7 +1891,7 @@ Sección propia de este intake, fuera de la plantilla. Existe porque las fuentes
 
 **Lo que este intake no hace.** No transcribe el glosario: son **155 identificadores en seis clases** y su fuente única es la norma §6.2 a §6.8. ~~**Ningún identificador de este documento cambia en la versión 1.30.**~~ **Cierto para la 1.30 y superado por la 1.31 el 2026-08-13** (norma §8, tramo `R-2`): la 1.31 renombra **cinco** identificadores de este documento —los tres puertos de la norma §6.3 y los dos miembros de su §6.5—, contra el glosario y no por criterio propio. Ningún otro cambia. La regla operativa que rige a partir de acá es la de la norma §6.1: **si un concepto no está en el glosario, no se traduce por criterio propio — se agrega primero**.
 
-**Lo que no alcanza.** El nombre del producto, `Raiz-Codigo`, las siete `Identidad-Codigo` de arriba y la ruta y el nodo de `GeometriaFactory-Visor` (§13.3) **no se reabren**: ya son ingleses en su raíz y no son punto abierto. Tampoco alcanza al **dato del alumno** —las claves y los valores del JSON que emite el programa de la Actividad 1—, que §17.1 P.10 declara ajeno a este producto y que se acepta tal como llega.
+**Lo que no alcanza.** El nombre del producto, `Raiz-Codigo`, las siete `Identidad-Codigo` de arriba y la excepción de `GeometriaFactory-Visor` **no se reabren**: ya son ingleses en su raíz y no son punto abierto. Tampoco alcanza al **dato del alumno** —las claves y los valores del JSON que emite el programa de la Actividad 1—, que §17.1 P.10 declara ajeno a este producto y que se acepta tal como llega.
 
 ---
 
@@ -1928,7 +1900,7 @@ Sección propia de este intake, fuera de la plantilla. Existe porque las fuentes
 | Sección del intake | Destino | Documento downstream típico |
 |---|---|---|
 | §1 a §12 (negocio) | `00-Contexto/`, `01-Necesidades-Negocio/` | Visión, alcance y NB-XX del laboratorio |
-| §13 (unidades de entrega y proyectos de código) | `PRODUCT-MANIFEST` derivado; todas las categorías por unidad de entrega | Manifiesto canónico de las 2 unidades de entrega y los 7 proyectos de código; selector de variantes D8 por unidad de entrega |
+| §13 (proyectos de código) | `PRODUCT-MANIFEST` derivado; todas las categorías por proyecto de código | Manifiesto canónico de los 7 proyectos de código; selector de variantes D8 |
 | §13.1 idioma de los identificadores | `SDD/Docs/Producto/` | [`../Docs/Producto/Norma-De-Nomenclatura.md`](../Docs/Producto/Norma-De-Nomenclatura.md), que es la fuente única del glosario de 155 identificadores y del plan de renombre |
 | §14 estilo de producto | `SDD/Docs/Producto/` y `05-Arquitectura-Tecnica/` | Vista de producto, contratos inter-proyecto, ADR de la topología y de RA-01 a RA-03 |
 | §15 descomposición | `07-Plan-Sprint/` | `Mini-Plan.md` (porque `equipo_n = 1`), con las etapas **`a` a `h`** comprometidas y sus puntos de control, más las pendientes `i…` |
@@ -1959,7 +1931,6 @@ Sección propia de este intake, fuera de la plantilla. Existe porque las fuentes
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
-| 5.0 | 2026-09-13 | **Migración normativa 13.7 → 13.16, fase M2** (`Master-Prompt-Migracion.md` 2.10 §6), sobre la plantilla **3.6**, por el caso (b) de `Master-Prompt.md` §13 regla 2, **aplicada con la aprobación explícita del Product Owner registrada en `SDD/Expedientes/0001-Migracion-Normativa-A-13.16/`, actuación 011** —el guion `propuestas/aplicar-propuestas.sh` exige esa actuación y completa el número—. Ninguna sección se mueve, se parte ni se colapsa. **§13.2**: la dependencia `GeometriaFactory-Visor` de la fila de `GeometriaFactory-Web` lleva la marca `(insumo de construcción)`; la pertenencia del visor a la solución se funda en esa arista y no en el nodo del agrupador; el término «activo de construcción» pasa a `insumo de construcción`; el grafo marca la arista y el orden declara las dos clases. **§13.3**: el perfil de convención se declara **por ecosistema**, con capitalización, y la «excepción declarada» del visor deja de serlo en su punto 1 (identidad por perfil npm) y conserva los puntos 2 y 3 como decisiones del destino. **§16.1**: los samples por el D8 de la **unidad de entrega**, una fila por sample con su entrada al agrupador —el nivel sale del `ejemplo-*.md` de `10-Examples` que gobierna cada sample (documento hermano) y la forma de entrada, del propio §16 de este intake y del `.csproj` de cada carpeta—, y las cinco filas anteriores transpuestas sin cambiar su texto. **§16, §17.2, §19 y la trazabilidad** citan el perfil y no la excepción, y dejan de atribuir D8 a los proyectos. **No se toca `visor.bundle.js`** (l.496, 1154, 1272, 1381), que no es de este salto: va aparte en el lote del expediente. Sube **major** por la tercera condición del caso (b). Estado anterior en `_legacy/2026-09-13/PRODUCT-INTAKE-Fabrica-De-Geometria-v4.6.md`. | Orquestador de migración normativa SDD, con aprobación del Product Owner |
 | 4.6 | 2026-09-13 | **§16, una línea: el árbol anota que `GeometriaFactory.sln` agrupa los veinte samples y no sólo los `.csproj`.** La 4.1 escribió «los samples .csproj» sobre la aplicación del 2026-09-12, que dejó afuera las once carpetas de `samples/` que no eran proyectos .NET (`visor/0N`, `api/0N`, `contracts/0N`, `web/01-datos-seed`) aunque la decisión del Product Owner del 2026-09-11 las alcanzaba. Desde hoy cada una tiene un nodo sin construcción con la forma del visor (§13.2) y `scripts/verify-solution-tree.sh` falla en la integración continua si una carpeta queda afuera. **No es decisión nueva**: completa la aplicación de la del 2026-09-11. Ningún proyecto de código, arista ni ruta cambia. Sube **minor**. Estado anterior en `_legacy/2026-09-13/PRODUCT-INTAKE-Fabrica-De-Geometria-v4.5.md`. | Equipo de desarrollo, sobre decisión del Product Owner del 2026-09-11 |
 | 4.5 | 2026-09-12 | **Actualización §17.2.P.3 · GeometriaFactory-Contracts: la última transcripción viva de «no hay clientes de terceros» se reescribe**, por delegación expresa de la entrada 4.4 («las transcripciones de «no hay clientes de terceros» (l.794, l.798, l.1176) […] son el conjunto medido de `BT-00027` y se reescriben allí»). El párrafo de §17.2.P.3 · GeometriaFactory-Contracts —espejo del de §17.1.P.3 · GeometriaFactory-Contracts, que la 4.3 ya había reescrito— pasa a decir lo mismo que aquél: la afirmación fue cierta hasta la 4.2 y deja de serlo; el tramo `Web`↔`Api` no cambia; la superficie pública versiona sus rutas por `/v{MAJOR}/`. Remite a `ADR-00009` y a `ADR-00010` (`GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md`, **Aceptado**, que supera parcialmente a `ADR-00008`). Las ocurrencias de l.794 y l.798 ya negaban la premisa desde la 4.3 y **no se tocan**; las de este control de cambios son registro. **Una sola sección; ninguna otra fila, decisión ni recuento cambia.** Sube **minor**. Estado anterior en `_legacy/2026-09-12/PRODUCT-INTAKE-Fabrica-De-Geometria-v4.4.md`. | Equipo de desarrollo (`BT-00027`), por delegación del Product Owner en la entrada 4.4 |
 | 4.4 | 2026-09-12 | **El Product Owner asienta, fuera de toda corrida del orquestador, la decisión que cierra `D-01` (`Master-Prompt.md` §13.1): la API autentica personas, no aplicaciones** — `ADR-00009` (`GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md`, **Aceptado**). Testimonio literal: «El cliente o usuario del sistema: hay dos, el administrador que recepciona los trabajos y los visa —aprobar o rechazar— y gestiona a los usuarios; y los usuarios, que en un caso particular son alumnos. No hay diferencia entre alumno y usuario general; no importa que sea alumno», y «no hay tercero — es re simple: un administrador, y luego usuarios generales, que pueden ser cualquiera, entre estos alumnos». **Cuatro puntos**: (1) dos identidades y nada más —administrador y usuario—, y toda aplicación del producto obtiene el acceso por `POST /auth/token` con las credenciales de la persona; **no hay claves de API ni `client_credentials`**; (2) cliente = aplicación propia del producto que actúa en nombre de una persona; la premisa con que se acepta ROPC («el intermediario es el propio front del mismo sistema», §17.1.P.5) se extiende a todo cliente propio; (3) `D-01` **se cierra** con la decisión completa —la forma del cliente no cambia la autenticación— y **no se abre ningún ítem diferido nuevo**; (4) «alumno» es la etiqueta del papel `Student` en este despliegue y el papel es «usuario»: se declara la equivalencia y **no se renombra ningún uso** (`Vocabulario-Rules.md` §9.5). **Qué cambia**: §17.1.P.3 (`GeometriaFactory-Api`) filas «Quién la consume» (el cliente queda decidido, sin credenciales por cliente), «CORS» (condición: un cliente propio que sea JavaScript de navegador desde otro origen) y «Endpoint de autenticación» (**toda** aplicación propia usa `POST /auth/token`; queda superada la frase «los clientes externos no usan este endpoint»); §17.1.P.5 (`GeometriaFactory-Api`) reemplaza el párrafo «Autenticación de clientes externos» por «Autenticación de las aplicaciones propias», con el límite de tasa por persona autenticada o por dirección de origen; `X-9` (§9) y `RA-01` (§14) dejan de remitir a `D-01` como abierto: su condición de reevaluación pasa a «una aplicación propia de otro origen que sea JavaScript de navegador». **Lo que no cambia**: `R-02` sigue aceptado como está; los cuatro puntos fuera de la guardia; `RN-B5`; la fila «Versionado del contrato» y las transcripciones de «no hay clientes de terceros» (l.794, l.798, l.1176), que son el conjunto medido de `BT-00027` y se reescriben allí. Consecuencia sobre el backlog: `BT-00028` pasa a `Descartada` (no hay nada que construir) y las cinco tareas que dependían de ella dejan de estar bloqueadas (`Backlog-Tecnico.md` 3.2, `Mini-Plan.md` 3.1). Sube **minor**: actualiza filas existentes de secciones aprobadas con el resultado de una condición que ellas mismas declaraban (`D-01`); no reescribe ninguna de raíz. Estado anterior en `_legacy/2026-09-12/PRODUCT-INTAKE-Fabrica-De-Geometria-v4.3.md`. | Product Owner, asistido por agente |

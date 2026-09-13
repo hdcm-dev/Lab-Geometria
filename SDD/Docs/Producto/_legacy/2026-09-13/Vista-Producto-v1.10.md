@@ -2,12 +2,12 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Vista-Producto.md
-**Versión:** 1.11
+**Versión:** 1.10
 **Estado:** Aprobado
-**Fecha:** 2026-09-13
+**Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Nivel:** Producto
-**Trazabilidad upstream:** [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) §1.2, §2, §3, §4 y §5; [`PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) §13 (composición del producto) y §14 (las tres reglas de arquitectura de nivel producto); las categorías `05-Arquitectura-Tecnica` emitidas bajo `Unidades-Entrega/`, con sus **45** ADR y sus **seis** contratos de superficie
+**Trazabilidad upstream:** [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **3.2** §1.2, §2, §3, §4 y §5; [`PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.26** §13 (composición del producto) y §14 (las tres reglas de arquitectura de nivel producto); las categorías `05-Arquitectura-Tecnica` emitidas bajo `Unidades-Entrega/`, con sus **45** ADR y sus **seis** contratos de superficie
 **Trazabilidad downstream:** `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `11-Documentacion` de los siete proyectos de código; [`Pipeline-Producto.md`](Pipeline-Producto.md) y [`../README.md`](../README.md), emitidos en la misma consolidación
 
 ---
@@ -62,7 +62,7 @@ La versión 1.0 se emitió cuando sólo la Fase C estaba cerrada. Hoy el bucle c
 | Magnitud | Cantidad | Dónde se cuenta |
 | --- | --- | --- |
 | Proyectos de código | 7 | `PRODUCT-MANIFEST` §2 |
-| Aristas de compilación | **8**, de dos clases: **7** referencias de proyecto y **1** activo de construcción —hoy `insumo de construcción`, SDD 13.16— (`Visor → Web`, generador `GeometriaFactory-Web`) | §3.1 de este documento, **cerrada el 2026-08-31** contra los seis `.csproj` |
+| Aristas de compilación | **8**, de dos clases: **7** referencias de proyecto y **1** activo de construcción (`Visor → Web`) | §3.1 de este documento, **cerrada el 2026-08-31** contra los seis `.csproj` |
 | Casos de uso | **48** — `GeometriaFactory-Api` 23, `GeometriaFactory-Web` 17, nivel Producto 8 | `Unidades-Entrega/<Nombre-Unidad-Entrega>/02-Especificacion-Funcional/Casos-De-Uso/` |
 | Reglas de negocio | 16 | `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/`, `RN-02001` a `RN-02016` |
 | Invariantes del dominio | 9 | `PRODUCT-INTAKE` §14, `INV-01` a `INV-09` |
@@ -80,21 +80,21 @@ La versión 1.0 se emitió cuando sólo la Fase C estaba cerrada. Hoy el bucle c
 
 ## 2. Mapa de proyectos de código
 
-Refleja `PRODUCT-MANIFEST` §2.B y §2.C. **Ningún proyecto de código es `redistribuible`**, de modo que el prefijo de paquetes redistribuibles del perfil de nombres (§1.2 del manifiesto) queda sin uso.
+Refleja `PRODUCT-MANIFEST` **3.2** §2 y §5. **Ningún proyecto de código es `redistribuible`**, de modo que el prefijo de paquetes redistribuibles del perfil de nombres (§1.2 del manifiesto) queda sin uso.
 
-| `Nombre-Proyecto-Codigo` | `Identidad-Codigo` | Stack | Solución de código | Rol en el producto | Unidades de entrega que compone | Arquitectura |
-| --- | --- | --- | --- | --- | --- | --- |
-| `GeometriaFactory-Domain` | `GeometriaFactory.Domain` | C# sobre .NET 10 | `GeometriaFactory.sln` | Entidades e invariantes; centro de la regla de dependencias | `GeometriaFactory-Api` | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
-| `GeometriaFactory-Contracts` | `GeometriaFactory.Contracts` | C# sobre .NET 10 | `GeometriaFactory.sln` | Tipos de transferencia; contrato compartido por los dos procesos desplegables | `GeometriaFactory-Api`, `GeometriaFactory-Web` | [`05`](../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) |
-| `GeometriaFactory-Visor` | `geometriafactory-visor` | Node.js con TypeScript y webpack | `GeometriaFactory.sln` | Bundle JavaScript del visor 3D; visualizador puro (`RA-02`) | `GeometriaFactory-Web` | [`05`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
-| `GeometriaFactory-Application` | `GeometriaFactory.Application` | C# sobre .NET 10 | `GeometriaFactory.sln` | Casos de uso y los cuatro puertos | `GeometriaFactory-Api` | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
-| `GeometriaFactory-Web` | `GeometriaFactory.Web` | Blazor Interactive Server sobre .NET 10, con MudBlazor | `GeometriaFactory.sln` | Front en el hosting público; **único punto de contacto del navegador** | `GeometriaFactory-Web` | [`05`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
-| `GeometriaFactory-Infrastructure` | `GeometriaFactory.Infrastructure` | C# sobre .NET 10, EF Core con proveedor SQLite | `GeometriaFactory.sln` | Adaptadores de los cuatro puertos, seguridad y validador de figuras | `GeometriaFactory-Api` | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
-| `GeometriaFactory-Api` | `GeometriaFactory.Api` | ASP.NET Core sobre .NET 10 | `GeometriaFactory.sln` | Host en el servidor propio (**principal**) | `GeometriaFactory-Api` (**principal**) | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
+| `Nombre-Proyecto-Codigo` | `Identidad-Codigo` | Tipo D8 | Rol en el producto | `redistribuible` | Arquitectura |
+| --- | --- | --- | --- | --- | --- |
+| `GeometriaFactory-Domain` | `GeometriaFactory.Domain` | `library` | Entidades e invariantes; centro de la regla de dependencias | false | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
+| `GeometriaFactory-Contracts` | `GeometriaFactory.Contracts` | `library` | Tipos de transferencia; contrato compartido por los dos procesos desplegables | false | [`05`](../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) |
+| `GeometriaFactory-Visor` | `geometriafactory-visor` | `library` | Bundle JavaScript del visor 3D; visualizador puro (`RA-02`) | false | [`05`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
+| `GeometriaFactory-Application` | `GeometriaFactory.Application` | `library` | Casos de uso y los cuatro puertos | false | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
+| `GeometriaFactory-Web` | `GeometriaFactory.Web` | `web-monolith` | Front en el hosting público; **único punto de contacto del navegador** | false | [`05`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
+| `GeometriaFactory-Infrastructure` | `GeometriaFactory.Infrastructure` | `library` | Adaptadores de los cuatro puertos, seguridad y validador de figuras | false | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
+| `GeometriaFactory-Api` | `GeometriaFactory.Api` | `rest-api` | Host en el servidor propio (**principal**) | false | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) |
 
-**Siete proyectos de código, en una sola solución de código, que componen dos unidades de entrega**: `GeometriaFactory-Api` (`rest-api`, **principal**) y `GeometriaFactory-Web` (`web-monolith`) (`PRODUCT-MANIFEST` §2.A). **Sin valor D8 y sin `redistribuible` por proyecto**: los dos son atributos de la unidad de entrega (`Vocabulario-Rules.md` §2; `Rules-Arquitectura-Tecnica.md` 4.6 §4.8). Hasta la 1.10 este mapa los llevaba por proyecto de código —`library` (5), `web-monolith` (1) y `rest-api` (1)—, con el modelo anterior a la 8.0.
+**Siete proyectos de código, tres tipos D8**: `library` (5), `web-monolith` (1) y `rest-api` (1). **Exactamente uno es principal**, `GeometriaFactory-Api`, como exige la validación bloqueante del manifiesto §4.
 
-**Identidad por perfil de ecosistema; ruta y nodo por decisión del destino.** `GeometriaFactory-Visor` es el único proyecto de código fuera del ecosistema .NET: su `Identidad-Codigo` sigue **el perfil del ecosistema npm** (`PRODUCT-MANIFEST` §1.2), minúscula con guion, y no es una excepción. Su carpeta `visor/` en la raíz y su nodo `geometriafactory-visor.csproj` sin construcción son **decisiones del destino** (`PRODUCT-INTAKE` §13.3, puntos 2 y 3). [CORREGIDO 2026-09-13: hasta la 1.10 este párrafo decía «Es apartamiento declarado, no incumplimiento del perfil de nombres», y **ningún ADR de apartamiento lo declara**: su formalización como decisión de arquitectura es la deuda `DD-1` de `../Audit/Mesa-2026-09-13.md`.]
+**Una excepción de nombre y de path, declarada con su fundamento en el manifiesto §2 y en el intake §13.** `GeometriaFactory-Visor` es el único proyecto de código fuera del ecosistema .NET: su `Identidad-Codigo` va en minúscula con guiones porque la forma general sería un nombre de paquete inválido en su gestor, y su carpeta es `visor/` en la raíz y no bajo `src/`, para que las dos cadenas de herramientas no compartan raíz. **Es apartamiento declarado, no incumplimiento del perfil de nombres.**
 
 ## 3. Grafo de dependencias
 
@@ -110,7 +110,7 @@ referencias de proyecto (7), las que un `.csproj` materializa
     GeometriaFactory-Contracts      -> GeometriaFactory-Api
     GeometriaFactory-Contracts      -> GeometriaFactory-Web
 
-insumo de construcción (1), generador `GeometriaFactory-Web` (target `BuildVisor`, `Web ADR-10008`), sin referencia de proyecto
+activo de construcción (1), que un `.csproj` expresa con un target y no con una referencia
     GeometriaFactory-Visor          -> GeometriaFactory-Web
 ```
 
@@ -259,7 +259,6 @@ Cada contrato inter-proyecto contra la dependencia del manifiesto que materializ
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.11 | 2026-09-13 | **Migración normativa 13.7 → 13.16, fase M4, fila PM-03** (`Rules-Arquitectura-Tecnica.md` 4.5 → 4.6 §4.8). **§2**: el mapa deja de llevar tipo D8 y `redistribuible` por proyecto de código y pasa a declarar stack, solución de código y unidades de entrega que compone, con los mismos siete proyectos, identidades, roles y enlaces. **§3**: la arista `Visor → Web` declara su clase vigente, `insumo de construcción`, y su único generador. **§1.1**: la magnitud de aristas agrega el nombre vigente sin borrar el anterior. **§2, párrafo del visor**: deja de afirmar un apartamiento declarado que ningún ADR declara. **Cabecera**: la trazabilidad upstream deja de citar versiones del intake y del manifiesto (`Root-Rules.md` §10 R1; deuda de `../Audit/Mesa-2026-08-27.md` §8). Sube minor. Estado anterior en `_legacy/2026-09-13/Vista-Producto-v1.10.md` |
 | 1.10 | 2026-09-12 | **§3.1 deja de decir que ningún `.csproj` puede expresar la arista `Visor → Web`**: desde el 2026-09-12 la expresa el target `BuildVisor` de `GeometriaFactory.Web.csproj` (`Web ADR-10008`), y la clase «activo de construcción» **se conserva** —sigue sin ser una referencia de proyecto—. Además el visor entra a `GeometriaFactory.sln` como nodo sin construcción por decisión del Product Owner (intake 4.0, manifiesto 6.0); el §2 no cambia porque la excepción de nombre y de ruta sigue vigente. Sube minor: cambia una justificación, no el grafo, los recuentos ni las decisiones. |
 | 1.4 | 2026-08-11 | **Absorbe la emisión de [`B-02-03-GeometriaFactory-Api-r2.md`](../Audit/B-02-03-GeometriaFactory-Api-r2.md) 1.0 y cierra con ella el hallazgo `N-02` (P2) de ese informe.** **§1.1**, párrafo del hueco de auditoría: el recuento de hallazgos de la ronda 1 pasa de **quince** a **diecisiete** —el desglose «un P0, cinco P1, seis P2 y cinco P3» estaba escrito al lado y suma diecisiete— y se registra que la **ronda 2 levanta el rechazo con dictamen APROBADO**, citado y no redecidido. **Búsqueda de propagación hecha con `grep` sobre todo el corpus vivo**: «quince hallazgos» y «falta la ronda 2» vivían en **tres** documentos de nivel producto —éste, [`../README.md`](../README.md) §8 y [`../Handoff-Checkout.md`](../Handoff-Checkout.md) §6.1 `B-1`—, y los tres se corrigen en la misma tanda. **Ninguna magnitud, ningún proyecto de código y ninguna decisión de arquitectura cambia.** |
 | 1.3 | 2026-08-11 | **Cierra el hallazgo `NB2-01` (P1)** del informe [`B2-Maqueta-GeometriaFactory-Web-r2.md`](../Audit/B2-Maqueta-GeometriaFactory-Web-r2.md) 1.0. **§1.1**, fila **B2**: la fila remitía a `B2-Maqueta-GeometriaFactory-Web-r1.md` «cuyo rechazo levanta `F26-Propagacion-r2.md`», y eso es falso: abierto ese informe, su §7 dice «**APROBADO. Se levanta el rechazo de `F26-Propagacion-r1.md`**» y su alcance son tres commits de propagación de F-26, no la Fase B2. **Un informe no puede levantar el rechazo de una fase que no audita, y no dice haberlo hecho.** La fila pasa a citar **`B2-Maqueta-GeometriaFactory-Web-r2.md`**, emitido el 2026-08-11, que sí audita la fase y sí dice levantar el rechazo de la ronda 1, y el dictamen pasa a «Rechazado en ronda 1; **aprobado en ronda 2**». **§1.1**, párrafo del hueco de auditoría: se registra la emisión del informe faltante de Fase B de `GeometriaFactory-Api` —hallazgo que ningún informe levanta y que la búsqueda de propagación de esta tanda dejó al descubierto: el párrafo afirmaba que ese informe **no existe**, y desde el 2026-08-11 existe—, con su dictamen **RECHAZADO** citado y no redecidido. **Búsqueda de propagación hecha con `grep` sobre todo el corpus vivo**: la atribución falsa a `F26-Propagacion-r2.md` no aparece en ningún otro documento; la salvedad `B-2` de [`../Handoff-Checkout.md`](../Handoff-Checkout.md), que decía lo contrario **y con razón al escribirse**, se actualiza en la misma tanda. **Ninguna magnitud, ningún proyecto de código y ninguna decisión de arquitectura cambia.** |

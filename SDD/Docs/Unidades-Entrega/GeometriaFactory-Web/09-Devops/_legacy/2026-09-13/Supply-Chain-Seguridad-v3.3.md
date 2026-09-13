@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Supply-Chain-Seguridad.md
-**Versión:** 3.4
+**Versión:** 3.3
 **Estado:** Propuesto
-**Fecha:** 2026-09-13
+**Fecha:** 2026-08-24
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -55,9 +55,9 @@ la **publicación adjunta** y la **firma**, que se eligen hoy.
 
 **Y el único que se difiere, con los cuatro campos que §12.2 obliga:**
 
-| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado | Ciclo de origen |
-|---|---|---|---|---| --- |
-| `PD-10` | **El generador del inventario.** **No se puede fijar hoy**, y acá el motivo es más fuerte que el runtime: **ninguna herramienta de una sola cadena lo produce entero**, porque el motor de dibujo tridimensional viaja empaquetado **dentro del bundle** y no como dependencia declarada. Elegir generador exige resolver cómo inventariar lo que está adentro de un archivo de recursos estáticos | El equipo, al resolverlo | [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §2.1, **fase `i` · Despliegue real**, que es cuando se publica de verdad y el inventario tiene destinatario | **Vigente.** La fase `i` no ocurrió | no derivable — anterior al mecanismo |
+| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
+|---|---|---|---|---|
+| `PD-10` | **El generador del inventario.** **No se puede fijar hoy**, y acá el motivo es más fuerte que el runtime: **ninguna herramienta de una sola cadena lo produce entero**, porque el motor de dibujo tridimensional viaja empaquetado **dentro del bundle** y no como dependencia declarada. Elegir generador exige resolver cómo inventariar lo que está adentro de un archivo de recursos estáticos | El equipo, al resolverlo | [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §2.1, **fase `i` · Despliegue real**, que es cuando se publica de verdad y el inventario tiene destinatario | **Vigente.** La fase `i` no ocurrió |
 
 **Por qué el identificador es `PD-10`.** Es la misma forma `PD-NN` que
 [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 usa en **su** ámbito, sin familia nueva, y **el ámbito es
@@ -342,7 +342,6 @@ La sección existe para que la canalización de nivel producto no trate a los tr
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 3.4 | 2026-09-13 | **Migración normativa 13.7 → 13.16, fase M4, fila PM-06** (`Root-Rules.md` 8.6 → 8.7 §12.2 punto 5; `Migracion-Rules.md` 3.20 §4.9). Las **1** filas de ítems diferidos de este documento suman la columna **Ciclo de origen**, **derivada del historial y no escrita a mano**: 0 derivadas —el commit que dio de alta la fila en el archivo de su proyecto, con su asunto literal como fase, el proyecto de la sección como unidad y el commit como base— y 1 `no derivable — anterior al mecanismo`, porque la fila ya existía con otro texto. Comando y resultado por fila en `SDD/Expedientes/0001-Migracion-Normativa-A-13.16/evidencia/E-006g`. **Ninguna otra celda cambia.** Sube minor. Estado anterior en `_legacy/2026-09-13/Supply-Chain-Seguridad-v3.3.md` |
 | 3.3 | 2026-08-31 | **Cierre de las dos incógnitas `[A VERIFICAR]` que ya no tenían pregunta**, sobre el inventario [`Inventario-Marcas-A-Verificar-2026-08-31.md`](../../../Audit/Inventario-Marcas-A-Verificar-2026-08-31.md), que clasificó las **71** apariciones vivas del corpus en **cinco** incógnitas. **(a) La versión de plataforma del hosting quedó RESUELTA el 2026-08-13, midiendo**: `PT-01.a` pasa con **200** y el hosting soporta `net10.0`, confirmado desde el panel; no hizo falta bajar la versión objetivo del front. **(b) La versión de la biblioteca de componentes queda SIN OBJETO**: la biblioteca nunca se introdujo y su ausencia es una decisión declarada en el `.csproj` — `PA-01` de `Web/05` §11 **ya lo había cerrado por lectura el 2026-08-20** y el desenlace no bajó. **Ninguna de las dos se decide acá: las dos se leen.**  **Ningún umbral, ningún contrato y ninguna decisión cambian.** |
 | 3.2 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **17 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 3.1 | 2026-08-24 | **Ronda 3 del corte 09 de la migración 10.0 → 13.3**, sobre el re-audit independiente, que pasó de RECHAZADO a **APROBADO CON HALLAZGOS**: el P0 y los cinco P1 quedaron cerrados y aparecieron cuatro P2 y tres P3. **El identificador pasa de `PD-01` a `PD-10`** —**P2**, y acá la colisión era real: §1 ya citaba `PD-01` de `Pipeline-CI-CD.md`—. **Y §6.b corrige dónde corre cada análisis** (**P2**): la emisión anterior había puesto los ocho gates de inspección en un stage, después de haberlos puesto en stages `build` y `test` que son de la unidad hermana. `Pipeline-CI-CD.md` §2 declara que **sólo `QG-01`, `QG-02` y `QG-03` corren dentro del flujo** y que los otros ocho corren **en el pull request de la etapa**; la tabla lo dice así y separa el SAST de estructura del SAST de compilación. Las dos decisiones del Product Owner se registran como `D9` y `D10` en [`../../../Audit/A3-Decisiones-Del-Product-Owner.md`](../../../Audit/A3-Decisiones-Del-Product-Owner.md) §4, y el hallazgo sobre `PD-03` como **`HM-01`** en el plan §5.2. |

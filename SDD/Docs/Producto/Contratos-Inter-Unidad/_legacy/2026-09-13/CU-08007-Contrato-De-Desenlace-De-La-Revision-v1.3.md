@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** CU-08007-Contrato-De-Desenlace-De-La-Revision.md
-**Versión:** 1.4
+**Versión:** 1.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -107,7 +107,6 @@ Declarar el tipo de transferencia con el que el administrador resuelve un trabaj
 > **2 · Por qué no se puede hoy:** **ningún registro de reconexión de la consolidación lo conserva**, y reconstruirlo comparando prosa es interpretación y no evidencia. El pronóstico se escribió antes de que existieran las historias reales.
 > **3 · Quién lo cierra:** la categoría 06 de las dos unidades de entrega, que es la que las acuñó.
 > **4 · En qué evento se cierra:** la **próxima emisión de la 06**, o la **Fase J**, lo que ocurra primero.
-> **5 · Ciclo de origen:** derivado (`Migracion-Rules.md` 3.20 §4.9) del alta de este bloque: «docs(sdd): mesa evaluadora 2026-08-29 — y el instrumento de cobertura » (2026-08-29) · producto · base `aa3abd3`.
 
 ## 10. Notas y supuestos
 
@@ -122,7 +121,6 @@ Declarar el tipo de transferencia con el que el administrador resuelve un trabaj
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.4 | 2026-09-13 | **Migración normativa 13.7 → 13.16, fase M4, fila PM-06** (`Root-Rules.md` 8.7 §12.2 punto 5; `Migracion-Rules.md` §4.9): el ítem diferido de §9 suma el campo **5 · Ciclo de origen**, derivado del alta del bloque en este archivo (`aa3abd3`, 2026-08-29). Ninguna otra línea cambia. Sube minor. Estado anterior en `_legacy/2026-09-13/CU-08007-Contrato-De-Desenlace-De-La-Revision-v1.3.md` |
 | 1.3 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **8 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.2 | 2026-08-29 | **Parche `P-02` de la mesa evaluadora del 2026-08-29** ([`../../Audit/Mesa-2026-08-29.md`](../../Audit/Mesa-2026-08-29.md), hallazgo `H-02`, evidencia **E2**, severidad **S2**). La fila «Historias de usuario a generar en 06» de §9 anunciaba historias del rango `08` **que nunca se acuñaron**: la consolidación de las unidades de entrega retiró ese rango y las historias que cubren este contrato se generaron con la numeración de su unidad. La celda pasa a declarar el hecho en lugar de seguir prometiendo artefactos inexistentes, y **la correspondencia una a una NO se reconstruye**: ningún registro de reconexión la conserva y deducirla del texto sería inventarla. Queda como **ítem diferido** con sus cuatro campos, con evento de cierre en la próxima emisión de la 06 o en la Fase J. **Ninguna otra sección cambia.** |
 | 1.0 | 2026-08-09 | Emisión inicial, derivada de la incorporación del circuito de revisión del administrador en `PRODUCT-INTAKE` 1.3 §4 (F-21, F-23), §4.1 (RN-08010) y §4.2, y de `NB-00009` de 01. Declara la solicitud de desenlace con su conjunto cerrado de dos valores, el comentario opcional, el resultado con el estado terminal alcanzado y los dos códigos de error nuevos del ensamblado. |
