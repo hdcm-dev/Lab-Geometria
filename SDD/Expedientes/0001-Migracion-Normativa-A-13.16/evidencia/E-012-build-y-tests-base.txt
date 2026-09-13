@@ -1,0 +1,7 @@
+$ docker run --rm -v <padre>:<padre> -w <worktree> mcr.microsoft.com/dotnet/sdk:10.0 bash -c "dotnet build GeometriaFactory.sln -c Release -p:SkipVisorBuild=true; dotnet test GeometriaFactory.sln -c Release --no-build -p:SkipVisorBuild=true"   (base b9675d8 + commits 7864428, f73588f, que no tocan código)
+    0 Error(s)
+    0 Warning(s)
+Passed!  - Failed:     0, Passed:    94, Skipped:     0, Total:    94, Duration: 177 ms - GeometriaFactory.Domain.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:    56, Skipped:     0, Total:    56, Duration: 169 ms - GeometriaFactory.Application.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   403, Skipped:     0, Total:   403, Duration: 25 s - GeometriaFactory.Integration.Tests.dll (net10.0)
+# Nota: una primera corrida montando sólo el worktree dio 8 advertencias MINVER1001 (el contenedor no veía el .git del repositorio padre); con el padre montado en la misma ruta, 0.

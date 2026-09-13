@@ -1,0 +1,14 @@
+$ enlaces relativos de samples/contracts/0*/README.md que no resuelven (python3 os.path.exists)
+roto: samples/contracts/01-basico -> ../../../SDD/Docs/Proyectos/GeometriaFactory-Contracts/10-Examples/ejemplo-01-basico.md
+roto: samples/contracts/01-basico -> ../../../SDD/Docs/Proyectos/GeometriaFactory-Contracts/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md
+roto: samples/contracts/02-intermedio -> ../../../SDD/Docs/Proyectos/GeometriaFactory-Contracts/10-Examples/ejemplo-02-intermedio.md
+roto: samples/contracts/02-intermedio -> ../../../SDD/Docs/Proyectos/GeometriaFactory-Contracts/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md
+roto: samples/contracts/03-avanzado -> ../../../SDD/Docs/Proyectos/GeometriaFactory-Contracts/10-Examples/ejemplo-03-avanzado.md
+roto: samples/contracts/03-avanzado -> ../../../SDD/Docs/Proyectos/GeometriaFactory-Contracts/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md
+$ git ls-files | grep -i "GeometriaFactory-Contracts/10-Examples"
+SDD/Docs/_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/10-Examples/README.md
+SDD/Docs/_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/10-Examples/ejemplo-01-basico.md
+SDD/Docs/_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/10-Examples/ejemplo-02-intermedio.md
+SDD/Docs/_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/10-Examples/ejemplo-03-avanzado.md
+$ git log main --oneline -1 -- samples/contracts/01-basico/README.md
+2ba229b 2026-08-11 Fase G: se levanta el rechazo, e intake 1.26

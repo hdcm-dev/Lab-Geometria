@@ -1,0 +1,28 @@
+$ git ls-files SDD/Docs | grep -v /_legacy/ | grep "\.md$" | wc -l   (y por carpeta de primer nivel)
+551
+      5 00-Contexto
+     11 01-Necesidades-Negocio
+     96 Audit
+      1 Handoff-Checkout.md
+     31 Producto
+      1 README.md
+     39 Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional
+      5 Unidades-Entrega/GeometriaFactory-Api/03-UX-UI-DX
+     51 Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica
+    153 Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico
+      2 Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint
+      9 Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas
+      6 Unidades-Entrega/GeometriaFactory-Api/09-Devops
+     15 Unidades-Entrega/GeometriaFactory-Api/10-Examples
+      1 Unidades-Entrega/GeometriaFactory-Api/11-Documentacion
+     14 Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional
+     23 Unidades-Entrega/GeometriaFactory-Web/03-UX-UI-DX
+     28 Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica
+     34 Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico
+      2 Unidades-Entrega/GeometriaFactory-Web/07-Plan-Sprint
+     11 Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas
+      7 Unidades-Entrega/GeometriaFactory-Web/09-Devops
+      5 Unidades-Entrega/GeometriaFactory-Web/10-Examples
+      1 Unidades-Entrega/GeometriaFactory-Web/11-Documentacion
+$ con _legacy:
+1122

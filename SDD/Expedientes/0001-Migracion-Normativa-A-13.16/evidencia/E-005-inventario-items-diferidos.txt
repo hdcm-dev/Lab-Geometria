@@ -1,0 +1,22 @@
+$ python3: tablas «| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |» en SDD/Docs fuera de _legacy y Audit
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md línea 387 filas 5
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md línea 399 filas 3
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/Supply-Chain-Seguridad.md línea 58 filas 1
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md línea 599 filas 7
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md línea 613 filas 5
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md línea 659 filas 9
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md línea 673 filas 7
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md línea 560 filas 5
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md línea 572 filas 3
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md línea 582 filas 3
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md línea 592 filas 5
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Supply-Chain-Seguridad.md línea 71 filas 1
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md línea 1187 filas 10
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md línea 1206 filas 4
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md línea 1217 filas 6
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md línea 1230 filas 11
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md línea 739 filas 10
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md línea 756 filas 6
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md línea 767 filas 7
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md línea 779 filas 10
+TOTAL filas 118 en 8 documentos
