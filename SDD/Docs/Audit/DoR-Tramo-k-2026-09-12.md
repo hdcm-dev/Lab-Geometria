@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** DoR-Tramo-k-2026-09-12.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master / Backlog Curator (AG-06), en su papel de evaluación de DoR
@@ -30,7 +30,9 @@ hueco se declara; no se inventa. **«Una ADR» incluye las de nivel Producto** (
 (`Apertura-Fase-k-2026-09-12.md`, base `9167e68`). **SI NO RESPONDÉS**: un hueco (BT-00028) no tiene
 fuente admitida en el árbol y requiere que la categoría `05` (arquitectura) emita el artefacto que
 falta —no una decisión de esta categoría—; se declara en el lote de detenciones de §4 y queda en
-`Borrador`. (La 1.0 declaraba dos huecos; el segundo, BT-00031, era falso: ver §7.)
+`Borrador`. (La 1.0 declaraba dos huecos; el segundo, BT-00031, era falso: ver §7.) **Respondido el
+2026-09-12** (1.2): el Product Owner decidió, y la ADR que faltaba existe — [`ADR-00009`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md) — y lo que
+dice es que BT-00028 **no se construye** (`Descartada`). El lote de §4 queda vacío.
 
 ---
 
@@ -309,7 +311,7 @@ citada a §2 regla 1. Ningún criterio de aceptación cambia.
 | BT | Resultado | Corrección aplicada | Fuente admitida usada |
 | --- | --- | --- | --- |
 | BT-00027 | **Ready** | Criterio de aceptación agregado (conjunto medido de 16 lugares) y declaración de alcance fuera de la unidad (criterio 6) | `ADR-00008` (ya citada); `ADR-08003` (nivel Producto, misma premisa) |
-| BT-00028 | **Borrador** | Ninguna posible | — (no existe en el árbol) |
+| BT-00028 | **Descartada** (1.2; era **Borrador** en 1.0/1.1) | Ninguna posible sobre la ficha; la resolvió una decisión de producto | [`ADR-00009`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md) (**Aceptado**, 2026-09-12): la API autentica personas, no aplicaciones; no hay nada que construir |
 | BT-00029 | **Ready** | Cita corregida | `05` §8.1, «Caudal sostenido» (`ADR-00005`) |
 | BT-00030 | **Ready** | Cita agregada; caja temporal corregida a «la etapa `k`, en su punto de control» (criterio 6) | `05` §9.1, riesgo de CORS/navegador |
 | BT-00031 | **Ready** | Cita agregada y criterio de aceptación agregado (umbral cero: 4 puntos fuera de la guardia) | `ADR-08008` §2 punto 2 (nivel Producto, Aceptado) |
@@ -319,7 +321,7 @@ citada a §2 regla 1. Ningún criterio de aceptación cambia.
 | BT-00035 | **Ready** | Cita agregada; sección corregida (§2 regla 1, no §1) | `ADR-00008` §2 «Decisión», regla 1 |
 
 **Ocho de nueve están en `Ready`; una queda en `Borrador`** (BT-00028) por ausencia de fuente admitida
-en el árbol, no por defecto de redacción. Medido, no heredado:
+en el árbol, no por defecto de redacción. Medido, no heredado (1.1):
 
 ```
 $ git grep -h "^\*\*Estado:\*\*" -- */tareas-tecnicas/BT-000{27..35}* | sort | uniq -c
@@ -327,11 +329,33 @@ $ git grep -h "^\*\*Estado:\*\*" -- */tareas-tecnicas/BT-000{27..35}* | sort | u
       8 **Estado:** Ready
 ```
 
+**Desde la 1.2: ocho `Ready`, cero `Borrador`, una `Descartada`.** BT-00028 no se destrabó: se
+descartó, porque la decisión que faltaba ([`ADR-00009`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md)) dice que la API autentica
+personas y no aplicaciones, y que no existe una tercera clase de identidad a la que darle una clave. Las
+otras ocho no cambian de resultado; tres de ellas (BT-00029, BT-00030, BT-00032) retiraron la dependencia
+de BT-00028 y siguen cumpliendo el criterio 5 (verificación 3 de §6.9). Medido, no heredado:
+
+```
+$ git grep -h "^\*\*Estado:\*\*" -- */tareas-tecnicas/BT-000{27..35}* | sort | uniq -c
+      1 **Estado:** Descartada
+      8 **Estado:** Ready
+```
+
 ---
 
 ## 4. Lote de detenciones — intención de producto
 
-Queda **una** detención (la 1.0 declaraba dos; la segunda, BT-00031, se retira en la 1.1 porque su
+**Desde la 1.2 el lote está vacío.** La única detención que quedaba (BT-00028) se resolvió el 2026-09-12
+por decisión del Product Owner —«no hay tercero — es re simple: un administrador, y luego usuarios
+generales, que pueden ser cualquiera, entre estos alumnos»— asentada en [`ADR-00009`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md)
+(**Aceptado**) y en `PRODUCT-INTAKE` **4.4**: la API autentica personas, no aplicaciones. La ADR que la
+detención pedía existe, y lo que dice es que **BT-00028 no se construye** (`Descartada` en su 1.2); las
+cinco BT que esperaban su destrabe ya no esperan nada (`Mini-Plan.md` 3.1 §3.5). El texto original de la
+detención se conserva a continuación como registro de qué se pidió y por qué.
+
+---
+
+*Texto de la 1.1:* Queda **una** detención (la 1.0 declaraba dos; la segunda, BT-00031, se retira en la 1.1 porque su
 ausencia de fuente era falsa, ver la sección BT-00031 y §7). Exige una decisión de arquitectura
 (categoría `05`), no de esta categoría, y no se resuelve leyendo:
 
@@ -491,6 +515,103 @@ $ grep -l -i "client_credentials\|api key\|clave de cliente\|autenticaci" SDD/Do
 exit: 1
 ```
 
+### 6.9 Verificación tras `ADR-00009` (1.2)
+
+Corridas sobre el árbol de trabajo de la rama `fase-k/adr-00009-autentica-personas`, base `9d33d6d`
+(`main`), después de editar la ADR, el intake (4.4), las dos mesas, las fichas BT-00027/28/29/30/32/34,
+`Backlog-Tecnico.md` (3.2), `Mini-Plan.md` (3.1), `README.md` de 07 (2.2) y este documento. Todas las
+ediciones fueron por script con **guarda**: cada cadena a reemplazar debe aparecer exactamente una vez
+y ninguna fila de tabla puede cambiar de ancho; si una premisa falla, el script aborta sin escribir. Son
+las siete verificaciones del mandato más la del término «tercero».
+
+```
+### 1. Estados de BT-00027…35
+$ git grep -h "^\*\*Estado:\*\*" -- */tareas-tecnicas/BT-000{27..35}* | sort | uniq -c
+      1 **Estado:** Descartada
+      8 **Estado:** Ready
+
+### 2. BT-00028 en las fichas 29–35 y en el catálogo: sólo en filas de control de cambios o con «descartada»
+$ git grep -n "BT-00028" -- $TT/BT-000{29..35}* $API/06-Backlog-Tecnico/Backlog-Tecnico.md | grep -v -i "descartada" | grep -v "^[^:]*:[0-9]*:| [0-9]\.[0-9] | 2026-09-12 |"
+(vacío = ninguna mención vigente fuera de esas dos formas; exit del grep final: 1)
+
+### 3. tsort sobre las dependencias leídas del §4 de las fichas en Ready
+$ for f in $TT/BT-000{27..35}*; do grep -q "^\*\*Estado:\*\* Ready" "$f" || continue; id=$(basename $f | cut -c1-8); sed -n "/^## 4. Dependencias/,/^## 5/p" $f | grep -o "BT-000[0-9][0-9]" | while read d; do echo "$d $id"; done; done > tramo-k-deps.txt; cat tramo-k-deps.txt; tsort tramo-k-deps.txt; echo "exit: $?"
+BT-00027 BT-00032
+BT-00029 BT-00032
+BT-00030 BT-00032
+BT-00032 BT-00034
+BT-00032 BT-00035
+BT-00027
+BT-00029
+BT-00030
+BT-00032
+BT-00035
+BT-00034
+exit: 0
+
+### 4. Todo enlace relativo de los documentos editados resuelve
+$ for f in <editados>; do d=$(dirname $f); grep -o "](\.\{1,2\}/[^)#]*)" $f | sed "s/](//;s/)//" | sort -u | while read l; do test -e "$d/$l" || echo "ROTO en $f: $l"; done; done; echo "fin"
+fin (vacío arriba = todos resuelven; 16 documentos)
+
+### 5. Número de columnas de cada tabla, base 9d33d6d contra árbol de trabajo (sólo tablas de documentos editados)
+$ python3 tablas.py
+tablas con problema: 0
+
+OK Decisiones-Arquitectura.md: 14 tablas sin cambio de ancho (omitidas por legibilidad)
+OK README.md: 11 tablas sin cambio de ancho (omitidas por legibilidad)
+OK PRODUCT-INTAKE-Fabrica-De-Geometria.md: 52 tablas sin cambio de ancho (omitidas por legibilidad)
+OK Mesa-2026-09-12-ciclo-2.md: 7 tablas sin cambio de ancho (omitidas por legibilidad)
+OK Mesa-2026-09-12.md: 7 tablas sin cambio de ancho (omitidas por legibilidad)
+OK DoR-Tramo-k-2026-09-12.md: 13 tablas sin cambio de ancho (omitidas por legibilidad)
+OK Backlog-Tecnico.md: 30 tablas sin cambio de ancho (omitidas por legibilidad)
+OK Mini-Plan.md: 26 tablas sin cambio de ancho (omitidas por legibilidad)
+OK BT-00027-Reescribir-Adr-00008-Adoptando-V-Major-Para-La-Superficie-Publica.md: 2 tablas sin cambio de ancho (omitidas por legibilidad)
+OK BT-00028-Autenticacion-Por-Cliente-Para-Terceros-Api-Key-O-Client-Credentials.md: 2 tablas sin cambio de ancho (omitidas por legibilidad)
+OK BT-00029-Rate-Limiting-Por-Clave-O-Por-Ip.md: 2 tablas sin cambio de ancho (omitidas por legibilidad)
+OK BT-00030-Declarar-Cors-Condicional-Al-Cliente-Que-Aparezca-D-01.md: 2 tablas sin cambio de ancho (omitidas por legibilidad)
+OK BT-00032-Versionar-Las-Rutas-Publicas-Bajo-V1.md: 2 tablas sin cambio de ancho (omitidas por legibilidad)
+OK BT-00034-Sample-De-Onboarding-Para-Un-Cliente-Externo-Contra-V1.md: 2 tablas sin cambio de ancho (omitidas por legibilidad)
+OK ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md l.48 3 col (nueva), 5 filas: | Alternativa | Pros | Contras |
+OK ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md l.79 3 col (nueva), 5 filas: | Métrica | Objetivo | Cómo se mide |
+OK ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md l.144 3 col (nueva), 1 filas: | Versión | Fecha | Descripción |
+OK PRODUCT-INTAKE-Fabrica-De-Geometria.md l.1932 4 col (base=4), 50 filas, filas con otro ancho: 3 (preexistentes en la base, no tocadas): | Versión | Fecha | Cambios | Autor |
+OK Backlog-Tecnico.md l.586 3 col (base=3), 6 filas, filas con otro ancho: 1 (preexistentes en la base, no tocadas): | Versión | Fecha | Cambios |
+OK Mini-Plan.md l.478 3 col (nueva), 1 filas: | ID | Por qué no se construye | Fundamento |
+### 6. Intake: la frase superada sólo puede quedar en el control de cambios
+$ sed "/^## Control de cambios/,\$d" SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md | grep -c "Los clientes externos no usan este endpoint"
+0
+
+### 7. Comprometidas de Mini-Plan §3.5 contra las fichas en Ready
+$ diff <(sed -n "/^### 3.5/,/^## 4/p" Mini-Plan.md | grep -o "^| \`k\` | BT-[0-9]*" | grep -o "BT-[0-9]*" | sort) <(git grep -l "^\*\*Estado:\*\* Ready" -- */tareas-tecnicas/BT-000{27..35}* | grep -o "BT-000[0-9]*" | sort) && echo "coinciden"
+coinciden
+BT-00027 BT-00029 BT-00030 BT-00031 BT-00032 BT-00033 BT-00034 BT-00035 
+8
+
+### 8. «tercero» en la ADR nueva, el intake y las fichas 27–35: sólo en frases que lo descartan o en filas de control de cambios
+$ git grep -n -i "tercero" -- <ADR> <intake> $TT/BT-000{27..35}* | cut -c1-<ancho>
+ADR-00009-La-Api-Autentica-Personas-No-A:17 [cuerpo] …tarea técnica sin fuente: `BT-00028` —«Autenticación por cliente para terceros»— no pasó la Definition of Ready porque l…
+ADR-00009-La-Api-Autentica-Personas-No-A:23 [cuerpo] …Y, sobre un tercero que no sea del producto:…
+ADR-00009-La-Api-Autentica-Personas-No-A:25 [cuerpo] …> «No hay tercero — es re simple: un administrador, y luego …
+ADR-00009-La-Api-Autentica-Personas-No-A:37 [cuerpo] …il— **no cambia la autenticación**. El Product Owner descartó modelar terceros: quien usa la API es una persona con uno …
+ADR-00009-La-Api-Autentica-Personas-No-A:94 [cuerpo] …cklog-Tecnico/tareas-tecnicas/BT-00028-Autenticacion-Por-Cliente-Para-Terceros-Api-Key-O-Client-Credentials.md) (descart…
+BT-00027-Reescribir-Adr-00008-Adoptando-:22 [cuerpo] …d) vigente. La premisa que `ADR-00008` reescribe —«no hay clientes de terceros»— no vive sólo en esa ADR: también la sos…
+BT-00027-Reescribir-Adr-00008-Adoptando-:28 [cuerpo] …- la premisa «no hay clientes de terceros» se reescribe o se declara superada en el…
+BT-00027-Reescribir-Adr-00008-Adoptando-:76 [control de cambios] …contra el árbol.** La ficha reescribía la premisa «no hay clientes de terceros» sólo en `ADR-00008`, pero la misma premi…
+BT-00027-Reescribir-Adr-00008-Adoptando-:77 [control de cambios] …demás a la lista de §3 una constancia: la premisa «no hay clientes de terceros» que esta tarea reescribe se lee ahora co…
+BT-00028-Autenticacion-Por-Cliente-Para-:1 [cuerpo] …# BT-00028 — Autenticación por cliente para terceros (API key o `client_credentials`)…
+BT-00028-Autenticacion-Por-Cliente-Para-:5 [cuerpo] …**Documento:** BT-00028-Autenticacion-Por-Cliente-Para-Terceros-Api-Key-O-Client-Credentials.md…
+BT-00028-Autenticacion-Por-Cliente-Para-:18 [cuerpo] …Autenticación por cliente para terceros (API key o `client_credentials`).…
+BT-00028-Autenticacion-Por-Cliente-Para-:60 [control de cambios] …, **Aceptado** por decisión del Product Owner del 2026-09-12: «no hay tercero — es re simple: un administrador, y luego …
+BT-00030-Declarar-Cors-Condicional-Al-Cl:57 [control de cambios] …io que sea JavaScript de navegador desde otro origen**; sin mención a terceros. La caja temporal (criterio 6 de la DoR) …
+PRODUCT-INTAKE-Fabrica-De-Geometria.md:789 [cuerpo] …dido** [DECISIÓN 2026-09-12, PO, `ADR-00009`, cierra `D-01`]: «no hay tercero — es re simple: un administrador, y luego …
+PRODUCT-INTAKE-Fabrica-De-Geometria.md:794 [cuerpo] …y fija «sin versionado de rutas» sobre la premisa «no hay clientes de terceros», ya no cierta) y `Estrategia-Versionado.…
+PRODUCT-INTAKE-Fabrica-De-Geometria.md:798 [cuerpo] … no cambia** [DECISIÓN 2026-09-12]: la afirmación «no hay clientes de terceros», cierta hasta la versión 4.2, **deja de …
+PRODUCT-INTAKE-Fabrica-De-Geometria.md:886 [cuerpo] …ción propia del producto que actúa en nombre de una de ellas: «no hay tercero — es re simple: un administrador, y luego …
+PRODUCT-INTAKE-Fabrica-De-Geometria.md:1176 [cuerpo] …hay versionado de endpoints en este alcance porque no hay clientes de terceros.…
+PRODUCT-INTAKE-Fabrica-De-Geometria.md:1934 [control de cambios] …entre alumno y usuario general; no importa que sea alumno», y «no hay tercero — es re simple: un administrador, y luego …
+PRODUCT-INTAKE-Fabrica-De-Geometria.md:1935 [control de cambios] …, y `GeometriaFactory-Contracts`) deja de afirmar «no hay clientes de terceros»; §17.1.P.5 suma autenticación por client…
+```
+
 ---
 
 ## 7. Control de cambios
@@ -499,3 +620,4 @@ exit: 1
 | --- | --- | --- |
 | 1.0 | 2026-09-12 | Emisión inicial. Evalúa `BT-00027` a `BT-00035` contra los seis criterios de `Definition-Of-Ready.md` §2.1, con cita literal por criterio. Corrige siete fichas (`27` sin cambio de contenido; `29`, `30`, `32`, `33`, `34`, `35` con corrección de fuente o de criterio de aceptación) y deja dos en `Borrador` (`28`, `31`) por ausencia de fuente admitida, declarada en el lote de detenciones de §4. Verifica ausencia de ciclo entre las nueve BT con `tsort`. |
 | 1.1 | 2026-09-12 | **Corrige cuatro afirmaciones de la 1.0, detectadas por el orquestador contra el árbol** (las fichas ya iban en v1.2 al momento de esta fila; este documento las alcanza). **(a) BT-00031: la ausencia afirmada era falsa.** La 1.0 declaró «no existe fuente admitida» sobre una búsqueda que se limitó a `05` (`Arquitectura-Unidad-Entrega.md`) de la unidad de entrega, la superficie de `02` y el intake §15, y **no miró `SDD/Docs/Producto/Adrs/`**, cuyas ADR de nivel Producto también son «una ADR» para el criterio 1. Existe [`ADR-08008`](../Producto/Adrs/ADR-08008-La-Superficie-HTTP-Se-Describe-Y-El-Explorador-No-Se-Publica-Solo.md) §2 punto 2, `Aceptado`, que declara exactamente la decisión. Se reevalúan los seis criterios con la ficha v1.2 y pasa a **Ready**; sale del lote de detenciones de §4, que queda con **sólo BT-00028**, y §0 pasa de «dos huecos» a uno. **(b) BT-00030: el «Sí» del criterio 6 era una equivalencia no admitida.** «Hasta que `D-01` cierre» no es una etapa ni un punto de control (`D-01` es un ítem diferido sin evento ocurrido); la 1.0 lo dio por equivalente. La fila pasa a «Sí, tras corregir» con la cita nueva de la ficha v1.2: «la etapa `k`, que cierra en su punto de control». **(c) BT-00035: citaba otra sección.** «`ADR-00008` §1 punto 1» apuntaba a «Contexto»; la frase vive en §2 «Decisión», regla 1 (línea 27). Se corrigen la sección BT-00035 y la fila de §3. **(d) BT-00027: el criterio de aceptación alcanzaba un documento de dieciséis lugares.** La ficha reescribía la premisa sólo en `ADR-00008`; la v1.2 fija el conjunto medido con `git grep` (dieciséis lugares en once documentos) y declara, por el criterio 6, que la decisión alcanza fuera de la unidad (`ADR-08003`, nivel Producto, obliga a `GeometriaFactory-Contracts`); la 1.0 respondía «N/A» al criterio 6 por tipo `docs` y omitía esa segunda mitad del criterio. §3 pasa a **8 `Ready`, 1 `Borrador`**, medido con `git grep`. Se agrega §6 «Verificación tras la corrección» con siete comandos y sus salidas; el control de cambios pasa a §7. Sube minor: corrige resultados de la evaluación sin cambiar el método ni los criterios. |
+| 1.2 | 2026-09-12 | **La detención de §4 se resolvió: el lote queda vacío.** El Product Owner decidió el 2026-09-12 que la API autentica personas y no aplicaciones ([`ADR-00009`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md), **Aceptado**; `PRODUCT-INTAKE` **4.4**): no hay tercera clase de identidad, luego **BT-00028 no se construye** y pasa a `Descartada` (ficha 1.2). §0 y §3 registran el desenlace sin borrar el resultado de la 1.1; §4 conserva el texto de la detención como registro, precedido por cómo se resolvió; §6 suma la verificación 6.9 con las siete comprobaciones del mandato (estados 8/0/1, `BT-00028` sólo en control de cambios o con «descartada», `tsort` con salida `0` sobre cinco aristas, enlaces, anchos de tabla, frase superada del intake, comprometidas == `Ready`) y la del término «tercero». Sube minor: no cambia el método ni los criterios; cambia el resultado de una ficha por una decisión de producto posterior. |

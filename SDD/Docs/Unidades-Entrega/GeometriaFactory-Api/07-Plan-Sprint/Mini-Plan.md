@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Mini-Plan.md
-**Versión:** 3.0
+**Versión:** 3.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-25
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -459,8 +459,8 @@ sección **queda separada** de la de §3.1 en lugar de fusionarse con sus seis e
 | Etapa | ID | Tipo | Descripción corta | Prioridad | Estimación | Asignado | Estado |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `k` | BT-00027 | Tarea técnica | Reescribir `ADR-00008` adoptando `/v{MAJOR}/` para la superficie pública | Alta | No aplica | Equipo (1) | Pendiente |
-| `k` | BT-00029 | Tarea técnica | Rate limiting por clave o por IP | Alta | No aplica | Equipo (1) | Pendiente |
-| `k` | BT-00030 | Tarea técnica | Declarar CORS, condicional al cliente que aparezca (`D-01`) | Media | No aplica | Equipo (1) | Pendiente |
+| `k` | BT-00029 | Tarea técnica | Rate limiting por persona autenticada o por IP | Alta | No aplica | Equipo (1) | Pendiente |
+| `k` | BT-00030 | Tarea técnica | Declarar CORS, condicional a que aparezca un cliente propio de navegador desde otro origen | Media | No aplica | Equipo (1) | Pendiente |
 | `k` | BT-00031 | Tarea técnica | Publicar OpenAPI/Scalar en el ambiente de producción | Media | No aplica | Equipo (1) | Pendiente |
 | `k` | BT-00032 | Tarea técnica | Versionar las rutas públicas bajo `/v1/` | Alta | No aplica | Equipo (1) | Pendiente |
 | `k` | BT-00033 | Tarea técnica | Adoptar MinVer y etiquetar los commits de producción | Media | No aplica | Equipo (1) | Pendiente |
@@ -473,24 +473,21 @@ EP-T06 se justifican como **infraestructura compartida**, porque ninguna US exis
 consume — son la exposición del contrato hacia un cliente externo, no una capacidad que un alumno o un
 administrador ejerzan.
 
-**No comprometida (queda en `Borrador` tras la evaluación de DoR):**
+**No comprometida — `Descartada`:**
 
-| ID | Qué le falta | Qué la destraba |
+| ID | Por qué no se construye | Fundamento |
 | --- | --- | --- |
-| BT-00028 — Autenticación por cliente para terceros (API key o `client_credentials`) | Criterio 1 de la DoR: sin fuente admitida en `05` (componente, ADR, NFR, riesgo o punto abierto) ni en la superficie de `02`. La decisión de diseño ya está en `PRODUCT-INTAKE` §17.1.P.5, pero no tiene ADR propia | Que la categoría 05 (arquitectura) emita una ADR de autenticación de clientes externos, análoga a `ADR-00003` para el ROPC de alumnos, y esta ficha la cite |
+| BT-00028 — Autenticación por cliente para terceros (API key o `client_credentials`) | La API autentica **personas, no aplicaciones**: dos identidades (administrador y usuario) y `POST /auth/token` con las credenciales de la persona como única vía para toda aplicación propia; no existe una tercera clase de identidad a la que darle una clave. `D-01` cerró con esa decisión, sin ítem diferido nuevo | [`ADR-00009`](../05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md), **Aceptado** por decisión del Product Owner del 2026-09-12 («no hay tercero — es re simple: un administrador, y luego usuarios generales, que pueden ser cualquiera, entre estos alumnos»); `PRODUCT-INTAKE` **4.4** §17.1.P.3/§17.1.P.5 |
 
-**Consecuencia sobre lo comprometido.** `BT-00028` es dependencia directa de `BT-00029` y de `BT-00030`,
-y transitiva de `BT-00032`, `BT-00034` y `BT-00035` (ver §4.1 y la verificación de ciclo en
-[`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) §5). Las **cinco**
-BT que dependen de ella, directa o transitivamente (`BT-00029`, `BT-00030`, `BT-00032`, `BT-00034`,
-`BT-00035`), están individualmente `Ready` por DoR, pero **no pueden ejecutarse** hasta que `BT-00028`
-se destrabe: se comprometen igual, porque el criterio 5 de la DoR no exige que la dependencia esté
-`Ready`, y el orden de construcción de §4.1 refleja la espera. Las otras tres comprometidas —`BT-00027`,
-`BT-00031` y `BT-00033`— no dependen de `BT-00028` (`BT-00027` es su antecesora; las otras dos declaran
-`Dependencias: Ninguna` y ninguna BT depende de ellas), de modo que pueden ejecutarse sin esperar el
-destrabe. `BT-00031` entra como comprometida en esta corrida: la ausencia de fuente que la dejaba
-afuera era falsa (`ADR-08008` §2 punto 2, nivel Producto, `Aceptado`; ver
-[`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) 1.1, sección
+**Consecuencia sobre lo comprometido: ya no hay ninguna BT bloqueada.** Hasta la 3.0, `BT-00028` era
+dependencia directa de `BT-00029` y de `BT-00030`, y transitiva de `BT-00032`, `BT-00034` y `BT-00035`, y
+esas **cinco** no podían ejecutarse hasta que se destrabara. Con `BT-00028` descartada por [`ADR-00009`](../05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md),
+las tres que la declaraban dependencia la retiraron de su §4 (`BT-00029` 1.2 y `BT-00030` 1.3 quedan
+**sin dependencias**; `BT-00032` 1.2 queda con `BT-00027`, `BT-00029` y `BT-00030`), y las dos
+transitivas (`BT-00034`, `BT-00035`) siguen dependiendo sólo de `BT-00032`. Las ocho comprometidas se
+pueden ejecutar en el orden de §4.1 sin esperar nada fuera del tramo (verificación de ciclo en
+[`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) 1.2 §6). `BT-00031` entra como comprometida desde la 3.0: la ausencia de fuente que la dejaba
+afuera era falsa (`ADR-08008` §2 punto 2, nivel Producto, `Aceptado`; ver [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) 1.1, sección
 BT-00031).
 
 ## 4. Alcance técnico y orden de construcción
@@ -507,18 +504,24 @@ Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectur
 4. `e`: BT-00018 sobre BT-00008, BT-00011 y BT-00013; las cuatro historias; **BT-00023 y BT-00024 al cerrar**, porque son las dos pruebas de criterio propio del producto.
 5. `f`: las dos historias sobre BT-00018; **BT-00012 se vuelve a correr**.
 6. `h`: BT-00019 sobre BT-00011 y BT-00013; US-00023 después; **BT-00020 al final**, porque la colección recorre la superficie entera e incluye la aprobación y el rechazo; BT-00021 y BT-00026 antes del punto de control.
-7. `k`: **BT-00027 primero**, porque reescribe la premisa de `ADR-00008` que las demás asumen cambiada. **BT-00031 y BT-00033 no tienen dependencias declaradas y pueden ir en paralelo** con el resto del tramo, incluso antes que BT-00027, porque ninguna de las dos toca la superficie de versionado de rutas. Sobre BT-00027: **BT-00028** (queda `Borrador`, ver destrabe en §3.5); sobre BT-00028: **BT-00029 y BT-00030**, que pueden ir en paralelo entre sí. **BT-00032 al cierre del grupo**, porque depende de las cuatro anteriores (`BT-00027`, `BT-00028`, `BT-00029`, `BT-00030`) y versiona los quince puntos de una sola vez. **BT-00034 y BT-00035 después de BT-00032**, y pueden ir en paralelo entre sí.
+7. `k`: **BT-00027, BT-00029 y BT-00030 primero, y pueden ir en paralelo entre sí**: ninguna de las tres declara dependencias (`BT-00027` reescribe la premisa de `ADR-00008` que las demás asumen cambiada; `BT-00029` y `BT-00030` dejaron de depender de `BT-00028`, descartada por `ADR-00009`). **BT-00031 y BT-00033 tampoco tienen dependencias declaradas y pueden ir en paralelo** con el resto del tramo, porque ninguna de las dos toca la superficie de versionado de rutas. **BT-00032 al cierre del grupo**, porque depende de las tres primeras (`BT-00027`, `BT-00029`, `BT-00030`) y versiona los quince puntos de una sola vez. **BT-00034 y BT-00035 después de BT-00032**, y pueden ir en paralelo entre sí. `BT-00028` no está en el orden: es `Descartada` y no se construye.
 
 **Verificación de que el orden anterior no tiene ciclo**, con el mismo comando que
-[`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) §5 usa sobre las
-nueve BT:
+[`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) 1.2 §6 usa, leyendo las aristas del §4 de las fichas en `Ready`
+(`BT-00028`, `Descartada`, queda fuera del grafo):
 
 ```
+$ for f in tareas-tecnicas/BT-000{27..35}*; do grep -q "^\*\*Estado:\*\* Ready" "$f" || continue; id=$(basename $f | cut -c1-8); sed -n "/^## 4. Dependencias/,/^## 5/p" $f | grep -o "BT-000[0-9][0-9]" | while read d; do echo "$d $id"; done; done > tramo-k-deps.txt
+$ cat tramo-k-deps.txt
+BT-00027 BT-00032
+BT-00029 BT-00032
+BT-00030 BT-00032
+BT-00032 BT-00034
+BT-00032 BT-00035
 $ tsort tramo-k-deps.txt; echo "exit: $?"
 BT-00027
-BT-00028
-BT-00030
 BT-00029
+BT-00030
 BT-00032
 BT-00035
 BT-00034
@@ -854,3 +857,4 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto sin reescritura. Sube **major**. |
 | 2.1 | 2026-08-25 | **Migración normativa 10.0 → 13.3, fase M4, corte de la categoría 06.** La fila **«Unidad de estimación»** decía «Sin fijar, por `Product-Backlog.md` §4.1», y ese punto —`PA-01`— **quedó cerrado por lectura el 2026-08-25**: el producto no estima, planifica por etapas con punto de control bloqueante. **Se toca este documento aunque no esté en la superficie declarada del plan**, y es deliberado: dejarlo habría producido exactamente lo que el audit del corte del README raíz levantó como **P1** —reescribir una parte y dejar las cifras viejas en otra, que es peor que un documento viejo con su fecha declarada—. §1.2 **no cambia**: ya decía que no se declara capacidad numérica y que es deliberado, y es una de las citas con las que `PA-01` se cerró. Estado previo archivado en [`_legacy/2026-08-25/Mini-Plan-v2.0.md`](_legacy/2026-08-25/Mini-Plan-v2.0.md). Sube **minor**: corrige una fila y no cambia ninguna decisión. |
 | 3.0 | 2026-09-12 | **Agrega el tramo `k`** (exposición pública y versionado del contrato, `Roadmap-Producto.md` §2.1 fila `k`, `Backlog-Tecnico.md` §2.6 EP-T06), abierto por decisión del Product Owner posterior al handoff (`PRODUCT-INTAKE` **4.3**, `E-02` y `E-04`). §2.1 suma el objetivo del tramo y declara que **no forma parte del alcance original de ocho etapas comprometidas** (`Roadmap-Producto.md` §3 lo marca «sin release comprometido: pendiente»). §3.1 abre una subsección `3.5` con las **siete** BT que la evaluación de DoR de [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) deja en `Ready` (`BT-00027`, `BT-00029`, `BT-00030`, `BT-00032` a `BT-00035`) como comprometidas, y las **dos** que quedan en `Borrador` (`BT-00028`, `BT-00031`) como no comprometidas, con qué les falta y qué las destraba. §4.1 suma el orden de construcción del tramo (punto 7) con la verificación de ausencia de ciclo por `tsort`. `GeometriaFactory-Domain`, `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure` declaran en una línea, en sus respectivas §3.2 a §3.4, que **no tienen tramo `k`**: las nueve BT de `EP-T06` son íntegramente de `GeometriaFactory-Api`. Estado previo archivado en [`_legacy/2026-09-12/Mini-Plan-v2.1.md`](_legacy/2026-09-12/Mini-Plan-v2.1.md). Sube **major**: agrega una etapa nueva con ítems comprometidos, que es el mismo evento que `Rules-Backlog-Tecnico.md` §3.6 usa para pasar el backlog técnico a `v2.0` — modifica el contenido de la matriz de `Roadmap-Producto.md` §3 (fila `k`, nueva). **Nota de la misma corrida, antes de publicar (no sube versión):** la evaluación de DoR corrigió cuatro fichas contra el árbol (`BT-00027`, `BT-00030`, `BT-00031`, `BT-00035` en v1.2; [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) 1.1). `BT-00031` pasa a **comprometida** en §3.5: la ausencia de fuente admitida que la dejaba en `Borrador` era falsa, porque la búsqueda no había mirado `SDD/Docs/Producto/Adrs/` y existe `ADR-08008` §2 punto 2 (`Aceptado`). El total del tramo pasa de **siete a ocho** tareas comprometidas y la tabla de no comprometidas queda con **sólo `BT-00028`**. El párrafo «Consecuencia sobre lo comprometido» reescribe la frase sobre `BT-00031` (ya no habla de su ausencia sino de que se ejecuta sin esperar el destrabe) y corrige un recuento propio: decía «las seis BT que dependen de `BT-00028`» y son **cinco** (`BT-00029`, `BT-00030`, `BT-00032`, `BT-00034`, `BT-00035`; medido sobre el grafo de dependencias leído de las nueve fichas). §4.1 punto 7 **no cambia**: `BT-00031` ya figuraba sin dependencias y en paralelo, y `tsort` sobre las aristas leídas de las fichas devuelve el mismo orden con salida `0` ([`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) §6, verificación 6). Medido con `git grep -h "^\*\*Estado:\*\*" -- */tareas-tecnicas/BT-000{27..35}*` → 8 `Ready`, 1 `Borrador`. |
+| 3.1 | 2026-09-12 | **Propagación de [`ADR-00009`](../05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md)** (la API autentica personas, no aplicaciones; **Aceptado** por decisión del Product Owner del 2026-09-12). `BT-00028` sale de «no comprometidas» **como `Descartada`** —no hay nada que construir: no existe una tercera clase de identidad a la que darle una clave— y `D-01` cierra sin ítem diferido nuevo (`PRODUCT-INTAKE` **4.4**). §3.5 reescribe la tabla de no comprometidas (de «qué le falta / qué la destraba» a «por qué no se construye / fundamento») y el párrafo «Consecuencia sobre lo comprometido»: **ya no hay ninguna BT bloqueada**, porque `BT-00029` 1.2 y `BT-00030` 1.3 quedaron sin dependencias y `BT-00032` 1.2 retiró la suya. La tabla de comprometidas actualiza los títulos de `BT-00029` (por persona autenticada o por IP) y `BT-00030` (condicional a un cliente propio de navegador desde otro origen); las ocho filas siguen siendo las ocho fichas en `Ready`. §4.1 punto 7 recalcula el orden de construcción con `tsort` sobre las aristas leídas de las fichas en `Ready` (cinco aristas, salida `0`, pegada): `BT-00027`, `BT-00029` y `BT-00030` van primero y en paralelo; `BT-00032` sobre las tres; `BT-00034` y `BT-00035` después. Medido con `git grep -h "^\*\*Estado:\*\*" -- */tareas-tecnicas/BT-000{27..35}*` → 8 `Ready`, 1 `Descartada`, 0 `Borrador`. Sube **minor**: no agrega ni quita ítems comprometidos; cambia el estado de una no comprometida y el orden interno del tramo. |

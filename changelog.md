@@ -1171,3 +1171,39 @@ fuera de toda corrida del orquestador, las tres escaladas `E-02`, `E-04` y `E-05
 `RA-01`, §11 `RN-B7`/`RN-B8`), `Roadmap-Producto.md` **1.11** (fila `k`, diez ítems, estado
 pendiente), `Mesa-2026-09-12.md` **1.1** (§9 respondida, §8 con los dos ítems diferidos que quedan
 abiertos: `D-01` y el mecanismo de respaldo del backend).
+
+## La API autentica personas, no aplicaciones — 2026-09-12
+
+**Sin código.** Entrada de arquitectura, intake y backlog, no de una rama de etapa: el Product Owner
+cerró el ítem diferido `D-01` (quién es el cliente externo) con una decisión, no con la aparición de un
+cliente: *«El cliente o usuario del sistema: hay dos, el administrador que recepciona los trabajos y los
+visa —aprobar o rechazar— y gestiona a los usuarios; y los usuarios, que en un caso particular son
+alumnos. No hay diferencia entre alumno y usuario general; no importa que sea alumno»*, y *«no hay
+tercero — es re simple: un administrador, y luego usuarios generales, que pueden ser cualquiera, entre
+estos alumnos»*.
+
+- **`ADR-00009`** (`SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/`,
+  **Aceptado**): dos identidades y nada más —administrador y usuario, los dos valores de `Role`—;
+  toda aplicación del producto obtiene el acceso por `POST /auth/token` con las credenciales de la
+  persona, como el front hoy; **no hay claves de API ni `client_credentials`**. Cliente es cualquier
+  aplicación propia que actúe en nombre de una persona, y su forma —otro front, MAUI, script— no cambia
+  la autenticación. «Alumno» es la etiqueta del papel `Student`; el papel es «usuario», y no se
+  renombra ningún uso. Descarta tres alternativas con fundamento (API key por cliente,
+  `client_credentials`, un tercer papel «aplicación») y deja en §10 los comandos con que se verificó
+  cada cita.
+- **`BT-00028`** (autenticación por cliente para terceros) pasa a **`Descartada`**: no hay nada que
+  construir. `BT-00029` (rate limiting) pasa a ser **por persona autenticada o por IP** y queda sin
+  dependencias; `BT-00030` (CORS) queda condicionada sólo a que aparezca **un cliente propio que sea
+  JavaScript de navegador desde otro origen**, sin dependencias; `BT-00032` retira la dependencia de
+  `BT-00028`; `BT-00034` se autentica como una persona y no con una clave; `BT-00027` deja de nombrar
+  `ADR-00009` como identificador libre. **Ya no hay ninguna BT del tramo `k` bloqueada**: 8 `Ready`,
+  0 `Borrador`, 1 `Descartada`, y `tsort` sobre las dependencias leídas de las fichas termina en `0`.
+
+**Asentado en:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **4.4** (§17.1.P.3 filas «Quién la
+consume», «CORS» y «Endpoint de autenticación»; §17.1.P.5; `X-9`; `RA-01`; sin ítem diferido nuevo),
+`Mesa-2026-09-12-ciclo-2.md` **1.1** (§8, `D-01` respondida), `Mesa-2026-09-12.md` **1.2** (§8, fila de
+deuda cerrada), `DoR-Tramo-k-2026-09-12.md` **1.2** (§4 vacío, §6.9 con las verificaciones),
+`Backlog-Tecnico.md` **3.2**, `Mini-Plan.md` **3.1**, `README.md` de 07 **2.2**,
+`Decisiones-Arquitectura.md` **2.1** y `README.md` de 05 **2.1** (la ADR entra a los índices).
+**No se tocan** `ADR-00008`, `Estrategia-Versionado.md` ni los dieciséis lugares con «no hay clientes
+de terceros»: son `BT-00027`.

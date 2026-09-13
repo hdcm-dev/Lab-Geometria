@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-16
 **Autor:** Scrum Master + API PM (AG-07)
@@ -48,7 +48,7 @@ final el host—, no este documento.
 | Tareas técnicas comprometidas (alcance original) | 26 |
 | Puntos de acceso que el plan pone en pie | 15 de 15; `A-04` está **retirado y no se recicla** |
 | Puertas técnicas propias | **`PT-04`**, medida en la etapa `a` |
-| Tramo `k` (exposición pública y versionado, **no comprometido**: `Roadmap-Producto.md` §3 lo declara «pendiente») | 9 tareas técnicas evaluadas por DoR: **8 en `Ready`** (`BT-00027`, `BT-00029` a `BT-00035`) y **1 en `Borrador`** (`BT-00028`), ver [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) 1.1 |
+| Tramo `k` (exposición pública y versionado, **no comprometido**: `Roadmap-Producto.md` §3 lo declara «pendiente») | 9 tareas técnicas evaluadas por DoR: **8 en `Ready`** (`BT-00027`, `BT-00029` a `BT-00035`), **0 en `Borrador`** y **1 `Descartada`** (`BT-00028`, por [`ADR-00009`](../05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md): la API autentica personas, no aplicaciones), ver [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) 1.2 |
 
 **Las etapas `b` y `g` no producen trabajo acá**, y el motivo está en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2: la `b` no agrega ningún punto de acceso y **todo lo que la `g` necesita de esta superficie ya está expuesto en la `e`**.
 
@@ -73,6 +73,7 @@ final el host—, no este documento.
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 2.2 | 2026-09-12 | **La fila del tramo `k` de §3 pasa a 8 `Ready`, 0 `Borrador`, 1 `Descartada`**: `BT-00028` quedó `Descartada` por [`ADR-00009`](../05-Arquitectura-Tecnica/Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md) (**Aceptado**, decisión del Product Owner del 2026-09-12: la API autentica personas, no aplicaciones; no hay tercera clase de identidad a la que darle una clave) y ya no hay ninguna BT del tramo bloqueada (`Mini-Plan.md` 3.1 §3.5). Medido con `git grep -h "^\*\*Estado:\*\*" -- */tareas-tecnicas/BT-000{27..35}*` → 8 `Ready`, 1 `Descartada`. Ningún otro contenido de este README cambia. Sube minor. |
 | 2.1 | 2026-09-12 | **Suma el tramo `k`** a la tabla de §3: 9 tareas técnicas evaluadas por DoR, 7 en `Ready` y 2 en `Borrador`, con enlace a [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md). La fecha de corte de §3 pasa de 2026-08-10 a 2026-09-12 y las filas del alcance original se rotulan como tales, para no confundirlas con el tramo nuevo, que **no está comprometido**. Ningún otro contenido de este README cambia. Sube minor. **Nota de la misma corrida, antes de publicar (no sube versión):** la fila del tramo `k` pasa a **8 en `Ready`, 1 en `Borrador` (`BT-00028`)**: la evaluación de DoR 1.1 corrigió `BT-00031` a `Ready` (su ausencia de fuente era falsa: `ADR-08008` §2 punto 2, nivel Producto, `Aceptado`, que la búsqueda de la 1.0 no había mirado). Medido con `git grep -h "^\*\*Estado:\*\*" -- */tareas-tecnicas/BT-000{27..35}*` → 8 `Ready`, 1 `Borrador`. |
 | 1.1 | 2026-08-11 | **Cierre de la fila de `10-Examples`** de §4, que decía «todavía no emitida». La categoría se emitió en su pasada de diseño y la colección de peticiones es su sample 02, con el contrato `VER-00002` que entra a la matriz de sensado como `SD-00002`. La fila se **conserva** con su desenlace y su fecha. Se declara además que las filas de `08-Calidad-Y-Pruebas` y de `09-Devops` de esa misma tabla **también quedaron desactualizadas** y que corregirlas pertenece a esta categoría en su próxima revisión. **Ningún tramo del plan, ninguna puerta y ningún recuento cambian.** Sube minor. |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Declara el único artefacto emitido, los **cuatro** que se omiten con el motivo de cada uno, el estado del plan con sus **seis** tramos, sus quince puntos de acceso y la puerta `PT-04`, y dónde vive lo que este plan no decide, incluidos los dos huecos del conjunto cerrado de códigos y las tres categorías todavía no emitidas. |
