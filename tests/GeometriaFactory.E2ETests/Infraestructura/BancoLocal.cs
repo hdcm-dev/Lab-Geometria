@@ -155,7 +155,9 @@ public static class BancoLocal
         var correo = "e2e.admin@prueba-automatica.invalid";
         var clave = $"E2e-{Guid.NewGuid():n}"[..20] + "-2026";
 
-        using var cliente = new HttpClient { BaseAddress = new Uri(urlApi + "/") };
+        // Sobre el prefijo de versión del contrato; `ApiBaseUrl` del front sigue siendo el
+        // anfitrión, porque la versión la conoce el cliente y no la dirección (`ADR-00010`).
+        using var cliente = new HttpClient { BaseAddress = new Uri(urlApi + "/v1/") };
         var alta = await cliente.PostAsJsonAsync("cuentas/administrador",
             new { email = correo, firstName = "Prueba", lastName = "Administracion", password = clave });
 

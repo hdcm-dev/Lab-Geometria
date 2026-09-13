@@ -34,21 +34,36 @@ public sealed class DataServiceClient
     private const string HealthPath = "salud";
 
     /// <summary>
+    /// El prefijo de versión del contrato REST, `v1/`, que se antepone a **toda** ruta del contrato
+    /// y a ninguna otra (`ADR-00010`). Es la misma cifra que
+    /// `GeometriaFactory.Api.Endpoints.ContractRoutePrefix.Major`, escrita acá porque esta pieza
+    /// no referencia al servicio (`Web ADR-07`) y porque la versión la conoce **el cliente**, no la
+    /// dirección: `ApiBaseUrl` sigue siendo el anfitrión, así que estrenar un `MAJOR` es un cambio
+    /// de código de esta clase —que compila contra el ensamblado de contratos y se despliega junto
+    /// con el servicio— y no de la configuración de quien despliega.
+    /// </summary>
+    /// <remarks>
+    /// `HealthPath` NO LO LLEVA, y es la única: el punto de salud es del arranque y no del
+    /// contrato. El motivo entero está en `ContractRoutePrefix` del servicio.
+    /// </remarks>
+    private const string ContractPrefix = "v1/";
+
+    /// <summary>
     /// Ruta del punto de aprovisionamiento `A-17`, derivada por `Definicion-Superficie-HTTP.md`
     /// §3. Es la misma constante que `GeometriaFactory.Api.Endpoints.AccountEndpoints`
     /// `ProvisioningStateRoute`, sin la barra inicial porque acá la dirección base la pone la
     /// configuración.
     /// </summary>
-    private const string ProvisioningPath = "aprovisionamiento";
+    private const string ProvisioningPath = ContractPrefix + "aprovisionamiento";
 
     /// <summary>Ruta del punto de canje `A-01`. Declarada por el intake §17.5.P.3.</summary>
-    private const string TokenPath = "auth/token";
+    private const string TokenPath = ContractPrefix + "auth/token";
 
     /// <summary>Ruta del punto de configuración `A-03`. [derivado]</summary>
-    private const string AdministratorSetupPath = "cuentas/administrador";
+    private const string AdministratorSetupPath = ContractPrefix + "cuentas/administrador";
 
     /// <summary>Ruta del punto de cambio de la contraseña propia `A-05`. [derivado]</summary>
-    private const string OwnPasswordPath = "cuenta/contrasena";
+    private const string OwnPasswordPath = ContractPrefix + "cuenta/contrasena";
 
     /// <summary>
     /// Ruta del alta de cuenta `A-02` y raíz del listado `A-06`, del cambio de situación `A-07`,
@@ -56,7 +71,7 @@ public sealed class DataServiceClient
     /// `GeometriaFactory.Api.Endpoints.CommissionAccountEndpoints.AccountsRoute`, sin la barra
     /// inicial porque acá la dirección base la pone la configuración. [derivado]
     /// </summary>
-    private const string AccountsPath = "cuentas";
+    private const string AccountsPath = ContractPrefix + "cuentas";
 
     /// <summary>
     /// Ruta del alta `A-10` y raíz del listado `A-13`, de la reedición `A-11`, de la eliminación
@@ -64,7 +79,14 @@ public sealed class DataServiceClient
     /// `GeometriaFactory.Api.Endpoints.WorkEndpoints.WorksRoute`, sin la barra inicial porque acá
     /// la dirección base la pone la configuración. [derivado]
     /// </summary>
-    private const string WorksPath = "trabajos";
+    private const string WorksPath = ContractPrefix + "trabajos";
+
+    /// <summary>
+    /// Ruta de la interpretación sin guardar `A-18`. Es la misma constante que
+    /// `GeometriaFactory.Api.Endpoints.WorkEndpoints.InterpretationsRoute`, y no cuelga de
+    /// `WorksPath` por el mismo motivo que allá: no guarda nada. [derivado]
+    /// </summary>
+    private const string InterpretationsPath = ContractPrefix + "interpretaciones";
 
     /// <summary>
     /// Nombre del parámetro de filtro por alumno de `A-13`. Es la misma constante que
@@ -277,7 +299,7 @@ public sealed class DataServiceClient
         CancellationToken cancellationToken = default) =>
         SendAsync<WorkInterpretationRequest, WorkInterpretationResponse>(
             HttpMethod.Post,
-            "/interpretaciones",
+            InterpretationsPath,
             new WorkInterpretationRequest(originalJson),
             accessToken,
             cancellationToken);

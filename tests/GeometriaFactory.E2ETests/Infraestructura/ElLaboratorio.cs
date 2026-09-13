@@ -204,7 +204,12 @@ public static class ElLaboratorio
 
     // ---- LA SIEMBRA ---------------------------------------------------------------------------
 
-    private static HttpClient Cliente() => new() { BaseAddress = new Uri(UrlDelServicioDeDatos + "/") };
+    /// <summary>
+    /// Un cliente ya parado sobre el prefijo de versión del contrato, `/v1/`: las rutas que siguen
+    /// son las relativas del contrato (`ADR-00010`). El punto de salud no lo lleva, y acá no se
+    /// consulta.
+    /// </summary>
+    private static HttpClient Cliente() => new() { BaseAddress = new Uri(UrlDelServicioDeDatos + "/v1/") };
 
     /// <summary>Canjea la credencial del administrador por un testigo del servicio de datos.</summary>
     public static async Task<string> TestigoDelAdministradorAsync()

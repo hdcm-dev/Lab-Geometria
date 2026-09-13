@@ -425,7 +425,7 @@ public sealed class AccountLifecycleWebSurfaceTests : IDisposable
         // Y el servicio igual la rechaza: esta pieza ACOTA, no hace cumplir.
         using var data = _dataService.CreateClient();
         using var forced = new HttpRequestMessage(
-            HttpMethod.Post, $"/cuentas/{administratorId}/reseteo-de-contrasena")
+            HttpMethod.Post, $"/v1/cuentas/{administratorId}/reseteo-de-contrasena")
         {
             Content = JsonContent.Create(new PasswordResetRequest(administratorId)),
         };
@@ -536,7 +536,7 @@ public sealed class AccountLifecycleWebSurfaceTests : IDisposable
         using var data = _dataService.CreateClient();
 
         using var setup = await data.PostAsJsonAsync(
-            "/cuentas/administrador",
+            "/v1/cuentas/administrador",
             new AdministratorSetupRequest(AdministratorEmail, "Ana", "Rossi", AdministratorPassword));
 
         Assert.Equal(HttpStatusCode.Created, setup.StatusCode);
@@ -570,7 +570,7 @@ public sealed class AccountLifecycleWebSurfaceTests : IDisposable
     {
         using var data = _dataService.CreateClient();
         using var exchange = await data.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(AdministratorEmail, AdministratorPassword));
+            "/v1/auth/token", new CredentialExchangeRequest(AdministratorEmail, AdministratorPassword));
 
         Assert.Equal(HttpStatusCode.OK, exchange.StatusCode);
         var session = await exchange.Content.ReadFromJsonAsync<SessionResponse>();

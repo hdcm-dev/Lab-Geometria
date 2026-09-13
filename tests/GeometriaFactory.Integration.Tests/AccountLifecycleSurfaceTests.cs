@@ -89,7 +89,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
         await RegisterStudentAsync();
 
         using var again = await _client.PostAsJsonAsync(
-            "/cuentas", new AccountRegistrationRequest(StudentEmail.ToUpperInvariant(), "Otra", "Persona"));
+            "/v1/cuentas", new AccountRegistrationRequest(StudentEmail.ToUpperInvariant(), "Otra", "Persona"));
 
         Assert.Equal(HttpStatusCode.Conflict, again.StatusCode);
 
@@ -112,7 +112,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
         await RegisterStudentAsync();
 
         using var exchange = await _client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(StudentEmail, "cualquier-cosa"));
+            "/v1/auth/token", new CredentialExchangeRequest(StudentEmail, "cualquier-cosa"));
 
         Assert.Equal(HttpStatusCode.Forbidden, exchange.StatusCode);
 
@@ -157,7 +157,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         // EL ALUMNO SE AUTENTICA Y NO OBTIENE SESIÓN DE TRABAJO: el canje devuelve el desvío.
         using var diverted = await _client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(StudentEmail, provisional));
+            "/v1/auth/token", new CredentialExchangeRequest(StudentEmail, provisional));
 
         Assert.Equal(HttpStatusCode.Forbidden, diverted.StatusCode);
         var divertedBody = await diverted.Content.ReadAsStringAsync();
@@ -166,7 +166,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         // CAMBIA LA PROVISORIA POR `A-05`, presentándola como vigente, y la marca se levanta.
         using var changed = await _client.PostAsJsonAsync(
-            "/cuenta/contrasena",
+            "/v1/cuenta/contrasena",
             new OwnPasswordChangeRequest(provisional, "la-que-elijo-yo", StudentEmail));
 
         Assert.Equal(HttpStatusCode.OK, changed.StatusCode);
@@ -174,7 +174,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         // Y RECIÉN AHORA HAY SESIÓN DE TRABAJO.
         using var session = await _client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(StudentEmail, "la-que-elijo-yo"));
+            "/v1/auth/token", new CredentialExchangeRequest(StudentEmail, "la-que-elijo-yo"));
 
         Assert.Equal(HttpStatusCode.OK, session.StatusCode);
         Assert.NotNull((await session.Content.ReadFromJsonAsync<SessionResponse>())!.AccessToken);
@@ -227,7 +227,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
         var (_, id) = await RegisterStudentAsync();
         await EnableAsync(token, id);
 
-        using var request = Authorized(HttpMethod.Get, "/cuentas", token);
+        using var request = Authorized(HttpMethod.Get, "/v1/cuentas", token);
         using var response = await _client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -287,12 +287,12 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         // Sin la vigente: la petición no es utilizable y la respuesta nombra el campo.
         using var withoutCurrent = await _client.PostAsJsonAsync(
-            "/cuenta/contrasena", new OwnPasswordChangeRequest(null, "la-que-quiero", StudentEmail));
+            "/v1/cuenta/contrasena", new OwnPasswordChangeRequest(null, "la-que-quiero", StudentEmail));
         Assert.Equal(HttpStatusCode.BadRequest, withoutCurrent.StatusCode);
 
         // Con una vigente equivocada: `401` neutro y **la marca sigue puesta**.
         using var wrongCurrent = await _client.PostAsJsonAsync(
-            "/cuenta/contrasena", new OwnPasswordChangeRequest("no-es-la-provisoria", "la-que-quiero", StudentEmail));
+            "/v1/cuenta/contrasena", new OwnPasswordChangeRequest("no-es-la-provisoria", "la-que-quiero", StudentEmail));
         Assert.Equal(HttpStatusCode.Unauthorized, wrongCurrent.StatusCode);
 
         Assert.True(await MarkOfAsync(StudentEmail));
@@ -300,7 +300,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         // Y con la provisoria correcta sí procede, para que la prueba no pase por ausencia.
         using var withCurrent = await _client.PostAsJsonAsync(
-            "/cuenta/contrasena", new OwnPasswordChangeRequest(provisional, "la-que-quiero", StudentEmail));
+            "/v1/cuenta/contrasena", new OwnPasswordChangeRequest(provisional, "la-que-quiero", StudentEmail));
         Assert.Equal(HttpStatusCode.OK, withCurrent.StatusCode);
     }
 
@@ -351,13 +351,13 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
         // de la cuenta se resuelve antes que la credencial (`Api CU-01` §4), de modo que ahí las
         // dos provisorias se verían iguales y la prueba no distinguiría nada.
         using var withTheOldOne = await _client.PostAsJsonAsync(
-            "/cuenta/contrasena",
+            "/v1/cuenta/contrasena",
             new OwnPasswordChangeRequest(first.ProvisionalPassword, "la-que-quiero", StudentEmail));
         Assert.Equal(HttpStatusCode.Unauthorized, withTheOldOne.StatusCode);
         Assert.True(await MarkOfAsync(StudentEmail));
 
         using var withTheNewOne = await _client.PostAsJsonAsync(
-            "/cuenta/contrasena",
+            "/v1/cuenta/contrasena",
             new OwnPasswordChangeRequest(second.ProvisionalPassword, "la-que-quiero", StudentEmail));
         Assert.Equal(HttpStatusCode.OK, withTheNewOne.StatusCode);
         Assert.False(await MarkOfAsync(StudentEmail));
@@ -423,7 +423,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         // `A-09` · el reseteo, con su código propio del conjunto cerrado.
         using var reset = await SendAsync(
-            Authorized(HttpMethod.Post, $"/cuentas/{administratorId}/reseteo-de-contrasena", token));
+            Authorized(HttpMethod.Post, $"/v1/cuentas/{administratorId}/reseteo-de-contrasena", token));
         Assert.Equal(HttpStatusCode.Conflict, reset.StatusCode);
         Assert.Contains(
             ErrorCode.ResetNotApplicableToAdministratorAccount,
@@ -448,7 +448,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         // Y SIGUE PUDIENDO ENTRAR: INV-08 no es sólo que no la borren, es que sigue gobernando.
         using var session = await _client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(AdministratorEmail, AdministratorPassword));
+            "/v1/auth/token", new CredentialExchangeRequest(AdministratorEmail, AdministratorPassword));
         Assert.Equal(HttpStatusCode.OK, session.StatusCode);
     }
 
@@ -468,13 +468,13 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         // El alumno cambia la provisoria, entra y obtiene un acceso válido.
         using var changed = await _client.PostAsJsonAsync(
-            "/cuenta/contrasena", new OwnPasswordChangeRequest(provisional, "la-que-elijo-yo", StudentEmail));
+            "/v1/cuenta/contrasena", new OwnPasswordChangeRequest(provisional, "la-que-elijo-yo", StudentEmail));
         Assert.Equal(HttpStatusCode.OK, changed.StatusCode);
 
         var studentToken = await SignInAsync(StudentEmail, "la-que-elijo-yo");
 
         // Con ese acceso, un punto guardado responde: la prueba no va a pasar por ausencia.
-        using var beforeTheReset = await SendAsync(Authorized(HttpMethod.Get, "/cuentas", studentToken));
+        using var beforeTheReset = await SendAsync(Authorized(HttpMethod.Get, "/v1/cuentas", studentToken));
         Assert.Equal(HttpStatusCode.Forbidden, beforeTheReset.StatusCode);
         Assert.Contains(
             ErrorCode.OperationAdminOnly,
@@ -484,7 +484,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
         // AHORA EL ADMINISTRADOR LE RESETEA LA CONTRASEÑA, y el acceso del alumno sigue vigente.
         await ResetAsync(administratorToken, id);
 
-        using var afterTheReset = await SendAsync(Authorized(HttpMethod.Get, "/cuentas", studentToken));
+        using var afterTheReset = await SendAsync(Authorized(HttpMethod.Get, "/v1/cuentas", studentToken));
         Assert.Equal(HttpStatusCode.Forbidden, afterTheReset.StatusCode);
 
         var body = await afterTheReset.Content.ReadAsStringAsync();
@@ -506,7 +506,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
         var provisional = (await EnableAsync(administratorToken, id)).ProvisionalPassword!;
 
         using var changed = await _client.PostAsJsonAsync(
-            "/cuenta/contrasena", new OwnPasswordChangeRequest(provisional, "la-que-elijo-yo", StudentEmail));
+            "/v1/cuenta/contrasena", new OwnPasswordChangeRequest(provisional, "la-que-elijo-yo", StudentEmail));
         Assert.Equal(HttpStatusCode.OK, changed.StatusCode);
 
         var studentToken = await SignInAsync(StudentEmail, "la-que-elijo-yo");
@@ -517,12 +517,12 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         var refusals = new List<HttpResponseMessage>
         {
-            await SendAsync(Authorized(HttpMethod.Get, "/cuentas", studentToken)),
-            await SendAsync(Authorized(HttpMethod.Post, $"/cuentas/{id}/situacion", studentToken,
+            await SendAsync(Authorized(HttpMethod.Get, "/v1/cuentas", studentToken)),
+            await SendAsync(Authorized(HttpMethod.Post, $"/v1/cuentas/{id}/situacion", studentToken,
                 new AccountStatusChangeRequest(id, nameof(AccountStatus.Blocked)))),
-            await SendAsync(Authorized(HttpMethod.Delete, $"/cuentas/{id}", studentToken,
+            await SendAsync(Authorized(HttpMethod.Delete, $"/v1/cuentas/{id}", studentToken,
                 new AccountDeletionRequest(id, StudentEmail))),
-            await SendAsync(Authorized(HttpMethod.Post, $"/cuentas/{id}/reseteo-de-contrasena", studentToken)),
+            await SendAsync(Authorized(HttpMethod.Post, $"/v1/cuentas/{id}/reseteo-de-contrasena", studentToken)),
         };
 
         foreach (var refusal in refusals)
@@ -552,14 +552,14 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         var refusals = new List<HttpResponseMessage>
         {
-            await _client.GetAsync("/cuentas"),
+            await _client.GetAsync("/v1/cuentas"),
             await _client.PostAsJsonAsync(
-                $"/cuentas/{id}/situacion", new AccountStatusChangeRequest(id, nameof(AccountStatus.Enabled))),
-            await SendAsync(new HttpRequestMessage(HttpMethod.Delete, $"/cuentas/{id}")
+                $"/v1/cuentas/{id}/situacion", new AccountStatusChangeRequest(id, nameof(AccountStatus.Enabled))),
+            await SendAsync(new HttpRequestMessage(HttpMethod.Delete, $"/v1/cuentas/{id}")
             {
                 Content = JsonContent.Create(new AccountDeletionRequest(id, StudentEmail)),
             }),
-            await _client.PostAsync($"/cuentas/{id}/reseteo-de-contrasena", content: null),
+            await _client.PostAsync($"/v1/cuentas/{id}/reseteo-de-contrasena", content: null),
         };
 
         foreach (var refusal in refusals)
@@ -572,7 +572,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
         Assert.Null(await StoredHashOfAsync(StudentEmail));
 
         // Y con el acceso del administrador el mismo punto sí responde: no pasa por ausencia.
-        using var listed = await SendAsync(Authorized(HttpMethod.Get, "/cuentas", token));
+        using var listed = await SendAsync(Authorized(HttpMethod.Get, "/v1/cuentas", token));
         Assert.Equal(HttpStatusCode.OK, listed.StatusCode);
     }
 
@@ -585,11 +585,11 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         var responses = new List<HttpResponseMessage>
         {
-            await SendAsync(Authorized(HttpMethod.Post, $"/cuentas/{missing}/situacion", token,
+            await SendAsync(Authorized(HttpMethod.Post, $"/v1/cuentas/{missing}/situacion", token,
                 new AccountStatusChangeRequest(missing, nameof(AccountStatus.Enabled)))),
-            await SendAsync(Authorized(HttpMethod.Delete, $"/cuentas/{missing}", token,
+            await SendAsync(Authorized(HttpMethod.Delete, $"/v1/cuentas/{missing}", token,
                 new AccountDeletionRequest(missing, StudentEmail))),
-            await SendAsync(Authorized(HttpMethod.Post, $"/cuentas/{missing}/reseteo-de-contrasena", token)),
+            await SendAsync(Authorized(HttpMethod.Post, $"/v1/cuentas/{missing}/reseteo-de-contrasena", token)),
         };
 
         foreach (var response in responses)
@@ -718,7 +718,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
     private async Task<string> ConfigureAdministratorAsync()
     {
         using var setup = await _client.PostAsJsonAsync(
-            "/cuentas/administrador",
+            "/v1/cuentas/administrador",
             new AdministratorSetupRequest(AdministratorEmail, "Ana", "Rossi", AdministratorPassword));
 
         Assert.Equal(HttpStatusCode.Created, setup.StatusCode);
@@ -729,7 +729,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
     private async Task<string> SignInAsync(string email, string password)
     {
         using var exchange = await _client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(email, password));
+            "/v1/auth/token", new CredentialExchangeRequest(email, password));
 
         Assert.Equal(HttpStatusCode.OK, exchange.StatusCode);
 
@@ -739,7 +739,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
     private async Task<(AccountRegistrationResponse Registration, Guid Id)> RegisterStudentAsync()
     {
         using var response = await _client.PostAsJsonAsync(
-            "/cuentas", new AccountRegistrationRequest(StudentEmail, StudentFirstName, StudentLastName));
+            "/v1/cuentas", new AccountRegistrationRequest(StudentEmail, StudentFirstName, StudentLastName));
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
@@ -762,7 +762,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
         string token, Guid id, AccountStatus intendedStatus)
     {
         using var response = await SendAsync(Authorized(
-            HttpMethod.Post, $"/cuentas/{id}/situacion", token,
+            HttpMethod.Post, $"/v1/cuentas/{id}/situacion", token,
             new AccountStatusChangeRequest(id, intendedStatus.ToString())));
 
         var body = response.StatusCode == HttpStatusCode.OK
@@ -775,7 +775,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
     private async Task<PasswordResetResponse> ResetAsync(string token, Guid id)
     {
         using var response = await SendAsync(
-            Authorized(HttpMethod.Post, $"/cuentas/{id}/reseteo-de-contrasena", token));
+            Authorized(HttpMethod.Post, $"/v1/cuentas/{id}/reseteo-de-contrasena", token));
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -784,7 +784,7 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
     private Task<HttpResponseMessage> DeleteAsync(string token, Guid id, string confirmationEmail) =>
         SendAsync(Authorized(
-            HttpMethod.Delete, $"/cuentas/{id}", token, new AccountDeletionRequest(id, confirmationEmail)));
+            HttpMethod.Delete, $"/v1/cuentas/{id}", token, new AccountDeletionRequest(id, confirmationEmail)));
 
     private static HttpRequestMessage Authorized(HttpMethod method, string route, string token, object? body = null)
     {

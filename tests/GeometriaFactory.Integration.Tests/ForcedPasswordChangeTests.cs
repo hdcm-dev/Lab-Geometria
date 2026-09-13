@@ -76,7 +76,7 @@ public sealed class ForcedPasswordChangeTests : IDisposable
         // 1 · Entra con la provisoria. La credencial SE RECONOCE y no se admite: `403` con el
         //     motivo del cambio requerido, y CERO accesos emitidos (`Api CU-01` CA-05).
         var diverted = await client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(StudentEmail, ProvisionalPassword));
+            "/v1/auth/token", new CredentialExchangeRequest(StudentEmail, ProvisionalPassword));
         var divertedBody = await diverted.Content.ReadAsStringAsync();
 
         Trace("1 · canje con la provisoria", diverted, divertedBody);
@@ -87,7 +87,7 @@ public sealed class ForcedPasswordChangeTests : IDisposable
         // 2 · Es llevada al cambio, y ahí cambia: SIN credencial de sesión, con la provisoria
         //     como contraseña vigente. Es la segunda forma de autenticarse del intake 1.34.
         var changed = await client.PostAsJsonAsync(
-            "/cuenta/contrasena",
+            "/v1/cuenta/contrasena",
             new OwnPasswordChangeRequest(ProvisionalPassword, ChosenPassword, StudentEmail));
         var changedBody = await changed.Content.ReadAsStringAsync();
 
@@ -103,12 +103,12 @@ public sealed class ForcedPasswordChangeTests : IDisposable
 
         // 4 · La provisoria dejó de servir y la nueva sí entrega sesión de trabajo.
         var withProvisional = await client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(StudentEmail, ProvisionalPassword));
+            "/v1/auth/token", new CredentialExchangeRequest(StudentEmail, ProvisionalPassword));
         Trace("4a · canje con la provisoria, ya cambiada", withProvisional, await withProvisional.Content.ReadAsStringAsync());
         Assert.Equal(HttpStatusCode.Unauthorized, withProvisional.StatusCode);
 
         var session = await client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(StudentEmail, ChosenPassword));
+            "/v1/auth/token", new CredentialExchangeRequest(StudentEmail, ChosenPassword));
         Trace("4b · canje con la contraseña elegida", session, Redacted(await session.Content.ReadAsStringAsync()));
         Assert.Equal(HttpStatusCode.OK, session.StatusCode);
 
@@ -145,12 +145,12 @@ public sealed class ForcedPasswordChangeTests : IDisposable
 
         // El canje con la provisoria correcta: reconocida y NO admitida.
         var diverted = await client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(StudentEmail, ProvisionalPassword));
+            "/v1/auth/token", new CredentialExchangeRequest(StudentEmail, ProvisionalPassword));
         Assert.Equal(HttpStatusCode.Forbidden, diverted.StatusCode);
 
         // El cambio con la provisoria equivocada: `401`, y LA MARCA SIGUE PUESTA.
         var refused = await client.PostAsJsonAsync(
-            "/cuenta/contrasena",
+            "/v1/cuenta/contrasena",
             new OwnPasswordChangeRequest("no-es-la-que-me-paso", ChosenPassword, StudentEmail));
 
         Assert.Equal(HttpStatusCode.Unauthorized, refused.StatusCode);
@@ -160,7 +160,7 @@ public sealed class ForcedPasswordChangeTests : IDisposable
         // Y después del intento fallido la provisoria SIGUE siendo la vigente: el intento no
         // cambió nada. El canje vuelve a dar el desvío y ningún acceso.
         var again = await client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(StudentEmail, ProvisionalPassword));
+            "/v1/auth/token", new CredentialExchangeRequest(StudentEmail, ProvisionalPassword));
         Assert.Equal(HttpStatusCode.Forbidden, again.StatusCode);
         Assert.DoesNotContain("accessToken", await again.Content.ReadAsStringAsync(), StringComparison.OrdinalIgnoreCase);
     }
@@ -178,7 +178,7 @@ public sealed class ForcedPasswordChangeTests : IDisposable
         // La cuenta del administrador NO tiene la marca: su contraseña se cambia con sesión, y
         // la forma sin sesión no le sirve aunque presente la contraseña correcta.
         var withoutSession = await client.PostAsJsonAsync(
-            "/cuenta/contrasena",
+            "/v1/cuenta/contrasena",
             new OwnPasswordChangeRequest(AdministratorPassword, ChosenPassword, AdministratorEmail));
 
         Assert.Equal(HttpStatusCode.Unauthorized, withoutSession.StatusCode);
@@ -186,7 +186,7 @@ public sealed class ForcedPasswordChangeTests : IDisposable
         // Un correo que no existe responde EXACTAMENTE igual: la marca de una cuenta ajena no
         // es averiguable desde afuera.
         var unknown = await client.PostAsJsonAsync(
-            "/cuenta/contrasena",
+            "/v1/cuenta/contrasena",
             new OwnPasswordChangeRequest(AdministratorPassword, ChosenPassword, "nadie@frre.utn.edu.ar"));
 
         Assert.Equal(withoutSession.StatusCode, unknown.StatusCode);
@@ -195,17 +195,17 @@ public sealed class ForcedPasswordChangeTests : IDisposable
         // Ni acceso firmado ni correo: nada identifica a la cuenta, y responde `401` como
         // respondía la guardia.
         var anonymous = await client.PostAsJsonAsync(
-            "/cuenta/contrasena", new OwnPasswordChangeRequest(AdministratorPassword, ChosenPassword));
+            "/v1/cuenta/contrasena", new OwnPasswordChangeRequest(AdministratorPassword, ChosenPassword));
         Assert.Equal(HttpStatusCode.Unauthorized, anonymous.StatusCode);
 
         // Y la contraseña del administrador no cambió por ninguno de los tres intentos: sigue
         // entrando con la suya, y por la forma CON sesión el cambio sí procede.
         var session = await client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(AdministratorEmail, AdministratorPassword));
+            "/v1/auth/token", new CredentialExchangeRequest(AdministratorEmail, AdministratorPassword));
         Assert.Equal(HttpStatusCode.OK, session.StatusCode);
 
         var opened = await session.Content.ReadFromJsonAsync<SessionResponse>();
-        using var authorized = new HttpRequestMessage(HttpMethod.Post, "/cuenta/contrasena")
+        using var authorized = new HttpRequestMessage(HttpMethod.Post, "/v1/cuenta/contrasena")
         {
             Content = JsonContent.Create(new OwnPasswordChangeRequest(AdministratorPassword, ChosenPassword)),
         };
@@ -227,7 +227,7 @@ public sealed class ForcedPasswordChangeTests : IDisposable
         // Sin la vigente no hay cambio, y el motivo es el campo ausente: `400`. La cuenta
         // marcada tampoco puede saltearse la provisoria.
         var withoutCurrent = await client.PostAsJsonAsync(
-            "/cuenta/contrasena", new OwnPasswordChangeRequest(null, ChosenPassword, StudentEmail));
+            "/v1/cuenta/contrasena", new OwnPasswordChangeRequest(null, ChosenPassword, StudentEmail));
 
         Assert.Equal(HttpStatusCode.BadRequest, withoutCurrent.StatusCode);
         Assert.Equal(ErrorCode.RequiredFieldMissing, (await Error(withoutCurrent)).Code);
@@ -235,7 +235,7 @@ public sealed class ForcedPasswordChangeTests : IDisposable
 
         // Y con la provisoria correcta el cambio sí procede: la prueba no pasa por ausencia.
         var changed = await client.PostAsJsonAsync(
-            "/cuenta/contrasena",
+            "/v1/cuenta/contrasena",
             new OwnPasswordChangeRequest(ProvisionalPassword, ChosenPassword, StudentEmail));
 
         Assert.Equal(HttpStatusCode.OK, changed.StatusCode);
@@ -247,7 +247,7 @@ public sealed class ForcedPasswordChangeTests : IDisposable
     private static async Task ConfigureAdministratorAsync(HttpClient client)
     {
         var setup = await client.PostAsJsonAsync(
-            "/cuentas/administrador",
+            "/v1/cuentas/administrador",
             new AdministratorSetupRequest(AdministratorEmail, "Ana", "Rossi", AdministratorPassword));
 
         Assert.Equal(HttpStatusCode.Created, setup.StatusCode);

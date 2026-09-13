@@ -124,10 +124,10 @@ campo() { printf '%s' "$2" | sed -n "s/.*\"$1\":\"\([^\"]*\)\".*/\1/p"; }
 clave() { printf 'Md-%s-2026' "$(head -c 12 /dev/urandom | base64 | tr -d '/+=')"; }
 
 correo_admin="medicion.admin@ejemplo.test"; clave_admin="$(clave)"
-pedir POST /cuentas/administrador \
+pedir POST /v1/cuentas/administrador \
   "{\"email\":\"$correo_admin\",\"firstName\":\"Medicion\",\"lastName\":\"Admin\",\"password\":\"$clave_admin\"}"
 [ "$estado" = "201" ] || morir "no se pudo configurar el administrador (HTTP $estado)."
-pedir POST /auth/token "{\"email\":\"$correo_admin\",\"password\":\"$clave_admin\"}"
+pedir POST /v1/auth/token "{\"email\":\"$correo_admin\",\"password\":\"$clave_admin\"}"
 acceso_admin="$(campo accessToken "$cuerpo")"
 
 texto="$(awk -f "$raiz/samples/web/01-datos-seed/datos/escapar.awk" \
@@ -137,16 +137,16 @@ alta_y_envios() {
   local n="$1"
   local correo="alumno${n}@ejemplo.test"
   local suya; suya="$(clave)"
-  pedir POST /cuentas "{\"email\":\"$correo\",\"firstName\":\"Alumno\",\"lastName\":\"Numero$n\"}"
+  pedir POST /v1/cuentas "{\"email\":\"$correo\",\"firstName\":\"Alumno\",\"lastName\":\"Numero$n\"}"
   local id; id="$(campo accountId "$cuerpo")"; [ -n "$id" ] || return 1
-  pedir POST "/cuentas/$id/situacion" "{\"accountId\":\"$id\",\"intendedStatus\":\"Enabled\"}" "$acceso_admin"
+  pedir POST "/v1/cuentas/$id/situacion" "{\"accountId\":\"$id\",\"intendedStatus\":\"Enabled\"}" "$acceso_admin"
   local prov; prov="$(campo provisionalPassword "$cuerpo")"
-  pedir POST /cuenta/contrasena "{\"email\":\"$correo\",\"currentPassword\":\"$prov\",\"newPassword\":\"$suya\"}"
-  pedir POST /auth/token "{\"email\":\"$correo\",\"password\":\"$suya\"}"
+  pedir POST /v1/cuenta/contrasena "{\"email\":\"$correo\",\"currentPassword\":\"$prov\",\"newPassword\":\"$suya\"}"
+  pedir POST /v1/auth/token "{\"email\":\"$correo\",\"password\":\"$suya\"}"
   local acceso; acceso="$(campo accessToken "$cuerpo")"; [ -n "$acceso" ] || return 1
   local i
   for i in $(seq 1 "$por_alumno"); do
-    pedir POST /trabajos \
+    pedir POST /v1/trabajos \
       "{\"name\":\"Trabajo $n-$i\",\"declaredDate\":\"2026-08-30\",\"description\":null,\"originalJson\":$texto}" \
       "$acceso"
   done

@@ -22,6 +22,12 @@ using Scalar.AspNetCore;
 ///
 /// NO CAMBIA NINGÚN PUNTO. `Definicion-Superficie-HTTP.md` sigue siendo la definición: acá no se
 /// declara ni se altera ninguna ruta del producto, sólo se describen las que ya existen.
+///
+/// LAS DOS RUTAS DE ACÁ QUEDAN FUERA DEL PREFIJO `/v1` DEL CONTRATO (`ADR-00010`, `BT-00032`).
+/// Describen la superficie y no son parte de ella: cuando convivan dos `MAJOR`, un solo explorador
+/// tiene que poder describir a los dos, y no puede hacerlo desde adentro de uno. El `v1` que
+/// llevan el nombre del documento y su ruta es el del **documento** generado, que hoy coincide con
+/// el del contrato; `Endpoints.ContractRoutePrefix` dice por qué se enumeran como exentas.
 /// </remarks>
 public static class ApiDocumentation
 {

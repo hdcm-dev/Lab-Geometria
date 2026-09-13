@@ -1,4 +1,4 @@
-# A-02 · POST /cuentas
+# A-02 · POST /v1/cuentas
 # La cuenta nace `Pending` y SIN credencial: la recibe en el acto de habilitación.
-POST /cuentas
+POST /v1/cuentas
 {"email":"{{CORREO_ALUMNA}}","firstName":"Nadia","lastName":"Ferrer"}

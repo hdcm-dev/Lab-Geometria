@@ -21,6 +21,10 @@ namespace GeometriaFactory.Api.Endpoints;
 ///
 /// NO DEJA RASTRO DE LA CONTRASEÑA RECIBIDA: ni en la respuesta ni en el registro del servidor.
 /// El registro anota el intento y su desenlace, nunca lo que la persona escribió.
+///
+/// LAS RUTAS DE ABAJO SON RELATIVAS AL PREFIJO DE VERSIÓN. La pública es `/v1` más la constante:
+/// quien las antepone es el grupo de `Program.cs`, y el motivo de que ningún contrato de punto sepa
+/// qué versión es está en <see cref="ContractRoutePrefix"/> (`ADR-00010`).
 /// </remarks>
 public static class AuthenticationEndpoints
 {

@@ -213,7 +213,7 @@ public sealed class SurfaceInteractionTests : IDisposable
 
         // 1 · Correo que NO coincide. Nunca hubo pantalla: la solicitud sale directo, con acceso
         //     de administrador de verdad y con todo lo demás en orden.
-        using var forced = new HttpRequestMessage(HttpMethod.Delete, $"/cuentas/{accountId}")
+        using var forced = new HttpRequestMessage(HttpMethod.Delete, $"/v1/cuentas/{accountId}")
         {
             Content = JsonContent.Create(
                 new AccountDeletionRequest(accountId, "no-es-el-correo@frre.utn.edu.ar")),
@@ -231,7 +231,7 @@ public sealed class SurfaceInteractionTests : IDisposable
 
         // 2 · La confirmación VACÍA tampoco alcanza: el rechazo no es una comparación de cadenas
         //     que un valor ausente pudiera saltear.
-        using var empty = new HttpRequestMessage(HttpMethod.Delete, $"/cuentas/{accountId}")
+        using var empty = new HttpRequestMessage(HttpMethod.Delete, $"/v1/cuentas/{accountId}")
         {
             Content = JsonContent.Create(new AccountDeletionRequest(accountId, null)),
         };
@@ -247,7 +247,7 @@ public sealed class SurfaceInteractionTests : IDisposable
         // 3 · LA PRUEBA NO PASA POR IMPOTENCIA: con el correo correcto la misma solicitud forzada
         //     SÍ procede, y la cuenta deja de existir. Lo que rechaza es la confirmación, no el
         //     camino.
-        using var correct = new HttpRequestMessage(HttpMethod.Delete, $"/cuentas/{accountId}")
+        using var correct = new HttpRequestMessage(HttpMethod.Delete, $"/v1/cuentas/{accountId}")
         {
             Content = JsonContent.Create(new AccountDeletionRequest(accountId, StudentEmail)),
         };
@@ -341,7 +341,7 @@ public sealed class SurfaceInteractionTests : IDisposable
         using var data = _dataService.CreateClient();
 
         using var setup = await data.PostAsJsonAsync(
-            "/cuentas/administrador",
+            "/v1/cuentas/administrador",
             new AdministratorSetupRequest(AdministratorEmail, "Ana", "Rossi", AdministratorPassword));
 
         Assert.Equal(HttpStatusCode.Created, setup.StatusCode);
@@ -405,7 +405,7 @@ public sealed class SurfaceInteractionTests : IDisposable
     {
         using var data = _dataService.CreateClient();
         using var exchange = await data.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(AdministratorEmail, AdministratorPassword));
+            "/v1/auth/token", new CredentialExchangeRequest(AdministratorEmail, AdministratorPassword));
 
         Assert.Equal(HttpStatusCode.OK, exchange.StatusCode);
         var session = await exchange.Content.ReadFromJsonAsync<SessionResponse>();

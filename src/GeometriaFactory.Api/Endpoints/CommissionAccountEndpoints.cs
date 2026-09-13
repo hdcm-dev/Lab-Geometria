@@ -44,6 +44,10 @@ namespace GeometriaFactory.Api.Endpoints;
 /// tiene que viajar**, y ponerlo en la ruta o en la cadena de consulta lo dejaría escrito en el
 /// registro de acceso de cualquier intermediario, que es exactamente donde el producto no quiere
 /// los datos de sus personas.
+///
+/// LAS RUTAS DE ABAJO SON RELATIVAS AL PREFIJO DE VERSIÓN. La pública es `/v1` más la constante:
+/// quien las antepone es el grupo de `Program.cs`, y el motivo de que ningún contrato de punto sepa
+/// qué versión es está en <see cref="ContractRoutePrefix"/> (`ADR-00010`).
 /// </remarks>
 public static class CommissionAccountEndpoints
 {

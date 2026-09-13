@@ -262,7 +262,7 @@ public sealed class ForcedPasswordChangeSurfaceTests : IDisposable
         // el que la pieza de datos emite para una cuenta que no tiene la marca puesta.
         using var data = _dataService.CreateClient();
         using var exchange = await data.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(AdministratorEmail, AdministratorPassword));
+            "/v1/auth/token", new CredentialExchangeRequest(AdministratorEmail, AdministratorPassword));
 
         Assert.Equal(HttpStatusCode.OK, exchange.StatusCode);
         Assert.Matches(SignedAccessShape, await exchange.Content.ReadAsStringAsync());
@@ -319,7 +319,7 @@ public sealed class ForcedPasswordChangeSurfaceTests : IDisposable
         using var data = _dataService.CreateClient();
 
         using var setup = await data.PostAsJsonAsync(
-            "/cuentas/administrador",
+            "/v1/cuentas/administrador",
             new AdministratorSetupRequest(AdministratorEmail, "Ana", "Rossi", AdministratorPassword));
 
         Assert.Equal(HttpStatusCode.Created, setup.StatusCode);

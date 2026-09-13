@@ -51,6 +51,10 @@ namespace GeometriaFactory.Api.Endpoints;
 /// filtro por alumno, que **acota** lo que el alcance del papel ya dejó pasar. Para un acceso de
 /// papel `Alumno` el filtro **se ignora** (`Contracts CU-04` FA-01): su alcance es su propia
 /// identidad y no hay nada que filtrar.
+///
+/// LAS RUTAS DE ABAJO SON RELATIVAS AL PREFIJO DE VERSIÓN. La pública es `/v1` más la constante:
+/// quien las antepone es el grupo de `Program.cs`, y el motivo de que ningún contrato de punto sepa
+/// qué versión es está en <see cref="ContractRoutePrefix"/> (`ADR-00010`).
 /// </remarks>
 public static class WorkEndpoints
 {

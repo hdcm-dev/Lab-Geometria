@@ -45,11 +45,13 @@ public sealed class ApiDocumentationSurfaceTests : IDisposable
         using var document = await client.GetAsync(ApiDocumentation.DocumentRoute);
         Assert.Equal(HttpStatusCode.OK, document.StatusCode);
 
-        // Que describa ESTA superficie: `/salud` y `/trabajos` son puntos del producto, y un
-        // documento vacío —que también daría 200— no los tendría.
+        // Que describa ESTA superficie: `/salud` y `/v1/trabajos` son puntos del producto, y un
+        // documento vacío —que también daría 200— no los tendría. El segundo lleva el prefijo de
+        // versión y el primero no, y el documento tiene que reflejar exactamente eso.
         var contract = await document.Content.ReadAsStringAsync();
         Assert.Contains("\"/salud\"", contract, StringComparison.Ordinal);
-        Assert.Contains("\"/trabajos\"", contract, StringComparison.Ordinal);
+        Assert.Contains("\"/v1/trabajos\"", contract, StringComparison.Ordinal);
+        Assert.DoesNotContain("\"/trabajos\"", contract, StringComparison.Ordinal);
 
         // El explorador vive en una carpeta, así que la ruta sin barra final redirige a ella.
         using var explorer = await client.GetAsync(ApiDocumentation.ExplorerRoute + "/");

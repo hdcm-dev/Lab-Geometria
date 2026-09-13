@@ -243,7 +243,7 @@ public sealed class SessionCookieTests : IDisposable
     {
         using var data = _dataService.CreateClient();
 
-        using var setup = await data.PostAsJsonAsync("/cuentas/administrador", new
+        using var setup = await data.PostAsJsonAsync("/v1/cuentas/administrador", new
         {
             email = Email,
             firstName = "Ana",
@@ -252,7 +252,7 @@ public sealed class SessionCookieTests : IDisposable
         });
         setup.EnsureSuccessStatusCode();
 
-        using var exchange = await data.PostAsJsonAsync("/auth/token", new { email = Email, password = Password });
+        using var exchange = await data.PostAsJsonAsync("/v1/auth/token", new { email = Email, password = Password });
         exchange.EnsureSuccessStatusCode();
 
         var body = await exchange.Content.ReadAsStringAsync();

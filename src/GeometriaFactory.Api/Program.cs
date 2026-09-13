@@ -79,11 +79,21 @@ app.UseMiddleware<PendingPasswordChangeGuard>();
 
 app.MapApiDocumentation();
 
+// FUERA DEL PREFIJO DE VERSIÓN, y es la única ruta del producto que se mapea sobre `app`:
+// `/salud` es del arranque y no del contrato. El motivo está en `ContractRoutePrefix`.
 app.MapHealthEndpoint();
-app.MapAuthenticationEndpoints();
-app.MapAccountEndpoints();
-app.MapCommissionAccountEndpoints();
-app.MapWorkEndpoints();
+
+// TODO EL CONTRATO REST CUELGA DE `/v1` (`ADR-00010`), y cuelga de UN solo grupo para que
+// agregar un punto no exija acordarse del prefijo: el contrato de punto declara su ruta
+// relativa y el grupo se la completa. Cuando el producto estrene otro `MAJOR`, acá se abre un
+// segundo grupo y conviven el plazo que `Estrategia-Versionado.md` fije; hasta entonces hay uno.
+// Sin el prefijo, la ruta no existe: `404`, sin redirección (`ContractRoutePrefixTests`).
+var contrato = app.MapGroup(ContractRoutePrefix.Value);
+
+contrato.MapAuthenticationEndpoints();
+contrato.MapAccountEndpoints();
+contrato.MapCommissionAccountEndpoints();
+contrato.MapWorkEndpoints();
 
 await app.RunAsync();
 
