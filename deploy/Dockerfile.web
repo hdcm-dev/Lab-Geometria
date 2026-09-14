@@ -99,8 +99,9 @@ RUN set -eu; \
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
 
-# EL FRONT NO TIENE ALMACÉN. No monta volumen y no guarda nada: todo su estado vive en el
-# servicio de datos, al que llega por `ApiBaseUrl`.
+# EL FRONT NO TIENE ALMACÉN DE DATOS: todo su estado de negocio vive en el servicio de datos, al
+# que llega por `ApiBaseUrl`. Lo único que escribe son sus CLAVES DE PROTECCIÓN DE DATOS, en
+# `App_Data/claves` bajo el contenido de la aplicación (ver abajo).
 ENV ASPNETCORE_URLS=http://+:8080
 
 # UNA SOLA HERRAMIENTA, Y CON SU MOTIVO — mismo criterio que la otra imagen: la lista no crece sin
@@ -114,6 +115,14 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /publish ./
+
+# EL FRONT CORRE COMO EL USUARIO SIN PRIVILEGIOS DE LA IMAGEN BASE (`app`, `$APP_UID` = 1654), y no
+# como root (mesa `SDD/Docs/Audit/Mesa-2026-09-14.md`, imágenes sin `USER`). El almacén de claves se
+# crea acá y es suyo. Si el despliegue lo monta desde un volumen que ya existe, el volumen conserva
+# su dueño y hay que pasarlo al usuario del servicio (`chown -R 1654:1654`) antes del primer
+# despliegue de esta versión: el front se niega a arrancar si no puede escribir sus claves, y lo dice.
+RUN mkdir -p /app/App_Data/claves && chown -R "$APP_UID:$APP_UID" /app/App_Data
+USER $APP_UID
 EXPOSE 8080
 
 # LA IMAGEN SÍ LLEVA UN VALOR DE `ApiBaseUrl`, Y HAY QUE SABERLO. Es el de `appsettings.json`
