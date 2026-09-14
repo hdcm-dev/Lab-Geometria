@@ -218,9 +218,12 @@ public abstract class PruebaE2E : PageTest
             await Task.Delay(TimeSpan.FromMilliseconds(100));
         }
 
-        // YA SALIO DEL INGRESO: basta con que el documento nuevo esté armado. La carga completa no
-        // se espera, por el mismo motivo de arriba; cada caso espera después lo que va a mirar.
-        await pagina.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
+        // YA SALIO DEL INGRESO, Y NO SE ESPERA NINGUN EVENTO DE CARGA. Hasta el 2026-09-14 se esperaba
+        // `DOMContentLoaded` acá, y en el banco local de CI se agotaba a los 30 s en esta línea tres
+        // corridas seguidas: la navegación que sigue al ingreso la completa el propio producto sin
+        // cargar un documento nuevo, y el navegador queda esperando el evento de una navegación que
+        // no lo va a emitir. Cada caso espera después lo que va a mirar —`GotoAsync` con su carga,
+        // `Expect` o `ClickAsync`, que reintentan solos—, y eso es lo que la suite necesita.
     }
 
     /// <summary>Si la dirección es la pantalla de ingreso, con o sin parámetros.</summary>

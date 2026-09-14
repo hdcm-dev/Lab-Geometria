@@ -1850,6 +1850,22 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
 
 - La intermitencia no se puede forzar en rojo a voluntad. La evidencia del defecto son los dos registros de CI con el agotamiento en `PruebaE2E.cs:187`.
 
+## El ingreso del E2E deja de esperar un evento de carga después de salir de `/ingreso` — 2026-09-14
+
+**Rama:** `pruebas/e2e-ingreso-sin-espera-de-carga`. Sin cambio de código de producción. Completa lo que la entrada anterior dejó a medias.
+
+### Corregido
+
+- `tests/GeometriaFactory.E2ETests/Infraestructura/PruebaE2E.cs`, `IngresarAsync`: la espera de `DOMContentLoaded` que quedó después de salir de `/ingreso` se agotaba a los 30 s en el banco local de CI. Pasó tres corridas seguidas del PR #214, siempre en `EnPantallaAnchaElListadoEsUnaTablaYNoHayTarjetas` y en esa línea. La navegación que sigue al ingreso la completa el propio producto sin cargar un documento nuevo, y el navegador quedaba esperando un evento que no llega. Ya no se espera ningún evento de carga: cada caso espera lo que va a mirar.
+
+### Verificado
+
+- Suite E2E completa en el banco local: 32/32. La intermitencia de CI no se reproduce en local; la verificación que decide es la corrida del banco local en CI de este PR y la de #214 actualizado.
+
+### Apartamiento declarado
+
+- Esta unidad se abrió con el PR #214 todavía sin fusionar, contra la comprobación 4 de la compuerta de arranque (`Master-Prompt.md` §12.1 T0). #214 no puede entrar mientras exista este defecto, y esperar a que entre habría sido un bloqueo circular.
+
 ## El reseteo del docente libera la cuota de intentos fallidos de la cuenta — 2026-09-14
 
 **Rama:** `seguridad/lote1-reseteo-libera-la-cuota`. Lote 1 del plan de la mesa del 2026-09-14 (`SDD/Docs/Audit/Mesa-2026-09-14.md`, R-03; escalada E-2 con la propuesta aprobada por el Product Owner).
