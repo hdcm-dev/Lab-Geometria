@@ -1989,3 +1989,26 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
 
 - **La puerta entera no se corrió:** necesita las dos piezas levantadas. Se verificaron a mano los cuadres estáticos `3.c` y `3.d`.
 - Cuatro familias de nombres siguen en castellano. Queda como deuda con evento en §6.26.
+
+## Ninguna puerta queda en verde sin correr las pruebas que nombra — 2026-09-14
+
+**Rama:** `puertas/lote2-pruebas-que-corrieron`. Lote 2 del plan de la mesa del 2026-09-14 (`R-24`).
+
+### Corregido
+
+- **`dotnet test` con un filtro que no coincide con nada sale con código 0** («No test matches the given testcase filter»), y así lo corrían `verify-stage-g.sh` y `verify-stage-h.sh`. Con una prueba renombrada, la puerta quedaba en verde sin haberla corrido.
+- `scripts/lib-puerta.sh` suma `puerta_no_corrieron`: busca cada prueba pedida como `Passed` en el registro, con el registrador de consola en `normal`.
+  - `g` y `h` la usan después de cada corrida.
+  - `d`, `e` y `f` la usan en cada criterio. **Esto amplía el alcance de R-24 y se declara:** `lib-puerta.sh` ya comparaba el recuento contra lo pedido, pero una teoría con varios casos tapaba un nombre que dejó de existir.
+
+### Verificado (en el contenedor del SDK)
+
+- **Batería de `h` con un sexto nombre inexistente en el filtro:** `dotnet test` salió con 0 y corrieron 5.
+  - Con los cinco nombres reales, no falta ninguno.
+  - Con el renombrado, lo lista.
+  - Con un prefijo parcial (`TheCommentIsStored`), también lo lista.
+- `verify-stage-e.sh` entera: **CONFORME**, 5 criterios y 28 pruebas.
+
+### No hecho, y declarado
+
+- `g` y `h` no se corrieron enteras: `g` necesita `docker` y `dotnet` juntos, y este entorno los tiene separados.
