@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 2.3
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -263,7 +263,7 @@ Catorce filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Uni
 | --- | --- | --- | --- | --- |
 | Tiempo de interpretación del texto semilla | Menos de **200 ms** para el texto de **3** piezas de `E-1`, **sin almacén** **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Infrastructure]** | `TC-06015`. Gate `QG-06014`, condicionado | Cronometrado dentro de la batería unitaria, sin abrir el almacén | `Pendiente` |
 | Cobertura del proyecto de código | **85 %** de líneas y **80 %** de ramas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Infrastructure]** | Informe del pipeline, **no un caso de prueba**. Gate `QG-06005`, condicionado | Recolector de cobertura, con informe por componente | `Pendiente` |
-| Cobertura del validador de figuras | **95 %** de líneas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Infrastructure]**. Es el número más alto del producto | Informe del pipeline acotado a los **dos motores**, **no un caso de prueba**. Gate `QG-06006`, condicionado | Recolector de cobertura con alcance acotado | **Instrumentado el 2026-09-14** (mesa del 2026-09-14, `R-12`): `scripts/coverage.sh` lo mide sobre `LocalFigureValidator.cs`, donde viven los dos motores, y corre en `ci.yml`. Primera medición **94,2 %**; con `FigureTextReadingTests`, **99,1 %** |
+| Cobertura del validador de figuras | **95 %** de líneas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Infrastructure]**. Es el número más alto del producto | Informe del pipeline acotado a los **dos motores**, **no un caso de prueba**. Gate `QG-06006`, condicionado | Recolector de cobertura con alcance acotado | `Pendiente` |
 | Tolerancia de comparación de valores | **0.01** absoluta con operador **estricto**. **No es asunción**: sale de que el emisor redondea a 2 decimales | `TC-06009`, que debe dar **exactamente 2** advertencias y no 3 | Caso de prueba del escenario `E-1` | `Pendiente` |
 | Casos de la batería del validador que pasan | **10 de 10**, con los **ocho** escenarios como entrada | `TC-06001` a `TC-06010`, contra la tabla de §6 | Etapa `test` del pipeline. Gate `QG-06003` | `Pendiente` |
 | Peticiones de red originadas por los dos motores | Exactamente **0** | `TC-06014` | Inspección de dependencias de los dos motores | `Pendiente` |
@@ -665,7 +665,6 @@ Es la tabla de `05` §10.5 con la columna del caso de prueba que la materializa.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 2.3 | 2026-09-14 | Fila «Cobertura del validador de figuras»: pasa de `Pendiente` a **instrumentado**. `scripts/coverage.sh` mide `QG-06` sobre los dos motores y corre en `ci.yml` (mesa del 2026-09-14, `R-12`). Estado anterior en `_legacy/2026-09-14/`. |
 | 2.2 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **25 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **5 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4). Pasa de ser el documento del proyecto de código `GeometriaFactory-Api` a ser el de la **unidad de entrega**, absorbiendo los homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada sección lleva **una subsección por proyecto de código**, con su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con los cuatro juntos. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

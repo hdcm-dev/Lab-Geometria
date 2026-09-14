@@ -158,6 +158,37 @@ foreach (var nombre in acum.Keys.OrderBy(x => x, StringComparer.Ordinal))
     Console.WriteLine($"  {nombre,-34}{a[0],6}/{a[1],-6}{li,6:F1}%{a[2],6}/{a[3],-6}{br,6:F1}%   {veredicto}");
 }
 
+// QG-06 — EL VALIDADOR DE FIGURAS TIENE PISO PROPIO, y no se lee en el número del proyecto
+// (mesa del 2026-09-14, R-12: el 95 no tenía instrumento). `Estrategia-Calidad.md` lo declara
+// sobre los DOS MOTORES —interpretación y verificación de valores— [ASUNCIÓN del intake
+// §17.1.P.6], y `Estrategia-Testing.md` §2.4 dice por qué va aparte: un 85 % de Infrastructure
+// con el validador en 80 % es un incumplimiento aunque el promedio cierre. Los dos motores
+// viven en un solo archivo, y el informe se acota a ese archivo. Las ramas se muestran y no
+// deciden: el piso de la fuente es de líneas.
+const int PisoDelValidador = 95;
+const string ArchivoDelValidador = "GeometriaFactory.Infrastructure/Figures/LocalFigureValidator.cs";
+bool EsDelValidador(string archivoFuente) =>
+    archivoFuente.Replace('\\', '/').EndsWith("/" + ArchivoDelValidador, StringComparison.Ordinal);
+var lineasDelValidador = lineas.Values.SelectMany(d => d).Where(kv => EsDelValidador(kv.Key.Item1)).ToArray();
+var ramasDelValidador = ramas.Values.SelectMany(d => d).Where(kv => EsDelValidador(kv.Key.Item1)).ToArray();
+
+Console.WriteLine();
+Console.WriteLine($"QG-06 · el validador de figuras, acotado a sus dos motores — pide {PisoDelValidador} % de líneas");
+if (lineasDelValidador.Length == 0)
+{
+    Console.WriteLine($"  NO SE PUEDE MEDIR · el informe no trae {ArchivoDelValidador}");
+    return 2;
+}
+var validadorCubiertas = lineasDelValidador.Count(kv => kv.Value);
+var validadorLineas = 100d * validadorCubiertas / lineasDelValidador.Length;
+var validadorRamasCubiertas = ramasDelValidador.Sum(kv => kv.Value.Cubiertas);
+var validadorRamasTotales = ramasDelValidador.Sum(kv => kv.Value.Totales);
+var validadorRamas = validadorRamasTotales == 0 ? 0d : 100d * validadorRamasCubiertas / validadorRamasTotales;
+var validadorOk = validadorLineas >= PisoDelValidador;
+if (!validadorOk) fallos.Add("QG-06 · validador de figuras");
+Console.WriteLine($"  {"LocalFigureValidator.cs",-34}{validadorCubiertas,6}/{lineasDelValidador.Length,-6}{validadorLineas,6:F1}%"
+                  + $"{validadorRamasCubiertas,6}/{validadorRamasTotales,-6}{validadorRamas,6:F1}%   {(validadorOk ? "PASA" : "NO PASA")}");
+
 // QG-04 — el reparto se cuenta del informe de la corrida, no de los atributos
 // del código fuente: `[Theory]` con datos en línea es un método y varios casos.
 XNamespace ns = "http://microsoft.com/schemas/VisualStudio/TeamTest/2010";
@@ -204,5 +235,5 @@ if (fallos.Count > 0)
     Console.WriteLine("NO CONFORME · " + string.Join(", ", fallos));
     return 1;
 }
-Console.WriteLine("CONFORME · QG-03 y QG-04 pasan");
+Console.WriteLine("CONFORME · QG-03, QG-06 y QG-04 pasan");
 return 0;
