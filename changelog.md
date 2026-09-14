@@ -2028,3 +2028,28 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
 ### No hecho, y declarado
 
 - `g` y `h` no se corrieron enteras: `g` necesita `docker` y `dotnet` juntos, y este entorno los tiene separados.
+
+## `QG-06` tiene instrumento, y la cobertura y las puertas de fase corren en CI — 2026-09-14
+
+**Rama:** `calidad/lote2-cobertura-del-validador`. Lote 2 del plan de la mesa del 2026-09-14 (`R-12`).
+
+### Agregado
+
+- `tools/informe-cobertura.cs` mide **`QG-06`**: 95 % de líneas sobre los dos motores del validador de figuras (`LocalFigureValidator.cs`), **aparte** del número de `Infrastructure`. Si el informe no trae el archivo, sale con 2 («no se puede medir»).
+- `FigureTextReadingTests`: la lectura de lo que el alumno puede escribir mal, en tres casos:
+  - una figura o un componente sin `Tipo`, con un `Tipo` que no es texto, o de un tipo que no existe;
+  - un número escrito `null`;
+  - un valor que la pieza no usa y el árbol del texto muestra.
+- `ci.yml` corre `scripts/coverage.sh` (`QG-03`, `QG-06` y `QG-04`) y las puertas de las etapas `d`, `e` y `h`. `c`, `f`, `g` e `i` siguen siendo manuales: levantan servicios, un navegador en contenedor o miran el despliegue.
+
+### Verificado (contenedor del SDK)
+
+- **Sin las pruebas nuevas:** `QG-06` **NO PASA**, 210/223 = **94,2 %**, y `coverage.sh` sale con 1.
+- **Con ellas:** **221/223 = 99,1 %**, CONFORME, y `coverage.sh` sale con 0. `Infrastructure` sube de 96,8 % a 97,4 %.
+- Las dos líneas que siguen sin cubrir no se alcanzan desde `Interpret`.
+- `verify-stage-d.sh` CONFORME (31 pruebas), `verify-stage-e.sh` CONFORME (28) y `verify-stage-h.sh` CONFORME.
+
+### No hecho, y declarado
+
+- `Pipeline-CI-CD.md` no se actualizó con los pasos nuevos de `ci.yml`.
+- **CI tarda más:** corre la batería de nuevo, con cobertura, y los subconjuntos de las tres puertas.
