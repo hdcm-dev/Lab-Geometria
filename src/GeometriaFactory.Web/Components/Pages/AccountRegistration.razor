@@ -142,7 +142,18 @@ else
                    aria-invalid="@(Falta(Form.LastName) ? "true" : null)" />
         </div>
 
-        <button type="submit" class="gf-btn gf-btn--primary gf-btn--full">Registrarme</button>
+        @* AVISO DE TRATAMIENTO DE DATOS PERSONALES (mesa del 2026-09-14, REF-01, escalada E-3). El
+           registro pide correo, nombre y apellido de una persona: la Ley 25.326 exige decir para
+           qué se usan y quién los ve, ANTES de que los escriba. El texto afirma sólo lo que el
+           producto hace hoy: guarda los tres datos y los trabajos, los ve el docente de la
+           comisión, no envía correos y no los comparte. La finalidad, la retención de los
+           respaldos y la supresión las redacta el Product Owner en el intake; este aviso remite a
+           lo que el producto puede afirmar por sí mismo y nada más. *@
+        <p class="gf-caption gf-mt-4" id="registration-privacy">
+            Tu correo, tu nombre y tu apellido se guardan sólo para identificar tus trabajos en este laboratorio, y los ve el docente de la comisión. El laboratorio no envía correos ni comparte estos datos. Para corregirlos o darte de baja, pedíselo al docente.
+        </p>
+
+        <button type="submit" class="gf-btn gf-btn--primary gf-btn--full" aria-describedby="registration-privacy">Registrarme</button>
     </form>
 
     @* Única salida de la superficie (CMP-54). No hay enlace de recuperación: no existe

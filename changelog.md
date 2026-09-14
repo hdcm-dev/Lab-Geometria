@@ -2041,3 +2041,16 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
   - el procedimiento con respaldo y verificación, y la reversión.
 - **Divergencia declarada para el Product Owner:** la guía y `Estrategia-Versionado.md` dicen que se despliega la etiqueta de la etapa, y el servidor construye `main`.
 - Sin nombres de red, rangos ni rutas del anfitrión.
+
+## El registro avisa qué se hace con los datos personales — 2026-09-14
+
+**Rama:** `interfaz/lote1-aviso-datos-personales`. Lote 1 de la mesa del 2026-09-14 (`REF-01`, escalada `E-3`: «Declararlo en el intake»; la parte del agente es el aviso en el registro del front).
+
+### Agregado
+
+- `Registro-De-Cuenta` muestra, antes del botón, qué se guarda (correo, nombre y apellido), para qué (identificar los trabajos), quién lo ve (el docente de la comisión), que no se envían correos ni se comparten, y cómo corregirlos o darse de baja (pedírselo al docente). El botón lo referencia con `aria-describedby`.
+- El aviso afirma sólo lo que el producto hace hoy.
+
+### No hecho, y declarado
+
+- **La finalidad, la retención de los respaldos y la supresión en el intake** las redacta el Product Owner (`E-3`). Cuando existan, el aviso se alinea con ese texto.
