@@ -166,6 +166,32 @@ builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<DataServiceReachability>();
 
 builder.Services.AddHttpContextAccessor();
+
+// LA DIRECCIÓN DEL NAVEGADOR, Y NO LA DEL TÚNEL (mesa `SDD/Docs/Audit/Mesa-2026-09-14.md`, R-02). El
+// front corre detrás del túnel de publicación, y sin esto ve a todos los navegadores con la dirección
+// del túnel. Las redes de los proxies en los que se confía llegan por configuración, con la misma
+// llave que usa el servicio de datos (`ForwardedHeaders__KnownNetworks__0=172.23.0.0/16`); sin
+// ninguna declarada, la cabecera se ignora, que es lo seguro.
+builder.Services.Configure<Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>(forwarded =>
+{
+    forwarded.ForwardedHeaders =
+        Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor
+        | Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
+
+    foreach (var network in builder.Configuration.GetSection("ForwardedHeaders:KnownNetworks").Get<string[]>() ?? [])
+    {
+        if (!System.Net.IPNetwork.TryParse(network, out var parsed))
+        {
+            throw new InvalidOperationException(
+                $"'ForwardedHeaders:KnownNetworks' trae '{network}', que no es una red en notación CIDR " +
+                "(por ejemplo 172.23.0.0/16). Se detiene el arranque en lugar de ignorar la cabecera de un " +
+                "proxy que quien despliega quiso declarar.");
+        }
+
+        forwarded.KnownIPNetworks.Add(parsed);
+    }
+});
+builder.Services.AddTransient<BrowserOriginForwardingHandler>();
 builder.Services.AddScoped<SessionState>();
 
 // La dirección del servicio de datos llega POR CONFIGURACIÓN y nunca embebida en el código
@@ -178,7 +204,10 @@ builder.Services.AddHttpClient<DataServiceClient>(client =>
 {
     client.BaseAddress = new Uri(apiBaseUrl, UriKind.Absolute);
     client.Timeout = TimeSpan.FromSeconds(10);
-});
+})
+// El servicio de datos limita lo anónimo por dirección de origen: sin esto, detrás del front toda
+// la comisión compartía una sola cuota (R-02). Ver `BrowserOriginForwardingHandler`.
+.AddHttpMessageHandler<BrowserOriginForwardingHandler>();
 
 var app = builder.Build();
 
@@ -190,6 +219,9 @@ app.Lifetime.ApplicationStarted.Register(observaciones.Cerrar);
 // La dirección que no existe se reejecuta contra `/no-encontrado` CONSERVANDO el código 404:
 // sin esto el cuerpo llega vacío, porque el `<NotFound>` del enrutador no gobierna el render
 // estático del servidor. La pantalla es `NotFoundSurface`, propuesta declarada de la etapa `b`.
+// PRIMERO: todo lo que sigue —incluido el reenvío al servicio de datos— tiene que ver la dirección
+// del navegador y no la del túnel.
+app.UseForwardedHeaders();
 app.UseStatusCodePagesWithReExecute("/no-encontrado");
 
 app.UseStaticFiles();

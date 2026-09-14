@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Entornos-Deploy.md
-**Versión:** 3.4
+**Versión:** 3.3
 **Estado:** Propuesto
-**Fecha:** 2026-09-14
+**Fecha:** 2026-08-26
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -119,11 +119,10 @@ Configuración de doce factores: **fuera del código, en variables inyectadas al
 | --- | --- | --- |
 | **Dirección del servicio de datos** | Del almacén de secretos del repositorio, inyectada en el paso 6 del flujo. **Nunca embebida en el código** | Únicamente el componente que hace de cliente tipado del servicio de datos. **Ningún otro componente la conoce y ninguna superficie la muestra** ([`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §7) |
 | Credenciales del canal de publicación | Del mismo almacén, usadas en el paso 7 | El flujo de publicación |
-| **Redes de los proxies de confianza** (`ForwardedHeaders__KnownNetworks__0`, `__1`, …) | De la composición del despliegue, que conoce la red del túnel. **No es secreta y no se versiona**: es topología del host | `UseForwardedHeaders` del front, para ver la dirección real del navegador y reenviársela al servicio de datos ([`ADR-10009`](../05-Arquitectura-Tecnica/Adrs/ADR-10009-El-Front-Le-Dice-Al-Servicio-De-Datos-De-Donde-Llego-El-Navegador.md)). Sin ninguna declarada, la cabecera entrante se ignora |
 | Configuración del bundle | **Ninguna, y es prohibición explícita.** `RA-02`: el bundle no lee configuración propia | [`../../GeometriaFactory-Visor/09-Devops/Entornos-Deploy.md`](Entornos-Deploy.md) §4 |
 | Configuración que la persona pueda fijar | **Ninguna.** No hay superficies de configuración en el producto, y un parámetro que la superficie no gobierna **no se dibuja ni siquiera deshabilitado** | [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §4, tercera alternativa descartada |
 
-**Hay tres valores de configuración en todo este proyecto de código**: dos secretos y, desde el 2026-09-14, las redes de los proxies de confianza, que no lo son. No hay mapa de variables por ambiente porque **no hay dos ambientes con configuración distinta**: en desarrollo el front apunta al servicio de datos que corre en local, y en el hosting apunta al del servidor propio; es el mismo parámetro con otro valor.
+**Sólo hay dos valores de configuración en todo este proyecto de código**, y los dos son secretos. No hay mapa de variables por ambiente porque **no hay dos ambientes con configuración distinta**: en desarrollo el front apunta al servicio de datos que corre en local, y en el hosting apunta al del servidor propio; es el mismo parámetro con otro valor.
 
 **La última fila es una decisión de producto y no de esta categoría.** Ofrecer una pantalla donde el docente escriba la dirección del servidor propio habría puesto **la dirección de un servicio interno en el navegador**, que es lo que `RA-03` prohíbe. La categoría 03 la descartó por eso y [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §4 lo registra.
 
@@ -271,7 +270,6 @@ Consecuencias operativas concretas, y se declaran porque una decisión de esta c
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 3.4 | 2026-09-14 | §4.1 suma las **redes de los proxies de confianza** (`ForwardedHeaders__KnownNetworks__N`), que el front necesita para ver la dirección real del navegador detrás del túnel y reenviarla ([`ADR-10009`](../05-Arquitectura-Tecnica/Adrs/ADR-10009-El-Front-Le-Dice-Al-Servicio-De-Datos-De-Donde-Llego-El-Navegador.md)). Lote 1 de la mesa del 2026-09-14 (`../../../Audit/Mesa-2026-09-14.md`, R-02). Estado anterior en `_legacy/2026-09-14/`. Sube minor. |
 | 3.3 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **9 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 3.1 | 2026-08-24 | **Ronda 3 del corte 09 de la migración 10.0 → 13.3**, sobre el re-audit independiente, que pasó de RECHAZADO a **APROBADO CON HALLAZGOS**: el P0 y los cinco P1 quedaron cerrados y aparecieron cuatro P2 y tres P3. **§3.b suma el estado del apartamiento en el que se apoya** (**P3**): `ADR-14004` está **`Propuesto`** y la emisión anterior lo citaba como si ya autorizara. |
 | 3.2 | 2026-08-26 | **El apartamiento en el que se apoya §3.b pasa a `Aceptado`.** El Product Owner aprobó [`ADR-14004`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md) el **2026-08-26**, sin modificar su contenido. La fila que declaraba que la figura «no aplica» se sostenía sobre un instrumento **todavía no aprobado** deja de hacer falta: con la aceptación, **el apartamiento cuenta como decisión y no como omisión** (`Root-Rules.md` §11), que es la diferencia que ese ADR existe para producir. **Nada más cambia**: el ítem sigue contestado igual, con su motivo y su condición de reapertura. Sube **minor**. |

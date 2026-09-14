@@ -1883,3 +1883,26 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
 - Las pruebas del límite de tasa siguen pasando sin cambios: 22/22.
 - Build sin advertencias; suite completa en verde: Domain 94, Application 56, Integration 407.
 
+## El front le dice al servicio de datos de dónde llegó el navegador — 2026-09-14
+
+**Rama:** `seguridad/lote1-origen-real-detras-del-front`. Lote 1 del plan de la mesa del 2026-09-14 (`SDD/Docs/Audit/Mesa-2026-09-14.md`, R-02), aprobado por el Product Owner.
+
+### Corregido
+
+- `GeometriaFactory.Web`: `UseForwardedHeaders` primero en la tubería, con las redes de confianza de `ForwardedHeaders:KnownNetworks`, para ver la dirección real del navegador detrás del túnel. Sin ninguna declarada, la cabecera entrante se ignora.
+- `GeometriaFactory.Web`: `BrowserOriginForwardingHandler` agrega `X-Forwarded-For` con esa dirección en las llamadas al servicio de datos que corren dentro de una petición del navegador: ingreso, registro y cambio obligado. Hasta hoy toda la comisión llegaba con la dirección del front y compartía una sola cuota por origen, y un solo cliente anónimo podía dejar a la clase sin entrar (`RN-B1`).
+- `ADR-10009` nuevo; `Decisiones-Arquitectura.md` y `Entornos-Deploy.md` de Web lo registran.
+
+### Verificado
+
+- `BrowserOriginForwardingTests`: la dirección del navegador viaja al servicio de datos; la que escribe el navegador en la cabecera no viaja; fuera de una petición del navegador no se inventa ninguna. Las dos primeras **vistas fallar** contra el front anterior.
+- Build sin advertencias; suite completa en verde: Domain 94, Application 56, Integration 410.
+
+### No hecho, y declarado
+
+- **Para que tenga efecto en producción, la composición del despliegue tiene que declarar dos redes:**
+  - en el front, la red del túnel: `ForwardedHeaders__KnownNetworks__0`;
+  - en el servicio de datos, la red del front (y la del túnel, si el servicio también se publica por él).
+
+  Es configuración del host y no se versiona en este repositorio. Sin ellas, el comportamiento es el de antes.
+
