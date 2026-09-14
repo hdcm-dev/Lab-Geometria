@@ -10,6 +10,8 @@
 #
 #   QG-03 · cobertura de líneas y de ramas, POR PROYECTO DE CÓDIGO, contra los
 #           umbrales del intake §22 que `D1` confirmó el 2026-08-26.
+#   QG-06 · el validador de figuras, 95 % de líneas sobre sus dos motores
+#           (`LocalFigureValidator.cs`), informado aparte (R-12, 2026-09-14).
 #   QG-04 · el reparto de la pirámide, 60 % integración / 40 % unitarias, que
 #           `Estrategia-Calidad.md` §3.1 declara INVERTIDA a propósito.
 #
@@ -24,7 +26,7 @@
 # §0 declaró que nadie había hecho.
 #
 # CÓDIGOS DE SALIDA, con la convención de `verify-stage-g.sh` y `-i.sh`:
-#   0  las dos puertas pasan
+#   0  las puertas pasan
 #   1  alguna puerta NO pasa
 #   2  no se puede medir — la batería falló, o el recolector no dejó informe
 #
@@ -51,7 +53,7 @@ salida=$?
 
 echo
 case "$salida" in
-  0) echo "Las dos puertas pasan." ;;
+  0) echo "Las puertas pasan." ;;
   1) echo "Alguna puerta no pasa. El detalle está arriba, gate por gate." ;;
   2) echo "No se pudo medir. Nada de lo de arriba es un veredicto." ;;
 esac
