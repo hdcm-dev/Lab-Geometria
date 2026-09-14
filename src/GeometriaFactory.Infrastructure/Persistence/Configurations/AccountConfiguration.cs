@@ -57,6 +57,10 @@ public sealed class AccountConfiguration : IEntityTypeConfiguration<Account>
 
         builder.Property(account => account.CreatedAt).IsRequired();
 
+        // Nula hasta el primer reemplazo de la credencial hecho por la propia cuenta: una columna
+        // nueva sobre filas existentes, que quedan en nulo sin reescribirse (REF-02).
+        builder.Property(account => account.CredentialChangedAt);
+
         builder.HasIndex(account => account.NormalizedEmail)
             .IsUnique()
             .HasDatabaseName("UX_Account_NormalizedEmail");

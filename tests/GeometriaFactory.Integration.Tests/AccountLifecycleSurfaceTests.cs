@@ -542,6 +542,64 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
     }
 
     /// <summary>
+    /// REF-02 sobre la superficie — cuando la propia cuenta cambia su contraseña, **todo acceso
+    /// emitido antes deja de servir**: el de otro dispositivo y el mismo con el que pidió el cambio.
+    /// El cambio con sesión devuelve un acceso nuevo, y ése **sí** sirve: quien cambia su
+    /// contraseña no queda afuera (mesa `SDD/Docs/Audit/Mesa-2026-09-14.md`).
+    /// </summary>
+    [Fact]
+    public async Task ChangingTheOwnPasswordRevokesEveryEarlierAccessAndHandsBackOneThatWorks()
+    {
+        var administratorToken = await ConfigureAdministratorAsync();
+        var (_, id) = await RegisterStudentAsync();
+        var provisional = (await EnableAsync(administratorToken, id)).ProvisionalPassword!;
+
+        using var forced = await _client.PostAsJsonAsync(
+            "/v1/cuenta/contrasena", new OwnPasswordChangeRequest(provisional, "la-que-elijo-yo", StudentEmail));
+        Assert.Equal(HttpStatusCode.OK, forced.StatusCode);
+        // EL CAMBIO FORZADO NO DEVUELVE ACCESO: la sesión se obtiene en el ingreso (RN-13).
+        Assert.DoesNotContain("accessToken", await forced.Content.ReadAsStringAsync(), StringComparison.OrdinalIgnoreCase);
+
+        // Dos accesos de la misma cuenta: el de "otro dispositivo" y el de la sesión que va a pedir el cambio.
+        var otherDevice = await SignInAsync(StudentEmail, "la-que-elijo-yo");
+        var thisSession = await SignInAsync(StudentEmail, "la-que-elijo-yo");
+
+        using (var bothWork = await SendAsync(Authorized(HttpMethod.Get, "/v1/trabajos", otherDevice)))
+        {
+            Assert.Equal(HttpStatusCode.OK, bothWork.StatusCode);
+        }
+
+        // LA COMPARACIÓN ES POR SEGUNDOS: un acceso emitido en el mismo segundo que el cambio se
+        // admite. Se espera a que el segundo cambie para que la prueba mida la revocación y no
+        // dependa del reloj.
+        await Task.Delay(TimeSpan.FromMilliseconds(1100));
+
+        using var changed = await SendAsync(Authorized(
+            HttpMethod.Post, "/v1/cuenta/contrasena", thisSession,
+            new OwnPasswordChangeRequest("la-que-elijo-yo", "la-segunda-que-elijo", null)));
+        Assert.Equal(HttpStatusCode.OK, changed.StatusCode);
+
+        var renewed = (await changed.Content.ReadFromJsonAsync<SessionResponse>())!;
+        Assert.False(string.IsNullOrEmpty(renewed.AccessToken));
+        Assert.Equal(id, renewed.AccountId);
+
+        using (var fromOtherDevice = await SendAsync(Authorized(HttpMethod.Get, "/v1/trabajos", otherDevice)))
+        {
+            Assert.Equal(HttpStatusCode.Unauthorized, fromOtherDevice.StatusCode);
+        }
+
+        using (var withTheOldSession = await SendAsync(Authorized(HttpMethod.Get, "/v1/trabajos", thisSession)))
+        {
+            Assert.Equal(HttpStatusCode.Unauthorized, withTheOldSession.StatusCode);
+        }
+
+        using (var withTheRenewed = await SendAsync(Authorized(HttpMethod.Get, "/v1/trabajos", renewed.AccessToken)))
+        {
+            Assert.Equal(HttpStatusCode.OK, withTheRenewed.StatusCode);
+        }
+    }
+
+    /// <summary>
     /// `Api CU-04` CA-05 — con un acceso de papel `Alumno`, los cuatro puntos de administración
     /// responden `403` con el código de facultad, y **0 de ellos modifican nada**.
     /// </summary>

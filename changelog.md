@@ -1810,3 +1810,26 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
 
 - La revocación del acceso cuando la propia cuenta cambia su contraseña (REF-02) necesita una marca temporal persistida y va en su propia unidad, junto con la prueba de migración sobre datos (R-10).
 
+## Cambiar la contraseña propia revoca los accesos anteriores, y la migración se prueba sobre datos — 2026-09-14
+
+**Rama:** `seguridad/lote1-revocacion-por-cambio-de-credencial`. Lote 1 del plan de la mesa del 2026-09-14 (`SDD/Docs/Audit/Mesa-2026-09-14.md`, REF-02 y R-10), aprobado por el Product Owner.
+
+### Cambiado
+
+- `GeometriaFactory.Domain`: `Account.CredentialChangedAt`, el instante del último cambio de credencial hecho por la propia cuenta.
+- Transformación de esquema **`20260914112430_CredentialChangedAt`**: una columna nula nueva en `Account`. Es la primera que se aplica sobre un almacén con datos.
+- `GeometriaFactory.Api`: la guarda de cada petición deja sin efecto un acceso emitido antes de ese instante (`401` genérico). `POST /v1/cuenta/contrasena` con sesión responde **con un acceso nuevo**, ampliación aditiva del contrato `/v1/`; sin sesión, sigue `200` sin cuerpo.
+- `GeometriaFactory.Web`: la pantalla de cambio de contraseña reemplaza en la sesión el acceso por el nuevo, de modo que quien cambia su contraseña no queda afuera.
+- `ADR-00003` y `Definicion-Superficie-HTTP.md` (fila A-05) declaran la revocación y por qué el acceso nuevo es reingreso y no refresco.
+
+### Verificado
+
+- `ChangingTheOwnPasswordRevokesEveryEarlierAccessAndHandsBackOneThatWorks`, **vista fallar** contra el código anterior en sus dos mitades: el acceso de otro dispositivo seguía respondiendo (`Expected: Unauthorized · Actual: OK`) y el cambio no devolvía acceso (cuerpo vacío).
+- `CredentialChangedAtMigrationTests` (R-10), **vista fallar** sin la transformación (`Assert.NotEmpty`: no había nada pendiente) y pasar con ella: la cuenta escrita en la transformación anterior queda intacta y la columna nueva, nula.
+- La prueba que fija el linaje de transformaciones sube de 4 a 5, nombrando la nueva.
+- Build sin advertencias; suite completa en verde: Domain 94, Application 56, Integration 406.
+
+### No hecho, y declarado
+
+- La pantalla del front no tiene prueba propia del reemplazo del acceso: lo cubren el contrato y la guarda. El recorrido E2E del banco local la ejercita en CI.
+
