@@ -20,6 +20,7 @@
 - [1. Pre-requisitos](#1-pre-requisitos)
 - [2. Comando y stage de publicación](#2-comando-y-stage-de-publicación)
   - [2.1 La prueba única del mecanismo, que la fuente exige](#21-la-prueba-única-del-mecanismo-que-la-fuente-exige)
+  - [2.2 La publicación real, tal como corre desde el 2026-09-06](#22-la-publicación-real-tal-como-corre-desde-el-2026-09-06)
 - [3. Verificación posterior al despliegue](#3-verificación-posterior-al-despliegue)
 - [4. Reversión](#4-reversión)
 - [5. Métricas](#5-métricas)
