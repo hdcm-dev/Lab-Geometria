@@ -1779,3 +1779,17 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
 
 - El ajuste de GitHub que exige aprobación para ejecuciones de colaboradores externos, la rotación de las credenciales que usa el recorrido desplegado y la revisión del runner son del Product Owner.
 
+## Mesa de expertos a pedido sobre el proyecto entero, para continuar la fase `i` — 2026-09-14
+
+**Rama:** `docs/mesa-2026-09-14`. Sin cambio de código. Registro: `SDD/Docs/Audit/Mesa-2026-09-14.md`.
+
+### Agregado
+
+- Evaluación del proyecto entero pedida por el Product Owner: ocho comisiones, refutador y jurado de cinco. 26 ítems consolidados, 25 procedentes. Dictamen sobre qué es hoy el producto, qué falta para cerrar `i` criterio por criterio y quién puede hacerlo, en qué orden trabajar y qué riesgos van antes.
+- Plan en cuatro lotes, siete deudas declaradas (`DD-R9-1..7`) y siete escaladas. El Product Owner respondió cuatro (lote 0, E-1, E-3, E-6); las otras rigen por su default.
+
+### No hecho, y declarado
+
+- **Tres ítems de seguridad tienen su detalle reservado** hasta el commit que corrige cada uno, porque el repositorio es público (`DD-R9-7`).
+- Del lote 0 quedan los ajustes de GitHub, la rotación de credenciales, la revisión del runner y las cabeceras en el borde, a cargo del Product Owner.
+
