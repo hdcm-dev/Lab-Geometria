@@ -2029,6 +2029,19 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
 
 - `g` y `h` no se corrieron enteras: `g` necesita `docker` y `dotnet` juntos, y este entorno los tiene separados.
 
+## La publicación real queda descrita en el repositorio — 2026-09-14
+
+**Rama:** `devops/lote2-publicacion-real`. Lote 2 del plan de la mesa del 2026-09-14 (`R-13`).
+
+### Documentado
+
+- `Guia-Publicacion-Image-Docker.md` 1.4, §2.2: la publicación **tal como corre**. Hasta hoy sólo estaba en una constancia en el servidor. Cubre:
+  - la composición desde GitHub por `LAB_GEOMETRIA_REF` y los dos servicios con sus volúmenes, salud y límites;
+  - las variables por nombre y el uid 1654;
+  - el procedimiento con respaldo y verificación, y la reversión.
+- **Divergencia declarada para el Product Owner:** la guía y `Estrategia-Versionado.md` dicen que se despliega la etiqueta de la etapa, y el servidor construye `main`.
+- Sin nombres de red, rangos ni rutas del anfitrión.
+
 ## La puerta de `i` mide el despliegue que existe — 2026-09-14
 
 **Rama:** `puertas/lote2-puerta-de-i`. Deuda `DD-R8-1` de la mesa del 2026-09-13 (ciclo 2), ampliada por `R-11` de la mesa del 2026-09-14.
