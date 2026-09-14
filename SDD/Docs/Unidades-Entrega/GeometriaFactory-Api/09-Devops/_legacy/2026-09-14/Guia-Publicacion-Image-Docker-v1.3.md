@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Guia-Publicacion-Image-Docker.md
-**Versión:** 1.4
+**Versión:** 1.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
@@ -90,48 +90,6 @@ El intake §17.1.P.11 · GeometriaFactory-Api punto 5 marca el mecanismo **[A VE
 
 **La quinta comprobación no está en la fuente y es un agregado de esta categoría**, declarado como tal: el intake exige que el almacén viva en un volumen persistente y **nunca dentro de la imagen**, y la única forma de saber que eso quedó bien configurado es **reemplazar la versión y comprobar que el dato sigue**. Es la comprobación más barata contra el modo de falla más caro del producto.
 
-### 2.2 La publicación real, tal como corre desde el 2026-09-06
-
-**Por qué existe esta subsección** (mesa del 2026-09-14, `R-13`). Lo anterior describe el mecanismo **como lo declaró la fuente**. El despliegue real se armó después y **no estaba descrito en ningún lugar del repositorio**: sólo en una constancia en el servidor. Ésta es su descripción, verificada contra ese servidor el 2026-09-14. **No transcribe nombres de red, rangos ni rutas del anfitrión** —el repositorio es público—; donde hacen falta, dice qué son.
-
-**La composición no es `deploy/compose.yaml`.** Vive en el servidor, fuera del repositorio, y construye **desde la URL de GitHub** con la referencia `LAB_GEOMETRIA_REF` (una rama, un commit o una etiqueta) y `BUILDKIT_CONTEXT_KEEP_GIT_DIR=1`, que es lo que deja a la imagen sellarse con su revisión. `deploy/compose.yaml` sigue en el árbol como composición de un solo servicio para ensayar la imagen; **no describe producción**: no tiene el front, ni la red del túnel, ni los límites.
-
-| Servicio | Construcción | Estado durable | Salud | Límite |
-| --- | --- | --- | --- | --- |
-| Servicio de datos | `deploy/Dockerfile` | Directorio del anfitrión montado en `/datos`: el almacén SQLite | `GET /salud` | 512 MiB |
-| Front | `deploy/Dockerfile.web` | Directorio del anfitrión montado en `/claves`: las claves de protección de datos | El bundle del visor | 256 MiB |
-
-**Publicación:** los dos servicios están en la red de un túnel del anfitrión, sin puertos publicados, bajo dominio propio: `https://geometria.aplicada.stream` (front) y `https://api-geometria.aplicada.stream` (servicio de datos).
-
-**Variables, por nombre.** Los valores no se escriben en el repositorio; la clave de firma vive en el `.env` del servidor, con modo 600.
-
-| Variable | Servicio | Qué es |
-| --- | --- | --- |
-| `LAB_GEOMETRIA_REF` | Composición | Qué revisión se construye |
-| `AccessToken__SigningKey` | Datos | **Secreto.** Cambiarla invalida todos los accesos emitidos |
-| `ForwardedHeaders__KnownNetworks__0` | Los dos | La red del túnel, a la que se le cree `X-Forwarded-For` (`Api ADR-00011`, `Web ADR-10009`) |
-| `Documentacion__Publicada` | Datos | Opcional: publica OpenAPI y el explorador |
-| `Registration__AdmittedEmailDomains__N` | Datos | Opcional: los dominios que admite el autorregistro (`Api ADR-00012`). **Hoy no se declara** |
-| `ApiBaseUrl` | Front | La dirección del servicio de datos dentro de la red del túnel |
-| `DataProtection__KeysDirectory` | Front | `/claves` |
-
-**Las dos imágenes corren con el usuario sin privilegios de la imagen base, uid 1654** (PR #219). Los dos directorios del anfitrión tienen que ser de ese usuario. Si el del almacén es de root, **el servicio de datos no arranca** (sale con 78, `readonly database`).
-
-**Procedimiento de actualización, en el directorio de la composición:**
-
-1. Respaldo: `scripts/respaldo-almacen.sh --desde-contenedor <servicio-de-datos> <directorio-de-respaldos>`, y una copia del directorio de claves del front. Los archivos de claves son de uid 1654 con modo 600, así que la copia la toma un contenedor como root.
-2. `docker compose build --pull && docker compose up -d`.
-3. Verificación:
-   - los dos servicios `healthy`;
-   - `/salud` con `ready` y la versión terminada en el commit que se quiso desplegar;
-   - el sello del front con esa misma versión;
-   - las migraciones y los recuentos del almacén, más `integrity_check` en `ok`;
-   - la clave del front, la misma de antes.
-
-**Reversión:** `LAB_GEOMETRIA_REF=<commit o etiqueta anterior> docker compose up -d --build`. Si una migración dejó el almacén mal, `scripts/restaurar-almacen.sh` con el respaldo del paso 1 y el servicio detenido. Vale la advertencia de §4: revertir el código no revierte los datos.
-
-**Divergencia declarada: etiqueta contra `main`.** §2 de esta guía y `Estrategia-Versionado.md` dicen que se despliega **la etiqueta de la etapa cerrada**. **El servidor construye `main`**: el 2026-09-14, `/salud` respondió `1.1.3-alpha.0.18+8d8c857`, la marca de MinVer de una construcción sin etiqueta. Cuál de las dos rige **es del Product Owner** (`R-13`, «constancia del PO»), y esta subsección no la decide. Mientras tanto, lo que corre se identifica por el commit del sello, no por una etiqueta.
-
 ## 3. Verificación posterior al despliegue
 
 **Cinco verificaciones, en orden de costo creciente.** Las dos primeras las hace la canalización antes de que el artefacto se entregue; las tres siguientes las hace quien despliega.
@@ -182,7 +140,6 @@ Las **seis** de [`ADR-00008`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Vers
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.4 | 2026-09-14 | **§2.2 nueva: la publicación real**, que no estaba descrita en el repositorio (mesa del 2026-09-14, `R-13`): composición en el servidor desde GitHub por `LAB_GEOMETRIA_REF`, los dos servicios, las variables por nombre, uid 1654, procedimiento con respaldo y verificación, reversión y la **divergencia etiqueta contra `main`** declarada para el Product Owner. Sin nombres de red, rangos ni rutas del anfitrión. Estado anterior en `_legacy/2026-09-14/`. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara de entrada que **no hay publicación en ningún registro de imágenes** y que lo que documenta es el **despliegue construyendo en destino desde el repositorio**, con la advertencia de que **lo ejecuta el Product Owner a mano** y de que esta guía está escrita para quien lo ejecuta. Usa `image-docker`, valor admitido por `Rules-Devops.md` §3.1, **sin declarar un tipo nuevo**, y declara por qué el artefacto secundario que §2.2 admite para el tipo **no tiene sujeto acá**. Declara los pre-requisitos —**ninguna cuenta de registro**, la clave de firma nombrada por su función, y la salida a la red del destino como consecuencia declarada del canal—, las **dos** piezas que el agente entrega y qué ocurre en cada arranque en **dos fases**. Escribe la **prueba única del mecanismo** que la fuente exige, en **cinco** comprobaciones, con la quinta declarada como agregado propio, **sin declarar que el mecanismo funcione**. Declara **cinco** verificaciones posteriores, la reversión por reconstrucción desde la etiqueta —incluida la situación en la que **no se puede revertir sin red**— y la advertencia de que **revertir el código no revierte los datos**, y las **seis** métricas de `ADR-00008` §8 sin agregar ninguna. |
 | 1.1 | 2026-08-11 | **Corrección del `H-01` de la auditoría `F-09-Devops-Siete-Proyectos-r1.md`, en su variante de este documento.** La cita de §0 es **literal**, pero la fuente que se le atribuía era la equivocada: el texto entrecomillado es la fila «Despliegue manual del backend» del intake **§13**, no §17.1.P.8 · GeometriaFactory-Api, cuya fila `despliegue` dice «Manual, por el docente [DECISIÓN, RT §13]». Se corrige la atribución y se agrega la cita literal de §17.1.P.8 · GeometriaFactory-Api al lado. Sube la trazabilidad upstream del intake de **1.21** a **1.22**. |
 | 1.2 | 2026-08-31 | **`U-01` del plan de la mesa del 2026-08-31: el respaldo existe, y el diario es el que la fuente declara.** Cierra el hallazgo `MI-01`, un `P0` votado 5-0: el respaldo era **el único mecanismo de vuelta atrás que el corpus declaraba** y **no existía en ningún árbol** —el barrido de `scripts/`, `deploy/` y `.github/` devolvía una sola coincidencia, `reset-db.sh`, que es el guion que **vacía** el almacén—. **Y su segunda mitad era peor**: la especificación escrita para construirlo describía diario **WAL** mientras `UseSqlite(cadena)` a secas dejaba el motor en `delete`, de modo que **el `P0` no se cerraba siguiendo el corpus**. Entra `StorePreparation` fijando `PRAGMA journal_mode=WAL` y **leyendo lo que el motor contesta** —sobre un almacén en memoria SQLite se queda en `delete` y **no falla**—; `sqlite3` entra a la imagen de ejecución con su motivo escrito, para que la copia se pueda tomar **desde adentro del contenedor** y no dependa de lo que el host del destino tenga; y entran `scripts/respaldo-almacen.sh` —`VACUUM INTO` y no `cp`, sin detener el servicio, negándose si el destino es el directorio del almacén, y con `integrity_check` que **borra la copia si no verifica**— y `scripts/restaurar-almacen.sh`, que **no borra el almacén anterior: lo aparta con sello**, que es la lección del 2026-08-15. **La política sigue sin declararse y es deliberado**: la frecuencia, el destino y la retención son `PD-04` y son del Product Owner. **Un número puesto en el guion se propaga como si fuera del producto.** |
