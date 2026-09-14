@@ -1793,3 +1793,20 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
 - **Tres ítems de seguridad tienen su detalle reservado** hasta el commit que corrige cada uno, porque el repositorio es público (`DD-R9-7`).
 - Del lote 0 quedan los ajustes de GitHub, la rotación de credenciales, la revisión del runner y las cabeceras en el borde, a cargo del Product Owner.
 
+## Un acceso deja de servir en cuanto la cuenta se bloquea o se elimina — 2026-09-14
+
+**Rama:** `seguridad/lote1-admision-en-cada-peticion`. Lote 1 del plan de la mesa del 2026-09-14 (`SDD/Docs/Audit/Mesa-2026-09-14.md`, R-05, primera parte), aprobado por el Product Owner.
+
+### Corregido
+
+- `GeometriaFactory.Api`: la guarda que corre en cada petición con acceso firmado evalúa la **admisión completa de la cuenta** (`Account.EvaluateAdmission`) y no sólo la marca de cambio de contraseña. Un acceso obtenido antes de que el administrador bloquee la cuenta responde `403` con `AccountNotEnabled`; si la eliminó, `401` genérico. La cuenta marcada y habilitada sigue recibiendo el mismo código que antes.
+
+### Verificado
+
+- Prueba nueva `AnAccessObtainedBeforeTheAccountIsBlockedOrDeletedStopsWorkingOnTheNextRequest`, **vista fallar** contra la guarda anterior (`Expected: Forbidden · Actual: OK` en el paso del bloqueo) y pasar con la nueva.
+- Build sin errores y suite completa en verde: Domain 94, Application 56, Integration 404.
+
+### No hecho, y declarado
+
+- La revocación del acceso cuando la propia cuenta cambia su contraseña (REF-02) necesita una marca temporal persistida y va en su propia unidad, junto con la prueba de migración sobre datos (R-10).
+
