@@ -24,7 +24,7 @@ Termina en **0 y sin advertencias**: `TreatWarningsAsErrors` está puesto y una 
 ## Probar
 
 ```bash
-bash scripts/test.sh                                    # las tres baterías, Release
+bash scripts/test.sh                                    # las tres baterías, Release (la E2E: bash scripts/pruebas-e2e.sh)
 dotnet test tests/GeometriaFactory.Domain.Tests -c Release   # un subconjunto
 bash scripts/coverage.sh                                # cobertura y sus dos puertas
 ```
@@ -61,8 +61,8 @@ Si el cambio toca una etapa con puerta propia, además `scripts/verify-stage-<le
 | El intake y los requerimientos técnicos | Documentos humanos. Lo desalineado **se eleva, no se corrige** |
 | `PRODUCT-MANIFEST` y los apartamientos | Se declaran, no se ejercen por conveniencia |
 | El almacén de trabajo | El 2026-08-15 una corrida de guiones se llevó una cuenta. Toda rutina destructiva usa **archivo propio** |
-| Los contenedores `gf-api`, `gf-web`, `gf-back`, `gf-tunnel` | Son el despliegue local del Product Owner. Un servicio de prueba se levanta **aparte**, puerto libre y almacén propio |
-| Fusionar un PR y borrar su rama | Son del Product Owner. Se entrega el enlace y se espera |
+| Los contenedores `lab-geometria-web` y `lab-geometria-api` | Son el despliegue real del Product Owner: ni `exec`, ni reinicio, ni lectura de sus volúmenes. Un servicio de prueba se levanta **aparte**, puerto libre y almacén propio |
+| Fusionar un PR y borrar su rama | Lo hace el agente, por decisión del Product Owner (2026-08-31, reafirmada el 2026-09-14), con los checks en verde y sin reserva. Con reserva, entrega el enlace y espera |
 
 **Y una que no es sobre archivos:** cuando dos mediciones del mismo hecho no coinciden, **no se elige la que conviene**. Se revisan las dos — y en este repositorio suele estar mal la más elaborada.
 
@@ -79,9 +79,9 @@ Las siete eventualidades completas, con lo que se descartó, están en la bitác
 
 | Quiero… | Documento |
 | --- | --- |
-| entender el producto | `SDD/Docs/Producto/11-Documentacion/Vision-General-Sistema.md` |
-| levantarlo en limpio | `SDD/Docs/Producto/11-Documentacion/Guia-Inicio-Rapido.md` |
-| desplegarlo y saber volver atrás | `SDD/Docs/Producto/11-Documentacion/Guia-Despliegue.md` |
+| entender el producto | `SDD/Docs/README.md` §7 (`Vision-General-Sistema.md` no está emitido) |
+| levantarlo en limpio | `SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/03-UX-UI-DX/Guia-Onboarding-Developer.md` y la de Web (`Guia-Inicio-Rapido.md` no está emitida) |
+| desplegarlo y saber volver atrás | `SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Guia-Publicacion-Image-Docker.md` y el registro de cambios (`Guia-Despliegue.md` no está emitida) |
 | saber si ya le pasó a alguien | `SDD/Docs/Producto/11-Documentacion/Bitacora-Eventualidades.md` |
 | la superficie HTTP exacta | `SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md` |
 | un ejemplo que corre | `samples/<capa>/<nivel>/` |
