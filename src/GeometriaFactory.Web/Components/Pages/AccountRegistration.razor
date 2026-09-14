@@ -82,6 +82,15 @@ else
             Ese correo ya pertenece a una cuenta del laboratorio. Usá otro, o entrá con el que ya tenés.
         </p>
     }
+    else if (_state is Outcome.EmailDomainNotAdmitted)
+    {
+        @* R-07 · `Api ADR-00012`: el laboratorio sólo admite correos de los dominios que el despliegue
+           declara. No los nombra y no dice si el correo ya tenía cuenta. *@
+        <p class="gf-banner gf-banner--error gf-mt-5" role="alert">
+            Ese correo no es de un dominio que el laboratorio admita. Registrate con tu correo institucional.
+            Todavía no se registró nada.
+        </p>
+    }
     else if (_state is Outcome.Rejected)
     {
         <p class="gf-banner gf-banner--error gf-mt-5" role="alert">
@@ -110,11 +119,11 @@ else
     <form class="gf-mt-5" method="post" @formname="account-registration" @onsubmit="SubmitAsync"
           data-gf-pending="Enviando">
         <AntiforgeryToken />
-        <div class="gf-field @(_state is Outcome.EmailAlreadyRegistered || Falta(Form.Email) ? "gf-field--error" : null)">
+        <div class="gf-field @(_state is Outcome.EmailAlreadyRegistered or Outcome.EmailDomainNotAdmitted || Falta(Form.Email) ? "gf-field--error" : null)">
             <label for="registration-email">Correo</label>
             <input class="gf-input" id="registration-email" name="Input.Email" type="email"
                    autocomplete="email" aria-describedby="registration-email-error" value="@Form.Email"
-                   aria-invalid="@(_state is Outcome.EmailAlreadyRegistered || Falta(Form.Email) ? "true" : null)" />
+                   aria-invalid="@(_state is Outcome.EmailAlreadyRegistered or Outcome.EmailDomainNotAdmitted || Falta(Form.Email) ? "true" : null)" />
             @if (_state is Outcome.EmailAlreadyRegistered)
             {
                 <span class="gf-requirement" id="registration-email-error">Ese correo ya está registrado.</span>
@@ -142,7 +151,7 @@ else
 }
 
 @code {
-    private enum Outcome { None, MissingFields, EmailAlreadyRegistered, Rejected, Registered, Unavailable }
+    private enum Outcome { None, MissingFields, EmailAlreadyRegistered, EmailDomainNotAdmitted, Rejected, Registered, Unavailable }
 
     /// <summary>Los tres campos de la tarjeta, tal como el envío los trae de vuelta.</summary>
     /// <remarks>
@@ -203,6 +212,7 @@ else
         _state = outcome.Error!.Code switch
         {
             ErrorCode.EmailAlreadyRegistered => Outcome.EmailAlreadyRegistered,
+            ErrorCode.EmailDomainNotAdmitted => Outcome.EmailDomainNotAdmitted,
             ErrorCode.ServiceUnavailable => Outcome.Unavailable,
             ErrorCode.RequiredFieldMissing => Outcome.MissingFields,
             _ => Outcome.Rejected,

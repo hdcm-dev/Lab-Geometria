@@ -27,14 +27,17 @@ public sealed class RegisterAccountUseCase
 {
     private readonly IAccountRepository _accounts;
     private readonly ISystemClock _clock;
+    private readonly RegistrationPolicy _policy;
 
-    public RegisterAccountUseCase(IAccountRepository accounts, ISystemClock clock)
+    /// <param name="policy">Los dominios admitidos. Sin política, cualquiera (<see cref="RegistrationPolicy.Unrestricted"/>).</param>
+    public RegisterAccountUseCase(IAccountRepository accounts, ISystemClock clock, RegistrationPolicy? policy = null)
     {
         ArgumentNullException.ThrowIfNull(accounts);
         ArgumentNullException.ThrowIfNull(clock);
 
         _accounts = accounts;
         _clock = clock;
+        _policy = policy ?? RegistrationPolicy.Unrestricted;
     }
 
     /// <summary>Ejecuta el flujo principal de CU-01 §4, en su orden.</summary>
@@ -47,9 +50,18 @@ public sealed class RegisterAccountUseCase
         string? lastName,
         CancellationToken cancellationToken = default)
     {
+        var normalizedEmail = EmailIdentity.Normalize(email);
+
+        // R-07 — ¿el dominio está admitido? ANTES de consultar el conjunto: la respuesta a un
+        // dominio no admitido no dice si ese correo ya tenía cuenta (`Api ADR-00012`). El correo
+        // vacío sigue de largo y lo rechaza el dominio por campo ausente.
+        if (!string.IsNullOrWhiteSpace(normalizedEmail) && !_policy.Admits(normalizedEmail))
+        {
+            return ApplicationResult<AccountSnapshot>.Rejected(ApplicationConditionCode.EmailDomainNotAdmitted);
+        }
+
         // Paso 2 — ¿el correo está libre? No se informa el estado ni el papel de la cuenta que
         // lo ocupa (RN-02, INV-01).
-        var normalizedEmail = EmailIdentity.Normalize(email);
 
         if (!string.IsNullOrWhiteSpace(normalizedEmail)
             && await _accounts.EmailIsRegisteredAsync(normalizedEmail, cancellationToken).ConfigureAwait(false))

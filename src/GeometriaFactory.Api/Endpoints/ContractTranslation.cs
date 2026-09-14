@@ -69,6 +69,13 @@ public static class ContractTranslation
             new Translation(ErrorCode.EmailAlreadyRegistered, StatusCodes.Status409Conflict,
                 "Ese correo ya está registrado."),
 
+        // `400` y no `409`, por el mismo criterio que la confirmación de la baja: es un campo de la
+        // petición que no cumple lo que el despliegue pide, no un estado del conjunto. El texto no
+        // nombra los dominios admitidos ni dice si el correo ya tenía cuenta (`Api ADR-00012`).
+        ApplicationConditionCode.EmailDomainNotAdmitted =>
+            new Translation(ErrorCode.EmailDomainNotAdmitted, StatusCodes.Status400BadRequest,
+                "Ese correo no es de un dominio que el laboratorio admita."),
+
         // El correo desconocido y la contraseña equivocada responden IGUAL, y es deliberado:
         // distinguirlos permitiría averiguar por tanteo qué correos están registrados.
         ApplicationConditionCode.AccountNotFound or ConditionCode.CurrentCredentialNotVerified =>

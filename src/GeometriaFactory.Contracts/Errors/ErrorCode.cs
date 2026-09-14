@@ -21,6 +21,9 @@ namespace GeometriaFactory.Contracts.Errors;
 /// `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR`—, que describen condiciones del punto `A-15`.
 /// Ese punto es de la etapa `h`, y escribir sus códigos ahora declararía condiciones que ninguna
 /// petición de esta superficie puede producir.
+///
+/// UNO MÁS ENTRÓ EL 2026-09-14, FUERA DE LAS ETAPAS: `EMAIL_DOMAIN_NOT_ADMITTED`, con el registro
+/// acotado a los dominios que el despliegue declara (`Api ADR-00012`). Son dieciocho vivos.
 /// </remarks>
 public static class ErrorCode
 {
@@ -38,6 +41,14 @@ public static class ErrorCode
 
     /// <summary>`CONTRATO_CORREO_YA_REGISTRADO` (`DXT-04`). RN-02.</summary>
     public const string EmailAlreadyRegistered = "EMAIL_ALREADY_REGISTERED";
+
+    /// <summary>
+    /// `CONTRATO_DOMINIO_DE_CORREO_NO_ADMITIDO`. El correo del registro no es de ninguno de los
+    /// dominios que el despliegue admite (`Api ADR-00012`). **Entra dentro de `/v1/`**: agregar un
+    /// código al conjunto cerrado es un cambio menor (`Api ADR-00010` §2.1 punto 3). La respuesta
+    /// no nombra los dominios admitidos ni dice si el correo ya tenía cuenta.
+    /// </summary>
+    public const string EmailDomainNotAdmitted = "EMAIL_DOMAIN_NOT_ADMITTED";
 
     /// <summary>`CONTRATO_ADMINISTRADOR_YA_CONFIGURADO` (`DXT-06`). RN-01, INV-05.</summary>
     public const string AdministratorAlreadyConfigured = "ADMINISTRATOR_ALREADY_CONFIGURED";

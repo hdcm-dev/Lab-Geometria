@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Definicion-Superficie-HTTP.md
-**Versión:** 1.15
+**Versión:** 1.14
 **Estado:** Aprobado
 **Fecha:** 2026-09-14
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -187,7 +187,6 @@ El conjunto cerrado lo declara `GeometriaFactory-Contracts` `CU-00006` §10 y es
 | `WORK_NOT_FOUND` | `404` | **RN-00003.** Cubre el inexistente, el ajeno y el que está fuera de lo que el solicitante ve, y las tres respuestas son indistinguibles |
 | `STUDENT_NOT_FOUND` | `404` | El filtro por alumno referencia un identificador que no existe. **Y, por adopción declarada de esta categoría, la cuenta que un punto de administración referencia y no existe**: es la misma situación desde otro punto de acceso, y la ampliación de causa se declara en `CU-00004` §10 en lugar de darse por prevista |
 | `EMAIL_ALREADY_REGISTERED` | `409` | El estado del conjunto no admite la operación. La respuesta **no declara la situación ni el papel** de la cuenta que ocupa el correo |
-| `EMAIL_DOMAIN_NOT_ADMITTED` | `400` | El correo del registro no es de un dominio que el despliegue admite ([`ADR-00012`](../05-Arquitectura-Tecnica/Adrs/ADR-00012-El-Autorregistro-Admite-Los-Dominios-Que-El-Despliegue-Declara.md)). Es un campo que no cumple lo que se pide, no un estado del conjunto. **Se verifica antes que la unicidad**, así que la respuesta no dice si el correo ya tenía cuenta, y no nombra los dominios admitidos. Sin dominios declarados no se produce |
 | `ADMINISTRATOR_ALREADY_CONFIGURED` | `409` | Ídem, y **el contrato no ofrece camino alternativo**: la respuesta no sugiere ninguno |
 | `CONFIRMATION_MISMATCH` | `400` | Es un campo de la petición que no cumple lo que el contrato le pide, no un estado que impida la operación. **La respuesta no devuelve el correo esperado** |
 | `STATE_FORBIDS_DELETE` | `409` | El estado del trabajo no habilita al solicitante. La respuesta **declara el estado actual**, que es lo que el contrato ya transporta |
@@ -264,4 +263,3 @@ Los **cinco** primeros son propios de este documento y están recogidos en el í
 | 1.13 | 2026-09-13 | **§4 pasa de diez a once códigos: entra el `429`** (tarea `BT-00029`). Una fila nueva en la tabla, que declara el código **transversal a los dieciséis puntos bajo `/v1/`** y por eso **no toca la columna de códigos de ninguna fila de §3**; `A-16` queda fuera. El párrafo de las ausencias informativas pasa de dos a una y deja constancia de por qué el `429` dejó de serlo. Las cuotas, su fundamento, su configuración y la batería que las verifica viven en `Contratos-REST.md` **1.9** §4.1 y no se duplican acá. **Ningún punto, verbo, ruta, papel ni CU cambia.** Sube minor. |
 | 1.12 | 2026-09-12 | **§7, fila «CORS», se alinea con `PRODUCT-INTAKE` 4.4 y remite a `05` §9.1** (tarea `BT-00030`). La fila decía sólo «RA-01» y la condición que el intake dejó escrita el 2026-09-12 —que la ausencia rige mientras ningún cliente propio sea JavaScript de navegador desde otro origen (`ADR-00009`)— no estaba acá. La celda «Por qué» suma la condición y remite a [`Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §9.1 y §9.1.1, donde vive la declaración de por qué no aplica hoy con su medición; la celda «Qué la repone» suma la forma exigida si la condición se da: política por origen explícito, nunca `AllowAnyOrigin` con credenciales. **La ausencia no se retira y sigue siendo ausencia**: ninguna ruta de §3 ni código de §6 cambia. Sube minor. |
 | 1.14 | 2026-09-14 | Fila **A-05**: la forma con sesión de trabajo responde con un acceso nuevo y deja sin efecto los emitidos antes del cambio (`ADR-00003` 1.1 §2 punto 5); la forma sin sesión no cambia. Lote 1 de la mesa del 2026-09-14 (`../../../Audit/Mesa-2026-09-14.md`, REF-02). Estado anterior en `_legacy/2026-09-14/`. Sube minor. |
-| 1.15 | 2026-09-14 | **§5 suma `EMAIL_DOMAIN_NOT_ADMITTED` con `400`** ([`ADR-00012`](../05-Arquitectura-Tecnica/Adrs/ADR-00012-El-Autorregistro-Admite-Los-Dominios-Que-El-Despliegue-Declara.md), mesa del 2026-09-14 `R-07`/`E-1`). `A-02` ya declaraba `400`: ningún punto cambia sus códigos de respuesta, y el código entra dentro de `/v1/` como cambio menor (`ADR-00010` §2.1 punto 3). Estado anterior en `_legacy/2026-09-14/`. Sube minor. |

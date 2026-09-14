@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 2.4
+**Versión:** 2.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-16
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -49,9 +49,9 @@ Lo que hay que haber entendido antes de tocar esta sección, y que atraviesa los
 | Documento | Propósito |
 | --- | --- |
 | [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) | Documento maestro: estilo, las cuatro vistas mínimas, cross-cutting, diecisiete NFR, nueve riesgos, trazabilidad de las dieciséis reglas, de los nueve invariantes y de las tres reglas de arquitectura, y diez puntos abiertos |
-| [`Decisiones-Arquitectura.md`](Decisiones-Arquitectura.md) | Índice de las doce ADR, con la correspondencia contra los cinco temas que el tipo exige y la tabla de consulta rápida por preocupación |
+| [`Decisiones-Arquitectura.md`](Decisiones-Arquitectura.md) | Índice de las once ADR, con la correspondencia contra los cinco temas que el tipo exige y la tabla de consulta rápida por preocupación |
 | [`Contratos-REST.md`](Contratos-REST.md) | Contrato de la superficie: quince puntos, diez códigos de respuesta, **la tabla de traducción de los diecisiete códigos del contrato**, el formato de intercambio y el versionado |
-| [`Adrs/`](Adrs/) | Las doce decisiones, una por archivo |
+| [`Adrs/`](Adrs/) | Las once decisiones, una por archivo |
 
 ## 3. ADR vigentes
 
@@ -68,7 +68,6 @@ Lo que hay que haber entendido antes de tocar esta sección, y que atraviesa los
 | [ADR-00009](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md) | La API autentica personas, no aplicaciones | Seguridad | **Aceptado** |
 | [ADR-00010](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) | Versión en la ruta, sólo el MAJOR, para la superficie pública | Comunicación | **Aceptado** |
 | [ADR-00011](Adrs/ADR-00011-El-Canje-Se-Protege-Por-Cuenta-Y-El-Origen-Tolera-Una-Comision.md) | El canje se protege por cuenta, y el origen tolera una comisión | Seguridad | **Aceptado** |
-| [ADR-00012](Adrs/ADR-00012-El-Autorregistro-Admite-Los-Dominios-Que-El-Despliegue-Declara.md) | El autorregistro admite los dominios que el despliegue declara | Seguridad | **Aceptado** |
 
 Una superada parcialmente, ninguna rechazada. La novena y la décima entran el 2026-09-12 por decisión del Product Owner y nacen `Aceptado`; la décima supera parcialmente a `ADR-00008`.
 
@@ -118,4 +117,3 @@ Cinco puntos abiertos llegaron a esta categoría desde otras Fases C, y conviene
 | 2.1 | 2026-09-12 | **Entra `ADR-00009`** (La API autentica personas, no aplicaciones; `Aceptado` por decisión del Product Owner del 2026-09-12) a la tabla de §3. Las ocho anteriores no cambian. Sube minor. |
 | 2.2 | 2026-09-12 | **Entra `ADR-00010`** (Versión en la ruta, sólo el MAJOR, para la superficie pública; `Aceptado`, `E-04`) a la tabla de §3, y **`ADR-00008` pasa a `Superado parcialmente`**; §1 pasa de «ocho» a «diez» ADR. Tarea `BT-00027`. Sube minor. |
 | 2.3 | 2026-09-13 | **Entra `ADR-00011`** (El canje se protege por cuenta, y el origen tolera una comisión; `Aceptado`) a la tabla de §3; «diez» pasa a «once» ADR en §2. Corrige el defecto de `BT-00029`. Sube minor. |
-| 2.4 | 2026-09-14 | **Entra `ADR-00012`** (El autorregistro admite los dominios que el despliegue declara; `Aceptado`) a la tabla de §3; «once» pasa a «doce» ADR en §2. Mesa del 2026-09-14, `R-07`/`E-1`. Estado anterior en `_legacy/2026-09-14/`. Sube minor. |
