@@ -89,12 +89,10 @@ public sealed class NavegacionTests : PruebaE2E
         await IngresarComoAdministradorAsync();
 
         await Page.ClickAsync("nav.gf-shell-sidebar a[href='/cuentas']");
-        await Page.WaitForLoadStateAsync(LoadState.Load);
         await Expect(Page).ToHaveURLAsync(new Regex(@"/cuentas$"));
         await Expect(Page.Locator("h1")).ToHaveTextAsync("Cuentas de la comisión");
 
         await Page.ClickAsync("nav.gf-shell-sidebar a[href='/entrega-comision']");
-        await Page.WaitForLoadStateAsync(LoadState.Load);
         await Expect(Page).ToHaveURLAsync(new Regex(@"/entrega-comision$"));
         await Expect(Page.Locator("h1")).ToHaveTextAsync("Entrega de la comisión");
     }
@@ -125,7 +123,6 @@ public sealed class NavegacionTests : PruebaE2E
         // puesta: la pantalla diría que salió y la próxima navegación entraría igual. Eso es
         // exactamente lo que comprueba la segunda mitad de este caso.
         await Page.ClickAsync("nav.gf-shell-sidebar form[method=post] button[type=submit]");
-        await Page.WaitForLoadStateAsync(LoadState.Load);
         await Expect(Page).ToHaveURLAsync(new Regex(@"/ingreso"));
 
         await Page.GotoAsync("/cuentas", new() { WaitUntil = WaitUntilState.Load });
