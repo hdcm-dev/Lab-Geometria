@@ -1,16 +1,33 @@
+@inject VersionIdentity Identity
+
 @* CMP-09, sello de versión. `Representacion-Sello-De-Version.md` §2 lo declara con DOS
    ubicaciones obligatorias: el pie de la barra lateral del shell de trabajo y el lienzo del
    shell de acceso.
 
-   ETAPA `b`: SIN IDENTIDAD DE VERSIÓN. El detalle de diagnóstico —versión, construcción,
-   origen, y el «copiar para reportar»— llega con la etapa que lo produce. Acá están la
-   ubicación, la jerarquía tipográfica y la línea del sello.
+   LA VERSIÓN LLEGA FORMADA desde `VersionIdentity`, resuelta una vez en la composición a partir
+   de la construcción (mesa del 2026-09-14, R-14). Este componente no la arma, no la reformatea y
+   no distingue entornos: dibuja una de las tres variantes de §3.
 
-   EL TEXTO NO ES INVENTADO Y NO ES ANDAMIAJE: es la variante «origen indeterminado» que
-   `Representacion-Sello-De-Version.md` §2 y §5 declaran para cuando «la identidad no pudo
-   derivarse de la construcción», que es exactamente lo que pasa hoy. La fuente manda mostrarla
-   «tal cual, sin disimulo». *@
+     · Publicada: la versión, sin adornos.
+     · Preliminar: la versión y el distintivo textual contiguo, en estado de atención. El color
+       es refuerzo; el canal es el texto (§5).
+     · Origen indeterminado: el marcador, «tal cual, sin disimulo».
+
+   EL DETALLE DE DIAGNÓSTICO —construcción, origen y «copiar para reportar»— SIGUE SIN DIBUJARSE,
+   y se declara: es un despliegue interactivo y es de otra unidad. El identificador de
+   construcción no se muestra en la línea, porque §4 lo reserva para el detalle. *@
 
 <div class="gf-seal">
-    <span class="gf-meta">Versión no identificada</span>
+    @if (Identity.IsIndeterminate)
+    {
+        <span class="gf-meta">Versión no identificada</span>
+    }
+    else
+    {
+        <span class="gf-meta">Versión @Identity.Version</span>
+        @if (Identity.IsPreliminary)
+        {
+            <span class="gf-badge gf-badge--warning">preliminar</span>
+        }
+    }
 </div>

@@ -157,6 +157,11 @@ builder.Services.AddSingleton<PendingCredentialChangeStore>();
 // está fundamentada en el comentario de `ProvisioningStateProbe`.
 builder.Services.AddSingleton<ProvisioningStateProbe>();
 
+// LA IDENTIDAD DE VERSIÓN SE RESUELVE UNA SOLA VEZ, ACÁ (`Representacion-Sello-De-Version.md` §4):
+// el sello la lee de este servicio y no la arma por su cuenta. Sale de la construcción, igual que
+// la que el servicio de datos publica en `/salud` (mesa del 2026-09-14, R-14).
+builder.Services.AddSingleton(VersionIdentity.OfAssembly(typeof(VersionIdentity).Assembly));
+
 // EL ESTADO DEL SERVICIO DE DATOS ES DEL LABORATORIO, NO DE UNA SESIÓN, y por eso es singleton:
 // que dos personas mirando dos pestañas compartan la misma lectura es lo correcto, y es lo que
 // evita una llamada de red por página dibujada. Ver `DataServiceReachability` para la decisión
