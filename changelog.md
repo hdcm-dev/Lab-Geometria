@@ -1973,3 +1973,19 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
 
 - **Ningún despliegue declara todavía un dominio**, así que en producción el registro sigue admitiendo cualquier correo. Declararlo es del Product Owner.
 - El intake sigue diciendo «diecisiete vivos» hasta su próxima emisión.
+
+## La puerta `c` autoriza los trece atributos que el marcado ya usaba — 2026-09-14
+
+**Rama:** `puertas/lote2-atributos-autorizados`. Lote 2 del plan de la mesa del 2026-09-14 (`R-11`, escalada `E-6` aprobada).
+
+### Cambiado
+
+- `scripts/verify-stage-c.sh`, control `C-4`: la lista cerrada pasa de **diecisiete a treinta** atributos `data-gf-*`. Los trece nuevos los agregaron las etapas `e` a `h` sin sumarlos, y la puerta estaba en rojo en `main`.
+  - **Cinco los lee el guion:** el diálogo irreversible, el que se promueve a modal y los tres del acuse de la escena.
+  - **Ocho no los lee ningún guion:** son marcas de estado.
+- `Norma-De-Nomenclatura.md` 1.31, §6.26: la tabla con el motivo de cada uno.
+
+### No hecho, y declarado
+
+- **La puerta entera no se corrió:** necesita las dos piezas levantadas. Se verificaron a mano los cuadres estáticos `3.c` y `3.d`.
+- Cuatro familias de nombres siguen en castellano. Queda como deuda con evento en §6.26.
