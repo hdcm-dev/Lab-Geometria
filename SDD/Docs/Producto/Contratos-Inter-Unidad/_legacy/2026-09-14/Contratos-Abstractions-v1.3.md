@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Producto:** Fábrica de Geometría
 **Documento:** Contratos-Abstractions.md
-**Versión:** 1.4
+**Versión:** 1.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -52,7 +52,7 @@ Un ensamblado de tipos no expone operaciones: expone **familias de tipos** que o
 | Familia | Qué transporta | Contrato de uso | Códigos de error propios |
 | --- | --- | --- | --- |
 | Sesión | Solicitud de canje de credenciales y respuesta de sesión de cuatro campos | CU-08001 | `INVALID_CREDENTIALS`, `ACCOUNT_NOT_ENABLED` |
-| Cuentas | Registro, credencial, listado de cuentas, cambio de situación, confirmación escrita de la baja y cambio de contraseña | CU-08002 | `EMAIL_ALREADY_REGISTERED`, `EMAIL_DOMAIN_NOT_ADMITTED`, `CONFIRMATION_MISMATCH`, `ADMINISTRATOR_ALREADY_CONFIGURED` |
+| Cuentas | Registro, credencial, listado de cuentas, cambio de situación, confirmación escrita de la baja y cambio de contraseña | CU-08002 | `EMAIL_ALREADY_REGISTERED`, `CONFIRMATION_MISMATCH`, `ADMINISTRATOR_ALREADY_CONFIGURED` |
 | Trabajo | Envío, eliminación y estado del trabajo, con el texto original como cadena no interpretada | CU-08003 | `STATE_FORBIDS_DELETE`, `STATE_FORBIDS_UPDATE` |
 | Listado | Proyección de trabajos, con alcance distinto según el papel | CU-08004 | `STUDENT_NOT_FOUND` |
 | Detalle | Trabajo interpretado: piezas, componentes, observaciones y comentario del administrador | CU-08005 | Ninguno propio |
@@ -100,9 +100,9 @@ Y tres ausencias más, de las que cada una tiene su motivo:
 
 Un único tipo de error para las ocho familias, con conjunto cerrado de códigos ([`ADR-08002`](../Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md)). El texto es **neutro** y nunca contiene la dirección del servicio que falló.
 
-### 5.1 Los dieciocho códigos vivos
+### 5.1 Los diecisiete códigos vivos
 
-La lista es la unión de las §6 de los ocho contratos de uso de la categoría 02, que es su fuente. Dieciocho filas.
+La lista es la unión de las §6 de los ocho contratos de uso de la categoría 02, que es su fuente. Diecisiete filas.
 
 | # | Código | Dónde se declara |
 | --- | --- | --- |
@@ -123,11 +123,8 @@ La lista es la unión de las §6 de los ocho contratos de uso de la categoría 0
 | 15 | `OPERATION_ADMIN_ONLY` | CU-08002, CU-08004, CU-08006, CU-08008 |
 | 16 | `STATE_FORBIDS_UPDATE` | CU-08003, CU-08006 |
 | 17 | `UNCLASSIFIED_ERROR` | CU-08006 |
-| 18 | `EMAIL_DOMAIN_NOT_ADMITTED` | CU-08002 |
 
-**El 18 entró el 2026-09-14** por [`Api ADR-00012`](../../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00012-El-Autorregistro-Admite-Los-Dominios-Que-El-Despliegue-Declara.md): el registro admite sólo los dominios que el despliegue declara. Es un cambio menor dentro de `/v1/`. **El intake sigue diciendo «diecisiete vivos»** hasta su próxima emisión, que es del Product Owner.
-
-**Los diecisiete anteriores**, dos de ellos incorporados por decisión del Product Owner (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que este documento **emite formalmente**: el 15 y el 16. **Cinco** de ellos —el 1, el 2, el 3, el 6 y el 15— aparecen en más de un contrato de uso con la **misma** causa, y siguen siendo un código cada uno: la unidad del conjunto es la condición, no la operación. El catálogo de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md) los desarrolla con su texto neutro propuesto.
+**Diecisiete códigos**, dos de ellos incorporados por decisión del Product Owner (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que este documento **emite formalmente**: el 15 y el 16. **Cinco** de ellos —el 1, el 2, el 3, el 6 y el 15— aparecen en más de un contrato de uso con la **misma** causa, y siguen siendo un código cada uno: la unidad del conjunto es la condición, no la operación. El catálogo de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md) los desarrolla con su texto neutro propuesto.
 
 **Los dos códigos que entran, y por qué ninguno de los que había alcanzaba** (`PRODUCT-INTAKE` **1.29** §17.4 P.3).
 
@@ -199,4 +196,3 @@ Aplica el criterio de [`ADR-08003`](../Adrs/ADR-08003-Versionado-Por-Compilacion
 | 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **22**. Sube minor. |
 | 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **33 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.3 | 2026-09-12 | **§6 deja de fundar la ausencia de deprecación en «no hay clientes de terceros»** (tarea `BT-00027`). La premisa fue cierta hasta `PRODUCT-INTAKE` 4.2; desde el 2026-09-12 hay aplicaciones propias que no compilan contra este ensamblado (`ADR-00009`), y su compatibilidad la gobierna la superficie REST bajo `/v{MAJOR}/` ([`ADR-00010`](../../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)). La política de despliegue conjunto para las dos unidades que compilan contra el ensamblado **no cambia**. Un párrafo reescrito; ningún tipo, código ni conjunto cerrado cambia. Sube minor. |
-| 1.4 | 2026-09-14 | **§5.1 pasa de diecisiete a dieciocho códigos vivos: entra `EMAIL_DOMAIN_NOT_ADMITTED`** ([`Api ADR-00012`](../../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00012-El-Autorregistro-Admite-Los-Dominios-Que-El-Despliegue-Declara.md), mesa del 2026-09-14 `R-07`/`E-1`), y la familia Cuentas de §3 lo suma. Ningún identificador retirado se recicla. **No se propagó el recuento** fuera de este documento, `CU-08002` y `Norma-De-Nomenclatura.md` §6.8.6: los demás lugares que dicen «diecisiete» siguen así, y el intake es del Product Owner. Estado anterior en `_legacy/2026-09-14/`. Sube minor. |

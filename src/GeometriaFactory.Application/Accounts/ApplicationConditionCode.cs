@@ -14,6 +14,9 @@ public static class ApplicationConditionCode
     /// <summary>`CORREO_YA_REGISTRADO` — CU-01, CU-10, RN-02.</summary>
     public const string EmailAlreadyRegistered = "EMAIL_ALREADY_REGISTERED";
 
+    /// <summary>`DOMINIO_DE_CORREO_NO_ADMITIDO` — CU-01, `Api ADR-00012`.</summary>
+    public const string EmailDomainNotAdmitted = "EMAIL_DOMAIN_NOT_ADMITTED";
+
     /// <summary>`CUENTA_INEXISTENTE` — CU-02, CU-03, CU-11.</summary>
     public const string AccountNotFound = "ACCOUNT_NOT_FOUND";
 

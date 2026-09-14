@@ -194,6 +194,10 @@ public static class CompositionRoot
         services.AddScoped<ChangeOwnPasswordUseCase>();
 
         // Los casos de uso de la etapa `d`: el ciclo de vida de la cuenta de alumno.
+        // LOS DOMINIOS QUE ADMITE EL AUTORREGISTRO llegan por configuración, y sin la llave el
+        // registro admite cualquier correo (`Api ADR-00012`, mesa del 2026-09-14 R-07).
+        services.AddSingleton(new RegistrationPolicy(
+            configuration.GetSection("Registration:AdmittedEmailDomains").Get<string[]>() ?? []));
         services.AddScoped<RegisterAccountUseCase>();
         services.AddScoped<GovernCommissionAccountsUseCase>();
         services.AddScoped<ResetStudentPasswordUseCase>();

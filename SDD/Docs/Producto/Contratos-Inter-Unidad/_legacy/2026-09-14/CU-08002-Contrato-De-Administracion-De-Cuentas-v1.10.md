@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** CU-08002-Contrato-De-Administracion-De-Cuentas.md
-**Versión:** 1.11
+**Versión:** 1.10
 **Estado:** Aprobado
 **Fecha:** 2026-08-14
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -77,7 +77,6 @@ Declarar los tipos de transferencia del ciclo de vida de una cuenta: el registro
 | --- | --- | --- |
 | `REQUIRED_FIELD_MISSING` | Falta el correo, el nombre o el apellido en el registro | Respuesta de error de CU-08006 que nombra el campo ausente. Recuperación: el código de la pieza pública corrige y reintenta |
 | `EMAIL_ALREADY_REGISTERED` | El correo del registro ya pertenece a una cuenta | Respuesta de error de CU-08006 con texto neutro. Terminación controlada |
-| `EMAIL_DOMAIN_NOT_ADMITTED` | El correo del registro no es de un dominio que el despliegue admite | Respuesta de error de CU-08006 con texto neutro, **sin escritura** y sin nombrar los dominios admitidos. Se evalúa antes que `EMAIL_ALREADY_REGISTERED`. Terminación controlada. Entra al conjunto cerrado por [`Api ADR-00012`](../../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00012-El-Autorregistro-Admite-Los-Dominios-Que-El-Despliegue-Declara.md) |
 | `CONFIRMATION_MISMATCH` | El correo escrito como confirmación de la baja no coincide con el de la cuenta | Respuesta de error de CU-08006. La baja no procede; recuperación por reintento con la confirmación correcta |
 | `INVALID_CREDENTIALS` | El cambio de contraseña llega sin la contraseña vigente o con una que no corresponde | Respuesta de error de CU-08006 con texto neutro. Terminación controlada |
 | `ADMINISTRATOR_ALREADY_CONFIGURED` | Se intenta configurar una cuenta de administrador cuando ya existe una | Respuesta de error de CU-08006. Terminación controlada: el contrato no ofrece camino alternativo |
@@ -138,7 +137,6 @@ Declarar los tipos de transferencia del ciclo de vida de una cuenta: el registro
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.11 | 2026-09-14 | **§6 suma `EMAIL_DOMAIN_NOT_ADMITTED`** ([`Api ADR-00012`](../../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00012-El-Autorregistro-Admite-Los-Dominios-Que-El-Despliegue-Declara.md), mesa del 2026-09-14 `R-07`/`E-1`): el registro admite sólo los dominios que el despliegue declara, y sin dominios declarados, cualquiera. **Ningún tipo cambia**: la solicitud de registro sigue con sus tres campos. Estado anterior en `_legacy/2026-09-14/`. Sube minor. |
 | 1.10 | 2026-09-13 | **Migración normativa 13.7 → 13.16, fase M4, fila PM-06** (`Root-Rules.md` 8.7 §12.2 punto 5; `Migracion-Rules.md` §4.9): el ítem diferido de §9 suma el campo **5 · Ciclo de origen**, derivado del alta del bloque en este archivo (`aa3abd3`, 2026-08-29). Ninguna otra línea cambia. Sube minor. Estado anterior en `_legacy/2026-09-13/CU-08002-Contrato-De-Administracion-De-Cuentas-v1.9.md` |
 | 1.9 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **12 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.8 | 2026-08-29 | **Parche `P-02` de la mesa evaluadora del 2026-08-29** ([`../../Audit/Mesa-2026-08-29.md`](../../Audit/Mesa-2026-08-29.md), hallazgo `H-02`, evidencia **E2**, severidad **S2**). La fila «Historias de usuario a generar en 06» de §9 anunciaba historias del rango `08` **que nunca se acuñaron**: la consolidación de las unidades de entrega retiró ese rango y las historias que cubren este contrato se generaron con la numeración de su unidad. La celda pasa a declarar el hecho en lugar de seguir prometiendo artefactos inexistentes, y **la correspondencia una a una NO se reconstruye**: ningún registro de reconexión la conserva y deducirla del texto sería inventarla. Queda como **ítem diferido** con sus cuatro campos, con evento de cierre en la próxima emisión de la 06 o en la Fase J. **Ninguna otra sección cambia.** |
