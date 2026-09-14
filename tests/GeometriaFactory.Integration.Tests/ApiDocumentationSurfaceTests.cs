@@ -58,6 +58,36 @@ public sealed class ApiDocumentationSurfaceTests : IDisposable
         Assert.Equal(HttpStatusCode.OK, explorer.StatusCode);
     }
 
+    /// <summary>
+    /// R-08 — EL DOCUMENTO DICE CÓMO SE AUTENTICA Y EN QUÉ PUNTOS. Declara el esquema `Bearer`, lo
+    /// exige en un punto que pide acceso firmado y no lo exige en los que no lo piden (mesa
+    /// `SDD/Docs/Audit/Mesa-2026-09-14.md`). Se lee el JSON y no se busca texto: una palabra suelta
+    /// en una descripción no prueba que el requisito esté donde corresponde.
+    /// </summary>
+    [Fact]
+    public async Task TheDocumentDeclaresTheBearerSchemeOnlyOnThePointsThatRequireAccess()
+    {
+        using var client = _dataService.CreateClient();
+        using var response = await client.GetAsync(ApiDocumentation.DocumentRoute);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        using var document = System.Text.Json.JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        var root = document.RootElement;
+
+        var scheme = root.GetProperty("components").GetProperty("securitySchemes").GetProperty(ApiDocumentation.BearerScheme);
+        Assert.Equal("http", scheme.GetProperty("type").GetString());
+        Assert.Equal("bearer", scheme.GetProperty("scheme").GetString());
+
+        static bool RequiresBearer(System.Text.Json.JsonElement operation) =>
+            operation.TryGetProperty("security", out var security)
+            && security.EnumerateArray().Any(requirement => requirement.TryGetProperty(ApiDocumentation.BearerScheme, out _));
+
+        var paths = root.GetProperty("paths");
+        Assert.True(RequiresBearer(paths.GetProperty("/v1/trabajos").GetProperty("get")), "`GET /v1/trabajos` pide acceso firmado.");
+        Assert.False(RequiresBearer(paths.GetProperty("/v1/auth/token").GetProperty("post")), "`POST /v1/auth/token` es anónimo.");
+        Assert.False(RequiresBearer(paths.GetProperty("/salud").GetProperty("get")), "`GET /salud` es anónimo.");
+    }
+
     // ------------------------------------------------------- fuera de desarrollo ------------
 
     [Fact]
