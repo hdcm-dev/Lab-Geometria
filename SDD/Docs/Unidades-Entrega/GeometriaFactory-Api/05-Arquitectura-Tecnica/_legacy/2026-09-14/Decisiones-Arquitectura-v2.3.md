@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Decisiones-Arquitectura.md
-**Versión:** 2.4
+**Versión:** 2.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -47,7 +47,6 @@ Cada decisión vive en un archivo individual bajo [`Adrs/`](Adrs/). Este documen
 | [ADR-00009](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md) | La API autentica personas, no aplicaciones | Seguridad | **Aceptado** | 2026-09-12 |
 | [ADR-00010](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) | Versión en la ruta, sólo el MAJOR, para la superficie pública | Comunicación | **Aceptado** | 2026-09-12 |
 | [ADR-00011](Adrs/ADR-00011-El-Canje-Se-Protege-Por-Cuenta-Y-El-Origen-Tolera-Una-Comision.md) | El canje se protege por cuenta, y el origen tolera una comisión | Seguridad | **Aceptado** | 2026-09-13 |
-| [ADR-00012](Adrs/ADR-00012-El-Autorregistro-Admite-Los-Dominios-Que-El-Despliegue-Declara.md) | El autorregistro admite los dominios que el despliegue declara | Seguridad | **Aceptado** | 2026-09-14 |
 
 **Diez ADR, una superada parcialmente y ninguna rechazada.** La novena y la décima entran el 2026-09-12 por decisión del Product Owner y nacen `Aceptado`; la décima supera parcialmente a `ADR-00008`, que conserva sus reglas 2 a 5.
 
@@ -114,7 +113,6 @@ Tabla de consulta rápida, para no tener que abrir las once.
 | Qué responde el punto de salud, y qué no responde | [ADR-00007](Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) |
 | Cómo se versiona la superficie pública, y qué subsiste del despliegue conjunto | [ADR-00010](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md): **`/v{MAJOR}/`, con el `MAJOR` del producto**; el despliegue conjunto de [ADR-00008](Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) sigue entre `Api` y `Web` |
 | Cómo se limita el canje sin castigar a una clase detrás de un origen | [ADR-00011](Adrs/ADR-00011-El-Canje-Se-Protege-Por-Cuenta-Y-El-Origen-Tolera-Una-Comision.md): **fallos por cuenta** (10 cada 900 s, correo normalizado), y topes por origen **holgados** para una comisión detrás del front o de un NAT |
-| Quién puede registrarse sin acceso firmado | [ADR-00012](Adrs/ADR-00012-El-Autorregistro-Admite-Los-Dominios-Que-El-Despliegue-Declara.md): los correos de los **dominios que la composición declara** (`Registration__AdmittedEmailDomains__N`); sin la llave, cualquiera. Rechazo `EMAIL_DOMAIN_NOT_ADMITTED` con `400` |
 | Quién se autentica contra la superficie, y desde qué aplicaciones | [ADR-00009](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md): **personas, no aplicaciones** — dos papeles, `POST /auth/token` desde cualquier aplicación propia, sin claves de API ni `client_credentials` |
 
 ### 4.2 `GeometriaFactory-Infrastructure`
@@ -244,4 +242,3 @@ Las dos categorías sin ADR se declaran vacías con su motivo, para que nadie la
 | 2.1 | 2026-09-12 | **Entra `ADR-00009`** (La API autentica personas, no aplicaciones; `Aceptado` por decisión del Product Owner del 2026-09-12) a la tabla de §1.1 y a la de consulta rápida de §4.1. Las ocho anteriores no cambian. Sube minor. |
 | 2.2 | 2026-09-12 | **Entra `ADR-00010`** (Versión en la ruta, sólo el MAJOR, para la superficie pública; `Aceptado` por decisión del Product Owner del 2026-09-12, `E-04`) a la tabla de §1.1 y a la de consulta rápida de §4.1; **`ADR-00008` pasa a `Superado parcialmente`** (regla 1 derogada; reglas 2 a 5 subsisten). §2.1 lo anota en la política de versionado de la frontera. Tarea `BT-00027`. Sube minor. |
 | 2.3 | 2026-09-13 | **Entra `ADR-00011`** (El canje se protege por cuenta, y el origen tolera una comisión; `Aceptado`) a la tabla de §1.1 y a la de consulta rápida de §4.1. Corrige el defecto de `BT-00029`. Sube minor. |
-| 2.4 | 2026-09-14 | **Entra `ADR-00012`** (El autorregistro admite los dominios que el despliegue declara; `Aceptado`) a la tabla de §1.1 y a la de consulta rápida de §4.1. Mesa del 2026-09-14, `R-07`/`E-1`. Estado anterior en `_legacy/2026-09-14/`. Sube minor. |

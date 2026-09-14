@@ -648,7 +648,7 @@ Ninguno es condición viva de ningún catálogo, y los cuatro **siguen aparecien
 
 **El quinto retirado de `Domain` no está acá y no falta**: `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` sigue **vivo en el catálogo de `Application`** y tiene su fila en §6.8.2, unificado. Es el caso de §6.9.
 
-#### 6.8.6 Los 22 `CONTRATO_*` de `GeometriaFactory-Contracts`
+#### 6.8.6 Los 21 `CONTRATO_*` de `GeometriaFactory-Contracts`
 
 **Es la parte de `F-03` que cambia el contrato** (§5.3). El prefijo `CONTRATO_` desaparece: la identidad del código la da el conjunto cerrado que lo declara, no un prefijo dentro del nombre.
 
@@ -658,7 +658,6 @@ Ninguno es condición viva de ningún catálogo, y los cuatro **siguen aparecien
 | `CONTRATO_CREDENCIAL_INVALIDA` | `INVALID_CREDENTIALS` | Contracts, vivo (`DXT-02`) | `Contracts/03` §3.2 |
 | `CONTRATO_CUENTA_NO_HABILITADA` | `ACCOUNT_NOT_ENABLED` | Contracts, vivo (`DXT-03`) | `Contracts/03` §3.2; RN-02006 |
 | `CONTRATO_CORREO_YA_REGISTRADO` | `EMAIL_ALREADY_REGISTERED` | Contracts, vivo (`DXT-04`) | `Contracts/03` §3.2; RN-02002 |
-| `CONTRATO_DOMINIO_DE_CORREO_NO_ADMITIDO` | `EMAIL_DOMAIN_NOT_ADMITTED` | Contracts, vivo (sin `DXT`: el catálogo está en `_legacy`) | `Contratos-Abstractions.md` 1.4 §5.1; `Api ADR-00012` |
 | `CONTRATO_CONFIRMACION_NO_COINCIDE` | `CONFIRMATION_MISMATCH` | Contracts, vivo (`DXT-05`) | `Contracts/03` §3.2; RN-02007 |
 | `CONTRATO_ADMINISTRADOR_YA_CONFIGURADO` | `ADMINISTRATOR_ALREADY_CONFIGURED` | Contracts, vivo (`DXT-06`) | `Contracts/03` §3.2; RN-02001 |
 | `CONTRATO_TRABAJO_NO_ENCONTRADO` | `WORK_NOT_FOUND` | Contracts, vivo (`DXT-07`) | `Contracts/03` §3.2; RN-02003, RN-02011 |
@@ -677,7 +676,7 @@ Ninguno es condición viva de ningún catálogo, y los cuatro **siguen aparecien
 | `CONTRATO_CONTRASENA_NO_ESTABLECIDA` | `PASSWORD_NOT_SET` | Contracts, **retirado** (`DXT-13`, por RN-02016) | `Contracts/03` §3.2 |
 | `CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA` | `RESET_NOT_APPLICABLE_TO_PASSWORDLESS_ACCOUNT` | Contracts, **retirado** (`DXT-18`, por RN-02016) | `Contracts/03` §3.2 |
 
-**Cuadre con el intake, desde la 1.30.** Entra `EMAIL_DOMAIN_NOT_ADMITTED` (`Api ADR-00012`): 18 vivos y **22 identificadores**. El intake todavía no lo registra, así que su cifra queda una atrás hasta su próxima emisión. **El cuadre de abajo es el anterior**, y sigue valiendo para el intake. 17 códigos de error vivos + 1 señal que nunca fue error (`EMPTY_LIST`) + 1 señal que dejó de ser error (`TEXT_NOT_PARSEABLE`) + 2 retirados = **21 identificadores**. El intake §17.1.P.3 · GeometriaFactory-Contracts dice «diecisiete vivos sobre veinte identificadores emitidos» y cuenta **códigos de error**: 17 + 3 retirados = 20. Las dos cifras son correctas y cuentan cosas distintas; se declara acá para que nadie las cruce.
+**Cuadre con el intake.** 17 códigos de error vivos + 1 señal que nunca fue error (`EMPTY_LIST`) + 1 señal que dejó de ser error (`TEXT_NOT_PARSEABLE`) + 2 retirados = **21 identificadores**. El intake §17.1.P.3 · GeometriaFactory-Contracts dice «diecisiete vivos sobre veinte identificadores emitidos» y cuenta **códigos de error**: 17 + 3 retirados = 20. Las dos cifras son correctas y cuentan cosas distintas; se declara acá para que nadie las cruce.
 
 #### 6.8.7 Los dos huérfanos, que **no se traducen todavía**
 
@@ -1084,7 +1083,7 @@ que la etapa usa están en §6.10.
 | Solicitud de canje de credenciales | `CredentialExchangeRequest` | Tipo, contrato de solicitud | `Contracts CU-08001` §4 paso 1 |
 | Respuesta de sesión | `SessionResponse` | Tipo, contrato de respuesta | `Contracts CU-08001` §4 paso 4 y `CA-01` |
 | Solicitud de cambio de la contraseña propia | `OwnPasswordChangeRequest` | Tipo, contrato de solicitud | `Contracts CU-08002` FA-02; `PRODUCT-INTAKE` 1.13, que la deja como tipo único de las tres situaciones |
-| Código de error del contrato | `ErrorCode` | Tipo, conjunto cerrado de códigos del contrato | `Contracts CU-08006`; §6.8.6 declara los 22 `CONTRATO_*` |
+| Código de error del contrato | `ErrorCode` | Tipo, conjunto cerrado de códigos del contrato | `Contracts CU-08006`; §6.8.6 declara los 21 `CONTRATO_*` |
 | Detalle del error | `ErrorDetail` | Tipo, contrato de respuesta | `Contracts CU-08006` §4 paso 3 |
 | Respuesta de error | `ErrorResponse` | Tipo, contrato de respuesta | `Contracts CU-08006` `CA-01`, que le fija cuatro campos |
 | Derivación de contraseña | `PasswordDerivation` | Tipo, mecanismo de infraestructura | `Infrastructure CU-06006` y `ADR-06004` |
@@ -2333,7 +2332,6 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
-| 1.30 | 2026-09-14 | **§6.8.6 suma `CONTRATO_DOMINIO_DE_CORREO_NO_ADMITIDO` → `EMAIL_DOMAIN_NOT_ADMITTED`** ([`Api ADR-00012`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00012-El-Autorregistro-Admite-Los-Dominios-Que-El-Despliegue-Declara.md), mesa del 2026-09-14 `R-07`/`E-1`): «21» pasa a «22» en el título de §6.8.6 y en la fila `ErrorCode` del glosario, y el cuadre declara el desfase con el intake. Estado anterior en `_legacy/2026-09-14/`. | Claude Code, corrida de reanudación |
 | 1.29 | 2026-08-31 | **§8 registra el cierre del tramo `R-3`, y su cifra principal es la que NO se tocó.** Se clasificaron las **723 ocurrencias candidatas** del corpus vivo contra las cinco formas de §4.1, **antes de editar**, que es lo que `V-4` exige: **580 son registro histórico**, **138 son este documento hablando de sí mismo** —§6.8 es la fuente del tramo y no su objeto—, **3 son cita textual** y **una sola era uso propio**. Esa una era `TIPO_DE_PIEZA_DESCONOCIDO`, escrita a mano en la salida de `samples/domain/02-intermedio`; pasa a `UNKNOWN_PIECE_TYPE`, que este glosario le fija **aunque la constante no exista todavía** —es uno de los ocho de la etapa `f` que el dominio deliberadamente no escribió—. **722 de 723 no se tocan.** El inventario está en [`../Audit/Inventario-Renombre-F03-2026-08-31.md`](../Audit/Inventario-Renombre-F03-2026-08-31.md), con la ocurrencia que el clasificador automático confunde con uso propio **declarada a mano**: una prosa que describe lo que un documento decía antes de una corrección ya aplicada. **El hallazgo `I-03` se cierra con su tamaño real**, que se había estimado en «~90 códigos, 731 ocurrencias, cuatro o cinco tandas» **contando sin clasificar** — exactamente el error que §4.1 nombra. Sube minor: cierra un tramo y no renombra el corpus. |
 | 1.28 | 2026-08-29 | **Tramo `R-3e`, y una corrección de lo que la 1.27 declaró.** «`R-3` cerrado, cero pendientes» era cierto para los tokens **entrecomillados** y demasiado ancho para lo que decía: quedaban **73 ocurrencias sin comillas invertidas** en 12 documentos, **casi todas en los bloques de salida de `10-Examples`**. Renombradas. **Lo encontró un sample al no poder reproducir su propio snapshot**, y por eso el hallazgo es predictivo: las 73 estaban esperando en los snapshots de los 16 samples que faltan. | Orquestador SDD |
 | 1.27 | 2026-08-29 | **`R-3d` ejecutado y `R-3` CERRADO.** 268 ocurrencias en 42 documentos, y el barrido sobre el corpus vivo devuelve **cero** usos propios en forma castellana. Los cuatro tramos suman **1359 ocurrencias** renombradas desde la reactivación del 2026-08-29. **§8 declara además una forma de §4.1 que el tramo reconoció sobre la marcha**: la línea que trae la forma vieja **y** su par vigente está **reportando** el renombre y no usando el identificador, y renombrarla la vuelve una frase que se contradice sola. Apareció una sola vez, en el documento donde la Fase I narró el hallazgo que reactivó `R-3`. Quedan protegidas **573 filas de control de cambios, 3 citas y 1 línea de prosa**: **577 es el número que tiene que quedar, y no cero.** | Orquestador SDD |

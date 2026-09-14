@@ -135,6 +135,53 @@ public sealed class AccountLifecycleUseCaseTests
         Assert.Equal(0, accounts.AddCount);
     }
 
+    /// <summary>
+    /// R-07 · `Api ADR-00012` — con dominios declarados, un correo de otro dominio no constituye
+    /// nada, **y responde lo mismo aunque ese correo ya tenga cuenta**.
+    /// </summary>
+    [Fact]
+    public async Task RegisteringAnEmailOutsideTheAdmittedDomainsIsRejectedWithoutRevealingTheAccount()
+    {
+        var accounts = new InMemoryAccounts();
+        AStudent(accounts, "ana.perez@ejemplo.edu");
+        var useCase = new RegisterAccountUseCase(accounts, new FixedClock(), new RegistrationPolicy(["frre.utn.edu.ar"]));
+
+        var result = await useCase.ExecuteAsync("ana.perez@ejemplo.edu", "Ana", "Pérez");
+
+        Assert.False(result.Succeeded);
+        Assert.Equal(ApplicationConditionCode.EmailDomainNotAdmitted, result.ConditionCode);
+        Assert.Equal(0, accounts.AddCount);
+    }
+
+    /// <summary>R-07 — el dominio admitido se compara sin mayúsculas, con o sin `@` en la declaración.</summary>
+    [Fact]
+    public async Task TheAdmittedDomainIsComparedIgnoringCaseAndALeadingAt()
+    {
+        var accounts = new InMemoryAccounts();
+        var useCase = new RegisterAccountUseCase(accounts, new FixedClock(), new RegistrationPolicy([" @FRRE.utn.edu.ar "]));
+
+        var result = await useCase.ExecuteAsync("Ana.Perez@frre.UTN.edu.ar", "Ana", "Pérez");
+
+        Assert.True(result.Succeeded);
+        Assert.Equal(1, accounts.AddCount);
+    }
+
+    /// <summary>R-07 — la comparación es sobre el dominio entero: ni un subdominio ni un sufijo entran.</summary>
+    [Theory]
+    [InlineData("ana@alumnos.frre.utn.edu.ar")]
+    [InlineData("ana@frre.utn.edu.ar.example.com")]
+    [InlineData("frre.utn.edu.ar@example.com")]
+    public async Task OnlyTheWholeAdmittedDomainIsAdmitted(string email)
+    {
+        var accounts = new InMemoryAccounts();
+        var useCase = new RegisterAccountUseCase(accounts, new FixedClock(), new RegistrationPolicy(["frre.utn.edu.ar"]));
+
+        var result = await useCase.ExecuteAsync(email, "Ana", "Pérez");
+
+        Assert.Equal(ApplicationConditionCode.EmailDomainNotAdmitted, result.ConditionCode);
+        Assert.Equal(0, accounts.AddCount);
+    }
+
     // ---- CU-02 · el gobierno de las cuentas -------------------------------------------------
 
     /// <summary>

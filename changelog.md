@@ -1954,3 +1954,22 @@ docker run --rm -v <volumen-del-almacén>:/datos alpine chown -R 1654:1654 /dato
 
 Lo mismo sobre el volumen de claves del front, si la composición lo monta desde un volumen existente. Sin esto, el servicio de datos no arranca.
 
+## El autorregistro admite los dominios que el despliegue declara — 2026-09-14
+
+**Rama:** `seguridad/lote1-registro-por-dominio-admitido`. Lote 1 del plan de la mesa del 2026-09-14 (`SDD/Docs/Audit/Mesa-2026-09-14.md`, `R-07`/`E-1`). Resuelto por delegación del Product Owner.
+
+### Agregado
+
+- `RegistrationPolicy` (Application): los dominios de correo que admite `CU-01`. Llega de `Registration__AdmittedEmailDomains__N`; **sin la llave, cualquiera**. La comparación es exacta sobre el dominio entero y no distingue mayúsculas.
+- Código del contrato `EMAIL_DOMAIN_NOT_ADMITTED`, con `400`. Se verifica antes que la unicidad del correo, así que no dice si el correo ya tenía cuenta. Entra dentro de `/v1/` como cambio menor.
+- `Registro-De-Cuenta` avisa que el correo no es de un dominio admitido y marca el campo.
+- `Api ADR-00012`, con las alternativas descartadas. La de «alta sólo por el docente» queda abierta: dejaba sin sustento a `F-02` y exigía `/v2/`.
+
+### Corpus
+
+- `Definicion-Superficie-HTTP` 1.15, `CU-08002` 1.11, `Contratos-Abstractions` 1.4 (dieciocho vivos), `Norma-De-Nomenclatura` 1.30 y los dos índices de ADR de la API en 2.4.
+
+### No hecho, y declarado
+
+- **Ningún despliegue declara todavía un dominio**, así que en producción el registro sigue admitiendo cualquier correo. Declararlo es del Product Owner.
+- El intake sigue diciendo «diecisiete vivos» hasta su próxima emisión.
