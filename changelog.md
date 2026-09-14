@@ -2041,3 +2041,30 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
   - el procedimiento con respaldo y verificación, y la reversión.
 - **Divergencia declarada para el Product Owner:** la guía y `Estrategia-Versionado.md` dicen que se despliega la etiqueta de la etapa, y el servidor construye `main`.
 - Sin nombres de red, rangos ni rutas del anfitrión.
+
+## La puerta de `i` mide el despliegue que existe — 2026-09-14
+
+**Rama:** `puertas/lote2-puerta-de-i`. Deuda `DD-R8-1` de la mesa del 2026-09-13 (ciclo 2), ampliada por `R-11` de la mesa del 2026-09-14.
+
+### Corregido
+
+- `scripts/verify-stage-i.sh` quedaba **NO CONFORME por construcción**. Medía siete criterios de un roadmap viejo:
+  - `I-1` daba OK sobre `deploy-front-ftp.yml`, un flujo retirado;
+  - `I-2` exigía que la revisión sellada fuera `origin/main`;
+  - `I-7` sólo comprobaba que las puertas existieran.
+- Ahora mide los **seis** criterios de `Roadmap-Producto.md` §5.2, sin número de versión en la cita:
+  - **I-1:** las dos direcciones en https; salud; revisión sellada en la historia de `main`, o igual a `REVISION_ESPERADA` si se declara; y el front sellando **la misma versión** que el servicio de datos, que prueba que las dos imágenes salieron de la misma construcción.
+  - **I-2 e I-5:** como antes.
+  - **I-6:** **corre** las puertas anteriores. Declara SIN MEDIR lo que el entorno no puede medir, y el resultado queda INCOMPLETO en lugar de CONFORME.
+
+### Verificado contra producción (2026-09-14)
+
+- **Guion anterior:** NO CONFORME. `FALLA la revisión sellada NO es la de main` (corre `8d8c857`, `main` en `5911c02`) y OK sobre el flujo de FTP.
+- **Guion nuevo:**
+  - I-1, I-2 e I-5 pasan (front y servicio de datos en `1.1.3-alpha.0.18`, revisión en la historia de `main`);
+  - I-6 queda SIN MEDIR en este anfitrión, que no tiene `dotnet`;
+  - I-3 falla porque `Medicion-PT-05.md` sigue en `SIN MEDIR`, que es lo que corresponde.
+
+### No hecho, y declarado
+
+- **El cierre formal de `DD-R8-1`** pide una `BT` en `Done` citada desde `Medicion-PT-05.md` §1 y desde `Roadmap-Producto.md` §2.2: queda pendiente.
