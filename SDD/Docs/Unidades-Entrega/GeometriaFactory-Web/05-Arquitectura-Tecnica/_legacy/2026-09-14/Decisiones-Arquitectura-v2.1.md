@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Decisiones-Arquitectura.md
-**Versión:** 2.2
+**Versión:** 2.1
 **Estado:** Propuesto
-**Fecha:** 2026-09-14
+**Fecha:** 2026-09-12
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -45,7 +45,6 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 | [ADR-10006](Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md) | El visor se opera sólo por sus seis funciones, y es esta pieza la que consulta el entorno | Comunicación | Propuesto | 2026-08-10 |
 | [ADR-10007](Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) | La dirección del servicio de datos viene de configuración, y el despliegue termina comprobando | Despliegue | Propuesto | 2026-08-10 |
 | [ADR-10008](Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md) | El bundle del visor lo genera el proyecto del front, y es el único que lo genera | Despliegue | Aprobado | 2026-09-12 |
-| [ADR-10009](Adrs/ADR-10009-El-Front-Le-Dice-Al-Servicio-De-Datos-De-Donde-Llego-El-Navegador.md) | El front le dice al servicio de datos de dónde llegó el navegador, para que cada uno consuma su propia cuota | Comunicación | Aprobado | 2026-09-14 |
 
 **Siete ADR**, sobre el mínimo de cinco que la regla de la categoría fija para el tipo `web-monolith`. Ninguna superada, ninguna rechazada.
 
@@ -95,7 +94,7 @@ Las dos que exceden el mínimo tienen origen declarado:
 | --- | --- | --- |
 | Estilo | ADR-10001, ADR-10004 | — |
 | Persistencia | ADR-10002 | La decisión es **no tener persistencia**, y por eso lleva ADR: contradice el valor por defecto de la regla para este tipo D8 |
-| Comunicación | ADR-10005, ADR-10006, ADR-10009 | Las dos fronteras de esta pieza: hacia el servicio de datos —lo que vuelve como condición— y hacia el bundle del visor |
+| Comunicación | ADR-10005, ADR-10006 | Las dos fronteras de esta pieza: hacia el servicio de datos —lo que vuelve como condición— y hacia el bundle del visor |
 | Seguridad | ADR-10003 | Custodia de la credencial y guardianes de ruta que **acotan sin hacer cumplir** |
 | Observabilidad | **Ninguna** | `tiene_observabilidad_critica` es false y §17.2.P.10 · GeometriaFactory-Web no declara instrumentación. Lo que la fuente sí exige es **manejo explícito** del cartel de reconexión y del estado degradado, y eso vive en ADR-10005. Un registro del lado del front no tendría consumidor: no hay operador mirando el hosting |
 | Despliegue | ADR-10007 | — |
@@ -133,6 +132,5 @@ El mínimo de tres cubre estilo, superficie pública y estrategia de versionado,
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 2.2 | 2026-09-14 | Suma [`ADR-10009`](Adrs/ADR-10009-El-Front-Le-Dice-Al-Servicio-De-Datos-De-Donde-Llego-El-Navegador.md): el front resuelve la dirección real del navegador y se la reenvía al servicio de datos, para que la cuota por origen no sea una sola para toda la comisión. Lote 1 de la mesa del 2026-09-14 (`../../../Audit/Mesa-2026-09-14.md`, R-02). Estado anterior en `_legacy/2026-09-14/`. Sube minor. |
 | 2.1 | 2026-09-12 | Suma [`ADR-10008`](Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md): el bundle del visor lo genera `GeometriaFactory.Web.csproj` con un target, y es el único generador. Lo decidió la mesa evaluadora de la Feature 20 del framework (2026-09-11) sobre tres hechos medidos. Sube minor: una decisión nueva, ninguna reabierta. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
