@@ -79,3 +79,18 @@ jobs:
 
       - name: Puerta QG-02 · la batería entera
         run: ./scripts/test.sh
+
+      # LA COBERTURA Y LAS PUERTAS DE FASE CORREN ACÁ desde la mesa del 2026-09-14 (R-12): hasta
+      # entonces existían y nadie las corría, y una puerta que no corre no frena. `coverage.sh`
+      # mide QG-03 por proyecto, QG-06 sobre el validador de figuras y QG-04 la pirámide.
+      - name: Puertas QG-03, QG-06 y QG-04 · cobertura
+        run: ./scripts/coverage.sh
+
+      # Sólo las puertas que necesitan `dotnet` y nada más. `c` levanta las dos piezas, `f` y `g`
+      # corren un navegador en contenedor, e `i` mira el despliegue: siguen siendo manuales.
+      - name: Puerta de la etapa d
+        run: bash scripts/verify-stage-d.sh
+      - name: Puerta de la etapa e
+        run: bash scripts/verify-stage-e.sh
+      - name: Puerta de la etapa h
+        run: bash scripts/verify-stage-h.sh
