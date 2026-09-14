@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Mini-Plan.md
-**Versión:** 3.6
+**Versión:** 3.5
 **Estado:** Propuesto
 **Fecha:** 2026-09-13
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -145,7 +145,7 @@ Lo que **sí** limita la capacidad y está declarado es el **cuello de diseño**
 | `e` | Los cinco puntos sobre trabajos están en pie, con el texto que **no se normaliza en el borde**, la eliminación verificada **forzando la petición** y el listado sin parámetro para pedir borradores ajenos. |
 | `f` | El envío y el reenvío **responden con éxito** transportando el estado que la interpretación decidió, y el texto viaja byte a byte. |
 | `h` | El desenlace está expuesto con su terminalidad, y **la colección de peticiones se reproduce en cinco pasos o menos sin datos inventados**. |
-| `k` | La superficie pública queda expuesta a clientes externos bajo `/v1/`, con la premisa de versionado reescrita, `OpenAPI`/Scalar publicados y la política de deprecación declarada, sin tocar el ROPC de los alumnos ni las siete etapas anteriores. Trazado a `Roadmap-Producto.md` §2.1 fila `k` y a `Backlog-Tecnico.md` §2.6 (EP-T06). **Fuera del alcance comprometido**, que cierra en `h`: entra por decisión del Product Owner posterior al handoff, y su estado lo registran `Roadmap-Producto.md` §2.1 y §3 (este documento no lo replica). |
+| `k` | La superficie pública queda expuesta a clientes externos bajo `/v1/`, con la premisa de versionado reescrita, `OpenAPI`/Scalar publicados y la política de deprecación declarada, sin tocar el ROPC de los alumnos ni las siete etapas anteriores. Trazado a `Roadmap-Producto.md` §2.1 fila `k` y a `Backlog-Tecnico.md` §2.6 (EP-T06). **No comprometido**: `Roadmap-Producto.md` §3 lo declara «sin release comprometido: pendiente», a diferencia de las seis etapas anteriores, que **cierran el alcance comprometido** en `h`. |
 
 **Las etapas `b` y `g` no producen trabajo en este proyecto de código**, y por eso no tienen fila. El motivo está en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2: la `b` no agrega ningún punto de acceso, y **todo lo que la `g` necesita de esta superficie ya está expuesto en la `e`**.
 
@@ -451,7 +451,7 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**.
 Los identificadores son los del backlog de 06 (`EP-T06`, `BT-00027` a `BT-00035`) y **ninguno se inventa
 acá**. La etapa `k` **no forma parte del alcance original de ocho etapas comprometidas** de §1.1: entra
 por decisión del Product Owner posterior al handoff (`PRODUCT-INTAKE` **4.3**), y `Roadmap-Producto.md`
-§2.1 y §3 registran su estado (este documento no lo replica). Por esa razón, la tabla de comprometidas de esta
+§3 la declara «sin release comprometido: pendiente». Por esa razón, la tabla de comprometidas de esta
 sección **queda separada** de la de §3.1 en lugar de fusionarse con sus seis etapas.
 
 **Comprometidas (`Ready` en la evaluación de DoR, [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md)):**
@@ -467,9 +467,7 @@ sección **queda separada** de la de §3.1 en lugar de fusionarse con sus seis e
 | `k` | BT-00034 | Tarea técnica | Sample de onboarding para un cliente externo contra `/v1/` | Media | No aplica | Equipo (1) | Done |
 | `k` | BT-00035 | Tarea técnica | Política de deprecación en `Estrategia-Versionado.md` | Media | No aplica | Equipo (1) | Done |
 
-**Punto de control del tramo: CERRADO con OK explícito del Product Owner el 2026-09-13** («tenés el ok de la fase K»), el que `Roadmap-Producto.md` §5.1 exige para toda transición; asentado en `Roadmap-Producto.md` §3 fila `k`.
-
-**Los otros seis criterios de §5.1 del roadmap no están asentados en este documento**: esta sección registra las tareas del tramo y el OK. Si existe un informe de cierre del tramo (`PRODUCT-INTAKE` §15 lo ubica en `Lab-Geometria.Documentacion/Avances/`), vive fuera de este repositorio.
+**Punto de control del tramo: CERRADO con OK explícito del Product Owner el 2026-09-13** («tenés el ok de la fase K»), el que `Roadmap-Producto.md` §5.1 exige para toda transición; asentado en `Roadmap-Producto.md` **1.13** §3 fila `k`.
 
 **Total comprometido: 0 historias y 8 tareas técnicas**, repartidas en una sola etapa (`k`). Ninguna
 historia de usuario acompaña a esta épica: `Backlog-Tecnico.md` §3.1 declara que las nueve tareas de
@@ -814,8 +812,6 @@ Una etapa de este proyecto de código está hecha cuando:
 
 ## 9. Bitácora de avance
 
-**Desde el 2026-08-16 el avance por etapa lo registra [`changelog.md`](../../../../../changelog.md)**, que `SDD/Docs/README.md` §7.2 declara única fuente; esta bitácora no se completó y no se completa retroactivamente. Las subsecciones de abajo conservan su estado del 2026-08-10.
-
 ### 9.1 `GeometriaFactory-Api`
 
 **Sin entradas al 2026-08-10.** Ninguna etapa está abierta: el producto está en fase de especificación.
@@ -868,4 +864,3 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 | 3.3 | 2026-09-12 | **§3.5 · `BT-00032` pasa a `Done` en la tabla de comprometidas**, en la misma corrida que cierra la ficha (2.0). El hecho que la cierra: PR #195 fusionado en `main` = `8e5e2f9`, **etiqueta anotada `v1.0.0` sobre `8e5e2f9`** (primera manual bajo [`../09-Devops/Estrategia-Versionado.md`](../09-Devops/Estrategia-Versionado.md) 5.1, `PD-VER-01`), y producción reconstruida desde `main` con ambos contenedores `healthy`: el 2026-09-13 02:48–02:52 UTC `https://api-geometria.aplicada.stream/salud` responde `1.0.0+8e5e2f9…`, `GET /v1/trabajos` → `401`, `GET /trabajos` → `404`. La exención de `/salud`, `/openapi/v1.json` y `/documentacion` quedó ratificada por el Product Owner y asentada en `ADR-00010` 1.1 §7. **Sólo cambia una celda de la columna `Estado`**; el orden de §4.1, las dependencias y el total comprometido no cambian: `BT-00034` y `BT-00035` quedan destrabadas porque su única dependencia está en `Done`. Medido con `git grep -h "^\*\*Estado:\*\*"` sobre las fichas `BT-00027` a `BT-00035` → 4 `Done`, 1 `Descartada`, 4 `Ready`. Sube **minor**. |
 | 3.4 | 2026-09-13 | **Cierre del tramo `k`**: las celdas de `BT-00029`, `BT-00030`, `BT-00034` y `BT-00035` pasan a `Done` (PR #198, #197, #201, #199). Las nueve tareas del tramo quedan resueltas: **ocho `Done` y una `Descartada`** (`BT-00028`, por `ADR-00009`). En producción: `v1.1.0` (`/salud`), contrato bajo `/v1/`, OpenAPI publicado, límite de tasa activo. Punto de control del tramo: el que `Roadmap-Producto.md` §5.1 fija para toda transición — el OK explícito del Product Owner sobre esta fusión. |
 | 3.5 | 2026-09-13 | **Cierre del punto de control del tramo `k`**: el Product Owner dio el OK explícito el 2026-09-13 («tenés el ok de la fase K»), y §3.5 lo asienta junto a la tabla de comprometidas. Ninguna celda de estado cambia: las ocho `Done` y la `Descartada` son las de la 3.4. **Corregido de paso**: las filas 3.3 y 3.4 de este control de cambios estaban en orden inverso; se reordenan sin cambiar su texto. Expediente `SDD/Expedientes/0001-Migracion-Normativa-A-13.16/`, actuación 002. Estado anterior en `_legacy/2026-09-13/Mini-Plan-v3.4.md`. |
-| 3.6 | 2026-09-13 | **Parche PR-06 de [`../../../Audit/Mesa-2026-09-13-ciclo-2.md`](../../../Audit/Mesa-2026-09-13-ciclo-2.md).** §2.1 fila `k` y §3.5 dejan de citar el estado del roadmap y su versión (`Root-Rules.md` §10 R1) y declara que los otros seis criterios de §5.1 no están asentados acá; §9 remite al `changelog.md` como fuente del avance. Sube minor. Estado anterior en `_legacy/2026-09-13/Mini-Plan-v3.5.md`. |

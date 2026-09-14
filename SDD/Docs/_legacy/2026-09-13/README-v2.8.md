@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Producto | Fábrica de Geometría |
-| Versión del documento | 2.9 |
+| Versión del documento | 2.8 |
 | Estado | Aprobado |
 | Fecha | 2026-09-13 |
 | Stack principal | C# sobre .NET 10 —Blazor Interactive Server en el front, ASP.NET Core en el servicio de datos—, Entity Framework Core sobre SQLite, y TypeScript con webpack en el visor |
@@ -11,7 +11,7 @@
 | Unidad de entrega principal | `GeometriaFactory-Api` |
 | Documento | README raíz del producto |
 | Responsable de §7 (`Master-Prompt-Reanudacion.md` §1.1) | El Orquestador de reanudación SDD, en cada reanudación; en su ausencia, el Product Owner |
-| Refleja | El `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` y el `PRODUCT-INTAKE-Fabrica-De-Geometria.md` vigentes en `../Intake/` (cada uno declara su versión en su cabecera; este índice no la replica) |
+| Refleja | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **6.0**, derivado del intake **4.2** |
 
 ---
 
@@ -170,7 +170,7 @@ El producto está **especificado y en construcción**. La documentación está e
 | 08-Calidad-Y-Pruebas | Las dos | Aprobado |
 | 09-Devops | Las dos | Aprobado |
 | 10-Examples | Las dos | Aprobado, pasada de diseño |
-| 11-Documentacion | Producto y las dos | El que declara cada `11-Documentacion/README.md` en su cabecera (este índice no lo replica) |
+| 11-Documentacion | Producto y las dos | **Planificado** |
 | Vista y pipeline de producto | Producto | Aprobado |
 
 **El árbol atravesó ocho migraciones normativas, las ocho cerradas** —6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0, 10.0 → 13.3 y **13.7 → 13.16** ([`Audit/Informe-Migracion-13.7-a-13.16.md`](Audit/Informe-Migracion-13.7-a-13.16.md), **APROBADO CON OBSERVACIONES**, 2026-09-13, con su trámite en [`../Expedientes/0001-Migracion-Normativa-A-13.16/`](../Expedientes/0001-Migracion-Normativa-A-13.16/README.md))—. Entre la séptima y la octava la procedencia pasó de 13.3 a **13.7 sin migrar** (quinta reanudación, salida `C`). La octava alcanzó el intake (5.0), el manifiesto (7.0, 7.1), `Producto/Vista-Producto.md`, `Producto/Pipeline-Producto.md`, los ítems diferidos de ocho documentos y de los ocho `CU-0800N`, y los cuatro ADR de apartamiento; dejó declaradas las deudas `DD-1` a `DD-9` de [`Audit/Mesa-2026-09-13.md`](Audit/Mesa-2026-09-13.md) §8. Sus informes están en [`Audit/`](Audit/) y la procedencia vigente —**SDD 13.16**— la declara el manifiesto §1.1.
@@ -187,8 +187,7 @@ El producto está **especificado y en construcción**. La documentación está e
 | `f` · Importación y validación | Interpretación del texto del alumno, la batería obligatoria de **diez** casos y el envío como única acción de guardado | **Cerrada** |
 | `g` · Visualización 3D | El dibujo de las piezas reconstruidas y el árbol del texto | **Cerrada** |
 | `h` · Circuito de revisión del administrador | Aprobación y rechazo con su comentario, y el desenlace visible para el alumno | **Cerrada** |
-| `i` · Despliegue real | Despliegue realizado el 2026-09-06: contenedores en el servidor propio, túnel y dominio propio (ver [`../../changelog.md`](../../changelog.md), «Dockerizar el front»). Faltan los criterios de la transición `i` → `j…` de [`00-Contexto/Roadmap-Producto.md`](00-Contexto/Roadmap-Producto.md) §5.2, entre ellos `PT-05` ([`Audit/Medicion-PT-05.md`](Audit/Medicion-PT-05.md)). Su puerta `scripts/verify-stage-i.sh` mide criterios de una versión anterior del roadmap y es deuda declarada (`DD-R8-1` de [`Audit/Mesa-2026-09-13-ciclo-2.md`](Audit/Mesa-2026-09-13-ciclo-2.md) §7) | **Abierta** |
-| `k` · Exposición pública de la API y versionado del contrato | Contrato bajo `/v1/`, MinVer, límite de tasa, OpenAPI y Scalar publicados, sample de onboarding y política de deprecación | **Cerrada**, con OK explícito del Product Owner el 2026-09-13 |
+| `i` · Despliegue real | **Su puerta está escrita y la fase no ocurrió**: `scripts/verify-stage-i.sh` con sus siete criterios, y `Audit/Medicion-PT-05.md` en `SIN MEDIR` | **Planificada, no ejecutada** |
 
 **El registro de cambios del código es [`../../changelog.md`](../../changelog.md)** y es la única fuente del avance de construcción: este README publica su resultado y no lo replica.
 
@@ -268,7 +267,6 @@ Veintiún términos para leer el resto sin tropezar. No reemplaza a los glosario
 
 | Versión | Fecha | Descripción del cambio |
 | --- | --- | --- |
-| 2.9 | 2026-09-13 | **Octava reanudación, salida `A`, parche PR-02 de [`Audit/Mesa-2026-09-13-ciclo-2.md`](Audit/Mesa-2026-09-13-ciclo-2.md).** §7.2: la fila `i` pasa a **Abierta** con el despliegue del 2026-09-06 y lo que falta, y entra la fila `k` **Cerrada**; la cabecera «Refleja» y la fila `11-Documentacion` de §7.1 dejan de replicar versiones y estados de otros documentos. Cierra `DIV-02`. Estado anterior en `_legacy/2026-09-13/README-v2.8.md`. Sube minor. |
 | 2.8 | 2026-09-13 | **§7.1 declara la octava migración normativa, 13.7 → 13.16, cerrada** con la procedencia en SDD 13.16 (fase M5, manifiesto 7.1), qué alcanzó y qué deuda dejó declarada. Un párrafo reescrito; nada más cambia. Estado anterior en `_legacy/2026-09-13/README-v2.7.md`. Sube minor. |
 | 2.7 | 2026-09-12 | **§1 deja de afirmar «no hay clientes de terceros» y «sin versionado de rutas»** (tarea `BT-00027`). La premisa fue cierta hasta `PRODUCT-INTAKE` 4.2; desde el 2026-09-12 hay aplicaciones propias además del front (`ADR-00009`) y la superficie pública se versiona en la ruta por `/v{MAJOR}/` ([`ADR-00010`](Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)). Una sola frase reescrita, con la fecha desde la que rige; nada más cambia. Sube minor. |
 | 2.6 | 2026-09-12 | **Séptima reanudación, salida `A` — corrige DIV-03 del informe de estado.** §7 enunciaba estado en prosa contra su propia tabla: decía «etapa `e`» cuando §7.2 ya declaraba `a` a `h` cerradas y «séptima migración en curso» cuando `Informe-Migracion-10.0-a-13.3.md` está **APROBADO CON HALLAZGOS** desde el 2026-08-25. Deja de enunciar estado y remite a §7.2 y al informe de migración; corrige la cabecera (manifiesto **6.0**, intake **4.2**, antes citaba 4.0/3.0); suma responsable de §7 (`Master-Prompt-Reanudacion.md` §1.1). Sube minor: corrige afirmaciones, no cambia ninguna decisión. | Orquestador de reanudación SDD |

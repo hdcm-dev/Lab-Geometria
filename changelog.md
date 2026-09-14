@@ -1744,3 +1744,24 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
   cierre). `visor.bundle.js` en el intake (`DD-5`), los residuos del modelo por proyecto de código (`DD-6`),
   los registros de cambios desordenados (`DD-7`) y nueve eventos de cierre que nombran un momento (`DD-9`).
 - Los puntos C, D y E del lote de la actuación 010 no tuvieron respuesta: rigen sus defaults.
+
+## Se retira `evidencia/` de la raíz, y la reparación de la octava reanudación — 2026-09-13
+
+**Ramas:** `chore/retirar-evidencia-de-la-raiz` (PR #207, `3662bf9`, fusionada en `4fc2763`) y `reanudacion/8-2026-09-13-reparacion`. Sin cambio de código.
+
+### Retirado
+
+- La carpeta `evidencia/` de la raíz, con las corridas fechadas del 2026-09-01 al 2026-09-13, por decisión del Product Owner del 2026-09-13. **El contenido no se pierde**: vive en el historial y se cita como `git show 3662bf9^:evidencia/<corrida>/<archivo>`. Las entradas anteriores de este registro que nombran `evidencia/2026-09-12-estructura-solucion/` y `evidencia/2026-09-13-dc5-samples/` no se reescriben: ésta es su forma de resolverse.
+
+### Corregido
+
+- La entrada «Punto de control de la fase `k`» dice «`main` = `v1.1.1`» sobre `b9675d8`; `b9675d8` es **`v1.1.2`** (`git for-each-ref refs/tags/v1.1.2`), y `v1.1.1` es `b58dec3`.
+- Octava reanudación, salida `A` ([`SDD/Docs/Audit/Estado-Del-Destino-2026-09-13.md`](SDD/Docs/Audit/Estado-Del-Destino-2026-09-13.md), [`SDD/Docs/Audit/Mesa-2026-09-13-ciclo-2.md`](SDD/Docs/Audit/Mesa-2026-09-13-ciclo-2.md)): `Roadmap-Producto.md` 1.15 (§4 reescrito por decisión del Product Owner sobre `E-1`), `SDD/Docs/README.md` 2.9 (fila `i` abierta, fila `k` cerrada), `Medicion-PT-05.md` 1.3, `Vision-Producto.md` 1.7, `Mini-Plan.md` de Api 3.6, ítems diferidos de Api/05 3.16, Api/06 4.7 y Api/09 3.11, `ADR-10008` 1.1, `samples/README.md`, y los README de la raíz y de `SDD/` como punteros.
+
+### Desplegado
+
+- Las entradas de `v1.1.1` y `v1.1.2` no llevaron esta sección. Al 2026-09-13 23:45 UTC, `GET https://api-geometria.aplicada.stream/salud` informa `1.1.2+b9675d8`: la corrección del límite de canje por cuenta (`ADR-00011`) está en producción. La versión en producción la informa `/salud`; este registro asienta la observación con su fecha.
+
+### No hecho, y declarado
+
+- `scripts/verify-stage-i.sh` sigue midiendo el flujo de FTP retirado y exigiendo producción = `main` (`DD-R8-1`). Es la **quinta** vez que este registro llega tarde a una fusión propia (`DD-R8-2`).

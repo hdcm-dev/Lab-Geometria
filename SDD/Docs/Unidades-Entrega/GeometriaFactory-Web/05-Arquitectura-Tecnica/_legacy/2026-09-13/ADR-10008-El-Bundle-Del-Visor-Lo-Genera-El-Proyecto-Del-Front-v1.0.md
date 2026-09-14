@@ -2,9 +2,9 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md
-**Versión:** 1.1
+**Versión:** 1.0
 **Estado:** Aprobado
-**Fecha:** 2026-09-13
+**Fecha:** 2026-09-12
 **Autor:** Arquitecto de Software Senior (AG-05), sobre los hallazgos de la mesa evaluadora de la Feature 20 del framework (2026-09-11)
 **Categoría:** Despliegue
 
@@ -35,7 +35,7 @@ Motivación upstream: `PRODUCT-INTAKE` §17.2.P.8 · GeometriaFactory-Web y · G
 
 ## 3. Estado
 
-**Aprobado** desde 2026-09-12, con la corrida que lo verifica (`evidencia/2026-09-12-estructura-solucion/`, retirada del árbol el 2026-09-13 y conservada en el historial: `git show 3662bf9^:evidencia/2026-09-12-estructura-solucion/README.md`).
+**Aprobado** desde 2026-09-12, con la corrida que lo verifica (`evidencia/2026-09-12-estructura-solucion/`).
 
 ## 4. Alternativas consideradas
 
@@ -84,5 +84,4 @@ Motivación upstream: `PRODUCT-INTAKE` §17.2.P.8 · GeometriaFactory-Web y · G
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.1 | 2026-09-13 | **Parche PR-04 de [`../../../../Audit/Mesa-2026-09-13-ciclo-2.md`](../../../../Audit/Mesa-2026-09-13-ciclo-2.md).** §3 cita la corrida que verifica el ADR en el historial (`3662bf9^`), porque `evidencia/` se retiró del árbol por decisión del Product Owner (PR #207). La decisión y su estado no cambian. |
 | 1.0 | 2026-09-12 | Emisión inicial, con la corrida que la verifica. Cierra la observación de `Vista-Producto.md` 1.9 de que ningún `.csproj` podía expresar la arista `Visor → Web`. |

@@ -27,7 +27,7 @@ y lo están de dos formas:
 - **Nueve `Sample.*.csproj` construidos con la solución** (`domain/`, `application/`, `infrastructure/`),
   desde el 2026-09-12: es la forma de cumplir `Rules-Examples.md` §3.4 («su CI debe garantizar que siempre
   compila contra la versión actual del producto»). El temor de que sus ensamblados movieran `QG-03` se midió
-  antes y después con `scripts/coverage.sh`: **la cobertura no cambia** (`evidencia/2026-09-12-estructura-solucion/`).
+  antes y después con `scripts/coverage.sh`: **la cobertura no cambia** (`git show 3662bf9^:evidencia/2026-09-12-estructura-solucion/`, en el historial desde el 2026-09-13).
 - **Once nodos sin construcción** (`visor/`, `api/`, `contracts/`, `web/`), desde el 2026-09-13: un
   `Sample.<Segmento>.<Nivel>.csproj` —`Sample.Visor.Basico`, `Sample.Api.ClienteHttpBasico`,
   `Sample.Web.DatosSeed`— con `Sdk="Microsoft.Build.NoTargets/3.7.56"`, `EnableDefaultItems=false` y un único
@@ -35,7 +35,7 @@ y lo están de dos formas:
   `ProjectReference`, y la verificación del sample nunca enganchada a `Build`**: es la forma del nodo del
   visor (opción D de P-7), que se eligió porque una lista de `SolutionItems` envejece en silencio y un glob no.
   El sample se sigue corriendo con el comando de §3; el nodo sólo lo muestra. No producen ensamblado y `QG-03`
-  no cambia (`evidencia/2026-09-13-dc5-samples/`).
+  no cambia (`git show 3662bf9^:evidencia/2026-09-13-dc5-samples/`, en el historial desde el 2026-09-13).
 
 **Es decisión del Product Owner del 2026-09-11 (DC-5)**: todo proyecto queda bajo el árbol de solución, aunque
 sea bajo carpetas virtuales. La aplicación del 2026-09-12 dejó afuera las once carpetas del segundo grupo y
@@ -94,6 +94,7 @@ Los textos de los ocho escenarios del `PRODUCT-INTAKE` §20 se transcriben **sin
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 2.3 | 2026-09-13 | §1 cita las dos corridas de evidencia en el historial (`git show 3662bf9^:evidencia/…`): la carpeta `evidencia/` se retiró del árbol por decisión del Product Owner (PR #207). Parche PR-04 de la octava reanudación (`SDD/Docs/Audit/Mesa-2026-09-13-ciclo-2.md`). |
 | 2.2 | 2026-09-13 | **§1 declara las veinte carpetas en `GeometriaFactory.sln`, no nueve.** La 2.0 decía que entraban «los nueve `Sample.*.csproj`», y era exacto sobre lo que se había hecho: las once carpetas que no eran proyectos .NET habían quedado fuera del agrupador contra la decisión del Product Owner del 2026-09-11. Entran como nodos sin construcción (`Microsoft.Build.NoTargets`), con su forma y sus nombres declarados en §1, y la puerta `scripts/verify-solution-tree.sh` impide que una carpeta vuelva a quedar afuera. §3 no cambia: los comandos de cada sample son los mismos. Sube minor. |
 | 2.1 | 2026-09-13 | **Entra la vigésima carpeta**, [`api/04-cliente-http-basico/`](api/04-cliente-http-basico/) (`BT-00034`, fase `k`), con su fila en §3 y el recuento de §1 y §3 pasado de diecinueve a veinte. Es la primera que corre **sin el repositorio**. Ninguna otra fila cambia. Sube minor. |
 | 2.0 | 2026-09-12 | **Estado real por carpeta y enlaces corregidos.** La cabecera decía «Esqueleto — sin código» desde el 2026-08-11 mientras dieciséis carpetas corrían desde el 2026-08-30; §1 y la columna nueva de §3 lo dicen con la fecha de la última corrida y su fuente. Los diecinueve enlaces apuntaban a `SDD/Docs/Proyectos/…`, ruta que no existe desde la migración 8.0: pasan a `SDD/Docs/Unidades-Entrega/<unidad>/10-Examples/`, y `contracts/*` declara que no tiene documento propio. Registra la entrada de los nueve `Sample.*.csproj` a `GeometriaFactory.sln` con `QG-03` medido antes y después. Lo pidió la mesa evaluadora de la Feature 20 del framework. Sube **major**: cambia el estado declarado de dieciséis carpetas. |
