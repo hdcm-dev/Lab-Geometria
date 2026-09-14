@@ -2094,6 +2094,19 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
 - `Pipeline-CI-CD.md` no se actualizó con los pasos nuevos de `ci.yml`.
 - **CI tarda más:** corre la batería de nuevo, con cobertura, y los subconjuntos de las tres puertas.
 
+## El registro avisa qué se hace con los datos personales — 2026-09-14
+
+**Rama:** `interfaz/lote1-aviso-datos-personales`. Lote 1 de la mesa del 2026-09-14 (`REF-01`, escalada `E-3`: «Declararlo en el intake»; la parte del agente es el aviso en el registro del front).
+
+### Agregado
+
+- `Registro-De-Cuenta` muestra, antes del botón, qué se guarda (correo, nombre y apellido), para qué (identificar los trabajos), quién lo ve (el docente de la comisión), que no se envían correos ni se comparten, y cómo corregirlos o darse de baja (pedírselo al docente). El botón lo referencia con `aria-describedby`.
+- El aviso afirma sólo lo que el producto hace hoy.
+
+### No hecho, y declarado
+
+- **La finalidad, la retención de los respaldos y la supresión en el intake** las redacta el Product Owner (`E-3`). Cuando existan, el aviso se alinea con ese texto.
+
 ## La batería E2E espera condiciones del producto, no el evento de carga — 2026-09-14
 
 **Rama:** `pruebas/e2e-esperar-condicion-tras-el-envio`. Cierra el apartamiento de T0 declarado en #215: quedaban ocho `WaitForLoadStateAsync(LoadState.Load)` fuera del ingreso, y uno se agotó en CI (#226, paso 5 del recorrido del alumno).
