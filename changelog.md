@@ -1989,3 +1989,42 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
 
 - **La puerta entera no se corrió:** necesita las dos piezas levantadas. Se verificaron a mano los cuadres estáticos `3.c` y `3.d`.
 - Cuatro familias de nombres siguen en castellano. Queda como deuda con evento en §6.26.
+
+## El sello de versión muestra la identidad de la construcción — 2026-09-14
+
+**Rama:** `interfaz/lote2-sello-de-version`. Lote 2 del plan de la mesa del 2026-09-14 (`R-14`).
+
+### Cambiado
+
+- `VersionSeal` (CMP-09) mostraba «Versión no identificada» siempre, también en producción. Ahora lee `VersionIdentity`, que se resuelve **una sola vez** en la composición desde `AssemblyInformationalVersion`, igual que `/salud`, y dibuja una de tres variantes (`Representacion-Sello-De-Version.md` §3):
+  - **Publicada:** la versión sin adornos.
+  - **Preliminar:** la versión con el distintivo textual `preliminar` (`gf-badge--warning`). Es el caso de `main`, que MinVer calcula como `-alpha.0.N`.
+  - **No identificada:** sin atributo, o `0.0.0`, que es lo que MinVer calcula sin historial.
+- El identificador de construcción no se muestra en la línea: §4 lo reserva para el detalle.
+
+### No hecho, y declarado
+
+- **El detalle de diagnóstico** —construcción, origen y «copiar para reportar»— sigue sin dibujarse. Es un despliegue interactivo y queda para otra unidad.
+
+## Ninguna puerta queda en verde sin correr las pruebas que nombra — 2026-09-14
+
+**Rama:** `puertas/lote2-pruebas-que-corrieron`. Lote 2 del plan de la mesa del 2026-09-14 (`R-24`).
+
+### Corregido
+
+- **`dotnet test` con un filtro que no coincide con nada sale con código 0** («No test matches the given testcase filter»), y así lo corrían `verify-stage-g.sh` y `verify-stage-h.sh`. Con una prueba renombrada, la puerta quedaba en verde sin haberla corrido.
+- `scripts/lib-puerta.sh` suma `puerta_no_corrieron`: busca cada prueba pedida como `Passed` en el registro, con el registrador de consola en `normal`.
+  - `g` y `h` la usan después de cada corrida.
+  - `d`, `e` y `f` la usan en cada criterio. **Esto amplía el alcance de R-24 y se declara:** `lib-puerta.sh` ya comparaba el recuento contra lo pedido, pero una teoría con varios casos tapaba un nombre que dejó de existir.
+
+### Verificado (en el contenedor del SDK)
+
+- **Batería de `h` con un sexto nombre inexistente en el filtro:** `dotnet test` salió con 0 y corrieron 5.
+  - Con los cinco nombres reales, no falta ninguno.
+  - Con el renombrado, lo lista.
+  - Con un prefijo parcial (`TheCommentIsStored`), también lo lista.
+- `verify-stage-e.sh` entera: **CONFORME**, 5 criterios y 28 pruebas.
+
+### No hecho, y declarado
+
+- `g` y `h` no se corrieron enteras: `g` necesita `docker` y `dotnet` juntos, y este entorno los tiene separados.

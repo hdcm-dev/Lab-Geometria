@@ -52,6 +52,9 @@ fails=0
 ok()  { printf '  \033[32mOK\033[0m   %s\n' "$1"; }
 bad() { printf '  \033[31mFALLA\033[0m %s\n' "$1"; fails=$((fails + 1)); }
 
+# Sólo `puerta_no_corrieron`: que ninguna prueba nombrada deje la puerta en verde sin correr (R-24).
+source "$(dirname "$0")/lib-puerta.sh"
+
 echo "== Puerta de la etapa \`g\` → \`h\` · siete criterios =="
 echo
 
@@ -109,10 +112,24 @@ if ! command -v dotnet >/dev/null 2>&1; then
   exit 2
 fi
 
+bateria=(
+  "TheAdministratorOpensTheWorkAndFindsExactlyWhatTheStudentSaw"
+  "TheWorkViewBringsTheSceneTheTreeAndTheTwoMotionControls"
+  "PreviewingDrawsWithoutSavingAndWithoutTheBrowserCallingTheDataService"
+)
+filtro=""
+for prueba in "${bateria[@]}"; do
+  filtro="${filtro}${filtro:+|}FullyQualifiedName~${prueba}"
+done
+
 if dotnet test tests/GeometriaFactory.Integration.Tests --configuration Release \
-     --filter "FullyQualifiedName~TheAdministratorOpensTheWorkAndFindsExactlyWhatTheStudentSaw|FullyQualifiedName~TheWorkViewBringsTheSceneTheTreeAndTheTwoMotionControls|FullyQualifiedName~PreviewingDrawsWithoutSavingAndWithoutTheBrowserCallingTheDataService" \
-     >/tmp/etapa-g-bateria.log 2>&1; then
-  ok "$(grep -oP 'Passed:\s+\K\d+' /tmp/etapa-g-bateria.log | tail -1) pruebas de la batería pasan"
+     --logger "$PUERTA_REGISTRADOR" --filter "$filtro" >/tmp/etapa-g-bateria.log 2>&1; then
+  faltan="$(puerta_no_corrieron /tmp/etapa-g-bateria.log "${bateria[@]}")"
+  if [ -n "$faltan" ]; then
+    bad "no corrieron, porque no existen con ese nombre: $(echo $faltan)"
+  else
+    ok "$(grep -oP 'Passed:\s+\K\d+' /tmp/etapa-g-bateria.log | tail -1) pruebas de la batería pasan"
+  fi
 else
   bad "la batería falla; ver /tmp/etapa-g-bateria.log"
   tail -20 /tmp/etapa-g-bateria.log

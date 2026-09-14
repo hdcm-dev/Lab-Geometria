@@ -48,6 +48,9 @@ fails=0
 ok()  { printf '  \033[32mOK\033[0m   %s\n' "$1"; }
 bad() { printf '  \033[31mFALLA\033[0m %s\n' "$1"; fails=$((fails + 1)); }
 
+# Sólo `puerta_no_corrieron`: que ninguna prueba nombrada deje la puerta en verde sin correr (R-24).
+source "$(dirname "$0")/lib-puerta.sh"
+
 echo "== Puerta de la etapa \`h\` → \`i…\` · siete criterios =="
 echo
 
@@ -70,8 +73,13 @@ for prueba in "${superficie[@]}"; do
 done
 
 if dotnet test tests/GeometriaFactory.Integration.Tests --configuration Release \
-     --filter "$filtro" >/tmp/etapa-h-superficie.log 2>&1; then
-  ok "$(grep -oP 'Passed:\s+\K\d+' /tmp/etapa-h-superficie.log | tail -1) pruebas de superficie pasan"
+     --logger "$PUERTA_REGISTRADOR" --filter "$filtro" >/tmp/etapa-h-superficie.log 2>&1; then
+  faltan="$(puerta_no_corrieron /tmp/etapa-h-superficie.log "${superficie[@]}")"
+  if [ -n "$faltan" ]; then
+    bad "no corrieron, porque no existen con ese nombre: $(echo $faltan)"
+  else
+    ok "$(grep -oP 'Passed:\s+\K\d+' /tmp/etapa-h-superficie.log | tail -1) pruebas de superficie pasan"
+  fi
 else
   bad "la superficie falla; ver /tmp/etapa-h-superficie.log"
   tail -25 /tmp/etapa-h-superficie.log
@@ -84,10 +92,15 @@ echo
 # ---------------------------------------------------------------------------
 echo "-- H-5 · el desenlace en el listado y el comentario en el detalle --"
 
+publica="TheStudentSeesTheOutcomeInTheirListingAndTheCommentOnOpeningTheWork"
 if dotnet test tests/GeometriaFactory.Integration.Tests --configuration Release \
-     --filter "FullyQualifiedName~TheStudentSeesTheOutcomeInTheirListingAndTheCommentOnOpeningTheWork" \
+     --logger "$PUERTA_REGISTRADOR" --filter "FullyQualifiedName~$publica" \
      >/tmp/etapa-h-publica.log 2>&1; then
-  ok "el alumno ve el desenlace donde va y el comentario donde va"
+  if [ -n "$(puerta_no_corrieron /tmp/etapa-h-publica.log "$publica")" ]; then
+    bad "no corrió, porque no existe con ese nombre: $publica"
+  else
+    ok "el alumno ve el desenlace donde va y el comentario donde va"
+  fi
 else
   bad "la pieza pública falla; ver /tmp/etapa-h-publica.log"
   tail -25 /tmp/etapa-h-publica.log
