@@ -180,12 +180,53 @@ public abstract class PruebaE2E : PageTest
         await pagina.GotoAsync("/ingreso", new() { WaitUntil = WaitUntilState.Load });
         await pagina.FillAsync("#signin-email", correo);
         await pagina.FillAsync("#signin-password", clave);
-        // SE APRIETA Y SE ESPERA EL ESTADO DE CARGA, y no se usa `RunAndWaitForNavigationAsync`:
-        // está obsoleto en el binding y este proyecto trata las advertencias como errores. La forma
-        // vigente es esperar la carga de la página que la navegación deja.
         await pagina.ClickAsync("form:has(#signin-email) button[type=submit]");
-        await pagina.WaitForLoadStateAsync(LoadState.Load);
+
+        // SE ESPERA UNA CONDICION DEL PRODUCTO Y NO EL EVENTO DE CARGA. Hasta el 2026-09-14 se
+        // esperaba `LoadState.Load` después del clic, y en el banco local de CI se agotaba a los
+        // 30 s de a ratos —dos corridas de tres, siempre en esta línea—: la navegación que deja el
+        // ingreso no siempre vuelve a disparar la carga completa. Lo que el ingreso produce, y lo
+        // que cada caso mira después, es una de dos cosas: SALIR DE `/ingreso` —al listado, a los
+        // trabajos o al cambio obligado— o QUEDARSE CON UN AVISO (`role="alert"`: credencial
+        // equivocada, campos faltantes, servicio no disponible). Se espera la que llegue primero.
+        //
+        // NO ES UN `Thread.Sleep` DISFRAZADO: el intervalo sólo decide cada cuánto se vuelve a
+        // mirar, y se sale en cuanto la condición se cumple. La dirección de la página se lee sin
+        // tocar el documento, y mirar el aviso puede fallar mientras la página navega: ese fallo
+        // no es un resultado, se vuelve a mirar.
+        var limite = DateTime.UtcNow + TimeSpan.FromSeconds(30);
+        while (EstaEnElIngreso(pagina.Url))
+        {
+            try
+            {
+                if (await pagina.Locator("[role=alert]").First.IsVisibleAsync())
+                {
+                    return;
+                }
+            }
+            catch (PlaywrightException)
+            {
+                // La página cambió de documento mientras se la miraba: se vuelve a mirar.
+            }
+
+            if (DateTime.UtcNow > limite)
+            {
+                throw new TimeoutException(
+                    "El ingreso no salió de /ingreso ni mostró un aviso en 30 s. Dirección: " + pagina.Url);
+            }
+
+            await Task.Delay(TimeSpan.FromMilliseconds(100));
+        }
+
+        // YA SALIO DEL INGRESO: basta con que el documento nuevo esté armado. La carga completa no
+        // se espera, por el mismo motivo de arriba; cada caso espera después lo que va a mirar.
+        await pagina.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
     }
+
+    /// <summary>Si la dirección es la pantalla de ingreso, con o sin parámetros.</summary>
+    private static bool EstaEnElIngreso(string direccion) =>
+        Uri.TryCreate(direccion, UriKind.Absolute, out var uri)
+        && uri.AbsolutePath.StartsWith("/ingreso", StringComparison.OrdinalIgnoreCase);
 
     /// <summary>Entra como el administrador del laboratorio.</summary>
     protected Task IngresarComoAdministradorAsync() =>

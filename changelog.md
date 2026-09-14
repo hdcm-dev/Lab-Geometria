@@ -1833,3 +1833,20 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
 
 - La pantalla del front no tiene prueba propia del reemplazo del acceso: lo cubren el contrato y la guarda. El recorrido E2E del banco local la ejercita en CI.
 
+## El ingreso del E2E espera una condición del producto y deja de agotarse de a ratos — 2026-09-14
+
+**Rama:** `pruebas/e2e-ingreso-espera-condicion`. Sin cambio de código de producción.
+
+### Corregido
+
+- `tests/GeometriaFactory.E2ETests/Infraestructura/PruebaE2E.cs`, `IngresarAsync`: después del clic de ingreso esperaba `LoadState.Load`, y en el banco local de CI se agotaba a los 30 s de a ratos. Pasó en dos corridas de tres el 2026-09-14 (PR #210 y #212), con dos pruebas distintas y siempre en esa línea. Ahora espera lo que el ingreso produce: **salir de `/ingreso`** o **quedarse con un aviso** (`role="alert"`), lo que llegue primero, y después sólo `DOMContentLoaded`.
+
+### Verificado
+
+- Suite E2E completa en el banco local, **tres corridas seguidas**: 32/32 en cada una, entre 15 y 17 s. Las corridas de CI con la espera anterior tardaban entre 37 y 44 s.
+- El caso que espera quedarse en `/ingreso` (`LaCredencialEquivocadaNoEntraYLaPantallaLoDice`) sigue pasando.
+
+### No hecho, y declarado
+
+- La intermitencia no se puede forzar en rojo a voluntad. La evidencia del defecto son los dos registros de CI con el agotamiento en `PruebaE2E.cs:187`.
+
