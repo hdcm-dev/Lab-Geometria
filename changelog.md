@@ -1989,3 +1989,19 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
 
 - **La puerta entera no se corrió:** necesita las dos piezas levantadas. Se verificaron a mano los cuadres estáticos `3.c` y `3.d`.
 - Cuatro familias de nombres siguen en castellano. Queda como deuda con evento en §6.26.
+
+## El sello de versión muestra la identidad de la construcción — 2026-09-14
+
+**Rama:** `interfaz/lote2-sello-de-version`. Lote 2 del plan de la mesa del 2026-09-14 (`R-14`).
+
+### Cambiado
+
+- `VersionSeal` (CMP-09) mostraba «Versión no identificada» siempre, también en producción. Ahora lee `VersionIdentity`, que se resuelve **una sola vez** en la composición desde `AssemblyInformationalVersion`, igual que `/salud`, y dibuja una de tres variantes (`Representacion-Sello-De-Version.md` §3):
+  - **Publicada:** la versión sin adornos.
+  - **Preliminar:** la versión con el distintivo textual `preliminar` (`gf-badge--warning`). Es el caso de `main`, que MinVer calcula como `-alpha.0.N`.
+  - **No identificada:** sin atributo, o `0.0.0`, que es lo que MinVer calcula sin historial.
+- El identificador de construcción no se muestra en la línea: §4 lo reserva para el detalle.
+
+### No hecho, y declarado
+
+- **El detalle de diagnóstico** —construcción, origen y «copiar para reportar»— sigue sin dibujarse. Es un despliegue interactivo y queda para otra unidad.
