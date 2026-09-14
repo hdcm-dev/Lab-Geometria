@@ -254,9 +254,9 @@ grep -q "$EMAIL" /tmp/anonimo.html && bad "sin marca sigue dibujando la identida
 #   3.b  EL ARCHIVO NO PUEDE SALIR A LA RED NI TOCAR EL NAVEGADOR PERSISTENTE. `RA-01` y
 #        `Web ADR-03` §2 se cuadran contra el texto del archivo, con umbral 0 cada uno. No hay
 #        forma de que ese guion pida nada al servicio de datos ni guarde nada en ninguna parte.
-#   3.c  EL ALCANCE ES UNA LISTA CERRADA DE NUEVE ATRIBUTOS, la de `Norma-De-Nomenclatura.md`
-#        §6.17.3. El guion no busca ninguna superficie por nombre: hace lo que esos nueve atributos
-#        le piden. Un comportamiento nuevo exige un atributo nuevo, y un atributo nuevo falla acá
+#   3.c  EL ALCANCE ES UNA LISTA CERRADA DE ATRIBUTOS, la de `Norma-De-Nomenclatura.md` §6.17.3,
+#        §6.23 y §6.26 —treinta desde la mesa del 2026-09-14—. El guion no busca ninguna superficie
+#        por nombre: hace lo que esos atributos le piden. Un comportamiento nuevo exige un atributo nuevo, y un atributo nuevo falla acá
 #        hasta que se lo agregue **a la norma y a esta lista**, que es exactamente la puerta.
 #   3.d  Y EL CUADRE VA EN LAS DOS DIRECCIONES: los atributos que el marcado declara también tienen
 #        que estar en la lista. Así no puede quedar un lado prometiendo lo que el otro no hace.
@@ -272,7 +272,23 @@ ARCHIVO=src/GeometriaFactory.Web/wwwroot$GUION
 AUTORIZADOS='data-gf-copy-source data-gf-copy-label data-gf-copy-done data-gf-copy-unavailable
 data-gf-pending data-gf-match-input data-gf-match-value data-gf-dialog data-gf-dialog-dismiss
 data-gf-viewer-pieces data-gf-viewer-drawn data-gf-piece-node data-gf-piece-node-bound
-data-gf-motion data-gf-motion-bound data-gf-motion-note data-gf-motion-status'
+data-gf-motion data-gf-motion-bound data-gf-motion-note data-gf-motion-status
+data-gf-dialog-irreversible data-gf-dialog-modal
+data-gf-escena-acuse data-gf-escena-dibujada data-gf-escena-sin-dibujar
+data-gf-outcome data-gf-confirm-outcome data-gf-withdraw data-gf-confirm-withdraw
+data-gf-resolution-error data-gf-preparando data-gf-servicio data-gf-fecha-no-representable'
+# LOS TRECE DE LAS CUATRO ÚLTIMAS LÍNEAS DE ARRIBA LOS AUTORIZA LA MESA DEL 2026-09-14
+# (`SDD/Docs/Audit/Mesa-2026-09-14.md`, R-11, escalada E-6 aprobada), con su motivo en
+# `Norma-De-Nomenclatura.md` §6.26. Las etapas `e` a `h` los agregaron al marcado sin sumarlos acá,
+# y esta puerta quedó en rojo en `main`. Son dos clases, y ninguna abre una vía nueva:
+#   · CINCO LOS LEE EL GUION, y amplían dos de las cuatro cosas autorizadas. `dialog-irreversible`
+#     le dice que la tecla de escape NO cierra la baja de una cuenta; `dialog-modal`, qué diálogo
+#     promueve a modal (el del desenlace). Los tres `escena-*` llevan el acuse anunciado del dibujo
+#     de la escena del visor, con los textos que decide el servidor.
+#   · OCHO NO LOS LEE NINGÚN GUION: son marcas de estado del marcado servido —las acciones del
+#     desenlace y su confirmación, el fallo del desenlace, «todavía no disponible», el estado del
+#     servicio de datos y la fecha no representable—. Tres de ellas son además los selectores de
+#     la batería E2E (`ResolucionDelTrabajoTests`).
 
 printf '   -- 3.a · inventario cerrado de guiones propios, sobre las ocho direcciones --\n'
 ajenos=0
@@ -302,12 +318,12 @@ for prohibido in 'fetch *\(' 'XMLHttpRequest' 'WebSocket' 'EventSource' 'sendBea
   same "$n" 0 "el guion no contiene \`$prohibido\`"
 done
 
-printf '   -- 3.c · el alcance del guion son los DIECISIETE atributos autorizados --\n'
+printf '   -- 3.c · el alcance del guion son los TREINTA atributos autorizados --\n'
 usados=$(grep -oE 'data-gf-[a-z-]+' "$ARCHIVO" | sort -u)
 echo "        atributos que el guion lee: $(echo "$usados" | tr '\n' ' ')"
 fuera=$(comm -23 <(echo "$usados") <(echo "$AUTORIZADOS" | tr ' ' '\n' | sort -u))
 if [ -z "$fuera" ]; then
-  ok "$(echo "$usados" | wc -l) atributos leídos, todos dentro de los diecisiete autorizados"
+  ok "$(echo "$usados" | wc -l) atributos leídos, todos dentro de los treinta autorizados"
 else
   bad "el guion lee atributos NO autorizados: $(echo "$fuera" | tr '\n' ' ')"
 fi
