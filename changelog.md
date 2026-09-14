@@ -2041,3 +2041,15 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
   - el procedimiento con respaldo y verificación, y la reversión.
 - **Divergencia declarada para el Product Owner:** la guía y `Estrategia-Versionado.md` dicen que se despliega la etiqueta de la etapa, y el servidor construye `main`.
 - Sin nombres de red, rangos ni rutas del anfitrión.
+
+## La batería E2E espera condiciones del producto, no el evento de carga — 2026-09-14
+
+**Rama:** `pruebas/e2e-esperar-condicion-tras-el-envio`. Cierra el apartamiento de T0 declarado en #215: quedaban ocho `WaitForLoadStateAsync(LoadState.Load)` fuera del ingreso, y uno se agotó en CI (#226, paso 5 del recorrido del alumno).
+
+### Corregido
+
+- `RecorridoDelAlumnoTests` y `NavegacionTests` ya no esperan el evento de carga después de un envío o de un clic. Cada `Expect` que sigue espera la condición del producto. Después de enviar un trabajo se espera la **tarjeta de resultado**, que es lo que garantiza que el trabajo quedó guardado antes de navegar al listado.
+
+### Verificado
+
+- Banco local (`scripts/pruebas-e2e.sh chromium`), dos corridas: **32/32** las dos veces.

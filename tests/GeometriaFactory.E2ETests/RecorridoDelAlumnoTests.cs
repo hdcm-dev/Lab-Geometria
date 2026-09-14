@@ -87,7 +87,11 @@ public sealed class RecorridoDelAlumnoTests : PruebaE2E
         await Page.FillAsync("#registration-first-name", "Prueba");
         await Page.FillAsync("#registration-last-name", "Recorrido");
         await Page.ClickAsync("form:has(#registration-email) button[type=submit]");
-        await Page.WaitForLoadStateAsync(LoadState.Load);
+
+        // NO SE ESPERA EL EVENTO DE CARGA DESPUES DE UN ENVIO. Es la misma regla que `IngresarAsync`
+        // adoptó el 2026-09-14: en el banco local de CI la navegación que deja un POST no siempre
+        // vuelve a disparar la carga completa, y la espera se agotaba a los 30 s de a ratos (#226,
+        // en el paso 5). Cada `Expect` que sigue ya espera la condición del producto por su cuenta.
 
         // EL REGISTRO NO DA ACCESO: la cuenta queda a la espera de que el docente la habilite. Que
         // la pantalla lo diga es parte del contrato —si dijera «ya podés entrar», el alumno
@@ -120,7 +124,6 @@ public sealed class RecorridoDelAlumnoTests : PruebaE2E
         await Page.FillAsync("#forced-new", propia);
         await Page.FillAsync("#forced-new-repeat", propia);
         await Page.ClickAsync("form:has(#forced-new) button[type=submit]");
-        await Page.WaitForLoadStateAsync(LoadState.Load);
 
         await IngresarAsync(_correo, propia);
         await Expect(Page).ToHaveURLAsync(new Regex("/mis-trabajos$"));
@@ -131,7 +134,10 @@ public sealed class RecorridoDelAlumnoTests : PruebaE2E
         await Page.FillAsync("#submission-date", "2026-08-30");
         await Page.FillAsync("#submission-text", TextoQueNoVerifica);
         await Page.ClickAsync("form:has(#submission-text) button[type=submit]");
-        await Page.WaitForLoadStateAsync(LoadState.Load);
+
+        // LA CONDICION QUE EL ENVIO PRODUCE es la tarjeta de resultado: hasta que aparece, el
+        // trabajo puede no estar guardado y navegar al listado antes lo buscaría en vano.
+        await Expect(Page.Locator("section[role=status][aria-labelledby=submission-result-heading]")).ToBeVisibleAsync();
 
         await Page.GotoAsync("/mis-trabajos", new() { WaitUntil = WaitUntilState.Load });
 
@@ -155,7 +161,6 @@ public sealed class RecorridoDelAlumnoTests : PruebaE2E
         // `.First` POR EL MISMO MOTIVO: el enlace de editar existe en la tabla y en la tarjeta.
         var editar = Page.Locator("a[href*='/editar']").First;
         await editar.ClickAsync();
-        await Page.WaitForLoadStateAsync(LoadState.Load);
 
         await Expect(Page.Locator("#submission-date")).ToHaveValueAsync("2026-08-30");
         await Expect(Page.Locator("#submission-name")).ToHaveValueAsync(NombreDelTrabajo);
@@ -163,7 +168,7 @@ public sealed class RecorridoDelAlumnoTests : PruebaE2E
         // ---- 7 · CORREGIR Y REENVIAR ------------------------------------------------------
         await Page.FillAsync("#submission-text", TextoQueSiVerifica);
         await Page.ClickAsync("form:has(#submission-text) button[type=submit]");
-        await Page.WaitForLoadStateAsync(LoadState.Load);
+        await Expect(Page.Locator("section[role=status][aria-labelledby=submission-result-heading]")).ToBeVisibleAsync();
 
         // ---- 8 · Y QUE EL SERVICIO DE DATOS LO CONFIRME -----------------------------------
         // NO ALCANZA CON QUE LA PANTALLA LO MUESTRE. Es la misma regla que en la resolución: la
