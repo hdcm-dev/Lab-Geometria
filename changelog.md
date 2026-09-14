@@ -1919,3 +1919,15 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
 - `TheDocumentDeclaresTheBearerSchemeOnlyOnThePointsThatRequireAccess`, **vista fallar** contra el documento anterior, que no declaraba ningún esquema: `GET /v1/trabajos` lo exige; `POST /v1/auth/token` y `GET /salud` no.
 - Build sin advertencias; suite completa en verde: Domain 94, Application 56, Integration 411.
 
+## El contrato de agentes dice lo que corre — 2026-09-14
+
+**Rama:** `docs/contrato-agentes-al-dia`. Sin cambio de código. Lote 1 del plan de la mesa del 2026-09-14 (`SDD/Docs/Audit/Mesa-2026-09-14.md`, R-18).
+
+### Corregido
+
+- `SDD/Docs/Producto/11-Documentacion/Contrato-Agentes.md` 1.1, y `AGENTS.md` regenerado con los mismos cambios:
+  - Protege `lab-geometria-web` y `lab-geometria-api`, el despliegue real. Nombraba cuatro contenedores `gf-*` que ya no corren, y dejaba sin proteger los que sí.
+  - La batería de extremo a extremo tiene su propio guion y no entra en `test.sh`.
+  - Fusionar un pull request es del agente con los checks en verde y sin reserva, por la decisión del Product Owner del 2026-08-31.
+  - La tabla «A dónde ir» citaba diez documentos y **ocho no existían**. Cada fila apunta ahora a uno que existe, o declara que no está emitido (`DD-R9-2`).
+

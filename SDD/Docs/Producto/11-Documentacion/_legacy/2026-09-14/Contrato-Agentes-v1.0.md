@@ -53,7 +53,7 @@ bash scripts/build-visor.sh
 bash scripts/test.sh
 ```
 
-Corre `dotnet test GeometriaFactory.sln --configuration Release`. Devuelve 0 con las tres baterías en verde: Domain, Application e Integration. **La cuarta, la de extremo a extremo, no entra en esa corrida**: tiene su guion, `bash scripts/pruebas-e2e.sh`, que levanta el producto entero y un navegador dentro de un contenedor.
+Corre `dotnet test GeometriaFactory.sln --configuration Release`. Devuelve 0 con las tres baterías en verde.
 
 Un subconjunto, por proyecto de prueba:
 
@@ -107,8 +107,8 @@ Si el cambio toca una etapa con puerta propia, además su verificador: `scripts/
 | **El intake y los requerimientos técnicos** | Son documentos humanos. Lo que la construcción encuentra desalineado **se eleva, no se corrige** |
 | **`PRODUCT-MANIFEST` y las decisiones de `Root-Rules.md` §11** | Un apartamiento se declara, no se ejerce por conveniencia |
 | **El almacén de trabajo** | `scripts/store-path.sh` lo explica: el 2026-08-15 una corrida de guiones se llevó la cuenta de administrador. Toda rutina destructiva usa **archivo propio** |
-| **Los contenedores `lab-geometria-web` y `lab-geometria-api`** | Son el **despliegue real** del Product Owner. No se les hace `exec`, no se reinician y no se leen sus volúmenes. Un servicio de prueba se levanta **aparte**, en puerto libre y con almacén propio. Hasta el 2026-09-14 esta fila nombraba `gf-api`, `gf-web`, `gf-back` y `gf-tunnel`, que ya no corren |
-| **Fusionar un pull request y borrar su rama** | **Desde el 2026-08-31 lo hace el agente, por decisión del Product Owner, reafirmada el 2026-09-14**: fusiona y borra la rama cuando los checks están en verde y la unidad no tiene una reserva. Con una reserva, entrega el enlace, dice cuál es la reserva y espera. Nunca fusiona con un check en rojo |
+| **Los contenedores `gf-api`, `gf-web`, `gf-back` y `gf-tunnel`** | Son el despliegue local del Product Owner. Un servicio de prueba se levanta **aparte**, en puerto libre y con almacén propio |
+| **Fusionar un pull request y borrar su rama** | Son del Product Owner. El agente entrega el enlace y espera |
 
 **Y una regla que no es sobre archivos:** cuando una medición y otra del mismo hecho no coinciden, **no se elige la que conviene**. Las dos se revisan, y la experiencia de este repositorio dice que suele estar mal la más elaborada.
 
@@ -116,15 +116,15 @@ Si el cambio toca una etapa con puerta propia, además su verificador: `scripts/
 
 | Quiero… | Documento |
 | --- | --- |
-| entender qué es el producto y por dónde entrar | `README.md` de `SDD/Docs/` (§7, estado por etapa). **`Vision-General-Sistema.md` no está emitido** (`DD-R9-2`) |
-| levantarlo entero en una máquina limpia | `Unidades-Entrega/GeometriaFactory-Api/03-UX-UI-DX/Guia-Onboarding-Developer.md` y la de `GeometriaFactory-Web`. **`Guia-Inicio-Rapido.md` no está emitida** (`DD-R9-2`) |
-| desplegarlo, en orden, y saber cómo volver atrás | `Unidades-Entrega/GeometriaFactory-Api/09-Devops/Guia-Publicacion-Image-Docker.md`; el despliegue vigente en contenedores está en el registro de cambios («Dockerizar el front»). **`Guia-Despliegue.md` no está emitida**: la publicación real se describe en un solo lugar en la fase `i` (R-13) |
+| entender qué es el producto y por dónde entrar | `Producto/11-Documentacion/Vision-General-Sistema.md` |
+| levantarlo entero en una máquina limpia | `Producto/11-Documentacion/Guia-Inicio-Rapido.md` |
+| desplegarlo, en orden, y saber cómo volver atrás | `Producto/11-Documentacion/Guia-Despliegue.md` |
 | saber si algo ya le pasó a alguien | `Producto/11-Documentacion/Bitacora-Eventualidades.md` |
-| correr el servicio en un contenedor | `Unidades-Entrega/GeometriaFactory-Api/09-Devops/Guia-Publicacion-Image-Docker.md` |
-| diagnosticar una falla en ejecución | `Producto/11-Documentacion/Bitacora-Eventualidades.md` y `09-Devops/Entornos-Deploy.md` de la unidad afectada. **`Runbook-Operacion.md` no está emitido** (`DD-R9-2`) |
-| ubicar en el repositorio lo que la arquitectura llama componente | `05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md` de la unidad. **`Recorrido-Codigo.md` no está emitido** (`DD-R9-2`) |
-| agregar una funcionalidad sin romper el diseño | `05-Arquitectura-Tecnica/Decisiones-Arquitectura.md` de la unidad, con sus ADR. **`Guia-Contribucion.md` no está emitida** (`DD-R9-2`) |
-| entender el modelo mental de una pieza | `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` y `Glosario-Funcional.md`. **`Conceptos-Fundamentales.md` no está emitido** (`DD-R9-2`) |
+| correr el servicio en un contenedor | `Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/Guia-Contenedor.md` |
+| diagnosticar una falla en ejecución | `Runbook-Operacion.md` del proyecto de código afectado |
+| ubicar en el repositorio lo que la arquitectura llama componente | `Recorrido-Codigo.md` del proyecto de código |
+| agregar una funcionalidad sin romper el diseño | `Guia-Contribucion.md` del proyecto de código |
+| entender el modelo mental de una pieza | `Conceptos-Fundamentales.md` del proyecto de código |
 | ver la superficie HTTP exacta | `Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md` |
 | ver un ejemplo que corre | `samples/<capa>/<nivel>/`, gobernado por su `10-Examples` |
 | saber cómo se nombra algo | `Producto/Norma-De-Nomenclatura.md` §6 |
@@ -138,4 +138,3 @@ Si el cambio toca una etapa con puerta propia, además su verificador: `scripts/
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-30 | Emisión inicial, que cierra el hallazgo `I-02` del incremento `I-1` de la Fase I —**el único bloqueante**: sin este contrato el paso 4 de la fase no se podía ejecutar en ninguna corrida—. Los siete puntos de `Rules-Documentacion.md` §4.2, con los comandos tomados de los guiones vigentes y los límites de intervención tomados de decisiones ya registradas: el incidente del almacén del 2026-08-15, la propiedad del `PROMPTs/`, y el despliegue local del Product Owner. De acá se deriva el `AGENTS.md` de la raíz. |
-| 1.1 | 2026-09-14 | **Al día con lo que corre**, por el R-18 de la mesa del 2026-09-14 (`../../Audit/Mesa-2026-09-14.md`). §3: la batería de extremo a extremo tiene su guion y no entra en `test.sh`. §6: los contenedores protegidos son `lab-geometria-web` y `lab-geometria-api`, y fusionar pasa a ser del agente con checks en verde y sin reserva, por la decisión del Product Owner del 2026-08-31. §7: de diez documentos citados, **ocho no existían**; cada fila apunta a uno que existe o declara que no está emitido (`DD-R9-2`). `AGENTS.md` se regenera con los mismos cambios. Estado anterior en `_legacy/2026-09-14/Contrato-Agentes-v1.0.md`. |
