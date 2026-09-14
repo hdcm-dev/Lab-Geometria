@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Mini-Plan.md
-**Versión:** 3.7
+**Versión:** 3.6
 **Estado:** Propuesto
 **Fecha:** 2026-09-13
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -494,25 +494,6 @@ pueden ejecutar en el orden de §4.1 sin esperar nada fuera del tramo (verificac
 afuera era falsa (`ADR-08008` §2 punto 2, nivel Producto, `Aceptado`; ver [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) 1.1, sección
 BT-00031).
 
-### 3.6 Fase `i` — el plan ejecutable del cierre
-
-**Por qué existe esta subsección** (mesa del 2026-09-14, `R-17`: «la fase `i` no tiene plan ejecutable», P1). La fase `i` está **realizada** —el despliegue real corre desde el 2026-09-06— y **no cerrada**: `Roadmap-Producto.md` §5.2 le pide seis criterios, y hasta hoy nadie había escrito qué falta para cada uno, quién lo hace y en qué orden. Ésta es esa lista, escrita sobre lo que se verificó el 2026-09-14 contra producción (`scripts/verify-stage-i.sh`, PR #226).
-
-**Regla de lectura:** «Hecho» es lo que la puerta o un PR fusionado demuestra; «Del PO» es lo que exige la presencia o la decisión del Product Owner y ningún agente puede producir.
-
-| # | Criterio (`Roadmap-Producto.md` §5.2, fila `i` → `j…`) | Estado al 2026-09-14 | Qué falta | Quién |
-| --- | --- | --- | --- | --- |
-| 1 | Contenedores desde su composición, imágenes selladas, túnel y dominio, publicación reproducible | **Hecho y verificado**: `I-1` de la puerta pasa contra producción; `Guia-Publicacion-Image-Docker.md` §2.2 lo describe (PR #225) | **Constancia de dos corridas** de la publicación, que es un acto: correrla dos veces y anotarlo en la bitácora de §9 | PO (o el agente con autorización, anotando la salida de la puerta) |
-| 2 | Servidor a servidor; el navegador no llega al servicio de datos | **Hecho y verificado**: `I-2` pasa | Nada | — |
-| 3 | `PT-05` medida desde la red de la facultad, resultado documentado sea cual sea | **SIN MEDIR**. El formulario tiene receta y campos (`Medicion-PT-05.md` 1.4, PR #227) | **(a)** Umbral de tiempo aceptable y definición de «con reservas» (`E-5`, antes de la visita); **(b)** la visita, con un alumno de verdad | PO |
-| 4 | Circuito completo sobre el despliegue real | **No presenciado** | La misma visita: pasos 3 a 6 de la receta de `Medicion-PT-05.md` §2.1 | PO + un alumno |
-| 5 | Esquema aplicado solo (reformulado por `E-6`) | **Hecho**: `I-5` pasa (`ready`); `CredentialChangedAtMigrationTests` prueba la transformación sobre datos (PR #212); la corrida local con volumen nuevo sobre la revisión desplegada se hizo el 2026-09-14 (`changelog.md`, entrada de las imágenes sin root) | Nada | — |
-| 6 | Puertas `c` a `h` tal como están en `main`, sin corregir el producto (reformulado por `E-6`) | **Parcial**: `d`, `e` y `h` pasan y corren en CI (PR #228); `c` corregida (PR #221) pero no corrida entera; `f` y `g` necesitan `dotnet` y `docker` juntos | Correr `c`, `f` y `g` en el `devcontainer` y anotar la salida en §9 | Agente, en un entorno con las dos herramientas |
-
-**Orden:** primero lo que no depende de nadie —el criterio 6, una sesión en el `devcontainer`—; después la decisión `E-5` del PO; después la visita, que cierra los criterios 3 y 4 y deja la constancia del 1. **El punto de control** es el OK explícito del PO sobre los seis, como en `k` (§3.5).
-
-**Lo que la mesa del 2026-09-14 puso en el lote 2 y ya está resuelto**, para que este plan no lo repita: `R-11` (#221), `R-24` (#223), `R-14` (#222), `R-13` (#225), `R-12` (#228), `R-10` y `R-16` (#227), `DD-R8-1` (#226). Queda `R-04` —ajustar los topes por origen— **después** de `PT-05`, con su resultado, y `R-17` es esta subsección.
-
 ## 4. Alcance técnico y orden de construcción
 
 ### 4.1 `GeometriaFactory-Api`
@@ -888,4 +869,3 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 | 3.4 | 2026-09-13 | **Cierre del tramo `k`**: las celdas de `BT-00029`, `BT-00030`, `BT-00034` y `BT-00035` pasan a `Done` (PR #198, #197, #201, #199). Las nueve tareas del tramo quedan resueltas: **ocho `Done` y una `Descartada`** (`BT-00028`, por `ADR-00009`). En producción: `v1.1.0` (`/salud`), contrato bajo `/v1/`, OpenAPI publicado, límite de tasa activo. Punto de control del tramo: el que `Roadmap-Producto.md` §5.1 fija para toda transición — el OK explícito del Product Owner sobre esta fusión. |
 | 3.5 | 2026-09-13 | **Cierre del punto de control del tramo `k`**: el Product Owner dio el OK explícito el 2026-09-13 («tenés el ok de la fase K»), y §3.5 lo asienta junto a la tabla de comprometidas. Ninguna celda de estado cambia: las ocho `Done` y la `Descartada` son las de la 3.4. **Corregido de paso**: las filas 3.3 y 3.4 de este control de cambios estaban en orden inverso; se reordenan sin cambiar su texto. Expediente `SDD/Expedientes/0001-Migracion-Normativa-A-13.16/`, actuación 002. Estado anterior en `_legacy/2026-09-13/Mini-Plan-v3.4.md`. |
 | 3.6 | 2026-09-13 | **Parche PR-06 de [`../../../Audit/Mesa-2026-09-13-ciclo-2.md`](../../../Audit/Mesa-2026-09-13-ciclo-2.md).** §2.1 fila `k` y §3.5 dejan de citar el estado del roadmap y su versión (`Root-Rules.md` §10 R1) y declara que los otros seis criterios de §5.1 no están asentados acá; §9 remite al `changelog.md` como fuente del avance. Sube minor. Estado anterior en `_legacy/2026-09-13/Mini-Plan-v3.5.md`. |
-| 3.7 | 2026-09-14 | **§3.6 nueva: el plan ejecutable del cierre de la fase `i`** (mesa del 2026-09-14, `R-17`): los seis criterios del roadmap con su estado verificado contra producción, qué falta y quién. Tres cosas son del Product Owner —la constancia de dos corridas, el umbral de `E-5` y la visita— y una del agente en el `devcontainer`. Estado anterior en `_legacy/2026-09-14/`. |
