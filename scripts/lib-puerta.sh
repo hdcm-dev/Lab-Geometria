@@ -13,6 +13,10 @@
 # esta forma habría hecho la forma más grande que el problema, que es cómo una
 # biblioteca compartida se vuelve el lugar donde nadie quiere tocar nada.
 #
+# `g` Y `h` TOMAN DE ACÁ UNA SOLA FUNCIÓN, `puerta_no_corrieron`, y nada más de la forma
+# (mesa del 2026-09-14, R-24): es la que impide que una puerta quede en verde sin
+# haber corrido lo que nombra, y ese defecto no depende de la forma de la puerta.
+#
 # CADA CRITERIO NOMBRA SUS PRUEBAS UNA POR UNA. Es lo que vuelve auditable la
 # puerta: la lista es el mapa entre el roadmap y la batería, y un filtro por
 # clase habría pasado igual sin decir qué criterio cubre qué.
@@ -21,6 +25,27 @@
 _puerta_fallas=0
 _puerta_criterios=0
 _puerta_pruebas=0
+
+# El registro de `dotnet test` con este registrador lista cada prueba corrida como
+# `Passed <nombre completo> [tiempo]`, que es lo que `puerta_no_corrieron` busca.
+PUERTA_REGISTRADOR='console;verbosity=normal'
+
+# puerta_no_corrieron <registro> <prueba> [prueba...]
+# Imprime, una por línea, las pruebas pedidas que el registro NO muestra como pasadas.
+#
+# POR QUÉ POR NOMBRE Y NO POR RECUENTO. `dotnet test` con un filtro que no coincide con
+# nada sale con código 0 («No test matches the given testcase filter»): una prueba
+# renombrada deja la puerta en verde sin haberla corrido. Comparar el recuento contra lo
+# pedido no alcanza, porque una teoría con tres casos cuenta tres y tapa un nombre que
+# dejó de existir. Buscar cada nombre sí.
+puerta_no_corrieron() {
+  local registro="$1"; shift
+  local prueba
+  for prueba in "$@"; do
+    grep -qE "^[[:space:]]*Passed [^[:space:]]*\.${prueba}([([:space:]]|$)" "$registro" \
+      || printf '%s\n' "$prueba"
+  done
+}
 
 puerta_abre() {
   printf '== Puerta de la etapa `%s` → `%s` · %s ==\n\n' "$1" "${2#* → }" "$3"
@@ -39,17 +64,19 @@ criterio() {
   local registro="/tmp/puerta-$$-${_puerta_criterios}.log"
 
   if dotnet test tests/GeometriaFactory.Integration.Tests --configuration Release \
-       --filter "$filtro" >"$registro" 2>&1; then
+       --logger "$PUERTA_REGISTRADOR" --filter "$filtro" >"$registro" 2>&1; then
     local pasadas
     pasadas="$(grep -oP 'Passed:\s+\K\d+' "$registro" | tail -1)"
     _puerta_pruebas=$((_puerta_pruebas + ${pasadas:-0}))
 
-    # EL RECUENTO SE COMPARA CONTRA LO PEDIDO. Una prueba que se renombra deja de
-    # existir para el filtro y la corrida pasaría en verde SIN HABERLA CORRIDO:
-    # es el modo de falla que un filtro por nombre tiene y que hay que cerrar.
-    if [ "${pasadas:-0}" -lt "$#" ]; then
+    # CADA PRUEBA PEDIDA TIENE QUE FIGURAR COMO CORRIDA. Una prueba que se renombra deja
+    # de existir para el filtro y la corrida pasaría en verde SIN HABERLA CORRIDO. Hasta
+    # R-24 esto se comparaba por recuento, que una teoría con varios casos tapaba.
+    local faltan
+    faltan="$(puerta_no_corrieron "$registro" "$@")"
+    if [ -n "$faltan" ]; then
       printf '  \033[31mFALLA\033[0m %s\n' "$rotulo"
-      printf '        se pidieron %s pruebas y corrieron %s: alguna no existe con ese nombre\n' "$#" "${pasadas:-0}"
+      printf '        no corrieron, porque no existen con ese nombre: %s\n' "$(echo $faltan)"
       _puerta_fallas=$((_puerta_fallas + 1))
       return
     fi
