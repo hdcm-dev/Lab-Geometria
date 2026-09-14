@@ -2,9 +2,9 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00011-El-Canje-Se-Protege-Por-Cuenta-Y-El-Origen-Tolera-Una-Comision.md
-**Versión:** 1.1
+**Versión:** 1.0
 **Estado:** Aceptado
-**Fecha:** 2026-09-14
+**Fecha:** 2026-09-13
 **Autor:** Arquitecto de Software Senior (AG-05), autocorrección de la corrida sobre un defecto introducido por `BT-00029` (`Master-Prompt.md` §8.1)
 **Categoría:** Seguridad
 **Corrige a:** la política `canje` de [`BT-00029`](../../06-Backlog-Tecnico/tareas-tecnicas/BT-00029-Rate-Limiting-Por-Clave-O-Por-Ip.md) y los dos umbrales por origen de [`../Contratos-REST.md`](../Contratos-REST.md) §4.1 **1.9**
@@ -28,7 +28,7 @@ El síntoma que lo delató fue el E2E del banco local, en rojo desde la fusión 
 2. **La misma cuota cubre la forma sin sesión de `A-05`**, que también comprueba una contraseña por correo. Allí sólo cuenta la vigente que no verificó; una nueva que no cumple la regla no, porque quien la escribió ya conoce la vigente.
 3. **El rechazo no dice si la cuenta existe.** La partición es el correo escrito, exista o no una cuenta; un correo desconocido gasta un permiso por fallo igual que una contraseña equivocada.
 4. **Los topes por origen quedan holgados, del tamaño de una comisión detrás de una dirección**: trescientos alumnos (el corte medido, redondeado), con **600 canjes por minuto** (uno con un error de tipeo cada uno) y **1200 peticiones anónimas por minuto** (cuatro cada uno: sonda de aprovisionamiento, registro, cambio de la provisoria y un reintento). Sirven contra quien rocía muchas cuentas o inunda el servicio. **La cuota por persona autenticada no cambia** (60).
-5. **La cuota por cuenta vive en el punto y no en la partición de `UseRateLimiter`.** Es una ventana deslizante propia por correo normalizado (`Composition/CredentialAttemptThrottle.cs`), que el punto consulta antes de verificar y a la que le anota un fallo. **Desde la 1.1 se puede liberar**: el reseteo de la contraseña por el docente libera la cuota de la cuenta. Hasta la 1.0 era un `PartitionedRateLimiter` del marco, que no permite quitar una partición, y por eso la mitigación de §6 punto 1 no existía.
+5. **La cuota por cuenta vive en el punto y no en la partición de `UseRateLimiter`.** Es un `PartitionedRateLimiter` inyectado (`Composition/CredentialAttemptThrottle.cs`) que el punto consulta pidiendo cero permisos y al que le anota un permiso por fallo.
 6. Las seis cifras son configurables (`RateLimiting__*`) y se ajustan cuando `PT-05` mida.
 
 ## 3. Estado
@@ -53,10 +53,10 @@ El síntoma que lo delató fue el E2E del banco local, en rojo desde la fusión 
 
 ## 6. Consecuencias negativas y trade-offs
 
-1. **Un atacante puede trabar el ingreso de una cuenta conocida durante quince minutos** equivocándose diez veces. Es el costo estándar del *throttling* por cuenta; se acota con vencimiento y no con bloqueo, y **el docente puede resetear la contraseña, que libera la cuota de la cuenta** (verificado desde la 1.1 por `TheAdministratorResetReleasesTheAccountFromItsFailedAttemptQuota`; hasta entonces el reseteo no la liberaba y el único remedio era reiniciar el servicio).
+1. **Un atacante puede trabar el ingreso de una cuenta conocida durante quince minutos** equivocándose diez veces. Es el costo estándar del *throttling* por cuenta; se acota con vencimiento y no con bloqueo, y el docente puede resetear la contraseña.
 2. **El tope por origen ya no frena a un atacante lento que rocía pocas cuentas**: lo frena la cuota de cada cuenta.
 3. **Hasta que `PT-05` mida, trescientos es una cifra razonada y no medida.**
-4. **El `Retry-After` por cuenta es la espera hasta que vence el fallo más viejo**, entre 1 y la ventana entera (900). Hasta la 1.0 era siempre la ventana entera, porque el limitador del marco no informaba la espera.
+4. **El `Retry-After` por cuenta es la ventana entera (900)**: la ventana deslizante del marco no informa la espera, y se responde la que seguro alcanza.
 
 ## 7. Implementación
 
@@ -85,4 +85,3 @@ El síntoma que lo delató fue el E2E del banco local, en rojo desde la fusión 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-09-13 | Emisión inicial, **Aceptado**. Rama `fix/canje-por-cuenta`, base `b58dec3` (`main` = `v1.1.1`). |
-| 1.1 | 2026-09-14 | §2 punto 5: la cuota por cuenta pasa a una ventana deslizante propia **que se puede liberar**, y el reseteo del docente la libera; §6 punto 1: la mitigación declarada deja de ser falsa; §6 punto 4: `Retry-After` pasa a ser la espera real. Lote 1 de la mesa del 2026-09-14 (`../../../../Audit/Mesa-2026-09-14.md`, R-03; escalada E-2 con la propuesta aprobada). Estado anterior en `_legacy/2026-09-14/`. Sube minor. |

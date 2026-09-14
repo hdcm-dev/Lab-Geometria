@@ -215,6 +215,8 @@ public static class CommissionAccountEndpoints
             ResetStudentPasswordUseCase resetPassword,
             ProvisionalPasswordFactory provisionalPasswords,
             PasswordDerivation credentials,
+            IAccountRepository accounts,
+            Composition.CredentialAttemptThrottle failedAttempts,
             ISystemClock clock,
             ILoggerFactory loggerFactory,
             CancellationToken cancellationToken) =>
@@ -241,6 +243,15 @@ public static class CommissionAccountEndpoints
             }
 
             var outcome = result.Value!;
+
+            // EL RESETEO LIBERA LA CUOTA DE INTENTOS FALLIDOS DE LA CUENTA (R-03, mesa
+            // `SDD/Docs/Audit/Mesa-2026-09-14.md`). Es la mitigación que `ADR-00011` §6 declara para
+            // la cuenta que un tercero dejó limitada equivocándose a propósito: sin esto, la
+            // provisoria recién entregada recibía `429` hasta que venciera la ventana.
+            if (await accounts.FindByIdAsync(id, cancellationToken).ConfigureAwait(false) is { } resetAccount)
+            {
+                failedAttempts.Release(resetAccount.Email);
+            }
 
             // EL REGISTRO ANOTA QUE HUBO UN RESETEO Y NUNCA EL VALOR PRODUCIDO (RA-03, y la
             // exigencia propia de `Api CU-05` §9).

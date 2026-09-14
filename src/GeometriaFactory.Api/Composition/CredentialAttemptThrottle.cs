@@ -1,4 +1,5 @@
-using System.Threading.RateLimiting;
+using System.Collections.Concurrent;
+using System.Globalization;
 using GeometriaFactory.Domain.Values;
 
 namespace GeometriaFactory.Api.Composition;
@@ -48,60 +49,131 @@ namespace GeometriaFactory.Api.Composition;
 /// equivocada: el `429` llega en el mismo intento, con la misma cabecera y sin cuerpo en los dos
 /// casos. Es la misma neutralidad que `Api CU-01` §6 exige al `401`.
 /// </remarks>
-public sealed class CredentialAttemptThrottle : IDisposable
+public sealed class CredentialAttemptThrottle
 {
-    private readonly PartitionedRateLimiter<string> _failures;
+    /// <summary>
+    /// A partir de cuántas cuentas con fallos anotados se barre lo vencido. Rociar correos
+    /// inventados agrega entradas; el barrido las descarta cuando su ventana ya pasó, y los topes
+    /// por origen acotan cuántas puede agregar un mismo origen por minuto.
+    /// </summary>
+    private const int SweepThreshold = 4096;
+
+    private readonly ConcurrentDictionary<string, Queue<DateTimeOffset>> _failures = new(StringComparer.Ordinal);
     private readonly RateLimitingOptions _options;
+    private readonly TimeProvider _time;
 
     public CredentialAttemptThrottle(RateLimitingOptions options)
+        : this(options, TimeProvider.System)
     {
-        ArgumentNullException.ThrowIfNull(options);
-
-        _options = options;
-
-        // Quince segmentos: la cuota vuelve de a un minuto sobre la ventana de quince por omisión,
-        // en vez de volver entera de golpe cuando la ventana pasa. Las particiones inactivas las
-        // descarta el propio limitador particionado, de modo que rociar correos inventados no deja
-        // un limitador vivo por cada uno.
-        _failures = PartitionedRateLimiter.Create<string, string>(account =>
-            RateLimitPartition.GetSlidingWindowLimiter(account, _ => new SlidingWindowRateLimiterOptions
-            {
-                PermitLimit = options.CredentialFailuresPerAccount,
-                Window = TimeSpan.FromSeconds(options.CredentialFailureWindowSeconds),
-                SegmentsPerWindow = 15,
-                QueueLimit = 0,
-                AutoReplenishment = true,
-            }));
     }
 
-    /// <summary>
-    /// El `429` si la cuenta agotó sus fallos en la ventana, y nulo si todavía puede intentar. **No
-    /// gasta nada**: pide cero permisos.
-    /// </summary>
+    /// <remarks>
+    /// POR QUÉ UNA VENTANA PROPIA Y NO `PartitionedRateLimiter` (mesa
+    /// `SDD/Docs/Audit/Mesa-2026-09-14.md`, R-03). El limitador particionado del marco no permite
+    /// quitar una partición, y sin eso el reseteo del docente no podía liberar a una cuenta
+    /// limitada: la única salida era reiniciar el servicio, que las libera a todas. La ventana es
+    /// la misma —tantos fallos por correo normalizado en tantos segundos, deslizante—, y lo que
+    /// agrega es <see cref="Release"/>.
+    /// </remarks>
+    public CredentialAttemptThrottle(RateLimitingOptions options, TimeProvider time)
+    {
+        ArgumentNullException.ThrowIfNull(options);
+        ArgumentNullException.ThrowIfNull(time);
+
+        _options = options;
+        _time = time;
+    }
+
     public IResult? Refusal(string? writtenEmail, HttpContext context)
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        using var lease = _failures.AttemptAcquire(EmailIdentity.Normalize(writtenEmail), permitCount: 0);
-        if (lease.IsAcquired)
+        if (!_failures.TryGetValue(EmailIdentity.Normalize(writtenEmail), out var failures))
+        {
+            return null;
+        }
+
+        var now = _time.GetUtcNow();
+        var window = TimeSpan.FromSeconds(_options.CredentialFailureWindowSeconds);
+        int count;
+        DateTimeOffset oldest;
+
+        lock (failures)
+        {
+            Prune(failures, now - window);
+            count = failures.Count;
+            oldest = count > 0 ? failures.Peek() : now;
+        }
+
+        if (count < _options.CredentialFailuresPerAccount)
         {
             return null;
         }
 
         // LA MISMA FORMA QUE EL RECHAZO DEL MIDDLEWARE: `429`, `Retry-After` en segundos y sin
         // cuerpo (`Contratos-REST.md` §4.1). Un consumidor no tiene por qué distinguir cuál de las
-        // dos cuotas se agotó, y distinguirlo tampoco le diría nada sobre la cuenta.
-        context.Response.Headers.RetryAfter =
-            ContractRateLimiting.RetryAfterSeconds(lease, _options.CredentialFailureWindowSeconds);
+        // dos cuotas se agotó, y distinguirlo tampoco le diría nada sobre la cuenta. La espera es la
+        // que falta para que venza el fallo más viejo, que es cuando vuelve un intento.
+        var retryAfter = (int)Math.Ceiling((oldest + window - now).TotalSeconds);
+        context.Response.Headers.RetryAfter = Math.Clamp(retryAfter, 1, _options.CredentialFailureWindowSeconds)
+            .ToString(CultureInfo.InvariantCulture);
 
         return Results.StatusCode(StatusCodes.Status429TooManyRequests);
     }
 
-    /// <summary>Anota un intento fallido contra la cuenta que el correo escrito nombra, exista o no.</summary>
     public void RecordFailure(string? writtenEmail)
     {
-        using var _ = _failures.AttemptAcquire(EmailIdentity.Normalize(writtenEmail), permitCount: 1);
+        var now = _time.GetUtcNow();
+        var cutoff = now - TimeSpan.FromSeconds(_options.CredentialFailureWindowSeconds);
+        var failures = _failures.GetOrAdd(EmailIdentity.Normalize(writtenEmail), _ => new Queue<DateTimeOffset>());
+
+        lock (failures)
+        {
+            Prune(failures, cutoff);
+
+            // UN FALLO NO SE ACUMULA MÁS ALLÁ DEL TOPE, igual que antes: el punto rechaza antes de
+            // verificar, de modo que agotada la cuota no llega ningún fallo nuevo que alargue la espera.
+            if (failures.Count < _options.CredentialFailuresPerAccount)
+            {
+                failures.Enqueue(now);
+            }
+        }
+
+        if (_failures.Count > SweepThreshold)
+        {
+            Sweep(cutoff);
+        }
     }
 
-    public void Dispose() => _failures.Dispose();
+    /// <summary>
+    /// Libera la cuota de intentos fallidos de una cuenta: la usa el reseteo del docente, que es la
+    /// mitigación que `ADR-00011` §6 declara para una cuenta que un tercero dejó limitada.
+    /// </summary>
+    public void Release(string? email) => _failures.TryRemove(EmailIdentity.Normalize(email), out _);
+
+    private static void Prune(Queue<DateTimeOffset> failures, DateTimeOffset cutoff)
+    {
+        while (failures.Count > 0 && failures.Peek() <= cutoff)
+        {
+            failures.Dequeue();
+        }
+    }
+
+    private void Sweep(DateTimeOffset cutoff)
+    {
+        foreach (var (key, failures) in _failures)
+        {
+            bool empty;
+            lock (failures)
+            {
+                Prune(failures, cutoff);
+                empty = failures.Count == 0;
+            }
+
+            if (empty)
+            {
+                _failures.TryRemove(key, out _);
+            }
+        }
+    }
 }

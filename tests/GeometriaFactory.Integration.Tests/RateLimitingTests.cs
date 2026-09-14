@@ -4,6 +4,7 @@ using System.Net.Http.Json;
 using GeometriaFactory.Api.Composition;
 using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Contracts.Accounts;
+using GeometriaFactory.Contracts.Errors;
 using GeometriaFactory.Contracts.Works;
 using GeometriaFactory.Domain.Values;
 using Microsoft.AspNetCore.Builder;
@@ -333,6 +334,49 @@ public sealed class RateLimitingTests : IDisposable
         using var otherAccount = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "198.51.100.200",
             body: new CredentialExchangeRequest("segunda@frre.utn.edu.ar", StudentPassword)));
         Assert.Equal(HttpStatusCode.OK, otherAccount.StatusCode);
+    }
+
+    /// <summary>
+    /// R-03 — EL RESETEO DEL DOCENTE LIBERA LA CUOTA DE INTENTOS FALLIDOS DE LA CUENTA. Una cuenta
+    /// que agotó sus intentos recibe `429` aunque traiga la contraseña correcta; cuando el docente
+    /// le resetea la contraseña, el ingreso con la provisoria **ya no se limita**: llega al cambio
+    /// obligado. Sin esto, la mitigación que `ADR-00011` §6 declara —«el docente puede resetear»—
+    /// no existía, y el único remedio era reiniciar el servicio (mesa
+    /// `SDD/Docs/Audit/Mesa-2026-09-14.md`).
+    /// </summary>
+    [Fact]
+    public async Task TheAdministratorResetReleasesTheAccountFromItsFailedAttemptQuota()
+    {
+        var harness = Harness();
+        using var client = harness.CreateClient();
+        var world = await WorldAsync(client, "primera@frre.utn.edu.ar", "segunda@frre.utn.edu.ar");
+        var options = harness.Services.GetRequiredService<RateLimitingOptions>();
+        var administrator = await TokenAsync(client, AdministratorEmail, AdministratorPassword);
+
+        for (var i = 0; i < options.CredentialFailuresPerAccount; i++)
+        {
+            using var refused = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", $"198.51.100.{i + 1}",
+                body: new CredentialExchangeRequest("primera@frre.utn.edu.ar", "no-es")));
+            Assert.Equal(HttpStatusCode.Unauthorized, refused.StatusCode);
+        }
+
+        using var limited = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "198.51.100.200",
+            body: new CredentialExchangeRequest("primera@frre.utn.edu.ar", StudentPassword)));
+        Assert.Equal(HttpStatusCode.TooManyRequests, limited.StatusCode);
+
+        // EL DOCENTE RESETEA LA CONTRASEÑA DE LA CUENTA LIMITADA.
+        using var reset = await client.SendAsync(Request(
+            HttpMethod.Post, $"/v1/cuentas/{world.FirstId}/reseteo-de-contrasena", SetupOrigin, administrator));
+        Assert.Equal(HttpStatusCode.OK, reset.StatusCode);
+        var provisional = (await reset.Content.ReadFromJsonAsync<PasswordResetResponse>())!.ProvisionalPassword!;
+
+        // CON LA PROVISORIA, EL INGRESO YA NO SE LIMITA: la credencial se reconoce y lleva al
+        // cambio obligado, que es lo que el reseteo produce.
+        using var afterTheReset = await client.SendAsync(Request(HttpMethod.Post, "/v1/auth/token", "198.51.100.201",
+            body: new CredentialExchangeRequest("primera@frre.utn.edu.ar", provisional)));
+        Assert.NotEqual(HttpStatusCode.TooManyRequests, afterTheReset.StatusCode);
+        Assert.Equal(HttpStatusCode.Forbidden, afterTheReset.StatusCode);
+        Assert.Contains(ErrorCode.PasswordChangeRequired, await afterTheReset.Content.ReadAsStringAsync(), StringComparison.Ordinal);
     }
 
     /// <summary>

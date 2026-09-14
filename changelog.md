@@ -1850,3 +1850,20 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
 
 - La intermitencia no se puede forzar en rojo a voluntad. La evidencia del defecto son los dos registros de CI con el agotamiento en `PruebaE2E.cs:187`.
 
+## El reseteo del docente libera la cuota de intentos fallidos de la cuenta — 2026-09-14
+
+**Rama:** `seguridad/lote1-reseteo-libera-la-cuota`. Lote 1 del plan de la mesa del 2026-09-14 (`SDD/Docs/Audit/Mesa-2026-09-14.md`, R-03; escalada E-2 con la propuesta aprobada por el Product Owner).
+
+### Corregido
+
+- `GeometriaFactory.Api`: la cuota por cuenta (`CredentialAttemptThrottle`) pasa de un `PartitionedRateLimiter` del marco, que no permite quitar una partición, a una **ventana deslizante propia que se puede liberar**. La ventana y el tope son los mismos: 10 fallos por correo normalizado en 900 s.
+- El reseteo de la contraseña por el docente **libera la cuota de la cuenta**. Hasta hoy, una cuenta que un tercero dejó limitada recibía `429` con la provisoria recién entregada, y el único remedio era reiniciar el servicio.
+- `Retry-After` por cuenta pasa a ser la espera real hasta que vence el fallo más viejo (entre 1 y 900 s).
+- `ADR-00011` 1.1: la mitigación que declaraba en §6 deja de ser falsa.
+
+### Verificado
+
+- `TheAdministratorResetReleasesTheAccountFromItsFailedAttemptQuota`, **vista fallar** contra el código anterior (`Expected: Not TooManyRequests · Actual: TooManyRequests` después del reseteo).
+- Las pruebas del límite de tasa siguen pasando sin cambios: 22/22.
+- Build sin advertencias; suite completa en verde: Domain 94, Application 56, Integration 407.
+
