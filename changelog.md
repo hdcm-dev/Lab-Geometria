@@ -1765,3 +1765,17 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
 ### No hecho, y declarado
 
 - `scripts/verify-stage-i.sh` sigue midiendo el flujo de FTP retirado y exigiendo producción = `main` (`DD-R8-1`). Es la **quinta** vez que este registro llega tarde a una fusión propia (`DD-R8-2`).
+
+## El runner propio deja de ejecutar pull requests de forks, y el recorrido desplegado se desata del FTP — 2026-09-14
+
+**Rama:** `ci/runner-propio-solo-ramas-propias`. Sin cambio de código de producción. Lote 0 del plan de la mesa a pedido del 2026-09-14 (`SDD/Docs/Audit/Mesa-2026-09-14.md`, ítems R-01 y R-15), aplicado por decisión del Product Owner.
+
+### Cambiado
+
+- `.github/workflows/e2e.yml`: el trabajo `banco-local`, que corre en el runner propio, sólo se ejecuta en un pull request si viene de una rama de este repositorio; el de un fork lo salta y el Resumen acepta el salto.
+- `.github/workflows/e2e.yml`: el recorrido contra el laboratorio desplegado deja de dispararse al terminar `deploy-front-ftp`, un canal retirado; queda a mano.
+
+### No hecho, y declarado
+
+- El ajuste de GitHub que exige aprobación para ejecuciones de colaboradores externos, la rotación de las credenciales que usa el recorrido desplegado y la revisión del runner son del Product Owner.
+

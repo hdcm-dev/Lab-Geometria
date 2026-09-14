@@ -16,8 +16,9 @@
 #      rojo por el entorno se termina apagando: ya pasó en este repositorio, con `C-3` en rojo
 #      catorce días sin que nadie lo leyera.
 #
-# Se dispara A MANO, y automáticamente DESPUES DE UNA PUBLICACION EXITOSA, que es el único
-# momento en que la pregunta «¿esto anda?» tiene una respuesta nueva.
+# Se dispara A MANO, después de que el Product Owner publica una versión en el servidor propio.
+# Hasta el 2026-09-14 también se disparaba al terminar `deploy-front-ftp`, un canal retirado que
+# ya no publica lo que corre: esa atadura se quitó (mesa `SDD/Docs/Audit/Mesa-2026-09-14.md`, R-15).
 #
 # ============================================================================================
 # Y HAY UN SEGUNDO RECORRIDO, EL DEL BANCO LOCAL, QUE SI CORRE EN CADA CAMBIO. Las dos razones
@@ -46,9 +47,6 @@ on:
         description: 'Navegadores a recorrer, separados por coma'
         required: false
         default: 'chromium,firefox,webkit'
-  workflow_run:
-    workflows: [deploy-front-ftp]
-    types: [completed]
 
 # UNA CORRIDA A LA VEZ, Y LA NUEVA ESPERA A LA VIEJA. Dos corridas simultáneas sembrarían cuentas
 # en el mismo laboratorio y se pisarían el panel. `cancel-in-progress: false` a propósito: cancelar
@@ -69,6 +67,13 @@ jobs:
     # red que alcanzar —el laboratorio se levanta adentro del propio trabajo—, lo que hace falta es
     # una máquina que aguante publicar dos piezas y abrir un navegador sin cobrar por minuto.
     runs-on: [self-hosted, i7infra-dev]
+    # EL RUNNER PROPIO NO EJECUTA CODIGO DE UN FORK. El repositorio es público: un pull request
+    # desde un fork corre acá sólo si viene de una rama de este mismo repositorio. El de un fork
+    # salta este trabajo, y el Resumen lo acepta como salto y no como rojo (mesa
+    # `SDD/Docs/Audit/Mesa-2026-09-14.md`, R-01).
+    if: >-
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.head.repo.full_name == github.repository
     steps:
       - name: Descargar el código
         uses: actions/checkout@v4
@@ -125,11 +130,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       navegadores: ${{ steps.armar.outputs.navegadores }}
-    # NO SE CORRE DETRAS DE UNA PUBLICACION QUE FALLO: probar un sitio que no se llegó a publicar
-    # sólo produce un rojo que no dice nada.
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      github.event.workflow_run.conclusion == 'success'
+    # SOLO A MANO: toca datos del laboratorio desplegado y lo pide quien acaba de publicar.
+    if: github.event_name == 'workflow_dispatch'
     steps:
       - id: armar
         run: |
@@ -227,7 +229,11 @@ jobs:
           # se pone en rojo sola se termina apagando —este repositorio ya lo pagó con `C-3`,
           # catorce días en rojo sin que nadie lo leyera—.
           malo=0
-          [ "$banco" = "success" ] || { echo "::error::El recorrido sobre el banco local falló."; malo=1; }
+          # El banco local SALTA en un pull request desde un fork (el runner propio no lo corre).
+          case "$banco" in
+            success|skipped) ;;
+            *) echo "::error::El recorrido sobre el banco local falló."; malo=1 ;;
+          esac
           case "$estado" in
             success|skipped) ;;
             *) echo "::error::El recorrido contra el laboratorio desplegado falló."; malo=1 ;;
