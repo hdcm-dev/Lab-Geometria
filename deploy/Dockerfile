@@ -87,10 +87,24 @@ RUN apt-get update \
     && apt-get install --yes --no-install-recommends curl sqlite3 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /datos
+# EL SERVICIO CORRE COMO EL USUARIO SIN PRIVILEGIOS DE LA IMAGEN BASE (`app`, `$APP_UID` = 1654), y
+# no como root (mesa `SDD/Docs/Audit/Mesa-2026-09-14.md`, imágenes sin `USER`). El directorio del
+# almacén es suyo desde la imagen, de modo que un volumen NUEVO nace con el dueño correcto.
+#
+# UN VOLUMEN QUE YA EXISTE CONSERVA SU DUEÑO, y si lo creó una versión anterior de esta imagen es
+# root. Antes del primer despliegue de esta versión, quien despliega lo pasa al usuario del servicio:
+#
+#   docker run --rm -v <volumen>:/datos alpine chown -R 1654:1654 /datos
+#
+# SIN ESO EL SERVICIO NO ARRANCA: sale con código 78 y `attempt to write a readonly database`
+# (medido el 2026-09-14 sobre un volumen con archivos de root). Los guiones de
+# respaldo y restauración siguen andando: escriben en `/tmp` y en `/datos` del contenedor, y del
+# montaje del anfitrión sólo leen la copia.
+RUN mkdir -p /datos && chown "$APP_UID:$APP_UID" /datos
 VOLUME ["/datos"]
 
 COPY --from=build /publish ./
+USER $APP_UID
 EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "GeometriaFactory.Api.dll"]

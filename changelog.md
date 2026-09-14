@@ -1931,3 +1931,26 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
   - Fusionar un pull request es del agente con los checks en verde y sin reserva, por la decisión del Product Owner del 2026-08-31.
   - La tabla «A dónde ir» citaba diez documentos y **ocho no existían**. Cada fila apunta ahora a uno que existe, o declara que no está emitido (`DD-R9-2`).
 
+## Las dos imágenes dejan de correr como root — 2026-09-14
+
+**Rama:** `deploy/imagenes-sin-root`. Lote 1 del plan de la mesa del 2026-09-14 (`SDD/Docs/Audit/Mesa-2026-09-14.md`, imágenes sin `USER`), aprobado por el Product Owner.
+
+### Cambiado
+
+- `deploy/Dockerfile` y `deploy/Dockerfile.web` corren con el usuario sin privilegios de la imagen base (`app`, uid **1654**), y no como root.
+- `/datos` (servicio de datos) y `App_Data/claves` (front) son de ese usuario desde la imagen.
+
+### Verificado (imágenes construidas y levantadas en local, sin tocar el despliegue)
+
+- **Servicio de datos, volumen nuevo:** el proceso corre como 1654, `/salud` responde `ready` y el almacén queda de `1654:1654`.
+- **Servicio de datos, volumen con archivos de root (como el que ya existe en producción):** **el contenedor no arranca**, sale con código 78 y `attempt to write a readonly database`. Después de `chown -R 1654:1654`, `ready`.
+- **Front:** corre como 1654, la portada responde 200 y escribe su clave en `App_Data/claves`.
+
+### Paso obligatorio antes del primer despliegue de esta versión
+
+```bash
+docker run --rm -v <volumen-del-almacén>:/datos alpine chown -R 1654:1654 /datos
+```
+
+Lo mismo sobre el volumen de claves del front, si la composición lo monta desde un volumen existente. Sin esto, el servicio de datos no arranca.
+
