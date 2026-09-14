@@ -1906,3 +1906,16 @@ audit de cierre y M5). Sin cambio de código. Expediente completo en
 
   Es configuración del host y no se versiona en este repositorio. Sin ellas, el comportamiento es el de antes.
 
+## El documento OpenAPI dice cómo se autentica y en qué puntos — 2026-09-14
+
+**Rama:** `api/openapi-declara-la-autenticacion`. Lote 1 del plan de la mesa del 2026-09-14 (`SDD/Docs/Audit/Mesa-2026-09-14.md`, R-08), aprobado por el Product Owner.
+
+### Corregido
+
+- `GeometriaFactory.Api`, `ApiDocumentation`: el documento declara el esquema de seguridad `Bearer` (HTTP, formato JWT) y lo exige en cada operación que pide acceso firmado. El requisito sale de los metadatos de cada punto (`RequireAuthorization` sin `AllowAnonymous`), así que un punto nuevo queda bien descripto sin tocar la documentación. Hasta hoy un cliente que leía el documento no podía saber qué puntos pedían acceso ni cómo presentarlo (`ADR-00009`: la superficie es pública para otros clientes).
+
+### Verificado
+
+- `TheDocumentDeclaresTheBearerSchemeOnlyOnThePointsThatRequireAccess`, **vista fallar** contra el documento anterior, que no declaraba ningún esquema: `GET /v1/trabajos` lo exige; `POST /v1/auth/token` y `GET /salud` no.
+- Build sin advertencias; suite completa en verde: Domain 94, Application 56, Integration 411.
+

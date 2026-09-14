@@ -1,5 +1,7 @@
 namespace GeometriaFactory.Api.Composition;
 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.OpenApi;
 using Scalar.AspNetCore;
 
 /// <summary>
@@ -40,12 +42,54 @@ public static class ApiDocumentation
     /// <summary>Llave de configuración que habilita el explorador fuera de desarrollo.</summary>
     public const string PublishedSetting = "Documentacion:Publicada";
 
+    /// <summary>El nombre del esquema de seguridad que el documento declara.</summary>
+    public const string BearerScheme = "Bearer";
+
     /// <summary>Registra el generador del documento OpenAPI.</summary>
     public static IServiceCollection AddApiDocumentation(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
 
-        services.AddOpenApi();
+        // EL DOCUMENTO DICE CÓMO SE AUTENTICA, Y EN QUÉ PUNTOS (mesa `SDD/Docs/Audit/Mesa-2026-09-14.md`,
+        // R-08). La superficie es pública para otros clientes (`ADR-00009`), y sin esto un cliente que
+        // lee el documento no sabía qué puntos piden un acceso firmado ni cómo se presenta. El
+        // requisito se DERIVA de los metadatos de cada punto —`RequireAuthorization` sin
+        // `AllowAnonymous`—, de modo que un punto nuevo queda bien descripto sin tocar este archivo.
+        services.AddOpenApi(options =>
+        {
+            options.AddDocumentTransformer((document, _, _) =>
+            {
+                document.Components ??= new OpenApiComponents();
+                document.Components.SecuritySchemes ??= new Dictionary<string, IOpenApiSecurityScheme>();
+                document.Components.SecuritySchemes[BearerScheme] = new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Description = "Acceso firmado que devuelve `POST /v1/auth/token`, presentado como `Authorization: Bearer <acceso>`.",
+                };
+
+                return Task.CompletedTask;
+            });
+
+            options.AddOperationTransformer((operation, context, _) =>
+            {
+                var metadata = context.Description.ActionDescriptor.EndpointMetadata;
+                var requiresAccess = metadata.OfType<IAuthorizeData>().Any()
+                    && !metadata.OfType<IAllowAnonymous>().Any();
+
+                if (requiresAccess)
+                {
+                    operation.Security ??= [];
+                    operation.Security.Add(new OpenApiSecurityRequirement
+                    {
+                        [new OpenApiSecuritySchemeReference(BearerScheme, context.Document)] = [],
+                    });
+                }
+
+                return Task.CompletedTask;
+            });
+        });
 
         return services;
     }
