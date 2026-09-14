@@ -119,6 +119,13 @@ public sealed class AccountLifecycleWebSurfaceTests : IDisposable
             "Tu cuenta queda a la espera de que el docente la habilite. El laboratorio no envía correos.",
             html, StringComparison.Ordinal);
 
+        // El aviso de tratamiento de datos personales, ANTES de que la persona escriba (REF-01,
+        // mesa del 2026-09-14): qué se guarda, quién lo ve y cómo se corrige o se da de baja.
+        Assert.Contains("id=\"registration-privacy\"", html, StringComparison.Ordinal);
+        Assert.Contains("se guardan sólo para identificar tus trabajos", html, StringComparison.Ordinal);
+        Assert.Contains("los ve el docente de la comisión", html, StringComparison.Ordinal);
+        Assert.Contains("darte de baja", html, StringComparison.Ordinal);
+
         using var registered = await PostRegistrationAsync(page, html, StudentEmail, StudentFirstName, StudentLastName);
         var registeredHtml = Read(await registered.Content.ReadAsStringAsync());
 
