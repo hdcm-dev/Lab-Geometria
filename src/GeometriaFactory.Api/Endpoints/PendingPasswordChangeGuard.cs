@@ -71,16 +71,30 @@ public sealed class PendingPasswordChangeGuard
             ? null
             : await accounts.FindByIdAsync(accountId.Value, context.RequestAborted).ConfigureAwait(false);
 
-        if (account?.MustChangePassword != true)
+        // LA ADMISIÓN ENTERA SE LEE DEL ALMACÉN EN CADA PETICIÓN, no sólo la marca (mesa
+        // `SDD/Docs/Audit/Mesa-2026-09-14.md`, R-05). Un acceso firmado antes de que el
+        // administrador bloquee o elimine la cuenta sigue siendo válido criptográficamente hasta
+        // que vence; lo que lo deja sin efecto es que la cuenta ya no se admite.
+        //
+        // LA CUENTA QUE NO EXISTE responde como la credencial que no corresponde —`401` genérico—
+        // y por el mismo motivo que el canje: no se revela si la cuenta existió.
+        //
+        // EL ORDEN DE LA EVALUACIÓN ES EL DEL DOMINIO (`Account.EvaluateAdmission`): situación
+        // primero y marca después. La cuenta marcada y habilitada sigue recibiendo el mismo código
+        // de siempre, de modo que el cambio forzado no se altera.
+        var condition = account is null
+            ? Application.Accounts.ApplicationConditionCode.AccountNotFound
+            : account.EvaluateAdmission() is { IsAdmissible: false } refused ? refused.Reason : null;
+
+        if (condition is null)
         {
             await _next(context).ConfigureAwait(false);
             return;
         }
 
-        // UN SOLO CÓDIGO PARA TODAS LAS OPERACIONES BLOQUEADAS, y sin nombrar la operación
-        // pedida: lo que le queda por hacer al consumidor es siempre lo mismo, derivar al cambio
-        // de contraseña (CU-02 CA-05, `Contracts CU-08` §10).
-        var translation = ContractTranslation.Translate(Domain.Values.ConditionCode.PasswordChangePending);
+        // UN SOLO CÓDIGO POR MOTIVO, y sin nombrar la operación pedida: lo que le queda por hacer
+        // al consumidor depende de la cuenta y no del punto (CU-02 CA-05, `Contracts CU-08` §10).
+        var translation = ContractTranslation.Translate(condition);
 
         context.Response.StatusCode = translation.StatusCode;
         await context.Response

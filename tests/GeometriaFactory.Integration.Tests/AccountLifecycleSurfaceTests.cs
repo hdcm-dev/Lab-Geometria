@@ -495,6 +495,53 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
     }
 
     /// <summary>
+    /// INV-06 sobre la superficie — un acceso obtenido **antes** de que el administrador bloquee
+    /// o elimine la cuenta **deja de servir en la petición siguiente**, sin esperar a que venza.
+    /// Es la misma propiedad que la marca ya tenía (`Api CU-05` CA-06), extendida a la situación
+    /// de la cuenta: la admisión se lee del almacén en cada petición, no de los reclamos del
+    /// acceso (mesa `SDD/Docs/Audit/Mesa-2026-09-14.md`, R-05).
+    /// </summary>
+    [Fact]
+    public async Task AnAccessObtainedBeforeTheAccountIsBlockedOrDeletedStopsWorkingOnTheNextRequest()
+    {
+        var administratorToken = await ConfigureAdministratorAsync();
+        var (_, id) = await RegisterStudentAsync();
+        var provisional = (await EnableAsync(administratorToken, id)).ProvisionalPassword!;
+
+        using var changed = await _client.PostAsJsonAsync(
+            "/v1/cuenta/contrasena", new OwnPasswordChangeRequest(provisional, "la-que-elijo-yo", StudentEmail));
+        Assert.Equal(HttpStatusCode.OK, changed.StatusCode);
+
+        var studentToken = await SignInAsync(StudentEmail, "la-que-elijo-yo");
+
+        // Con ese acceso, un punto guardado del alumno RESPONDE: la prueba no pasa por ausencia.
+        using var whileEnabled = await SendAsync(Authorized(HttpMethod.Get, "/v1/trabajos", studentToken));
+        Assert.Equal(HttpStatusCode.OK, whileEnabled.StatusCode);
+
+        // EL ADMINISTRADOR LA BLOQUEA. El acceso del alumno sigue firmado y vigente.
+        var blocked = await ChangeStatusAsync(administratorToken, id, AccountStatus.Blocked);
+        Assert.Equal(HttpStatusCode.OK, blocked.Status);
+
+        using var afterTheBlock = await SendAsync(Authorized(HttpMethod.Get, "/v1/trabajos", studentToken));
+        Assert.Equal(HttpStatusCode.Forbidden, afterTheBlock.StatusCode);
+        Assert.Contains(
+            ErrorCode.AccountNotEnabled,
+            await afterTheBlock.Content.ReadAsStringAsync(),
+            StringComparison.Ordinal);
+
+        // EL ADMINISTRADOR LA ELIMINA. El mismo acceso ya no nombra ninguna cuenta.
+        using var deleted = await DeleteAsync(administratorToken, id, StudentEmail);
+        Assert.True(deleted.IsSuccessStatusCode, $"La eliminación respondió {(int)deleted.StatusCode}.");
+
+        using var afterTheDeletion = await SendAsync(Authorized(HttpMethod.Get, "/v1/trabajos", studentToken));
+        Assert.Equal(HttpStatusCode.Unauthorized, afterTheDeletion.StatusCode);
+
+        // Y el acceso del administrador, cuya cuenta sigue habilitada, sigue sirviendo.
+        using var administratorStillWorks = await SendAsync(Authorized(HttpMethod.Get, "/v1/cuentas", administratorToken));
+        Assert.Equal(HttpStatusCode.OK, administratorStillWorks.StatusCode);
+    }
+
+    /// <summary>
     /// `Api CU-04` CA-05 — con un acceso de papel `Alumno`, los cuatro puntos de administración
     /// responden `403` con el código de facultad, y **0 de ellos modifican nada**.
     /// </summary>
