@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Security.Claims;
 using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Contracts.Errors;
 
@@ -86,6 +88,18 @@ public sealed class PendingPasswordChangeGuard
             ? Application.Accounts.ApplicationConditionCode.AccountNotFound
             : account.EvaluateAdmission() is { IsAdmissible: false } refused ? refused.Reason : null;
 
+        // UN ACCESO EMITIDO ANTES DEL ÚLTIMO CAMBIO DE CREDENCIAL DE LA PROPIA CUENTA YA NO SIRVE
+        // (REF-02): responde como la cuenta que no existe, `401` genérico. La comparación es por
+        // SEGUNDOS porque el momento de emisión del acceso no tiene fracción: el acceso que el
+        // propio cambio emite, en el mismo segundo, sigue sirviendo. Un acceso sin momento de
+        // emisión no se admite si la cuenta ya cambió su credencial.
+        if (condition is null
+            && account!.CredentialChangedAt is { } changedAt
+            && (IssuedAtOf(context.User) is not { } issuedAt || issuedAt < changedAt.ToUnixTimeSeconds()))
+        {
+            condition = Application.Accounts.ApplicationConditionCode.AccountNotFound;
+        }
+
         if (condition is null)
         {
             await _next(context).ConfigureAwait(false);
@@ -101,4 +115,10 @@ public sealed class PendingPasswordChangeGuard
             .WriteAsJsonAsync(new ErrorResponse(translation.Code, translation.Message, [], clock.UtcNow))
             .ConfigureAwait(false);
     }
+
+    /// <summary>El momento de emisión del acceso presentado, en segundos Unix, si lo trae.</summary>
+    private static long? IssuedAtOf(ClaimsPrincipal principal) =>
+        long.TryParse(principal.FindFirstValue("iat"), NumberStyles.Integer, CultureInfo.InvariantCulture, out var seconds)
+            ? seconds
+            : null;
 }

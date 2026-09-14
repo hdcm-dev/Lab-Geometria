@@ -85,6 +85,19 @@ public sealed class Account
     public DateTimeOffset CreatedAt { get; private set; }
 
     /// <summary>
+    /// El instante en que la propia cuenta reemplazó su credencial por última vez, o nulo si nunca
+    /// la reemplazó.
+    /// </summary>
+    /// <remarks>
+    /// EXISTE PARA QUE UN ACCESO EMITIDO ANTES DEL CAMBIO DEJE DE SERVIR (mesa
+    /// `SDD/Docs/Audit/Mesa-2026-09-14.md`, REF-02). Quien cambia su contraseña porque sospecha que
+    /// alguien la conoce espera que el cambio corte a ese alguien, y un acceso firmado sigue siendo
+    /// válido hasta que vence. La guarda de la tubería lo compara con el momento de emisión del
+    /// acceso en cada petición. El reseteo del administrador no lo toca: ése ya corta por la marca.
+    /// </remarks>
+    public DateTimeOffset? CredentialChangedAt { get; private set; }
+
+    /// <summary>
     /// CU-12 — Constituye la única cuenta con papel `Administrator` de la instancia.
     /// </summary>
     /// <param name="email">Correo escrito.</param>
@@ -413,7 +426,8 @@ public sealed class Account
     /// habilitación de CU-02, que es de la etapa `d`. La cuenta de administrador no la usa nunca,
     /// porque su credencial nace fijada (CU-03 FA-03).
     /// </remarks>
-    public DomainResult ReplaceCredential(string? newPasswordHash, bool currentCredentialVerified)
+    public DomainResult ReplaceCredential(
+        string? newPasswordHash, bool currentCredentialVerified, DateTimeOffset? changedAt = null)
     {
         if (Status != AccountStatus.Enabled)
         {
@@ -439,6 +453,7 @@ public sealed class Account
 
         PasswordHash = newPasswordHash;
         MustChangePassword = false;
+        CredentialChangedAt = changedAt ?? CredentialChangedAt;
 
         return DomainResult.Applied();
     }

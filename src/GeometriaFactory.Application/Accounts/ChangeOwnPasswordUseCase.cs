@@ -43,6 +43,7 @@ public sealed class ChangeOwnPasswordUseCase
         Guid accountId,
         Func<string, CredentialCheck> verifyCurrentCredential,
         Func<string> deriveNewCredential,
+        DateTimeOffset? changedAt = null,
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(verifyCurrentCredential);
@@ -55,7 +56,7 @@ public sealed class ChangeOwnPasswordUseCase
         }
 
         return await ApplyAsync(
-            account, verifyCurrentCredential, deriveNewCredential, requireMark: false, cancellationToken)
+            account, verifyCurrentCredential, deriveNewCredential, requireMark: false, changedAt, cancellationToken)
             .ConfigureAwait(false);
     }
 
@@ -82,6 +83,7 @@ public sealed class ChangeOwnPasswordUseCase
         string? email,
         Func<string, CredentialCheck> verifyCurrentCredential,
         Func<string> deriveNewCredential,
+        DateTimeOffset? changedAt = null,
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(verifyCurrentCredential);
@@ -100,7 +102,7 @@ public sealed class ChangeOwnPasswordUseCase
         }
 
         return await ApplyAsync(
-            account, verifyCurrentCredential, deriveNewCredential, requireMark: true, cancellationToken)
+            account, verifyCurrentCredential, deriveNewCredential, requireMark: true, changedAt, cancellationToken)
             .ConfigureAwait(false);
     }
 
@@ -110,6 +112,7 @@ public sealed class ChangeOwnPasswordUseCase
         Func<string, CredentialCheck> verifyCurrentCredential,
         Func<string> deriveNewCredential,
         bool requireMark,
+        DateTimeOffset? changedAt,
         CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(account.PasswordHash))
@@ -133,7 +136,7 @@ public sealed class ChangeOwnPasswordUseCase
             return ApplicationResult.Rejected(ConditionCode.CurrentCredentialNotVerified);
         }
 
-        var replacement = account.ReplaceCredential(deriveNewCredential(), currentCredentialVerified: true);
+        var replacement = account.ReplaceCredential(deriveNewCredential(), currentCredentialVerified: true, changedAt);
         if (!replacement.Succeeded)
         {
             return ApplicationResult.Rejected(replacement.ConditionCode!);

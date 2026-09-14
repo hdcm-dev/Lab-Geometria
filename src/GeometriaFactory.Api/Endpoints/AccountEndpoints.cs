@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using GeometriaFactory.Application;
 using GeometriaFactory.Application.Accounts;
 using GeometriaFactory.Application.Ports;
@@ -210,6 +211,7 @@ public static class AccountEndpoints
             ChangeOwnPasswordUseCase changeOwnPassword,
             PasswordDerivation credentials,
             Composition.CredentialAttemptThrottle failedAttempts,
+            AccessTokenIssuer accessTokens,
             ISystemClock clock,
             ILoggerFactory loggerFactory,
             CancellationToken cancellationToken) =>
@@ -243,7 +245,8 @@ public static class AccountEndpoints
                         storedValue => credentials.Verify(request!.CurrentPassword, storedValue),
                         // La contraseña nueva se deriva RECIÉN cuando la vigente ya verificó.
                         () => credentials.Derive(request!.NewPassword) ?? string.Empty,
-                        cancellationToken)
+                        changedAt: now,
+                        cancellationToken: cancellationToken)
                     .ConfigureAwait(false);
             }
             else if (string.IsNullOrWhiteSpace(request!.Email))
@@ -284,7 +287,8 @@ public static class AccountEndpoints
                             return check;
                         },
                         () => credentials.Derive(request.NewPassword) ?? string.Empty,
-                        cancellationToken)
+                        changedAt: now,
+                        cancellationToken: cancellationToken)
                     .ConfigureAwait(false);
 
                 if (!result.Succeeded && !verified)
@@ -301,10 +305,37 @@ public static class AccountEndpoints
 
             log.LogInformation("Contraseña reemplazada por la forma {Form}.", accountId is not null ? "de sesión" : "de credencial");
 
-            // `200` sin cuerpo de sesión: el cambio no emite un acceso nuevo, en NINGUNA de las
-            // dos formas. Con sesión, el que la persona ya tenía sigue sirviendo hasta que venza;
-            // sin sesión, la persona vuelve a canjear, y es ahí donde obtiene la suya (RN-13).
-            return Results.Ok();
+            // SIN SESIÓN, `200` SIN CUERPO: la persona vuelve a canjear, y es ahí donde obtiene su
+            // acceso (RN-13). No cambió.
+            //
+            // CON SESIÓN, `200` CON UN ACCESO NUEVO (REF-02, mesa `SDD/Docs/Audit/Mesa-2026-09-14.md`).
+            // El cambio deja sin efecto todo acceso emitido antes, incluido el que la persona usó
+            // para pedirlo: sin uno nuevo, quien cambia su contraseña quedaría afuera en la petición
+            // siguiente. Se emite con el MISMO instante con el que el caso de uso selló el cambio,
+            // para que la guarda, que compara por segundos, no lo tome por anterior. El cuerpo es
+            // una ampliación aditiva del contrato `/v1/`: quien no lo lee no se rompe.
+            if (accountId is null)
+            {
+                return Results.Ok();
+            }
+
+            var renewed = accessTokens.Issue(
+                accountId.Value,
+                context.User.FindFirstValue(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email),
+                context.User.FindFirstValue(AccessTokenIssuer.RoleClaim),
+                now);
+
+            if (renewed is null)
+            {
+                log.LogError("La contraseña se reemplazó y no se pudo emitir el acceso nuevo. Revisar la provisión de la clave de firma.");
+                return Results.Ok();
+            }
+
+            return Results.Ok(new SessionResponse(
+                renewed,
+                accountId.Value,
+                context.User.FindFirstValue(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email) ?? string.Empty,
+                context.User.FindFirstValue(AccessTokenIssuer.RoleClaim) ?? string.Empty));
         })
         .WithName("ChangeOwnPassword")
         // NO lleva `RequireAuthorization`, y es la decisión del intake 1.34: exigir acceso firmado

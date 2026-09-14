@@ -50,15 +50,18 @@ public sealed class AdministratorLifecycleTests : IDisposable
         using var connection = new SqliteConnection($"Data Source={_storePath}");
         await connection.OpenAsync();
 
-        // CUATRO TRANSFORMACIONES ASENTADAS DESDE LA ETAPA `g`: la de `Account`, de la etapa `c`;
-        // la de `Work`, de la `e`; la de la interpretación, de la `f`; y **las dimensiones propias
-        // de la pieza**, que la etapa `g` agregó al descubrir que las figuras planas del conjunto
-        // raíz llevan su medida en sí mismas y la perdían al guardarse.
+        // CINCO TRANSFORMACIONES ASENTADAS: la de `Account`, de la etapa `c`; la de `Work`, de la
+        // `e`; la de la interpretación, de la `f`; **las dimensiones propias de la pieza**, que la
+        // etapa `g` agregó al descubrir que las figuras planas del conjunto raíz llevan su medida
+        // en sí mismas y la perdían al guardarse; y **el instante del último cambio de credencial
+        // de la cuenta**, que el lote 1 de la mesa del 2026-09-14 agregó para que un acceso emitido
+        // antes de ese cambio deje de servir (REF-02). Es la primera que se aplica sobre un almacén
+        // con datos, y `CredentialChangedAtMigrationTests` lo prueba (R-10).
         //
         // El recuento crece con el linaje, y crecerlo acá es lo que impide que una transformación
         // entre sin que nadie la mire. **Ninguna anterior se editó**: una ya fusionada no se toca
         // (intake §17.3.P.7).
-        Assert.Equal(4L, await ScalarAsync(connection,
+        Assert.Equal(5L, await ScalarAsync(connection,
             "select count(*) from __EFMigrationsHistory"));
 
         // LAS CINCO TABLAS DEL MODELO DE DATOS EXISTEN, por primera vez desde que se declararon.

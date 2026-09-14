@@ -2,9 +2,9 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md
-**Versión:** 1.1
+**Versión:** 1.0
 **Estado:** Aprobado
-**Fecha:** 2026-09-14
+**Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Seguridad
 
@@ -28,7 +28,7 @@ Motivación upstream: NB-00001, NB-00002; RN-00001, RN-00004, RN-00006, RN-00010
 2. **Cuatro puntos no exigen acceso firmado, y son exactamente cuatro**: el canje de credenciales, el registro de cuenta, la configuración del administrador y la salud. **Ni uno más.** La lista está en [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.4 y **una prueba de inspección la recorre en las dos direcciones**.
 3. **La guardia del cambio pendiente tiene una sola excepción declarada**: el cambio de la propia contraseña, que es lo único que la levanta. Ninguna otra excepción es admisible, y agregar una es un cambio de esta ADR y no de un punto de acceso.
 4. **Exigir el papel no es autorizar.** El papel viaja en el acceso y esta capa lo exige por punto; **la verificación de pertenencia y la de facultad se hacen sobre el dato recuperado y son de la capa de aplicación**. Que un punto exija `Administrador` no exime a la capa de adentro de comprobar.
-5. **La vigencia del acceso se toma de configuración**, con el criterio de que **caduque dentro de la sesión de trabajo de una clase** y con **renovación por reingreso**, sin acceso de refresco. El número se ancla en la etapa `a`. **Aclaración del 2026-09-14 (REF-02):** cambiar la contraseña propia con sesión de trabajo **deja sin efecto todo acceso emitido antes** y **emite uno nuevo en la misma respuesta**. No es un acceso de refresco: se emite sólo después de verificar la contraseña vigente —que es un reingreso—, con la misma vigencia que cualquier otro, y no existe ningún punto que renueve un acceso sin contraseña. La guardia transversal lo hace cumplir comparando el momento de emisión del acceso con el del último cambio de credencial de la cuenta.
+5. **La vigencia del acceso se toma de configuración**, con el criterio de que **caduque dentro de la sesión de trabajo de una clase** y con **renovación por reingreso**, sin acceso de refresco. El número se ancla en la etapa `a`.
 
 **Y una ausencia que esta ADR sostiene explícitamente: ningún punto de acceso fija una contraseña sobre una cuenta existente sin credencial.** Es `RN-00016` vista desde la superficie, y se comprueba sobre los cuatro puntos que no exigen acceso: uno canja credenciales, uno registra una cuenta **sin** contraseña, uno sólo procede mientras no exista administrador y uno es de sólo lectura. El identificador `A-04`, que era la excepción, **quedó retirado y no se recicla**.
 
@@ -94,4 +94,3 @@ Motivación upstream: NB-00001, NB-00002; RN-00001, RN-00004, RN-00006, RN-00010
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Convierte la garantía de `RN-00013` e `INV-09` en una propiedad contable —cuatro puntos fuera de la guardia, once dentro, una excepción declarada— verificada por una prueba de inspección en las dos direcciones, y sostiene como ausencia comprobable la de `RN-00016`. Evalúa cinco alternativas, declara cuatro trade-offs —incluido el registro del riesgo aceptado del tramo sin cifrar, que no se reabre— y fija siete métricas de validación. |
-| 1.1 | 2026-09-14 | §2 punto 5 aclara que el cambio de contraseña propia con sesión revoca los accesos anteriores y emite uno nuevo tras verificar la contraseña vigente, y por qué eso es reingreso y no refresco. Lote 1 de la mesa del 2026-09-14 (`../../../../Audit/Mesa-2026-09-14.md`, REF-02). Estado anterior en `_legacy/2026-09-14/`. Sube minor. |

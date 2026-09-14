@@ -183,6 +183,25 @@ public sealed class SessionState
     public string? UseAccessToken() => SessionId is { } sessionId ? _tokens.Find(sessionId) : null;
 
     /// <summary>
+    /// Reemplaza el acceso que custodia la sesión abierta por el que emitió el servicio de datos
+    /// al cambiar la contraseña propia (REF-02).
+    /// </summary>
+    /// <remarks>
+    /// EL CAMBIO DEJA SIN EFECTO EL ACCESO ANTERIOR, y sin este reemplazo la persona que acaba de
+    /// cambiar su contraseña recibiría un rechazo en la petición siguiente. Sólo actúa sobre una
+    /// sesión que ya está abierta en este custodio: no abre ninguna.
+    /// </remarks>
+    public void ReplaceAccessToken(string accessToken)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(accessToken);
+
+        if (SessionId is { } sessionId && _tokens.Contains(sessionId))
+        {
+            _tokens.Keep(sessionId, accessToken);
+        }
+    }
+
+    /// <summary>
     /// De dónde sale la identidad: del contexto de la petición mientras exista, y del proveedor
     /// de estado de autenticación cuando ya no —que es lo que pasa dentro de un circuito—.
     /// </summary>

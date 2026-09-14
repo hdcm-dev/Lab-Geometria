@@ -178,17 +178,32 @@ public sealed class DataServiceClient
     /// La credencial de sesión se adjunta ACÁ, del lado del servidor. Es el único lugar del
     /// producto donde la credencial se usa, y el navegador no participa.
     /// </remarks>
-    public async Task<DataServiceOutcome<bool>> ChangeOwnPasswordAsync(
+    /// <returns>
+    /// Con credencial de sesión, el ACCESO NUEVO que emitió el servicio de datos, que reemplaza al
+    /// anterior porque el cambio lo dejó sin efecto (REF-02). Sin credencial —el cambio forzado—,
+    /// nulo: la sesión se obtiene después, en el ingreso.
+    /// </returns>
+    public async Task<DataServiceOutcome<string?>> ChangeOwnPasswordAsync(
         OwnPasswordChangeRequest request,
         string? accessToken,
         CancellationToken cancellationToken = default)
     {
-        var outcome = await PostAsync<OwnPasswordChangeRequest, object>(
+        if (string.IsNullOrEmpty(accessToken))
+        {
+            var forced = await PostAsync<OwnPasswordChangeRequest, object>(
+                OwnPasswordPath, request, accessToken, cancellationToken).ConfigureAwait(false);
+
+            return forced.Succeeded
+                ? DataServiceOutcome<string?>.Resolved(null)
+                : DataServiceOutcome<string?>.Failed(forced.Error!);
+        }
+
+        var renewed = await PostAsync<OwnPasswordChangeRequest, SessionResponse>(
             OwnPasswordPath, request, accessToken, cancellationToken).ConfigureAwait(false);
 
-        return outcome.Succeeded
-            ? DataServiceOutcome<bool>.Resolved(true)
-            : DataServiceOutcome<bool>.Failed(outcome.Error!);
+        return renewed.Succeeded
+            ? DataServiceOutcome<string?>.Resolved(renewed.Value!.AccessToken)
+            : DataServiceOutcome<string?>.Failed(renewed.Error!);
     }
 
     /// <summary>`A-02` — Registra la cuenta de un alumno, con tres campos y SIN contraseña.</summary>
