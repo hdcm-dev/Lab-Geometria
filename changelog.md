@@ -2118,3 +2118,23 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
 ### Verificado
 
 - Banco local (`scripts/pruebas-e2e.sh chromium`), dos corridas: **32/32** las dos veces.
+
+## Mesa delegada: seis decisiones que eran del Product Owner — 2026-09-15
+
+**Rama:** `mesa/2026-09-15-decisiones-delegadas`. `SDD/Docs/Audit/Mesa-2026-09-15.md`, por pedido del PO: «proponga alternativas, elijan la mejor y más razonable y la apliquen».
+
+### Agregado
+
+- **Cabeceras de seguridad en el origen** (D-3, cierra `R-06`): `SecurityHeaders` en el front y en el servicio de datos; HSTS corto, sin `preload`, sólo por https; CSP sin `script-src` (deuda `DD-R10-2`). `SecurityHeadersTests`, 3 pruebas vistas fallar sin el middleware.
+
+### Decidido y aplicado en el corpus
+
+- **`E-5`** (D-1): `Medicion-PT-05.md` 1.5, primera pantalla ≤ 5 s; «con reservas» entre 5 y 10 s o con reintento o sin escena 3D; «no funciona» > 10 s. Sigue `SIN MEDIR`.
+- **Datos personales** (D-4): intake 5.1 §10, la fila «Normativa» deja de negar la Ley 25.326 y entra «Tratamiento de datos personales» con retención y respaldos (máximo un cuatrimestre).
+- **Etiqueta y `main`** (D-5): se etiqueta el commit antes de desplegarlo (`Guia-Publicacion-Image-Docker.md` 1.5). Esta fusión recibe `v1.2.0`.
+- **Constancia de reproducibilidad** (D-6): `Mini-Plan.md` 3.8 §9.1, tres corridas del 2026-09-14.
+- **Dominio admitido** (D-2): **no se declara** hasta que el PO confirme el dominio o exista el alta por el docente (`DD-R10-1`).
+
+### Fuera del alcance de la mesa
+
+- La visita a la facultad (criterios 3 y 4 de `i`); forks y runner en GitHub.

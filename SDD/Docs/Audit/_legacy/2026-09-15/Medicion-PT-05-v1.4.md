@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Medicion-PT-05.md
-**Versión:** 1.5
+**Versión:** 1.4
 **Estado:** **SIN MEDIR** — el formulario existe, la medición no se hizo
 **Fecha:** —
 **Autor:** —
@@ -41,9 +41,9 @@ pasa la puerta.
 | **¿El front cargó?** | — |
 | **¿El circuito funcionó de punta a punta?** | — |
 | **Tiempo hasta la primera pantalla** | — |
-| **Tiempo aceptable** | **≤ 5 s hasta la primera pantalla** [DECISIÓN de mesa delegada, `Mesa-2026-09-15.md` D-1; el PO puede reemplazarlo en la visita]. Entre 5 y 10 s: «con reservas». Más de 10 s: «no funciona» |
+| **Tiempo aceptable** | **A definir por el Product Owner antes de la visita** (`E-5`, default: «el formulario queda con umbral a definir por el PO; la medición no se bloquea») |
 | **Caudal observado** | — (peticiones por minuto durante la visita). `A-5` declara **20 por minuto** para la API, y es **el único umbral de `A-5` que sigue abierto** (`PRODUCT-INTAKE` §22): esta medición es la que se le delegó |
-| **Resultado** | — (**funciona** / **no funciona** / **funciona con reservas**, y cuáles). **«Con reservas»** = el circuito termina pero: la primera pantalla tardó entre 5 y 10 s, **o** algún paso necesitó un reintento, **o** la escena 3D no dibujó en algún equipo mientras el árbol del texto sí. **«No funciona»** = más de 10 s, o un paso del circuito que no termina (`Mesa-2026-09-15.md` D-1) |
+| **Resultado** | — (**funciona** / **no funciona** / **funciona con reservas**, y cuáles). **Qué es «con reservas» lo define el Product Owner** (`E-5`) |
 | **Salida de la puerta** | — (la de `PUBLIC_URL=… API_URL=… scripts/verify-stage-i.sh`, pegada tal cual) |
 
 **La dirección y su fecha se registran juntas, y no es redundante.** `ADR-14003` **1.1** declara que
@@ -83,7 +83,6 @@ Mesa del 2026-09-14, `R-16`: la puerta no tenía receta. Éstos son los pasos, e
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
-| 1.5 | 2026-09-15 | **`E-5` decidido por la mesa delegada** (`Mesa-2026-09-15.md` D-1): umbral de 5 s, y la definición de «con reservas» y de «no funciona». El PO puede reemplazarlos en la visita. **Sigue en `SIN MEDIR`.** Estado anterior en `_legacy/2026-09-15/`. |
 | 1.4 | 2026-09-14 | **Mesa del 2026-09-14, `R-16` y `E-5` por default.** §2 suma la revisión que corría, el **tiempo aceptable** y la definición de «con reservas» —las dos **a definir por el Product Owner**—, el **caudal observado** contra los 20 por minuto de `A-5` y la salida de la puerta. **§2.1 nueva: la receta.** §1 deja de decir que la puerta no certifica: se reescribió (`DD-R8-1`, PR #226). Las direcciones pasan a ser dominios por túnel. **El estado sigue en `SIN MEDIR`**: la medición no se hizo. Estado anterior en `_legacy/2026-09-14/`. |
 | 1.3 | 2026-09-13 | **Parche PR-05 de [`Mesa-2026-09-13-ciclo-2.md`](Mesa-2026-09-13-ciclo-2.md).** Tercera corrección de la misma cita (1.1: 1.8 → 1.9; 1.2: 1.9 → 1.10): esta vez **se quita el número** (`Root-Rules.md` §10 R1) para que no vuelva a envejecer. §1 deja de afirmar que `PT-05` es «lo único que la fase `i` hace» y declara que la puerta no certifica hasta `DD-R8-1`. La medición sigue `SIN MEDIR`. | Orquestador de reanudación SDD |
 | 1.2 | 2026-09-12 | **Cita corregida por dato derivado** (`Root-Rules.md` §10): la cabecera citaba `Roadmap-Producto.md` **1.9** y el roadmap está en **1.10** desde la reapertura de la fila `i` por el evento de `Rules-Contexto.md` §3.5 (séptima reanudación, salida `A`). **§2.2 no cambió**: `PT-05` sigue siendo lo único que la fase `i` hace y su criterio de medición no varía con el cambio de topología. **Sigue `SIN MEDIR`**: esta intervención no fabrica una medición — item diferido, evento de cierre «una persona en la red de la facultad corre el formulario», ciclo de origen: mesa · producto · base `5c95dab`. | Orquestador de reanudación SDD |

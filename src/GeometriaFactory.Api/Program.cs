@@ -77,6 +77,9 @@ app.UseExceptionHandler(_ => { });
 // origen del límite de tasa colapsa en una sola dirección y esta línea no lo puede evitar.
 app.UseForwardedHeaders();
 
+// LAS CABECERAS DE SEGURIDAD, EN EL ORIGEN (mesa del 2026-09-15, D-3).
+app.UseSecurityHeaders();
+
 app.UseRouting();
 app.UseAuthentication();
 
