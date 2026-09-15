@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Guia-Publicacion-Image-Docker.md
-**Versión:** 1.5
+**Versión:** 1.4
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
@@ -131,7 +131,7 @@ El intake §17.1.P.11 · GeometriaFactory-Api punto 5 marca el mecanismo **[A VE
 
 **Reversión:** `LAB_GEOMETRIA_REF=<commit o etiqueta anterior> docker compose up -d --build`. Si una migración dejó el almacén mal, `scripts/restaurar-almacen.sh` con el respaldo del paso 1 y el servicio detenido. Vale la advertencia de §4: revertir el código no revierte los datos.
 
-**Etiqueta y `main`: se etiqueta lo que se despliega.** `Estrategia-Versionado.md` §3.c manda etiquetar toda fusión a `main` que cambie código de producción, y el 2026-09-14 producción corría `main` sin etiqueta (`/salud`: `1.1.3-alpha.0.18+8d8c857`, el sello «preliminar» a la vista). La mesa delegada del 2026-09-15 (D-5) lo resolvió cumpliendo la regla y no cambiando la composición: **antes de cada despliegue, el commit de `main` que se va a construir recibe su etiqueta** (`git tag -a vX.Y.Z <commit>` y `git push origin vX.Y.Z`); la composición sigue en `main`, MinVer sella la versión limpia y el sello del front la muestra sin distintivo. Un despliegue de un commit sin etiqueta se ve en el sello, y es lo que esta regla existe para que no pase.
+**Divergencia declarada: etiqueta contra `main`.** §2 de esta guía y `Estrategia-Versionado.md` dicen que se despliega **la etiqueta de la etapa cerrada**. **El servidor construye `main`**: el 2026-09-14, `/salud` respondió `1.1.3-alpha.0.18+8d8c857`, la marca de MinVer de una construcción sin etiqueta. Cuál de las dos rige **es del Product Owner** (`R-13`, «constancia del PO»), y esta subsección no la decide. Mientras tanto, lo que corre se identifica por el commit del sello, no por una etiqueta.
 
 ## 3. Verificación posterior al despliegue
 
@@ -183,7 +183,6 @@ Las **seis** de [`ADR-00008`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Vers
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.5 | 2026-09-15 | §2.2: la divergencia etiqueta/`main` se resuelve **etiquetando antes de desplegar** (mesa delegada `Mesa-2026-09-15.md` D-5, cumpliendo `Estrategia-Versionado.md` §3.c). Estado anterior en `_legacy/2026-09-15/`. |
 | 1.4 | 2026-09-14 | **§2.2 nueva: la publicación real**, que no estaba descrita en el repositorio (mesa del 2026-09-14, `R-13`): composición en el servidor desde GitHub por `LAB_GEOMETRIA_REF`, los dos servicios, las variables por nombre, uid 1654, procedimiento con respaldo y verificación, reversión y la **divergencia etiqueta contra `main`** declarada para el Product Owner. Sin nombres de red, rangos ni rutas del anfitrión. Estado anterior en `_legacy/2026-09-14/`. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara de entrada que **no hay publicación en ningún registro de imágenes** y que lo que documenta es el **despliegue construyendo en destino desde el repositorio**, con la advertencia de que **lo ejecuta el Product Owner a mano** y de que esta guía está escrita para quien lo ejecuta. Usa `image-docker`, valor admitido por `Rules-Devops.md` §3.1, **sin declarar un tipo nuevo**, y declara por qué el artefacto secundario que §2.2 admite para el tipo **no tiene sujeto acá**. Declara los pre-requisitos —**ninguna cuenta de registro**, la clave de firma nombrada por su función, y la salida a la red del destino como consecuencia declarada del canal—, las **dos** piezas que el agente entrega y qué ocurre en cada arranque en **dos fases**. Escribe la **prueba única del mecanismo** que la fuente exige, en **cinco** comprobaciones, con la quinta declarada como agregado propio, **sin declarar que el mecanismo funcione**. Declara **cinco** verificaciones posteriores, la reversión por reconstrucción desde la etiqueta —incluida la situación en la que **no se puede revertir sin red**— y la advertencia de que **revertir el código no revierte los datos**, y las **seis** métricas de `ADR-00008` §8 sin agregar ninguna. |
 | 1.1 | 2026-08-11 | **Corrección del `H-01` de la auditoría `F-09-Devops-Siete-Proyectos-r1.md`, en su variante de este documento.** La cita de §0 es **literal**, pero la fuente que se le atribuía era la equivocada: el texto entrecomillado es la fila «Despliegue manual del backend» del intake **§13**, no §17.1.P.8 · GeometriaFactory-Api, cuya fila `despliegue` dice «Manual, por el docente [DECISIÓN, RT §13]». Se corrige la atribución y se agrega la cita literal de §17.1.P.8 · GeometriaFactory-Api al lado. Sube la trazabilidad upstream del intake de **1.21** a **1.22**. |

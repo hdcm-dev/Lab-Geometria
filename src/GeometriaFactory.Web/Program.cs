@@ -227,6 +227,10 @@ app.Lifetime.ApplicationStarted.Register(observaciones.Cerrar);
 // PRIMERO: todo lo que sigue —incluido el reenvío al servicio de datos— tiene que ver la dirección
 // del navegador y no la del túnel.
 app.UseForwardedHeaders();
+
+// LAS CABECERAS DE SEGURIDAD, EN EL ORIGEN (mesa del 2026-09-15, D-3). Después de las reenviadas,
+// porque HSTS sólo se emite cuando la petición llegó por https.
+app.UseSecurityHeaders();
 app.UseStatusCodePagesWithReExecute("/no-encontrado");
 
 app.UseStaticFiles();
