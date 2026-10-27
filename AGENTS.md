@@ -64,6 +64,14 @@ Si el cambio toca una etapa con puerta propia, además `scripts/verify-stage-<le
 | Los contenedores `lab-geometria-web` y `lab-geometria-api` | Son el despliegue real del Product Owner: ni `exec`, ni reinicio, ni lectura de sus volúmenes. Un servicio de prueba se levanta **aparte**, puerto libre y almacén propio |
 | Fusionar un PR y borrar su rama | Lo hace el agente, por decisión del Product Owner (2026-08-31, reafirmada el 2026-09-14), con los checks en verde y sin reserva. Con reserva, entrega el enlace y espera |
 
+### Delegación del merge (asiento de `Knowledge-Conformacion-Pull-Request-Automatico` §3.1)
+
+- **Fecha y responsable:** decidida por el Product Owner el 2026-08-31, reafirmada el 2026-09-14 y ampliada por escrito el 2026-10-27. La ejerce el **agente** que conduce la unidad.
+- **Testimonio literal (PO, 2026-10-27):** «sobre el merge automático, esto surgió porque despues de un avance surgia preguntas y confirmaciones tontas, - nada que con un analisis previo no se resuelva por si solo … de esta manera el desarrollo no se para … Mi objetivo es que se enriquesca de tal forma el conocimiento analitico que los subagentes con este conocimiento puedan orquestar de forma automatica todo el proceso de desarrollo, busco una interactividad autonoma e inteligente».
+- **Guarda G1–G4:** PR abierto y sin conflicto, `mergeable_state` `clean`, controles en verde sobre el SHA de la cabeza, merge commit atado a ese SHA; después se borra la rama y se comprueba el 404.
+- **Techo de espera:** 60 minutos por PR. **Intervalo de relectura:** 60 segundos.
+- **Excepción:** si hay un cuestionamiento particular sobre la unidad, o una decisión irreversible con efecto externo, se para y se hace manual. Revocable por unidad sin derogar este asiento.
+
 **Y una que no es sobre archivos:** cuando dos mediciones del mismo hecho no coinciden, **no se elige la que conviene**. Se revisan las dos — y en este repositorio suele estar mal la más elaborada.
 
 ## Notas del entorno que cuestan tiempo
