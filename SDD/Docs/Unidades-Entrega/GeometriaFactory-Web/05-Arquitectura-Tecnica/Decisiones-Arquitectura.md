@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Decisiones-Arquitectura.md
-**Versión:** 2.2
+**Versión:** 2.3
 **Estado:** Propuesto
-**Fecha:** 2026-09-14
+**Fecha:** 2026-10-27
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -46,6 +46,7 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 | [ADR-10007](Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) | La dirección del servicio de datos viene de configuración, y el despliegue termina comprobando | Despliegue | Propuesto | 2026-08-10 |
 | [ADR-10008](Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md) | El bundle del visor lo genera el proyecto del front, y es el único que lo genera | Despliegue | Aprobado | 2026-09-12 |
 | [ADR-10009](Adrs/ADR-10009-El-Front-Le-Dice-Al-Servicio-De-Datos-De-Donde-Llego-El-Navegador.md) | El front le dice al servicio de datos de dónde llegó el navegador, para que cada uno consuma su propia cuota | Comunicación | Aprobado | 2026-09-14 |
+| [ADR-10010](Adrs/ADR-10010-La-Ayuda-De-Usuario-Acompana-Sin-Resolver-El-Trabajo.md) | La ayuda de usuario acompaña sin resolver el trabajo: ratifica la ayuda contextual y acota «sin manual» | Experiencia de uso | Aprobado | 2026-10-27 |
 
 **Siete ADR**, sobre el mínimo de cinco que la regla de la categoría fija para el tipo `web-monolith`. Ninguna superada, ninguna rechazada.
 
@@ -133,6 +134,7 @@ El mínimo de tres cubre estilo, superficie pública y estrategia de versionado,
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.3 | 2026-10-27 | Suma [`ADR-10010`](Adrs/ADR-10010-La-Ayuda-De-Usuario-Acompana-Sin-Resolver-El-Trabajo.md): la ayuda de usuario se admite con el límite didáctico «la ayuda no entrega el JSON ni las clases resueltas». Es una decisión consecuente sobre la fila de heurísticas de `Experiencia-De-Uso.md` §2.1. |
 | 2.2 | 2026-09-14 | Suma [`ADR-10009`](Adrs/ADR-10009-El-Front-Le-Dice-Al-Servicio-De-Datos-De-Donde-Llego-El-Navegador.md): el front resuelve la dirección real del navegador y se la reenvía al servicio de datos, para que la cuota por origen no sea una sola para toda la comisión. Lote 1 de la mesa del 2026-09-14 (`../../../Audit/Mesa-2026-09-14.md`, R-02). Estado anterior en `_legacy/2026-09-14/`. Sube minor. |
 | 2.1 | 2026-09-12 | Suma [`ADR-10008`](Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md): el bundle del visor lo genera `GeometriaFactory.Web.csproj` con un target, y es el único generador. Lo decidió la mesa evaluadora de la Feature 20 del framework (2026-09-11) sobre tres hechos medidos. Sube minor: una decisión nueva, ninguna reabierta. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
