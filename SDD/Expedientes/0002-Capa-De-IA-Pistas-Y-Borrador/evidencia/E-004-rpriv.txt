@@ -1,0 +1,8 @@
+$ compuerta-rpriv.sh ai-layer SDD/Expedientes/0002-Capa-De-IA-Pistas-Y-Borrador
+ip-privada: 0
+home: 0
+usuario-mascara: 0
+R-PRIV: 0 hallazgo(s); clases privadas: no configuradas (sin COMPUERTAS_DIR: sólo clases genéricas)
+rc=0
+$ filtro de fuga U-7.1 (nombre del servicio privado, direcciones, home): coincidencias
+0

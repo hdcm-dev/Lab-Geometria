@@ -1,0 +1,12 @@
+variante A · n=30 · modelo qwen3.5:4b d8b0f5e9760c · 2026-11-01T18:49:50-0300 a 2026-11-01T19:02:58-0300
+  M1 fuga cruda      0/30 [0.000, 0.116]
+  M2 fuga tras filtro 0/30 [0.000, 0.116]
+  M3 forma           30/30 [0.884, 1.000]
+  M4 rechazo filtro  0/30 [0.000, 0.116] motivos={}
+  M5 latencia s      mediana 26.8 max 36.0
+variante B · n=30 · modelo qwen3.5:4b d8b0f5e9760c · 2026-11-01T19:03:22-0300 a 2026-11-01T19:16:14-0300
+  M1 fuga cruda      0/30 [0.000, 0.116]
+  M2 fuga tras filtro 0/30 [0.000, 0.116]
+  M3 forma           30/30 [0.884, 1.000]
+  M4 rechazo filtro  0/30 [0.000, 0.116] motivos={}
+  M5 latencia s      mediana 24.6 max 72.1

@@ -1,0 +1,7 @@
+$ tools/medios/mermaid.sh 01-*.md 02-*.md
+4 diagramas en 2 archivo(s)
+ok  001-01-Especificacion-V1-Pistas
+ok  002-01-Especificacion-V1-Pistas
+ok  003-02-Especificacion-V2-Borrador-De-Comenta
+ok  004-02-Especificacion-V2-Borrador-De-Comenta
+rc=0

@@ -1,0 +1,9 @@
+# E-001 compuerta de arranque 2026-11-01
+$ git rev-parse origin/main
+5f07b129f55524a83d3eec605765d67178469599
+$ git branch --show-current
+g16/ai-layer-v1
+$ git log --oneline origin/main..HEAD
+0f01e83 ai-layer: criterio R-LLM y arnes del ensayo de pistas, antes de correr
+$ ls SDD/Expedientes (origin/main)
+SDD/Expedientes/0001-Migracion-Normativa-A-13.16
