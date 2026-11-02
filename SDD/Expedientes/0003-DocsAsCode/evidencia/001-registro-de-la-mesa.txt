@@ -1,0 +1,28 @@
+Método: sha256sum de las piezas de la mesa, que viven fuera del repositorio (carpeta de trabajo de la mesa, no transcripta)
+Base: Lab-Geometria origin/main c5afa0e; Lab-Geometria.Documentacion origin/main 0202722; 2026-11-02
+Quién: presidencia de la mesa DocsAsCode (agente)
+
+5deffcc594e35c83bdcaee8b79462b6663bc67172ddb126adc9ec773eef3c3d2  10-informe-docs-as-code.md
+6856d5be65a33800223782bdf92242b3bf09875d694b00c7120a173f053f1e40  11-informe-acceso.md
+56715a25ddd6834ce250b38e5d385ce9b50d8443e31022011c4dfc4037cdfbad  12-informe-punto-de-uso.md
+0a59a62c92a77dec03291d391f0f94d232be31f75c44144dd8c298fafb7db0d8  13-informe-portal-y-api.md
+f48679f45789d5b229ebc1671e541a95f54653bed164e6ef30203c667816b637  14-informe-dominio.md
+f7f67364f82effd6310a4fc916e72d6aad9132de36f7059dd0d20d22cb725d34  15-informe-implementacion.md
+3b51170a1d4d9b9ace03c0aee2933eb1acc10cedd7696c30147fd5c169884ae1  30-propuesta.md
+51b1d5960507681e05e307d623c9986ab5079bf47e69fe33302ca9f03d3836c3  40-refutacion.md
+d16bbf7c87f0380e6545d985a5d2f9a793dd955c74be3ca1fdf57c97b3b230df  51-voto.md
+58c873f14a9b03b30a39e5a0ad130d0b6b1ab680f620546850a1ef542afb87aa  52-voto.md
+9a093d98f6341a5f1ea0eb8186fc06742934c74d68d2814a6471733020074b97  53-voto.md
+fe12890c0c1695b7078e7dc5794a59e622aa44bbf0489c8c4da63d2d0b5a13d9  99-resolucion.md
+
+Las once primeras huellas se recalcularon al copiar y coinciden con las que la resolución transcribe.
+Barrido S2 (rutas de host, usuario, IPv4, nombres de destinos privados) sobre las 11 primeras piezas: 0 coincidencias.
+
+Pedido literal del Product Owner (2026-11-02), fuente de intención de la §2.1 de la pieza 99.
+Copia byte a byte, UTF-8, sin salto final; huella sha256sum de cada texto (recalculada al copiar: coincide).
+
+974d2d2cce69fb4f29aef3579a08d2a1646c4dab81266724fb729a2090615608  texto 1 (668 bytes)
+lo de rol - venia a cuento de que yo tengo un panel de control que puede tener un adminitrador raiz, y administradores con menos privilegios, pero no son raiz, - cada uno con necesidades documentales diferentes - incluso la aplciación movil, el perfil de ese usuario tiene ya necesidades documentales diferentes, - podría tener un segundo servicio como parte dle paquete con otro tipo de usuario - todos ven documentación diferentes - incluso alcance sdiferentes - hasta si tengo una api, tendria una documentaicón para desarrollador que tal vez no quiera hacer publica por razones de seguridad, y hacer publcia a usuarios especificos con caracter de desarrollador
+
+24bead38d0a53a56f6dbbe473d292f65eafb137b4958a3e986015d18d5b9c66c  texto 2 (335 bytes)
+suma tambien esto, me interesa  mucho la integración con los servicios como paneles de control y portales, - me intersa saber si este concepto de docsAsCode se integra con los formularios de ingreso de datos como una forma de guiar o asistir a los usuarios con pequeña información, que mecanismos hay al respeto y que se esta usando
