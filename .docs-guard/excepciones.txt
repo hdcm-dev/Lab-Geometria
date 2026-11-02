@@ -1,0 +1,5 @@
+# Excepciones con huella (AK-3 de docs-guard; artefacto A-08 del expediente 0003). Vacío a propósito.
+# Formato: SHA-256 del archivo, ruta desde la raíz del repositorio y control exceptuado. La excepción vale sólo
+# mientras el archivo tenga esa huella. Agregar o renovar una excepción la aprueba una persona en el PR.
+#
+# sha256                                                            ruta                          control

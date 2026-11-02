@@ -1,0 +1,13 @@
+# Copia con huella de docs-guard (expediente 0003, tramo T-2; decisión D-09 y artefacto A-09).
+# Origen: repositorio público hdcm-dev/Lab-Documentos, carpeta tools/docs-guard, en el commit de «sha».
+# Los archivos listados con «sha256» son copia literal: no se editan acá. Para actualizar la copia se trae el archivo
+# del nuevo commit, se cambian «sha», «fecha» y las huellas, y se corre scripts/docs-local.sh (paso «huella»).
+# Lo propio de Lab-Geometria en esta carpeta (prefijos.txt, excepciones.txt y este archivo) no lleva huella.
+repo: https://github.com/hdcm-dev/Lab-Documentos
+ruta: tools/docs-guard
+sha: fcdb81aacdc356a38bdc44b4c066e1654e7cad1c
+fecha: 2026-11-02
+sha256: 471936d8f86f2d91a6b9633adc8016bfb9135547053739a7952d3321e689bdbf  dg.py
+sha256: 6d10a9f35d5b692fc6629dbe0edce8121bd6a2577ef321e3f29ef99428b57d0c  esquemas/cuerpo.schema.json
+sha256: a911aaef86c25a4b39aad4100735ef58a0175cc54a49e8e11fd05025d2837453  esquemas/ayuda.schema.json
+sha256: 0437d3efb4230383637e1efd80aa74e327c69130f7ce02f331708ad1833692cd  esquemas/readme-cuerpo.schema.json

@@ -1,0 +1,44 @@
+# Compuerta de docs (expediente 0003, tramo T-2; decisión D-09, endurecimiento K-11).
+#
+# Workflow PROPIO y aparte de `ci.yml` (que es compartido y no se toca): verifica la documentación y termina.
+#   - SIN `paths`: corre en todo cambio, como las puertas de `ci.yml:1` («EN TODO CAMBIO»). Un check requerido con
+#     filtro de rutas queda «esperando» en los PR que no tocan esas rutas y frena la fusión.
+#   - NO compila la Api ni nada: sólo bash y el python3 del runner (decisión K-06 para la ola 1).
+#   - NO publica ni despliega: no hay paso de publicación, ni secretos, ni permiso de escritura.
+#   - Evento `pull_request` y nunca su variante «_target» (K-11): el código de un PR corre sin acceso al repositorio.
+#   - Acciones fijadas a una versión exacta.
+#
+# Corre `scripts/docs-local.sh`, el mismo guion que se usa en local: copia con huella `.docs-guard/` (verificada contra
+# `.docs-guard/source.lock`), autoprueba del par rojo/verde y los controles por ámbito. En la ola 1 todo arranca en
+# AVISA (decisión D-10): un hallazgo es una advertencia del PR y el job queda verde. Rojo sólo si la copia no coincide
+# con su huella, si la autoprueba falla (la compuerta está rota) o si un control da error de uso.
+# Para pasar `docs-as-code/**` a bloquea basta con cambiar DOCS_MODO_DOCS_AS_CODE (ver docs-as-code/controles/README.md).
+
+name: docs
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      DOCS_MODO_DOCS_AS_CODE: avisa
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Compuerta de docs (huella, autoprueba y controles por ámbito)
+        run: bash scripts/docs-local.sh
