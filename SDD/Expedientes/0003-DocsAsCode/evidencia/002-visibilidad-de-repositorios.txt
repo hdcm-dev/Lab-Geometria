@@ -1,0 +1,16 @@
+Comando: env -u GIT_ASKPASS GIT_TERMINAL_PROMPT=0 git -c credential.helper= ls-remote https://github.com/<owner>/<repo>.git HEAD ; curl -s https://api.github.com/repos/<owner>/<repo> (sin token)
+Fecha-hora: 2026-11-02 16:25-03:00 (ls-remote); 2026-11-02 18:23-03:00 (API)
+Quién: presidencia de la mesa DocsAsCode (agente)
+
+Medición 1, ls-remote sin credenciales:
+hdcm-dev/Lab-Geometria                 rc=0  pública
+hdcm-dev/Lab-Geometria.Documentacion   rc=0  pública
+hdcm-dev/Lab-Documentos                rc=0  pública
+
+Medición 2, GET /repos/<owner>/<repo> sin token:
+hdcm-dev/Lab-Geometria                 "private": false
+hdcm-dev/Lab-Geometria.Documentacion   "private": false
+hdcm-dev/Lab-Documentos                "private": false
+
+Las dos mediciones coinciden. PRIV queda vacío.
+Evidencia secundaria: README.md:3 de Lab-Geometria («…de la cátedra, público de consulta.»).
