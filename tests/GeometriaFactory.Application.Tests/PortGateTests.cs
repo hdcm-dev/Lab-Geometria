@@ -40,8 +40,13 @@ public sealed class PortGateTests
         Assert.Empty(offenders);
     }
 
+    /// <remarks>
+    /// ALTA DECLARATIVA DEL EXPEDIENTE 0002 (tramo T2): el quinto puerto es
+    /// <c>IObservationHintWriter</c>, el redactor de pistas de la capa de IA (`ADR-14006`). Los
+    /// cuatro de antes siguen siendo exactamente los mismos.
+    /// </remarks>
     [Fact]
-    public void TheFourPortsAreDeclared()
+    public void TheFivePortsAreDeclared()
     {
         var ports = typeof(ISystemClock).Assembly
             .GetTypes()
@@ -51,7 +56,40 @@ public sealed class PortGateTests
             .ToArray();
 
         Assert.Equal(
-            new[] { "IAccountRepository", "IFigureValidator", "ISystemClock", "IWorkRepository" },
+            new[] { "IAccountRepository", "IFigureValidator", "IObservationHintWriter", "ISystemClock", "IWorkRepository" },
             ports);
+    }
+
+    /// <summary>
+    /// REQ-IA-03 · El validador sigue sincrónico y sin red (G-6): ningún método de su puerto
+    /// devuelve una tarea. La capa de IA va por un puerto aparte (`ADR-14006`).
+    /// </summary>
+    [Fact]
+    public void FigureValidatorPortStaysSynchronous()
+    {
+        var asynchronous = typeof(IFigureValidator)
+            .GetMethods()
+            .Where(method => typeof(Task).IsAssignableFrom(method.ReturnType)
+                || method.ReturnType == typeof(ValueTask)
+                || (method.ReturnType.IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof(ValueTask<>)))
+            .Select(method => method.Name)
+            .ToArray();
+
+        Assert.Empty(asynchronous);
+    }
+
+    /// <summary>REQ-IA-01/02 · Application no referencia el SDK de IA ni un SDK de modelos.</summary>
+    [Fact]
+    public void ApplicationReferencesNoAiSdk()
+    {
+        string[] forbidden = ["Microsoft.Extensions.AI", "OllamaSharp", "OpenAI"];
+
+        var offenders = typeof(ISystemClock).Assembly
+            .GetReferencedAssemblies()
+            .Select(reference => reference.Name ?? string.Empty)
+            .Where(name => forbidden.Any(prefix => name.StartsWith(prefix, StringComparison.Ordinal)))
+            .ToArray();
+
+        Assert.Empty(offenders);
     }
 }

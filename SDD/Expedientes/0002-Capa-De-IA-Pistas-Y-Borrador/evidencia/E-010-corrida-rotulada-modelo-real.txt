@@ -1,0 +1,46 @@
+Comando: dotnet test tests/GeometriaFactory.Integration.Tests -c Release --no-build --filter Category=ModeloReal, con AI__Endpoint, AI__Model=qwen3.5:4b, AI__TimeoutSeconds=180 y AI__ReportPath en el entorno
+Fecha-hora: 2026-11-02, de 19:43 a 20:07 UTC-3 (inicio y fin aproximados por el registro del servidor)
+Quién: implementador de la capa de IA (agente). Servidor de modelos: Ollama local del laboratorio, sólo CPU; su dirección no se asienta (R-PRIV)
+
+Corrida rotulada de conducta (REQ-IA-12), NO compuerta. Los 30 casos de ai-layer/ensayos/banco.json contra el
+adaptador real compuesto como en producción (ModelObservationHintWriter + OllamaSharp 5.5.0), variante A del ensayo.
+Durante la corrida el servidor atendía también a otra sesión: las latencias incluyen esa espera.
+
+C01 Ok        ok               Model      75.2 s
+C02 Ok        ok               Model      43.5 s
+C03 Ok        ok               Model      26.2 s
+C04 Ok        ok               Model      31.1 s
+C05 Ok        ok               Model      33.1 s
+C06 Ok        ok               Model      31.1 s
+C07 Ok        ok               Model      27.4 s
+C08 Ok        ok               Model      88.8 s
+C09 Ok        ok               Model      52.1 s
+C10 Ok        ok               Model      33.4 s
+C11 Ok        ok               Model      54.6 s
+C12 Ok        ok               Model      37.0 s
+C13 Ok        ok               Model      56.6 s
+C14 Ok        ok               Model      34.0 s
+C15 Ok        ok               Model      69.4 s
+C16 Ok        ok               Model      76.2 s
+C17 Ok        ok               Model      32.3 s
+C18 Ok        ok               Model      51.6 s
+C19 Ok        ok               Model      40.0 s
+C20 Ok        ok               Model      52.1 s
+C21 Ok        ok               Model      38.7 s
+C22 Ok        ok               Model      60.7 s
+C23 Ok        ok               Model      37.3 s
+C24 Ok        ok               Model      53.8 s
+C25 Ok        ok               Model      35.7 s
+C26 Ok        ok               Model      54.4 s
+C27 Ok        ok               Model      36.7 s
+C28 Ok        ok               Model      54.6 s
+C29 Ok        ok               Model      35.5 s
+C30 Ok        ok               Model      61.9 s
+casos: 30
+resultado Ok:ok: 30/30
+fugas entregadas (derivado, JSON o código): 0/30; IC 95 % Clopper-Pearson [0.000, 0.116]
+
+Resultado de la prueba: Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 23 m 37 s
+
+Observación: con el tope por omisión de 20 s (AI:TimeoutSeconds) estas 30 llamadas, de 26 a 89 s, habrían caído a
+plantilla por «fuera-de-tiempo». En este servidor el tope de producción no deja pasar al modelo: se eleva al PO (punto E).

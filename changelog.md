@@ -2138,3 +2138,19 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
 ### Fuera del alcance de la mesa
 
 - La visita a la facultad (criterios 3 y 4 de `i`); forks y runner en GitHub.
+
+## Capa de IA · V1 pistas (expediente 0002)
+
+**Rama:** `ai-layer/implementacion-v1`, desde `main` `c5afa0e`. Escrita **en la rama**, como manda el intake §16.
+
+- **Pistas sobre las advertencias de valor**, apagadas por omisión. Ruta nueva `POST /v1/interpretaciones/pistas`
+  (mismo cuerpo que A-18, observaciones idénticas, tres pistas graduadas con su origen); A-18 no cambia.
+- Puerto `IObservationHintWriter` (quinto puerto de `QG-10`), caso de uso `ExplainObservationsUseCase`,
+  carpeta `Infrastructure/AI` (filtro con paridad 8/8 con `pistas.py`, doce plantillas **provisionales**,
+  adaptador sobre `IChatClient`, cupo único por instancia). OllamaSharp 5.5.0 y Microsoft.Extensions.AI 10.11.0
+  fijos, sólo en la composición.
+- Sin `AI__Endpoint` y `AI__Model` el servicio arranca igual y responde con plantillas; la Web sólo muestra
+  «Ver pistas» con `AI__HintsEnabled=true`. `deploy/compose.yaml` y los `Dockerfile` sin cambios.
+- Norma de Nomenclatura 1.32 y 1.33 (§6.27), `ADR-14006` a `ADR-14010`, `Contratos-REST.md` 1.12.
+- **V2** (borrador de comentario) especificada y **diferida**. El ingreso de V1 al intake como F-n sigue
+  pendiente del Product Owner.

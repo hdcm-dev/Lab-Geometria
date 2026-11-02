@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 2.3
+**Versión:** 2.4
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -661,10 +661,39 @@ Es la tabla de `05` §10.5 con la columna del caso de prueba que la materializa.
 
 **Diez de diez, y siete de los ocho escenarios representados.** El octavo, `E-7`, no respalda ninguno de los diez y se ejercita igual en `TC-06011` y `TC-06019` como **cobertura adicional declarada** por `05` §10.5.
 
+## 11.x Capa de IA V1: requisitos ↔ pruebas (expediente 0002)
+
+Todas las garantías corren **sin modelo y sin red**, con un doble propio de `IChatClient`
+(`FakeChatClient`), en cada build. **Ninguna prueba con modelo real entra en `test.sh` ni en `ci.yml`.**
+Las plantillas que se prueban son **provisionales** (punto F del lote al PO).
+
+| Requisito | Prueba | Archivo |
+| --- | --- | --- |
+| REQ-IA-01 | `DomainReferencesNoAiSdk` | `tests/GeometriaFactory.Domain.Tests/DependencyGateTests.cs` |
+| REQ-IA-02 | `AiSdkOnlyInInfrastructureAiAndComposition` (mutada a mano: rojo) | `tests/GeometriaFactory.Integration.Tests/AI/AiLayerArchitectureTests.cs` |
+| REQ-IA-03 | `FigureValidatorPortStaysSynchronous`, `TheLocalValidatorDoesNotDependOnTheAiLayer` | `tests/GeometriaFactory.Application.Tests/PortGateTests.cs, AI/AiLayerArchitectureTests.cs` |
+| REQ-IA-04 | `HintRequest_CarriesOnlyTypeFieldDeclaredDirection` | `tests/GeometriaFactory.AI/ModelObservationHintWriterTests.cs` |
+| REQ-IA-05 | `HintFilter_RejectsDerivedValue`, `HintFilter_MatchesTheReferenceSelfTest` (8/8 de `pistas.py`) | `tests/GeometriaFactory.AI/HintFilterTests.cs` |
+| REQ-IA-06 | `HintFilter_RejectsFigureJsonAndCode` | `tests/GeometriaFactory.AI/HintFilterTests.cs` |
+| REQ-IA-07 | `HintPort_FallsBackToTemplate` (8 fallas), `WithoutConfiguration_EveryHintIsTemplate` | `tests/GeometriaFactory.AI/ModelObservationHintWriterTests.cs, AI/HintsEndpointTests.cs` |
+| REQ-IA-08 | `InterpretationsEndpoint_DoesNotUseHintPort`; batería de A-18 sin cambios | `tests/GeometriaFactory.AI/HintsEndpointTests.cs` |
+| REQ-IA-09 | `Hints_AreNotPersisted` | `tests/GeometriaFactory.AI/HintsEndpointTests.cs` |
+| REQ-IA-10 | `HintPort_RespectsLimits`, `SixWarnings_FiveGoToTheWriterAndOneIsTemplate`, `TheGateIsTheSameInstanceFromTwoScopes` | `tests/GeometriaFactory.AI/…, Application.Tests/ExplainObservationsUseCaseTests.cs` |
+| REQ-IA-11 | `HintTelemetry_ContentOnlyInDevelopment` (adaptador y servicio en `Production`) | `tests/GeometriaFactory.AI/ModelObservationHintWriterTests.cs, AI/HintsEndpointTests.cs` |
+| REQ-IA-12 | Conducta, no compuerta: corrida manual rotulada contra un modelo local (evidencia E-010 del expediente 0002) | fuera de la batería |
+| REQ-IA-13 | Fuera del alcance del agente: puntuación docente | — |
+| REQ-IA-14 | Fuera del alcance: juez automático, PUEDE en PROTO | — |
+| REQ-IA-15 | `NoModelEndpoint_StartsDegraded`, `AnInvalidEndpointNeverBreaksTheStartAndRegistersNoClient` | `tests/GeometriaFactory.AI/AiLayerArchitectureTests.cs` |
+| REQ-IA-16 | `Hints_DoNotChangeObservations` (caso de uso y HTTP) | `tests/GeometriaFactory.Application.Tests/…, AI/HintsEndpointTests.cs` |
+
+Se agregan además las pruebas de la Web detrás del flag (`HintsWebSurfaceTests`: sin botón por omisión, niveles a
+pedido, marcado codificado) y las altas declarativas de `QG-10` (cinco puertos) y del contrato (dieciocho puntos).
+
 ## 12. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.4 | 2026-11-02 | **§11.x: matriz REQ-IA-01 a 16 ↔ pruebas de la capa de IA V1** (expediente 0002, tramo T7), con REQ-IA-12 como conducta fuera de la batería, REQ-IA-13 y 14 fuera del alcance del agente y las plantillas provisionales. |
 | 2.3 | 2026-09-14 | Fila «Cobertura del validador de figuras»: pasa de `Pendiente` a **instrumentado**. `scripts/coverage.sh` mide `QG-06` sobre los dos motores y corre en `ci.yml` (mesa del 2026-09-14, `R-12`). Estado anterior en `_legacy/2026-09-14/`. |
 | 2.2 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **25 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **5 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

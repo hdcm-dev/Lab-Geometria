@@ -4,12 +4,13 @@
 |---|---|
 | Número | **EXP-0002** |
 | Título | Especificación de una capa de IA de nivel A0 para la Fábrica de Geometría: V1 pistas, V2 borrador de comentario |
-| Estado | **especificado**: V1 y V2 completas para el revisor 1; lote al Product Owner abierto (actuación 004). Nada construido |
+| Estado | **en trámite** (constancia 008): V1 **construida**, apagada por omisión, en la rama `ai-layer/implementacion-v1`; V2 especificada y diferida. Falta el pull request (coordinador) y el punto A del lote (PO) |
 | Apertura | 2026-11-01 |
 | Rama | `g16/ai-layer-v1` desde `origin/main` `5f07b12`, local. **Sin push, sin pull request, sin merge** |
 | Partes | **Product Owner** (decide el ingreso al intake); **orquestador del prompt 02 de la guía 16** de Lab-Documentos (agente, presenta); **agente de la etapa E5** (especifica e informa) |
 | Objeto | Probar el Conocimiento de especificación v0 de la guía 16 sobre un caso público y dejar la especificación en `ai-layer/` |
 | Origen | [Actuación 001](actuaciones/001-presentacion-pedido-de-especificacion.md) |
+| Base | especificación: `main` `5f07b12`; construcción: `main` `c5afa0e` (fusión del PR #236) |
 
 **Forma.** La del expediente [EXP-0001](../0001-Migracion-Normativa-A-13.16/README.md): carátula, actuaciones
 foliadas que no se reescriben y evidencia con SHA-256. Los artefactos viven en [`ai-layer/`](../../../ai-layer/README.md),
@@ -32,6 +33,10 @@ que el expediente folia por enlace sin duplicarlos.
 | 002 | 2026-11-01 | informe | agente E5 | V1 (16 requisitos) y V2 (8), seis ADR, 19 filas de nomenclatura, checklist completo para el revisor 1 | [002](actuaciones/002-informe-especificacion-v1-y-v2.md) |
 | 003 | 2026-11-01 | informe | agente E5 | Ensayo del prompt: 0/30 fugas del valor en A y B; 24/30 dicen la operación en palabras | [003](actuaciones/003-informe-ensayo-del-prompt-de-pistas.md) |
 | 004 | 2026-11-01 | resolucion | agente E5 | Estado y lote de siete puntos al Product Owner con su «si no respondés» | [004](actuaciones/004-resolucion-lote-al-product-owner.md) |
+| 005 | 2026-11-02 | providencia | coordinador (agente, por delegación del PO) | Encargo de construir V1 con el flag apagado; testimonio del pedido del PO, redactado por S2 | [005](actuaciones/005-providencia-encargo-de-construccion.md) |
+| 006 | 2026-11-02 | informe | mesa de construcción (cinco lentes) | Acta: once decisiones con sus votos, vetos y riesgos | [006](actuaciones/006-informe-mesa-de-construccion.md) |
+| 007 | 2026-11-02 | resolucion | coordinador | Resuelve A, C, E, F y G; plan T1 a T8; V2 diferida; fila Reintegra | [007](actuaciones/007-resolucion-plan-de-construccion-v1.md) |
+| 008 | 2026-11-02 | constancia | implementador de la capa de IA (agente) | T1 a T8 con sus commits; 741 pruebas en verde y 0 advertencias; cobertura conforme; corrida rotulada con modelo local; apartamientos declarados | [008](actuaciones/008-constancia-construccion-de-v1.md) |
 
 ## 2. Índice de evidencia
 
@@ -43,14 +48,25 @@ que el expediente folia por enlace sin duplicarlos.
 | E-004 | R-PRIV y filtro de fuga: 0 | `compuerta-rpriv.sh`, grep | `c7939664a8bde64079e32f504491ab1ad9e5d3de1a52116c6fd93c7b14af0af4` | [E-004](evidencia/E-004-rpriv.txt) |
 | E-005 | Autoprueba del filtro 8/8 y resumen del ensayo recalculado sin modelo | `pistas.py`, `resumir.py` | `1d6d6afd40fc98b593839b51d0b5b1f52e04899498fddfea3092384d0f8c70c8` | [E-005](evidencia/E-005-ensayo-de-pistas.txt) |
 | E-006 | Árbol de solución, build 0 advertencias y 591/591 pruebas sin E2E | scripts del repo, `dotnet` en contenedor | `744769affaa11513c8f772c9463d62f29eb741dbbdc56b056ae8f1bb8f117cab` | [E-006](evidencia/E-006-build-y-pruebas.txt) |
+| E-007 | Árbol, build 0 advertencias y 741 pruebas en verde (1 salteada, rotulada), mutación de REQ-IA-02, puertas d/e/h y autoprueba 8/8 | scripts del repo, `dotnet` en contenedor | `104b159b7c50e4ca9d26d3b3f83290e2201768ccd65d1285f9590fb4275ffbf2` | [E-007](evidencia/E-007-build-y-pruebas.txt) |
+| E-008 | Cobertura QG-03, QG-06 y QG-04 conformes | `scripts/coverage.sh` en contenedor | `242501331a29cd474547ec2eb05064a95d2eb665588e231f728c3d728ea5b265` | [E-008](evidencia/E-008-cobertura.txt) |
+| E-009 | R-PRIV y A11 sobre el diff de la rama y los commits: 0 coincidencias fuera del ejemplo `localhost` | grep | `b0a567a79acf1e29925898aac01f1ac7722e54817da95cee016a8bf5263c757e` | [E-009](evidencia/E-009-rpriv.txt) |
+| E-010 | Corrida rotulada con modelo real: 30/30 Ok, 0/30 fugas, IC 95 % [0; 0,116]; latencias de 26 a 89 s | prueba `ModeloReal` contra Ollama local | `e77debc68b42b408b065a82fc1a1bb0b4b5b4fa1f0b3a799edd0b81f68106e43` | [E-010](evidencia/E-010-corrida-rotulada-modelo-real.txt) |
 
 ## 3. Artefactos tocados
 
-Sólo archivos nuevos en `ai-layer/` y en este expediente. No se tocaron `src/`, `tests/`, el intake, la
-Norma de Nomenclatura, `docs-as-code/` ni la ia-db.
+**Hasta la actuación 004:** sólo archivos nuevos en `ai-layer/` y en este expediente.
+
+**Desde la actuación 005 (construcción de V1):** `src/` (Application/Ports y Works, `Infrastructure/AI/`,
+composición, ruta de pistas, contratos y `WorkSubmission.razor`), `tests/`, la Norma de Nomenclatura (1.32 y
+1.33), `ADR-14006` a `ADR-14010`, `Contratos-REST.md`, backlog técnico, matriz de cobertura, entornos y
+despliegue, los wireframes de envío y la arquitectura de la Web, `changelog.md` y `ai-layer/`. **No** se
+tocaron el intake, `deploy/`, los `Dockerfile`, `.github/`, `_legacy/` ni Audit.
 
 ## 4. Punto de continuación
 
-**Dónde estoy:** especificación completa para el revisor 1; rama local con commits propios.
-**Qué sigue:** respuesta del Product Owner al lote de la actuación 004, en el lote único de cierre de la
-guía 16; revisión humana del checklist; las respuestas entran como actuaciones nuevas.
+**Dónde estoy:** V1 construida en la rama `ai-layer/implementacion-v1` (constancia 008), empujada al remoto,
+sin pull request. La capacidad queda apagada por omisión: fusionar no cambia el producto publicado.
+**Qué sigue:** el coordinador abre el pull request y lo fusiona con la CI en verde; el Product Owner decide el
+punto A (ingreso como F-n), fija las doce plantillas (F) y revisa el checklist (B). V2 espera su condición de
+reapertura (actuación 007 §3).

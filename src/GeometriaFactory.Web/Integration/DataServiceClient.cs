@@ -89,6 +89,12 @@ public sealed class DataServiceClient
     private const string InterpretationsPath = ContractPrefix + "interpretaciones";
 
     /// <summary>
+    /// Ruta de las pistas de la capa de IA (expediente 0002). Es la misma constante que
+    /// `GeometriaFactory.Api.Endpoints.WorkEndpoints.HintsRoute`. [derivado]
+    /// </summary>
+    private const string HintsPath = InterpretationsPath + "/pistas";
+
+    /// <summary>
     /// Nombre del parámetro de filtro por alumno de `A-13`. Es la misma constante que
     /// `GeometriaFactory.Api.Endpoints.WorkEndpoints.StudentFilterParameter`, y **va en
     /// castellano porque es superficie y no identificador** (`Norma-De-Nomenclatura.md` §4).
@@ -316,6 +322,24 @@ public sealed class DataServiceClient
             HttpMethod.Post,
             InterpretationsPath,
             new WorkInterpretationRequest(originalJson),
+            accessToken,
+            cancellationToken);
+
+    /// <summary>
+    /// Pide las pistas de las advertencias de un texto **sin guardar nada** (expediente 0002, V1).
+    /// </summary>
+    /// <remarks>
+    /// SÓLO LA LLAMA LA PANTALLA DE ENVÍO, Y SÓLO CON <c>AI:HintsEnabled</c> EN <c>true</c>. Con el
+    /// valor por omisión esta pieza no hace ningún pedido nuevo.
+    /// </remarks>
+    public Task<DataServiceOutcome<WorkHintsResponse>> ExplainObservationsAsync(
+        string originalJson,
+        string? accessToken,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<WorkHintsRequest, WorkHintsResponse>(
+            HttpMethod.Post,
+            HintsPath,
+            new WorkHintsRequest(originalJson),
             accessToken,
             cancellationToken);
 

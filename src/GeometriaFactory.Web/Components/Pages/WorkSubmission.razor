@@ -3,6 +3,7 @@
 @layout WorkShell
 @inject DataServiceClient DataService
 @inject SessionState Session
+@inject IConfiguration Configuration
 @using System.Text.Json
 @using GeometriaFactory.Contracts.Works
 
@@ -135,6 +136,66 @@ else if (_state is Outcome.NotFound)
     </p>
     <a class="gf-btn gf-btn--secondary gf-mt-3" href="/mis-trabajos">Volver a mis trabajos</a>
 }
+else if (HintsEnabled && IsHintsPost)
+{
+    @* ---- Pistas sobre una advertencia (expediente 0002, V1). DIVULGACIÓN PROGRESIVA (decisión
+       D-NIVEL3): el nivel 1 al pedirlas, el 2 con «Otra pista» y el 3 SÓLO con «Ver la última
+       pista». Los niveles que no se pidieron NO ESTÁN en el marcado. El texto se dibuja
+       CODIFICADO, nunca como marcado. Cada pista dice su origen. ---- *@
+    <section class="gf-card" role="status" aria-labelledby="hints-heading" tabindex="-1">
+        <h2 id="hints-heading" class="gf-title">Pistas para tu advertencia</h2>
+
+        @if (_hintsObservation is { } hinted)
+        {
+            <p class="gf-finding-location gf-mt-2">@LocationOf(hinted)</p>
+        }
+
+        @if (_hints is { } hints)
+        {
+            <ol class="gf-mt-3">
+                <li>
+                    <p>@hints.Level1</p>
+                    <p class="gf-caption">@OriginLabel(hints.Origin)</p>
+                </li>
+                @if (HintsLevel >= 2)
+                {
+                    <li>
+                        <p>@hints.Level2</p>
+                        <p class="gf-caption">@OriginLabel(hints.Origin)</p>
+                    </li>
+                }
+                @if (HintsLevel >= 3)
+                {
+                    <li>
+                        <p>@hints.Level3</p>
+                        <p class="gf-caption">@OriginLabel(hints.Origin)</p>
+                    </li>
+                }
+            </ol>
+        }
+        else if (_hintsUnavailable)
+        {
+            <p class="gf-banner gf-banner--error gf-mt-2" role="alert">
+                No pudimos traer pistas para esta advertencia. Tu trabajo ya quedó guardado.
+            </p>
+        }
+
+        <form id="gf-hints" method="post" @formname="work-hints" @onsubmit="ExplainAsync" class="gf-footer-actions gf-mt-3">
+            <AntiforgeryToken />
+            <input type="hidden" name="HintsInput.OriginalJson" value="@HintsForm.OriginalJson" />
+            <input type="hidden" name="HintsInput.Index" value="@HintsForm.Index" />
+            @if (_hints is not null && HintsLevel == 1)
+            {
+                <button type="submit" class="gf-btn gf-btn--secondary" name="HintsInput.Level" value="2">Otra pista</button>
+            }
+            else if (_hints is not null && HintsLevel == 2)
+            {
+                <button type="submit" class="gf-btn gf-btn--secondary" name="HintsInput.Level" value="3">Ver la última pista</button>
+            }
+            <a class="gf-btn gf-btn--primary" href="/mis-trabajos">Volver a mis trabajos</a>
+        </form>
+    </section>
+}
 else if (_result is { } result)
 {
     @* ---- Bloque de resultado (CMP-24). Reemplaza el contenido, y se anuncia como región activa,
@@ -196,10 +257,32 @@ else if (_result is { } result)
                                     <dt>La geometría da</dt><dd class="gf-num">@derived.ToString("N2")</dd>
                                 </dl>
                             }
+                            @if (HintsEnabled && observation.Kind == WorkObservationKind.Warning)
+                            {
+                                @* PISTAS, DETRÁS DEL FLAG (expediente 0002, D-FLAG). Con el valor por
+                                   omisión este bloque no existe y la pantalla queda como antes. El
+                                   botón envía el formulario de pistas de abajo con el índice de
+                                   ESTA advertencia. *@
+                                <button type="submit" form="gf-hints" class="gf-btn gf-btn--secondary gf-mt-2"
+                                        name="HintsInput.Index" value="@IndexOf(result.Observations, observation)">
+                                    Ver pistas
+                                </button>
+                            }
                         </div>
                     </li>
                 }
             </ul>
+        }
+
+        @if (HintsEnabled && Warnings.Count > 0)
+        {
+            @* EL FORMULARIO DE PISTAS LLEVA EL TEXTO QUE SE ACABA DE ENVIAR, Y NADA MÁS: el servicio
+               lo vuelve a interpretar, no guarda nada y devuelve las pistas. *@
+            <form id="gf-hints" method="post" @formname="work-hints" @onsubmit="ExplainAsync">
+                <AntiforgeryToken />
+                <input type="hidden" name="HintsInput.OriginalJson" value="@Form.OriginalJson" />
+                <input type="hidden" name="HintsInput.Level" value="1" />
+            </form>
         }
 
         @* H-06 · ACÁ SE MOSTRABA EL IDENTIFICADOR INTERNO DEL TRABAJO —un `Guid` de treinta y
@@ -517,6 +600,42 @@ else
         public string Action { get; set; } = string.Empty;
     }
 
+    /// <summary>
+    /// El formulario de pistas (expediente 0002): el texto enviado, qué advertencia y hasta qué nivel.
+    /// </summary>
+    private sealed class WorkHintsForm
+    {
+        public string OriginalJson { get; set; } = string.Empty;
+
+        public int Index { get; set; }
+
+        public int Level { get; set; } = 1;
+    }
+
+    [SupplyParameterFromForm(FormName = "work-hints")]
+    private WorkHintsForm? HintsInput { get; set; }
+
+    private WorkHintsForm HintsForm => HintsInput ??= new WorkHintsForm();
+
+    /// <summary>
+    /// <c>AI:HintsEnabled</c> de la configuración propia de esta pieza. **<c>false</c> por omisión**:
+    /// sin la llave la pantalla queda exactamente como antes de la capa de IA (D-FLAG).
+    /// </summary>
+    private bool HintsEnabled => Configuration.GetValue("AI:HintsEnabled", false);
+
+    /// <summary>Si esta petición es el envío del formulario de pistas.</summary>
+    private bool IsHintsPost =>
+        HttpContext is { } context
+        && HttpMethods.IsPost(context.Request.Method)
+        && context.Request.HasFormContentType
+        && context.Request.Form["_handler"] == "work-hints";
+
+    private int HintsLevel => Math.Clamp(HintsForm.Level, 1, 3);
+
+    private WorkObservationHints? _hints;
+    private WorkObservation? _hintsObservation;
+    private bool _hintsUnavailable;
+
     [SupplyParameterFromForm(FormName = "work-submission")]
     private WorkSubmissionForm? Input { get; set; }
 
@@ -745,6 +864,57 @@ else
             : $"No se pudo interpretar el campo «{observation.Field}» de esta figura, así que la "
                 + "figura no se reconstruyó. El resto del texto sí se interpretó.";
     }
+    /// <summary>
+    /// Trae las pistas de UNA advertencia del texto enviado (expediente 0002, V1). No guarda nada.
+    /// </summary>
+    private async Task ExplainAsync()
+    {
+        _hints = null;
+        _hintsObservation = null;
+        _hintsUnavailable = false;
+
+        if (!HintsEnabled || string.IsNullOrWhiteSpace(HintsForm.OriginalJson))
+        {
+            _hintsUnavailable = true;
+            return;
+        }
+
+        var outcome = await DataService.ExplainObservationsAsync(HintsForm.OriginalJson, Session.UseAccessToken());
+
+        if (!outcome.Succeeded)
+        {
+            _hintsUnavailable = true;
+            return;
+        }
+
+        var response = outcome.Value!;
+        _hints = response.Hints.FirstOrDefault(h => h.ObservationIndex == HintsForm.Index);
+        _hintsObservation = HintsForm.Index >= 0 && HintsForm.Index < response.Observations.Count
+            ? response.Observations[HintsForm.Index]
+            : null;
+        _hintsUnavailable = _hints is null;
+    }
+
+    /// <summary>
+    /// El rótulo discreto del origen. Las plantillas son provisionales hasta que el docente las fije
+    /// (decisión D-2), y por eso no se rotulan como «del docente».
+    /// </summary>
+    private static string OriginLabel(string origin) =>
+        origin == "Model" ? "Pista automática" : "Pista de plantilla";
+
+    private static int IndexOf(IReadOnlyList<WorkObservation> observations, WorkObservation observation)
+    {
+        for (var index = 0; index < observations.Count; index++)
+        {
+            if (ReferenceEquals(observations[index], observation))
+            {
+                return index;
+            }
+        }
+
+        return -1;
+    }
+
     /// <summary>El valor con el que el botón secundario se distingue del primario.</summary>
     private const string PreviewAction = "preview";
 

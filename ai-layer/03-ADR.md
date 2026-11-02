@@ -8,6 +8,11 @@
 | Fecha | 2026-11-01 |
 | Formato | el del Conocimiento de especificación v0 §7: estado, ASR que lo origina, contexto, alternativas, criterio, decisión, consecuencias, confianza, deja de valer si, en el código |
 
+**Correspondencia con el registro del repositorio (expediente 0002, actuación 007, 2026-11-02).** ADR-IA-01
+→ `ADR-14006`, IA-02 → `ADR-14007`, IA-03 → `ADR-14008`, IA-04 → `ADR-14009`, IA-05 → `ADR-14010`, en
+`SDD/Docs/Producto/Adrs/`. ADR-IA-06 (V2) sigue propuesta y sin número: V2 está diferida. Esta nota se
+agrega; el texto de abajo no se reescribe.
+
 ## Índice
 
 - [ADR-IA-01 · Dónde vive la llamada al modelo](#adr-ia-01--dónde-vive-la-llamada-al-modelo)

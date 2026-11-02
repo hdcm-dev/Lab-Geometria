@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Arquitectura-Unidad-Entrega.md
-**Versión:** 3.9
+**Versión:** 3.10
 **Estado:** Propuesto
 **Fecha:** 2026-09-13
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -456,6 +456,14 @@ Los seis primeros son las **seis propiedades transversales verificables** que [`
 
 **No hay NFR de latencia con umbral numérico.** La fuente declara «interacción fluida al rotar y acercar, sin tráfico de circuito durante el gesto» (`PRODUCT-INTAKE` §17.2.P.10 · GeometriaFactory-Visor) y no fija un valor. Esta categoría **no inventa uno**: lo deja como punto abierto PA-03 de §11, porque un umbral de cuadros por segundo inventado acá se propagaría a 08 como si fuera del producto.
 
+### 8.x Pistas de la capa de IA detrás de un flag (expediente 0002)
+
+La pieza pública **no habla con ningún modelo**: pide las pistas al servicio de datos por
+`POST /v1/interpretaciones/pistas` (`DataServiceClient.ExplainObservationsAsync`), servidor a servidor, igual
+que A-18 (RA-01). La llave propia `AI:HintsEnabled` vale `false` por omisión y, así, `WorkSubmission.razor` no
+dibuja el botón ni el formulario de pistas y no hace ningún pedido nuevo. Encendida, las pistas se dibujan
+como texto codificado, nunca como `MarkupString`, y el nivel 3 sólo tras una acción explícita.
+
 ## 9. Riesgos arquitectónicos
 
 ### 9.1 `GeometriaFactory-Web`
@@ -635,3 +643,4 @@ Las siete filas están, `G-1` a `G-7`, sin agrupar. Son las de [`../02-Especific
 | 3.7 | 2026-08-30 | **`E-03` y `E-04` de la mesa del 2026-08-27, contestadas por el Product Owner el 2026-08-30.** **`E-03`, opción (b)**: los dos umbrales numéricos —tiempo de respuesta en §11 y fluidez de la interacción en el Visor— pasan a **NO APLICA** con la figura de `ADR-14004`. El fundamento no es que no se puedan medir: es que **no tienen objeto**, y este mismo documento lo dice en su §8 —«no hay NFR de latencia con umbral numérico», «ninguna fuente lo declara»—, de modo que lo que faltaba no era el número sino aquello que el número mediría. **`E-04`**: la **versión mínima de navegador** pasa también a NO APLICA, porque la fuente declara el requisito **por capacidad y no por versión**. Las tres llevan su condición de reapertura, que es lo que `ADR-14004` exige. **Las prosas de recuento de §11 suman el tercer estado**: una fila que no aplica no es abierta ni resuelta, y contarla entre las abiertas la dejaría esperando para siempre una decisión sobre algo que ninguna fuente pide. Sube minor. |
 | 3.8 | 2026-08-31 | **Cierre de las dos incógnitas `[A VERIFICAR]` que ya no tenían pregunta**, sobre el inventario [`Inventario-Marcas-A-Verificar-2026-08-31.md`](../../../Audit/Inventario-Marcas-A-Verificar-2026-08-31.md), que clasificó las **71** apariciones vivas del corpus en **cinco** incógnitas. **(a) La versión de plataforma del hosting quedó RESUELTA el 2026-08-13, midiendo**: `PT-01.a` pasa con **200** y el hosting soporta `net10.0`, confirmado desde el panel; no hizo falta bajar la versión objetivo del front. **(b) La versión de la biblioteca de componentes queda SIN OBJETO**: la biblioteca nunca se introdujo y su ausencia es una decisión declarada en el `.csproj` — `PA-01` de `Web/05` §11 **ya lo había cerrado por lectura el 2026-08-20** y el desenlace no bajó. **Ninguna de las dos se decide acá: las dos se leen.** **`PA-02` deja de estar vigente.** El parche `P-06` de la mesa del 2026-08-27 le había reasignado el evento a la fase `i`; **acertó en que no se cerraba decidiendo y no vio que ya estaba cerrada midiendo**. Su única palabra falsa es «sin registrarla»: la etapa `a` **sí** la registró, ese mismo 2026-08-13 y en tres documentos. **Ningún umbral, ningún contrato y ninguna decisión cambian.** |
 | 3.9 | 2026-09-13 | **Migración normativa 13.7 → 13.16, fase M4, fila PM-06** (`Root-Rules.md` 8.6 → 8.7 §12.2 punto 5; `Migracion-Rules.md` 3.20 §4.9). Las **12** filas de ítems diferidos de este documento suman la columna **Ciclo de origen**, **derivada del historial y no escrita a mano**: 9 derivadas —el commit que dio de alta la fila en el archivo de su proyecto, con su asunto literal como fase, el proyecto de la sección como unidad y el commit como base— y 3 `no derivable — anterior al mecanismo`, porque la fila ya existía con otro texto. Comando y resultado por fila en `SDD/Expedientes/0001-Migracion-Normativa-A-13.16/evidencia/E-006g`. **Ninguna otra celda cambia.** Sube minor. Estado anterior en `_legacy/2026-09-13/Arquitectura-Unidad-Entrega-v3.8.md` |
+| 3.10 | 2026-11-02 | **§8.x: las pistas de la capa de IA detrás de `AI:HintsEnabled`** (expediente 0002, tramo T6). La pieza pública no habla con el modelo; con el valor por omisión no cambia nada. |

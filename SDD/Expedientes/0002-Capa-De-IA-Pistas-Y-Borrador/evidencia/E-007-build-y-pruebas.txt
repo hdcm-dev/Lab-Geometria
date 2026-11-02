@@ -1,0 +1,24 @@
+Comando: bash scripts/verify-solution-tree.sh; dotnet build GeometriaFactory.sln -c Release -p:SkipVisorBuild=true -p:MinVerSkip=true; dotnet test --no-build --filter FullyQualifiedName!~E2ETests
+Base: rama ai-layer/implementacion-v1, árbol del commit del tramo T8, 2026-11-02
+Quién: implementador de la capa de IA (agente), en contenedor mcr.microsoft.com/dotnet/sdk:10.0.403 con el árbol montado en la misma ruta
+
+$ bash scripts/verify-solution-tree.sh
+El árbol de solución está completo.
+arbol rc=0
+$ dotnet build GeometriaFactory.sln -c Release -p:SkipVisorBuild=true -p:MinVerSkip=true
+    0 Warning(s)
+    0 Error(s)
+$ dotnet test --no-build (sin E2E)
+Passed!  - Failed:     0, Passed:    70, Skipped:     0, Total:    70- GeometriaFactory.Application.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:    95, Skipped:     0, Total:    95- GeometriaFactory.Domain.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   576, Skipped:     1, Total:   577- GeometriaFactory.Integration.Tests.dll (net10.0)
+test_rc=0
+
+Línea base (E-006): 591 = Application 61 + Domain 94 + Integration 436.
+Ahora: 741 en verde = Application 70 + Domain 95 + Integration 576, y 1 salteada (ModeloReal, sin AI__Endpoint).
+Nuevas: 150. Fallos: 0. Advertencias de construcción: 0.
+
+Mutación de REQ-IA-02 (tramo T4): con 'using Microsoft.Extensions.AI;' en Infrastructure/Persistence/EfCoreAccountRepository.cs,
+AiSdkOnlyInInfrastructureAiAndComposition dio Failed 1 de 1; revertida, verde.
+verify-stage-d, -e y -h en el mismo contenedor: CONFORME (10, 5 y 6 criterios).
+python3 -I ai-layer/ensayos/pistas.py --autoprueba: autoprueba: 8/8

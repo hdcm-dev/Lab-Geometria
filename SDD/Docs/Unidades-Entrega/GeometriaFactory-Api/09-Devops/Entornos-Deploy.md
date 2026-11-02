@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Entornos-Deploy.md
-**Versión:** 3.5
+**Versión:** 3.6
 **Estado:** Propuesto
 **Fecha:** 2026-08-26
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -496,6 +496,21 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 
 **`PD-04` sigue abierto y CAMBIA DE CONTENIDO, no de dueño.** Ya no dice «no hay respaldo»: dice **falta la política** —cada cuánto, dónde y cuánto se conserva—, que es del Product Owner. **El mecanismo existe; mientras `PD-04` siga abierto, la copia existe si alguien la corrió.** Registrado en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10.
 
+### 11.x La sección `AI`: la capa de IA, apagada por omisión (expediente 0002)
+
+| Llave | Pieza | Por omisión | Qué hace |
+| --- | --- | --- | --- |
+| `AI__Endpoint` | servicio de datos | **vacía, sin valor por omisión** | Dirección del servidor de modelos. Sin ella (o sin `AI__Model`) no hay cliente y las pistas salen de plantilla |
+| `AI__Model` | servicio de datos | vacía | Nombre del modelo en ese servidor |
+| `AI__TimeoutSeconds` | servicio de datos | `20` | Tope de espera por llamada |
+| `AI__MaxObservations` | servicio de datos | `5` | Advertencias por pedido que van al modelo |
+| `AI__HintsEnabled` | pieza pública | `false` | Muestra «Ver pistas». En `false` la pantalla no cambia y no pide nada |
+
+**`deploy/compose.yaml` y los dos `Dockerfile` no cambian y no exigen ninguna variable nueva**: fusionar la capa
+deja el producto publicado como estaba. El único ejemplo de dirección que el repositorio admite es
+`http://localhost:11434`; la dirección real de un servidor de modelos **no se escribe en el repositorio** y llega
+por el entorno, como la clave de firma. El arranque **nunca falla** por esta sección.
+
 ## 12. Secretos: la clave de firma que se recibe y no se busca
 
 ### 12.1 `GeometriaFactory-Infrastructure`
@@ -522,6 +537,7 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 3.6 | 2026-11-02 | **§11.x: la sección `AI`** de la capa de IA V1 (expediente 0002, tramo T7): cinco llaves, todas apagadas o vacías por omisión; `compose` y `Dockerfile` sin cambios. |
 | 3.5 | 2026-09-01 | **El mecanismo de respaldo se corrigió y se CORRIÓ, que es lo que la emisión anterior no hizo.** La mesa del 2026-09-01 lo ejerció y encontró dos defectos que lo volvían inservible en la máquina del docente: el respaldo **borraba la copia que acababa de tomar** —su verificador hacía `docker run` sin `--entrypoint sh` sobre una imagen cuyo `ENTRYPOINT` es el servicio, un `2>/dev/null` se tragaba el error y la rama de «no verificó» destruía una copia sana— y **la restitución no tenía modo contenedor**, de modo que la copia se podía tomar y no devolver. Ahora el verificador tiene **tres** desenlaces y no dos: verificó, **no** verificó —y borra, porque una copia corrupta ocupa el lugar de la que falta— y **no se pudo** verificar, que **conserva la copia** y sale 1 diciendo por qué. **Ante la duda se guarda.** Se pega el **ciclo completo corrido**: 3 cuentas y 5 trabajos, respaldo verificado, pérdida total del almacén, restitución, y el mismo recuento del otro lado. | Orquestador SDD |
 | 3.4 | 2026-08-31 | **`U-01` del plan de la mesa del 2026-08-31: el respaldo existe, y el diario es el que la fuente declara.** Cierra el hallazgo `MI-01`, un `P0` votado 5-0: el respaldo era **el único mecanismo de vuelta atrás que el corpus declaraba** y **no existía en ningún árbol** —el barrido de `scripts/`, `deploy/` y `.github/` devolvía una sola coincidencia, `reset-db.sh`, que es el guion que **vacía** el almacén—. **Y su segunda mitad era peor**: la especificación escrita para construirlo describía diario **WAL** mientras `UseSqlite(cadena)` a secas dejaba el motor en `delete`, de modo que **el `P0` no se cerraba siguiendo el corpus**. Entra `StorePreparation` fijando `PRAGMA journal_mode=WAL` y **leyendo lo que el motor contesta** —sobre un almacén en memoria SQLite se queda en `delete` y **no falla**—; `sqlite3` entra a la imagen de ejecución con su motivo escrito, para que la copia se pueda tomar **desde adentro del contenedor** y no dependa de lo que el host del destino tenga; y entran `scripts/respaldo-almacen.sh` —`VACUUM INTO` y no `cp`, sin detener el servicio, negándose si el destino es el directorio del almacén, y con `integrity_check` que **borra la copia si no verifica**— y `scripts/restaurar-almacen.sh`, que **no borra el almacén anterior: lo aparta con sello**, que es la lección del 2026-08-15. **La política sigue sin declararse y es deliberado**: la frecuencia, el destino y la retención son `PD-04` y son del Product Owner. **Un número puesto en el guion se propaga como si fuera del producto.** |
 | 3.3 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **12 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |

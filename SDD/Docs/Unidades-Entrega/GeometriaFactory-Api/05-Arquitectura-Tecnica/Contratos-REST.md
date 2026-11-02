@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Contratos-REST.md
-**Versión:** 1.11
+**Versión:** 1.12
 **Estado:** Aprobado
-**Fecha:** 2026-09-13
+**Fecha:** 2026-11-02
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 
 ---
@@ -95,8 +95,11 @@ Los diecisiete son los de [`../02-Especificacion-Funcional/Definicion-Superficie
 | A-16 | `GET` | Responder por el estado del servicio. **No exige acceso** | Ninguno | `200`, `503` | Ninguno: invoca la preparación del almacén |
 | A-17 | `GET` | Responder **si el laboratorio ya tiene administrador**, y nada más. **No exige acceso** y es de **sólo lectura** | Ninguno | `200` | Configuración de la cuenta de administrador, en su consulta |
 | A-18 | `POST` | **Interpretar un texto sin guardar nada**, para la previsualización. **No constituye ningún trabajo**: devuelve la estructura reconstruida y no deja rastro | `Alumno` | `200`, `400`, `401`, `403` | Envío del trabajo e interpretación de su texto, en su camino sin persistencia |
+| IA-V1 | `POST` | **Pistas sobre las advertencias de valor** (capa de IA, expediente 0002, [`ADR-14009`](../../../Producto/Adrs/ADR-14009-Las-Pistas-Tienen-Endpoint-Propio-Con-Respaldo-De-Plantilla.md)). Mismo cuerpo que A-18; devuelve las observaciones **idénticas** a A-18 y tres pistas graduadas por advertencia, cada una con su origen (`Model` o `Template`). **No guarda nada.** Sin servidor de modelos configurado responde con plantilla | `Alumno` | `200`, `400`, `401`, `403` | Envío del trabajo e interpretación de su texto, camino sin persistencia; capa de IA V1 |
 
 **Diecisiete puntos: cinco sin credencial firmada —A-01, A-02, A-03, A-16 y A-17— y doce bajo la guardia. Cinco más doce son diecisiete.**
+
+**Desde la 1.12 (expediente 0002) son dieciocho: el punto `IA-V1` se suma bajo la guardia, que pasa a trece.** No lleva identificador `A-NN` porque no está en `Definicion-Superficie-HTTP.md`: lo declara la especificación de la capa de IA (`ai-layer/01-Especificacion-V1-Pistas.md` §3) y entra acá como alta aditiva, sin tocar ningún punto anterior.
 
 **A-17 entra porque el guardián 1 de `Web ADR-00003` §2 no se podía construir sin él**, y esa constancia va acá y no sólo en 02 porque es una propiedad de **esta** tabla: **ninguno de los quince puntos anteriores servía para que un anónimo preguntara si el laboratorio ya tiene administrador**. `A-03` configura —es escritura—, `A-16` responde por la salud del servicio y `A-06` exige el papel. El fundamento entero, lo que el punto revela y **por qué el dato no se le agregó a `A-16`** —la salud la consume el chequeo del contenedor de `deploy/compose.yaml`, y mezclarle un hecho del producto acopla dos cosas que cambian por motivos distintos— están en [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, que es donde se decide. **La decisión la tomó el orquestador, con el Product Owner avisado, y queda a ratificación.**
 
@@ -116,9 +119,9 @@ Los diecisiete son los de [`../02-Especificacion-Funcional/Definicion-Superficie
 | A-07 | `POST /v1/cuentas/{id}/situacion` | A-16 | `GET /salud` — **exento**, ver abajo |
 | A-08 | `DELETE /v1/cuentas/{id}` | A-17 | `GET /v1/aprovisionamiento` |
 | A-09 | `POST /v1/cuentas/{id}/reseteo-de-contrasena` | A-18 | `POST /v1/interpretaciones` |
-| A-10 | `POST /v1/trabajos` | | |
+| A-10 | `POST /v1/trabajos` | IA-V1 | `POST /v1/interpretaciones/pistas` |
 
-**Diecisiete puntos: dieciséis bajo `/v1/` y uno exento. Dieciséis más uno son diecisiete.**
+**Diecisiete puntos: dieciséis bajo `/v1/` y uno exento. Dieciséis más uno son diecisiete.** **Desde la 1.12, dieciocho: diecisiete bajo `/v1/` y uno exento** (`ContractRoutePrefixTests`).
 
 **Tres rutas quedan fuera del prefijo, enumeradas y no toleradas por forma.** `ADR-00010` §7 remitió a `BT-00032` decidir «si el punto de salud y la descripción generada quedan bajo el prefijo», y la decisión es que **no**:
 
@@ -332,3 +335,4 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | 1.9 | 2026-09-13 | **§4 pasa de diez a once códigos: entra el `429`** (tarea `BT-00029`, implementa el NFR «Caudal sostenido» de `05` §8.1 sobre [`ADR-06002`](Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md)). **§4.1 nuevo**: la cuota por persona autenticada (reclamo `sub`, [`ADR-00003`](Adrs/ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md)) o por dirección de origen sin acceso, nunca por una clave de aplicación ([`ADR-00009`](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md)); la cuota propia y más estricta del canje; las cuatro cifras por omisión con su fundamento y su llave de configuración; el `Retry-After` sin cuerpo; la confianza en `X-Forwarded-For` sólo desde una red declarada, y la obligación del despliegue de declararla; `/salud` y el explorador fuera; la batería que lo verifica con los umbrales reales. **El párrafo de §4 que declaraba el `429` como ausencia informativa se reescribe**: su fundamento —`ADR-00005` §2, «el único cliente legítimo es la pieza pública»— cayó con la fase `k`, y se deja constancia en lugar de reescribir la ADR. **§5.1 pasa de dos a tres respuestas sin código**. §7: once códigos, `ADR-00009` entre las que gobiernan, y la salvedad sobre `ADR-00005`. Ningún punto, verbo, papel ni traducción de §5 cambia. Sube minor. |
 | 1.10 | 2026-09-13 | **Remisión a la política de deprecación** (tarea `BT-00035`, sobre `D-02`). **§3.1** suma un párrafo: cuando exista `/v{N+1}/`, `/v{N}/` convive un cuatrimestre como mínimo con `Deprecation` y `Sunset`, y al vencer responde `410`; la política vive en [`../09-Devops/Estrategia-Versionado.md`](../09-Devops/Estrategia-Versionado.md) **6.0** §6.b. **§4** declara que `Deprecation` y `Sunset` son cabeceras **futuras** que ninguna respuesta lleva hoy y que **`410` no entra a los once códigos por esta versión** —lo hará la tarea del primer retiro—, con la medición contra producción del 2026-09-13 transcripta (`/salud` y `/v1/aprovisionamiento`, `200`, cero cabeceras de deprecación). **§6** precisa la remisión que ya tenía. **Ningún punto, verbo, papel, código de respuesta ni fila de §5 cambia; sigue habiendo once códigos.** Sube minor. |
 | 1.11 | 2026-09-13 | **§4.1 corrige el límite del canje, que dejaba afuera a una clase** ([`ADR-00011`](Adrs/ADR-00011-El-Canje-Se-Protege-Por-Cuenta-Y-El-Origen-Tolera-Una-Comision.md)). La cuota del canje **por origen** de `BT-00029` —30 por minuto— la agotaba la comisión entera, porque el front no reenvía la dirección del navegador y la facultad sale por un NAT (`RN-B1`). Entra la fila **«Los fallos, por cuenta»**: diez fallos cada 900 segundos por correo normalizado, desde cualquier origen, en `A-01` y en la forma sin sesión de `A-05`, sin revelar si la cuenta existe. Los topes por origen suben a **600** canjes y **1200** anónimas por minuto, dimensionados para trescientos alumnos detrás de una dirección. El párrafo de umbrales se parte en tres y el de la batería se actualiza. **Ningún punto, verbo, papel ni código de respuesta cambia.** Sube minor. |
+| 1.12 | 2026-11-02 | **Agrega el punto `IA-V1`, `POST /v1/interpretaciones/pistas`**, de la capa de IA V1 (expediente 0002, tramo T5; [`ADR-14009`](../../../Producto/Adrs/ADR-14009-Las-Pistas-Tienen-Endpoint-Propio-Con-Respaldo-De-Plantilla.md)): §3 y §3.1 suman la fila y el recuento pasa a dieciocho puntos, diecisiete bajo `/v1/`. Sin códigos de error nuevos (el texto vacío reusa el de A-18). A-18 no cambia. | Implementador de la capa de IA |
