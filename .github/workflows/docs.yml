@@ -42,3 +42,55 @@ jobs:
 
       - name: Compuerta de docs (huella, autoprueba y controles por ámbito)
         run: bash scripts/docs-local.sh
+
+  # Instantánea OpenAPI (expediente 0003, tramo T-5; decisiones K-07 y K-12). Job APARTE de la compuerta:
+  #   - Sólo en push a main (`if`): nunca en un PR, así que la tarea no recae sobre ningún PR de producto.
+  #   - Es el único job con permiso de escritura, y sólo `contents` y `pull-requests`; la compuerta sigue en lectura.
+  #   - Extracción aislada (`docs-as-code/api/extraer-openapi.sh`): proceso local en el runner, almacén efímero en un
+  #     directorio temporal, clave de firma descartable y puerto propio. Sin Docker, sin secretos, sin despliegue.
+  #   - Si el documento cambió, empuja la rama fija `automatico/instantanea-openapi` y abre (o actualiza) un PR. Ese PR
+  #     lo revisa una persona o agente, que agrega la entrada en `docs-as-code/api/CHANGELOG-API.md`.
+  #   - Si el repositorio no permite que Actions abra PRs, el job lo avisa y queda verde: la rama queda empujada.
+  instantanea-openapi:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    concurrency:
+      group: instantanea-openapi
+      cancel-in-progress: false
+    env:
+      RAMA: automatico/instantanea-openapi
+      GF_OPENAPI_PUERTO: '5199'
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - uses: actions/setup-dotnet@v4.3.1
+        with:
+          dotnet-version: '10.0.403'
+
+      - name: Extraer el documento (aislado)
+        run: bash docs-as-code/api/extraer-openapi.sh
+
+      - name: Abrir o actualizar el PR automático si cambió
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- docs-as-code/api/openapi-v1.json; then
+            echo "La instantánea no cambió."; exit 0
+          fi
+          git diff --stat -- docs-as-code/api/openapi-v1.json
+          git switch -C "$RAMA"
+          git add docs-as-code/api/openapi-v1.json
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "EXP-0003: instantánea OpenAPI regenerada desde ${GITHUB_SHA::7}"
+          git push --force origin "$RAMA"
+          if [ -n "$(gh pr list --head "$RAMA" --state open --json number --jq '.[].number')" ]; then
+            echo "PR abierto actualizado."; exit 0
+          fi
+          gh pr create --base main --head "$RAMA" \
+            --title "EXP-0003: instantánea OpenAPI regenerada" \
+            --body "Regenerada por el job \`instantanea-openapi\` de \`docs.yml\` desde ${GITHUB_SHA}. Antes de fusionar: agregar la entrada en \`docs-as-code/api/CHANGELOG-API.md\`." \
+          || echo "::warning::No se pudo abrir el PR automático (¿Actions sin permiso para crear PRs?). La rama $RAMA quedó empujada."
