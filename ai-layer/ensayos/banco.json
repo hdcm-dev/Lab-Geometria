@@ -1,0 +1,242 @@
+[
+ {
+  "id": "C01",
+  "figura": "Cubo",
+  "campo": "Area",
+  "declarado": 16.0,
+  "derivado": 24.0,
+  "nota": "cubo de arista 2: area con 4 caras"
+ },
+ {
+  "id": "C02",
+  "figura": "Cubo",
+  "campo": "Area",
+  "declarado": 36.0,
+  "derivado": 54.0,
+  "nota": "cubo de arista 3: area con 4 caras"
+ },
+ {
+  "id": "C03",
+  "figura": "Cubo",
+  "campo": "Area",
+  "declarado": 64.0,
+  "derivado": 96.0,
+  "nota": "cubo de arista 4: area con 4 caras"
+ },
+ {
+  "id": "C04",
+  "figura": "Cubo",
+  "campo": "Area",
+  "declarado": 100.0,
+  "derivado": 150.0,
+  "nota": "cubo de arista 5: area con 4 caras"
+ },
+ {
+  "id": "C05",
+  "figura": "Cubo",
+  "campo": "Area",
+  "declarado": 196.0,
+  "derivado": 294.0,
+  "nota": "cubo de arista 7: area con 4 caras"
+ },
+ {
+  "id": "C06",
+  "figura": "Cubo",
+  "campo": "Volumen",
+  "declarado": 4.0,
+  "derivado": 8.0,
+  "nota": "cubo de arista 2: volumen como area de una cara"
+ },
+ {
+  "id": "C07",
+  "figura": "Cubo",
+  "campo": "Volumen",
+  "declarado": 9.0,
+  "derivado": 27.0,
+  "nota": "cubo de arista 3: volumen como area de una cara"
+ },
+ {
+  "id": "C08",
+  "figura": "Cubo",
+  "campo": "Volumen",
+  "declarado": 36.0,
+  "derivado": 216.0,
+  "nota": "cubo de arista 6: volumen como area de una cara"
+ },
+ {
+  "id": "C09",
+  "figura": "Ortoedro",
+  "campo": "Volumen",
+  "declarado": 49.0,
+  "derivado": 1029.0,
+  "nota": "ortoedro 7x7x21: volumen sin el largo"
+ },
+ {
+  "id": "C10",
+  "figura": "Ortoedro",
+  "campo": "Volumen",
+  "declarado": 6.0,
+  "derivado": 24.0,
+  "nota": "ortoedro 2x3x4: volumen sin el largo"
+ },
+ {
+  "id": "C11",
+  "figura": "Ortoedro",
+  "campo": "Volumen",
+  "declarado": 10.0,
+  "derivado": 100.0,
+  "nota": "ortoedro 5x2x10: volumen sin el largo"
+ },
+ {
+  "id": "C12",
+  "figura": "Ortoedro",
+  "campo": "Volumen",
+  "declarado": 9.0,
+  "derivado": 72.0,
+  "nota": "ortoedro 3x3x8: volumen sin el largo"
+ },
+ {
+  "id": "C13",
+  "figura": "Ortoedro",
+  "campo": "Area",
+  "declarado": 28.0,
+  "derivado": 52.0,
+  "nota": "ortoedro 2x3x4: faltan dos caras"
+ },
+ {
+  "id": "C14",
+  "figura": "Ortoedro",
+  "campo": "Area",
+  "declarado": 120.0,
+  "derivado": 160.0,
+  "nota": "ortoedro 5x2x10: faltan dos caras"
+ },
+ {
+  "id": "C15",
+  "figura": "Ortoedro",
+  "campo": "Area",
+  "declarado": 392.0,
+  "derivado": 686.0,
+  "nota": "ortoedro 7x7x21: faltan dos caras"
+ },
+ {
+  "id": "C16",
+  "figura": "Ortoedro",
+  "campo": "Area",
+  "declarado": 16.0,
+  "derivado": 40.0,
+  "nota": "ortoedro 1x2x6: faltan dos caras"
+ },
+ {
+  "id": "C17",
+  "figura": "Cilindro",
+  "campo": "Area",
+  "declarado": 12.57,
+  "derivado": 18.85,
+  "nota": "cilindro r=1 h=2: solo area lateral"
+ },
+ {
+  "id": "C18",
+  "figura": "Cilindro",
+  "campo": "Area",
+  "declarado": 62.83,
+  "derivado": 87.96,
+  "nota": "cilindro r=2 h=5: solo area lateral"
+ },
+ {
+  "id": "C19",
+  "figura": "Cilindro",
+  "campo": "Area",
+  "declarado": 75.4,
+  "derivado": 131.95,
+  "nota": "cilindro r=3 h=4: solo area lateral"
+ },
+ {
+  "id": "C20",
+  "figura": "Cilindro",
+  "campo": "Volumen",
+  "declarado": 12.57,
+  "derivado": 6.28,
+  "nota": "cilindro r=1 h=2: volumen con 2*pi*r*h"
+ },
+ {
+  "id": "C21",
+  "figura": "Cilindro",
+  "campo": "Volumen",
+  "declarado": 62.83,
+  "derivado": 62.83,
+  "nota": "cilindro r=2 h=5: volumen con 2*pi*r*h"
+ },
+ {
+  "id": "C22",
+  "figura": "Cilindro",
+  "campo": "Volumen",
+  "declarado": 75.4,
+  "derivado": 113.1,
+  "nota": "cilindro r=3 h=4: volumen con 2*pi*r*h"
+ },
+ {
+  "id": "C23",
+  "figura": "Rectangulo",
+  "campo": "Area",
+  "declarado": 14.0,
+  "derivado": 12.0,
+  "nota": "rectangulo 3x4: area como perimetro"
+ },
+ {
+  "id": "C24",
+  "figura": "Rectangulo",
+  "campo": "Area",
+  "declarado": 22.0,
+  "derivado": 18.0,
+  "nota": "rectangulo 2x9: area como perimetro"
+ },
+ {
+  "id": "C25",
+  "figura": "Cuadrado",
+  "campo": "Area",
+  "declarado": 12.0,
+  "derivado": 9.0,
+  "nota": "cuadrado de lado 3: area como perimetro"
+ },
+ {
+  "id": "C26",
+  "figura": "Cuadrado",
+  "campo": "Area",
+  "declarado": 20.0,
+  "derivado": 25.0,
+  "nota": "cuadrado de lado 5: area como perimetro"
+ },
+ {
+  "id": "C27",
+  "figura": "Circulo",
+  "campo": "Area",
+  "declarado": 6.28,
+  "derivado": 3.14,
+  "nota": "circulo r=1: area como circunferencia"
+ },
+ {
+  "id": "C28",
+  "figura": "Circulo",
+  "campo": "Area",
+  "declarado": 18.85,
+  "derivado": 28.27,
+  "nota": "circulo r=3: area como circunferencia"
+ },
+ {
+  "id": "C29",
+  "figura": "Circulo",
+  "campo": "Area",
+  "declarado": 31.42,
+  "derivado": 78.54,
+  "nota": "circulo r=5: area como circunferencia"
+ },
+ {
+  "id": "C30",
+  "figura": "Circulo",
+  "campo": "Area",
+  "declarado": 62.83,
+  "derivado": 314.16,
+  "nota": "circulo r=10: area como circunferencia"
+ }
+]

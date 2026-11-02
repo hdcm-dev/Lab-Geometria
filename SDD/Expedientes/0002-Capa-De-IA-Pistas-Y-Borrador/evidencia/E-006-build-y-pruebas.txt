@@ -1,0 +1,16 @@
+# E-006 puertas del repositorio sobre una copia del worktree (sin .git), 2026-11-01
+$ bash scripts/verify-solution-tree.sh
+El árbol de solución está completo.
+arbol rc=0
+$ docker mcr.microsoft.com/dotnet/sdk:10.0: dotnet build -c Release -p:SkipVisorBuild=true -p:MinVerSkip=true; dotnet test --no-build (sin E2E)
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:02:01.55
+build_rc=0
+Passed!  - Failed:     0, Passed:    61, Skipped:     0, Total:    61, Duration: 534 ms - GeometriaFactory.Application.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:    94, Skipped:     0, Total:    94, Duration: 285 ms - GeometriaFactory.Domain.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   436, Skipped:     0, Total:   436, Duration: 38 s - GeometriaFactory.Integration.Tests.dll (net10.0)
+test_rc=0
+rc=0
+No ejecutadas: E2E (pruebas-e2e.sh) y puertas f/g, que necesitan Playwright en contenedor; el cambio no toca codigo ni pruebas.

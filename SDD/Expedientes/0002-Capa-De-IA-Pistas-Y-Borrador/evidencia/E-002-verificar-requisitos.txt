@@ -1,0 +1,7 @@
+$ python3 -I E4-verificar-requisitos.py 01-Especificacion-V1-Pistas.md
+16 requisitos revisados, 0 incompletos
+rc=0
+$ python3 -I E4-verificar-requisitos.py 02-Especificacion-V2-Borrador-De-Comentario.md
+8 requisitos revisados, 0 incompletos
+rc=0
+sha256 del script: de1d4cd26ad1af391205a8e8c7210412075de2c59140d2e9304a74bb17bae8b6

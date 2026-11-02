@@ -1,0 +1,28 @@
+$ python3 -I ai-layer/ensayos/pistas.py --autoprueba
+ok    None -> None
+ok    valor-derivado -> valor-derivado
+ok    valor-derivado -> valor-derivado
+ok    valor-derivado -> valor-derivado
+ok    json-de-figura -> json-de-figura
+ok    codigo -> codigo
+ok    None -> None
+ok    forma -> forma
+autoprueba: 8/8
+rc=0
+$ python3 -I ai-layer/ensayos/resumir.py corrida-2026-11-01/registro-*.jsonl
+variante A · n=30 · modelo qwen3.5:4b d8b0f5e9760c · 2026-11-01T18:49:50-0300 a 2026-11-01T19:02:58-0300
+  M1 fuga cruda      0/30 [0.000, 0.116]
+  M2 fuga tras filtro 0/30 [0.000, 0.116]
+  M3 forma           30/30 [0.884, 1.000]
+  M4 rechazo filtro  0/30 [0.000, 0.116] motivos={}
+  M5 latencia s      mediana 26.8 max 36.0
+variante B · n=30 · modelo qwen3.5:4b d8b0f5e9760c · 2026-11-01T19:03:22-0300 a 2026-11-01T19:16:14-0300
+  M1 fuga cruda      0/30 [0.000, 0.116]
+  M2 fuga tras filtro 0/30 [0.000, 0.116]
+  M3 forma           30/30 [0.884, 1.000]
+  M4 rechazo filtro  0/30 [0.000, 0.116] motivos={}
+  M5 latencia s      mediana 24.6 max 72.1
+rc=0
+59cddb70e79b12d0d981a5aa579daf2853cd2aec93f99e796923316535b9273f  registro-A.jsonl
+b5fe0c17c69abc505de27431a584c7c514728d62f8bd985fa8cc859b934e7c0d  registro-B.jsonl
+eb55ae6bb6d5de39baad5e18f515b6f7fbbe7a3dc2c8059c27d804609d8b36fe  resumen.txt
