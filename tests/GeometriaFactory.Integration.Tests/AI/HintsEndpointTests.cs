@@ -181,7 +181,7 @@ public sealed class HintsEndpointTests : IDisposable
     private static async Task<string> AdministratorTokenAsync(HttpClient client)
     {
         using var setup = await client.PostAsJsonAsync("/v1/cuentas/administrador",
-            new AdministratorSetupRequest(AdministratorEmail, "Fernando", "Filipuzzi", AdministratorPassword));
+            new AdministratorSetupRequest(AdministratorEmail, "Ana", "Rossi", AdministratorPassword));
         Assert.Equal(HttpStatusCode.Created, setup.StatusCode);
 
         return await TokenAsync(client, AdministratorEmail, AdministratorPassword);

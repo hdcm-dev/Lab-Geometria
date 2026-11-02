@@ -1,0 +1,12 @@
+Método: barrido grep sobre las líneas agregadas por la rama (git diff c5afa0e, con lo de este commit en el índice) y sobre los mensajes de commit c5afa0e..HEAD
+Base: rama ai-layer/implementacion-v1, commit del tramo T8, 2026-11-02
+Quién: implementador de la capa de IA (agente)
+
+Patrones (los valores reales se pasan por variable y NO se asientan acá):
+  1. la dirección y el puerto reales del servidor de modelos del laboratorio (salvo el ejemplo admitido localhost)  -> 0
+  2. direcciones IPv4 privadas (10/8, 100.64/10, 172.16/12, 192.168/16)                                            -> 0
+  3. nombres de host o de contenedor privados y de la red privada                                                  -> 0
+  4. A11: rutas y usuario del host (/home/<usuario>, /Users/, el usuario de la sesión)                              -> 0
+
+Ejemplo admitido, contado aparte: 'localhost:11434' aparece 5 veces (appsettings, AiOptions, Entornos-Deploy y pruebas).
+Resultado: 0 coincidencias fuera del ejemplo admitido.

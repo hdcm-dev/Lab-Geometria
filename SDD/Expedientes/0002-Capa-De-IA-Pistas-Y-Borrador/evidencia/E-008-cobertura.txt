@@ -1,0 +1,27 @@
+Comando: ./scripts/coverage.sh (QG-03, QG-06 y QG-04), con SkipVisorBuild=true y MinVerSkip=true
+Base: la misma de E-007, 2026-11-02
+Quién: implementador de la capa de IA (agente), en contenedor mcr.microsoft.com/dotnet/sdk:10.0.403
+
+QG-03 · cobertura por proyecto de código
+  proyecto                                       líneas              ramas   veredicto
+  GeometriaFactory.Api                1574/1622    97.0%   264/303     87.1%   PASA
+  GeometriaFactory.Application         575/599     96.0%   165/192     85.9%   PASA
+  GeometriaFactory.Contracts           152/152    100.0%     0/0        0.0%   sin umbral de líneas en la fuente
+  GeometriaFactory.Domain              335/348     96.3%   141/162     87.0%   PASA
+  GeometriaFactory.Infrastructure     2150/2212    97.2%   290/341     85.0%   PASA
+  GeometriaFactory.Web                1618/1968    82.2%   696/1082    64.3%   sin umbral de líneas en la fuente
+
+QG-06 · el validador de figuras, acotado a sus dos motores — pide 95 % de líneas
+  LocalFigureValidator.cs              221/223     99.1%   177/206     85.9%   PASA
+
+QG-04 · pirámide invertida — pide 60 % de integración
+  geometriafactory.application.tests    70 casos
+  geometriafactory.domain.tests         95 casos
+  geometriafactory.integration.tests   577 casos
+
+  integración 577 · unitarias 165 · total 742  →  77.8 % de integración   PASA
+
+CONFORME · QG-03, QG-06 y QG-04 pasan
+
+Las puertas pasan.
+coverage_rc=0
