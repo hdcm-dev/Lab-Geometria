@@ -15,6 +15,7 @@
 #                 docs-as-code/**   modo DOCS_MODO_DOCS_AS_CODE (por defecto «avisa»; decisión D-10)
 #                 README.md         avisa (nunca bloquea en la ola 1, H-14)
 #                 SDD/Docs/**       avisa, sin _legacy/ (generado; lo desalineado se eleva, AGENTS.md:61)
+#   punto de uso  anclas, limite-didactico y pista-sin-enlaces sobre docs-as-code/** (tramo T-3), en avisa
 # En «avisa» un control con hallazgos queda en el resumen y no cambia el código de salida.
 # Código de salida: 0 verde; 1 algún paso que bloquea dio rojo; 2 error de uso de algún control.
 set -uo pipefail
@@ -84,6 +85,12 @@ paso "docs-as-code · id-unico"         "$MODO_DAC" python3 -I "$DG" trazas docs
 paso "docs-as-code · fuera"            "$MODO_DAC" python3 -I "$DG" fuera docs-as-code
 paso "docs-as-code · enlaces-internos" "$MODO_DAC" python3 -I "$CTL/enlaces_internos.py" docs-as-code
 paso "docs-as-code · delivery-publico" "$MODO_DAC" python3 -I "$CTL/delivery_publico.py" --exigir docs-as-code
+
+# Punto de uso (tramo T-3): arrancan en avisa y no siguen a DOCS_MODO_DOCS_AS_CODE. limite-didactico pasa a bloquea
+# después de dos corridas verdes de su par; anclas y pista-sin-enlaces siguen en avisa (resolución del expediente 0003, §5.2).
+paso "docs-as-code · anclas"            avisa python3 -I "$CTL/anclas.py" docs-as-code
+paso "docs-as-code · limite-didactico"  avisa python3 -I "$CTL/limite_didactico.py" docs-as-code
+paso "docs-as-code · pista-sin-enlaces" avisa python3 -I "$CTL/pista_sin_enlaces.py" docs-as-code
 
 paso "README.md · esquema"             avisa python3 -I "$DG" esquema README.md
 paso "README.md · enlaces-internos"    avisa python3 -I "$CTL/enlaces_internos.py" README.md
