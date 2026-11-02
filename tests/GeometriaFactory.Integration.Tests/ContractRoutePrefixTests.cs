@@ -58,6 +58,8 @@ public sealed class ContractRoutePrefixTests : IDisposable
         ("A-16", "GET", "/salud"),
         ("A-17", "GET", "/v1/aprovisionamiento"),
         ("A-18", "POST", "/v1/interpretaciones"),
+        // Alta del expediente 0002 (capa de IA, V1, `ADR-14009`).
+        ("IA-V1", "POST", "/v1/interpretaciones/pistas"),
     ];
 
     private readonly string _storePath = DataServiceHarness.ReserveStorePath();
@@ -133,22 +135,23 @@ public sealed class ContractRoutePrefixTests : IDisposable
     }
 
     /// <summary>
-    /// El recuento que `Contratos-REST.md` §3 declara: diecisiete puntos, dieciséis bajo el
-    /// prefijo y uno exento. Se cuenta sobre la lista y sobre lo publicado, para que las dos
+    /// El recuento que `Contratos-REST.md` §3 declara: dieciocho puntos, diecisiete bajo el
+    /// prefijo y uno exento. **Alta del expediente 0002**: eran diecisiete y dieciséis hasta que la
+    /// capa de IA sumó `POST /v1/interpretaciones/pistas`. Se cuenta sobre la lista y sobre lo publicado, para que las dos
     /// direcciones no cierren por casualidad con listas de distinto tamaño.
     /// </summary>
     [Fact]
-    public void SeventeenPointsSixteenUnderThePrefixAndOneExempt()
+    public void EighteenPointsSeventeenUnderThePrefixAndOneExempt()
     {
-        Assert.Equal(17, Contrato.Length);
-        Assert.Equal(16, Contrato.Count(p => p.Ruta.StartsWith("/v1/", StringComparison.Ordinal)));
+        Assert.Equal(18, Contrato.Length);
+        Assert.Equal(17, Contrato.Count(p => p.Ruta.StartsWith("/v1/", StringComparison.Ordinal)));
         Assert.Single(Contrato, p => IsExempt(p.Ruta));
 
         var publicadasDelContrato = PublishedRoutes()
             .Where(r => r.Ruta.StartsWith("/v1/", StringComparison.Ordinal))
             .Distinct()
             .Count();
-        Assert.Equal(16, publicadasDelContrato);
+        Assert.Equal(17, publicadasDelContrato);
     }
 
     // ------------------------------------------------------------ sin prefijo: 404 ----------

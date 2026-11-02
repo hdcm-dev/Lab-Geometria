@@ -87,6 +87,12 @@ public static class WorkEndpoints
     /// </remarks>
     public const string InterpretationsRoute = "/interpretaciones";
 
+    /// <summary>
+    /// Ruta de las pistas de la capa de IA (expediente 0002, `ADR-14009`). Cuelga de la
+    /// interpretación porque, como ella, **no guarda nada**.
+    /// </summary>
+    public const string HintsRoute = InterpretationsRoute + "/pistas";
+
     public static IEndpointRouteBuilder MapWorkEndpoints(this IEndpointRouteBuilder endpoints)
     {
         ArgumentNullException.ThrowIfNull(endpoints);
@@ -188,6 +194,49 @@ public static class WorkEndpoints
                 ContractTranslation.Tree(interpretation.Tree)));
         })
         .WithName("InterpretWork")
+        .RequireAuthorization();
+
+        // ---- Pistas de la capa de IA (expediente 0002, V1) --------------------------------------
+        // UN PUNTO PROPIO Y NO UNA AMPLIACIÓN DE A-18 (`ADR-14009`): A-18 sigue igual, en contrato,
+        // latencia y handler. Éste corre el MISMO validador —que decide— y pone pistas al lado.
+        //
+        // EXISTE AUNQUE LA CAPA ESTÉ APAGADA (decisión D-FLAG): sin dirección del servidor de
+        // modelos responde 200 con las plantillas. La Web no lo llama mientras `AI:HintsEnabled`
+        // sea `false`, que es el valor por omisión.
+        //
+        // MISMA GUARDIA QUE A-18: acceso firmado, papel `Alumno`, el mismo límite de tasa y el mismo
+        // tope de cuerpo, que son los del contrato entero. Y NO SE REGISTRA NADA DEL TEXTO.
+        endpoints.MapPost(HintsRoute, async (
+            WorkHintsRequest request,
+            HttpContext context,
+            ExplainObservationsUseCase explain,
+            ISystemClock clock,
+            CancellationToken cancellationToken) =>
+        {
+            var now = clock.UtcNow;
+
+            if (RoleOf(context.User) != Role.Student)
+            {
+                return StudentOnly(now);
+            }
+
+            if (string.IsNullOrWhiteSpace(request?.OriginalJson))
+            {
+                return ContractTranslation.Problem(ConditionCode.RequiredFieldMissing, now, "OriginalJson");
+            }
+
+            var explained = await explain.ExplainAsync(request.OriginalJson, cancellationToken).ConfigureAwait(false);
+
+            return Results.Ok(new WorkHintsResponse(
+                ContractTranslation.Observations(explained.Interpretation.Observations),
+                [.. explained.Hints.Select(h => new WorkObservationHints(
+                    h.ObservationIndex,
+                    h.Hints.Level1,
+                    h.Hints.Level2,
+                    h.Hints.Level3,
+                    h.Hints.Origin.ToString()))]));
+        })
+        .WithName("ExplainObservations")
         .RequireAuthorization();
 
         // ---- A-11 · la reedición de un trabajo en `Draft` ------------------------------------
