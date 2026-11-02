@@ -55,6 +55,7 @@
   - [6.24 Agregados por la documentación de la superficie HTTP, etapa `g`, fuera de los 155](#624-agregados-por-la-documentación-de-la-superficie-http-etapa-g-fuera-de-los-155)
   - [6.25 Agregados por el árbol del texto, etapa `g`, fuera de los 155](#625-agregados-por-el-árbol-del-texto-etapa-g-fuera-de-los-155)
   - [6.26 Atributos de marcado autorizados por la mesa del 2026-09-14, fuera de los 155](#626-atributos-de-marcado-autorizados-por-la-mesa-del-2026-09-14-fuera-de-los-155)
+  - [6.27 Agregados por la capa de IA, expediente 0002, fuera de los 155](#627-agregados-por-la-capa-de-ia-expediente-0002-fuera-de-los-155)
 - [7. Cómo se verifica esta norma](#7-cómo-se-verifica-esta-norma)
 - [8. El plan de renombre](#8-el-plan-de-renombre)
   - [8.1 Los siete tramos](#81-los-siete-tramos)
@@ -370,6 +371,7 @@ La versión 1.0 emitió **42 conceptos** y dejó fuera los 101 códigos, porque 
 | Agregados por la documentación de la superficie HTTP (1.22), **fuera de los 155** | 10 | 10 | §6.24 |
 | Agregados por el árbol del texto (1.23), **fuera de los 155** | 14 | 14 | §6.25 |
 | Atributos de marcado autorizados por la mesa del 2026-09-14 (1.31), **fuera de los 155** | 13 | 13 | §6.26 |
+| Capa de IA, expediente 0002 (1.32), **fuera de los 155** | 44 | 44 | §6.27 |
 
 **Las cinco filas agregadas por la etapa `a` tampoco entran en los 155, y por el mismo motivo que las de §6.11:** son conceptos que **no existían** cuando se contaron las seis clases —el cuerpo de la respuesta del punto de salud y el nombre propio del *bundle* en `window`—, y entran por el corolario 4 de §6.1, que es lo que esta norma manda hacer cuando aparece un concepto sin fila. **Los recuentos de las seis clases no cambian**: 155 sigue siendo 155, y el control `V-1` cuadra contra las ocho tablas más estas cinco filas, que llevan su marca. **Lo mismo vale para las 214 que agrega la etapa `b` en §6.12**, que desde la 1.6 es la novena tabla del rango, **para las 109 que agrega la etapa `c` en §6.13** —106 propias más las tres que la 1.8 sumó—, que desde la 1.7 es la décima, **para las 39 que agrega §6.14**, que desde la 1.8 es la undécima —27 las trajo la marca de sesión, 5 más el guardián de sesión de la 1.9, 5 más el arreglo del cambio forzado de la 1.10 y 2 más la guardia de arranque de la clave de firma de la 1.11— **para las 36 que agrega §6.15**, que desde la 1.12 es la duodécima —16 tipos y 20 miembros del ciclo de vida de la cuenta de alumno del lado del servicio— **para las 41 que agrega §6.16**, que desde la 1.13 es la decimotercera —2 tipos, 35 miembros, propiedades y valores, y 4 iconos de la interfaz de esa misma etapa— **y para las 19 que agrega §6.17**, que desde la 1.14 es la decimocuarta —2 superficies derivadas, 8 funciones del guion de interacción y 9 atributos de marcado que ese guion lee— **para las 8 que agrega §6.18**, que desde la 1.15 es la decimoquinta —3 tipos y 5 miembros del guardián 1 de `Web ADR-10003` §2 y del punto de acceso anónimo que lo hace posible— **para las 47 que agrega §6.19**, que desde la 1.16 es la decimosexta —16 tipos, 4 valores de conjunto cerrado y 27 miembros del trabajo con dueño, estado y persistencia— **y para las 27 que agrega §6.20**, que desde la 1.17 es la decimoséptima —3 tipos, 22 miembros, propiedades y valores, y 2 iconos de la interfaz de esa misma etapa—. Y la etapa `c` deja además una constancia que vale la pena leer al revés: **de los veinte códigos de condición que escribió, cero necesitaron fila nueva**, porque los veinte ya estaban en §6.8 con su nombre inglés fijado por `F-03`. El glosario hizo exactamente lo que §6.1 promete. **La etapa `e` la reproduce sobre la población más grande de las tres**: de los **diecisiete** códigos que escribió —catorce del dominio, tres propios de la aplicación y tres del contrato— **cero necesitaron fila nueva**, y entre ellos está el homónimo declarado de §6.9, `WORK_NOT_FOUND`, que la etapa escribió **dos veces, una por catálogo, y no unificó**, porque lo que los separa es el tipo que los contiene. **La etapa `d` reproduce la constancia sobre una población mayor**: de los **quince** códigos que escribió —siete del dominio, tres propios de la aplicación, uno de infraestructura y cuatro del contrato— **cero necesitaron fila nueva**, y entre ellos están los dos casos difíciles que `F-03` había dejado resueltos de antemano: la **unificación** de §6.9, que le da a `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` y a `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` el mismo nombre inglés, y los **dos identificadores retirados por RN-02016** de §6.8.5, que la etapa `d` **no recicló**.
 
@@ -2135,6 +2137,70 @@ desde la etapa `b`, declaradas y sin usar. Esta etapa las usa por primera vez.
 
 **Nombres en castellano en cuatro familias** (`escena-*`, `preparando`, `servicio`, `fecha-no-representable`): la regla de §5 pide inglés para identificadores nuevos. **No se renombran acá**: renombrarlos toca marcado, guion y pruebas, y `E-6` manda autorizarlos tal como están. Queda como deuda con evento: la próxima unidad que toque esos componentes.
 
+### 6.27 Agregados por la capa de IA, expediente 0002, fuera de los 155
+
+**Por qué existe esta sección.** La capa de IA de nivel A0 (`ai-layer/`, expediente
+[0002](../../Expedientes/0002-Capa-De-IA-Pistas-Y-Borrador/README.md)) nombra tipos que no existían. Por §6.1
+y por `ADR-14010` entran **acá primero** y recién después al código. Las **19 filas de §6.27.1 son las de
+`ai-layer/04-Propuesta-Norma-De-Nomenclatura.md` §2, sin cambios**; las de §6.27.2 son las que la
+construcción de V1 necesitó además, cada una con su motivo. Las filas de V2 (`ICommentDraftWriter` y sus
+cuatro hermanas) entran **reservadas**: la capacidad está diferida (actuación 007) y no se escriben en código
+hasta que se reabra. **Ningún código de condición nuevo**: el pedido sin texto reusa `RequiredFieldMissing`.
+
+#### 6.27.1 Filas propuestas por la especificación (19)
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| redactor de pistas | `IObservationHintWriter` | Puerto | `ai-layer/01-Especificacion-V1-Pistas.md` §3.3 |
+| pedido de pistas | `ObservationHintRequest` | Tipo | ídem §3.3 |
+| resultado de pistas | `HintResult` | Tipo | ídem §3.3 |
+| pistas | `Hints` | Tipo | ídem §3.3 |
+| nivel 1, 2, 3 de la pista | `Level1`, `Level2`, `Level3` | Miembros | ídem §3.3 |
+| origen de la pista | `HintOrigin` | Tipo, conjunto cerrado | ídem §3.3 |
+| modelo / plantilla (origen) | `Model` / `Template` | Valores de conjunto cerrado | ídem §3.3 |
+| sentido de la diferencia | `DiscrepancyDirection` | Tipo, conjunto cerrado | ídem §3.3 |
+| mayor / menor (sentido) | `Above` / `Below` | Valores de conjunto cerrado | ídem §3.3 |
+| explicar observaciones | `ExplainObservationsUseCase` | Caso de uso | ídem §5.1 |
+| redactor de pistas con modelo | `ModelObservationHintWriter` | Adaptador | ídem §5.1 |
+| filtro de pistas | `HintFilter` | Tipo | ídem §4.2 |
+| pistas de plantilla | `TemplateHints` | Tipo | ídem §5.2 |
+| redactor de borradores de comentario | `ICommentDraftWriter` | Puerto, **reservado (V2 diferida)** | `ai-layer/02-Especificacion-V2-Borrador-De-Comentario.md` §3 |
+| pedido de borrador | `CommentDraftRequest` | Tipo, **reservado** | ídem §3 |
+| resultado del borrador | `DraftResult` | Tipo, **reservado** | ídem §3 |
+| redactar borrador de comentario del trabajo | `DraftWorkCommentUseCase` | Caso de uso, **reservado** | ídem §3 |
+| redactor de borradores con modelo | `ModelCommentDraftWriter` | Adaptador, **reservado** | ídem §3 |
+| capa de IA (subsegmento de espacio de nombres) | `AI` | Superficie derivada | `ai-layer/03-ADR.md` ADR-IA-03, asentada como `ADR-14008` |
+
+#### 6.27.2 Filas que agrega la construcción de V1 (25)
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| escribir las pistas | `WriteAsync` | Miembro de `IObservationHintWriter` | `ai-layer/01` §3.3, la firma |
+| plantilla del pedido | `TemplateFor` | Miembro de `IObservationHintWriter` | Lo exige el tope de REQ-IA-10: la observación sexta sale de plantilla **sin** pasar por el modelo, y Application no ve `TemplateHints` |
+| especie del resultado | `HintResultKind` | Tipo, conjunto cerrado | `ai-layer/01` §3.3, la tabla de tres resultados |
+| ok / degradado / rechazado | `Ok` / `Degraded` / `Rejected` | Valores de conjunto cerrado | ídem |
+| motivo | `Reason` | Miembro de `HintResult` | ídem: el motivo va a la traza, nunca el texto |
+| observaciones explicadas | `ExplainedObservations` | Tipo | Salida de `ExplainObservationsUseCase` |
+| pistas de una observación | `ObservationHints` | Tipo | ídem, una por advertencia explicada |
+| índice de la observación | `ObservationIndex` | Miembro | Posición de la advertencia en la lista de observaciones de A-18 |
+| explicar | `ExplainAsync` | Miembro de `ExplainObservationsUseCase` | — |
+| cupo de pistas | `HintConcurrencyGate` | Tipo | REQ-IA-10, decisión D-CUPO de la mesa (actuación 006) |
+| tomar / soltar el cupo | `TryEnter` / `Release` | Miembros de `HintConcurrencyGate` | ídem |
+| opciones de la capa de IA | `AiOptions` | Tipo | REQ-IA-15, decisión D-FLAG |
+| dirección del servidor de modelos | `Endpoint` | Miembro de `AiOptions` | ídem; **sin valor por omisión** |
+| modelo | `Model` (miembro) | Miembro de `AiOptions` | ídem. Homónimo declarado del valor `HintOrigin.Model`: otro concepto con el mismo nombre (§4.1) |
+| segundos de espera | `TimeoutSeconds` | Miembro de `AiOptions` | REQ-IA-10 |
+| tope de observaciones | `MaxObservations` | Miembro de `AiOptions` | REQ-IA-10 |
+| pistas habilitadas | `HintsEnabled` | Miembro de `AiOptions` y llave de la Web | D-FLAG; `false` por omisión |
+| prompt de sistema | `SystemPrompt` | Constante de `ModelObservationHintWriter` | `ai-layer/01` §5.2 |
+| comprobar | `Check` | Miembro de `HintFilter` | `ai-layer/01` §4.2 |
+| ruta de pistas | `HintsRoute` | Constante de `WorkEndpoints` | `ai-layer/04` §3 |
+| pedido de pistas (contrato) | `WorkHintsRequest` | Tipo de contrato | Mismo cuerpo que `WorkInterpretationRequest` |
+| respuesta de pistas (contrato) | `WorkHintsResponse` | Tipo de contrato | Observaciones idénticas a A-18 más las pistas |
+| pistas de una observación (contrato) | `WorkObservationHints` | Tipo de contrato | — |
+| explicar observaciones (cliente) | `ExplainObservationsAsync` | Miembro de `DataServiceClient` | — |
+| formulario de pistas | `WorkHintsForm` / `work-hints` | Tipo y nombre de formulario de `WorkSubmission.razor` | Divulgación progresiva, decisión D-NIVEL3 |
+
 ## 7. Cómo se verifica esta norma
 
 Una norma sin instrumento de verificación es una intención. Siete controles, y **la 1.4 declara cuál de ellos se verifica tal como está escrito y cuál exige que alguien lo interprete** —la tabla está debajo de las tres formulaciones completas—:
@@ -2357,6 +2423,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.32 | 2026-11-02 | **Agrega §6.27 con los identificadores de la capa de IA (expediente 0002)**: las 19 filas de `ai-layer/04-Propuesta-Norma-De-Nomenclatura.md` §2 sin cambios —las cinco de V2 marcadas **reservadas** porque V2 quedó diferida— y 25 filas que la construcción de V1 necesitó, con su motivo. Entran antes del código, como manda §6.1 y `ADR-14010`. Ningún código de condición nuevo; un homónimo declarado (`Model`). No renombra nada. | Implementador de la capa de IA, por la resolución de la actuación 007 del expediente 0002 |
 | 1.31 | 2026-09-14 | **Agrega §6.26 con los trece atributos `data-gf-*`** que las etapas `e` a `h` sumaron al marcado sin autorizar, con su motivo. Mesa del 2026-09-14, `R-11`, escalada `E-6` aprobada. `scripts/verify-stage-c.sh` los suma a su lista cerrada, que pasa de diecisiete a treinta. Declara la deuda de los nombres en castellano. Estado anterior en `_legacy/2026-09-14/`. | Claude Code, corrida de reanudación |
 | 1.30 | 2026-09-14 | **§6.8.6 suma `CONTRATO_DOMINIO_DE_CORREO_NO_ADMITIDO` → `EMAIL_DOMAIN_NOT_ADMITTED`** ([`Api ADR-00012`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00012-El-Autorregistro-Admite-Los-Dominios-Que-El-Despliegue-Declara.md), mesa del 2026-09-14 `R-07`/`E-1`): «21» pasa a «22» en el título de §6.8.6 y en la fila `ErrorCode` del glosario, y el cuadre declara el desfase con el intake. Estado anterior en `_legacy/2026-09-14/`. | Claude Code, corrida de reanudación |
 | 1.29 | 2026-08-31 | **§8 registra el cierre del tramo `R-3`, y su cifra principal es la que NO se tocó.** Se clasificaron las **723 ocurrencias candidatas** del corpus vivo contra las cinco formas de §4.1, **antes de editar**, que es lo que `V-4` exige: **580 son registro histórico**, **138 son este documento hablando de sí mismo** —§6.8 es la fuente del tramo y no su objeto—, **3 son cita textual** y **una sola era uso propio**. Esa una era `TIPO_DE_PIEZA_DESCONOCIDO`, escrita a mano en la salida de `samples/domain/02-intermedio`; pasa a `UNKNOWN_PIECE_TYPE`, que este glosario le fija **aunque la constante no exista todavía** —es uno de los ocho de la etapa `f` que el dominio deliberadamente no escribió—. **722 de 723 no se tocan.** El inventario está en [`../Audit/Inventario-Renombre-F03-2026-08-31.md`](../Audit/Inventario-Renombre-F03-2026-08-31.md), con la ocurrencia que el clasificador automático confunde con uso propio **declarada a mano**: una prosa que describe lo que un documento decía antes de una corrección ya aplicada. **El hallazgo `I-03` se cierra con su tamaño real**, que se había estimado en «~90 códigos, 731 ocurrencias, cuatro o cinco tandas» **contando sin clasificar** — exactamente el error que §4.1 nombra. Sube minor: cierra un tramo y no renombra el corpus. |
