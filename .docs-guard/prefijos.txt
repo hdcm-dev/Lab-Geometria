@@ -1,0 +1,13 @@
+# Registro cerrado de prefijos de ID de Lab-Geometria (artefacto A-02; decisiones D-04 y D-07 del expediente 0003).
+# Lo lee la copia de docs-guard (dg.py esquema y trazas). Un prefijo nuevo entra por un PR que lo agrega acá.
+# Columnas: prefijo, ámbito y descripción.
+#   interno  el ID se declara en este repositorio (doc_id o encabezado): si no resuelve, la traza es un hallazgo.
+#   externo  el ID se declara en otro sistema y resuelve contra el SHA de un source.lock.
+#
+# docs-as-code/ (expediente 0003; libres en todo el repo según la ficha FIC-GEO-001, §1, comando 9)
+FIC     interno   ficha, notas y anexos del sistema documentador
+AUD     interno   registro de audiencias
+RD      interno   regla o requerimiento documental (las filas del RRD usan RD-nn)
+PU      interno   catálogo del punto de uso
+# Heredado: el doc_id del SDD (decisión D-04), en SDD/Docs/**
+DOC     interno   documento del corpus SDD (DOC-…-README-nn)
