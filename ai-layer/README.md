@@ -1,5 +1,8 @@
 # ai-layer · Especificación de una capa de IA para la Fábrica de Geometría
 
+> **Estado al 2026-11-02: V1 construida, con el flag apagado; V2 especificada y diferida** (expediente 0002,
+> actuaciones 005 a 007 y constancia del tramo T8). El párrafo de abajo es el del 2026-11-01 y se conserva.
+>
 > Carpeta de especificación. **Nada de esto está construido** y nada toca `src/`, `tests/`, el intake ni el
 > despliegue. Expediente: [`SDD/Expedientes/0002-Capa-De-IA-Pistas-Y-Borrador/`](../SDD/Expedientes/0002-Capa-De-IA-Pistas-Y-Borrador/README.md).
 > Fecha: 2026-11-01. Base: `main` `5f07b12`.
@@ -52,6 +55,9 @@ o confundió está registrado como hallazgos K-nn en la bitácora pública de es
 
 ## 5. Límites
 
-- Las pruebas de los requisitos están **especificadas**, no escritas.
+- ~~Las pruebas de los requisitos están **especificadas**, no escritas.~~ **Superado el 2026-11-02**: V1
+  está construida con sus pruebas de garantía (REQ-IA-01 a 11, 15 y 16), con el flag apagado por omisión;
+  la matriz está en `SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Cobertura-Pruebas.md` §11.x.
+  Las ADR-IA-01 a 05 son `ADR-14006` a `ADR-14010`. V2 sigue especificada y **diferida**.
 - La revisión humana del checklist está pendiente.
 - El ingreso al intake, el servidor de PROD y el número de las ADR son del Product Owner.

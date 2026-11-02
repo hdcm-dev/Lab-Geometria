@@ -3,6 +3,9 @@
 > Plantilla: `E4-Checklist-Completitud.md` del Conocimiento de especificación v0 (bitácora de la guía 16,
 > etapa E4), que reproduce su §11. Una tabla por especificación. Fecha: 2026-11-01.
 
+> **Estado al 2026-11-02 (expediente 0002):** V1 **construida, flag apagado**; V2 especificada, **diferida**.
+> El checklist de abajo se conserva tal como lo dejó el revisor 1; la revisión humana sigue pendiente.
+
 ## Índice
 
 - [1. Datos de la revisión](#1-datos-de-la-revisión)
