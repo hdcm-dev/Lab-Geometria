@@ -26,8 +26,22 @@ public sealed class PublicPieceHarness : WebApplicationFactory<SessionTokenStore
 {
     private readonly HttpMessageHandler _dataServiceHandler;
 
-    public PublicPieceHarness(HttpMessageHandler dataServiceHandler) =>
+    private readonly IReadOnlyDictionary<string, string?> _settings;
+
+    public PublicPieceHarness(HttpMessageHandler dataServiceHandler)
+        : this(dataServiceHandler, new Dictionary<string, string?>())
+    {
+    }
+
+    /// <summary>
+    /// Con llaves de configuración propias de la pieza. Lo agrega el expediente 0002 para encender
+    /// <c>AI:HintsEnabled</c> en las pruebas de pistas; sin llaves, la pieza es la de siempre.
+    /// </summary>
+    public PublicPieceHarness(HttpMessageHandler dataServiceHandler, IReadOnlyDictionary<string, string?> settings)
+    {
         _dataServiceHandler = dataServiceHandler;
+        _settings = settings;
+    }
 
     /// <summary>El almacén de testigos del proceso, para poder ejercitar el reciclado.</summary>
     public SessionTokenStore Tokens => Services.GetRequiredService<SessionTokenStore>();
@@ -46,6 +60,11 @@ public sealed class PublicPieceHarness : WebApplicationFactory<SessionTokenStore
         builder.UseEnvironment("Production");
 
         builder.UseSetting("ApiBaseUrl", "http://el-servicio-de-datos/");
+
+        foreach (var (key, value) in _settings)
+        {
+            builder.UseSetting(key, value);
+        }
 
         builder.ConfigureTestServices(services =>
             services.AddHttpClient<DataServiceClient>(client =>

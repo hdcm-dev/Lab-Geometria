@@ -2,9 +2,9 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Envio-De-Trabajo.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Aprobado
-**Fecha:** 2026-08-09
+**Fecha:** 2026-11-02
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
 **Variante:** UX/UI
 **Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-10005-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md` íntegro —§4, FA-01 a FA-06, §6, §6.1 y CA-01 a CA-08—; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-03, RT-04, RT-05, RT-07, RT-08, RT-11) y §7; `../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md` §4.1, §4.2, §4.5 y §6; `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md` §1, §5 (tercero, cuarto, quinto y sexto criterio); `NB-00003` §1, §5 (primero, segundo y quinto criterio); `NB-00005` §5 (segundo y tercer criterio); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-06, F-09, F-10, F-22), §4.1 (RN-10005, RN-10008, RN-10009), §4.2, §6 (flujos 2 y 4), §7 (CL-3, CL-4), §17.6 P.11 punto 4 y punto 5, §20.E-1 y §20.E-2; `Design-Rules-Web-Generico.md` §3, §4.4, §4.6, §4.9, §5, §7, §8; `Design-Rules-Blazor-Mudblazor.md` §2, §4, §5
@@ -122,6 +122,12 @@ Estado de resultado, que reemplaza el contenido tras el envío y antes de volver
 | Enviar | Acción primaria | Se envía el texto **carácter por carácter** tal como se pegó, y el resultado decide el estado | Nombre, fecha y texto completos |
 | Volver a enviar tras un texto que no verificó | Acción primaria | Mismo contrato, con el identificador ya asignado. **Cuantas veces haga falta** | El trabajo está en estado `Borrador` |
 | Abandonar la superficie | Navegación fuera | Se **libera la instancia**. Nada de lo escrito sobrevive del lado de la pieza pública | — |
+| Ver pistas *(sólo con `AI:HintsEnabled=true`; expediente 0002)* | «Ver pistas» junto a una advertencia del resultado | Se piden las pistas del texto enviado **sin guardar nada** y se muestra **sólo el nivel 1**, con su rótulo de origen («Pista automática» o «Pista de plantilla») | Resultado con al menos una advertencia; flag encendido |
+| Otra pista / Ver la última pista | Botón explícito en el panel de pistas | Aparece el nivel 2; el nivel 3 **sólo** con «Ver la última pista» (punto C del lote al PO). Lo no pedido **no está en el marcado** | Panel de pistas abierto |
+
+**Con la configuración por omisión (`AI:HintsEnabled` en `false`) las dos filas de arriba no existen**: la
+pantalla no muestra el botón, no lleva el formulario y no hace ningún pedido nuevo. Es la condición que
+permite fusionar la capa de IA sin cambiar la experiencia publicada.
 
 ## 5. Estados
 
@@ -191,3 +197,4 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | 1.0 | 2026-08-09 | Corrección absorbida de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`, **sin subir versión** por `Master-Prompt.md` §5. **`AB2-09`**: §2 suma la nota que declara deliberado el punto decimal de `declarado` y `derivado`, con la misma redacción que llevan `Wireframes-Vista-De-Trabajo.md` §2 y `Representacion-Lista-De-Observaciones.md` §1. La entrada de control de cambios de la retroalimentación de la Fase B2 declaraba esa nota como incorporada y **la nota no estaba en el documento**: la entrada quedó anotada con esa constancia, para no borrar la traza de la discrepancia. |
 | 1.1 | 2026-08-16 | **Absorbe [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md).** §3 y §4: la acción de previsualizar deja de declararse «sin ninguna llamada al servicio de datos» y pasa a **pedir la interpretación sin guardar** y entregarle las piezas reconstruidas al visor. **Es la contrapartida directa de la decisión y no un efecto imprevisto**: el visor ya no interpreta, de modo que alguien tiene que reconstruir las piezas y quien sabe hacerlo está del otro lado. **Enviar sigue siendo la única acción de guardado** y la previsualización sigue sin escribir nada. La nota de alcance **no cambia y se explicita por qué sigue siendo cierta**: que las piezas se hayan podido reconstruir para dibujarlas no dice que el trabajo verifique —un trabajo con advertencias se dibuja entero—. Sube minor: ninguna acción se agrega ni se retira, y lo que cambia es de dónde sale el dato que la previsualización dibuja. | Product Owner (decisión) · Orquestador SDD |
 | 1.2 | 2026-08-31 | **`U-06` del plan de la mesa: las promesas que este modo de render no puede cumplir se acotan, y no se retiran.** `ADR-10001` **1.1** §2.1 declaró el reparto real —**seis superficies interactivas de catorce**— y de ahí se sigue que en las estáticas **no existe el instante que un esqueleto ocupa** ni circuito que se pueda cortar: el servidor entrega el documento completo o nada. Las filas **Cargando** y **Reconectando** de las superficies estáticas quedan marcadas **NO APLICA**, y `Credencial-Propia` **parcialmente aplicable**, porque tiene tres componentes y uno es estático. **Ninguna fila se borra**: un estado prometido que se retira sin dejar rastro obliga al próximo lector a redescubrir por qué. Cierra `MI-07`, `MI-10` y `MI-12`. |
+| 1.3 | 2026-11-02 | **§4 suma las interacciones de pistas de la capa de IA (expediente 0002, tramo T6)**, detrás de `AI:HintsEnabled`, que por omisión es `false` y deja la pantalla como estaba. Divulgación progresiva: nivel 1 al pedir, nivel 2 con «Otra pista», nivel 3 sólo con «Ver la última pista»; origen rotulado; texto siempre codificado. |
