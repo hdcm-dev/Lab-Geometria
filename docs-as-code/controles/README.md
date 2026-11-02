@@ -28,9 +28,13 @@ probar» en el sentido de la ficha hasta que el check `docs` dé verde en un PR 
 | `.docs-guard/excepciones.txt` | Excepciones con huella (A-08). Vacío |
 | [`delivery_publico.py`](delivery_publico.py) | Extensión `delivery-publico`: todo `delivery:` vale `publico` (D-18) |
 | [`enlaces_internos.py`](enlaces_internos.py) | Extensión `enlaces-internos`: destinos relativos y anclas, sin red |
+| [`anclas.py`](anclas.py) | Extensión `anclas` (tramo T-3): cada fila del [catálogo del punto de uso](../punto-de-uso/catalogo.md) resuelve a un id y a un texto del `.razor` que cita |
+| [`limite_didactico.py`](limite_didactico.py) | Extensión `limite-didactico` (tramo T-3): las prohibiciones verificables de [RD-01](../reglas/RD-01-ayuda-no-resuelve.md), incluida la de no repetir las plantillas de la capa de IA |
+| [`pista_sin_enlaces.py`](pista_sin_enlaces.py) | Extensión `pista-sin-enlaces` (tramo T-3): la capa `pista` del catálogo no lleva enlaces |
+| [`catalogo_pu.py`](catalogo_pu.py) | Lector del catálogo que comparten las tres extensiones del punto de uso; no es un control |
 | [`autoprueba.sh`](autoprueba.sh) | Par rojo/verde plantado de cada control, sobre un corpus temporal |
 
-Las dos extensiones reutilizan el lector de frontmatter de la copia sin modificarla. Son el apartamiento parcial de
+Las extensiones reutilizan el lector de frontmatter de la copia sin modificarla. Son el apartamiento parcial de
 D-09 que la resolución del expediente 0003 declara y avisa al Product Owner (K-13). `enlaces-internos` reemplaza a
 lychee, que es lo que usa `docs-guard` para el mismo control: la compuerta de este repo corre sólo con el `python3` del
 runner y no baja herramientas.
@@ -46,6 +50,13 @@ runner y no baja herramientas.
 | `fuera` (`dg.py fuera`) | avisa | — | — |
 | `enlaces-internos` | avisa | avisa | avisa |
 | `delivery-publico` (en `docs-as-code/**` con `--exigir`) | avisa | — | avisa |
+| `anclas` | avisa (fijo) | — | — |
+| `limite-didactico` | avisa; a bloquea después de dos corridas verdes de su par | — | — |
+| `pista-sin-enlaces` | avisa (fijo) | — | — |
+
+Los tres controles del punto de uso no siguen a `DOCS_MODO_DOCS_AS_CODE`: quedan en avisa hasta que un PR propio
+los cambie en `scripts/docs-local.sh` (resolución del expediente 0003, §5.2). La prohibición 3 de RD-01 (ejemplos no
+isomorfos al TP vigente) no tiene control: el repo no declara el TP, y la revisa el Product Owner (H-10).
 
 Todo arranca en **avisa** (decisión D-10): un hallazgo queda como advertencia del PR y el check sigue verde.
 `docs-as-code/**` pasa a **bloquea** cambiando `DOCS_MODO_DOCS_AS_CODE` a `bloquea` en `docs.yml`, cuando su línea
