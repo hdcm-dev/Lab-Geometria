@@ -41,6 +41,25 @@ public sealed class DependencyGateTests
         Assert.Empty(thirdParty);
     }
 
+    /// <summary>
+    /// REQ-IA-01 (expediente 0002, `ADR-14008`) · Domain no referencia el SDK de IA ni un SDK de
+    /// modelos. Es una prueba **nueva y no un relevo**: `DomainReferencesNoThirdPartyLibrary` sigue
+    /// igual, y no alcanza porque admite todo prefijo `Microsoft`.
+    /// </summary>
+    [Fact]
+    public void DomainReferencesNoAiSdk()
+    {
+        string[] aiPrefixes = ["Microsoft.Extensions.AI", "OllamaSharp", "OpenAI", "Azure.AI"];
+
+        var offenders = typeof(Account).Assembly
+            .GetReferencedAssemblies()
+            .Select(reference => reference.Name ?? string.Empty)
+            .Where(name => aiPrefixes.Any(prefix => name.StartsWith(prefix, StringComparison.Ordinal)))
+            .ToArray();
+
+        Assert.Empty(offenders);
+    }
+
     [Fact]
     public void TheFiveModelEntitiesExist()
     {

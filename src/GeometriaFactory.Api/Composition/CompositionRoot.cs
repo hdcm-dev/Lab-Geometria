@@ -2,12 +2,16 @@ using System.Text;
 using GeometriaFactory.Application.Accounts;
 using GeometriaFactory.Application.Works;
 using GeometriaFactory.Application.Ports;
+using GeometriaFactory.Infrastructure.AI;
 using GeometriaFactory.Infrastructure.Figures;
 using GeometriaFactory.Infrastructure.Persistence;
 using GeometriaFactory.Infrastructure.Security;
 using GeometriaFactory.Infrastructure.Time;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.AI;
+using OllamaSharp;
+using OllamaSharp.Models.Chat;
 
 namespace GeometriaFactory.Api.Composition;
 
@@ -43,7 +47,9 @@ public static class CompositionRoot
         typeof(IAccountRepository),
         typeof(IWorkRepository),
         typeof(IFigureValidator),
-        typeof(ISystemClock)
+        typeof(ISystemClock),
+        // EL QUINTO, del expediente 0002 (`ADR-14006`): el redactor de pistas de la capa de IA.
+        typeof(IObservationHintWriter),
     ];
 
     /// <summary>
@@ -57,6 +63,7 @@ public static class CompositionRoot
         [typeof(ISystemClock)] = typeof(UtcSystemClock),
         [typeof(IWorkRepository)] = typeof(EfCoreWorkRepository),
         [typeof(IFigureValidator)] = typeof(LocalFigureValidator),
+        [typeof(IObservationHintWriter)] = typeof(ModelObservationHintWriter),
     };
 
     /// <summary>Nombre de la cadena de conexión del almacén. Su valor llega por configuración.</summary>
@@ -213,6 +220,8 @@ public static class CompositionRoot
         // `A-15` · el desenlace de la revisión. Etapa `h`.
         services.AddScoped<ResolveWorkUseCase>();
 
+        AddAiLayer(services, configuration);
+
         // La guardia de `CU-02`: verificar la firma y la expiración del acceso presentado.
         // El `401` de la guardia NO lleva código del contrato, y es deliberado: el conjunto
         // cerrado no declara ninguno para un acceso ausente, vencido o mal firmado, y esta capa
@@ -228,4 +237,69 @@ public static class CompositionRoot
 
         return services;
     }
+
+    /// <summary>
+    /// La capa de IA de V1 (expediente 0002, `ADR-14007`, decisión D-FLAG). **Apagada por omisión.**
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// EL CLIENTE DEL MODELO SÓLO SE REGISTRA CON UNA DIRECCIÓN VÁLIDA Y UN MODELO. Sin
+    /// <c>AI:Endpoint</c> —que es el caso de `appsettings.json`, de `deploy/compose.yaml` y de los
+    /// `Dockerfile`— no hay <see cref="IChatClient"/>, el redactor devuelve la plantilla desde el
+    /// arranque y la Web, con <c>AI:HintsEnabled</c> en <c>false</c>, no pide nada (REQ-IA-15).
+    /// </para>
+    /// <para>
+    /// EL ARRANQUE NUNCA FALLA POR ESTA SECCIÓN, a diferencia de la clave de firma: sin la clave la
+    /// pieza no puede cumplir su función; sin modelo la cumple entera, con plantillas.
+    /// </para>
+    /// <para>
+    /// UNA DIRECCIÓN INVÁLIDA SE AVISA SIN EL VALOR: el aviso nombra la llave, nunca lo que traía.
+    /// </para>
+    /// </remarks>
+    private static void AddAiLayer(IServiceCollection services, IConfiguration configuration)
+    {
+        var ai = new AiOptions();
+        configuration.GetSection(AiOptions.SectionName).Bind(ai);
+        services.AddSingleton(ai);
+
+        // EL CUPO ES SINGLETON: uno por instancia, no uno por petición (REQ-IA-10, D-CUPO).
+        services.AddSingleton<HintConcurrencyGate>();
+
+        if (ModelEndpointOf(ai) is { } endpoint)
+        {
+            services.AddSingleton<IChatClient>(_ => new ChatClientBuilder((IChatClient)new OllamaApiClient(endpoint, ai.Model))
+                // SIN RAZONAMIENTO VISIBLE: el ensayo corrió con `think: false`, y la respuesta
+                // tiene que ser el objeto de tres campos y nada más.
+                .ConfigureOptions(options => options.RawRepresentationFactory ??= _ => new ChatRequest { Think = false })
+                .Build());
+        }
+        else if (!string.IsNullOrWhiteSpace(ai.Endpoint))
+        {
+            Console.Error.WriteLine(
+                $"La sección '{AiOptions.SectionName}' trae '{nameof(AiOptions.Endpoint)}' sin forma de " +
+                "dirección absoluta http o https, o sin 'Model'. La capa de IA queda apagada y las " +
+                "pistas salen de plantilla.");
+        }
+
+        // EL CONTENIDO DE LOS MENSAJES SÓLO VA A LA TRAZA EN DESARROLLO (REQ-IA-11).
+        services.AddScoped<IObservationHintWriter>(provider => new ModelObservationHintWriter(
+            provider.GetService<IChatClient>(),
+            provider.GetRequiredService<HintConcurrencyGate>(),
+            ai,
+            provider.GetRequiredService<ILogger<ModelObservationHintWriter>>(),
+            provider.GetRequiredService<IHostEnvironment>().IsDevelopment()));
+
+        services.AddScoped(provider => new ExplainObservationsUseCase(
+            provider.GetRequiredService<IFigureValidator>(),
+            provider.GetRequiredService<IObservationHintWriter>(),
+            ai.MaxObservations));
+    }
+
+    /// <summary>La dirección del servidor de modelos, sólo si es absoluta http o https y hay modelo.</summary>
+    private static Uri? ModelEndpointOf(AiOptions ai) =>
+        !string.IsNullOrWhiteSpace(ai.Model)
+        && Uri.TryCreate(ai.Endpoint, UriKind.Absolute, out var uri)
+        && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps)
+            ? uri
+            : null;
 }
