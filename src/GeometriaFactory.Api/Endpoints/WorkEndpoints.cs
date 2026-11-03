@@ -149,6 +149,10 @@ public static class WorkEndpoints
                 new WorkSubmissionResponse(outcome.WorkId, outcome.Status.ToString(), outcome.RegisteredAt, ContractTranslation.Observations(outcome)));
         })
         .WithName("SubmitWork")
+        .WithSummary("Envía un trabajo nuevo")
+        .Produces<WorkSubmissionResponse>(StatusCodes.Status201Created)
+        .ProducesContractErrors(StatusCodes.Status400BadRequest, StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         // ---- A-18 · la interpretación que NO guarda nada -------------------------------------
@@ -194,6 +198,10 @@ public static class WorkEndpoints
                 ContractTranslation.Tree(interpretation.Tree)));
         })
         .WithName("InterpretWork")
+        .WithSummary("Interpreta un texto sin guardarlo")
+        .Produces<WorkInterpretationResponse>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status400BadRequest, StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         // ---- Pistas de la capa de IA (expediente 0002, V1) --------------------------------------
@@ -237,6 +245,10 @@ public static class WorkEndpoints
                     h.Hints.Origin.ToString()))]));
         })
         .WithName("ExplainObservations")
+        .WithSummary("Interpreta un texto y suma pistas a sus observaciones, sin guardarlo")
+        .Produces<WorkHintsResponse>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status400BadRequest, StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         // ---- A-11 · la reedición de un trabajo en `Draft` ------------------------------------
@@ -295,6 +307,10 @@ public static class WorkEndpoints
                 new WorkSubmissionResponse(outcome.WorkId, outcome.Status.ToString(), outcome.RegisteredAt, ContractTranslation.Observations(outcome)));
         })
         .WithName("ResubmitWork")
+        .WithSummary("Reedita un trabajo en borrador")
+        .Produces<WorkSubmissionResponse>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status400BadRequest, StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status404NotFound, StatusCodes.Status409Conflict, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         // ---- A-12 · la eliminación, con los dos alcances opuestos ----------------------------
@@ -332,6 +348,10 @@ public static class WorkEndpoints
             return Results.NoContent();
         })
         .WithName("DeleteWork")
+        .WithSummary("Elimina un trabajo")
+        .Produces(StatusCodes.Status204NoContent)
+        .ProducesContractErrors(StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status404NotFound, StatusCodes.Status409Conflict, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         // ---- A-15 · aprobar o rechazar un trabajo en estado `Pendiente` ---------------------
@@ -388,6 +408,10 @@ public static class WorkEndpoints
                 resolution.ResolvedAt));
         })
         .WithName("ResolveWork")
+        .WithSummary("Aprueba o rechaza un trabajo pendiente")
+        .Produces<WorkOutcomeResponse>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status400BadRequest, StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status404NotFound, StatusCodes.Status409Conflict, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         // ---- A-13 · el listado, con el alcance que el papel determina ------------------------
@@ -442,6 +466,10 @@ public static class WorkEndpoints
                 entry.OwnerLastName)).ToArray());
         })
         .WithName("ListWorks")
+        .WithSummary("Lista los trabajos según el papel de quien pide")
+        .Produces<WorkListItem[]>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status404NotFound, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         // ---- A-14 · el detalle de un trabajo -------------------------------------------------
@@ -503,6 +531,10 @@ public static class WorkEndpoints
                 ContractTranslation.Tree(validator.Interpret(detail.OriginalJson).Tree)));
         })
         .WithName("GetWork")
+        .WithSummary("Devuelve el detalle de un trabajo")
+        .Produces<WorkDetailResponse>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status404NotFound, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         return endpoints;

@@ -114,6 +114,10 @@ public static class AuthenticationEndpoints
                 identity.Role.ToString()));
         })
         .WithName("ExchangeCredentials")
+        .WithSummary("Canjea correo y contraseña por un acceso firmado")
+        .Produces<SessionResponse>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status400BadRequest, StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .AllowAnonymous()
         // LA CUOTA DEL CANJE POR ORIGEN ES PROPIA, y es un tope holgado: cada intento cuesta una
         // derivación anclada, se acierte o no, y un origen puede ser una comisión entera detrás del

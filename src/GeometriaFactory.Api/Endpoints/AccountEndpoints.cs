@@ -120,6 +120,10 @@ public static class AccountEndpoints
                 new AccountRegistrationResponse(account.Id, account.Email, account.Status.ToString()));
         })
         .WithName("RegisterAccount")
+        .WithSummary("Registra una cuenta de alumno")
+        .Produces<AccountRegistrationResponse>(StatusCodes.Status201Created)
+        .ProducesContractErrors(StatusCodes.Status400BadRequest, StatusCodes.Status409Conflict, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .AllowAnonymous();
 
         endpoints.MapPost(AdministratorSetupRoute, async (
@@ -170,6 +174,10 @@ public static class AccountEndpoints
                 new AccountSetupResponse(identity.Id, identity.Email, identity.Role.ToString()));
         })
         .WithName("ConfigureAdministrator")
+        .WithSummary("Configura la cuenta del administrador del laboratorio")
+        .Produces<AccountSetupResponse>(StatusCodes.Status201Created)
+        .ProducesContractErrors(StatusCodes.Status400BadRequest, StatusCodes.Status409Conflict, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .AllowAnonymous();
 
         // `A-17` — SI EL LABORATORIO YA TIENE ADMINISTRADOR. Es el punto que faltaba, y su ausencia
@@ -203,6 +211,10 @@ public static class AccountEndpoints
             return Results.Ok(new LaboratoryProvisioning(configured));
         })
         .WithName("LaboratoryProvisioning")
+        .WithSummary("Informa si el laboratorio ya tiene administrador")
+        .Produces<LaboratoryProvisioning>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .AllowAnonymous();
 
         endpoints.MapPost(OwnPasswordRoute, async (
@@ -338,6 +350,10 @@ public static class AccountEndpoints
                 context.User.FindFirstValue(AccessTokenIssuer.RoleClaim) ?? string.Empty));
         })
         .WithName("ChangeOwnPassword")
+        .WithSummary("Cambia la contraseña propia")
+        .Produces<SessionResponse>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status400BadRequest, StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         // NO lleva `RequireAuthorization`, y es la decisión del intake 1.34: exigir acceso firmado
         // acá dejaba la pantalla del cambio forzado inalcanzable. La autenticación de la segunda
         // forma la hace la contraseña vigente, dentro del caso de uso.

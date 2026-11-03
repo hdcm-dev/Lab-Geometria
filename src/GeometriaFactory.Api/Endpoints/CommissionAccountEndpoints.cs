@@ -97,6 +97,10 @@ public static class CommissionAccountEndpoints
                 account.MustChangePassword)).ToArray());
         })
         .WithName("ListCommissionAccounts")
+        .WithSummary("Lista las cuentas de la comisión")
+        .Produces<AccountListItem[]>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         // ---- A-07 · el cambio de situación ---------------------------------------------------
@@ -164,6 +168,10 @@ public static class CommissionAccountEndpoints
                 outcome.MustChangePassword));
         })
         .WithName("ChangeAccountStatus")
+        .WithSummary("Cambia la situación de una cuenta")
+        .Produces<AccountStatusChangeResponse>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status400BadRequest, StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status404NotFound, StatusCodes.Status409Conflict, StatusCodes.Status500InternalServerError, StatusCodes.Status503ServiceUnavailable)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         // ---- A-08 · la baja física -----------------------------------------------------------
@@ -206,6 +214,10 @@ public static class CommissionAccountEndpoints
             return Results.NoContent();
         })
         .WithName("DeleteAccount")
+        .WithSummary("Elimina una cuenta")
+        .Produces(StatusCodes.Status204NoContent)
+        .ProducesContractErrors(StatusCodes.Status400BadRequest, StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status404NotFound, StatusCodes.Status409Conflict, StatusCodes.Status500InternalServerError)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         // ---- A-09 · el reseteo de la contraseña ----------------------------------------------
@@ -264,6 +276,10 @@ public static class CommissionAccountEndpoints
                 outcome.MustChangePassword));
         })
         .WithName("ResetAccountPassword")
+        .WithSummary("Resetea la contraseña de una cuenta de alumno")
+        .Produces<PasswordResetResponse>(StatusCodes.Status200OK)
+        .ProducesContractErrors(StatusCodes.Status401Unauthorized, StatusCodes.Status403Forbidden, StatusCodes.Status404NotFound, StatusCodes.Status409Conflict, StatusCodes.Status500InternalServerError, StatusCodes.Status503ServiceUnavailable)
+        .ProducesRateLimitRejection()
         .RequireAuthorization();
 
         return endpoints;
