@@ -110,3 +110,7 @@ que la lectura siguiente no tenga que reconstruirlas.
   correr al aplicar (esperado: 18 requisitos, 0 incompletos).
 - **V1, C-12:** la fila LLM09 pasa de riesgo previsto a **observado** (dos textos falsos que pasaron el
   filtro); el tratamiento es el flag apagado en PROD hasta REQ-IA-13.
+- **V1, C-11 (mesa 0004):** prompt y plantillas pasan a ser un solo **contrato de pistas, versión 1.1**,
+  vigente y no definitivo, con condición de revisión (`01` §5.2), y la prueba bloqueante
+  `HintContractMatchesSpecTests` compara el código con los bloques marcados de `01`. Fusionar no despliega
+  (canal manual) y no enciende: encender es una decisión aparte.

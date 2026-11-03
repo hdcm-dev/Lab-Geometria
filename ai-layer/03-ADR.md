@@ -128,3 +128,5 @@ agrega; el texto de abajo no se reescribe.
 | Confianza | media-alta para la latencia (medida); baja para la utilidad (puntuación de juez, prompt v2 sin medir) |
 | Deja de valer si | con el prompt v2 el modelo queda < 4 de 5 en la puntuación docente y otro candidato la supera; el servidor pasa a GPU; un candidato nuevo iguala la garantía con menos memoria o frío |
 | En el código | `AiOptions.KeepAlive`, `OllamaRequestDefaults`, `ModelWarmup`, `ModelWarmupHostedService`; pruebas de REQ-IA-17 y 18 |
+| Contrato de pistas | el modelo se elige contra el **contrato de pistas 1.1** (prompt v1 y doce plantillas, `01` §5.2): versión vigente, no definitiva. Un cambio de prompt o de plantillas sube la versión y obliga a volver a medir esta decisión; `HintContractMatchesSpecTests` impide que código y ficha difieran |
+| Puesta en uso | esta ADR no enciende la capa: `AI__HintsEnabled` sigue en `false` en producción por la calidad medida y la puntuación docente pendiente. Fusionar no despliega (el despliegue es manual, `workflow_dispatch`) y **fusionar no es encender** |

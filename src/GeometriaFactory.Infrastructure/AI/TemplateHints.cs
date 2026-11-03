@@ -8,9 +8,12 @@ namespace GeometriaFactory.Infrastructure.AI;
 /// </summary>
 /// <remarks>
 /// <para>
-/// TEXTO DEFINITIVO (expediente 0002, actuación 009, punto F del lote; Círculo · Area corregido en la
-/// actuación 010 porque su nivel 2 dictaba la operación, «el radio por el radio», que es justo lo que
-/// la mesa le reprocha al modelo). Son el piso de calidad: se
+/// CONTRATO DE PISTAS, VERSIÓN 1.1 (`ContractVersion`): texto de la actuación 009, punto F del lote, con
+/// Círculo · Area corregido en la actuación 010 porque su nivel 2 dictaba la operación, «el radio por el
+/// radio». No es un texto definitivo: es la versión vigente, junto con
+/// `ModelObservationHintWriter.SystemPrompt`, y se revisa con la puntuación docente, con la medición del
+/// prompt v2 o ante una pista falsa (`ai-layer/01` §5.2). Cambiarlo sin cambiar los bloques marcados de
+/// `01` hace fallar `HintContractMatchesSpecTests`. Son el piso de calidad: se
 /// sirven siempre que el modelo falla, se demora o el filtro lo rechaza, así que tienen que enseñar
 /// solas, sin el modelo.
 /// </para>
@@ -29,6 +32,9 @@ namespace GeometriaFactory.Infrastructure.AI;
 /// </remarks>
 public static class TemplateHints
 {
+    /// <summary>Versión del contrato de pistas (prompt de sistema y doce plantillas), la de `ai-layer/01` §5.2.</summary>
+    public const string ContractVersion = "1.1";
+
     private static readonly Dictionary<(FigureType, string), (string, string, string)> Texts = new()
     {
         [(FigureType.Cube, "Area")] = (

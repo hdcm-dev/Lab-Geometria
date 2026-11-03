@@ -48,7 +48,7 @@ porqué:
 | **B** · revisor 2 del checklist | firmado por la mesa, V1 conforme, V2 conforme con observaciones; contrafirma docente optativa | la segunda lectura es independiente (otra sesión, contra el código fusionado); se declara que no es humana |
 | **D** · ¿el borrador de V2 puede contener el valor derivado? | **no** | el comentario lo lee el alumno; la herramienta no escribe la solución (LLM02). El docente puede escribirla él al editar |
 | **E** · servidor y modelo de producción (ACT-SEC) | servidor de modelos de la cátedra, sólo CPU; `qwen3.5:35b-a3b` con `think=false` | §4. No viaja ningún dato de persona (`01` §2.2), así que la ubicación se decide por capacidad y costo |
-| **F** · texto de las doce plantillas | definitivo, en `TemplateHints.cs`; rótulo provisional retirado | `01` §5.3. Cada terna: dónde mirar, idea geométrica, comprobación propia. Sin dígitos: `EveryTemplatePassesTheFilter` |
+| **F** · texto de las doce plantillas | vigente, en `TemplateHints.cs`; rótulo provisional retirado (la 010 lo versiona como contrato de pistas 1.1, sin rótulo «definitivo») | `01` §5.3. Cada terna: dónde mirar, idea geométrica, comprobación propia. Sin dígitos: `EveryTemplatePassesTheFilter` |
 | umbral de REQ-IA-26 | 60 % de borradores enviados con edición menor | debajo de eso el borrador no ahorra trabajo frente a escribir desde cero |
 | número de ADR-IA-06 | reservado `ADR-14011` | correlativo después de `ADR-14010`; se escribe al reabrir V2 |
 

@@ -4,7 +4,7 @@
 |---|---|
 | Número | **EXP-0002** |
 | Título | Especificación de una capa de IA de nivel A0 para la Fábrica de Geometría: V1 pistas, V2 borrador de comentario |
-| Estado | **en trámite** (actuación 010): V1 **fusionada** en `main` (PR #237, `056801d`), apagada por omisión; ingresada al intake como **F-27**; plantillas definitivas (Círculo · Area corregida en la 010); modelo de producción `qwen3.5:4b` sin razonamiento, 20 s, precarga y permanencia (`ADR-14012`), decididos con la evaluación completa. Falta el código de la 010, la corrida de 30 casos con el prompt v2, la puntuación docente de REQ-IA-13 y la corrida E2E con el flag encendido. V2 especificada y diferida |
+| Estado | **en trámite** (actuación 010): V1 **fusionada** en `main` (PR #237, `056801d`), apagada por omisión (fusionar no despliega ni enciende: el despliegue es manual); ingresada al intake como **F-27**; contrato de pistas 1.1, vigente y versionado, con prueba código = ficha (Círculo · Area corregida en la 010); modelo de producción `qwen3.5:4b` sin razonamiento, 20 s, precarga y permanencia (`ADR-14012`), decididos con la evaluación completa. Falta el código de la 010, la corrida de 30 casos con el prompt v2, la puntuación docente de REQ-IA-13 y la corrida E2E con el flag encendido. V2 especificada y diferida |
 | Apertura | 2026-11-01 |
 | Rama | especificación: `g16/ai-layer-v1`; construcción: `ai-layer/implementacion-v1`, **fusionada** por el PR #237 (`main` `056801d`); cierre: `ai-layer/actuacion-009` |
 | Partes | **Product Owner** (decide el ingreso al intake); **orquestador del prompt 02 de la guía 16** de Lab-Documentos (agente, presenta); **agente de la etapa E5** (especifica e informa) |

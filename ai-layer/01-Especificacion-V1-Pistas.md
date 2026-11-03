@@ -363,7 +363,7 @@ puntuación de **juez**, no del docente): pasar el filtro no es lo mismo que ens
 
 | Fuente del texto | Media del juez (0–5) | Defecto típico |
 |---|---|---|
-| plantilla definitiva (§5.3) | 4,5 | — |
+| plantilla, contrato 1.1 (§5.3) | 4,5 | — |
 | `qwen3.5:35b-a3b` | 4,2 | tutea; a veces nombra la operación en el nivel 3 |
 | `qwen3.5:4b` | 2,4 | tutea en los diez casos; el nivel 3 **dicta la operación en los diez** («multiplica ese resultado por seis», «multiplica por el cuadrado del radio»), y en uno la operación dictada es **ambigua** (C08: «multiplica ese valor por sí mismo tres veces consecutivas», que se lee como a·a·a o como la cuarta potencia); en un caso de inyección el nivel 2 también es ambiguo («sumar el área de una sola cara cinco veces más», que da seis caras pero se lee como cinco) |
 | `gemma4:e4b-it-qat` | 2,3 | no da la operación, pero es vago: el nivel 1 manda a mirar «las dimensiones» y no el cálculo del campo; el nivel 2 no nombra la idea geométrica |
@@ -397,15 +397,26 @@ menos frío.
 
 ### 5.2 Prompt propio
 
-**Prompt v1 (vigente en el código, el que se midió).** Sistema, el mismo texto que `PROMPT_SISTEMA` de
-`ensayos/pistas.py`, que lo escribe sin tildes:
+**Contrato de pistas, versión 1.1 (vigente).** El prompt de sistema y las doce plantillas de respaldo son
+**un solo contrato**: las plantillas son el piso con el que se compara lo que el modelo escribe, y cambiar uno
+sin el otro deja de comparar con la misma vara (mesa 0004, K-15). Se versionan juntos: 1.0 es el texto de la
+actuación 009; 1.1, el de la actuación 010 (Círculo · Area). **No es un texto definitivo**: es la versión
+vigente y se revisa (a) cuando haya puntuación docente (REQ-IA-13), (b) cuando el prompt v2 se mida en GEO-04,
+o (c) cuando una corrida rotulada muestre una pista falsa o ambigua. Toda revisión sube la versión y cambia, en
+el mismo commit, el código (`ModelObservationHintWriter.SystemPrompt`, `TemplateHints`, `TemplateHints.ContractVersion`)
+y los bloques marcados de esta sección. **La prueba `HintContractMatchesSpecTests` (Integration, bloqueante)
+compara el código con estos bloques y falla si difieren**; ya no vale «si difieren, manda el código».
 
-> Sos un asistente de una cátedra de programación. Un validador ya encontró una diferencia entre el valor
-> que declaró el programa del alumno y el que corresponde a las dimensiones de la figura. Escribí tres pistas
-> graduadas para que el alumno encuentre por su cuenta el error en su programa. Reglas: 1) nunca escribas el
-> valor correcto ni lo calcules; 2) nunca escribas JSON, código ni nombres de clases; 3) no corrijas el texto
-> del alumno; 4) nivel1 dice dónde mirar; nivel2 dice qué concepto geométrico interviene; nivel3 dice cómo
-> comprobarlo paso a paso, sin números. Cada pista en una o dos oraciones.
+<!-- contrato-pistas:version 1.1 -->
+
+**Prompt v1 (vigente en el código, el que se midió).** Sistema, el mismo texto que `PROMPT_SISTEMA` de
+`ensayos/pistas.py`, que lo escribe sin tildes. Entre las marcas va el texto exacto que compara la prueba:
+
+<!-- contrato-pistas:prompt:inicio -->
+```text
+Sos un asistente de una catedra de programacion. Un validador ya encontro una diferencia entre el valor que declaro el programa del alumno y el que corresponde a las dimensiones de la figura. Escribi tres pistas graduadas para que el alumno encuentre por su cuenta el error en su programa. Reglas: 1) nunca escribas el valor correcto ni lo calcules; 2) nunca escribas JSON, codigo ni nombres de clases; 3) no corrijas el texto del alumno; 4) nivel1 dice donde mirar; nivel2 dice que concepto geometrico interviene; nivel3 dice como comprobarlo paso a paso, sin numeros. Cada pista en una o dos oraciones.
+```
+<!-- contrato-pistas:prompt:fin -->
 
 Usuario, por observación: `Figura`, `Campo`, `Valor declarado por el programa` y `El valor declarado es
 {mayor|menor} que el que corresponde.` Salida con esquema de tres campos `nivel1`, `nivel2`, `nivel3`.
@@ -455,8 +466,9 @@ docente.
 
 ### 5.3 Plantillas de respaldo: el piso de calidad
 
-Las doce plantillas de `Infrastructure/AI/TemplateHints.cs` tienen **texto definitivo** desde la actuación
-009 (punto F del lote), con una corrección en la actuación 010 (Círculo · Area). Se escribieron con tres
+Las doce plantillas de `Infrastructure/AI/TemplateHints.cs` son la **versión 1.1 del contrato de pistas**
+(§5.2): texto de la actuación 009 (punto F del lote), con una corrección en la actuación 010 (Círculo · Area).
+Son la versión vigente, no un texto definitivo, y se revisan con las condiciones de §5.2. Se escribieron con tres
 reglas tomadas de la didáctica, para que enseñen solas cuando el modelo no responde:
 
 1. **Andamiaje que se retira** (scaffolding: Wood, Bruner y Ross, 1976). Nivel 1 localiza («mirá la parte
@@ -470,8 +482,10 @@ reglas tomadas de la didáctica, para que enseñen solas cuando el modelo no res
    (prueba `EveryTemplatePassesTheFilter`). Los números en palabras («dos tapas», «tres dimensiones», «el
    doble») son estructura de la figura o de la comprobación, no un valor del trabajo.
 
-**Texto definitivo de las doce plantillas** (el mismo de `TemplateHints.cs`; si difieren, manda el código):
+**Texto de las doce plantillas, contrato 1.1** (el mismo de `TemplateHints.cs`; la prueba
+`HintContractMatchesSpecTests` compara cada celda entre las marcas y falla si difieren):
 
+<!-- contrato-pistas:plantillas:inicio -->
 | Figura · campo | Nivel 1 · dónde mirar | Nivel 2 · idea geométrica | Nivel 3 · comprobación propia |
 |---|---|---|---|
 | Cubo · Area | Mirá la parte de tu programa que calcula el área del Cubo: ahí está la diferencia. | El área total de un cuerpo es la suma de las superficies de todas sus caras, y en el cubo todas las caras son iguales. | Imaginá el cubo desarmado sobre la mesa: contá las caras y fijate si tu cálculo las incluye a todas, ni una más ni una menos. |
@@ -486,6 +500,7 @@ reglas tomadas de la didáctica, para que enseñen solas cuando el modelo no res
 | Cuadrado · Volumen | Mirá qué volumen declara tu programa para el Cuadrado. | Una figura plana tiene largo y ancho pero no altura: no ocupa espacio, así que no tiene volumen. | Buscá en tu programa qué valor de volumen escribe para una figura plana y preguntate qué debería valer algo que no ocupa espacio. |
 | Círculo · Area | Mirá la parte de tu programa que calcula el área del Círculo: ahí está la diferencia. | La superficie del círculo y el largo de su borde dependen del radio de forma distinta: si el radio se duplica, el borde se duplica, pero la superficie aumenta en una proporción mucho mayor. | Probá tu cálculo con un radio y después con el doble de ese radio: si el área que obtenés también sale apenas el doble, estás midiendo el borde y no la superficie. |
 | Círculo · Volumen | Mirá qué volumen declara tu programa para el Círculo. | Una figura plana no tiene altura: no ocupa espacio, así que no tiene volumen. | Buscá en tu programa qué valor de volumen escribe para una figura plana y preguntate qué debería valer algo que no ocupa espacio. |
+<!-- contrato-pistas:plantillas:fin -->
 
 **La corrección de la actuación 010 (Círculo · Area).** El nivel 2 de la 009 decía «una crece con el radio
 por el radio, la otra sólo con el radio»: eso es la operación (r·r) dicha en palabras, exactamente lo que la
@@ -619,5 +634,5 @@ Ficha de riesgo de cada fila activada (forma propia: el v0 remite a una ficha de
 
 | Versión | Fecha | Cambios |
 |---|---|---|
-| 0.2 | 2026-11-03 | Actuación 010 del expediente 0002, con la evaluación completa de diez configuraciones: modelo `qwen3.5:4b` sin razonamiento (alternativa `gemma4:e4b-it-qat`) en lugar de `qwen3.5:35b-a3b`; tope de 20 s en todos los entornos; permanencia del modelo en cada pedido y precarga al arrancar (REQ-IA-17 y 18, `ADR-14012`); marco NIST AI RMF, OWASP LLM 2025 e ISO/IEC 42001 por paso (§4.7); alternativas de servidor de PROD (§4.3); prompt v2 candidato (§5.2); tabla del texto definitivo de las doce plantillas y corrección de Círculo · Area en términos de proporción y excepciones anotadas (§5.3); regla 7 del prompt v2 alineada con la rúbrica y rúbrica con registro separado de la didáctica (§5.2); LLM09 observado (§8); §4.6 y §4.7 en orden |
+| 0.2 | 2026-11-03 | Actuación 010 del expediente 0002, con la evaluación completa de diez configuraciones: modelo `qwen3.5:4b` sin razonamiento (alternativa `gemma4:e4b-it-qat`) en lugar de `qwen3.5:35b-a3b`; tope de 20 s en todos los entornos; permanencia del modelo en cada pedido y precarga al arrancar (REQ-IA-17 y 18, `ADR-14012`); marco NIST AI RMF, OWASP LLM 2025 e ISO/IEC 42001 por paso (§4.7); alternativas de servidor de PROD (§4.3); prompt v2 candidato (§5.2); tabla del texto de las doce plantillas y corrección de Círculo · Area en términos de proporción y excepciones anotadas (§5.3); regla 7 del prompt v2 alineada con la rúbrica y rúbrica con registro separado de la didáctica (§5.2); LLM09 observado (§8); §4.6 y §4.7 en orden. Mesa 0004: prompt y plantillas como un solo contrato de pistas 1.1, vigente y versionado, con condición de revisión y prueba bloqueante código = ficha (§5.2) |
 | 0.1 | 2026-11-01 | Emisión |
