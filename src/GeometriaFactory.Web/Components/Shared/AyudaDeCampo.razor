@@ -1,0 +1,45 @@
+@* Ayuda de campo en el punto de uso (expediente 0003, tramo T-11). Dibuja la capa `pista` de una
+   fila del catálogo `docs-as-code/punto-de-uso/catalogo.md` bajo la etiqueta del campo.
+
+   RESOLVEDOR DE `contexto:`. El catálogo identifica cada fila con `web/<id-del-elemento>`. Este
+   componente recibe ese mismo valor y lo resuelve al `id` del elemento que dibuja (`<id>`, sin el
+   prefijo `web/`), que es el que el campo nombra en `aria-describedby`. Un contexto sin el prefijo
+   `web/` o con el id vacío no es de esta superficie y se rechaza al dibujar: así el catálogo y la
+   pantalla no se pueden separar en silencio.
+
+   SIN ENLACE A LA AYUDA LARGA (decisión H-08, default aplicado). El componente no dibuja ningún
+   enlace a `docs-as-code/ayuda/`: sólo el texto que recibe.
+
+   El texto lo escribe la pantalla que usa el componente, en el `.razor`, que es donde el control
+   `anclas` lo busca. La ayuda explica el campo y el formato; no comenta discrepancias, que son de
+   las pistas de la capa de IA (expediente 0002). *@
+
+<span class="gf-requirement" id="@Id">@ChildContent</span>
+
+@code {
+    /// Prefijo de los contextos de la Web en el catálogo del punto de uso.
+    public const string PrefijoWeb = "web/";
+
+    /// Contexto de la fila del catálogo, con la forma `web/<id-del-elemento>`.
+    [Parameter, EditorRequired] public string Contexto { get; set; } = string.Empty;
+
+    /// Texto de la capa `pista`, tal como lo registra el catálogo.
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    private string Id => ResolverId(Contexto);
+
+    /// Resuelve `web/<id>` al id del elemento. Rechaza lo que no tenga esa forma.
+    public static string ResolverId(string contexto)
+    {
+        if (string.IsNullOrWhiteSpace(contexto)
+            || !contexto.StartsWith(PrefijoWeb, StringComparison.Ordinal)
+            || contexto.Length == PrefijoWeb.Length
+            || contexto.AsSpan(PrefijoWeb.Length).ContainsAny(" /\t"))
+        {
+            throw new ArgumentException(
+                $"El contexto '{contexto}' no tiene la forma 'web/<id-del-elemento>'.", nameof(contexto));
+        }
+
+        return contexto[PrefijoWeb.Length..];
+    }
+}
