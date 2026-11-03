@@ -48,6 +48,9 @@ done
 if grep -q 'lab-geometria-' "$tmp/api.log"; then echo "el registro nombra un contenedor lab-geometria-*" >&2; exit 1; fi
 
 # Formato estable (claves en el orden que da la Api, sangría de 2) para que el diff muestre sólo cambios reales.
-python3 -I -c 'import json,sys; d=json.load(open(sys.argv[1])); open(sys.argv[2],"w").write(json.dumps(d,ensure_ascii=False,indent=2)+"\n")' \
+# Se quita `servers`: la Api declara la dirección en la que la levantó este guion (127.0.0.1 y el puerto propio),
+# que es un artefacto de la extracción y no sirve a quien integra (hallazgo M2 de la revisión externa). Sin
+# `servers`, OpenAPI 3 resuelve las rutas contra el origen desde el que se sirve el documento.
+python3 -I -c 'import json,sys; d=json.load(open(sys.argv[1])); d.pop("servers",None); open(sys.argv[2],"w").write(json.dumps(d,ensure_ascii=False,indent=2)+"\n")' \
   "$tmp/openapi.json" "$salida"
 echo "instantánea escrita en ${salida#"$raiz/"}"
