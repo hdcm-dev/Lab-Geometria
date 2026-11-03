@@ -8,7 +8,8 @@ Recorre los catálogos (.md con la tabla entre `<!-- catalogo:inicio -->` y `<!-
 - `contexto-invalido`: el contexto no tiene la forma `web/<id-del-elemento>`.
 - `capa-invalida`: la capa no es una de etiqueta, pista, info, ejemplo, validacion.
 - `fuente-ausente` / `linea-fuera`: la `ruta[:línea]` no existe en el repositorio.
-- `id-ausente`: la fuente es un .razor y no tiene un elemento con `id="<id>"` (el ancla es el id, no el texto).
+- `id-ausente`: la fuente es un .razor y no tiene un elemento con `id="<id>"` (el ancla es el id, no el texto) ni un
+  `AyudaDeCampo` con `Contexto="web/<id>"`, que el componente resuelve a ese mismo id (tramo T-11).
 - `texto-ausente`: la fuente es un .razor y el texto de la fila no está contenido en él (sin etiquetas HTML, sin
   comillas invertidas y con los blancos normalizados en los dos lados).
 - `linea-desplazada`: el texto está en el archivo, pero no empieza en la línea citada ni en las tres siguientes.
@@ -64,7 +65,8 @@ def main(argv):
                     continue
                 if destino.suffix != '.razor':
                     continue
-                if m and f'id="{m.group(1)}"' not in '\n'.join(lineas):
+                todo = '\n'.join(lineas)
+                if m and f'id="{m.group(1)}"' not in todo and f'Contexto="web/{m.group(1)}"' not in todo:
                     inf.error(ruta, n, 'id-ausente', f'{camino} no tiene un elemento con id="{m.group(1)}"')
                 buscado = pu.normalizar(txt)
                 if buscado not in pu.normalizar('\n'.join(lineas)):

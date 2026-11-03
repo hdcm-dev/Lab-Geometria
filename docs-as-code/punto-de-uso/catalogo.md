@@ -49,7 +49,7 @@ compruebe que lo registrado y lo dibujado no se separen.
 | contexto | capa | texto | fuente |
 | --- | --- | --- | --- |
 | `web/provisioning-password` | etiqueta | Contraseña | `src/GeometriaFactory.Web/Components/Pages/InitialProvisioning.razor:95` |
-| `web/credential-requirement` | pista | Vas a usarla para entrar; no hay forma de recuperarla. | `src/GeometriaFactory.Web/Components/Pages/CredentialRequirement.razor:12` |
+| `web/credential-requirement` | pista | Vas a usarla para entrar; no hay forma de recuperarla. | `src/GeometriaFactory.Web/Components/Pages/CredentialRequirement.razor:13` |
 | `web/credential-new` | etiqueta | Contraseña nueva | `src/GeometriaFactory.Web/Components/Pages/OwnCredentialSetup.razor:26` |
 | `web/forced-new` | etiqueta | Contraseña nueva | `src/GeometriaFactory.Web/Components/Pages/OwnCredentialForcedChange.razor:159` |
 | `web/credential-change-new` | etiqueta | Contraseña nueva | `src/GeometriaFactory.Web/Components/Pages/OwnCredentialChange.razor:100` |
@@ -74,7 +74,7 @@ capa de IA por archivo (decisión H-06).
 | `contexto` | Observación | Destino |
 | --- | --- | --- |
 | `web/provisioning-password` | La resolución del expediente lo llamó `web/initial-provisioning-password`; el id real del control es `provisioning-password` (`InitialProvisioning.razor:96`) y el catálogo usa el real | — |
-| `web/credential-requirement` | La misma pista estaba escrita **cuatro veces**, una por pantalla (base `caf4e6c`: `InitialProvisioning.razor:100`, `OwnCredentialSetup.razor:29`, `OwnCredentialForcedChange.razor:162`, `OwnCredentialChange.razor:105`). Desde el tramo T-10 vive una sola vez en `CredentialRequirement.razor:12`, que las cuatro pantallas dibujan; los cuatro campos de contraseña nueva apuntan a ese id con `aria-describedby` | resuelto en la ola 2, PR 10 |
+| `web/credential-requirement` | La misma pista estaba escrita **cuatro veces**, una por pantalla (base `caf4e6c`: `InitialProvisioning.razor:100`, `OwnCredentialSetup.razor:29`, `OwnCredentialForcedChange.razor:162`, `OwnCredentialChange.razor:105`). Desde el tramo T-10 vive una sola vez en `CredentialRequirement.razor:13`, que las cuatro pantallas dibujan; los cuatro campos de contraseña nueva apuntan a ese id con `aria-describedby` | resuelto en la ola 2, PR 10 |
 | `web/registration-email` | El control apunta siempre a `aria-describedby="registration-email-error"` (`AccountRegistration.razor:125`), pero ese `span` sólo se dibuja con `EmailAlreadyRegistered` (`:127-130`). Con `EmailDomainNotAdmitted` el mensaje va sólo en el aviso de la pantalla (`:85-93`) y la referencia queda colgada: defecto WCAG 3.3.1 / 1.3.1 | ola 2, PR 9, solo y declarado como cambio funcional |
 | `web/submission-date` | La capa `validacion` copia la parte fija del mensaje; el día declarado lo inserta la pantalla (`WorkSubmission.razor:372`) | — |
 | `web/submission-text` | La pista nombra cuatro conjuntos de componentes; el validador lee además `Lado` en el cilindro (`src/GeometriaFactory.Infrastructure/Figures/LocalFigureValidator.cs:490`). Ver [RD-03](../reglas/RD-03-forma-del-texto-del-trabajo.md), §3 | se eleva con la ficha de la regla |
