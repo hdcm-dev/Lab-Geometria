@@ -73,12 +73,16 @@ jobs:
 
   # Instantánea OpenAPI (expediente 0003, tramo T-5; decisiones K-07 y K-12). Job APARTE de la compuerta:
   #   - Sólo en push a main (`if`): nunca en un PR, así que la tarea no recae sobre ningún PR de producto.
-  #   - Es el único job con permiso de escritura, y sólo `contents` y `pull-requests`; la compuerta sigue en lectura.
+  #   - Es el único job con permiso de escritura (`contents`, `pull-requests` e `issues`); la compuerta sigue en lectura.
+  #   - Checkout SIN credenciales persistidas (B6 de la revisión externa): la compilación y la Api corren sin token en
+  #     `.git/config`; el token entra sólo en el último paso, para empujar la rama y abrir el PR.
   #   - Extracción aislada (`docs-as-code/api/extraer-openapi.sh`): proceso local en el runner, almacén efímero en un
   #     directorio temporal, clave de firma descartable y puerto propio. Sin Docker, sin secretos, sin despliegue.
   #   - Si el documento cambió, empuja la rama fija `automatico/instantanea-openapi` y abre (o actualiza) un PR. Ese PR
   #     lo revisa una persona o agente, que agrega la entrada en `docs-as-code/api/CHANGELOG-API.md`.
-  #   - Si el repositorio no permite que Actions abra PRs, el job lo avisa y queda verde: la rama queda empujada.
+  #   - Si no puede abrir el PR (p. ej. el repositorio no permite que Actions cree PRs), NO queda verde con un aviso
+  #     adentro (A1 de la revisión externa): abre o comenta el issue de etiqueta fija `instantanea-openapi` y el job
+  #     falla. La rama queda empujada para abrir el PR a mano.
   instantanea-openapi:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -86,14 +90,18 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      issues: write
     concurrency:
       group: instantanea-openapi
       cancel-in-progress: false
     env:
       RAMA: automatico/instantanea-openapi
+      ETIQUETA: instantanea-openapi
       GF_OPENAPI_PUERTO: '5199'
     steps:
       - uses: actions/checkout@v4.2.2
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-dotnet@v4.3.1
         with:
@@ -114,11 +122,25 @@ jobs:
           git add docs-as-code/api/openapi-v1.json
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -m "EXP-0003: instantánea OpenAPI regenerada desde ${GITHUB_SHA::7}"
-          git push --force origin "$RAMA"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$RAMA"
           if [ -n "$(gh pr list --head "$RAMA" --state open --json number --jq '.[].number')" ]; then
             echo "PR abierto actualizado."; exit 0
           fi
-          gh pr create --base main --head "$RAMA" \
+          if gh pr create --base main --head "$RAMA" \
             --title "EXP-0003: instantánea OpenAPI regenerada" \
-            --body "Regenerada por el job \`instantanea-openapi\` de \`docs.yml\` desde ${GITHUB_SHA}. Antes de fusionar: agregar la entrada en \`docs-as-code/api/CHANGELOG-API.md\`." \
-          || echo "::warning::No se pudo abrir el PR automático (¿Actions sin permiso para crear PRs?). La rama $RAMA quedó empujada."
+            --body "Regenerada por el job \`instantanea-openapi\` de \`docs.yml\` desde ${GITHUB_SHA}. Antes de fusionar: agregar la entrada en \`docs-as-code/api/CHANGELOG-API.md\`."; then
+            exit 0
+          fi
+          # Sin PR: aviso durable en un issue de etiqueta fija (se busca por etiqueta, no por título) y el job falla.
+          corrida="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          aviso="No se pudo abrir el PR automático de la instantánea OpenAPI (corrida ${corrida}, commit ${GITHUB_SHA::7}). La rama \`${RAMA}\` quedó empujada: abrir el PR a mano y agregar la entrada en \`docs-as-code/api/CHANGELOG-API.md\`."
+          gh label create "$ETIQUETA" --color D93F0B --description "Aviso del job instantanea-openapi de docs.yml" 2>/dev/null || true
+          issue="$(gh issue list --label "$ETIQUETA" --state open --json number --jq '.[0].number')"
+          if [ -n "$issue" ]; then
+            gh issue comment "$issue" --body "$aviso" || echo "::error::Tampoco se pudo comentar el issue #$issue."
+          else
+            gh issue create --title "Instantánea OpenAPI sin PR" --label "$ETIQUETA" --body "$aviso" \
+              || echo "::error::Tampoco se pudo abrir el issue de aviso."
+          fi
+          echo "::error::No se pudo abrir el PR automático de la instantánea; la rama $RAMA quedó empujada."
+          exit 1
