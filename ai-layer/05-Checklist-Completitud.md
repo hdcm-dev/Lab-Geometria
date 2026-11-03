@@ -4,7 +4,13 @@
 > etapa E4), que reproduce su §11. Una tabla por especificación. Fecha: 2026-11-01.
 
 > **Estado al 2026-11-02 (expediente 0002):** V1 **construida, flag apagado**; V2 especificada, **diferida**.
-> El checklist de abajo se conserva tal como lo dejó el revisor 1; la revisión humana sigue pendiente.
+> El checklist de abajo se conserva tal como lo dejó el revisor 1.
+
+> **Revisión 2 (2026-11-03, actuación 009):** la hizo la **mesa de Geometría** por delegación del Product
+> Owner (relator y especialistas, agentes). Se declara así porque la plantilla pide «humano de la mesa»: la
+> segunda lectura es independiente del revisor 1 —otra sesión, otro encargo, contra el código fusionado y no
+> contra la especificación sola— pero no es humana. El docente puede contrafirmarla en la columna
+> «Contrafirma» sin que eso bloquee nada.
 
 ## Índice
 
@@ -20,7 +26,8 @@
 | Especificación revisada | `01-Especificacion-V1-Pistas.md` | `02-Especificacion-V2-Borrador-De-Comentario.md` |
 | Contexto | PROTO | PROTO |
 | Revisor 1 | agente que especificó sin la guía (sólo el Conocimiento v0 y el repositorio) | ídem |
-| Revisor 2 | humano de la mesa: **pendiente** (se pide en el lote al Product Owner del expediente 0002) | ídem |
+| Revisor 2 | mesa de Geometría (agentes), por delegación del PO, 2026-11-03: **firmado** | ídem: **firmado con observaciones** (ver §4) |
+| Contrafirma | docente: optativa | docente: optativa |
 | Fecha | 2026-11-01 | 2026-11-01 |
 | `E4-verificar-requisitos.py` | 16 requisitos, 0 incompletos, rc 0 | 8 requisitos, 0 incompletos, rc 0 |
 
@@ -77,4 +84,33 @@
 | DEBE en NO | 0 | 0 |
 | DEBERÍA en NO | 0 | 0 |
 | **Completa (revisor 1)** | **sí** | **sí** |
-| Revisor 2 (humano de la mesa) | pendiente | pendiente |
+| Revisor 2 (mesa, actuación 009) | **conforme** | **conforme con observaciones** |
+
+**Observaciones del revisor 2.**
+
+- **V1, C-13:** ahora hay decisión de ACT-SEC sobre el servidor de PROD (`01` §4.3); antes sólo había la de
+  PROTO. Se confirma SÍ.
+- **V1, C-17:** el umbral de REQ-IA-13 (media ≥ 4/5) está; la medición docente todavía no. No es ítem del
+  checklist —el checklist mide completitud de la especificación, no su cumplimiento— y queda en
+  `ensayos/corrida-2026-11-03/Revision-Utilidad.md`.
+- **V2, C-17:** el umbral de REQ-IA-26 se fija en la actuación 009 (≥ 60 % de borradores enviados con
+  edición menor, como k de n con Clopper-Pearson). Pasa de «pendiente de valor» a SÍ.
+- **V2, C-08:** ADR-IA-06 recibe número reservado `ADR-14011`; sigue propuesta mientras V2 esté diferida.
+
+**Observaciones de la actuación 010 (2026-11-03, misma mesa).** No cambia ningún resultado; se anotan para
+que la lectura siguiente no tenga que reconstruirlas.
+
+- **V1, C-13:** la decisión de ACT-SEC sobre el servidor de PROD se revisó con la evaluación completa
+  (`01` §4.3, `ADR-14012`): mismo servidor, modelo `qwen3.5:4b` sin razonamiento. Sigue en SÍ, ahora sin la
+  salvedad de «provisional por evidencia incompleta».
+- **V1, C-14:** la evaluación completa se resume en `01` §4.7 sin dirección, puerto ni credenciales del
+  servidor; el informe original y su arnés no entran al repositorio. R-PRIV se vuelve a correr sobre
+  `ai-layer/` y `SDD/` antes de abrir el PR.
+- **V1, C-10:** entran REQ-IA-17 y REQ-IA-18 con criterio y prueba; `E4-verificar-requisitos.py` se vuelve a
+  correr al aplicar (esperado: 18 requisitos, 0 incompletos).
+- **V1, C-12:** la fila LLM09 pasa de riesgo previsto a **observado** (dos textos falsos que pasaron el
+  filtro); el tratamiento es el flag apagado en PROD hasta REQ-IA-13.
+- **V1, C-11 (mesa 0004):** prompt y plantillas pasan a ser un solo **contrato de pistas, versión 1.1**,
+  vigente y no definitivo, con condición de revisión (`01` §5.2), y la prueba bloqueante
+  `HintContractMatchesSpecTests` compara el código con los bloques marcados de `01`. Fusionar no despliega
+  (canal manual) y no enciende: encender es una decisión aparte.

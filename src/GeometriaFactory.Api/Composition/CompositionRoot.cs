@@ -10,8 +10,6 @@ using GeometriaFactory.Infrastructure.Time;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.AI;
-using OllamaSharp;
-using OllamaSharp.Models.Chat;
 
 namespace GeometriaFactory.Api.Composition;
 
@@ -267,11 +265,17 @@ public static class CompositionRoot
 
         if (ModelEndpointOf(ai) is { } endpoint)
         {
-            services.AddSingleton<IChatClient>(_ => new ChatClientBuilder((IChatClient)new OllamaApiClient(endpoint, ai.Model))
-                // SIN RAZONAMIENTO VISIBLE: el ensayo corrió con `think: false`, y la respuesta
-                // tiene que ser el objeto de tres campos y nada más.
-                .ConfigureOptions(options => options.RawRepresentationFactory ??= _ => new ChatRequest { Think = false })
-                .Build());
+            services.AddSingleton<IChatClient>(_ => OllamaRequestDefaults.CreateChatClient(ai, endpoint));
+
+            // PRECARGA: sólo existe si hay cliente de modelo (REQ-IA-17).
+            services.AddHostedService<ModelWarmupHostedService>();
+
+            if (OllamaRequestDefaults.HasInvalidKeepAlive(ai))
+            {
+                Console.Error.WriteLine(
+                    $"La sección '{AiOptions.SectionName}' trae '{nameof(AiOptions.KeepAlive)}' sin forma de " +
+                    $"duración. Se usa '{AiOptions.DefaultKeepAlive}'.");
+            }
         }
         else if (!string.IsNullOrWhiteSpace(ai.Endpoint))
         {

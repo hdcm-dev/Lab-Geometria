@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Entornos-Deploy.md
-**Versión:** 3.6
+**Versión:** 3.7
 **Estado:** Propuesto
 **Fecha:** 2026-08-26
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -293,7 +293,7 @@ Configuración de doce factores: **fuera del código, en variables de entorno o 
 
 **Las dos transiciones del medio son dos y no una**, y la Definition of Done §1.4 lo declara: **el artefacto queda entregado, no desplegado**. Es la frontera de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §1.
 
-**Sobre la última fila, y sobre el orden.** La obligación es del intake §17.1.P.3 · GeometriaFactory-Contracts y su tratamiento completo está en [`../../GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md`](../../GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md) §3.2. Lo que esta categoría agrega es que **el despliegue de esta unidad tiene ventana de indisponibilidad y el del front no**, de modo que el orden entre los dos deja siempre un intervalo de desajuste. **El intake §17.2.P.7 · GeometriaFactory-Web elige el orden desde 1.22: primero el backend**, o sea esta unidad, porque una API nueva normalmente acepta lo que mandaba el front anterior. Lo que esta categoría declaraba sigue vigente: el intervalo **se minimiza y se registra**, y **el orden no lo elimina**, porque el front sale al fusionar y esta unidad se despliega a mano. `PD-05` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 queda **cerrado**.
+**Sobre la última fila, y sobre el orden.** La obligación es del intake §17.1.P.3 · GeometriaFactory-Contracts y su tratamiento completo está en [`../../GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md`](../../GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md) §3.2. Lo que esta categoría agrega es que **el despliegue de esta unidad tiene ventana de indisponibilidad y el del front no**, de modo que el orden entre los dos deja siempre un intervalo de desajuste. **El intake §17.2.P.7 · GeometriaFactory-Web elige el orden desde 1.22: primero el backend**, o sea esta unidad, porque una API nueva normalmente acepta lo que mandaba el front anterior. Lo que esta categoría declaraba sigue vigente: el intervalo **se minimiza y se registra**, y **el orden no lo elimina**, porque las dos unidades se despliegan por actos separados: el front por el flujo de publicación, que hoy se lanza a mano (`workflow_dispatch`), y esta unidad a mano. `PD-05` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 queda **cerrado**.
 
 ### 7.2 `GeometriaFactory-Domain`
 
@@ -504,12 +504,62 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 | `AI__Model` | servicio de datos | vacía | Nombre del modelo en ese servidor |
 | `AI__TimeoutSeconds` | servicio de datos | `20` | Tope de espera por llamada |
 | `AI__MaxObservations` | servicio de datos | `5` | Advertencias por pedido que van al modelo |
+| `AI__KeepAlive` | servicio de datos | `30m` | Cuánto mantiene el servidor el modelo cargado después del último pedido; viaja en cada pedido (`ADR-14012`). Un valor sin forma de duración cae a `30m` con aviso |
 | `AI__HintsEnabled` | pieza pública | `false` | Muestra «Ver pistas». En `false` la pantalla no cambia y no pide nada |
 
 **`deploy/compose.yaml` y los dos `Dockerfile` no cambian y no exigen ninguna variable nueva**: fusionar la capa
 deja el producto publicado como estaba. El único ejemplo de dirección que el repositorio admite es
 `http://localhost:11434`; la dirección real de un servidor de modelos **no se escribe en el repositorio** y llega
 por el entorno, como la clave de firma. El arranque **nunca falla** por esta sección.
+
+#### 11.x.1 Valores por entorno (expediente 0002, actuaciones 009 y 010)
+
+El código conserva los valores por omisión de la tabla; los entornos que encienden la capa los pisan por
+variable de entorno. **Los valores reales de dirección y modelo viven en el secreto del despliegue**, igual
+que `AccessToken__SigningKey`; acá sólo se documenta qué variable lleva cada entorno y por qué.
+
+| Variable | Desarrollo local | Prueba (E2E con IA) | Producción |
+| --- | --- | --- | --- |
+| `AI__Endpoint` | `http://localhost:11434` si hay un servidor local; si no, vacía | secreto `ai_endpoint` | secreto `ai_endpoint` |
+| `AI__Model` | el que haya en el servidor local | `qwen3.5:4b` | `qwen3.5:4b` (alternativa `gemma4:e4b-it-qat`) |
+| `AI__TimeoutSeconds` | `20` (omisión) | `20` (omisión) | `20` (omisión) |
+| `AI__MaxObservations` | `5` | `3` | `3` |
+| `AI__KeepAlive` | `30m` (omisión) | `30m` (omisión) | `-1` |
+| `AI__HintsEnabled` (Web) | `false` | `true` | `false` hasta la revisión docente de REQ-IA-13; después `true` |
+
+**Por qué estos valores (actuación 010, que corrige la 009).** La evaluación completa del 2026-11-03 midió
+diez configuraciones con el mismo banco (`ai-layer/01` §4.7). Los siete modelos sin razonamiento pasaron la
+garantía; se eligió el de menor costo, `qwen3.5:4b` (3 GB), con p95 en caliente de 12,6 s y primera llamada
+en frío de 13,3 s. La regla del banco (p95 + 50 %, redondeado) da **20 s**, que es el valor por omisión del
+código: por eso **ningún entorno lo pisa**, y el frío también entra. Los 40 s de la actuación 009 existían
+sólo para el frío de 33,6 s del modelo de 35 B que se reemplazó. Tres observaciones por pedido mantienen la
+espera del alumno cerca de 35 s, porque el cupo de un pedido a la vez serializa las llamadas. `-1` en
+producción mantiene el modelo siempre cargado: son 3 GB en un servidor compartido, y así el frío no aparece.
+
+**El modelo va sin razonamiento, y eso no se configura.** `think=false` lo pone el código en cada pedido
+(REQ-IA-18): con razonamiento, el modelo elegido devolvió el contenido vacío en los diez casos. No hay
+variable para encenderlo a propósito.
+
+**Por qué producción arranca con el flag apagado.** Encender la capa es una decisión de producto, no de
+infraestructura: el modelo ya pasó la garantía (0 fugas) pero la utilidad para el alumno (REQ-IA-13) todavía
+no la midió el docente, y la evaluación encontró pistas ambiguas que pasan el filtro. El entorno de prueba la
+enciende para correr las puertas c, f, g e i y las E2E. **Fusionar no es encender**: la publicación del front
+es manual (`deploy-front-ftp.yml` sólo tiene `workflow_dispatch`) y el servicio se despliega a mano, de modo
+que una fusión a `main` no pone nada en uso; pasar `AI__HintsEnabled` a `true` es una decisión separada del
+merge, del Product Owner.
+
+**Cómo se inyecta.** En `deploy/compose.yaml` del entorno, las cinco variables `AI__*` del servicio de datos
+y `AI__HintsEnabled` de la pieza pública se agregan en el archivo de entorno del host (no versionado), y la
+dirección se monta como secreto de compose y se lee con el mismo mecanismo que la clave de firma. Ningún
+`Dockerfile` cambia.
+
+**Precarga (reemplaza el «calentamiento» de la actuación 009).** El propio servicio de datos, al arrancar y
+sólo si tiene cliente de modelo, manda un pedido mínimo en segundo plano (`ModelWarmup`: un mensaje fijo, un
+token, tope 120 s) para que el modelo quede cargado antes del primer alumno. No bloquea el arranque, no usa
+el cupo de pistas y, si falla, sólo lo deja en la traza (`Failed`, `TimedOut`), sin la dirección. Se hace en
+el servicio y no en el guion de despliegue porque así no depende de que alguien se acuerde de correrlo, y
+porque se repite sola en cada reinicio del contenedor. Con el modelo elegido es defensa en profundidad (su
+frío ya entra en 20 s); con un modelo grande sería imprescindible.
 
 ## 12. Secretos: la clave de firma que se recibe y no se busca
 
@@ -537,6 +587,7 @@ por el entorno, como la clave de firma. El arranque **nunca falla** por esta sec
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 3.7 | 2026-11-03 Mesa 0004: «fusionar no es encender» y el canal del front medido como manual (`workflow_dispatch`); §5 corrige «el front sale al fusionar». | **§11.x y §11.x.1, actuación 010 del expediente 0002**: entra la llave `AI__KeepAlive` (`30m` por omisión, `-1` en producción); el modelo de prueba y producción pasa a `qwen3.5:4b` (alternativa `gemma4:e4b-it-qat`); el tope vuelve a 20 s en todos los entornos (se retiran los 40 s de la 009, que cubrían el frío de un modelo que ya no se usa); el «calentamiento» del despliegue se reemplaza por la precarga del propio servicio. `compose` y `Dockerfile` siguen sin cambios. |
 | 3.6 | 2026-11-02 | **§11.x: la sección `AI`** de la capa de IA V1 (expediente 0002, tramo T7): cinco llaves, todas apagadas o vacías por omisión; `compose` y `Dockerfile` sin cambios. |
 | 3.5 | 2026-09-01 | **El mecanismo de respaldo se corrigió y se CORRIÓ, que es lo que la emisión anterior no hizo.** La mesa del 2026-09-01 lo ejerció y encontró dos defectos que lo volvían inservible en la máquina del docente: el respaldo **borraba la copia que acababa de tomar** —su verificador hacía `docker run` sin `--entrypoint sh` sobre una imagen cuyo `ENTRYPOINT` es el servicio, un `2>/dev/null` se tragaba el error y la rama de «no verificó» destruía una copia sana— y **la restitución no tenía modo contenedor**, de modo que la copia se podía tomar y no devolver. Ahora el verificador tiene **tres** desenlaces y no dos: verificó, **no** verificó —y borra, porque una copia corrupta ocupa el lugar de la que falta— y **no se pudo** verificar, que **conserva la copia** y sale 1 diciendo por qué. **Ante la duda se guarda.** Se pega el **ciclo completo corrido**: 3 cuentas y 5 trabajos, respaldo verificado, pérdida total del almacén, restitución, y el mismo recuento del otro lado. | Orquestador SDD |
 | 3.4 | 2026-08-31 | **`U-01` del plan de la mesa del 2026-08-31: el respaldo existe, y el diario es el que la fuente declara.** Cierra el hallazgo `MI-01`, un `P0` votado 5-0: el respaldo era **el único mecanismo de vuelta atrás que el corpus declaraba** y **no existía en ningún árbol** —el barrido de `scripts/`, `deploy/` y `.github/` devolvía una sola coincidencia, `reset-db.sh`, que es el guion que **vacía** el almacén—. **Y su segunda mitad era peor**: la especificación escrita para construirlo describía diario **WAL** mientras `UseSqlite(cadena)` a secas dejaba el motor en `delete`, de modo que **el `P0` no se cerraba siguiendo el corpus**. Entra `StorePreparation` fijando `PRAGMA journal_mode=WAL` y **leyendo lo que el motor contesta** —sobre un almacén en memoria SQLite se queda en `delete` y **no falla**—; `sqlite3` entra a la imagen de ejecución con su motivo escrito, para que la copia se pueda tomar **desde adentro del contenedor** y no dependa de lo que el host del destino tenga; y entran `scripts/respaldo-almacen.sh` —`VACUUM INTO` y no `cp`, sin detener el servicio, negándose si el destino es el directorio del almacén, y con `integrity_check` que **borra la copia si no verifica**— y `scripts/restaurar-almacen.sh`, que **no borra el almacén anterior: lo aparta con sello**, que es la lección del 2026-08-15. **La política sigue sin declararse y es deliberado**: la frecuencia, el destino y la retención son `PD-04` y son del Product Owner. **Un número puesto en el guion se propaga como si fuera del producto.** |
