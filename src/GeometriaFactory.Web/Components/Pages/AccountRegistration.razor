@@ -122,11 +122,15 @@ else
         <div class="gf-field @(_state is Outcome.EmailAlreadyRegistered or Outcome.EmailDomainNotAdmitted || Falta(Form.Email) ? "gf-field--error" : null)">
             <label for="registration-email">Correo</label>
             <input class="gf-input" id="registration-email" name="Input.Email" type="email"
-                   autocomplete="email" aria-describedby="registration-email-error" value="@Form.Email"
+                   autocomplete="email" aria-describedby="@(_state is Outcome.EmailAlreadyRegistered or Outcome.EmailDomainNotAdmitted ? "registration-email-error" : null)" value="@Form.Email"
                    aria-invalid="@(_state is Outcome.EmailAlreadyRegistered or Outcome.EmailDomainNotAdmitted || Falta(Form.Email) ? "true" : null)" />
             @if (_state is Outcome.EmailAlreadyRegistered)
             {
                 <span class="gf-requirement" id="registration-email-error">Ese correo ya está registrado.</span>
+            }
+            else if (_state is Outcome.EmailDomainNotAdmitted)
+            {
+                <span class="gf-requirement" id="registration-email-error">Ese correo no es de un dominio admitido.</span>
             }
         </div>
         <div class="gf-field @(Falta(Form.FirstName) ? "gf-field--error" : null)">
