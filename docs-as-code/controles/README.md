@@ -7,7 +7,7 @@ status: borrador
 origin: ia-generated
 confidence: media
 owner: mantenimiento de docs-as-code (agente, expediente 0003)
-last_review: 2026-11-02
+last_review: 2026-11-03
 audience: [desarrollo, agente]
 delivery: [publico]
 traces: [FIC-GEO-001]
@@ -35,6 +35,8 @@ probar» en el sentido de la ficha hasta que el check `docs` dé verde en un PR 
 | [`recuento_openapi.py`](recuento_openapi.py) | Extensión `recuento-openapi` (tramo T-6): la [instantánea OpenAPI](../api/openapi-v1.json) contra la tabla de operaciones de `Contratos-REST.md` §3 y §3.1 (cifra del título, rutas de más o de menos y códigos sin documentar) |
 | [`openapi.sh`](openapi.sh) | Controles OpenAPI con Docker (tramo T-6): oasdiff `breaking` de Tufin y Spectral, con su propio par rojo/verde. Lo corre el job `openapi` de `docs.yml` |
 | [`spectral.yaml`](spectral.yaml) | Las tres reglas de Spectral, propias y sin `extends`: `operacion-con-id`, `operacion-con-resumen` y `operacion-con-error-documentado` |
+| [`enlaces_externos.py`](enlaces_externos.py) | Extensión `enlaces-externos` (tramo T-7, revisión externa R-G2): enlaces `http`/`https` de la documentación, con red. La corre sólo el carril programado `.github/workflows/docs-programado.yml`, no la compuerta |
+| [`enlaces-excepciones.txt`](enlaces-excepciones.txt) | Excepciones de `enlaces-externos`: `URL \| motivo \| vence AAAA-MM-DD`. Vencida, no se aplica y se avisa |
 | [`autoprueba.sh`](autoprueba.sh) | Par rojo/verde plantado de cada control, sobre un corpus temporal |
 
 Las extensiones reutilizan el lector de frontmatter de la copia sin modificarla. Son el apartamiento parcial de
@@ -72,6 +74,13 @@ eleva, no se corrige**.
 `esquema` sólo valida frontmatter YAML. Lo heredado que declara sus metadatos en una tabla Campo/Valor se cuenta como
 «sin frontmatter» y no se valida.
 
+### 2.0 Enlaces externos (carril programado)
+
+`enlaces-externos` no corre en la compuerta, que es sin red: lo corre `docs-programado.yml` los lunes y a mano. Avisa
+siempre. El issue de aviso lleva la etiqueta fija `docs-enlaces` y se busca por ella; con caídos se abre o se comenta,
+y sin caídos se comenta y se cierra. Su par rojo/verde está en `autoprueba.sh`, contra un servidor local que devuelve
+404, y cubre también la excepción vigente, la vencida y la mal formada.
+
 ### 2.1 Controles OpenAPI (tramo T-6)
 
 - **`recuento-openapi`** compara la instantánea con `SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md`:
@@ -95,6 +104,8 @@ bash docs-as-code/controles/autoprueba.sh               # sólo el par rojo/verd
 python3 -I docs-as-code/controles/delivery_publico.py --exigir docs-as-code   # un control suelto
 python3 -I docs-as-code/controles/recuento_openapi.py                         # el recuento OpenAPI
 bash docs-as-code/controles/openapi.sh origin/main                            # oasdiff y Spectral (con Docker)
+python3 -I docs-as-code/controles/enlaces_externos.py \
+  --excepciones docs-as-code/controles/enlaces-excepciones.txt                # enlaces externos (con red)
 ```
 
 Corre sólo en el host o en el runner: necesita `python3`, que la imagen del SDK no trae (`AGENTS.md:81`). Código de

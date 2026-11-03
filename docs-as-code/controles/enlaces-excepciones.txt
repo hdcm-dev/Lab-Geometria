@@ -1,0 +1,5 @@
+# Excepciones del control enlaces-externos (expediente 0003, revisión externa R-G2, hallazgo B3).
+# Forma: URL | motivo | vence AAAA-MM-DD
+# Una excepción vigente saca la URL del informe semanal; vencida, la URL se revisa de nuevo y se avisa.
+# Al vencer: renovar con un motivo actualizado o quitar la línea. Ninguna excepción sin fecha.
+https://api-geometria.aplicada.stream | la raíz de la Api no sirve contenido y responde 404 por diseño; su punto de vida es /salud. Los enlaces a la raíz están en SDD/Docs, que no se corrige desde acá: cambiarlos a /salud se eleva al orquestador SDD | vence 2027-05-03
