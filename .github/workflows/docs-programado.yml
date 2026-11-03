@@ -1,0 +1,113 @@
+# Carril programado de docs (expediente 0003, tramo T-7; decisión D-17, control «Enlaces externos» de la §5.2).
+#
+# Workflow PROPIO y aparte de `docs.yml` y de `ci.yml`: revisa los enlaces externos (http/https) de la documentación
+# una vez por semana y, si hay enlaces caídos, abre (o actualiza) un issue. SÓLO AVISA:
+#   - No corre en PRs ni en push: un sitio ajeno caído no debe frenar ninguna fusión ni la conformación automática.
+#   - El job queda verde aunque haya enlaces caídos; el aviso es el issue. Rojo sólo si el guion falla por uso.
+#   - NO compila, NO publica y NO despliega: sin secretos; el único permiso de escritura es `issues: write`.
+#   - Sin acciones de terceros salvo `actions/checkout`, fijada a una versión exacta; el control es python3 del
+#     runner, sin dependencias.
+# Ámbito: los `.md` de `docs-as-code/**`, `README.md` y `SDD/Docs/**` (este último sólo se informa: se eleva, no se
+# corrige). Se ignoran los nombres sin dominio (internos de contenedor), `localhost`, `127.0.0.1`, `example.com/.org`
+# y los ejemplos con marcadores (`{`, `<`).
+
+name: docs-programado
+
+on:
+  schedule:
+    - cron: '17 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-programado
+  cancel-in-progress: false
+
+jobs:
+  enlaces-externos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      issues: write
+    env:
+      TITULO_ISSUE: 'EXP-0003: enlaces externos caídos en la documentación'
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Revisar enlaces externos (avisa)
+        run: |
+          python3 - <<'PY'
+          import os, re, sys, glob, urllib.request, urllib.error, concurrent.futures as cf
+
+          archivos = sorted(set(glob.glob('docs-as-code/**/*.md', recursive=True)
+                                + ['README.md'] + glob.glob('SDD/Docs/**/*.md', recursive=True)))
+          patron = re.compile(r'https?://[^\s)<>"`\]]+')
+          ignorar = re.compile(r'^https?://(localhost|127\.0\.0\.1|0\.0\.0\.0|([^/]*\.)?example\.(com|org))([:/]|$)')
+          usos = {}
+          for ruta in archivos:
+              if not os.path.isfile(ruta):
+                  continue
+              with open(ruta, encoding='utf-8', errors='replace') as f:
+                  for n, linea in enumerate(f, 1):
+                      for url in patron.findall(linea):
+                          url = url.rstrip('.,;:*_\'')
+                          if ignorar.match(url) or '{' in url or '<' in url or '...' in url or '…' in url:
+                              continue
+                          host = re.sub(r'^https?://', '', url).split('/')[0].split(':')[0]
+                          if '.' not in host:  # nombres internos de contenedor, no navegables desde afuera
+                              continue
+                          lugar = f'{ruta}:{n}'
+                          if lugar not in usos.setdefault(url, []):
+                              usos[url].append(lugar)
+
+          def probar(url):
+              cab = {'User-Agent': 'Lab-Geometria-docs-programado/1.0'}
+              ultimo = ''
+              for metodo in ('HEAD', 'GET'):
+                  try:
+                      with urllib.request.urlopen(urllib.request.Request(url, method=metodo, headers=cab), timeout=20) as r:
+                          return url, None
+                  except urllib.error.HTTPError as e:
+                      # 401/403/429: el sitio existe y no deja revisar; no es un enlace caído.
+                      if e.code in (401, 403, 429):
+                          return url, None
+                      ultimo = f'HTTP {e.code}'
+                  except Exception as e:
+                      ultimo = type(e).__name__
+              return url, ultimo
+
+          with cf.ThreadPoolExecutor(max_workers=8) as ex:
+              resultados = list(ex.map(probar, sorted(usos)))
+          caidos = [(u, err) for u, err in resultados if err]
+
+          print(f'{len(archivos)} archivos, {len(usos)} enlaces externos, {len(caidos)} caídos.')
+          with open('informe-enlaces.md', 'w', encoding='utf-8') as f:
+              f.write(f'Revisión semanal de enlaces externos ({len(usos)} enlaces en {len(archivos)} archivos).\n\n')
+              f.write('| Enlace | Error | Dónde |\n| --- | --- | --- |\n')
+              for u, err in caidos:
+                  f.write(f'| {u} | {err} | {", ".join(usos[u][:5])} |\n')
+                  print(f'::warning::enlace caído ({err}): {u} en {", ".join(usos[u][:5])}')
+              f.write('\nLos enlaces de `SDD/Docs/**` se elevan al orquestador SDD, no se corrigen (`AGENTS.md:61`).\n')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f'caidos={len(caidos)}\n')
+          PY
+        id: revisar
+
+      - name: Abrir o actualizar el issue si hay enlaces caídos
+        if: steps.revisar.outputs.caidos != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          cat informe-enlaces.md >> "$GITHUB_STEP_SUMMARY"
+          n=$(gh issue list --state open --search "\"$TITULO_ISSUE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$n" ]; then
+            gh issue comment "$n" --body-file informe-enlaces.md
+          else
+            gh issue create --title "$TITULO_ISSUE" --body-file informe-enlaces.md
+          fi
