@@ -94,10 +94,10 @@ else if (_state is Outcome.Rejected)
     <div class="gf-field">
         <label for="provisioning-password">Contraseña</label>
         <input class="gf-input" id="provisioning-password" name="password" type="password"
-               autocomplete="new-password" aria-describedby="provisioning-requirement"
+               autocomplete="new-password" aria-describedby="credential-requirement"
                @bind="_password" @bind:event="oninput" disabled="@(_sending || !_listo)" />
         @* Requisito declarado antes del intento, no recién al fallar. *@
-        <span class="gf-requirement" id="provisioning-requirement">Vas a usarla para entrar; no hay forma de recuperarla.</span>
+        <CredentialRequirement />
     </div>
 
     <div class="gf-field">

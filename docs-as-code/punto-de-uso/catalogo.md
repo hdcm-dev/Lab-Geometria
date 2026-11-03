@@ -49,13 +49,10 @@ compruebe que lo registrado y lo dibujado no se separen.
 | contexto | capa | texto | fuente |
 | --- | --- | --- | --- |
 | `web/provisioning-password` | etiqueta | Contraseña | `src/GeometriaFactory.Web/Components/Pages/InitialProvisioning.razor:95` |
-| `web/provisioning-password` | pista | Vas a usarla para entrar; no hay forma de recuperarla. | `src/GeometriaFactory.Web/Components/Pages/InitialProvisioning.razor:100` |
+| `web/credential-requirement` | pista | Vas a usarla para entrar; no hay forma de recuperarla. | `src/GeometriaFactory.Web/Components/Pages/CredentialRequirement.razor:12` |
 | `web/credential-new` | etiqueta | Contraseña nueva | `src/GeometriaFactory.Web/Components/Pages/OwnCredentialSetup.razor:26` |
-| `web/credential-new` | pista | Vas a usarla para entrar; no hay forma de recuperarla. | `src/GeometriaFactory.Web/Components/Pages/OwnCredentialSetup.razor:29` |
 | `web/forced-new` | etiqueta | Contraseña nueva | `src/GeometriaFactory.Web/Components/Pages/OwnCredentialForcedChange.razor:159` |
-| `web/forced-new` | pista | Vas a usarla para entrar; no hay forma de recuperarla. | `src/GeometriaFactory.Web/Components/Pages/OwnCredentialForcedChange.razor:162` |
 | `web/credential-change-new` | etiqueta | Contraseña nueva | `src/GeometriaFactory.Web/Components/Pages/OwnCredentialChange.razor:100` |
-| `web/credential-change-new` | pista | Vas a usarla para entrar; no hay forma de recuperarla. | `src/GeometriaFactory.Web/Components/Pages/OwnCredentialChange.razor:105` |
 | `web/registration-email` | etiqueta | Correo | `src/GeometriaFactory.Web/Components/Pages/AccountRegistration.razor:123` |
 | `web/registration-email` | validacion | Ese correo ya está registrado. | `src/GeometriaFactory.Web/Components/Pages/AccountRegistration.razor:129` |
 | `web/registration-email` | validacion | Ese correo no es de un dominio que el laboratorio admita. Registrate con tu correo institucional. | `src/GeometriaFactory.Web/Components/Pages/AccountRegistration.razor:90` |
@@ -77,12 +74,12 @@ capa de IA por archivo (decisión H-06).
 | `contexto` | Observación | Destino |
 | --- | --- | --- |
 | `web/provisioning-password` | La resolución del expediente lo llamó `web/initial-provisioning-password`; el id real del control es `provisioning-password` (`InitialProvisioning.razor:96`) y el catálogo usa el real | — |
-| `web/*-new`, `web/provisioning-password` | La misma pista está escrita **cuatro veces**, una por pantalla (`InitialProvisioning.razor:100`, `OwnCredentialSetup.razor:29`, `OwnCredentialForcedChange.razor:162`, `OwnCredentialChange.razor:105`). El catálogo la registra una vez por contexto para que `anclas` vigile las cuatro | ola 2, PR 10: una sola fuente en código |
+| `web/credential-requirement` | La misma pista estaba escrita **cuatro veces**, una por pantalla (base `caf4e6c`: `InitialProvisioning.razor:100`, `OwnCredentialSetup.razor:29`, `OwnCredentialForcedChange.razor:162`, `OwnCredentialChange.razor:105`). Desde el tramo T-10 vive una sola vez en `CredentialRequirement.razor:12`, que las cuatro pantallas dibujan; los cuatro campos de contraseña nueva apuntan a ese id con `aria-describedby` | resuelto en la ola 2, PR 10 |
 | `web/registration-email` | El control apunta siempre a `aria-describedby="registration-email-error"` (`AccountRegistration.razor:125`), pero ese `span` sólo se dibuja con `EmailAlreadyRegistered` (`:127-130`). Con `EmailDomainNotAdmitted` el mensaje va sólo en el aviso de la pantalla (`:85-93`) y la referencia queda colgada: defecto WCAG 3.3.1 / 1.3.1 | ola 2, PR 9, solo y declarado como cambio funcional |
 | `web/submission-date` | La capa `validacion` copia la parte fija del mensaje; el día declarado lo inserta la pantalla (`WorkSubmission.razor:372`) | — |
 | `web/submission-text` | La pista nombra cuatro conjuntos de componentes; el validador lee además `Lado` en el cilindro (`src/GeometriaFactory.Infrastructure/Figures/LocalFigureValidator.cs:490`). Ver [RD-03](../reglas/RD-03-forma-del-texto-del-trabajo.md), §3 | se eleva con la ficha de la regla |
 | `web/submission-text` | El ejemplo de la pantalla es un JSON completo y correcto de un cubo de arista 3 (`WorkSubmission.razor:428-445`). Si el TP vigente pide un cubo, choca con las prohibiciones 1 y 3 de [RD-01](../reglas/RD-01-ayuda-no-resuelve.md). El repo no declara cuál es el TP vigente, así que **no se puede decidir desde acá**: el catálogo no copia el JSON y lo marca para que el Product Owner lo revise (H-10) | revisión del PO |
-| `web/accounts-search`, `web/works-search` | Las dos cajas tienen `<label for>` propio (`AccountsPanel.razor:267`, `StudentWorkPanel.razor:177`); el `placeholder` (`:270`, `:180`) repite un ejemplo y no lleva información esencial. La auditoría del nombre accesible calculado sigue en la ola 2 | ola 2, PR 10 |
+| `web/accounts-search`, `web/works-search` | Auditoría del nombre accesible (tramo T-10): cada caja tiene `<label for>` propio (`AccountsPanel.razor:267`, `StudentWorkPanel.razor:177`), así que su nombre accesible es el texto de la etiqueta; el ícono de lupa es `aria-hidden="true"` y no entra en el nombre (`Components/Shared/Icon.razor:11`); el `placeholder` (`:270`, `:180`) sólo repite un ejemplo. No falta etiqueta: no hay cambio de código | auditado en la ola 2, PR 10; sin cambio |
 
 ## 4. Cómo se agrega una fila
 
