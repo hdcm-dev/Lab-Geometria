@@ -82,6 +82,9 @@ public static class HealthEndpoint
                 : Results.Json(health, statusCode: StatusCodes.Status503ServiceUnavailable);
         })
         .WithName("Health")
+        .WithSummary("Estado del servicio y de su almacén")
+        .Produces<ServiceHealth>(StatusCodes.Status200OK)
+        .Produces<ServiceHealth>(StatusCodes.Status503ServiceUnavailable)
         .AllowAnonymous();
 
         return endpoints;
