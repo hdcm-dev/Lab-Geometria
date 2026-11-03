@@ -171,7 +171,17 @@ Se suman a REQ-IA-01..03, 11 y 15 de V1, que valen igual.
 
 ## 7. Lo que esta especificación no decide
 
-- El umbral de REQ-IA-26 (lo fija el docente).
-- El banco de V2: trabajos sintéticos con observaciones conocidas; no se construyó en esta pasada.
-- Si el borrador debe además evitar el valor derivado: el comentario lo lee el alumno, por eso esta
-  especificación lo prohíbe; el docente puede escribirlo él mismo si lo decide. Se eleva para confirmar.
+- ~~El umbral de REQ-IA-26~~: **60 %** de borradores enviados con edición menor (actuación 009). Motivo:
+  un borrador que hay que reescribir más de cuatro de cada diez veces no ahorra trabajo frente a escribir
+  desde cero; el valor se revisa con la primera corrida docente.
+- El banco de V2: trabajos sintéticos con observaciones conocidas. **Sigue sin construir**; es la condición 2
+  de reapertura (actuación 007 §3).
+- ~~Si el borrador puede contener el valor derivado~~ (punto D): **resuelto: no** (actuación 009). Motivo:
+  el comentario lo lee el alumno, y si la herramienta escribe la solución convierte la corrección en
+  respuesta (OWASP LLM02, divulgación de lo que el producto debe proteger). El docente conserva la libertad
+  de escribirla él mismo al editar: la prohibición es para el modelo, no para el docente. REQ-IA-27 queda
+  como está.
+
+**Estado de reapertura (2026-11-03).** Condición 1, piloto de V1 cerrado con la puntuación docente: **no
+cumplida** (la revisión de la mesa existe; la docente no). Condición 2, banco de conducta de V2: **no
+cumplida**. Condición 3, umbral de REQ-IA-26: **cumplida**. V2 sigue diferida.

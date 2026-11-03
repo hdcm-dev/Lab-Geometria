@@ -4,9 +4,9 @@
 |---|---|
 | Número | **EXP-0002** |
 | Título | Especificación de una capa de IA de nivel A0 para la Fábrica de Geometría: V1 pistas, V2 borrador de comentario |
-| Estado | **en trámite** (constancia 008): V1 **construida**, apagada por omisión, en la rama `ai-layer/implementacion-v1`; V2 especificada y diferida. Falta el pull request (coordinador) y el punto A del lote (PO) |
+| Estado | **en trámite** (actuación 010): V1 **fusionada** en `main` (PR #237, `056801d`), apagada por omisión; ingresada al intake como **F-27**; plantillas definitivas (Círculo · Area corregida en la 010); modelo de producción `qwen3.5:4b` sin razonamiento, 20 s, precarga y permanencia (`ADR-14012`), decididos con la evaluación completa. Falta el código de la 010, la corrida de 30 casos con el prompt v2, la puntuación docente de REQ-IA-13 y la corrida E2E con el flag encendido. V2 especificada y diferida |
 | Apertura | 2026-11-01 |
-| Rama | `g16/ai-layer-v1` desde `origin/main` `5f07b12`, local. **Sin push, sin pull request, sin merge** |
+| Rama | especificación: `g16/ai-layer-v1`; construcción: `ai-layer/implementacion-v1`, **fusionada** por el PR #237 (`main` `056801d`); cierre: `ai-layer/actuacion-009` |
 | Partes | **Product Owner** (decide el ingreso al intake); **orquestador del prompt 02 de la guía 16** de Lab-Documentos (agente, presenta); **agente de la etapa E5** (especifica e informa) |
 | Objeto | Probar el Conocimiento de especificación v0 de la guía 16 sobre un caso público y dejar la especificación en `ai-layer/` |
 | Origen | [Actuación 001](actuaciones/001-presentacion-pedido-de-especificacion.md) |
@@ -37,6 +37,8 @@ que el expediente folia por enlace sin duplicarlos.
 | 006 | 2026-11-02 | informe | mesa de construcción (cinco lentes) | Acta: once decisiones con sus votos, vetos y riesgos | [006](actuaciones/006-informe-mesa-de-construccion.md) |
 | 007 | 2026-11-02 | resolucion | coordinador | Resuelve A, C, E, F y G; plan T1 a T8; V2 diferida; fila Reintegra | [007](actuaciones/007-resolucion-plan-de-construccion-v1.md) |
 | 008 | 2026-11-02 | constancia | implementador de la capa de IA (agente) | T1 a T8 con sus commits; 741 pruebas en verde y 0 advertencias; cobertura conforme; corrida rotulada con modelo local; apartamientos declarados | [008](actuaciones/008-constancia-construccion-de-v1.md) |
+| 009 | 2026-11-03 | resolucion | mesa de Geometría (agentes, por delegación del PO) | Fusión del PR #237; resuelve A (F-27), B (revisor 2), D (no), E (modelo y servidor), F (plantillas) y el umbral de REQ-IA-26; tiempos del despliegue; revisión de utilidad de la mesa; lo que queda abierto | [009](actuaciones/009-resolucion-fusion-y-cierre-del-lote.md) |
+| 010 | 2026-11-03 | resolucion | mesa de Geometría (agentes, por delegación del PO) | Evaluación completa (diez configuraciones); corrige el punto E y los tiempos de la 009: `qwen3.5:4b` sin razonamiento, 20 s, precarga y permanencia (`ADR-14012`); flag de producción apagado hasta la puntuación docente; plantilla Círculo · Area; prompt v2 candidato; F-27 al bloque Could | [010](actuaciones/010-resolucion-evaluacion-completa-y-modelo-de-produccion.md) |
 
 ## 2. Índice de evidencia
 
@@ -65,8 +67,14 @@ tocaron el intake, `deploy/`, los `Dockerfile`, `.github/`, `_legacy/` ni Audit.
 
 ## 4. Punto de continuación
 
-**Dónde estoy:** V1 construida en la rama `ai-layer/implementacion-v1` (constancia 008), empujada al remoto,
-sin pull request. La capacidad queda apagada por omisión: fusionar no cambia el producto publicado.
-**Qué sigue:** el coordinador abre el pull request y lo fusiona con la CI en verde; el Product Owner decide el
-punto A (ingreso como F-n), fija las doce plantillas (F) y revisa el checklist (B). V2 espera su condición de
-reapertura (actuación 007 §3).
+**Dónde estoy:** V1 fusionada en `main` por el PR #237 (`056801d`), apagada por omisión. La actuación 010
+corrige la 009 con la evaluación completa: modelo `qwen3.5:4b` sin razonamiento (alternativa
+`gemma4:e4b-it-qat`) en el servidor de la cátedra, 20 s en todos los entornos, precarga al arrancar y
+permanencia del modelo en cada pedido (`ADR-14012`). La revisión de utilidad muestra que, con el prompt v1,
+ningún modelo supera a la plantilla.
+**Qué sigue, en orden:** (1) aplicar el código propuesto de la 010 y las filas de la norma, con la CI en
+verde; (2) corrida rotulada de 30 casos con `qwen3.5:4b` y 20 s, con el prompt v1 y el v2 (GEO-04, E-011);
+(3) el docente puntúa la corrida v2 y se mide la concordancia del juez (REQ-IA-13 y 14); (4) entorno de
+prueba con el flag encendido para las puertas c, f, g e i y las E2E (E-012); (5) recién entonces,
+`AI__HintsEnabled=true` en producción. V2 sigue diferida hasta
+que se cumplan sus condiciones 1 y 2 (actuación 009 §6).

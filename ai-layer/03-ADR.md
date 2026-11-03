@@ -10,7 +10,8 @@
 
 **Correspondencia con el registro del repositorio (expediente 0002, actuación 007, 2026-11-02).** ADR-IA-01
 → `ADR-14006`, IA-02 → `ADR-14007`, IA-03 → `ADR-14008`, IA-04 → `ADR-14009`, IA-05 → `ADR-14010`, en
-`SDD/Docs/Producto/Adrs/`. ADR-IA-06 (V2) sigue propuesta y sin número: V2 está diferida. Esta nota se
+`SDD/Docs/Producto/Adrs/`. ADR-IA-06 (V2) sigue propuesta, con número reservado `ADR-14011`: V2 está diferida.
+ADR-IA-07 → `ADR-14012` (actuación 010, 2026-11-03). Esta nota se
 agrega; el texto de abajo no se reescribe.
 
 ## Índice
@@ -21,6 +22,7 @@ agrega; el texto de abajo no se reescribe.
 - [ADR-IA-04 · Endpoint propio con respaldo de plantilla](#adr-ia-04--endpoint-propio-con-respaldo-de-plantilla)
 - [ADR-IA-05 · Los nombres de la capa entran primero a la norma](#adr-ia-05--los-nombres-de-la-capa-entran-primero-a-la-norma)
 - [ADR-IA-06 · V2: el borrador lo propone el modelo y lo firma el docente](#adr-ia-06--v2-el-borrador-lo-propone-el-modelo-y-lo-firma-el-docente)
+- [ADR-IA-07 · Modelo, servidor, tiempo y precarga de producción](#adr-ia-07--modelo-servidor-tiempo-y-precarga-de-producción)
 
 ## ADR-IA-01 · Dónde vive la llamada al modelo
 
@@ -101,7 +103,7 @@ agrega; el texto de abajo no se reescribe.
 
 | Campo | Contenido |
 |---|---|
-| Estado | propuesta |
+| Estado | propuesta; número reservado **`ADR-14011`** (actuación 009). Se escribe en `SDD/Docs/Producto/Adrs/` cuando V2 se reabra |
 | ASR que lo origina | REQ-IA-21 y REQ-IA-22 de `02-Especificacion-V2-Borrador-De-Comentario.md` |
 | Contexto | `ResolveWorkUseCase.ExecuteAsync` recibe un `comment` opcional; el comentario no es calificación (F-21, X-5 retirada) |
 | Alternativas | (a) el modelo escribe el comentario al resolver: sería una escritura del modelo, nivel A1 con aprobación; (b) **el modelo devuelve un borrador que el docente edita y envía por el flujo vigente** |
@@ -111,3 +113,18 @@ agrega; el texto de abajo no se reescribe.
 | Confianza | alta |
 | Deja de valer si | se pide que el modelo resuelva trabajos |
 | En el código | ninguno hasta la aprobación |
+
+## ADR-IA-07 · Modelo, servidor, tiempo y precarga de producción
+
+| Campo | Contenido |
+|---|---|
+| Estado | aceptada por la mesa por delegación del Product Owner (actuación 010); se asienta como **`ADR-14012`**. Reemplaza el punto E de la actuación 009 |
+| ASR que lo origina | REQ-IA-10 (tiempo y cupo), REQ-IA-17 (precarga), REQ-IA-18 (pedido sin razonamiento y con permanencia) |
+| Contexto | la actuación 009 eligió `qwen3.5:35b-a3b` con un solo candidato medido y subió el tope a 40 s para cubrir su frío de 33,6 s. La evaluación completa midió diez configuraciones con el mismo banco (`01` §4.7) |
+| Alternativas | modelo: los siete que pasan 10/10 sin razonamiento; servidor: API comercial, modelo dentro del contenedor, GPU, servidor de la cátedra (`01` §4.3); frío: subir el tope, precargar, o elegir un modelo cuyo frío entre en el tope |
+| Criterio | con la garantía empatada (10/10), el menor costo: memoria, frío y p95; que el tope por omisión del código cubra caliente y frío sin excepciones por entorno |
+| Decisión | `qwen3.5:4b` con `think=false` (alternativa `gemma4:e4b-it-qat`, también sin razonamiento) en el servidor de modelos de la cátedra, sólo CPU; `AI__TimeoutSeconds=20` en todos los entornos; `AI__KeepAlive` viaja en cada pedido (`-1` en producción, `30m` por omisión); precarga al arrancar el servicio de datos |
+| Consecuencias | se gana: 3 GB en lugar de 23, frío dentro del tope, tope igual al del código. Se pierde: la redacción del modelo grande era mejor (juez 4,2 contra 2,4); se compensa con el prompt v2 y, mientras tanto, con la plantilla, que puntúa 4,5 |
+| Confianza | media-alta para la latencia (medida); baja para la utilidad (puntuación de juez, prompt v2 sin medir) |
+| Deja de valer si | con el prompt v2 el modelo queda < 4 de 5 en la puntuación docente y otro candidato la supera; el servidor pasa a GPU; un candidato nuevo iguala la garantía con menos memoria o frío |
+| En el código | `AiOptions.KeepAlive`, `OllamaRequestDefaults`, `ModelWarmup`, `ModelWarmupHostedService`; pruebas de REQ-IA-17 y 18 |

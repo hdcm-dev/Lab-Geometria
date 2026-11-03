@@ -371,7 +371,7 @@ La versión 1.0 emitió **42 conceptos** y dejó fuera los 101 códigos, porque 
 | Agregados por la documentación de la superficie HTTP (1.22), **fuera de los 155** | 10 | 10 | §6.24 |
 | Agregados por el árbol del texto (1.23), **fuera de los 155** | 14 | 14 | §6.25 |
 | Atributos de marcado autorizados por la mesa del 2026-09-14 (1.31), **fuera de los 155** | 13 | 13 | §6.26 |
-| Capa de IA, expediente 0002 (1.32 y 1.33), **fuera de los 155** | 58 | 58 | §6.27 |
+| Capa de IA, expediente 0002 (1.32, 1.33 y 1.34), **fuera de los 155** | 67 | 67 | §6.27 |
 
 **Las cinco filas agregadas por la etapa `a` tampoco entran en los 155, y por el mismo motivo que las de §6.11:** son conceptos que **no existían** cuando se contaron las seis clases —el cuerpo de la respuesta del punto de salud y el nombre propio del *bundle* en `window`—, y entran por el corolario 4 de §6.1, que es lo que esta norma manda hacer cuando aparece un concepto sin fila. **Los recuentos de las seis clases no cambian**: 155 sigue siendo 155, y el control `V-1` cuadra contra las ocho tablas más estas cinco filas, que llevan su marca. **Lo mismo vale para las 214 que agrega la etapa `b` en §6.12**, que desde la 1.6 es la novena tabla del rango, **para las 109 que agrega la etapa `c` en §6.13** —106 propias más las tres que la 1.8 sumó—, que desde la 1.7 es la décima, **para las 39 que agrega §6.14**, que desde la 1.8 es la undécima —27 las trajo la marca de sesión, 5 más el guardián de sesión de la 1.9, 5 más el arreglo del cambio forzado de la 1.10 y 2 más la guardia de arranque de la clave de firma de la 1.11— **para las 36 que agrega §6.15**, que desde la 1.12 es la duodécima —16 tipos y 20 miembros del ciclo de vida de la cuenta de alumno del lado del servicio— **para las 41 que agrega §6.16**, que desde la 1.13 es la decimotercera —2 tipos, 35 miembros, propiedades y valores, y 4 iconos de la interfaz de esa misma etapa— **y para las 19 que agrega §6.17**, que desde la 1.14 es la decimocuarta —2 superficies derivadas, 8 funciones del guion de interacción y 9 atributos de marcado que ese guion lee— **para las 8 que agrega §6.18**, que desde la 1.15 es la decimoquinta —3 tipos y 5 miembros del guardián 1 de `Web ADR-10003` §2 y del punto de acceso anónimo que lo hace posible— **para las 47 que agrega §6.19**, que desde la 1.16 es la decimosexta —16 tipos, 4 valores de conjunto cerrado y 27 miembros del trabajo con dueño, estado y persistencia— **y para las 27 que agrega §6.20**, que desde la 1.17 es la decimoséptima —3 tipos, 22 miembros, propiedades y valores, y 2 iconos de la interfaz de esa misma etapa—. Y la etapa `c` deja además una constancia que vale la pena leer al revés: **de los veinte códigos de condición que escribió, cero necesitaron fila nueva**, porque los veinte ya estaban en §6.8 con su nombre inglés fijado por `F-03`. El glosario hizo exactamente lo que §6.1 promete. **La etapa `e` la reproduce sobre la población más grande de las tres**: de los **diecisiete** códigos que escribió —catorce del dominio, tres propios de la aplicación y tres del contrato— **cero necesitaron fila nueva**, y entre ellos está el homónimo declarado de §6.9, `WORK_NOT_FOUND`, que la etapa escribió **dos veces, una por catálogo, y no unificó**, porque lo que los separa es el tipo que los contiene. **La etapa `d` reproduce la constancia sobre una población mayor**: de los **quince** códigos que escribió —siete del dominio, tres propios de la aplicación, uno de infraestructura y cuatro del contrato— **cero necesitaron fila nueva**, y entre ellos están los dos casos difíciles que `F-03` había dejado resueltos de antemano: la **unificación** de §6.9, que le da a `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` y a `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` el mismo nombre inglés, y los **dos identificadores retirados por RN-02016** de §6.8.5, que la etapa `d` **no recicló**.
 
@@ -2224,6 +2224,23 @@ antes del código de la Web, y la constancia del tramo T8 lo registra como apart
 | formulario de pistas (marcado) | `gf-hints` | Identificador de elemento (`id`), no atributo `data-gf-*` ni clase | El botón «Ver pistas» lo nombra con `form=`; no toca la lista cerrada de `C-4` |
 | dobles y arneses de prueba de la capa | `FakeChatClient` / `CapturingLogger` / `CapturingLoggerProvider` / `AiDataServiceHarness` | Tipos de prueba | `ai-layer/01` §5.1, «Doble»; sin librerías de mocking |
 
+#### 6.27.4 Permanencia y precarga del modelo (9 filas)
+
+Las trae la actuación 010 del expediente 0002 (`ADR-14012`, REQ-IA-17 y REQ-IA-18). Entran **antes** del
+código, como manda §6.1.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| permanencia del modelo y su valor por omisión | `KeepAlive` / `DefaultKeepAlive` | Propiedad y constante de `AiOptions` | `ai-layer/01` §4.5; `ADR-14012` |
+| valores de cada pedido al servidor de modelos | `OllamaRequestDefaults` | Tipo estático de la composición | `ai-layer/01` §4.5; vive en la composición porque nombra un tipo de OllamaSharp (`ADR-14007`) |
+| armado del pedido y lectura de la permanencia | `For` / `KeepAliveOf` / `HasInvalidKeepAlive` / `Duration` | Miembros de `OllamaRequestDefaults` (`Duration`, privado) | REQ-IA-18 |
+| precarga del modelo | `ModelWarmup` | Tipo estático | REQ-IA-17 |
+| correr la precarga, su tope, su mensaje y su traza | `RunAsync` / `DefaultTimeout` / `Probe` / `Trace` | Miembros de `ModelWarmup` (`Trace`, privado) | REQ-IA-17 |
+| resultado de la precarga | `WarmupOutcome` | Tipo, conjunto cerrado | REQ-IA-17; sólo va a la traza, no a la pantalla |
+| sin servidor / cargado / tiempo agotado / falló | `NoServer` / `Loaded` / `TimedOut` / `Failed` | Valores de conjunto cerrado | ídem |
+| servicio de precarga al arrancar | `ModelWarmupHostedService` | Tipo de la composición | REQ-IA-17 |
+| pruebas de la precarga y de las salidas reales | `ModelWarmupTests` / `HintFilterRealOutputsTests` | Tipos de prueba | REQ-IA-17 y 18; decisión D-09 de la actuación 010 |
+
 ## 7. Cómo se verifica esta norma
 
 Una norma sin instrumento de verificación es una intención. Siete controles, y **la 1.4 declara cuál de ellos se verifica tal como está escrito y cuál exige que alguien lo interprete** —la tabla está debajo de las tres formulaciones completas—:
@@ -2446,6 +2463,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.34 | 2026-11-03 | **Agrega §6.27.4 con 9 filas de la permanencia y la precarga del modelo (expediente 0002, actuación 010, `ADR-14012`)**, antes del código. Ningún código de condición nuevo; no renombra nada. | Implementador de la capa de IA, por la resolución de la actuación 010 del expediente 0002 |
 | 1.33 | 2026-11-02 | **Agrega §6.27.3 con 14 filas de miembros internos y de prueba de la capa de IA (expediente 0002)**, antes del código de la Web (tramo T6). Las de los tramos T3 y T4 llegan con atraso y se declaran como apartamiento de §6.1 en la constancia del expediente. | Implementador de la capa de IA |
 | 1.32 | 2026-11-02 | **Agrega §6.27 con los identificadores de la capa de IA (expediente 0002)**: las 19 filas de `ai-layer/04-Propuesta-Norma-De-Nomenclatura.md` §2 sin cambios —las cinco de V2 marcadas **reservadas** porque V2 quedó diferida— y 25 filas que la construcción de V1 necesitó, con su motivo. Entran antes del código, como manda §6.1 y `ADR-14010`. Ningún código de condición nuevo; un homónimo declarado (`Model`). No renombra nada. | Implementador de la capa de IA, por la resolución de la actuación 007 del expediente 0002 |
 | 1.31 | 2026-09-14 | **Agrega §6.26 con los trece atributos `data-gf-*`** que las etapas `e` a `h` sumaron al marcado sin autorizar, con su motivo. Mesa del 2026-09-14, `R-11`, escalada `E-6` aprobada. `scripts/verify-stage-c.sh` los suma a su lista cerrada, que pasa de diecisiete a treinta. Declara la deuda de los nombres en castellano. Estado anterior en `_legacy/2026-09-14/`. | Claude Code, corrida de reanudación |

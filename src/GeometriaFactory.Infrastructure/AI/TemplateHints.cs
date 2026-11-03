@@ -4,17 +4,27 @@ using GeometriaFactory.Domain.Values;
 namespace GeometriaFactory.Infrastructure.AI;
 
 /// <summary>
-/// Las doce plantillas de respaldo, una por par (figura, campo) (`ai-layer/01` §5.2).
+/// Las doce plantillas de respaldo, una por par (figura, campo) (`ai-layer/01` §5.2 y §5.3).
 /// </summary>
 /// <remarks>
 /// <para>
-/// PROVISIONALES, PENDIENTES DEL DOCENTE (punto F del lote de la actuación 004; decisión D-2 de la
-/// mesa del expediente 0002). Las redactó el agente sobre el modelo Cubo · Area que fija la
-/// especificación; el texto final lo fija el docente. No se presentan como definitivas.
+/// TEXTO DEFINITIVO (expediente 0002, actuación 009, punto F del lote; Círculo · Area corregido en la
+/// actuación 010 porque su nivel 2 dictaba la operación, «el radio por el radio», que es justo lo que
+/// la mesa le reprocha al modelo). Son el piso de calidad: se
+/// sirven siempre que el modelo falla, se demora o el filtro lo rechaza, así que tienen que enseñar
+/// solas, sin el modelo.
 /// </para>
 /// <para>
-/// NO LLEVAN NÚMEROS. Así pasan el filtro con cualquier valor derivado, y la prueba
-/// `EveryTemplatePassesTheFilter` lo comprueba sobre los doce pares.
+/// Cada terna es un andamiaje de tres escalones que retira la ayuda de a poco (scaffolding, Wood,
+/// Bruner y Ross, 1976; retroalimentación formativa, Shute, 2008; Hattie y Timperley, 2007):
+/// nivel 1 dice DÓNDE mirar (la tarea), nivel 2 nombra la IDEA geométrica que rige ese campo (el
+/// proceso) y nivel 3 propone una COMPROBACIÓN que el alumno hace solo (la autorregulación).
+/// Ningún nivel da la operación completa ni el resultado: la última decisión es del alumno.
+/// </para>
+/// <para>
+/// NO LLEVAN CIFRAS. Así pasan el filtro con cualquier valor derivado, y la prueba
+/// `EveryTemplatePassesTheFilter` lo comprueba sobre los doce pares. Los números en palabras que
+/// aparecen («dos tapas», «tres dimensiones») son estructura de la figura, no un valor del trabajo.
 /// </para>
 /// </remarks>
 public static class TemplateHints
@@ -22,53 +32,53 @@ public static class TemplateHints
     private static readonly Dictionary<(FigureType, string), (string, string, string)> Texts = new()
     {
         [(FigureType.Cube, "Area")] = (
-            "Revisá cómo calcula el área tu figura Cubo.",
-            "El área total suma el área de todas las caras.",
-            "Contá cuántas caras tiene la figura y verificá que tu cálculo las sume todas."),
+            "Mirá la parte de tu programa que calcula el área del Cubo: ahí está la diferencia.",
+            "El área total de un cuerpo es la suma de las superficies de todas sus caras, y en el cubo todas las caras son iguales.",
+            "Imaginá el cubo desarmado sobre la mesa: contá las caras y fijate si tu cálculo las incluye a todas, ni una más ni una menos."),
         [(FigureType.Cube, "Volumen")] = (
-            "Revisá cómo calcula el volumen tu figura Cubo.",
-            "El volumen mide el espacio que ocupa la figura, no la superficie de una cara.",
-            "Verificá que tu cálculo use la arista en las tres direcciones del espacio."),
+            "Mirá la parte de tu programa que calcula el volumen del Cubo: ahí está la diferencia.",
+            "El volumen mide el espacio que ocupa el cuerpo, no la superficie de una cara: la arista interviene en largo, ancho y alto.",
+            "Contá cuántas veces aparece la arista como factor en tu cálculo y compará con la cantidad de direcciones que tiene el espacio."),
         [(FigureType.Orthohedron, "Area")] = (
-            "Revisá cómo calcula el área tu figura Ortoedro.",
-            "El área total suma las seis caras, que vienen en pares iguales.",
-            "Listá los tres pares de caras distintos y verificá que tu cálculo incluya los dos de cada par."),
+            "Mirá la parte de tu programa que calcula el área del Ortoedro: ahí está la diferencia.",
+            "El ortoedro tiene seis caras rectangulares que vienen en pares iguales y opuestos.",
+            "Escribí al lado de tu cálculo qué par de dimensiones forma cada cara y verificá que cada par aparezca dos veces."),
         [(FigureType.Orthohedron, "Volumen")] = (
-            "Revisá cómo calcula el volumen tu figura Ortoedro.",
-            "El volumen depende de las tres dimensiones de la figura.",
-            "Verificá que tu cálculo use el largo, el ancho y la altura, y no sólo dos de ellas."),
+            "Mirá la parte de tu programa que calcula el volumen del Ortoedro: ahí está la diferencia.",
+            "El volumen de un ortoedro combina sus tres dimensiones: largo, ancho y altura.",
+            "Señalá en tu cálculo dónde aparece cada una de las tres dimensiones; si falta alguna o una se repite, ahí está el problema."),
         [(FigureType.Cylinder, "Area")] = (
-            "Revisá cómo calcula el área tu figura Cilindro.",
-            "El área total es la superficie lateral más las dos tapas.",
-            "Separá el cálculo en la parte lateral y las tapas, y verificá que tu programa sume las tres partes."),
+            "Mirá la parte de tu programa que calcula el área del Cilindro: ahí está la diferencia.",
+            "El área total del cilindro tiene dos partes distintas: la superficie lateral, que desenrollada es un rectángulo, y las dos tapas circulares.",
+            "Separá tu cálculo en la parte lateral y las tapas y verificá que estén las tres superficies: la lateral y cada una de las dos tapas."),
         [(FigureType.Cylinder, "Volumen")] = (
-            "Revisá cómo calcula el volumen tu figura Cilindro.",
-            "El volumen es el área de la base por la altura, y la base es un círculo.",
-            "Verificá que tu cálculo use el área del círculo de la base y no su contorno."),
+            "Mirá la parte de tu programa que calcula el volumen del Cilindro: ahí está la diferencia.",
+            "El volumen de un cilindro es la superficie de su base multiplicada por la altura, y la base es un círculo.",
+            "Revisá qué medida del círculo usás como base: tiene que ser la superficie encerrada, no el largo del borde."),
         [(FigureType.Rectangle, "Area")] = (
-            "Revisá cómo calcula el área tu figura Rectángulo.",
-            "El área mide la superficie encerrada, no el contorno.",
-            "Verificá que tu cálculo multiplique las dos dimensiones en lugar de sumar los lados."),
+            "Mirá la parte de tu programa que calcula el área del Rectángulo: ahí está la diferencia.",
+            "El área mide la superficie encerrada por la figura; el contorno es otra magnitud, el perímetro.",
+            "Preguntate si tu cálculo cuenta cuadraditos dentro de la figura o recorre su borde: el área combina el largo con el ancho."),
         [(FigureType.Rectangle, "Volumen")] = (
-            "Revisá qué volumen declara tu figura Rectángulo.",
-            "Una figura plana no ocupa espacio: no tiene volumen.",
-            "Verificá qué valor de volumen escribe tu programa para una figura plana."),
+            "Mirá qué volumen declara tu programa para el Rectángulo.",
+            "Una figura plana tiene largo y ancho pero no altura: no ocupa espacio, así que no tiene volumen.",
+            "Buscá en tu programa qué valor de volumen escribe para una figura plana y preguntate qué debería valer algo que no ocupa espacio."),
         [(FigureType.Square, "Area")] = (
-            "Revisá cómo calcula el área tu figura Cuadrado.",
-            "El área mide la superficie encerrada, no el contorno.",
-            "Verificá que tu cálculo use el lado en las dos direcciones en lugar de sumar los lados."),
+            "Mirá la parte de tu programa que calcula el área del Cuadrado: ahí está la diferencia.",
+            "El área mide la superficie encerrada por la figura; el contorno es otra magnitud, el perímetro.",
+            "Fijate si tu cálculo usa el lado en las dos direcciones de la figura o si suma los lados del borde."),
         [(FigureType.Square, "Volumen")] = (
-            "Revisá qué volumen declara tu figura Cuadrado.",
-            "Una figura plana no ocupa espacio: no tiene volumen.",
-            "Verificá qué valor de volumen escribe tu programa para una figura plana."),
+            "Mirá qué volumen declara tu programa para el Cuadrado.",
+            "Una figura plana tiene largo y ancho pero no altura: no ocupa espacio, así que no tiene volumen.",
+            "Buscá en tu programa qué valor de volumen escribe para una figura plana y preguntate qué debería valer algo que no ocupa espacio."),
         [(FigureType.Circle, "Area")] = (
-            "Revisá cómo calcula el área tu figura Círculo.",
-            "El área del círculo depende del radio de otra forma que la circunferencia.",
-            "Compará tu cálculo con la diferencia entre medir el borde y medir la superficie encerrada."),
+            "Mirá la parte de tu programa que calcula el área del Círculo: ahí está la diferencia.",
+            "La superficie del círculo y el largo de su borde dependen del radio de forma distinta: si el radio se duplica, el borde se duplica, pero la superficie aumenta en una proporción mucho mayor.",
+            "Probá tu cálculo con un radio y después con el doble de ese radio: si el área que obtenés también sale apenas el doble, estás midiendo el borde y no la superficie."),
         [(FigureType.Circle, "Volumen")] = (
-            "Revisá qué volumen declara tu figura Círculo.",
-            "Una figura plana no ocupa espacio: no tiene volumen.",
-            "Verificá qué valor de volumen escribe tu programa para una figura plana."),
+            "Mirá qué volumen declara tu programa para el Círculo.",
+            "Una figura plana no tiene altura: no ocupa espacio, así que no tiene volumen.",
+            "Buscá en tu programa qué valor de volumen escribe para una figura plana y preguntate qué debería valer algo que no ocupa espacio."),
     };
 
     /// <summary>Los doce pares que la plantilla cubre.</summary>
