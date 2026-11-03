@@ -16,6 +16,8 @@
 #                 README.md         avisa (nunca bloquea en la ola 1, H-14)
 #                 SDD/Docs/**       avisa, sin _legacy/ (generado; lo desalineado se eleva, AGENTS.md:61)
 #   punto de uso  anclas, limite-didactico y pista-sin-enlaces sobre docs-as-code/** (tramo T-3), en avisa
+#   recuento    la instantánea OpenAPI contra la tabla de operaciones de Contratos-REST.md (tramo T-6), en avisa.
+#               oasdiff y Spectral necesitan Docker y corren aparte (docs-as-code/controles/openapi.sh, job `openapi`)
 # En «avisa» un control con hallazgos queda en el resumen y no cambia el código de salida.
 # Código de salida: 0 verde; 1 algún paso que bloquea dio rojo; 2 error de uso de algún control.
 set -uo pipefail
@@ -91,6 +93,9 @@ paso "docs-as-code · delivery-publico" "$MODO_DAC" python3 -I "$CTL/delivery_pu
 paso "docs-as-code · anclas"            avisa python3 -I "$CTL/anclas.py" docs-as-code
 paso "docs-as-code · limite-didactico"  avisa python3 -I "$CTL/limite_didactico.py" docs-as-code
 paso "docs-as-code · pista-sin-enlaces" avisa python3 -I "$CTL/pista_sin_enlaces.py" docs-as-code
+
+# Recuento OpenAPI (tramo T-6): en avisa fijo; lo que encuentra en el contrato del SDD se eleva, no se corrige.
+paso "docs-as-code · recuento-openapi"  avisa python3 -I "$CTL/recuento_openapi.py"
 
 paso "README.md · esquema"             avisa python3 -I "$DG" esquema README.md
 paso "README.md · enlaces-internos"    avisa python3 -I "$CTL/enlaces_internos.py" README.md

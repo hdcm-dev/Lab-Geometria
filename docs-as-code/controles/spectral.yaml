@@ -1,0 +1,38 @@
+# Reglas de Spectral de la compuerta de docs (expediente 0003, tramo T-6). Exactamente tres reglas propias y ninguna
+# heredada (sin `extends`): lo que mira la compuerta queda dicho acá y no cambia con la versión de Spectral.
+# Las corre docs-as-code/controles/openapi.sh contra docs-as-code/api/openapi-v1.json, en avisa.
+rules:
+  operacion-con-id:
+    description: Toda operación lleva operationId (es el nombre que usan los endpoints y el registro de cambios).
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+  operacion-con-resumen:
+    description: Toda operación lleva summary (WithSummary en la Api; decisión H-09).
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+  operacion-con-error-documentado:
+    description: >-
+      Toda operación documenta al menos una respuesta de error de las que declara la §4 de Contratos-REST
+      (ProducesProblem en la Api; decisión H-09).
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: ["400"]
+            - required: ["401"]
+            - required: ["403"]
+            - required: ["404"]
+            - required: ["409"]
+            - required: ["429"]
+            - required: ["500"]
+            - required: ["503"]
