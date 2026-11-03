@@ -1,5 +1,7 @@
 using System.Text.RegularExpressions;
 using GeometriaFactory.Infrastructure.AI;
+using Microsoft.Extensions.AI;
+using OllamaSharp;
 using OllamaSharp.Models.Chat;
 
 namespace GeometriaFactory.Api.Composition;
@@ -25,6 +27,26 @@ public static partial class OllamaRequestDefaults
     {
         ArgumentNullException.ThrowIfNull(ai);
         return new ChatRequest { Think = false, KeepAlive = KeepAliveOf(ai) };
+    }
+
+    /// <summary>
+    /// El cliente que compone <c>AddAiLayer</c>: OllamaSharp envuelto para que TODO pedido —pistas y
+    /// precarga— lleve <see cref="For"/> (REQ-IA-18). El <paramref name="handler"/> sólo lo pasan las
+    /// pruebas, para mirar el JSON que sale sin servidor.
+    /// </summary>
+    public static IChatClient CreateChatClient(AiOptions ai, Uri endpoint, HttpMessageHandler? handler = null)
+    {
+        ArgumentNullException.ThrowIfNull(ai);
+        ArgumentNullException.ThrowIfNull(endpoint);
+
+        IChatClient inner = handler is null
+            ? new OllamaApiClient(endpoint, ai.Model)
+            : new OllamaApiClient(new HttpClient(handler) { BaseAddress = endpoint }, ai.Model);
+
+        return new ChatClientBuilder(inner)
+            // SIN RAZONAMIENTO Y CON PERMANENCIA EN CADA PEDIDO (ADR-14012): pistas y precarga salen iguales.
+            .ConfigureOptions(options => options.RawRepresentationFactory ??= _ => For(ai))
+            .Build();
     }
 
     /// <summary>

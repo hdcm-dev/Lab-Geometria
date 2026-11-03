@@ -10,8 +10,6 @@ using GeometriaFactory.Infrastructure.Time;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.AI;
-using OllamaSharp;
-using OllamaSharp.Models.Chat;
 
 namespace GeometriaFactory.Api.Composition;
 
@@ -267,10 +265,7 @@ public static class CompositionRoot
 
         if (ModelEndpointOf(ai) is { } endpoint)
         {
-            services.AddSingleton<IChatClient>(_ => new ChatClientBuilder((IChatClient)new OllamaApiClient(endpoint, ai.Model))
-                // SIN RAZONAMIENTO Y CON PERMANENCIA EN CADA PEDIDO (ADR-14012): pistas y precarga salen iguales.
-                .ConfigureOptions(options => options.RawRepresentationFactory ??= _ => OllamaRequestDefaults.For(ai))
-                .Build());
+            services.AddSingleton<IChatClient>(_ => OllamaRequestDefaults.CreateChatClient(ai, endpoint));
 
             // PRECARGA: sólo existe si hay cliente de modelo (REQ-IA-17).
             services.AddHostedService<ModelWarmupHostedService>();

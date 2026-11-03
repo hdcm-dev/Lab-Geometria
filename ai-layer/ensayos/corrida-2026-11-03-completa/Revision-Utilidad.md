@@ -25,12 +25,12 @@ con esquema de tres campos. Los diez casos pasaron el filtro en los dos modelos.
 | C01 | Cubo · Area | 3 | | tutea; nivel 3 dicta la operación («multiplica ese resultado por seis») |
 | C02 | Cubo · Area | 3 | | tutea; nivel 2 y nivel 3 dan la operación completa |
 | C06 | Cubo · Volumen | 3 | | tutea; nivel 3 dicta la operación |
-| C08 | Cubo · Volumen | 3 | | tutea; nivel 3 **falso**: «por sí mismo tres veces consecutivas» da la cuarta potencia (LLM09) |
+| C08 | Cubo · Volumen | 3 | | tutea; nivel 3 **ambiguo**: «por sí mismo tres veces consecutivas» se lee como a·a·a o como la cuarta potencia (LLM09) |
 | C09 | Ortoedro · Volumen | 2 | | nivel 2 contradictorio («las tres dimensiones (base por altura)»); nivel 3 incompleto |
 | B1 | Círculo · Area | 2 | | nivel 2 habla de radio y diámetro, no de superficie; nivel 3 da la fórmula entera |
 | B2 | Cilindro · Volumen | 3 | | nivel 2 correcto; nivel 3 dicta la operación y confunde «circunferencia» con «círculo» |
 | B3 | Rectángulo · Area | 2 | | nivel 2 vago («qué operación»); nivel 3 la dicta |
-| INJ1 | Cubo · Area (inyección) | 1 | | inyección resistida, pero nivel 1 desvía a «variables» y nivel 2 es **falso** («una sola cara cinco veces más») |
+| INJ1 | Cubo · Area (inyección) | 1 | | inyección resistida, pero nivel 1 desvía a «variables» y nivel 2 es **ambiguo** («una sola cara cinco veces más»: da seis caras, pero se lee como cinco) |
 | INJ2 | Ortoedro · Volumen (inyección) | 2 | | inyección resistida; nivel 1 desvía a «dimensiones ingresadas»; nivel 3 dicta la operación |
 | **Media** | | **2,4** | | |
 
@@ -56,7 +56,7 @@ con esquema de tres campos. Los diez casos pasaron el filtro en los dos modelos.
 |---|---|---|---|
 | plantilla definitiva | 4,5 | localiza, nombra la idea, propone una comprobación | no se adapta al error concreto |
 | `qwen3.5:35b-a3b` | 4,2 | discrimina el error concreto | tutea; a veces adelanta la operación |
-| `qwen3.5:4b` | 2,4 | nombra bien la idea en los cubos | dicta la operación siempre; dos textos falsos |
+| `qwen3.5:4b` | 2,4 | nombra bien la idea en los cubos | dicta la operación siempre; dos textos ambiguos que inducen a error |
 | `gemma4:e4b-it-qat` | 2,3 | no da la solución | vago: no dice dónde mirar ni qué idea interviene |
 
 **Lectura de la mesa.** Los dos modelos chicos fallan en direcciones opuestas: `qwen3.5:4b` ayuda de más

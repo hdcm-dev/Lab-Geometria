@@ -365,7 +365,7 @@ puntuación de **juez**, no del docente): pasar el filtro no es lo mismo que ens
 |---|---|---|
 | plantilla definitiva (§5.3) | 4,5 | — |
 | `qwen3.5:35b-a3b` | 4,2 | tutea; a veces nombra la operación en el nivel 3 |
-| `qwen3.5:4b` | 2,4 | tutea en los diez casos; el nivel 3 **dicta la operación en los diez** («multiplica ese resultado por seis», «multiplica por el cuadrado del radio»), y en uno la operación dictada es **falsa** (C08: «multiplica ese valor por sí mismo tres veces consecutivas», que da la cuarta potencia); en un caso de inyección el nivel 2 también es falso («sumar el área de una sola cara cinco veces más») |
+| `qwen3.5:4b` | 2,4 | tutea en los diez casos; el nivel 3 **dicta la operación en los diez** («multiplica ese resultado por seis», «multiplica por el cuadrado del radio»), y en uno la operación dictada es **ambigua** (C08: «multiplica ese valor por sí mismo tres veces consecutivas», que se lee como a·a·a o como la cuarta potencia); en un caso de inyección el nivel 2 también es ambiguo («sumar el área de una sola cara cinco veces más», que da seis caras pero se lee como cinco) |
 | `gemma4:e4b-it-qat` | 2,3 | no da la operación, pero es vago: el nivel 1 manda a mirar «las dimensiones» y no el cálculo del campo; el nivel 2 no nombra la idea geométrica |
 
 Ningún modelo, con el prompt ensayado, supera a la plantilla. Eso **no cambia la elección del modelo** —la
@@ -439,9 +439,9 @@ puede ver cuánto de una nota baja viene de la forma y cuánto de la didáctica,
 para sostener que el defecto se arregla con el prompt. Las planillas ya puntuadas no se recalculan: su
 rúbrica se escribió antes de correr y se respeta.
 
-**Un texto falso descarta, aunque la media suba.** Si en la corrida del prompt v2 `qwen3.5:4b` vuelve a dar
-pistas falsas (como C08, que daba la cuarta potencia, o INJ1, «una sola cara cinco veces más»), eso basta para
-descartarlo como redactor aunque su media llegue a 4: una pista falsa le hace al alumno más daño que una vaga,
+**Un texto falso o ambiguo descarta, aunque la media suba.** Si en la corrida del prompt v2 `qwen3.5:4b` vuelve a dar
+pistas ambiguas que inducen a error (como C08, que se lee como la cuarta potencia, o INJ1, «una sola cara cinco veces más»), eso basta para
+descartarlo como redactor aunque su media llegue a 4: una pista falsa o ambigua le hace al alumno más daño que una vaga,
 y el filtro no la detiene (D-09; LLM09 en §8). Se miden en la próxima corrida rotulada (30 casos, GEO-04) con
 `qwen3.5:4b`; si bajan la proporción que pasa el filtro, se retiran. Si entran, `SystemPrompt` cambia junto
 con `PROMPT_SISTEMA` de `ensayos/pistas.py`, en el mismo cambio.
@@ -557,7 +557,7 @@ no es compuerta [Con §8], [Con §2, P-10]. Las pruebas se **especifican**; se e
 | REQ-IA-15 | Sin dirección del servidor no hay valor por omisión | DEBE | DEBE | sin configuración, el arranque no falla y el puerto devuelve *degradado* | `NoModelEndpoint_StartsDegraded` | garantía |
 | REQ-IA-16 | La capa de IA no cambia el veredicto | DEBE | DEBE | las observaciones de la respuesta de pistas son idénticas a las de A-18 para el mismo texto | `Hints_DoNotChangeObservations` | garantía |
 | REQ-IA-17 | Con cliente de modelo, el servicio precarga el modelo al arrancar sin bloquear el arranque ni usar el cupo, y una precarga fallida no impide arrancar | DEBERÍA | DEBE | un mensaje fijo, sin sistema, sin herramientas y con un token; con el doble que lanza o se demora el resultado es `Failed` o `TimedOut` y no hay excepción; sin cliente, `NoServer`; la traza no trae dirección | `Warmup_WithoutClient_DoesNothing`, `Warmup_SendsOneMinimalCall`, `Warmup_ModelFailure_DoesNotThrow`, `Warmup_Timeout_DoesNotThrow`, `Warmup_HostStopping_PropagatesCancellation`, `Warmup_TraceHasNoAddress` | garantía |
-| REQ-IA-18 | Todo pedido al servidor sale sin razonamiento y con la permanencia configurada; un valor inválido cae al de omisión y se avisa sin el valor | DEBE | DEBE | el JSON que viaja lleva `"think": false` y `keep_alive` igual al configurado (`30m`, `8h`, `-1`) o `30m` si el configurado no tiene forma de duración | `EveryRequest_ThinkFalseAndKeepAlive`, `InvalidKeepAlive_IsDetectedForTheWarning`, `Defaults_MatchTheEvaluation` | garantía |
+| REQ-IA-18 | Todo pedido al servidor sale sin razonamiento y con la permanencia configurada; un valor inválido cae al de omisión y se avisa sin el valor | DEBE | DEBE | el JSON que viaja lleva `"think": false` y `keep_alive` igual al configurado (`30m`, `8h`, `-1`) o `30m` si el configurado no tiene forma de duración | `EveryRequest_ThinkFalseAndKeepAlive`, `HintsAndWarmup_BothCarryThinkFalseAndKeepAlive`, `InvalidKeepAlive_IsDetectedForTheWarning`, `Defaults_MatchTheEvaluation` | garantía |
 
 **Requisitos base de [Con §8] que no aplican**, con motivo: herramientas sobre casos de uso, escrituras
 aprobables, sesión puesta por el código, contexto no confiable sin escrituras y tope del bucle de
@@ -577,7 +577,7 @@ Matriz de [Con §9] filtrada por el nivel A0, más una fila que el v0 no trae.
 | LLM05:2025 Improper Output Handling | sí | filtro posterior; la Web muestra texto plano (Blazor codifica) | REQ-IA-05, REQ-IA-06 |
 | LLM08:2025 Vector and Embedding Weaknesses | **no**: sin recuperación | — | — |
 | LLM10:2025 Unbounded Consumption | sí | topes de §4.5; razonamiento apagado (con él, unos 200 s por caso) | REQ-IA-10, REQ-IA-18 |
-| LLM09:2025 Misinformation (fila agregada, fuera del v0) | sí, **observado**: en la evaluación completa `qwen3.5:4b` dictó una operación falsa (C08) y un nivel 2 falso (INJ1) que pasaron el filtro | plantilla revisada por el docente como piso; utilidad puntuada; origen visible; **flag apagado en PROD hasta REQ-IA-13** | REQ-IA-13 |
+| LLM09:2025 Misinformation (fila agregada, fuera del v0) | sí, **observado**: en la evaluación completa `qwen3.5:4b` dictó una operación ambigua (C08) y un nivel 2 ambiguo (INJ1) que pasaron el filtro | plantilla revisada por el docente como piso; utilidad puntuada; origen visible; **flag apagado en PROD hasta REQ-IA-13** | REQ-IA-13 |
 | ASI02, ASI03, ASI09 | **no**: se activan desde A1 | — | — |
 
 Ficha de riesgo de cada fila activada (forma propia: el v0 remite a una ficha de la guía que no trae, K-05):

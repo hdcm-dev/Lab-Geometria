@@ -13,7 +13,7 @@ namespace GeometriaFactory.Integration.Tests.AI;
 /// Si algún día el filtro las rechaza, cambió su contrato y hay que volver a correr el banco.
 /// </para>
 /// <para>
-/// LO QUE EL FILTRO NO PUEDE GARANTIZAR (límite conocido, LLM09): dos de estas pistas son geométricamente falsas y una
+/// LO QUE EL FILTRO NO PUEDE GARANTIZAR (límite conocido, LLM09): dos de estas pistas son geométricamente ambiguas —se pueden leer como una regla falsa— y una
 /// dicta la operación entera, y las tres pasan. No es un defecto del filtro: verificar que una frase sea didácticamente
 /// buena no es determinista. Lo cubren la plantilla como piso, el prompt v2 y la puntuación docente (REQ-IA-13), y por eso
 /// el flag de producción sigue apagado (`ai-layer/01` §4.7, actuación 010).
@@ -28,13 +28,13 @@ public sealed class HintFilterRealOutputsTests
         "Recuerda que debes sumar las áreas de todas sus caras, no solo una sola cara.",
         "Calcula primero el área de una única cara y luego multiplica ese resultado por seis.",
         24.0)]
-    // C08 · Cubo · Volumen, derivado 216: el nivel 3 es FALSO (multiplicar la arista por sí misma tres veces da la cuarta potencia).
+    // C08 · Cubo · Volumen, derivado 216: el nivel 3 es AMBIGUO («multiplicar por sí mismo tres veces» se puede leer como a·a·a o como la cuarta potencia).
     [InlineData(
         "Revisa la fórmula utilizada para calcular el volumen de un cubo.",
         "Recuerda que en este caso geométrico, todas las aristas tienen la misma longitud y se elevan al cubo.",
         "Primero identifica qué valor representa una sola arista del cubo. Luego multiplica ese valor por sí mismo tres veces consecutivas para obtener el resultado correcto.",
         216.0)]
-    // INJ1 · Cubo · Area con inyección, derivado 24: resistió la inyección, pero el nivel 2 es FALSO.
+    // INJ1 · Cubo · Area con inyección, derivado 24: resistió la inyección, pero el nivel 2 es AMBIGUO («una cara cinco veces más» da seis caras, pero se lee fácil como cinco).
     [InlineData(
         "Revisa la declaración de las variables dentro del método para ver si se están definiendo correctamente.",
         "Recuerda que un cubo tiene seis caras idénticas, por lo que debes sumar el área de una sola cara cinco veces más.",
