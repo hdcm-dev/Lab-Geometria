@@ -13,6 +13,8 @@
 #   pista-sin-enlaces un enlace en la capa pista
 # y, desde el tramo T-6, el del recuento OpenAPI sobre un contrato y una instantánea mínimos:
 #   recuento-openapi  una operación de más en la instantánea y una cifra del título que no coincide
+# y, desde la revisión externa R-G2, el de enlaces externos contra un servidor local que devuelve 404:
+#   enlaces-externos  un enlace a una ruta que da 404 y una excepción vencida
 # Si un control no da rojo sobre su defecto o no da verde sin él, la compuerta misma está rota y este guion sale con 1.
 # No toca el árbol del repositorio. Requiere bash y python3 (sólo en el host o en el runner; la imagen del SDK no trae
 # python3, AGENTS.md:81).
@@ -218,6 +220,55 @@ esperar recuento-openapi 1 'rojo operación de más en la instantánea'
 armar
 sed -i 's/los dos puntos de acceso/los tres puntos de acceso/' "$TMP/c/contrato.md"
 esperar recuento-openapi 1 'rojo cifra del título que no coincide'
+
+echo "== autoprueba: enlaces externos (servidor local que devuelve 404)"
+mkdir -p "$TMP/x"
+cat > "$TMP/x/servidor.py" <<'EOF2'
+import http.server, sys
+class H(http.server.BaseHTTPRequestHandler):
+    def responder(self):
+        self.send_response(200 if self.path == '/ok' else 404)
+        self.end_headers()
+    do_HEAD = do_GET = responder
+    def log_message(self, *a):
+        pass
+s = http.server.HTTPServer(('127.0.0.1', 0), H)
+open(sys.argv[1], 'w').write(str(s.server_address[1]))
+s.serve_forever()
+EOF2
+python3 -I "$TMP/x/servidor.py" "$TMP/x/puerto" &
+SERVIDOR=$!
+trap 'kill "$SERVIDOR" 2>/dev/null || true; rm -rf "$TMP"' EXIT
+for _ in $(seq 50); do [ -s "$TMP/x/puerto" ] && break; sleep 0.1; done
+PUERTO="$(cat "$TMP/x/puerto")"
+externos() {  # archivo de excepciones → código de salida del control en estricto
+  local rc=0
+  python3 -I "$CTL/enlaces_externos.py" --raiz "$TMP/x" --estricto --permitir-local --hoy 2026-11-03 \
+    --excepciones "$1" "$TMP/x/doc.md" > "$TMP/salida.txt" 2>&1 || rc=$?
+  echo "$rc"
+}
+esperar_externos() {  # código esperado, etiqueta, archivo de excepciones
+  local rc; rc="$(externos "$3")"
+  if [ "$rc" = "$1" ]; then
+    echo "  ok    $2: enlaces-externos dio $rc"
+  else
+    echo "  FALLA $2: enlaces-externos dio $rc, se esperaba $1"
+    sed 's/^/        /' "$TMP/salida.txt"
+    fallas=$((fallas + 1))
+  fi
+}
+: > "$TMP/x/sin-excepciones.txt"
+echo "Ver [el sitio](http://127.0.0.1:$PUERTO/ok)." > "$TMP/x/doc.md"
+esperar_externos 0 'verde enlace que responde' "$TMP/x/sin-excepciones.txt"
+echo "Ver [el sitio](http://127.0.0.1:$PUERTO/falta)." > "$TMP/x/doc.md"
+esperar_externos 1 'rojo enlace que da 404' "$TMP/x/sin-excepciones.txt"
+echo "http://127.0.0.1:$PUERTO/falta | autoprueba | vence 2026-12-31" > "$TMP/x/vigente.txt"
+esperar_externos 0 'verde 404 con excepción vigente' "$TMP/x/vigente.txt"
+echo "http://127.0.0.1:$PUERTO/falta | autoprueba | vence 2026-11-02" > "$TMP/x/vencida.txt"
+esperar_externos 1 'rojo 404 con excepción vencida' "$TMP/x/vencida.txt"
+echo "http://127.0.0.1:$PUERTO/falta | autoprueba" > "$TMP/x/mal.txt"
+esperar_externos 2 'error de uso excepción sin vencimiento' "$TMP/x/mal.txt"
+kill "$SERVIDOR" 2>/dev/null || true
 
 if [ "$fallas" -gt 0 ]; then
   echo "== autoprueba: ROJO ($fallas fallas): la compuerta está rota"
