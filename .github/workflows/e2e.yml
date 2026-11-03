@@ -31,7 +31,7 @@
 # ninguna fila— catorce días antes de que lo encontrara una persona mirando.
 #
 # ============================================================================================
-# CORRE EN EL RUNNER PROPIO, `i7infra-dev`, Y NO ES POR VELOCIDAD. El servicio de datos del
+# CORRE EN EL RUNNER PROPIO, `e2e-geometria`, Y NO ES POR VELOCIDAD. El servicio de datos del
 # laboratorio vive en la red del docente; un runner alojado por GitHub tendría que alcanzarlo por
 # la dirección pública, que es exactamente lo que no se quiere que estas pruebas dependan.
 
@@ -66,7 +66,7 @@ jobs:
     # CORRE EN EL RUNNER PROPIO IGUAL QUE EL OTRO, pero por un motivo distinto: acá no hay ninguna
     # red que alcanzar —el laboratorio se levanta adentro del propio trabajo—, lo que hace falta es
     # una máquina que aguante publicar dos piezas y abrir un navegador sin cobrar por minuto.
-    runs-on: [self-hosted, i7infra-dev]
+    runs-on: [self-hosted, e2e-geometria]
     # EL RUNNER PROPIO NO EJECUTA CODIGO DE UN FORK. El repositorio es público: un pull request
     # desde un fork corre acá sólo si viene de una rama de este mismo repositorio. El de un fork
     # salta este trabajo, y el Resumen lo acepta como salto y no como rojo (mesa
@@ -146,7 +146,7 @@ jobs:
   pruebas:
     name: Recorrido (${{ matrix.navegador }})
     needs: matriz
-    runs-on: [self-hosted, i7infra-dev]
+    runs-on: [self-hosted, e2e-geometria]
     # LA MATRIZ NO SE CORTA CON EL PRIMER ROJO. Que falle en un navegador y ande en los otros ES el
     # dato: dice que el defecto es del navegador y no del producto.
     strategy:
