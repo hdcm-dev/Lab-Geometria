@@ -32,6 +32,9 @@ probar» en el sentido de la ficha hasta que el check `docs` dé verde en un PR 
 | [`limite_didactico.py`](limite_didactico.py) | Extensión `limite-didactico` (tramo T-3): las prohibiciones verificables de [RD-01](../reglas/RD-01-ayuda-no-resuelve.md), incluida la de no repetir las plantillas de la capa de IA |
 | [`pista_sin_enlaces.py`](pista_sin_enlaces.py) | Extensión `pista-sin-enlaces` (tramo T-3): la capa `pista` del catálogo no lleva enlaces |
 | [`catalogo_pu.py`](catalogo_pu.py) | Lector del catálogo que comparten las tres extensiones del punto de uso; no es un control |
+| [`recuento_openapi.py`](recuento_openapi.py) | Extensión `recuento-openapi` (tramo T-6): la [instantánea OpenAPI](../api/openapi-v1.json) contra la tabla de operaciones de `Contratos-REST.md` §3 y §3.1 (cifra del título, rutas de más o de menos y códigos sin documentar) |
+| [`openapi.sh`](openapi.sh) | Controles OpenAPI con Docker (tramo T-6): oasdiff `breaking` de Tufin y Spectral, con su propio par rojo/verde. Lo corre el job `openapi` de `docs.yml` |
+| [`spectral.yaml`](spectral.yaml) | Las tres reglas de Spectral, propias y sin `extends`: `operacion-con-id`, `operacion-con-resumen` y `operacion-con-error-documentado` |
 | [`autoprueba.sh`](autoprueba.sh) | Par rojo/verde plantado de cada control, sobre un corpus temporal |
 
 Las extensiones reutilizan el lector de frontmatter de la copia sin modificarla. Son el apartamiento parcial de
@@ -53,6 +56,8 @@ runner y no baja herramientas.
 | `anclas` | avisa (fijo) | — | — |
 | `limite-didactico` | avisa; a bloquea después de dos corridas verdes de su par | — | — |
 | `pista-sin-enlaces` | avisa (fijo) | — | — |
+| `recuento-openapi` | avisa (fijo); el contrato que lee es de `SDD/Docs/**` y lo que encuentra allí se eleva | — | — |
+| `oasdiff` y `spectral` (job `openapi`) | avisa (fijo); su autoprueba bloquea | — | — |
 
 Los tres controles del punto de uso no siguen a `DOCS_MODO_DOCS_AS_CODE`: quedan en avisa hasta que un PR propio
 los cambie en `scripts/docs-local.sh` (resolución del expediente 0003, §5.2). La prohibición 3 de RD-01 (ejemplos no
@@ -67,6 +72,20 @@ eleva, no se corrige**.
 `esquema` sólo valida frontmatter YAML. Lo heredado que declara sus metadatos en una tabla Campo/Valor se cuenta como
 «sin frontmatter» y no se valida.
 
+### 2.1 Controles OpenAPI (tramo T-6)
+
+- **`recuento-openapi`** compara la instantánea con `SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md`:
+  la cifra en palabras del título de la §3, cada `VERBO /ruta` de la tabla de §3.1 en las dos direcciones (error) y
+  los códigos que declara cada punto en la tabla de §3 frente a los que documenta la instantánea (aviso; los resuelve
+  el PR de `WithSummary`/`ProducesProblem`, decisión H-09). Corre en `scripts/docs-local.sh`, sin red.
+- **oasdiff** (`tufin/oasdiff:v1.11.4`) corre `breaking --fail-on ERR` de la instantánea de la base contra la del
+  árbol, y `changelog` para el registro. Una operación nueva sale como `endpoint-added` (informativo), no como
+  cambio que rompe.
+- **Spectral** (`stoplight/spectral:6.15.0`) corre las tres reglas de [`spectral.yaml`](spectral.yaml).
+- Los dos corren en el job `openapi` de `docs.yml` con `docs-as-code/controles/openapi.sh`: necesitan Docker, y la
+  compuerta principal sigue sin red. Antes de mirar la instantánea, el guion demuestra su par rojo/verde (una ruta
+  retirada para oasdiff y una operación sin `operationId`, sin `summary` y sin respuesta de error para Spectral).
+
 ## 3. Cómo se corre
 
 ```bash
@@ -74,6 +93,8 @@ scripts/docs-local.sh                                   # igual que en el runner
 DOCS_MODO_DOCS_AS_CODE=bloquea scripts/docs-local.sh    # cómo correría docs-as-code/** en bloquea
 bash docs-as-code/controles/autoprueba.sh               # sólo el par rojo/verde
 python3 -I docs-as-code/controles/delivery_publico.py --exigir docs-as-code   # un control suelto
+python3 -I docs-as-code/controles/recuento_openapi.py                         # el recuento OpenAPI
+bash docs-as-code/controles/openapi.sh origin/main                            # oasdiff y Spectral (con Docker)
 ```
 
 Corre sólo en el host o en el runner: necesita `python3`, que la imagen del SDK no trae (`AGENTS.md:81`). Código de

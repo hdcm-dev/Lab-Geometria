@@ -11,6 +11,8 @@
 #   anclas            un texto de la pantalla que cambió y un id que no existe
 #   limite-didactico  un envío JSON completo, una clase C# y una plantilla de la capa de IA copiada en el catálogo
 #   pista-sin-enlaces un enlace en la capa pista
+# y, desde el tramo T-6, el del recuento OpenAPI sobre un contrato y una instantánea mínimos:
+#   recuento-openapi  una operación de más en la instantánea y una cifra del título que no coincide
 # Si un control no da rojo sobre su defecto o no da verde sin él, la compuerta misma está rota y este guion sale con 1.
 # No toca el árbol del repositorio. Requiere bash y python3 (sólo en el host o en el runner; la imagen del SDK no trae
 # python3, AGENTS.md:81).
@@ -103,6 +105,24 @@ traces: [FIC-GEO-901]
 | `web/campo-prueba` | info | La forma completa está en la pieza A. | `docs-as-code/a.md` |
 <!-- catalogo:fin -->
 EOF
+  # Contrato e instantánea mínimos del recuento OpenAPI (tramo T-6), fuera de docs-as-code/ del corpus.
+  cat > "$TMP/c/contrato.md" <<'EOF'
+## 3. Operaciones: los dos puntos de acceso
+
+| Punto | Verbo | Qué hace | Papel exigido | Códigos | CU de la capa de aplicación |
+| --- | --- | --- | --- | --- | --- |
+| A-01 | `POST` | Canjear | Ninguno | `200`, `401` | Ingreso |
+| A-16 | `GET` | Salud | Ninguno | `200` | Ninguno |
+
+| Punto | Ruta pública | Punto | Ruta pública |
+| --- | --- | --- | --- |
+| A-01 | `POST /v1/auth/token` | A-16 | `GET /salud` |
+EOF
+  cat > "$TMP/c/api.json" <<'EOF'
+{"openapi": "3.1.1", "info": {"title": "autoprueba", "version": "1"}, "paths": {
+  "/v1/auth/token": {"post": {"responses": {"200": {"description": "ok"}, "401": {"description": "no"}}}},
+  "/salud": {"get": {"responses": {"200": {"description": "ok"}}}}}}
+EOF
 }
 
 control() {  # nombre → comando sobre el corpus temporal
@@ -116,6 +136,7 @@ control() {  # nombre → comando sobre el corpus temporal
     anclas)            python3 -I "$CTL/anclas.py" --raiz "$c" "$c/docs-as-code" ;;
     limite-didactico)  python3 -I "$CTL/limite_didactico.py" --plantillas "$c/src/Plantillas.cs" --raiz "$c" "$c/docs-as-code" ;;
     pista-sin-enlaces) python3 -I "$CTL/pista_sin_enlaces.py" --raiz "$c" "$c/docs-as-code" ;;
+    recuento-openapi)  python3 -I "$CTL/recuento_openapi.py" --contrato "$c/contrato.md" --instantanea "$c/api.json" --raiz "$c" ;;
   esac
 }
 
@@ -134,7 +155,7 @@ esperar() {  # control, código esperado, etiqueta
 
 echo "== autoprueba: verde (corpus en orden)"
 armar
-for c in esquema id-unico fuera enlaces-internos delivery-publico anclas limite-didactico pista-sin-enlaces; do esperar "$c" 0 verde; done
+for c in esquema id-unico fuera enlaces-internos delivery-publico anclas limite-didactico pista-sin-enlaces recuento-openapi; do esperar "$c" 0 verde; done
 
 echo "== autoprueba: rojo (un defecto plantado por vez)"
 armar
@@ -184,6 +205,19 @@ esperar limite-didactico 1 'rojo plantilla de IA duplicada'
 armar
 sed -i 's/tal como lo imprime tu programa\. |/tal como lo imprime tu programa, ver [la guía](..\/a.md). |/' "$TMP/c/docs-as-code/punto-de-uso/catalogo.md"
 esperar pista-sin-enlaces 1 'rojo enlace en la pista'
+
+armar
+python3 -I - "$TMP/c/api.json" <<'EOF2'
+import json, sys
+d = json.load(open(sys.argv[1]))
+d['paths']['/v1/extra'] = {'get': {'responses': {'200': {'description': 'ok'}}}}
+json.dump(d, open(sys.argv[1], 'w'))
+EOF2
+esperar recuento-openapi 1 'rojo operación de más en la instantánea'
+
+armar
+sed -i 's/los dos puntos de acceso/los tres puntos de acceso/' "$TMP/c/contrato.md"
+esperar recuento-openapi 1 'rojo cifra del título que no coincide'
 
 if [ "$fallas" -gt 0 ]; then
   echo "== autoprueba: ROJO ($fallas fallas): la compuerta está rota"

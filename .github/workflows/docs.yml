@@ -43,6 +43,34 @@ jobs:
       - name: Compuerta de docs (huella, autoprueba y controles por ámbito)
         run: bash scripts/docs-local.sh
 
+  # Controles OpenAPI (expediente 0003, tramo T-6): oasdiff `breaking` (Tufin) y Spectral (tres reglas propias) sobre
+  # la instantánea `docs-as-code/api/openapi-v1.json`. Job aparte de la compuerta porque necesita Docker y baja dos
+  # imágenes con versión fija (en `docs-as-code/controles/openapi.sh`); la compuerta principal sigue sin red. El
+  # recuento contra el contrato corre en la compuerta (`recuento_openapi.py`, sin red).
+  #   - Mismo endurecimiento que la compuerta: `contents: read`, sin secretos, sin `paths`, acciones con versión fija.
+  #   - En AVISA: un hallazgo es una advertencia del PR y el job queda verde. Rojo sólo si la autoprueba del par
+  #     rojo/verde falla (los controles están rotos) o si hay un error de uso.
+  #   - oasdiff compara la instantánea de la base (en un PR, la rama base; en push, el commit anterior) con la del árbol.
+  #   - No compila la Api ni levanta nada: la instantánea la regenera el job `instantanea-openapi`.
+  openapi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: oasdiff y Spectral sobre la instantánea (avisa)
+        env:
+          BASE_PR: ${{ github.base_ref }}
+          BASE_PUSH: ${{ github.event.before }}
+        run: |
+          base=""
+          if [ -n "$BASE_PR" ]; then base="origin/$BASE_PR"
+          elif [ -n "$BASE_PUSH" ] && git cat-file -e "$BASE_PUSH^{commit}" 2>/dev/null; then base="$BASE_PUSH"; fi
+          bash docs-as-code/controles/openapi.sh ${base:+"$base"}
+
   # Instantánea OpenAPI (expediente 0003, tramo T-5; decisiones K-07 y K-12). Job APARTE de la compuerta:
   #   - Sólo en push a main (`if`): nunca en un PR, así que la tarea no recae sobre ningún PR de producto.
   #   - Es el único job con permiso de escritura, y sólo `contents` y `pull-requests`; la compuerta sigue en lectura.
