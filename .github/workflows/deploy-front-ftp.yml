@@ -49,17 +49,17 @@ jobs:
   publish-front:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
 
       - name: Anclar el kit de desarrollo
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v4.3.1
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '10.0.403'
 
       - name: Anclar Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
-          node-version: '22'
+          node-version: '22.23.4'
 
       # EL VISOR LO EMPAQUETA `GeometriaFactory.Web.csproj` (target `BuildVisor`) al construir
       # la solución, y por eso no hay un paso suelto acá ni en `build.sh`: un solo lugar desde

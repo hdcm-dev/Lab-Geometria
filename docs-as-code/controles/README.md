@@ -37,6 +37,7 @@ probar» en el sentido de la ficha hasta que el check `docs` dé verde en un PR 
 | [`spectral.yaml`](spectral.yaml) | Las tres reglas de Spectral, propias y sin `extends`: `operacion-con-id`, `operacion-con-resumen` y `operacion-con-error-documentado` |
 | [`enlaces_externos.py`](enlaces_externos.py) | Extensión `enlaces-externos` (tramo T-7, revisión externa R-G2): enlaces `http`/`https` de la documentación, con red. La corre sólo el carril programado `.github/workflows/docs-programado.yml`, no la compuerta |
 | [`enlaces-excepciones.txt`](enlaces-excepciones.txt) | Excepciones de `enlaces-externos`: `URL \| motivo \| vence AAAA-MM-DD`. Vencida, no se aplica y se avisa |
+| [`versiones_fijas.py`](versiones_fijas.py) | Extensión `versiones-fijas` (folio 018, PR-P2): workflows y `deploy/Dockerfile*` sin `uses: x@vN` sin parche, sin versiones `x.x` flotantes y sin imágenes sin `@sha256:` |
 | [`autoprueba.sh`](autoprueba.sh) | Par rojo/verde plantado de cada control, sobre un corpus temporal |
 
 Las extensiones reutilizan el lector de frontmatter de la copia sin modificarla. Son el apartamiento parcial de
@@ -59,6 +60,7 @@ runner y no baja herramientas.
 | `limite-didactico` | avisa; a bloquea después de dos corridas verdes de su par | — | — |
 | `pista-sin-enlaces` | avisa (fijo) | — | — |
 | `recuento-openapi` | avisa (fijo); el contrato que lee es de `SDD/Docs/**` y lo que encuentra allí se eleva | — | — |
+| `versiones-fijas` (`.github/workflows/*.yml` y `deploy/Dockerfile*`) | avisa; a bloquea tras una corrida limpia | — | — |
 | `oasdiff` y `spectral` (job `openapi`) | avisa (fijo); su autoprueba bloquea | — | — |
 
 Los tres controles del punto de uso no siguen a `DOCS_MODO_DOCS_AS_CODE`: quedan en avisa hasta que un PR propio
@@ -103,6 +105,7 @@ DOCS_MODO_DOCS_AS_CODE=bloquea scripts/docs-local.sh    # cómo correría docs-a
 bash docs-as-code/controles/autoprueba.sh               # sólo el par rojo/verde
 python3 -I docs-as-code/controles/delivery_publico.py --exigir docs-as-code   # un control suelto
 python3 -I docs-as-code/controles/recuento_openapi.py                         # el recuento OpenAPI
+python3 -I docs-as-code/controles/versiones_fijas.py                          # versiones fijas
 bash docs-as-code/controles/openapi.sh origin/main                            # oasdiff y Spectral (con Docker)
 python3 -I docs-as-code/controles/enlaces_externos.py \
   --excepciones docs-as-code/controles/enlaces-excepciones.txt                # enlaces externos (con red)

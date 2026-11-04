@@ -15,6 +15,8 @@
 #   recuento-openapi  una operación de más en la instantánea y una cifra del título que no coincide
 # y, desde la revisión externa R-G2, el de enlaces externos contra un servidor local que devuelve 404:
 #   enlaces-externos  un enlace a una ruta que da 404 y una excepción vencida
+# y, desde el folio 018 (PR-P2), el de versiones fijas sobre workflows y Dockerfiles:
+#   versiones-fijas   el deploy-front-ftp.yml previo a fijarlo y una imagen sin digest
 # Si un control no da rojo sobre su defecto o no da verde sin él, la compuerta misma está rota y este guion sale con 1.
 # No toca el árbol del repositorio. Requiere bash y python3 (sólo en el host o en el runner; la imagen del SDK no trae
 # python3, AGENTS.md:81).
@@ -269,6 +271,54 @@ esperar_externos 1 'rojo 404 con excepción vencida' "$TMP/x/vencida.txt"
 echo "http://127.0.0.1:$PUERTO/falta | autoprueba" > "$TMP/x/mal.txt"
 esperar_externos 2 'error de uso excepción sin vencimiento' "$TMP/x/mal.txt"
 kill "$SERVIDOR" 2>/dev/null || true
+
+# versiones-fijas (folio 018 §7, PR-P2): rojo con los pasos de deploy-front-ftp.yml tal como estaban en main antes
+# de fijarlos (líneas 52-62), verde con las versiones fijadas; y un Dockerfile con y sin digest.
+echo "== autoprueba: versiones-fijas"
+mkdir -p "$TMP/v"
+cat > "$TMP/v/deploy-front-ftp.yml" <<'EOF'
+jobs:
+  publish-front:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Anclar el kit de desarrollo
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Anclar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+EOF
+versiones() {  # código esperado, etiqueta, archivo
+  local rc=0
+  python3 -I "$CTL/versiones_fijas.py" --raiz "$TMP/v" "$3" > "$TMP/salida.txt" 2>&1 || rc=$?
+  if [ "$rc" = "$1" ]; then
+    echo "  ok    $2: versiones-fijas dio $rc"
+  else
+    echo "  FALLA $2: versiones-fijas dio $rc, se esperaba $1"
+    sed 's/^/        /' "$TMP/salida.txt"
+    fallas=$((fallas + 1))
+  fi
+}
+versiones 1 'rojo deploy-front-ftp.yml con versiones flotantes' "$TMP/v/deploy-front-ftp.yml"
+if [ "$(grep -cE 'accion-sin-parche|version-flotante' "$TMP/salida.txt")" != 5 ]; then
+  echo "  FALLA rojo deploy-front-ftp.yml: se esperaban 5 hallazgos"
+  sed 's/^/        /' "$TMP/salida.txt"
+  fallas=$((fallas + 1))
+fi
+sed -i -e 's/checkout@v4$/checkout@v4.2.2/' -e 's/setup-dotnet@v4$/setup-dotnet@v4.3.1/' \
+  -e 's/setup-node@v4$/setup-node@v4.4.0/' -e "s/'10.0.x'/'10.0.403'/" -e "s/'22'/'22.23.4'/" "$TMP/v/deploy-front-ftp.yml"
+versiones 0 'verde deploy-front-ftp.yml con versiones fijadas' "$TMP/v/deploy-front-ftp.yml"
+printf 'FROM python:3.12-slim AS base\nFROM base\n' > "$TMP/v/Dockerfile"
+versiones 1 'rojo imagen sin digest' "$TMP/v/Dockerfile"
+printf 'FROM python:3.12.12-slim@sha256:%064d AS base\nFROM base\n' 0 > "$TMP/v/Dockerfile"
+versiones 0 'verde imagen con digest y etapa propia' "$TMP/v/Dockerfile"
+versiones 2 'error de uso archivo inexistente' "$TMP/v/no-existe.yml"
 
 if [ "$fallas" -gt 0 ]; then
   echo "== autoprueba: ROJO ($fallas fallas): la compuerta está rota"
