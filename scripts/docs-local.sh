@@ -102,6 +102,10 @@ paso "docs-as-code · recuento-openapi"  avisa python3 -I "$CTL/recuento_openapi
 # limpia; hoy quedan hallazgos fuera de deploy-front-ftp.yml (ci.yml, e2e.yml, deploy/Dockerfile*).
 paso "workflows · versiones-fijas"      avisa python3 -I "$CTL/versiones_fijas.py"
 
+# Manifiesto del portal (folio 018 §1 y §7, PR-P3): lista permitida en docs-as-code/portal/publicar.yml. Arranca en
+# avisa y pasa a bloquea tras una corrida limpia (PR-P7).
+paso "portal · manifiesto"             avisa python3 -I "$CTL/portal_manifiesto.py"
+
 paso "README.md · esquema"             avisa python3 -I "$DG" esquema README.md
 paso "README.md · enlaces-internos"    avisa python3 -I "$CTL/enlaces_internos.py" README.md
 
