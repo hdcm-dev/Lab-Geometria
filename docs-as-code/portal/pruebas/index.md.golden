@@ -1,0 +1,8 @@
+# Repo de juguete
+
+Ver [la pieza](http://localhost:8080/docs-as-code/d.md#uso), [el estado](https://github.com/hdcm-dev/Lab-Geometria/blob/main/SDD/Docs/README.md "fuera del portal") y
+[la carpeta](https://github.com/hdcm-dev/Lab-Geometria/tree/main/docs-as-code/).
+
+```text
+[no se reescribe](docs-as-code/d.md)
+```

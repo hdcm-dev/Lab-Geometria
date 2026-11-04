@@ -10,7 +10,8 @@ de la raíz. Hallazgos (error):
 - `fuera-del-manifiesto`: un archivo del sitio que no sale de una pieza del manifiesto ni de la infraestructura del
   generador. Una pieza `ruta/x.md` da `ruta/x/index.html` (un README.md o index.md da el índice de su carpeta) y, desde
   PR-P5, su Markdown crudo `ruta/x.md` o `ruta/x/index.md`. Infraestructura: `assets/`, `search/`, `404.html`,
-  `sitemap.xml`, `sitemap.xml.gz`, `llms.txt` y `llms-full.txt`.
+  `sitemap.xml`, `sitemap.xml.gz`, `llms.txt`, `llms-full.txt` y, desde PR-P5,
+  `.well-known/api-catalog`.
 - `patron-prohibido`: en cualquier archivo de texto, una dirección de red privada (10/8, 172.16/12, 192.168/16,
   100.64/10), `jump-host`, una ruta de un anfitrión (`/home/…/`, `/root/…/`, …), una dirección de correo o una
   `SigningKey` con valor (los créditos de autor del código de terceros bajo `assets/` no cuentan como correo); y, en
@@ -37,7 +38,7 @@ sys.dont_write_bytecode = True
 RAIZ_REPO = Path(__file__).resolve().parents[2]
 CONTROL_MANIFIESTO = Path(__file__).resolve().parent / 'portal_manifiesto.py'
 INFRA_DIRS = ('assets/', 'search/')
-INFRA_ARCHIVOS = {'404.html', 'sitemap.xml', 'sitemap.xml.gz', 'llms.txt', 'llms-full.txt'}
+INFRA_ARCHIVOS = {'404.html', 'sitemap.xml', 'sitemap.xml.gz', 'llms.txt', 'llms-full.txt', '.well-known/api-catalog'}
 TEXTO = {'.html', '.md', '.txt', '.xml', '.json', '.js', '.css', '.map', '.svg'}
 PROHIBIDOS = [
     ('red privada 10/8', re.compile(r'(?<![\d.])10\.\d{1,3}\.\d{1,3}\.\d{1,3}(?![\d.])')),

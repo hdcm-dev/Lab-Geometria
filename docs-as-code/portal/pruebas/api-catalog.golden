@@ -1,0 +1,19 @@
+{
+  "linkset": [
+    {
+      "anchor": "http://localhost:8080/api/",
+      "service-desc": [
+        {
+          "href": "http://localhost:8080/api/openapi-v1.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "http://localhost:8080/api/",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}
