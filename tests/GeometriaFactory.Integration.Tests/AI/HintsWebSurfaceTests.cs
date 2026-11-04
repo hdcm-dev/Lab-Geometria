@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Contracts.Accounts;
 using GeometriaFactory.Domain.Values;
+using GeometriaFactory.Infrastructure.AI;
 using GeometriaFactory.Web.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -77,7 +78,21 @@ public sealed class HintsWebSurfaceTests : IDisposable
             var first = Read(await level1.Content.ReadAsStringAsync());
             Assert.Equal(HttpStatusCode.OK, level1.StatusCode);
             Assert.Contains("PRIMERA pista", first, StringComparison.Ordinal);
-            Assert.Contains("Pista automática", first, StringComparison.Ordinal);
+            Assert.Contains("Pista redactada por IA: puede no ser exacta", first, StringComparison.Ordinal);
+            // G4: la marca también en el texto accesible de cada nivel.
+            Assert.Contains("Pista 1 de 3. Pista redactada por IA: puede no ser exacta.", first, StringComparison.Ordinal);
+            // G3: la advertencia completa queda arriba de las pistas.
+            Assert.Contains("Tu programa declara", first, StringComparison.Ordinal);
+            Assert.Contains("La geometría da", first, StringComparison.Ordinal);
+            Assert.True(
+                first.IndexOf("La geometría da", StringComparison.Ordinal) < first.IndexOf("PRIMERA pista", StringComparison.Ordinal),
+                "La advertencia tiene que ir arriba de las pistas.");
+            // G5: el foco va a la pista nueva y la región viva está en el marcado.
+            Assert.Matches("<li[^>]*autofocus[^>]*id=\"hints-level-1\"|<li[^>]*id=\"hints-level-1\"[^>]*autofocus", first);
+            Assert.Contains("aria-live=\"polite\"", first, StringComparison.Ordinal);
+            Assert.Contains("data-gf-pending=\"Buscando una pista…\"", first, StringComparison.Ordinal);
+            // G6: la línea fija de acción.
+            Assert.Contains("Usá la pista para revisar tu programa.", first, StringComparison.Ordinal);
             Assert.DoesNotContain("SEGUNDA pista", first, StringComparison.Ordinal);
             Assert.DoesNotContain("TERCERA pista", first, StringComparison.Ordinal);
             Assert.Contains("Otra pista", first, StringComparison.Ordinal);
@@ -110,8 +125,100 @@ public sealed class HintsWebSurfaceTests : IDisposable
 
             Assert.DoesNotContain("<script>alert(1)</script>", raw, StringComparison.Ordinal);
             Assert.Contains("&lt;script&gt;", raw, StringComparison.Ordinal);
-            Assert.Contains("Pista de plantilla", raw, StringComparison.Ordinal);
+            Assert.Contains("Pista general del laboratorio", raw, StringComparison.Ordinal);
         }
+    }
+
+    /// <summary>
+    /// G1 · Un modelo que no responde nunca: el servicio de datos corta en su tope, antes que la Web,
+    /// y la alumna recibe la pista general del laboratorio en lugar de «No pudimos traer pistas».
+    /// </summary>
+    [Fact]
+    public async Task ASlowModel_StillGivesTheLabHint()
+    {
+        Start(hintsEnabled: "true", services => services.AddScoped<IObservationHintWriter>(provider => new ModelObservationHintWriter(
+            FakeChatClient.Delaying(), new HintConcurrencyGate(), new AiOptions { TimeoutSeconds = 1 },
+            new CapturingLogger<ModelObservationHintWriter>(), includeContentInTelemetry: false)));
+
+        var (page, html) = await SubmitAsync(Scenarios.E1);
+        using (page)
+        {
+            using var hints = await PostHintsAsync(page, html, Scenarios.E1, IndexOfFirstHintButton(html), level: 1);
+            var shown = Read(await hints.Content.ReadAsStringAsync());
+
+            Assert.Equal(HttpStatusCode.OK, hints.StatusCode);
+            Assert.Contains("Pista general del laboratorio", shown, StringComparison.Ordinal);
+            Assert.DoesNotContain("No pudimos traer pistas", shown, StringComparison.Ordinal);
+        }
+    }
+
+    /// <summary>
+    /// G2 · Las pistas se piden desde el trabajo guardado, sin reenviarlo: el detalle ofrece «Ver
+    /// pistas» por advertencia, las dibuja adentro de esa advertencia con sus valores a la vista, y el
+    /// almacén no gana ningún trabajo.
+    /// </summary>
+    [Fact]
+    public async Task FromTheSavedWork_HintsComeWithoutResubmitting()
+    {
+        Start(hintsEnabled: "true", services => services.AddScoped<IObservationHintWriter>(_ => new ScriptedWriter(
+            new Hints("PRIMERA pista", "SEGUNDA pista", "TERCERA pista", HintOrigin.Template))));
+
+        var (page, html) = await SubmitAsync(Scenarios.E1);
+        page.Dispose();
+        var detailRoute = Regex.Match(html, "href=\"(?<r>/trabajos/[0-9a-f-]{36})\"").Groups["r"].Value;
+        Assert.NotEmpty(detailRoute);
+
+        using var before = await GetAsync("/mis-trabajos", _mark);
+        var listedBefore = Regex.Matches(Read(await before.Content.ReadAsStringAsync()), "Trabajo con advertencias").Count;
+
+        using var detail = await GetAsync(detailRoute, _mark);
+        var detailHtml = Read(await detail.Content.ReadAsStringAsync());
+        Assert.Equal(2, Regex.Matches(detailHtml, "Ver pistas").Count);
+        Assert.DoesNotContain("OriginalJson", detailHtml, StringComparison.Ordinal);
+        var step = Regex.Match(detailHtml, "name=\"HintsInput.Step\" value=\"(?<s>\\d+:1)\"").Groups["s"].Value;
+        Assert.NotEmpty(step);
+
+        using var asked = await PostAsync(detail, detailHtml, detailRoute, "work-hints", new Dictionary<string, string>
+        {
+            ["HintsInput.Step"] = step,
+        });
+        var shown = Read(await asked.Content.ReadAsStringAsync());
+
+        Assert.Equal(HttpStatusCode.OK, asked.StatusCode);
+        Assert.Contains("PRIMERA pista", shown, StringComparison.Ordinal);
+        Assert.Contains("Pista general del laboratorio", shown, StringComparison.Ordinal);
+        Assert.DoesNotContain("SEGUNDA pista", shown, StringComparison.Ordinal);
+        Assert.Contains("Otra pista", shown, StringComparison.Ordinal);
+        Assert.True(
+            shown.IndexOf("La geometría da", StringComparison.Ordinal) < shown.IndexOf("PRIMERA pista", StringComparison.Ordinal),
+            "La advertencia tiene que seguir arriba de las pistas.");
+        // La otra advertencia sigue ofreciendo sus pistas.
+        Assert.Single(Regex.Matches(shown, "Ver pistas"));
+
+        // 0 REENVÍOS Y 0 DUPLICADOS: la alumna sigue teniendo un solo trabajo.
+        using var mine = await GetAsync("/mis-trabajos", _mark);
+        var list = Read(await mine.Content.ReadAsStringAsync());
+        Assert.Equal(listedBefore, Regex.Matches(list, "Trabajo con advertencias").Count);
+    }
+
+    /// <summary>Con el flag apagado, el detalle no ofrece pistas.</summary>
+    [Fact]
+    public async Task ByDefault_TheSavedWorkHasNoHintsButton()
+    {
+        var calls = new CountingWriter();
+        Start(hintsEnabled: null, services => services.AddScoped<IObservationHintWriter>(_ => calls));
+
+        var (page, html) = await SubmitAsync(Scenarios.E1);
+        page.Dispose();
+        var detailRoute = Regex.Match(html, "href=\"(?<r>/trabajos/[0-9a-f-]{36})\"").Groups["r"].Value;
+
+        using var detail = await GetAsync(detailRoute, _mark);
+        var detailHtml = Read(await detail.Content.ReadAsStringAsync());
+
+        Assert.Contains("Advertencia", detailHtml, StringComparison.Ordinal);
+        Assert.DoesNotContain("Ver pistas", detailHtml, StringComparison.Ordinal);
+        Assert.DoesNotContain("gf-hints", detailHtml, StringComparison.Ordinal);
+        Assert.Equal(0, calls.Count);
     }
 
     private void Start(string? hintsEnabled, Action<IServiceCollection> services)

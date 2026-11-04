@@ -89,6 +89,17 @@ public sealed class DataServiceClient
     private const string InterpretationsPath = ContractPrefix + "interpretaciones";
 
     /// <summary>
+    /// Cuánto espera la Web al servicio de datos en cada pedido (10 s, la ventana de Nielsen).
+    /// </summary>
+    /// <remarks>
+    /// TIENE QUE SER MAYOR QUE EL TOPE DE PISTAS DEL SERVICIO DE DATOS (`AI:TimeoutSeconds`, 8 s por
+    /// omisión): así el servicio de datos corta primero y devuelve la plantilla, y la alumna nunca se
+    /// queda sin pista por un corte de la Web (REQ-IA-07, G1 de la mesa UX del 2026-11-03). Lo fija
+    /// `HintsTimeoutTests.TheDataServiceGivesUpBeforeTheWeb`.
+    /// </remarks>
+    public static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(10);
+
+    /// <summary>
     /// Ruta de las pistas de la capa de IA (expediente 0002). Es la misma constante que
     /// `GeometriaFactory.Api.Endpoints.WorkEndpoints.HintsRoute`. [derivado]
     /// </summary>

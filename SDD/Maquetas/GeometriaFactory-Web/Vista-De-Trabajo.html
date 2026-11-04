@@ -89,6 +89,52 @@
       <div data-mq-cuatro-partes></div>
     </div>
 
+
+    <!-- ==================================================================
+         PISTAS DE LA CAPA DE IA (expediente 0002, actuación 013; mesa UX
+         del 2026-11-03, G2 a G6). Detrás de AI:HintsEnabled, apagado por
+         omisión. La advertencia completa queda ARRIBA de las pistas (G3);
+         un solo rótulo por tarjeta, y la marca repetida en el texto
+         accesible de cada nivel (G4); espera anunciada en una región viva
+         que ya está en el marcado, y foco en la pista nueva (G5); una línea
+         fija dice qué hacer (G6). En el detalle del trabajo guardado (G2), las pistas van ADENTRO de la advertencia, sin reenviar.
+         ================================================================== -->
+    <section class="mq-tarjeta mq-mt-5" aria-labelledby="vt-pistas-h"
+             data-mq-estado="pistas-ia pistas-laboratorio buscando-pista pistas-no-disponibles">
+      <h2 id="vt-pistas-h" class="mq-meta">Observaciones</h2>
+      <ul class="mq-observaciones mq-mt-3">
+        <li class="mq-observacion">
+          <span class="mq-insignia mq-insignia--atencion">Advertencia</span>
+          <div class="mq-observacion-cuerpo">
+            <p class="mq-observacion-ubicacion mq-sin-margen" id="vt-pistas-ubicacion">Figura 1 · posición 0 en el texto · campo «Area»</p>
+            <p class="mq-caption mq-margen-arriba-1">El valor de «Area» que trae tu texto no coincide con el que se deriva de las dimensiones que tu propio programa emitió.</p>
+            <dl class="mq-valores"><dt>Tu programa declara</dt><dd>36,00</dd><dt>La geometría da</dt><dd>54,00</dd></dl>
+
+            <button type="button" class="mq-btn mq-btn--secundario mq-mt-2" aria-describedby="vt-pistas-ubicacion"
+                    data-mq-estado="buscando-pista" disabled aria-disabled="true">Buscando una pista…</button>
+            <p class="mq-sr-only" role="status" aria-live="polite" data-mq-estado="buscando-pista">Buscando una pista…</p>
+
+            <p class="mq-caption mq-mt-3" data-mq-estado="pistas-ia"><strong>Pista redactada por IA: puede no ser exacta</strong></p>
+            <p class="mq-caption mq-mt-3" data-mq-estado="pistas-laboratorio"><strong>Pista general del laboratorio</strong></p>
+            <ol class="mq-mt-2" data-mq-estado="pistas-ia pistas-laboratorio">
+              <li tabindex="-1"><span class="mq-sr-only" data-mq-estado="pistas-ia">Pista 1 de 3. Pista redactada por IA: puede no ser exacta. </span><span class="mq-sr-only" data-mq-estado="pistas-laboratorio">Pista 1 de 3. Pista general del laboratorio. </span>
+                Mirá la parte de tu programa que calcula el área del Cubo: ahí está la diferencia.</li>
+            </ol>
+            <p class="mq-caption mq-mt-3" data-mq-estado="pistas-ia pistas-laboratorio">
+              Usá la pista para revisar tu programa. Para corregir el trabajo, cargá una versión nueva.
+              <a href="Envio-De-Trabajo.html">Cargar una versión nueva</a>
+            </p>
+            <button type="button" class="mq-btn mq-btn--secundario mq-mt-2" data-mq-estado="pistas-ia pistas-laboratorio">Otra pista</button>
+
+            <p class="mq-banda mq-banda--error mq-mt-3" role="alert" data-mq-estado="pistas-no-disponibles">
+              No pudimos traer pistas para esta advertencia. Tu trabajo ya quedó guardado.
+            </p>
+            <button type="button" class="mq-btn mq-btn--secundario mq-mt-2" data-mq-estado="pistas-no-disponibles">Probar de nuevo</button>
+          </div>
+        </li>
+      </ul>
+    </section>
+
   </main></div>
 </div>
 

@@ -134,10 +134,22 @@
      * NO CANCELA NI RETIENE EL ENVÍO: se aplica después de que el envío salió,
      * de modo que inhabilitar el control no pueda quitarle un campo a la
      * solicitud. Previene el segundo disparo, que es lo que el estado protege.
+     *
+     * LA ACCIÓN ES LA QUE DISPARÓ EL ENVÍO, si el navegador la informa. Las pistas
+     * (expediente 0002, mesa UX del 2026-11-03, G5) tienen un «Ver pistas» por
+     * advertencia, FUERA del formulario y asociado con `form=`: buscar el primer
+     * botón adentro no encontraba ninguno y la espera quedaba muda.
+     *
+     * Y SI EL FORMULARIO TRAE SU REGIÓN VIVA (`role="status"`), el mismo texto se
+     * escribe ahí, que es lo que el lector de pantalla anuncia. La región está en
+     * el marcado desde antes del envío: una región que nace con el anuncio no se
+     * anuncia. El texto sigue siendo el del marcado; este guion no agrega ninguno.
      */
-    function markPending(form) {
+    function markPending(form, submitter) {
         const label = form.getAttribute('data-gf-pending');
-        const action = form.querySelector('button[type="submit"]');
+        const action = submitter instanceof HTMLButtonElement && submitter.type === 'submit'
+            ? submitter
+            : form.querySelector('button[type="submit"]');
 
         if (label === null || label === '' || action === null || action.disabled) {
             return;
@@ -161,6 +173,11 @@
             const announcement = document.createElement('span');
             announcement.textContent = label;
             action.appendChild(announcement);
+
+            const region = form.querySelector('[role="status"]');
+            if (region !== null) {
+                region.textContent = label;
+            }
         }, 0);
     }
 
@@ -329,7 +346,7 @@
         const form = event.target;
 
         if (form instanceof HTMLFormElement && form.hasAttribute('data-gf-pending')) {
-            markPending(form);
+            markPending(form, event.submitter);
         }
     }, true);
 

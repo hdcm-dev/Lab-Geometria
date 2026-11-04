@@ -3,6 +3,7 @@
 @inject NavigationManager Navigation
 @inject DataServiceClient DataService
 @inject SessionState Session
+@inject IConfiguration Configuration
 @using System.Text.Json
 @using GeometriaFactory.Contracts.Works
 
@@ -200,14 +201,16 @@ else
                 @if (_work.Observations.Count > 0)
                 {
                     <ul class="gf-findings gf-mt-3">
-                        @foreach (var observation in _work.Observations)
+                        @for (var index = 0; index < _work.Observations.Count; index++)
                         {
+                            var observation = _work.Observations[index];
+                            var position = index;
                             <li class="gf-finding">
                                 <span class="gf-badge @(observation.Kind == WorkObservationKind.ValidationError ? "gf-badge--danger" : "gf-badge--warning")">
                                     @(observation.Kind == WorkObservationKind.ValidationError ? "Error" : "Advertencia")
                                 </span>
                                 <div class="gf-finding-body">
-                                    <p class="gf-finding-location">@LocationOf(observation)</p>
+                                    <p class="gf-finding-location" id="@($"finding-location-{position}")">@LocationOf(observation)</p>
                                     @if (observation is { DeclaredValue: { } declared, DerivedValue: { } derived })
                                     {
                                         <dl class="gf-values">
@@ -215,10 +218,63 @@ else
                                             <dt>La geometría da</dt><dd class="gf-num">@derived.ToString("N2")</dd>
                                         </dl>
                                     }
+                                    @* G2 Y G3 DE LA MESA UX DEL 2026-11-03: LAS PISTAS SE PIDEN DESDE EL
+                                       TRABAJO GUARDADO, sin reenviarlo, y se dibujan ADENTRO de esta
+                                       advertencia, debajo de sus valores, que siguen a la vista. Sólo
+                                       para quien escribió el trabajo y detrás del flag (D-FLAG). *@
+                                    @if (CanAskForHints && observation.Kind == WorkObservationKind.Warning)
+                                    {
+                                        @if (HintsAsked && HintsForm.Index == position)
+                                        {
+                                            <HintsPanel Hints="_hints" Level="HintsLevel" Unavailable="_hintsUnavailable"
+                                                        IdPrefix="@($"hints-{position}")">
+                                                <Actions>
+                                                    <div class="gf-footer-actions gf-mt-3">
+                                                        @if (_hints is not null && HintsLevel < 3)
+                                                        {
+                                                            <button type="submit" form="gf-hints" class="gf-btn gf-btn--secondary"
+                                                                    name="HintsInput.Step" value="@StepOf(position, HintsLevel + 1)">
+                                                                @(HintsLevel == 1 ? "Otra pista" : "Ver la última pista")
+                                                            </button>
+                                                        }
+                                                        else if (_hints is null)
+                                                        {
+                                                            @* «PROBAR DE NUEVO» CON EL MISMO PEDIDO (F5). *@
+                                                            <button type="submit" form="gf-hints" class="gf-btn gf-btn--secondary"
+                                                                    name="HintsInput.Step" value="@StepOf(position, HintsLevel)">
+                                                                Probar de nuevo
+                                                            </button>
+                                                        }
+                                                    </div>
+                                                </Actions>
+                                            </HintsPanel>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" form="gf-hints" class="gf-btn gf-btn--secondary gf-mt-2"
+                                                    name="HintsInput.Step" value="@StepOf(position, 1)"
+                                                    aria-describedby="@($"finding-location-{position}")">
+                                                Ver pistas
+                                            </button>
+                                        }
+                                    }
                                 </div>
                             </li>
                         }
                     </ul>
+
+                    @if (CanAskForHints)
+                    {
+                        @* UN SOLO FORMULARIO PARA TODAS LAS ADVERTENCIAS: cada botón dice qué
+                           advertencia y qué nivel. NO LLEVA EL TEXTO: la pantalla lo toma del trabajo
+                           guardado, de modo que pedir pistas no reenvía ni duplica nada (G2). La
+                           región viva está desde antes de pedir (G5). *@
+                        <form id="gf-hints" method="post" @formname="work-hints" @onsubmit="ExplainAsync"
+                              data-gf-pending="@HintsPanel.PendingLabel">
+                            <AntiforgeryToken />
+                            <p class="gf-sr-only" role="status" aria-live="polite"></p>
+                        </form>
+                    }
                 }
                 else if (_work.RootFigureCount is null)
                 {
@@ -512,6 +568,76 @@ else
 
         _unavailable = string.Equals(
             outcome.Error!.Code, ErrorCode.ServiceUnavailable, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// El formulario de pistas del trabajo guardado (G2): qué advertencia y hasta qué nivel, como
+    /// <c>índice:nivel</c>. El texto no viaja: se toma del trabajo.
+    /// </summary>
+    private sealed class WorkViewHintsForm
+    {
+        public string Step { get; set; } = string.Empty;
+    }
+
+    [SupplyParameterFromForm(FormName = "work-hints")]
+    private WorkViewHintsForm? HintsInput { get; set; }
+
+    private WorkObservationHints? _hints;
+    private bool _hintsUnavailable;
+
+    /// <summary><c>AI:HintsEnabled</c>; <c>false</c> por omisión (D-FLAG).</summary>
+    private bool HintsEnabled => Configuration.GetValue("AI:HintsEnabled", false);
+
+    /// <summary>
+    /// Sólo quien escribió el trabajo pide pistas, y sólo con el flag (O14: ninguna fuga de audiencia).
+    /// </summary>
+    private bool CanAskForHints =>
+        HintsEnabled && _work is not null && Session.IsOpen && !Session.IsAdministrator
+        && !string.IsNullOrWhiteSpace(_work.OriginalJson);
+
+    /// <summary>Si esta petición pidió pistas.</summary>
+    private bool HintsAsked => HintsInput is not null && HintsForm.Index >= 0;
+
+    /// <summary>El pedido leído: advertencia y nivel. Un valor sin forma no pide nada.</summary>
+    private (int Index, int Level) HintsForm
+    {
+        get
+        {
+            var parts = (HintsInput?.Step ?? string.Empty).Split(':');
+            return parts.Length == 2
+                && int.TryParse(parts[0], System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var index)
+                && int.TryParse(parts[1], System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var level)
+                ? (index, level)
+                : (-1, 1);
+        }
+    }
+
+    private int HintsLevel => Math.Clamp(HintsForm.Level, 1, 3);
+
+    private static string StepOf(int index, int level) =>
+        string.Create(System.Globalization.CultureInfo.InvariantCulture, $"{index}:{level}");
+
+    /// <summary>
+    /// Trae las pistas de UNA advertencia del trabajo guardado (G2). No guarda ni reenvía nada: el
+    /// servicio de datos vuelve a interpretar el texto guardado y pone las pistas al lado.
+    /// </summary>
+    private async Task ExplainAsync()
+    {
+        _hints = null;
+        _hintsUnavailable = false;
+
+        if (!CanAskForHints || !HintsAsked)
+        {
+            _hintsUnavailable = HintsAsked;
+            return;
+        }
+
+        var outcome = await DataService.ExplainObservationsAsync(_work!.OriginalJson, Session.UseAccessToken());
+
+        _hints = outcome.Succeeded
+            ? outcome.Value!.Hints.FirstOrDefault(h => h.ObservationIndex == HintsForm.Index)
+            : null;
+        _hintsUnavailable = _hints is null;
     }
 
     private static string LabelOf(string status) => StatusLabels.GetValueOrDefault(status, status);

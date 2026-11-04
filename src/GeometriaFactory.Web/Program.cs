@@ -208,7 +208,7 @@ var apiBaseUrl = builder.Configuration["ApiBaseUrl"]
 builder.Services.AddHttpClient<DataServiceClient>(client =>
 {
     client.BaseAddress = new Uri(apiBaseUrl, UriKind.Absolute);
-    client.Timeout = TimeSpan.FromSeconds(10);
+    client.Timeout = DataServiceClient.RequestTimeout;
 })
 // El servicio de datos limita lo anónimo por dirección de origen: sin esto, detrás del front toda
 // la comisión compartía una sola cuota (R-02). Ver `BrowserOriginForwardingHandler`.

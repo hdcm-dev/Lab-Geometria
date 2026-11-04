@@ -32,13 +32,29 @@ public sealed class AiOptions
     public string Model { get; set; } = string.Empty;
 
     /// <summary>
-    /// Tope de espera por llamada, en segundos (REQ-IA-10). Admite fracciones para las pruebas.
+    /// Tope por omisión de <see cref="TimeoutSeconds"/>, en segundos (G1 de la mesa UX del 2026-11-03).
+    /// </summary>
+    public const double DefaultTimeoutSeconds = 8;
+
+    /// <summary>
+    /// Tope de espera de UN PEDIDO DE PISTAS, en segundos, sumadas todas sus llamadas al modelo
+    /// (REQ-IA-10). Admite fracciones para las pruebas.
     /// </summary>
     /// <remarks>
-    /// 20 s = p95 en caliente del modelo elegido (12,6 s) más 50 % de margen, redondeado
-    /// (evaluación completa del 2026-11-03). El arranque en frío del mismo modelo (13,3 s) también entra.
+    /// <para>
+    /// 8 s Y NO 20: EL SERVICIO DE DATOS CORTA ANTES QUE LA WEB. La Web espera al servicio de datos
+    /// 10 s (<c>DataServiceClient.RequestTimeout</c>); con 20 s por llamada la Web se cansaba primero y
+    /// la alumna recibía «No pudimos traer pistas» en lugar de la plantilla, que es lo que REQ-IA-07
+    /// le garantiza (hallazgo F3 de la mesa UX del 2026-11-03, 6 de 6 intentos sin pista). Con 8 s la
+    /// plantilla llega siempre dentro de la ventana de 10 s. Consecuencia declarada: con el modelo en
+    /// CPU compartida la pista sale casi siempre de plantilla, hasta que GEO-05 fije modelo y hardware.
+    /// </para>
+    /// <para>
+    /// Supera el valor de 20 s de la evaluación completa del 2026-11-03 (`ADR-14012`, enmendado). Es
+    /// configuración y se revierte con <c>AI__TimeoutSeconds</c>, siempre por debajo del tope de la Web.
+    /// </para>
     /// </remarks>
-    public double TimeoutSeconds { get; set; } = 20;
+    public double TimeoutSeconds { get; set; } = DefaultTimeoutSeconds;
 
     /// <summary>Tope de observaciones que van al modelo por pedido (REQ-IA-10).</summary>
     public int MaxObservations { get; set; } = 5;
