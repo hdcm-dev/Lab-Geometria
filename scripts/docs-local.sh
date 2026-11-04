@@ -18,8 +18,8 @@
 #   punto de uso  anclas, limite-didactico y pista-sin-enlaces sobre docs-as-code/** (tramo T-3), en avisa
 #   recuento    la instantánea OpenAPI contra la tabla de operaciones de Contratos-REST.md (tramo T-6), en bloquea
 #               desde PR-P6 (los hallazgos ya elevados, en docs-as-code/controles/recuento-elevados.txt).
-#   portal      build del portal en contenedor fijo (scripts/docs-portal.sh) y portal-negativo sobre el sitio (PR-P4),
-#               en avisa. Necesita docker y red (PyPI con hashes): con DOCS_PORTAL=no, o sin docker, queda «omitido».
+#   portal      build del portal en contenedor fijo (scripts/docs-portal.sh), portal-negativo y portal-salida sobre el
+#               sitio, en bloquea desde PR-P7. Necesita docker y red (PyPI con hashes): con DOCS_PORTAL=no, o sin docker, queda «omitido».
 #               En CI lo corre el job `portal` de docs.yml, aparte, y el job `docs` lo omite para seguir sin red.
 #   versiones-fijas  workflows y Dockerfiles sin versiones flotantes ni imágenes sin digest (folio 018), en avisa
 #               oasdiff y Spectral necesitan Docker y corren aparte (docs-as-code/controles/openapi.sh, job `openapi`)
@@ -104,10 +104,11 @@ paso "docs-as-code · pista-sin-enlaces" avisa python3 -I "$CTL/pista_sin_enlace
 # vencimiento a docs-as-code/controles/recuento-elevados.txt y cuenta como aviso mientras siga idéntico.
 paso "docs-as-code · recuento-openapi"  bloquea python3 -I "$CTL/recuento_openapi.py"
 
-# Portal (folio 018 §8, PR-P4): mkdocs build --strict en la imagen fija y portal-negativo sobre el sitio, en avisa.
+# Portal (folio 018 §8, PR-P4): mkdocs build --strict en la imagen fija, portal-negativo y portal-salida sobre el sitio.
+# En bloquea desde PR-P7 (folio 018 §7: pasa a bloquea tras una corrida limpia).
 # El sitio queda fuera del árbol (directorio temporal). DOCS_PORTAL=no lo omite (job `docs` de CI, sin red).
 if [ "${DOCS_PORTAL:-si}" != no ] && command -v docker >/dev/null; then
-  paso "portal · build y negativo"     avisa bash scripts/docs-portal.sh
+  paso "portal · build y negativo"     bloquea bash scripts/docs-portal.sh
 else
   RESUMEN+=("$(printf '  %-34s %s' "portal · build y negativo" "omitido (DOCS_PORTAL=no o sin docker)")")
 fi
@@ -116,9 +117,9 @@ fi
 # limpia; hoy quedan hallazgos fuera de deploy-front-ftp.yml (ci.yml, e2e.yml, deploy/Dockerfile*).
 paso "workflows · versiones-fijas"      avisa python3 -I "$CTL/versiones_fijas.py"
 
-# Manifiesto del portal (folio 018 §1 y §7, PR-P3): lista permitida en docs-as-code/portal/publicar.yml. Arranca en
-# avisa y pasa a bloquea tras una corrida limpia (PR-P7).
-paso "portal · manifiesto"             avisa python3 -I "$CTL/portal_manifiesto.py"
+# Manifiesto del portal (folio 018 §1 y §7, PR-P3): lista permitida en docs-as-code/portal/publicar.yml. Arrancó en
+# avisa y pasa a bloquea en PR-P7, después de corridas limpias desde PR-P4.
+paso "portal · manifiesto"             bloquea python3 -I "$CTL/portal_manifiesto.py"
 
 paso "README.md · esquema"             avisa python3 -I "$DG" esquema README.md
 paso "README.md · enlaces-internos"    avisa python3 -I "$CTL/enlaces_internos.py" README.md

@@ -1,0 +1,6 @@
+# Contexto del build del portal (docker/docs/Dockerfile): sólo lo que lee el build.
+*
+!README.md
+!docs-as-code/
+!.docs-guard/
+!docker/docs/nginx.conf

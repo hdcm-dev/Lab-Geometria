@@ -64,10 +64,10 @@ runner y no baja herramientas.
 | `limite-didactico` | avisa; a bloquea después de dos corridas verdes de su par | — | — |
 | `pista-sin-enlaces` | avisa (fijo) | — | — |
 | `recuento-openapi` | bloquea desde PR-P6 del portal (folio 018 §7); el contrato que lee es de `SDD/Docs/**` y lo que encuentra allí se eleva: un hallazgo elevado y vigente en [`recuento-elevados.txt`](recuento-elevados.txt) cuenta como aviso | — | — |
-| `versiones-fijas` (`.github/workflows/*.yml` y `deploy/Dockerfile*`) | avisa; a bloquea tras una corrida limpia | — | — |
-| `portal-manifiesto` (`docs-as-code/portal/publicar.yml`) | avisa; a bloquea tras una corrida limpia | — | — |
-| `portal-negativo` (sitio del portal, paso `portal` y job `portal` de `docs.yml`) | avisa; a bloquea tras una corrida limpia | — | — |
-| `portal-salida` (sitio del portal, paso `portal` y job `portal` de `docs.yml`) | avisa; a bloquea tras una corrida limpia | — | — |
+| `versiones-fijas` (`.github/workflows/*.yml`, `deploy/Dockerfile*` y `docker/**/Dockerfile*`) | avisa; a bloquea tras una corrida limpia | — | — |
+| `portal-manifiesto` (`docs-as-code/portal/publicar.yml`) | bloquea (desde PR-P7) | — | — |
+| `portal-negativo` (sitio del portal, paso `portal`, job `portal` de `docs.yml` y build de la imagen) | bloquea (desde PR-P7) | — | — |
+| `portal-salida` (sitio del portal, paso `portal`, job `portal` de `docs.yml` y build de la imagen) | bloquea (desde PR-P7) | — | — |
 | `oasdiff` y `spectral` (job `openapi`) | avisa (fijo); su autoprueba bloquea | — | — |
 
 Los tres controles del punto de uso no siguen a `DOCS_MODO_DOCS_AS_CODE`: quedan en avisa hasta que un PR propio
@@ -118,6 +118,7 @@ python3 -I docs-as-code/controles/recuento_openapi.py                         # 
 python3 -I docs-as-code/controles/versiones_fijas.py                          # versiones fijas
 python3 -I docs-as-code/controles/portal_manifiesto.py                        # manifiesto del portal
 bash scripts/docs-portal.sh                                                   # build del portal, agentes, portal-negativo y portal-salida (docker y red)
+bash docker/docs/probar.sh                                                    # imagen del portal (nginx) y prueba con curl, sin push (PR-P7)
 bash docs-as-code/controles/openapi.sh origin/main                            # oasdiff y Spectral (con Docker)
 python3 -I docs-as-code/controles/enlaces_externos.py \
   --excepciones docs-as-code/controles/enlaces-excepciones.txt                # enlaces externos (con red)
