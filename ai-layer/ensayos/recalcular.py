@@ -122,7 +122,10 @@ def verificar(raiz):
             errores.append(f"{ACT010}: no esta la cifra recalculada «{f}»")
     # 4 ---------------------------------------------------------------------------------------
     import glob
-    geo = sorted(glob.glob(os.path.join(ens, "corrida-GEO-0[45]-*")))
+    geo = sorted(glob.glob(os.path.join(ens, "corrida-GEO-[0-9][0-9]-*")))
+    for sobra in sorted({os.path.basename(g)[8:14] for g in geo} - set(ACT_GEO)):
+        errores.append(f"la corrida {sobra} no esta en ACT_GEO: sumala con su actuacion para que se recalculen sus cifras")
+    geo = [g for g in geo if os.path.basename(g)[8:14] in ACT_GEO]
     for falta in set(ACT_GEO) - {os.path.basename(g)[8:14] for g in geo}:
         errores.append(f"falta la corrida {falta} versionada")
     for c4 in geo:
@@ -204,7 +207,7 @@ def autoprueba():
         for parte in ("ai-layer", os.path.dirname(ACT010)):
             shutil.copytree(os.path.join(RAIZ_REPO, parte), os.path.join(t, parte))
         import glob
-        for p in sorted(glob.glob(os.path.join(t, "ai-layer/ensayos/corrida-GEO-0[45]-*/puntuacion-mesa.json"))):
+        for p in sorted(glob.glob(os.path.join(t, "ai-layer/ensayos/corrida-GEO-[0-9][0-9]-*/puntuacion-mesa.json"))):
             texto = open(p, encoding="utf-8").read()
             open(p, "w", encoding="utf-8").write(texto.replace('"marca": "falsa"', '"marca": null', 1))
             resellar(os.path.dirname(p))
