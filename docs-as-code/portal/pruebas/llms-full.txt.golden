@@ -1,0 +1,26 @@
+<!-- fuente: http://localhost:8080/index.md -->
+
+# Repo de juguete
+
+Ver [la pieza](http://localhost:8080/docs-as-code/d.md#uso), [el estado](https://github.com/hdcm-dev/Lab-Geometria/blob/main/SDD/Docs/README.md "fuera del portal") y
+[la carpeta](https://github.com/hdcm-dev/Lab-Geometria/tree/main/docs-as-code/).
+
+```text
+[no se reescribe](docs-as-code/d.md)
+```
+
+<!-- fuente: http://localhost:8080/docs-as-code/d.md -->
+
+---
+doc_id: FIC-GEO-903
+title: Pieza D de la autoprueba
+audience: [desarrollo]
+---
+
+# Pieza D
+
+## Uso
+
+Volver al [inicio](http://localhost:8080/index.md) o ver [el registro][r] y [una sección](#uso).
+
+[r]: https://github.com/hdcm-dev/Lab-Geometria/blob/main/changelog.md

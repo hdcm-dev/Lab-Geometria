@@ -22,6 +22,9 @@
 # y, desde el folio 018 (PR-P4), el negativo del sitio del portal:
 #   portal-negativo   un site/ sembrado con SDD/Expedientes/x.md, una red privada, un patrón privado externo y un
 #                     sitemap con una URL de más
+# y, desde el folio 018 (PR-P5), la capa para agentes y la salida del portal:
+#   agentes           archivos dorados de docs-as-code/portal/pruebas/ y llms-full.txt sobre el tope
+#   portal-salida     página sin .md, mcp/ y agent-card.json, linkset inválido, tope, enlaces y openapi distinto
 # Si un control no da rojo sobre su defecto o no da verde sin él, la compuerta misma está rota y este guion sale con 1.
 # No toca el árbol del repositorio. Requiere bash y python3 (sólo en el host o en el runner; la imagen del SDK no trae
 # python3, AGENTS.md:81).
@@ -412,6 +415,120 @@ grep -q 'urls-distintas' "$TMP/salida.txt" || { echo "  FALLA rojo sitemap: sin 
 rc=0; python3 -I "$CTL/portal_negativo.py" "$TMP/no-existe" > /dev/null 2>&1 || rc=$?
 if [ "$rc" = 2 ]; then echo "  ok    error de uso sitio inexistente: portal-negativo dio 2"
 else echo "  FALLA error de uso sitio inexistente: portal-negativo dio $rc"; fallas=$((fallas + 1)); fi
+
+# agentes y portal-salida (folio 018 §4, §5 y §7, PR-P5). agentes.py sobre un repo de juguete da exactamente los
+# archivos dorados de docs-as-code/portal/pruebas/ (.md crudos, llms.txt, llms-full.txt y .well-known/api-catalog);
+# portal-salida da verde sobre ese sitio y rojo por cada defecto plantado.
+echo "== autoprueba: agentes y portal-salida"
+DORADOS="$RAIZ/docs-as-code/portal/pruebas"
+AGENTES="$RAIZ/docs-as-code/portal/agentes.py"
+juguete() {  # repo de juguete en $TMP/g y su manifiesto
+  rm -rf "$TMP/g"
+  mkdir -p "$TMP/g/docs-as-code/portal"
+  cat > "$TMP/g/README.md" <<'EOF'
+# Repo de juguete
+
+Ver [la pieza](docs-as-code/d.md#uso), [el estado](SDD/Docs/README.md "fuera del portal") y
+[la carpeta](docs-as-code/).
+
+```text
+[no se reescribe](docs-as-code/d.md)
+```
+EOF
+  cat > "$TMP/g/docs-as-code/d.md" <<'EOF'
+---
+doc_id: FIC-GEO-903
+doc_type: ficha
+title: Pieza D de la autoprueba
+description: Pieza que usa la autoprueba del portal.
+audience: [desarrollo]
+delivery: [publico]
+traces: []
+---
+
+# Pieza D
+
+## Uso
+
+Volver al [inicio](../README.md) o ver [el registro][r] y [una sección](#uso).
+
+[r]: ../changelog.md
+EOF
+  printf 'piezas:\n  - ruta: README.md\n    llms: true\n  - ruta: docs-as-code/d.md\n    llms: true\n' \
+    > "$TMP/g/docs-as-code/portal/publicar.yml"
+}
+sitio_agentes() {  # sitio de juguete (lo que deja mkdocs) en $TMP/sg, completado por agentes.py
+  rm -rf "$TMP/sg"
+  mkdir -p "$TMP/sg/docs-as-code/d" "$TMP/sg/search" "$TMP/sg/assets"
+  printf '<a href="docs-as-code/d/">d</a>\n' > "$TMP/sg/index.html"
+  printf '<p>d</p>\n' > "$TMP/sg/docs-as-code/d/index.html"
+  printf '<urlset><url><loc>http://localhost:8080/</loc></url><url><loc>http://localhost:8080/docs-as-code/d/</loc></url></urlset>\n' \
+    > "$TMP/sg/sitemap.xml"
+  printf '{"docs":[{"location":""},{"location":"docs-as-code/d/"}]}\n' > "$TMP/sg/search/search_index.json"
+  python3 -I "$AGENTES" --raiz "$TMP/g" --base http://localhost:8080/ "$TMP/sg" > "$TMP/salida.txt" 2>&1
+}
+juguete
+if sitio_agentes; then
+  echo "  ok    agentes sobre el repo de juguete: dio 0"
+else
+  echo "  FALLA agentes sobre el repo de juguete"; sed 's/^/        /' "$TMP/salida.txt"; fallas=$((fallas + 1))
+fi
+for par in 'index.md:index.md.golden' 'docs-as-code/d.md:d.md.golden' 'llms.txt:llms.txt.golden' \
+           'llms-full.txt:llms-full.txt.golden' '.well-known/api-catalog:api-catalog.golden'; do
+  if cmp -s "$TMP/sg/${par%%:*}" "$DORADOS/${par#*:}"; then
+    echo "  ok    dorado ${par%%:*}"
+  else
+    echo "  FALLA dorado ${par%%:*} distinto de pruebas/${par#*:}"
+    diff "$DORADOS/${par#*:}" "$TMP/sg/${par%%:*}" | sed 's/^/        /' || true
+    fallas=$((fallas + 1))
+  fi
+done
+salida_ctl() {  # salida_ctl RC_ESPERADO DESCRIPCION [REGLA]
+  local rc=0
+  python3 -I "$CTL/portal_salida.py" --raiz "$TMP/g" "$TMP/sg" > "$TMP/salida.txt" 2>&1 || rc=$?
+  if [ "$rc" = "$1" ] && { [ -z "${3:-}" ] || grep -q "$3" "$TMP/salida.txt"; }; then
+    echo "  ok    $2: portal-salida dio $rc"
+  else
+    echo "  FALLA $2: portal-salida dio $rc, se esperaba $1 ${3:-}"
+    sed 's/^/        /' "$TMP/salida.txt"
+    fallas=$((fallas + 1))
+  fi
+}
+salida_ctl 0 'verde sitio completado por agentes'
+rc=0; python3 -I "$CTL/portal_negativo.py" --manifiesto "$TMP/g/docs-as-code/portal/publicar.yml" "$TMP/sg" \
+  > "$TMP/salida.txt" 2>&1 || rc=$?
+if [ "$rc" = 0 ]; then echo "  ok    verde portal-negativo sobre el sitio con la capa para agentes"
+else echo "  FALLA portal-negativo sobre el sitio con la capa para agentes dio $rc"; sed 's/^/        /' "$TMP/salida.txt"; fallas=$((fallas + 1)); fi
+rm "$TMP/sg/docs-as-code/d.md"
+salida_ctl 1 'rojo página sin .md hermano' sin-md-hermano
+sitio_agentes; mkdir -p "$TMP/sg/.well-known/mcp"; printf '{}\n' > "$TMP/sg/.well-known/mcp/server-card.json"
+salida_ctl 1 'rojo .well-known/mcp/server-card.json' anuncio-falso
+sitio_agentes; printf '{}\n' > "$TMP/sg/.well-known/agent-card.json"
+salida_ctl 1 'rojo .well-known/agent-card.json' anuncio-falso
+sitio_agentes; sed -i 's#"href": "http://localhost:8080/api/openapi-v1.json"#"href": "https://api.example.org/openapi.json"#' \
+  "$TMP/sg/.well-known/api-catalog"
+salida_ctl 1 'rojo linkset que apunta fuera del portal' linkset-invalido
+sitio_agentes; printf '{"linkset": {}}\n' > "$TMP/sg/.well-known/api-catalog"
+salida_ctl 1 'rojo linkset sin lista de contextos' linkset-invalido
+sitio_agentes; truncate -s 409601 "$TMP/sg/llms-full.txt"
+salida_ctl 1 'rojo llms-full.txt sobre el tope' llms-full-tope
+sitio_agentes; printf 'ver [x](otra.md)\n' >> "$TMP/sg/docs-as-code/d.md"
+salida_ctl 1 'rojo enlace relativo sin reescribir' enlace-no-publicado
+sitio_agentes; printf 'ver [x](http://localhost:8080/SDD/Docs/README.md)\n' >> "$TMP/sg/docs-as-code/d.md"
+salida_ctl 1 'rojo enlace a una pieza no publicada' enlace-no-publicado
+sitio_agentes; mkdir -p "$TMP/sg/api" "$TMP/g/docs-as-code/api"
+printf '{"openapi":"3.1.0"}\n' > "$TMP/g/docs-as-code/api/openapi-v1.json"
+cp "$TMP/g/docs-as-code/api/openapi-v1.json" "$TMP/sg/api/openapi-v1.json"
+salida_ctl 0 'verde openapi servido idéntico a la instantánea'
+printf ' ' >> "$TMP/sg/api/openapi-v1.json"
+salida_ctl 1 'rojo openapi servido distinto de la instantánea' openapi-distinto
+rc=0; python3 -I "$CTL/portal_salida.py" "$TMP/no-existe" > /dev/null 2>&1 || rc=$?
+if [ "$rc" = 2 ]; then echo "  ok    error de uso sitio inexistente: portal-salida dio 2"
+else echo "  FALLA error de uso sitio inexistente: portal-salida dio $rc"; fallas=$((fallas + 1)); fi
+juguete; head -c 420000 /dev/zero | tr '\0' 'x' >> "$TMP/g/docs-as-code/d.md"
+rc=0; sitio_agentes || rc=$?
+if [ "$rc" = 1 ] && [ ! -e "$TMP/sg/llms-full.txt" ]; then echo "  ok    rojo agentes con llms-full.txt sobre el tope: dio 1 y no lo escribió"
+else echo "  FALLA agentes con llms-full.txt sobre el tope dio $rc"; fallas=$((fallas + 1)); fi
 
 if [ "$fallas" -gt 0 ]; then
   echo "== autoprueba: ROJO ($fallas fallas): la compuerta está rota"

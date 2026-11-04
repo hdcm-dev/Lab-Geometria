@@ -3,7 +3,9 @@
 #
 # Construye el sitio estático con MkDocs Material DENTRO de una imagen de Python fijada por digest, con las
 # dependencias de docs-as-code/portal/requirements-docs.txt instaladas con --require-hashes. No publica ni despliega:
-# deja el sitio en un directorio fuera del árbol y corre sobre él el control portal_negativo.py.
+# deja el sitio en un directorio fuera del árbol, le suma la capa para agentes (docs-as-code/portal/agentes.py: .md
+# crudos, llms.txt, llms-full.txt y .well-known/api-catalog, PR-P5) y corre sobre él portal_negativo.py y
+# portal_salida.py.
 #
 # Uso:  scripts/docs-portal.sh                       # sitio en un directorio temporal (se informa al final)
 #       PORTAL_SALIDA=DIR scripts/docs-portal.sh      # sitio en DIR/site (DIR fuera del árbol del repo)
@@ -14,7 +16,7 @@
 # --rm, con el usuario del host, el repo montado en sólo lectura y su /tmp en un directorio de trabajo del host
 # (que sigue a TMPDIR). La fecha del build sale del último commit (SOURCE_DATE_EPOCH): dos corridas del mismo commit
 # dan el mismo sitio.
-# Código de salida: 0 sitio construido y portal-negativo verde; 1 build o control en rojo; 2 error de uso.
+# Código de salida: 0 sitio construido y los dos controles en verde; 1 build o control en rojo; 2 error de uso.
 set -euo pipefail
 
 IMAGEN='python:3.12.16-slim@sha256:b18b261e1b4974b4f321451ad5251ded85abb22c2b8b262da527dda1d031ab30'
@@ -46,6 +48,7 @@ construir() {  # construir DESTINO — sitio en DESTINO (directorio del host)
         -r /repo/docs-as-code/portal/requirements-docs.txt
       python -I /repo/docs-as-code/portal/preparar.py /tmp/contenido
       /tmp/venv/bin/mkdocs build --strict --clean -f /repo/docs-as-code/portal/mkdocs.yml -d /salida
+      python -I /repo/docs-as-code/portal/agentes.py --raiz /repo /salida
     '
 }
 
@@ -63,4 +66,8 @@ if [ "${PORTAL_REPRODUCIBLE:-no}" = si ]; then
   fi
 fi
 
-python3 -I "$RAIZ/docs-as-code/controles/portal_negativo.py" "$SALIDA/site"
+# Los dos controles del portal corren siempre; el código de salida es el peor de los dos.
+rc=0
+python3 -I "$RAIZ/docs-as-code/controles/portal_negativo.py" "$SALIDA/site" || rc=$?
+python3 -I "$RAIZ/docs-as-code/controles/portal_salida.py" "$SALIDA/site" || { r=$?; [ "$r" -gt "$rc" ] && rc=$r; }
+exit "$rc"
