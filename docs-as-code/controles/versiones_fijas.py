@@ -3,7 +3,7 @@
 
     python3 -I docs-as-code/controles/versiones_fijas.py [--raiz DIR] [RUTA...]
 
-Sin RUTA revisa `.github/workflows/*.yml` y `deploy/Dockerfile*` de la raíz. Hallazgos (error):
+Sin RUTA revisa `.github/workflows/*.yml`, `deploy/Dockerfile*` y `docker/**/Dockerfile*` (PR-P7) de la raíz. Hallazgos (error):
 
 - `accion-sin-parche`: `uses: dueño/accion@vN` o `@vN.M`; se exige `@vN.M.P` o un SHA de 40 caracteres.
 - `version-flotante`: `*-version: '10.0.x'`, `'22'` o `'lts/*'`; se exige `N.M.P` (o más componentes).
@@ -93,7 +93,8 @@ def main(argv):
         else:
             rutas.append(Path(a))
     if not rutas:
-        rutas = sorted((raiz / '.github' / 'workflows').glob('*.yml')) + sorted((raiz / 'deploy').glob('Dockerfile*'))
+        rutas = (sorted((raiz / '.github' / 'workflows').glob('*.yml')) + sorted((raiz / 'deploy').glob('Dockerfile*'))
+                 + sorted(p for p in (raiz / 'docker').glob('**/Dockerfile*') if not p.name.endswith('.dockerignore')))
     if not rutas:
         print('versiones-fijas: no hay archivos que revisar', file=sys.stderr)
         return 2

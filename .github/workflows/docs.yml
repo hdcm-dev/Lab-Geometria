@@ -50,8 +50,8 @@ jobs:
   # `portal_negativo.py` y `portal_salida.py` sobre él y lo sube como ARTEFACTO.
   #   - NO publica ni despliega: no hay secretos, ni permiso de escritura, ni dominio (la exposición la decide el PO).
   #   - Mismo endurecimiento que la compuerta: `contents: read`, sin `paths`, acciones con versión fija.
-  #   - En AVISA (folio 018 §7): un hallazgo de portal-negativo o portal-salida es una advertencia y el job queda verde. Rojo si el
-  #     build `--strict` falla o si dos corridas del mismo commit dan sitios distintos.
+  #   - En BLOQUEA desde PR-P7 (folio 018 §7): rojo si el build `--strict` falla, si dos corridas del mismo commit dan
+  #     sitios distintos o si portal-negativo o portal-salida encuentran algo.
   portal:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -61,15 +61,11 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
 
-      - name: Build del portal en contenedor fijo, dos veces, portal-negativo y portal-salida (avisa)
+      - name: Build del portal en contenedor fijo, dos veces, portal-negativo y portal-salida (bloquea)
         env:
           PORTAL_SALIDA: ${{ runner.temp }}/portal
           PORTAL_REPRODUCIBLE: si
-        run: |
-          rc=0
-          salida="$(bash scripts/docs-portal.sh 2>&1)" || rc=$?
-          printf '%s\n' "$salida" | sed 's/^::error /::warning /'
-          if [ "$rc" != 0 ] && ! printf '%s\n' "$salida" | grep -qE '^== portal-(negativo|salida): ROJO'; then exit "$rc"; fi
+        run: bash scripts/docs-portal.sh
 
       - name: Subir el sitio como artefacto (no se despliega)
         uses: actions/upload-artifact@v4.6.2
@@ -78,6 +74,24 @@ jobs:
           path: ${{ runner.temp }}/portal/site
           if-no-files-found: error
           retention-days: 7
+
+  # Imagen del portal (expediente 0003, folio 018 §8, PR-P7). Construye `docker/docs/Dockerfile` (etapa de build con la
+  # misma imagen de Python que el job `portal`, servido con nginx-unprivileged fijado por digest) y la prueba con curl
+  # (`docker/docs/probar.sh`): content-types, 404 de rutas internas, redirección de directorio, cabeceras, usuario sin
+  # privilegios y sistema de archivos de sólo lectura.
+  #   - SIN PUSH: la imagen queda en el runner y se descarta; no hay login a ningún registro, ni secretos, ni dominio.
+  #   - Mismo endurecimiento: `contents: read`, sin `paths`, acciones con versión fija. Bloquea.
+  portal-imagen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Construir la imagen del portal y probarla con curl (sin push)
+        run: bash docker/docs/probar.sh
 
   # Controles OpenAPI (expediente 0003, tramo T-6): oasdiff `breaking` (Tufin) y Spectral (tres reglas propias) sobre
   # la instantánea `docs-as-code/api/openapi-v1.json`. Job aparte de la compuerta porque necesita Docker y baja dos
