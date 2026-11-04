@@ -5,8 +5,8 @@
 #
 #   python3 -I ai-layer/ensayos/recalcular.py               verifica el repo (rc 0 = todo coincide)
 #   python3 -I ai-layer/ensayos/recalcular.py --autoprueba  par rojo/verde: verde sobre el repo y rojo
-#                                                           sobre seis copias adulteradas (espec, act010, act011,
-#                                                           resumen 11-01, salidas.jsonl, puntuacion-mesa.json)
+#                                                           sobre ocho copias adulteradas (espec, act010, act011, act012,
+#                                                           resumen 11-01, salidas.jsonl, puntuacion-mesa.json de GEO-04 y GEO-05)
 #
 # Que verifica:
 #   1. corrida-2026-11-01: SHA256SUMS y que resumir.py reproduce resumen.txt byte a byte.
@@ -15,8 +15,8 @@
 #      de la especificacion 01, con la precision con que se cita (0,1 s, o 1 s si se cita entero).
 #   3. Las frases con cifra de la actuacion 010 (H-1 a H-3 y el intervalo de 10/10), regeneradas
 #      desde los datos: si el dato o el texto cambian, la frase deja de estar.
-#   4. corrida-GEO-04-*: SHA256SUMS, resumen.txt regenerado desde registro-A-v2.jsonl y puntuacion-mesa.json,
-#      y la media y el conteo de pistas falsas/ambiguas citados en Revision-Mesa.md y en la actuacion 011.
+#   4. corrida-GEO-04-* y corrida-GEO-05-*: SHA256SUMS, resumen.txt regenerado desde registro-A-v2.jsonl y puntuacion-mesa.json,
+#      y la media y el conteo de pistas falsas/ambiguas citados en Revision-Mesa.md y en la actuacion 011 (GEO-04) o 012 (GEO-05).
 # Metrica: version declarada en METRICA; cambiar como se calcula obliga a cambiarla.
 import hashlib, json, math, os, re, shutil, statistics, subprocess, sys, tempfile
 
@@ -25,6 +25,8 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ_REPO = os.path.abspath(os.path.join(AQUI, "..", ".."))
 ESPEC = "ai-layer/01-Especificacion-V1-Pistas.md"
 ACT011 = "SDD/Expedientes/0002-Capa-De-IA-Pistas-Y-Borrador/actuaciones/011-informe-corrida-GEO-04-prompt-v2.md"
+ACT012 = "SDD/Expedientes/0002-Capa-De-IA-Pistas-Y-Borrador/actuaciones/012-informe-corrida-GEO-05-35b-prompt-v2.md"
+ACT_GEO = {"GEO-04": ACT011, "GEO-05": ACT012}
 ACT010 = "SDD/Expedientes/0002-Capa-De-IA-Pistas-Y-Borrador/actuaciones/010-resolucion-evaluacion-completa-y-modelo-de-produccion.md"
 RAZON = {"no": "false", "sí": "true", "—": "none"}
 
@@ -120,9 +122,9 @@ def verificar(raiz):
             errores.append(f"{ACT010}: no esta la cifra recalculada «{f}»")
     # 4 ---------------------------------------------------------------------------------------
     import glob
-    geo = sorted(glob.glob(os.path.join(ens, "corrida-GEO-04-*")))
-    if not geo:
-        errores.append("falta la corrida GEO-04 versionada")
+    geo = sorted(glob.glob(os.path.join(ens, "corrida-GEO-0[45]-*")))
+    for falta in set(ACT_GEO) - {os.path.basename(g)[8:14] for g in geo}:
+        errores.append(f"falta la corrida {falta} versionada")
     for c4 in geo:
         nom = os.path.basename(c4)
         sums_ok(c4, errores)
@@ -135,7 +137,8 @@ def verificar(raiz):
         media = sum(v["juez"] for v in punt.values()) / len(punt)
         fal = sum(v["marca"] == "falsa" for v in punt.values())
         amb = sum(v["marca"] == "ambigua" for v in punt.values())
-        esperado = (f"GEO-04 prompt v2 qwen3.5:4b think=false variante A\ncasos {len(filas)}\n"
+        geo_id = nom[8:14]
+        esperado = (f"{geo_id} prompt v2 {filas[0]['modelo']} think=false variante A\ncasos {len(filas)}\n"
                     f"aceptadas {sum(f['motivo_rechazo'] is None for f in filas)}\n"
                     f"fuga_cruda {sum(f['fuga_cruda'] for f in filas)}\nfuga_filtrada {sum(f['fuga_filtrada'] for f in filas)}\n"
                     f"errores {sum(f['error'] is not None for f in filas)}\nfrio {lat[0]:.1f}\n"
@@ -149,11 +152,11 @@ def verificar(raiz):
         for f in (f"| **Media** | | **{mf}** |", f"**{fal} falsas · {amb} ambiguas**"):
             if f not in rev:
                 errores.append(f"{nom}/Revision-Mesa.md: no esta la cifra recalculada «{f}»")
-        a11 = os.path.join(raiz, ACT011)
+        a11 = os.path.join(raiz, ACT_GEO[geo_id])
         plano11 = re.sub(r"\s+", " ", open(a11, encoding="utf-8").read()) if os.path.exists(a11) else ""
         for f in (f"media de la mesa {mf}", f"{fal} falsas y {amb} ambiguas", f"{sum(f['motivo_rechazo'] is None for f in filas)}/{len(filas)} aceptadas"):
             if f not in plano11:
-                errores.append(f"{ACT011}: no esta la cifra recalculada «{f}»")
+                errores.append(f"{ACT_GEO[geo_id]}: no esta la cifra recalculada «{f}»")
     return errores
 
 def resellar(carpeta):  # rehace SHA256SUMS para que la adulteracion no la delate el hash sino el recalculo
@@ -170,6 +173,7 @@ def autoprueba():
         (ESPEC, "| **10/10** | **13,3 s** |", "| **10/10** | **12,3 s** |"),
         (ACT010, "2/10", "3/10"),
         (ACT011, "media de la mesa 3,2", "media de la mesa 3,4"),
+        (ACT012, "3 falsas y 4 ambiguas", "2 falsas y 4 ambiguas"),
         ("ai-layer/ensayos/corrida-2026-11-01/resumen.txt", "mediana 26.8", "mediana 26.9"),
     ]
     rc = 0
@@ -200,14 +204,14 @@ def autoprueba():
         for parte in ("ai-layer", os.path.dirname(ACT010)):
             shutil.copytree(os.path.join(RAIZ_REPO, parte), os.path.join(t, parte))
         import glob
-        p = os.path.join(sorted(glob.glob(os.path.join(t, "ai-layer/ensayos/corrida-GEO-04-*")))[0], "puntuacion-mesa.json")
-        texto = open(p, encoding="utf-8").read()
-        open(p, "w", encoding="utf-8").write(texto.replace('"marca": "falsa"', '"marca": null', 1))
-        resellar(os.path.dirname(p))
-        e = [x for x in verificar(t) if "SHA-256" not in x]
-        print(f"  rojo esperado · puntuacion-mesa.json: {'ROJO' if e else 'VERDE (falla la autoprueba)'}")
-        rc |= 0 if e else 1
-    print("autoprueba:", "PASA (verde en el repo, rojo en las seis adulteraciones)" if rc == 0 else "FALLA")
+        for p in sorted(glob.glob(os.path.join(t, "ai-layer/ensayos/corrida-GEO-0[45]-*/puntuacion-mesa.json"))):
+            texto = open(p, encoding="utf-8").read()
+            open(p, "w", encoding="utf-8").write(texto.replace('"marca": "falsa"', '"marca": null', 1))
+            resellar(os.path.dirname(p))
+            e = [x for x in verificar(t) if "SHA-256" not in x and os.path.basename(os.path.dirname(p)) in x]
+            print(f"  rojo esperado · {os.path.basename(os.path.dirname(p))}/puntuacion-mesa.json: {'ROJO' if e else 'VERDE (falla la autoprueba)'}")
+            rc |= 0 if e else 1
+    print("autoprueba:", "PASA (verde en el repo, rojo en las ocho adulteraciones)" if rc == 0 else "FALLA")
     return rc
 
 if __name__ == "__main__":

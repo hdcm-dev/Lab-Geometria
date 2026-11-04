@@ -40,6 +40,7 @@ que el expediente folia por enlace sin duplicarlos.
 | 009 | 2026-11-03 | resolucion | mesa de Geometría (agentes, por delegación del PO) | Fusión del PR #237; resuelve A (F-27), B (revisor 2), D (no), E (modelo y servidor), F (plantillas) y el umbral de REQ-IA-26; tiempos del despliegue; revisión de utilidad de la mesa; lo que queda abierto | [009](actuaciones/009-resolucion-fusion-y-cierre-del-lote.md) |
 | 010 | 2026-11-03 | resolucion | mesa de Geometría (agentes, por delegación del PO) | Evaluación completa (diez configuraciones); corrige el punto E y los tiempos de la 009: `qwen3.5:4b` sin razonamiento, 20 s, precarga y permanencia (`ADR-14012`); flag de producción apagado hasta la puntuación docente; plantilla Círculo · Area; prompt v2 candidato; F-27 al bloque Could | [010](actuaciones/010-resolucion-evaluacion-completa-y-modelo-de-produccion.md) |
 | 011 | 2026-11-03 | informe | mesa de evaluación de Geometría (agentes) | GEO-04: prompt v2 con `qwen3.5:4b`, 30 casos; filtro 30/30, media de la mesa 3,2 (no docente); 19 pistas falsas y 7 ambiguas: el 4b con v2 queda descartado y la condición de encendido no se cumple | [011](actuaciones/011-informe-corrida-GEO-04-prompt-v2.md) |
+| 012 | 2026-11-03 | informe | mesa de evaluación de Geometría (agentes) | GEO-05: prompt v2 con `qwen3.5:35b-a3b`, 30 casos; filtro 30/30, media de la mesa 3,5 (no docente); 3 pistas falsas y 4 ambiguas, p95 caliente 20,6 s: descartado; recomendación: servir sólo la plantilla y cerrar la V1 así | [012](actuaciones/012-informe-corrida-GEO-05-35b-prompt-v2.md) |
 
 ## 2. Índice de evidencia
 
@@ -74,7 +75,7 @@ corrige la 009 con la evaluación completa: modelo `qwen3.5:4b` sin razonamiento
 permanencia del modelo en cada pedido (`ADR-14012`). La revisión de utilidad muestra que, con el prompt v1,
 ningún modelo supera a la plantilla.
 **Qué sigue, en orden:** (1) aplicar el código propuesto de la 010 y las filas de la norma, con la CI en
-verde; (2) corrida rotulada de 30 casos con `qwen3.5:4b` y 20 s, con el prompt v2 (GEO-04, actuación 011: **hecha**; 19 pistas falsas y 7 ambiguas, el 4b con v2 queda descartado y la condición de encendido no se cumple);
+verde; (2) corrida rotulada de 30 casos con `qwen3.5:4b` y 20 s, con el prompt v2 (GEO-04, actuación 011: **hecha**; 19 pistas falsas y 7 ambiguas, el 4b con v2 queda descartado y la condición de encendido no se cumple; GEO-05, actuación 012: el 35b con v2 tampoco la cumple, 3 falsas y 4 ambiguas, y la mesa recomienda servir sólo la plantilla y cerrar la V1 así);
 (3) el docente puntúa la corrida v2 y se mide la concordancia del juez (REQ-IA-13 y 14); (4) entorno de
 prueba con el flag encendido para las puertas c, f, g e i y las E2E (E-012); (5) recién entonces,
 `AI__HintsEnabled=true` en producción. V2 sigue diferida hasta

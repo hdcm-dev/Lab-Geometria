@@ -1,0 +1,14 @@
+GEO-05 prompt v2 qwen3.5:35b-a3b think=false variante A
+casos 30
+aceptadas 30
+fuga_cruda 0
+fuga_filtrada 0
+errores 0
+frio 35.7
+p50 16.3
+p95 20.6
+max 35.7
+sobre_20s 3
+juez_media 3.47
+falsas 3
+ambiguas 4
