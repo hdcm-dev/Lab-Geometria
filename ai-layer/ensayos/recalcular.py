@@ -12,6 +12,8 @@
 #   2. corrida-2026-11-03-completa: SHA256SUMS y, por candidato, aprobados k/n, frio, p50 y p95
 #      (en caliente, casos 2 en adelante; p95 por statistics.quantiles inclusivo) contra la tabla
 #      de la especificacion 01, con la precision con que se cita (0,1 s, o 1 s si se cita entero).
+#   4. corrida-GEO-04-*: SHA256SUMS, resumen.txt regenerado desde registro-A-v2.jsonl y puntuacion-mesa.json,
+#      y la media y el conteo de pistas falsas/ambiguas citados en Revision-Mesa.md y en la actuacion 011.
 #   3. Las frases con cifra de la actuacion 010 (H-1 a H-3 y el intervalo de 10/10), regeneradas
 #      desde los datos: si el dato o el texto cambian, la frase deja de estar.
 # Metrica: version declarada en METRICA; cambiar como se calcula obliga a cambiarla.
@@ -21,6 +23,7 @@ METRICA = "pistas-filtro-v1 (veredicto ok del filtro de 4.2; latencias: frio=cas
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ_REPO = os.path.abspath(os.path.join(AQUI, "..", ".."))
 ESPEC = "ai-layer/01-Especificacion-V1-Pistas.md"
+ACT011 = "SDD/Expedientes/0002-Capa-De-IA-Pistas-Y-Borrador/actuaciones/011-informe-corrida-GEO-04-prompt-v2.md"
 ACT010 = "SDD/Expedientes/0002-Capa-De-IA-Pistas-Y-Borrador/actuaciones/010-resolucion-evaluacion-completa-y-modelo-de-produccion.md"
 RAZON = {"no": "false", "sí": "true", "—": "none"}
 
@@ -114,6 +117,42 @@ def verificar(raiz):
     for f in frases:
         if f not in plano:
             errores.append(f"{ACT010}: no esta la cifra recalculada «{f}»")
+    # 4 ---------------------------------------------------------------------------------------
+    import glob
+    geo = sorted(glob.glob(os.path.join(ens, "corrida-GEO-04-*")))
+    if not geo:
+        errores.append("falta la corrida GEO-04 versionada")
+    for c4 in geo:
+        nom = os.path.basename(c4)
+        sums_ok(c4, errores)
+        filas = [json.loads(l) for l in open(os.path.join(c4, "registro-A-v2.jsonl"), encoding="utf-8") if l.strip()]
+        punt = json.load(open(os.path.join(c4, "puntuacion-mesa.json"), encoding="utf-8"))
+        if [f["caso"] for f in filas] != list(punt):
+            errores.append(f"{nom}: la puntuacion no cubre los mismos casos que el registro")
+            continue
+        lat = [f["segundos"] for f in filas]
+        media = sum(v["juez"] for v in punt.values()) / len(punt)
+        fal = sum(v["marca"] == "falsa" for v in punt.values())
+        amb = sum(v["marca"] == "ambigua" for v in punt.values())
+        esperado = (f"GEO-04 prompt v2 qwen3.5:4b think=false variante A\ncasos {len(filas)}\n"
+                    f"aceptadas {sum(f['motivo_rechazo'] is None for f in filas)}\n"
+                    f"fuga_cruda {sum(f['fuga_cruda'] for f in filas)}\nfuga_filtrada {sum(f['fuga_filtrada'] for f in filas)}\n"
+                    f"errores {sum(f['error'] is not None for f in filas)}\nfrio {lat[0]:.1f}\n"
+                    f"p50 {statistics.median(lat[1:]):.1f}\n"
+                    f"p95 {statistics.quantiles(lat[1:], n=20, method='inclusive')[-1]:.1f}\nmax {max(lat):.1f}\n"
+                    f"sobre_20s {sum(l > 20 for l in lat)}\njuez_media {media:.2f}\nfalsas {fal}\nambiguas {amb}\n")
+        if open(os.path.join(c4, "resumen.txt"), encoding="utf-8").read() != esperado:
+            errores.append(f"{nom}: resumen.txt no se reproduce desde el registro y la puntuacion")
+        mf = f"{media:.1f}".replace(".", ",")
+        rev = re.sub(r"\s+", " ", open(os.path.join(c4, "Revision-Mesa.md"), encoding="utf-8").read())
+        for f in (f"| **Media** | | **{mf}** |", f"**{fal} falsas · {amb} ambiguas**"):
+            if f not in rev:
+                errores.append(f"{nom}/Revision-Mesa.md: no esta la cifra recalculada «{f}»")
+        a11 = os.path.join(raiz, ACT011)
+        plano11 = re.sub(r"\s+", " ", open(a11, encoding="utf-8").read()) if os.path.exists(a11) else ""
+        for f in (f"media de la mesa {mf}", f"{fal} falsas y {amb} ambiguas", f"{sum(f['motivo_rechazo'] is None for f in filas)}/{len(filas)} aceptadas"):
+            if f not in plano11:
+                errores.append(f"{ACT011}: no esta la cifra recalculada «{f}»")
     return errores
 
 def autoprueba():
@@ -122,6 +161,7 @@ def autoprueba():
     adulteraciones = [
         (ESPEC, "| **10/10** | **13,3 s** |", "| **10/10** | **12,3 s** |"),
         (ACT010, "2/10", "3/10"),
+        (ACT011, "media de la mesa 3,2", "media de la mesa 3,4"),
         ("ai-layer/ensayos/corrida-2026-11-01/resumen.txt", "mediana 26.8", "mediana 26.9"),
     ]
     rc = 0
@@ -146,7 +186,18 @@ def autoprueba():
         e = verificar(t)
         print(f"  rojo esperado · salidas.jsonl: {'ROJO' if e else 'VERDE (falla la autoprueba)'}")
         rc |= 0 if e else 1
-    print("autoprueba:", "PASA (verde en el repo, rojo en las cuatro adulteraciones)" if rc == 0 else "FALLA")
+    # una puntuacion de la mesa adulterada en GEO-04: SHA256SUMS y resumen la delatan
+    with tempfile.TemporaryDirectory() as t:
+        for parte in ("ai-layer", os.path.dirname(ACT010)):
+            shutil.copytree(os.path.join(RAIZ_REPO, parte), os.path.join(t, parte))
+        import glob
+        p = os.path.join(sorted(glob.glob(os.path.join(t, "ai-layer/ensayos/corrida-GEO-04-*")))[0], "puntuacion-mesa.json")
+        texto = open(p, encoding="utf-8").read()
+        open(p, "w", encoding="utf-8").write(texto.replace('"marca": "falsa"', '"marca": null', 1))
+        e = verificar(t)
+        print(f"  rojo esperado · puntuacion-mesa.json: {'ROJO' if e else 'VERDE (falla la autoprueba)'}")
+        rc |= 0 if e else 1
+    print("autoprueba:", "PASA (verde en el repo, rojo en las seis adulteraciones)" if rc == 0 else "FALLA")
     return rc
 
 if __name__ == "__main__":
