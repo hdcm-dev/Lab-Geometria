@@ -3,14 +3,16 @@
 #
 #   python3 -I pistas.py --banco <salida.json>              genera el banco determinista de 30 casos
 #   python3 -I pistas.py --autoprueba                        prueba el filtro sin modelo (rc 0 = pasa)
-#   OLLAMA_URL=<url> python3 -I pistas.py --correr <banco.json> <variante A|B> <registro.jsonl> [--prompt v1|v2]
+#   [PISTAS_MODELO=qwen3.5:35b-a3b] OLLAMA_URL=<url> python3 -I pistas.py --correr <banco.json> <variante A|B> <registro.jsonl> [--prompt v1|v2]
 #
 # No es codigo del producto: es la implementacion de referencia del filtro (REQ-IA-05, REQ-IA-06) y el
 # arnes de la prueba de concepto. El criterio de la corrida esta en Criterio-R-LLM.md, escrito antes.
 import json, math, os, re, sys, time, urllib.request
 
-MODELO = "qwen3.5:4b"
-DIGEST = "d8b0f5e9760c"
+# Modelo por omision el de produccion (actuacion 010); PISTAS_MODELO elige otro candidato medido (GEO-05).
+DIGESTS = {"qwen3.5:4b": "d8b0f5e9760c", "qwen3.5:35b-a3b": "72aac7c28be8"}
+MODELO = os.environ.get("PISTAS_MODELO", "qwen3.5:4b")
+DIGEST = DIGESTS.get(MODELO, "")
 
 # Prompt propio de la capacidad. Debe coincidir con 01-Especificacion-V1-Pistas.md, seccion 5.2.
 PROMPT_SISTEMA = (
