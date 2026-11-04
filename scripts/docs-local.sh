@@ -17,6 +17,7 @@
 #                 SDD/Docs/**       avisa, sin _legacy/ (generado; lo desalineado se eleva, AGENTS.md:61)
 #   punto de uso  anclas, limite-didactico y pista-sin-enlaces sobre docs-as-code/** (tramo T-3), en avisa
 #   recuento    la instantánea OpenAPI contra la tabla de operaciones de Contratos-REST.md (tramo T-6), en avisa.
+#   versiones-fijas  workflows y Dockerfiles sin versiones flotantes ni imágenes sin digest (folio 018), en avisa
 #               oasdiff y Spectral necesitan Docker y corren aparte (docs-as-code/controles/openapi.sh, job `openapi`)
 # En «avisa» un control con hallazgos queda en el resumen y no cambia el código de salida.
 # Código de salida: 0 verde; 1 algún paso que bloquea dio rojo; 2 error de uso de algún control.
@@ -96,6 +97,10 @@ paso "docs-as-code · pista-sin-enlaces" avisa python3 -I "$CTL/pista_sin_enlace
 
 # Recuento OpenAPI (tramo T-6): en avisa fijo; lo que encuentra en el contrato del SDD se eleva, no se corrige.
 paso "docs-as-code · recuento-openapi"  avisa python3 -I "$CTL/recuento_openapi.py"
+
+# Versiones fijas (folio 018 §7, PR-P2): workflows y Dockerfiles. Arranca en avisa y pasa a bloquea tras una corrida
+# limpia; hoy quedan hallazgos fuera de deploy-front-ftp.yml (ci.yml, e2e.yml, deploy/Dockerfile*).
+paso "workflows · versiones-fijas"      avisa python3 -I "$CTL/versiones_fijas.py"
 
 paso "README.md · esquema"             avisa python3 -I "$DG" esquema README.md
 paso "README.md · enlaces-internos"    avisa python3 -I "$CTL/enlaces_internos.py" README.md
