@@ -36,11 +36,12 @@ probar» en el sentido de la ficha hasta que el check `docs` dé verde en un PR 
 | [`openapi.sh`](openapi.sh) | Controles OpenAPI con Docker (tramo T-6): oasdiff `breaking` de Tufin y Spectral, con su propio par rojo/verde. Lo corre el job `openapi` de `docs.yml` |
 | [`spectral.yaml`](spectral.yaml) | Las tres reglas de Spectral, propias y sin `extends`: `operacion-con-id`, `operacion-con-resumen` y `operacion-con-error-documentado` |
 | [`enlaces_externos.py`](enlaces_externos.py) | Extensión `enlaces-externos` (tramo T-7, revisión externa R-G2): enlaces `http`/`https` de la documentación, con red. La corre sólo el carril programado `.github/workflows/docs-programado.yml`, no la compuerta |
+| [`recuento-elevados.txt`](recuento-elevados.txt) | Hallazgos de `recuento-openapi` ya elevados: `regla \| mensaje exacto \| folio \| vence AAAA-MM-DD`. Vigente e idéntico, el error cuenta como aviso; vencido o con otro mensaje, vuelve a rojo |
 | [`enlaces-excepciones.txt`](enlaces-excepciones.txt) | Excepciones de `enlaces-externos`: `URL \| motivo \| vence AAAA-MM-DD`. Vencida, no se aplica y se avisa |
 | [`versiones_fijas.py`](versiones_fijas.py) | Extensión `versiones-fijas` (folio 018, PR-P2): workflows y `deploy/Dockerfile*` sin `uses: x@vN` sin parche, sin versiones `x.x` flotantes y sin imágenes sin `@sha256:` |
 | [`portal_manifiesto.py`](portal_manifiesto.py) | Extensión `portal-manifiesto` (folio 018, PR-P3): la lista permitida [`../portal/publicar.yml`](../portal/publicar.yml) sólo nombra archivos `.md` exactos fuera de `SDD/`, `_legacy`, `ai-layer/`, `.docs-guard/` y los controles, cada uno con `llms`, y una pieza con `audience` `docente` lleva `portal_docente_ok: true` |
 | [`portal_negativo.py`](portal_negativo.py) | Extensión `portal-negativo` (folio 018, PR-P4): el sitio construido por [`../../scripts/docs-portal.sh`](../../scripts/docs-portal.sh) sólo tiene archivos que salen del manifiesto (más la infraestructura del generador), no trae direcciones de red privada, rutas de un anfitrión, correos, `SigningKey` con valor ni lo que nombre el archivo de patrones privados (`PORTAL_PATRONES_PRIVADOS`, fuera del repo), no enlaza `SDD/Expedientes`, `SDD/Docs/Audit` ni `_legacy`, y su sitemap e índice de búsqueda nombran las mismas páginas |
-| [`portal_salida.py`](portal_salida.py) | Extensión `portal-salida` (folio 018, PR-P5): sobre el sitio completado por [`../portal/agentes.py`](../portal/agentes.py), cada página HTML tiene su `.md` crudo, los `.md` crudos y `llms.txt` no enlazan URLs del portal que no existen ni dejan enlaces relativos, `llms-full.txt` no supera 400 KB, `.well-known/api-catalog` es un linkset de RFC 9727 con `service-desc` y `service-doc` del portal, el `api/openapi-v1.json` servido (si está) es idéntico a la instantánea y no hay `mcp/` ni `agent-card.json` |
+| [`portal_salida.py`](portal_salida.py) | Extensión `portal-salida` (folio 018, PR-P5): sobre el sitio completado por [`../portal/agentes.py`](../portal/agentes.py), cada página HTML tiene su `.md` crudo, los `.md` crudos y `llms.txt` no enlazan URLs del portal que no existen ni dejan enlaces relativos, `llms-full.txt` no supera 400 KB, `.well-known/api-catalog` es un linkset de RFC 9727 con `service-desc` y `service-doc` del portal, el `api/openapi-v1.json` servido (si está) es idéntico a la instantánea y no hay `mcp/` ni `agent-card.json`. Desde PR-P6, con la instantánea en el repo: la referencia de API (de [`../portal/referencia_api.py`](../portal/referencia_api.py)) renderiza las mismas operaciones que cuenta `recuento-openapi` (`api-recuento`) y `api/redoc.html` carga sólo el Redoc vendorizado del sitio (`redoc-local`) |
 | [`autoprueba.sh`](autoprueba.sh) | Par rojo/verde plantado de cada control, sobre un corpus temporal |
 
 Las extensiones reutilizan el lector de frontmatter de la copia sin modificarla. Son el apartamiento parcial de
@@ -62,7 +63,7 @@ runner y no baja herramientas.
 | `anclas` | avisa (fijo) | — | — |
 | `limite-didactico` | avisa; a bloquea después de dos corridas verdes de su par | — | — |
 | `pista-sin-enlaces` | avisa (fijo) | — | — |
-| `recuento-openapi` | avisa (fijo); el contrato que lee es de `SDD/Docs/**` y lo que encuentra allí se eleva | — | — |
+| `recuento-openapi` | bloquea desde PR-P6 del portal (folio 018 §7); el contrato que lee es de `SDD/Docs/**` y lo que encuentra allí se eleva: un hallazgo elevado y vigente en [`recuento-elevados.txt`](recuento-elevados.txt) cuenta como aviso | — | — |
 | `versiones-fijas` (`.github/workflows/*.yml` y `deploy/Dockerfile*`) | avisa; a bloquea tras una corrida limpia | — | — |
 | `portal-manifiesto` (`docs-as-code/portal/publicar.yml`) | avisa; a bloquea tras una corrida limpia | — | — |
 | `portal-negativo` (sitio del portal, paso `portal` y job `portal` de `docs.yml`) | avisa; a bloquea tras una corrida limpia | — | — |
@@ -94,7 +95,10 @@ y sin caídos se comenta y se cierra. Su par rojo/verde está en `autoprueba.sh`
 - **`recuento-openapi`** compara la instantánea con `SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md`:
   la cifra en palabras del título de la §3, cada `VERBO /ruta` de la tabla de §3.1 en las dos direcciones (error) y
   los códigos que declara cada punto en la tabla de §3 frente a los que documenta la instantánea (aviso; los resuelve
-  el PR de `WithSummary`/`ProducesProblem`, decisión H-09). Corre en `scripts/docs-local.sh`, sin red.
+  el PR de `WithSummary`/`ProducesProblem`, decisión H-09). Corre en `scripts/docs-local.sh`, sin red, en bloquea
+  desde PR-P6 del portal. Lo que encuentra en el contrato se eleva, no se corrige: el hallazgo elevado se anota con su
+  mensaje exacto, su folio y su vencimiento en `recuento-elevados.txt` y, mientras esté vigente y sea idéntico, cuenta
+  como aviso.
 - **oasdiff** (`tufin/oasdiff:v1.11.4`) corre `breaking --fail-on ERR` de la instantánea de la base contra la del
   árbol, y `changelog` para el registro. Una operación nueva sale como `endpoint-added` (informativo), no como
   cambio que rompe.

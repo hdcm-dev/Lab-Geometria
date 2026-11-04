@@ -25,6 +25,10 @@
 # y, desde el folio 018 (PR-P5), la capa para agentes y la salida del portal:
 #   agentes           archivos dorados de docs-as-code/portal/pruebas/ y llms-full.txt sobre el tope
 #   portal-salida     página sin .md, mcp/ y agent-card.json, linkset inválido, tope, enlaces y openapi distinto
+# y, desde el folio 018 (PR-P6), la referencia de API y los elevados del recuento:
+#   referencia-api    dorado api/cosas.md; operación sin renderizar, JSON ausente o distinto, Redoc desde un CDN y
+#                     bundle de Redoc con otra huella
+#   recuento-openapi  error elevado vigente (verde), vencido o con otro mensaje (rojo) y línea mal formada
 # Si un control no da rojo sobre su defecto o no da verde sin él, la compuerta misma está rota y este guion sale con 1.
 # No toca el árbol del repositorio. Requiere bash y python3 (sólo en el host o en el runner; la imagen del SDK no trae
 # python3, AGENTS.md:81).
@@ -230,6 +234,21 @@ esperar recuento-openapi 1 'rojo operación de más en la instantánea'
 armar
 sed -i 's/los dos puntos de acceso/los tres puntos de acceso/' "$TMP/c/contrato.md"
 esperar recuento-openapi 1 'rojo cifra del título que no coincide'
+# Elevados (PR-P6): el mismo error, registrado y vigente, queda como aviso; vencido o con otro mensaje, vuelve a rojo.
+msg='el título declara «tres» puntos y la instantánea trae 2 operaciones'
+elevado() {  # elevado RC DESCRIPCION LINEA [HOY]
+  local rc=0
+  printf '%s\n' "$3" > "$TMP/c/elevados.txt"
+  python3 -I "$CTL/recuento_openapi.py" --contrato "$TMP/c/contrato.md" --instantanea "$TMP/c/api.json" \
+    --raiz "$TMP/c" --elevados "$TMP/c/elevados.txt" --hoy "${4:-2027-01-01}" > "$TMP/salida.txt" 2>&1 || rc=$?
+  if [ "$rc" = "$1" ]; then echo "  ok    $2: recuento-openapi dio $rc"
+  else echo "  FALLA $2: recuento-openapi dio $rc, se esperaba $1"; sed 's/^/        /' "$TMP/salida.txt"; fallas=$((fallas + 1)); fi
+}
+elevado 0 'verde cifra elevada y vigente' "recuento-cifra | $msg | folio 999 | vence 2027-02-03"
+elevado 1 'rojo cifra elevada y vencida' "recuento-cifra | $msg | folio 999 | vence 2027-02-03" 2027-03-01
+elevado 1 'rojo elevado con otro mensaje' \
+  "recuento-cifra | el título declara «cuatro» puntos y la instantánea trae 2 operaciones | folio 999 | vence 2027-02-03"
+elevado 2 'error de uso línea de elevados mal formada' "recuento-cifra | $msg"
 
 echo "== autoprueba: enlaces externos (servidor local que devuelve 404)"
 mkdir -p "$TMP/x"
@@ -516,12 +535,54 @@ sitio_agentes; printf 'ver [x](otra.md)\n' >> "$TMP/sg/docs-as-code/d.md"
 salida_ctl 1 'rojo enlace relativo sin reescribir' enlace-no-publicado
 sitio_agentes; printf 'ver [x](http://localhost:8080/SDD/Docs/README.md)\n' >> "$TMP/sg/docs-as-code/d.md"
 salida_ctl 1 'rojo enlace a una pieza no publicada' enlace-no-publicado
-sitio_agentes; mkdir -p "$TMP/sg/api" "$TMP/g/docs-as-code/api"
-printf '{"openapi":"3.1.0"}\n' > "$TMP/g/docs-as-code/api/openapi-v1.json"
-cp "$TMP/g/docs-as-code/api/openapi-v1.json" "$TMP/sg/api/openapi-v1.json"
-salida_ctl 0 'verde openapi servido idéntico a la instantánea'
-printf ' ' >> "$TMP/sg/api/openapi-v1.json"
+# Referencia de API (PR-P6): con una instantánea de juguete de dos operaciones en dos grupos, referencia_api.py deja
+# el contenido para mkdocs (se simula su salida) y agentes.py los crudos; portal-salida y portal-negativo dan verde, y
+# rojo si se pierde una operación, si el JSON servido falta o difiere, si la vista Redoc carga un script de un CDN o si
+# el bundle de Redoc no es la copia vendorizada.
+REFAPI="$RAIZ/docs-as-code/portal/referencia_api.py"
+sitio_api() {  # sitio de juguete con la referencia de API en $TMP/sg
+  mkdir -p "$TMP/g/docs-as-code/api"
+  cat > "$TMP/g/docs-as-code/api/openapi-v1.json" <<'EOJ'
+{"openapi": "3.1.1", "info": {"title": "juguete", "version": "1"}, "paths": {
+  "/salud": {"get": {"summary": "Salud", "responses": {"200": {"description": "OK"}}}},
+  "/v1/cosas/{id}": {"delete": {"operationId": "DeleteCosa", "security": [{"Bearer": []}],
+    "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "string", "format": "uuid"}}],
+    "responses": {"204": {"description": "No Content"}}}}}}
+EOJ
+  sitio_agentes || return 1
+  rm -rf "$TMP/ca"; mkdir -p "$TMP/ca"
+  python3 -I "$REFAPI" --raiz "$TMP/g" "$TMP/ca" > /dev/null || return 1
+  (cd "$TMP/ca" && find . -type f ! -name '*.md' -exec cp --parents {} "$TMP/sg" \;)
+  for pag in api api/salud api/cosas; do mkdir -p "$TMP/sg/$pag"; printf '<p>%s</p>\n' "$pag" > "$TMP/sg/$pag/index.html"; done
+  sed -i 's#</urlset>#<url><loc>http://localhost:8080/api/</loc></url><url><loc>http://localhost:8080/api/salud/</loc></url><url><loc>http://localhost:8080/api/cosas/</loc></url></urlset>#' \
+    "$TMP/sg/sitemap.xml"
+  sed -i 's#]}$#,{"location":"api/"},{"location":"api/salud/"},{"location":"api/cosas/"}]}#' "$TMP/sg/search/search_index.json"
+}
+negativo_api() {  # negativo_api RC DESCRIPCION
+  local rc=0
+  python3 -I "$CTL/portal_negativo.py" --manifiesto "$TMP/g/docs-as-code/portal/publicar.yml" "$TMP/sg" \
+    > "$TMP/salida.txt" 2>&1 || rc=$?
+  if [ "$rc" = "$1" ]; then echo "  ok    $2: portal-negativo dio $rc"
+  else echo "  FALLA $2: portal-negativo dio $rc, se esperaba $1"; sed 's/^/        /' "$TMP/salida.txt"; fallas=$((fallas + 1)); fi
+}
+juguete
+if sitio_api; then echo "  ok    referencia_api y agentes sobre la instantánea de juguete"
+else echo "  FALLA referencia_api o agentes sobre la instantánea de juguete"; sed 's/^/        /' "$TMP/salida.txt"; fallas=$((fallas + 1)); fi
+if cmp -s "$TMP/sg/api/cosas.md" "$DORADOS/api-cosas.md.golden"; then echo "  ok    dorado api/cosas.md"
+else echo "  FALLA dorado api/cosas.md distinto de pruebas/api-cosas.md.golden"
+  diff "$DORADOS/api-cosas.md.golden" "$TMP/sg/api/cosas.md" | sed 's/^/        /' || true; fallas=$((fallas + 1)); fi
+salida_ctl 0 'verde referencia de API con las operaciones de la instantánea'
+negativo_api 0 'verde sitio con la referencia de API'
+printf '\n/* 192.168.0.1 */\n' >> "$TMP/sg/assets/vendor/redoc/redoc.standalone.js"
+negativo_api 1 'rojo bundle de Redoc con otra huella (se barre)'
+sitio_api; sed -i 's/^## `DELETE /## DELETE /' "$TMP/sg/api/cosas.md"
+salida_ctl 1 'rojo una operación de la instantánea sin renderizar' api-recuento
+sitio_api; rm "$TMP/sg/api/openapi-v1.json"
+salida_ctl 1 'rojo el repo tiene la instantánea y el sitio no la sirve' api-recuento
+sitio_api; printf ' ' >> "$TMP/sg/api/openapi-v1.json"
 salida_ctl 1 'rojo openapi servido distinto de la instantánea' openapi-distinto
+sitio_api; sed -i 's#src="[^"]*"#src="https://cdn.example.org/redoc.standalone.js"#' "$TMP/sg/api/redoc.html"
+salida_ctl 1 'rojo vista Redoc que carga un script de un CDN' redoc-local
 rc=0; python3 -I "$CTL/portal_salida.py" "$TMP/no-existe" > /dev/null 2>&1 || rc=$?
 if [ "$rc" = 2 ]; then echo "  ok    error de uso sitio inexistente: portal-salida dio 2"
 else echo "  FALLA error de uso sitio inexistente: portal-salida dio $rc"; fallas=$((fallas + 1)); fi

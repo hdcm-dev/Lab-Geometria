@@ -3,9 +3,10 @@
 #
 # Construye el sitio estático con MkDocs Material DENTRO de una imagen de Python fijada por digest, con las
 # dependencias de docs-as-code/portal/requirements-docs.txt instaladas con --require-hashes. No publica ni despliega:
-# deja el sitio en un directorio fuera del árbol, le suma la capa para agentes (docs-as-code/portal/agentes.py: .md
-# crudos, llms.txt, llms-full.txt y .well-known/api-catalog, PR-P5) y corre sobre él portal_negativo.py y
-# portal_salida.py.
+# deja el sitio en un directorio fuera del árbol, con la referencia de API generada desde la instantánea OpenAPI y
+# Redoc vendorizado (docs-as-code/portal/referencia_api.py, PR-P6); le suma la capa para agentes
+# (docs-as-code/portal/agentes.py: .md crudos, llms.txt, llms-full.txt y .well-known/api-catalog, PR-P5) y corre sobre
+# él portal_negativo.py y portal_salida.py.
 #
 # Uso:  scripts/docs-portal.sh                       # sitio en un directorio temporal (se informa al final)
 #       PORTAL_SALIDA=DIR scripts/docs-portal.sh      # sitio en DIR/site (DIR fuera del árbol del repo)
@@ -47,6 +48,7 @@ construir() {  # construir DESTINO — sitio en DESTINO (directorio del host)
       /tmp/venv/bin/pip install -q --require-hashes --no-deps --only-binary=:all: \
         -r /repo/docs-as-code/portal/requirements-docs.txt
       python -I /repo/docs-as-code/portal/preparar.py /tmp/contenido
+      python -I /repo/docs-as-code/portal/referencia_api.py --raiz /repo /tmp/contenido
       /tmp/venv/bin/mkdocs build --strict --clean -f /repo/docs-as-code/portal/mkdocs.yml -d /salida
       python -I /repo/docs-as-code/portal/agentes.py --raiz /repo /salida
     '

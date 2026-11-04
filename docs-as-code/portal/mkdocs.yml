@@ -6,7 +6,8 @@
 #
 # Enlaces: un enlace relativo a una pieza no publicada (p. ej. a SDD/Docs) queda como está y se informa sin cortar el
 # build (`validation` en info). Su reescritura a URLs absolutas del portal y el control portal_salida.py llegan con
-# PR-P5 (folio 018 §3 y §7).
+# PR-P5 (folio 018 §3 y §7). La referencia de API (api/: páginas por grupo, la instantánea y la vista Redoc
+# vendorizada) la escribe docs-as-code/portal/referencia_api.py en el mismo directorio de contenido (PR-P6, §6).
 site_name: Lab-Geometria · documentación
 site_description: Documentación pública de consulta de Lab-Geometria.
 # El dominio lo decide el PO (folio 018, excepción); hasta entonces el sitemap usa una URL local.
@@ -51,3 +52,15 @@ nav:
   - Cómo intervenir: docs-as-code/como-intervenir.md
   - Punto de uso: docs-as-code/punto-de-uso/catalogo.md
   - API · cambios: docs-as-code/api/CHANGELOG-API.md
+  # Referencia de API (PR-P6): la generan docs-as-code/portal/referencia_api.py desde la instantánea, un archivo por
+  # grupo (primer segmento después de /v1). Si la instantánea suma o pierde un grupo, --strict corta el build hasta
+  # que esta lista lo refleje.
+  - Referencia de API:
+      - api/index.md
+      - api/salud.md
+      - api/auth.md
+      - api/cuentas.md
+      - api/aprovisionamiento.md
+      - api/cuenta.md
+      - api/trabajos.md
+      - api/interpretaciones.md

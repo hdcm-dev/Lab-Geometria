@@ -82,7 +82,7 @@ jobs:
   # Controles OpenAPI (expediente 0003, tramo T-6): oasdiff `breaking` (Tufin) y Spectral (tres reglas propias) sobre
   # la instantánea `docs-as-code/api/openapi-v1.json`. Job aparte de la compuerta porque necesita Docker y baja dos
   # imágenes con versión fija (en `docs-as-code/controles/openapi.sh`); la compuerta principal sigue sin red. El
-  # recuento contra el contrato corre en la compuerta (`recuento_openapi.py`, sin red).
+  # recuento contra el contrato corre en la compuerta (`recuento_openapi.py`, sin red, en bloquea desde PR-P6).
   #   - Mismo endurecimiento que la compuerta: `contents: read`, sin secretos, sin `paths`, acciones con versión fija.
   #   - En AVISA: un hallazgo es una advertencia del PR y el job queda verde. Rojo sólo si la autoprueba del par
   #     rojo/verde falla (los controles están rotos) o si hay un error de uso.
