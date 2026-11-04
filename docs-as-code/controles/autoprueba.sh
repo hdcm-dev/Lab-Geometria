@@ -17,6 +17,8 @@
 #   enlaces-externos  un enlace a una ruta que da 404 y una excepción vencida
 # y, desde el folio 018 (PR-P2), el de versiones fijas sobre workflows y Dockerfiles:
 #   versiones-fijas   el deploy-front-ftp.yml previo a fijarlo y una imagen sin digest
+# y, desde el folio 018 (PR-P3), el del manifiesto del portal:
+#   portal-manifiesto una pieza de SDD/Docs/Audit y una pieza docente sin portal_docente_ok
 # Si un control no da rojo sobre su defecto o no da verde sin él, la compuerta misma está rota y este guion sale con 1.
 # No toca el árbol del repositorio. Requiere bash y python3 (sólo en el host o en el runner; la imagen del SDK no trae
 # python3, AGENTS.md:81).
@@ -319,6 +321,38 @@ versiones 1 'rojo imagen sin digest' "$TMP/v/Dockerfile"
 printf 'FROM python:3.12.12-slim@sha256:%064d AS base\nFROM base\n' 0 > "$TMP/v/Dockerfile"
 versiones 0 'verde imagen con digest y etapa propia' "$TMP/v/Dockerfile"
 versiones 2 'error de uso archivo inexistente' "$TMP/v/no-existe.yml"
+
+# portal-manifiesto (folio 018 §7, PR-P3): verde con el manifiesto vacío, rojo con una pieza de SDD/Docs/Audit y
+# con una pieza docente sin portal_docente_ok, verde con el ok explícito.
+echo "== autoprueba: portal-manifiesto"
+mkdir -p "$TMP/p/SDD/Docs/Audit" "$TMP/p/docs-as-code"
+printf -- '---\ndoc_id: AUD-GEO-901\ntitle: x\n---\n# x\n' > "$TMP/p/SDD/Docs/Audit/x.md"
+printf -- '---\ndoc_id: GUI-GEO-901\ntitle: d\naudience: [docente, humano]\n---\n# d\n' > "$TMP/p/docs-as-code/d.md"
+manifiesto() {  # código esperado, etiqueta, archivo
+  local rc=0
+  python3 -I "$CTL/portal_manifiesto.py" --raiz "$TMP/p" "$3" > "$TMP/salida.txt" 2>&1 || rc=$?
+  if [ "$rc" = "$1" ]; then
+    echo "  ok    $2: portal-manifiesto dio $rc"
+  else
+    echo "  FALLA $2: portal-manifiesto dio $rc, se esperaba $1"
+    sed 's/^/        /' "$TMP/salida.txt"
+    fallas=$((fallas + 1))
+  fi
+}
+manifiesto 0 'verde manifiesto del repo' "$RAIZ/docs-as-code/portal/publicar.yml"
+printf 'piezas: []\n' > "$TMP/p/m.yml"
+manifiesto 0 'verde manifiesto vacío' "$TMP/p/m.yml"
+printf 'piezas:\n  - ruta: SDD/Docs/Audit/x.md\n    llms: false\n' > "$TMP/p/m.yml"
+manifiesto 1 'rojo pieza de SDD/Docs/Audit' "$TMP/p/m.yml"
+grep -q 'ruta-no-permitida' "$TMP/salida.txt" || { echo "  FALLA rojo SDD/Docs/Audit: sin ruta-no-permitida"; fallas=$((fallas + 1)); }
+printf 'piezas:\n  - ruta: docs-as-code/d.md\n    llms: true\n' > "$TMP/p/m.yml"
+manifiesto 1 'rojo pieza docente sin portal_docente_ok' "$TMP/p/m.yml"
+grep -q 'docente-sin-ok' "$TMP/salida.txt" || { echo "  FALLA rojo docente: sin docente-sin-ok"; fallas=$((fallas + 1)); }
+printf 'piezas:\n  - ruta: docs-as-code/d.md\n    llms: true\n    portal_docente_ok: true\n' > "$TMP/p/m.yml"
+manifiesto 0 'verde pieza docente con portal_docente_ok' "$TMP/p/m.yml"
+printf 'piezas:\n  - ruta: docs-as-code/*.md\n    llms: true\n' > "$TMP/p/m.yml"
+manifiesto 1 'rojo glob' "$TMP/p/m.yml"
+manifiesto 2 'error de uso manifiesto inexistente' "$TMP/p/no-existe.yml"
 
 if [ "$fallas" -gt 0 ]; then
   echo "== autoprueba: ROJO ($fallas fallas): la compuerta está rota"

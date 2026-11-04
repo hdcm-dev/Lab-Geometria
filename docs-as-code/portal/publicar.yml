@@ -1,0 +1,13 @@
+# Manifiesto del portal de documentación (expediente 0003, folio 018 §1, PR-P3).
+#
+# Lista permitida: lo que no está listado acá no se publica. Una entrada por archivo, con su ruta exacta desde la
+# raíz del repo; no se aceptan globs. El filtro no es `delivery`, que en este repo vale siempre [publico] (D-18).
+#
+#   piezas:
+#     - ruta: docs-as-code/glosario.md
+#       llms: true                  # obligatorio: entra o no a llms.txt / llms-full.txt
+#       portal_docente_ok: true     # sólo si el `audience` de la pieza contiene `docente`; decisión explícita del PR
+#
+# Excluidos siempre: SDD/**, _legacy/**, ai-layer/**, .docs-guard/**, docs-as-code/controles/** y toda solución del
+# alumno. Lo verifica docs-as-code/controles/portal_manifiesto.py. El alta inicial llega con PR-P4.
+piezas: []
