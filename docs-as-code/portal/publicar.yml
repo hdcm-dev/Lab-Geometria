@@ -9,5 +9,23 @@
 #       portal_docente_ok: true     # sólo si el `audience` de la pieza contiene `docente`; decisión explícita del PR
 #
 # Excluidos siempre: SDD/**, _legacy/**, ai-layer/**, .docs-guard/**, docs-as-code/controles/** y toda solución del
-# alumno. Lo verifica docs-as-code/controles/portal_manifiesto.py. El alta inicial llega con PR-P4.
-piezas: []
+# alumno. Lo verifica docs-as-code/controles/portal_manifiesto.py.
+#
+# Alta inicial (PR-P4, folio 018 §1): README.md, el glosario, la guía de cómo intervenir, docs-as-code/api/** (su
+# única pieza .md es el CHANGELOG; la instantánea openapi-v1.json la sirve PR-P6) y docs-as-code/punto-de-uso/**.
+# Las tres piezas con audience docente entran con portal_docente_ok: true, decisión explícita de este PR: son guías de
+# trabajo y de vocabulario, no soluciones del alumno (el catálogo lo vigila limite_didactico.py).
+piezas:
+  - ruta: README.md
+    llms: true
+  - ruta: docs-as-code/glosario.md
+    llms: true
+    portal_docente_ok: true
+  - ruta: docs-as-code/como-intervenir.md
+    llms: true
+    portal_docente_ok: true
+  - ruta: docs-as-code/api/CHANGELOG-API.md
+    llms: true
+  - ruta: docs-as-code/punto-de-uso/catalogo.md
+    llms: true
+    portal_docente_ok: true
