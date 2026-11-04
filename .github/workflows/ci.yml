@@ -74,6 +74,15 @@ jobs:
       - name: Árbol de solución · todo proyecto y todo sample tienen nodo en GeometriaFactory.sln
         run: bash scripts/verify-solution-tree.sh
 
+      # RECÁLCULO DE LAS CORRIDAS CITADAS (expediente 0004, orden 6). Sin modelo y sin red: recalcula
+      # desde las salidas versionadas (SHA256SUMS, resumir.py, salidas.jsonl) las cifras que citan la
+      # especificación 01 y la actuación 010 del expediente 0002, y frena si difieren. Primero su par
+      # rojo/verde: verde sobre el repo y rojo sobre cuatro copias adulteradas.
+      - name: Recálculo de corridas citadas · par rojo/verde
+        run: python3 -I ai-layer/ensayos/recalcular.py --autoprueba
+      - name: Recálculo de corridas citadas · las cifras del repo
+        run: python3 -I ai-layer/ensayos/recalcular.py
+
       - name: Puerta QG-01 · construir sin advertencias, con el bundle del visor
         run: ./scripts/build.sh
 
