@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Microsoft.Playwright;
 using NUnit.Framework;
@@ -76,23 +75,34 @@ public sealed class PistasDeLaCapaDeIaTests : PruebaE2E
             }
             """);
 
-        var reloj = Stopwatch.StartNew();
-        await verPistas.ClickAsync();
+        // SE MIDE EL TRAMO DEL SERVIDOR, NO EL REPINTADO NI EL ARNÉS. La garantía (REQ-IA-07) es que
+        // la Web tenga la plantilla antes de su propio corte de 10 s, y la Web contesta el POST del
+        // formulario recién cuando el servicio de datos le devolvió las pistas. Por eso el plazo sale
+        // de los tiempos de red del propio navegador (del envío del pedido al primer byte de la
+        // respuesta). Un cronómetro alrededor del clic sumaba además el clic de Playwright, el aviso
+        // al proceso de la prueba y el pintado de la página nueva: en la CI eso dio 10,3 s con el
+        // servicio de datos cortando a tiempo.
+        var respuesta = await Page.RunAndWaitForResponseAsync(
+            () => verPistas.ClickAsync(),
+            r => r.Request.Method == "POST" && r.Url.Contains($"/trabajos/{trabajo}"),
+            new() { Timeout = 15_000 });
+        var tiempos = respuesta.Request.Timing;
+        var delServidor = TimeSpan.FromMilliseconds(tiempos.ResponseStart - tiempos.RequestStart);
 
         // G1: el servicio de datos corta antes que la Web; llega la pista general, no el error.
         var rotulo = Page.GetByText("Pista general del laboratorio", new() { Exact = true });
         await Expect(rotulo).ToBeVisibleAsync(new() { Timeout = 15_000 });
-        reloj.Stop();
-        TestContext.Progress.WriteLine($"Pista general visible a los {reloj.Elapsed.TotalSeconds:0.0} s.");
+        TestContext.Progress.WriteLine(
+            $"La Web respondió las pistas a los {delServidor.TotalSeconds:0.00} s (HTTP {respuesta.Status}).");
 
         var anunciado = await Page.EvaluateAsync<string?>("() => sessionStorage.getItem('gf-e2e-anuncio')");
         Assert.That(anunciado, Is.EqualTo("Buscando una pista…"), "La espera tiene que anunciarse en la región viva.");
 
-        Assert.That(reloj.Elapsed, Is.LessThan(TimeSpan.FromSeconds(10)),
-            "La pista tiene que llegar antes de que la Web corte (10 s).");
+        Assert.That(delServidor, Is.LessThan(TimeSpan.FromSeconds(10)),
+            "La Web tiene que tener la pista antes de su corte (10 s).");
         // Y NO ANTES DE UNOS SEGUNDOS: si llegara al instante, el pedido no habría pasado por el modelo
         // lento y la prueba no estaría midiendo el corte del servicio de datos (8 s por omisión).
-        Assert.That(reloj.Elapsed, Is.GreaterThan(TimeSpan.FromSeconds(5)),
+        Assert.That(delServidor, Is.GreaterThan(TimeSpan.FromSeconds(5)),
             "La pista llegó demasiado rápido: el pedido no esperó al modelo.");
         await Expect(Page.GetByText("No pudimos traer pistas")).ToHaveCountAsync(0);
 
