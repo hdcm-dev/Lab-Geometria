@@ -1,0 +1,11 @@
+# Hallazgos de recuento-openapi ya elevados (expediente 0003, folio 023, PR-P6).
+#
+# El contrato que lee recuento_openapi.py es de SDD/Docs/**, que es generado: lo que el control encuentra allí se
+# eleva, no se corrige (AGENTS.md:61). Una línea por hallazgo elevado, con el mensaje EXACTO del control:
+#
+#   regla | mensaje exacto | folio donde se elevó | vence AAAA-MM-DD
+#
+# Vigente, ese error exacto cuenta como aviso y la compuerta, que corre el control en bloquea, sigue verde. Si el
+# mensaje cambia (otra cifra, otra ruta), vuelve a ser error. Vencida, deja de aplicarse. Sin uso, se avisa para
+# borrarla. Agregar una línea es una decisión del PR que la trae, con su folio.
+recuento-cifra | el título declara «diecisiete» puntos y la instantánea trae 18 operaciones | EXP-0003 folios 009, 016 y 023 | vence 2027-02-03

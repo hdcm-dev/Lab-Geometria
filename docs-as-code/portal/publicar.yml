@@ -12,7 +12,8 @@
 # alumno. Lo verifica docs-as-code/controles/portal_manifiesto.py.
 #
 # Alta inicial (PR-P4, folio 018 §1): README.md, el glosario, la guía de cómo intervenir, docs-as-code/api/** (su
-# única pieza .md es el CHANGELOG; la instantánea openapi-v1.json la sirve PR-P6) y docs-as-code/punto-de-uso/**.
+# única pieza .md es el CHANGELOG; la instantánea openapi-v1.json y la referencia generada desde ella las sirve
+# docs-as-code/portal/referencia_api.py, PR-P6, en api/) y docs-as-code/punto-de-uso/**.
 # Las tres piezas con audience docente entran con portal_docente_ok: true, decisión explícita de este PR: son guías de
 # trabajo y de vocabulario, no soluciones del alumno (el catálogo lo vigila limite_didactico.py).
 piezas:

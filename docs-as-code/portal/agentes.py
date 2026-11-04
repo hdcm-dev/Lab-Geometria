@@ -14,6 +14,9 @@ Corre después de `mkdocs build` sobre el sitio ya construido (scripts/docs-port
   `llms: true`.
 - `llms-full.txt`: la concatenación de esos `.md` crudos, en el orden del manifiesto. Tope: 400 KB (TOPE_FULL); si lo
   supera, sale con 1 y no lo escribe.
+- el Markdown crudo de la referencia de API (`api/index.md` y `api/<grupo>.md`, PR-P6), si el repo tiene la
+  instantánea `docs-as-code/api/openapi-v1.json`: las mismas páginas que referencia_api.py dejó para mkdocs, con los
+  enlaces como URLs absolutas del portal. Van en una sección propia de `llms.txt` y al final de `llms-full.txt`.
 - `.well-known/api-catalog`: linkset de RFC 9727 (`application/linkset+json`, el content-type lo pone el servidor en
   PR-P7) con `service-desc` a `api/openapi-v1.json` y `service-doc` a `api/`, ambos del portal; ninguno apunta a una
   instancia viva. `mcp/server-card.json` y `agent-card.json` NO se escriben (folio 018 §5: no hay MCP ni agente A2A).
@@ -35,6 +38,7 @@ sys.dont_write_bytecode = True
 
 AQUI = Path(__file__).resolve().parent
 CONTROL = AQUI.parent / 'controles' / 'portal_manifiesto.py'
+REFERENCIA = AQUI / 'referencia_api.py'
 BASE_DEFECTO = 'http://localhost:8080/'
 REPO_BLOB = 'https://github.com/hdcm-dev/Lab-Geometria/blob/main/'
 TOPE_FULL = 400 * 1024
@@ -48,8 +52,8 @@ RE_REFERENCIA = re.compile(r'^(\s{0,3}\[[^\]]+\]:\s*)(\S+)(.*)$')
 RE_VALLA = re.compile(r'^\s{0,3}(```|~~~)')
 
 
-def cargar_control():
-    spec = importlib.util.spec_from_file_location('portal_manifiesto', CONTROL)
+def cargar_control(nombre='portal_manifiesto', ruta=CONTROL):
+    spec = importlib.util.spec_from_file_location(nombre, ruta)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -218,17 +222,34 @@ def main(argv):
             llms.append(f'- [{titulo}]({base}{crudo(ruta)})')
             full.append(f'<!-- fuente: {base}{crudo(ruta)} -->\n\n{md}')
 
+    api = []
+    instantanea = raiz / 'docs-as-code' / 'api' / 'openapi-v1.json'
+    if instantanea.is_file():
+        ref = cargar_control('referencia_api', REFERENCIA)
+        try:
+            doc = json.loads(instantanea.read_text(encoding='utf-8'))
+        except ValueError as e:
+            print(f'agentes: la instantánea no es JSON: {e}', file=sys.stderr)
+            return 1
+        for ruta, md in ref.paginas(doc, lambda r: base + r).items():
+            escribir(sitio / ruta, md)
+            print(f'  crudo {ruta}')
+            titulo = next((l[2:].strip() for l in md.split('\n') if l.startswith('# ')), ruta)
+            api.append(f'- [{titulo}]({base}{ruta})')
+            full.append(f'<!-- fuente: {base}{ruta} -->\n\n{md}')
+
     texto_full = '\n'.join(full)
     tam = len(texto_full.encode('utf-8'))
     if tam > TOPE_FULL:
         print(f'agentes: llms-full.txt pesa {tam} bytes y el tope es {TOPE_FULL}; no se escribe', file=sys.stderr)
         return 1
     cabecera = f'# {TITULO}\n\n> {RESUMEN}\n\n'
-    escribir(sitio / 'llms.txt', cabecera + '## Documentación\n\n' + ''.join(l + '\n' for l in llms))
+    seccion_api = '\n## Referencia de API\n\n' + ''.join(l + '\n' for l in api) if api else ''
+    escribir(sitio / 'llms.txt', cabecera + '## Documentación\n\n' + ''.join(l + '\n' for l in llms) + seccion_api)
     escribir(sitio / 'llms-full.txt', texto_full)
     escribir(sitio / '.well-known' / 'api-catalog',
              json.dumps(api_catalog(base), ensure_ascii=False, indent=2, sort_keys=False) + '\n')
-    print(f'agentes: {len(piezas)} crudos, llms.txt con {len(llms)} enlaces, llms-full.txt de {tam} bytes, '
+    print(f'agentes: {len(piezas)} crudos, {len(api)} de la referencia de API, llms.txt con {len(llms) + len(api)} enlaces, llms-full.txt de {tam} bytes, '
           f'.well-known/api-catalog en {sitio}')
     return 0
 

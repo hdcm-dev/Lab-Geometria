@@ -19,11 +19,17 @@ de la raíz. Hallazgos (error):
   o `_legacy`. Nombrar esas carpetas en el texto de una guía no es una fuga; enlazarlas, sí.
   Los nombres de máquinas y las rutas propias de la infraestructura NO se escriben en este repo público: van en un
   archivo de patrones privado, una expresión regular por línea, que se pasa con --privados o PORTAL_PATRONES_PRIVADOS.
+  Desde PR-P6, si el sitio sirve `api/openapi-v1.json`, también la referencia de API que deriva de ese JSON
+  (docs-as-code/portal/referencia_api.py): `api/` y una página por grupo, con su `.md` crudo, `api/openapi-v1.json` y
+  `api/redoc.html`; el bundle de Redoc va bajo `assets/`. El bundle vendorizado (`assets/vendor/redoc/`) no se barre
+  por patrones sólo si su huella es la de docs-as-code/portal/vendor/redoc/VENDOR (trae ejemplos de formato, como una
+  IPv4 de muestra); con otra huella se barre como cualquier archivo.
 - `urls-distintas`: el sitemap, el índice de búsqueda y (si existe) llms.txt no tienen el mismo conjunto de páginas.
 
 Sin dependencias. Código de salida: 0 en orden, 1 hay hallazgos, 2 error de uso. Arranca en avisa (folio 018 §7).
 """
 
+import hashlib
 import importlib.util
 import json
 import os
@@ -37,6 +43,7 @@ sys.dont_write_bytecode = True
 
 RAIZ_REPO = Path(__file__).resolve().parents[2]
 CONTROL_MANIFIESTO = Path(__file__).resolve().parent / 'portal_manifiesto.py'
+REFERENCIA = RAIZ_REPO / 'docs-as-code' / 'portal' / 'referencia_api.py'
 INFRA_DIRS = ('assets/', 'search/')
 INFRA_ARCHIVOS = {'404.html', 'sitemap.xml', 'sitemap.xml.gz', 'llms.txt', 'llms-full.txt', '.well-known/api-catalog'}
 TEXTO = {'.html', '.md', '.txt', '.xml', '.json', '.js', '.css', '.map', '.svg'}
@@ -148,7 +155,19 @@ def main(argv):
             print(f'portal-negativo: patrones privados ilegibles ({externos}): {e}', file=sys.stderr)
             return 2
     paginas, archivos_ok = permitidos(piezas)
+    ref = cargar('referencia_api', REFERENCIA)
     inf = dg.Informe('portal-negativo')
+    servido = sitio / 'api' / 'openapi-v1.json'
+    if servido.is_file():
+        try:
+            doc = json.loads(servido.read_text(encoding='utf-8'))
+        except ValueError as e:
+            doc = {}
+            inf.error('api/openapi-v1.json', 1, 'fuera-del-manifiesto', f'el JSON servido no se puede leer: {e}')
+        p_api, a_api = permitidos([{'ruta': r} for r in ref.rutas(doc)])
+        paginas |= p_api
+        archivos_ok |= a_api | {'api/openapi-v1.json', 'api/redoc.html'}
+    vendor = {f'{ref.VENDOR_SITIO}/{n}': h for n, h in ref.huellas_vendor().items()}
     n_archivos = 0
 
     # (a) y (b): cada archivo del sitio.
@@ -159,6 +178,8 @@ def main(argv):
             inf.error(rel, 1, 'fuera-del-manifiesto', 'el archivo no sale de ninguna pieza de publicar.yml')
         if f.suffix not in TEXTO:
             continue
+        if rel in vendor and hashlib.sha256(f.read_bytes()).hexdigest() == vendor[rel]:
+            continue  # copia exacta del bundle vendorizado de Redoc (folio 018 §6)
         contenido = f.read_text(encoding='utf-8', errors='replace')
         for n, linea in enumerate(contenido.split('\n'), 1):
             for nombre, rx in prohibidos:

@@ -1,0 +1,16 @@
+# Referencia de API · `/v1/cosas`
+
+Operaciones de la instantánea OpenAPI cuya ruta empieza por `/v1/cosas`: 1. Página generada en el build del portal; la fuente es la instantánea, no se edita a mano.
+
+## `DELETE /v1/cosas/{id}`
+
+- Operación: `DeleteCosa`
+- Seguridad: `Bearer`
+
+| Parámetro | En | Obligatorio | Tipo |
+| --- | --- | --- | --- |
+| `id` | path | sí | `string` (`uuid`) |
+
+| Respuesta | Descripción | Cuerpo |
+| --- | --- | --- |
+| `204` | No Content | — |
