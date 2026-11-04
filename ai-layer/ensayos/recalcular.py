@@ -5,17 +5,18 @@
 #
 #   python3 -I ai-layer/ensayos/recalcular.py               verifica el repo (rc 0 = todo coincide)
 #   python3 -I ai-layer/ensayos/recalcular.py --autoprueba  par rojo/verde: verde sobre el repo y rojo
-#                                                           sobre tres copias adulteradas (cita, salida, resumen)
+#                                                           sobre seis copias adulteradas (espec, act010, act011,
+#                                                           resumen 11-01, salidas.jsonl, puntuacion-mesa.json)
 #
 # Que verifica:
 #   1. corrida-2026-11-01: SHA256SUMS y que resumir.py reproduce resumen.txt byte a byte.
 #   2. corrida-2026-11-03-completa: SHA256SUMS y, por candidato, aprobados k/n, frio, p50 y p95
 #      (en caliente, casos 2 en adelante; p95 por statistics.quantiles inclusivo) contra la tabla
 #      de la especificacion 01, con la precision con que se cita (0,1 s, o 1 s si se cita entero).
-#   4. corrida-GEO-04-*: SHA256SUMS, resumen.txt regenerado desde registro-A-v2.jsonl y puntuacion-mesa.json,
-#      y la media y el conteo de pistas falsas/ambiguas citados en Revision-Mesa.md y en la actuacion 011.
 #   3. Las frases con cifra de la actuacion 010 (H-1 a H-3 y el intervalo de 10/10), regeneradas
 #      desde los datos: si el dato o el texto cambian, la frase deja de estar.
+#   4. corrida-GEO-04-*: SHA256SUMS, resumen.txt regenerado desde registro-A-v2.jsonl y puntuacion-mesa.json,
+#      y la media y el conteo de pistas falsas/ambiguas citados en Revision-Mesa.md y en la actuacion 011.
 # Metrica: version declarada en METRICA; cambiar como se calcula obliga a cambiarla.
 import hashlib, json, math, os, re, shutil, statistics, subprocess, sys, tempfile
 
@@ -155,6 +156,13 @@ def verificar(raiz):
                 errores.append(f"{ACT011}: no esta la cifra recalculada «{f}»")
     return errores
 
+def resellar(carpeta):  # rehace SHA256SUMS para que la adulteracion no la delate el hash sino el recalculo
+    ruta = os.path.join(carpeta, "SHA256SUMS")
+    lineas = [l.split() for l in open(ruta, encoding="utf-8") if l.strip()]
+    with open(ruta, "w", encoding="utf-8") as f:
+        for _, nombre in lineas:
+            f.write(hashlib.sha256(open(os.path.join(carpeta, nombre), "rb").read()).hexdigest() + "  " + nombre + "\n")
+
 def autoprueba():
     if verificar(RAIZ_REPO):
         print("autoprueba: el repo no esta verde; corra sin --autoprueba"); return 1
@@ -176,17 +184,18 @@ def autoprueba():
             e = verificar(t)
             print(f"  rojo esperado · {ruta}: {'ROJO' if e else 'VERDE (falla la autoprueba)'}")
             rc |= 0 if e else 1
-    # una salida adulterada: el SHA256SUMS de la corrida completa la delata
+    # una salida adulterada y RESELLADA (SHA256SUMS recalculado): sólo el recálculo de cifras puede delatarla
     with tempfile.TemporaryDirectory() as t:
         for parte in ("ai-layer", os.path.dirname(ACT010)):
             shutil.copytree(os.path.join(RAIZ_REPO, parte), os.path.join(t, parte))
         p = os.path.join(t, "ai-layer/ensayos/corrida-2026-11-03-completa/salidas.jsonl")
         texto = open(p, encoding="utf-8").read()
         open(p, "w", encoding="utf-8").write(texto.replace('"lat": 15.6', '"lat": 14.6', 1))
-        e = verificar(t)
+        resellar(os.path.dirname(p))
+        e = [x for x in verificar(t) if "SHA-256" not in x]
         print(f"  rojo esperado · salidas.jsonl: {'ROJO' if e else 'VERDE (falla la autoprueba)'}")
         rc |= 0 if e else 1
-    # una puntuacion de la mesa adulterada en GEO-04: SHA256SUMS y resumen la delatan
+    # una puntuacion de la mesa adulterada y RESELLADA en GEO-04: sólo el recálculo del resumen puede delatarla
     with tempfile.TemporaryDirectory() as t:
         for parte in ("ai-layer", os.path.dirname(ACT010)):
             shutil.copytree(os.path.join(RAIZ_REPO, parte), os.path.join(t, parte))
@@ -194,7 +203,8 @@ def autoprueba():
         p = os.path.join(sorted(glob.glob(os.path.join(t, "ai-layer/ensayos/corrida-GEO-04-*")))[0], "puntuacion-mesa.json")
         texto = open(p, encoding="utf-8").read()
         open(p, "w", encoding="utf-8").write(texto.replace('"marca": "falsa"', '"marca": null', 1))
-        e = verificar(t)
+        resellar(os.path.dirname(p))
+        e = [x for x in verificar(t) if "SHA-256" not in x]
         print(f"  rojo esperado · puntuacion-mesa.json: {'ROJO' if e else 'VERDE (falla la autoprueba)'}")
         rc |= 0 if e else 1
     print("autoprueba:", "PASA (verde en el repo, rojo en las seis adulteraciones)" if rc == 0 else "FALLA")
