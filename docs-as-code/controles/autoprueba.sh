@@ -19,6 +19,9 @@
 #   versiones-fijas   el deploy-front-ftp.yml previo a fijarlo y una imagen sin digest
 # y, desde el folio 018 (PR-P3), el del manifiesto del portal:
 #   portal-manifiesto una pieza de SDD/Docs/Audit y una pieza docente sin portal_docente_ok
+# y, desde el folio 018 (PR-P4), el negativo del sitio del portal:
+#   portal-negativo   un site/ sembrado con SDD/Expedientes/x.md, una red privada, un patrón privado externo y un
+#                     sitemap con una URL de más
 # Si un control no da rojo sobre su defecto o no da verde sin él, la compuerta misma está rota y este guion sale con 1.
 # No toca el árbol del repositorio. Requiere bash y python3 (sólo en el host o en el runner; la imagen del SDK no trae
 # python3, AGENTS.md:81).
@@ -339,7 +342,9 @@ manifiesto() {  # código esperado, etiqueta, archivo
     fallas=$((fallas + 1))
   fi
 }
-manifiesto 0 'verde manifiesto del repo' "$RAIZ/docs-as-code/portal/publicar.yml"
+rc=0; python3 -I "$CTL/portal_manifiesto.py" --raiz "$RAIZ" > "$TMP/salida.txt" 2>&1 || rc=$?
+if [ "$rc" = 0 ]; then echo "  ok    verde manifiesto del repo: portal-manifiesto dio 0"
+else echo "  FALLA verde manifiesto del repo: portal-manifiesto dio $rc"; sed 's/^/        /' "$TMP/salida.txt"; fallas=$((fallas + 1)); fi
 printf 'piezas: []\n' > "$TMP/p/m.yml"
 manifiesto 0 'verde manifiesto vacío' "$TMP/p/m.yml"
 printf 'piezas:\n  - ruta: SDD/Docs/Audit/x.md\n    llms: false\n' > "$TMP/p/m.yml"
@@ -353,6 +358,60 @@ manifiesto 0 'verde pieza docente con portal_docente_ok' "$TMP/p/m.yml"
 printf 'piezas:\n  - ruta: docs-as-code/*.md\n    llms: true\n' > "$TMP/p/m.yml"
 manifiesto 1 'rojo glob' "$TMP/p/m.yml"
 manifiesto 2 'error de uso manifiesto inexistente' "$TMP/p/no-existe.yml"
+
+# portal-negativo (folio 018 §7, PR-P4): verde con un site/ limpio que sale del manifiesto; rojo con el mismo site/
+# sembrado con SDD/Expedientes/x.md, con una dirección de red privada, con un nombre de máquina de un archivo de
+# patrones privados (fuera del repo) y con un sitemap que no coincide.
+echo "== autoprueba: portal-negativo"
+unset PORTAL_PATRONES_PRIVADOS  # los casos verdes no dependen de los patrones privados del entorno
+sitio_limpio() {
+  rm -rf "$TMP/s"
+  mkdir -p "$TMP/s/docs-as-code/d" "$TMP/s/search" "$TMP/s/assets"
+  printf '<a href="docs-as-code/d/">d</a>\n' > "$TMP/s/index.html"
+  printf '<p>Los casos van en SDD/Expedientes; no se enlazan.</p>\n' > "$TMP/s/docs-as-code/d/index.html"
+  printf '<urlset><url><loc>http://localhost:8080/</loc></url><url><loc>http://localhost:8080/docs-as-code/d/</loc></url></urlset>\n' \
+    > "$TMP/s/sitemap.xml"
+  printf '{"docs":[{"location":""},{"location":"docs-as-code/d/"},{"location":"docs-as-code/d/#x"}]}\n' \
+    > "$TMP/s/search/search_index.json"
+  printf 'x\n' > "$TMP/s/assets/a.js"
+}
+printf 'piezas:\n  - ruta: README.md\n    llms: true\n  - ruta: docs-as-code/d.md\n    llms: true\n' > "$TMP/p/n.yml"
+negativo() {  # negativo RC_ESPERADO DESCRIPCION
+  local rc=0
+  python3 -I "$CTL/portal_negativo.py" --manifiesto "$TMP/p/n.yml" "$TMP/s" > "$TMP/salida.txt" 2>&1 || rc=$?
+  if [ "$rc" = "$1" ]; then
+    echo "  ok    $2: portal-negativo dio $rc"
+  else
+    echo "  FALLA $2: portal-negativo dio $rc, se esperaba $1"
+    sed 's/^/        /' "$TMP/salida.txt"
+    fallas=$((fallas + 1))
+  fi
+}
+sitio_limpio
+negativo 0 'verde site/ limpio'
+mkdir -p "$TMP/s/SDD/Expedientes"
+printf -- '# x\n' > "$TMP/s/SDD/Expedientes/x.md"
+negativo 1 'rojo site/ sembrado con SDD/Expedientes/x.md'
+grep -q 'fuera-del-manifiesto' "$TMP/salida.txt" || { echo "  FALLA rojo sembrado: sin fuera-del-manifiesto"; fallas=$((fallas + 1)); }
+sitio_limpio
+printf '<p>servidor 10.20.30.40</p>\n' >> "$TMP/s/docs-as-code/d/index.html"
+negativo 1 'rojo dirección de red privada'
+grep -q 'patron-prohibido' "$TMP/salida.txt" || { echo "  FALLA rojo red interna: sin patron-prohibido"; fallas=$((fallas + 1)); }
+sitio_limpio
+printf '<a href="../SDD/Expedientes/0003/">caso</a>\n' >> "$TMP/s/docs-as-code/d/index.html"
+negativo 1 'rojo enlace a SDD/Expedientes'
+sitio_limpio
+printf '<p>corre en maquina-de-prueba</p>\n' >> "$TMP/s/docs-as-code/d/index.html"
+negativo 0 'verde nombre de máquina sin patrones privados'
+printf 'maquina-de-prueba\n' > "$TMP/p/privados.txt"
+PORTAL_PATRONES_PRIVADOS="$TMP/p/privados.txt" negativo 1 'rojo nombre de máquina con patrones privados'
+sitio_limpio
+sed -i 's#</urlset>#<url><loc>http://localhost:8080/otra/</loc></url></urlset>#' "$TMP/s/sitemap.xml"
+negativo 1 'rojo sitemap con una página de más'
+grep -q 'urls-distintas' "$TMP/salida.txt" || { echo "  FALLA rojo sitemap: sin urls-distintas"; fallas=$((fallas + 1)); }
+rc=0; python3 -I "$CTL/portal_negativo.py" "$TMP/no-existe" > /dev/null 2>&1 || rc=$?
+if [ "$rc" = 2 ]; then echo "  ok    error de uso sitio inexistente: portal-negativo dio 2"
+else echo "  FALLA error de uso sitio inexistente: portal-negativo dio $rc"; fallas=$((fallas + 1)); fi
 
 if [ "$fallas" -gt 0 ]; then
   echo "== autoprueba: ROJO ($fallas fallas): la compuerta está rota"

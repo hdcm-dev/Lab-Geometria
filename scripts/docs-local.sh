@@ -3,7 +3,7 @@
 #
 # Es el MISMO guion que corre `.github/workflows/docs.yml`: en local da los mismos pasos en el mismo orden.
 # SÓLO EN EL HOST O EN EL RUNNER: necesita bash y python3, y la imagen del SDK no trae python3 (AGENTS.md:81).
-# No compila nada, no usa red y no escribe en el árbol.
+# No compila nada y no escribe en el árbol. Sólo el paso `portal` usa red y docker (se omite con DOCS_PORTAL=no).
 #
 # Uso:  scripts/docs-local.sh
 #       DOCS_MODO_DOCS_AS_CODE=bloquea scripts/docs-local.sh   # cómo correría docs-as-code/** en bloquea
@@ -17,6 +17,9 @@
 #                 SDD/Docs/**       avisa, sin _legacy/ (generado; lo desalineado se eleva, AGENTS.md:61)
 #   punto de uso  anclas, limite-didactico y pista-sin-enlaces sobre docs-as-code/** (tramo T-3), en avisa
 #   recuento    la instantánea OpenAPI contra la tabla de operaciones de Contratos-REST.md (tramo T-6), en avisa.
+#   portal      build del portal en contenedor fijo (scripts/docs-portal.sh) y portal-negativo sobre el sitio (PR-P4),
+#               en avisa. Necesita docker y red (PyPI con hashes): con DOCS_PORTAL=no, o sin docker, queda «omitido».
+#               En CI lo corre el job `portal` de docs.yml, aparte, y el job `docs` lo omite para seguir sin red.
 #   versiones-fijas  workflows y Dockerfiles sin versiones flotantes ni imágenes sin digest (folio 018), en avisa
 #               oasdiff y Spectral necesitan Docker y corren aparte (docs-as-code/controles/openapi.sh, job `openapi`)
 # En «avisa» un control con hallazgos queda en el resumen y no cambia el código de salida.
@@ -97,6 +100,14 @@ paso "docs-as-code · pista-sin-enlaces" avisa python3 -I "$CTL/pista_sin_enlace
 
 # Recuento OpenAPI (tramo T-6): en avisa fijo; lo que encuentra en el contrato del SDD se eleva, no se corrige.
 paso "docs-as-code · recuento-openapi"  avisa python3 -I "$CTL/recuento_openapi.py"
+
+# Portal (folio 018 §8, PR-P4): mkdocs build --strict en la imagen fija y portal-negativo sobre el sitio, en avisa.
+# El sitio queda fuera del árbol (directorio temporal). DOCS_PORTAL=no lo omite (job `docs` de CI, sin red).
+if [ "${DOCS_PORTAL:-si}" != no ] && command -v docker >/dev/null; then
+  paso "portal · build y negativo"     avisa bash scripts/docs-portal.sh
+else
+  RESUMEN+=("$(printf '  %-34s %s' "portal · build y negativo" "omitido (DOCS_PORTAL=no o sin docker)")")
+fi
 
 # Versiones fijas (folio 018 §7, PR-P2): workflows y Dockerfiles. Arranca en avisa y pasa a bloquea tras una corrida
 # limpia; hoy quedan hallazgos fuera de deploy-front-ftp.yml (ci.yml, e2e.yml, deploy/Dockerfile*).

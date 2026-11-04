@@ -35,6 +35,7 @@ jobs:
     timeout-minutes: 5
     env:
       DOCS_MODO_DOCS_AS_CODE: avisa
+      DOCS_PORTAL: 'no'   # el portal lo construye el job `portal`, que es el único con red
     steps:
       - uses: actions/checkout@v4.2.2
         with:
@@ -42,6 +43,40 @@ jobs:
 
       - name: Compuerta de docs (huella, autoprueba y controles por ámbito)
         run: bash scripts/docs-local.sh
+
+  # Portal de documentación (expediente 0003, folio 018 §2 y §8, PR-P4). Construye el sitio con MkDocs Material en la
+  # imagen de Python fijada por digest (`scripts/docs-portal.sh`, dependencias con `--require-hashes`), lo construye
+  # dos veces para exigir que sea reproducible, corre `portal_negativo.py` sobre él y lo sube como ARTEFACTO.
+  #   - NO publica ni despliega: no hay secretos, ni permiso de escritura, ni dominio (la exposición la decide el PO).
+  #   - Mismo endurecimiento que la compuerta: `contents: read`, sin `paths`, acciones con versión fija.
+  #   - En AVISA (folio 018 §7): un hallazgo de portal-negativo es una advertencia y el job queda verde. Rojo si el
+  #     build `--strict` falla o si dos corridas del mismo commit dan sitios distintos.
+  portal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Build del portal en contenedor fijo, dos veces, y portal-negativo (avisa)
+        env:
+          PORTAL_SALIDA: ${{ runner.temp }}/portal
+          PORTAL_REPRODUCIBLE: si
+        run: |
+          rc=0
+          salida="$(bash scripts/docs-portal.sh 2>&1)" || rc=$?
+          printf '%s\n' "$salida" | sed 's/^::error /::warning /'
+          if [ "$rc" != 0 ] && ! printf '%s\n' "$salida" | grep -q '^== portal-negativo: ROJO'; then exit "$rc"; fi
+
+      - name: Subir el sitio como artefacto (no se despliega)
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: portal-sitio
+          path: ${{ runner.temp }}/portal/site
+          if-no-files-found: error
+          retention-days: 7
 
   # Controles OpenAPI (expediente 0003, tramo T-6): oasdiff `breaking` (Tufin) y Spectral (tres reglas propias) sobre
   # la instantánea `docs-as-code/api/openapi-v1.json`. Job aparte de la compuerta porque necesita Docker y baja dos

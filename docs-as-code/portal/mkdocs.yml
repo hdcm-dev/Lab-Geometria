@@ -1,0 +1,53 @@
+# Portal de documentación de Lab-Geometria (expediente 0003, folio 018 §2 y §3, PR-P4).
+#
+# No se corre suelto: lo corre scripts/docs-portal.sh dentro de la imagen fija, con `mkdocs build --strict`. El
+# contenido NO es el árbol del repo: docs-as-code/portal/preparar.py copia a PORTAL_DOCS_DIR sólo las piezas del
+# manifiesto publicar.yml, con sus mismas rutas (README.md queda como página de inicio).
+#
+# Enlaces: un enlace relativo a una pieza no publicada (p. ej. a SDD/Docs) queda como está y se informa sin cortar el
+# build (`validation` en info). Su reescritura a URLs absolutas del portal y el control portal_salida.py llegan con
+# PR-P5 (folio 018 §3 y §7).
+site_name: Lab-Geometria · documentación
+site_description: Documentación pública de consulta de Lab-Geometria.
+# El dominio lo decide el PO (folio 018, excepción); hasta entonces el sitemap usa una URL local.
+site_url: !ENV [PORTAL_SITE_URL, 'http://localhost:8080/']
+docs_dir: !ENV PORTAL_DOCS_DIR
+use_directory_urls: true
+strict: true
+
+theme:
+  name: material
+  language: es
+  font: false            # sin Google Fonts: el portal no pide nada a terceros
+  features:
+    - navigation.indexes
+    - content.code.copy
+
+plugins:
+  - search:
+      lang: es
+
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.superfences
+
+validation:
+  omitted_files: warn
+  absolute_links: info
+  unrecognized_links: info
+  anchors: info
+  links:
+    not_found: info
+    anchors: info
+    absolute_links: info
+    unrecognized_links: info
+
+nav:
+  - Inicio: README.md
+  - Glosario: docs-as-code/glosario.md
+  - Cómo intervenir: docs-as-code/como-intervenir.md
+  - Punto de uso: docs-as-code/punto-de-uso/catalogo.md
+  - API · cambios: docs-as-code/api/CHANGELOG-API.md
