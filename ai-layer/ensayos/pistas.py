@@ -3,7 +3,7 @@
 #
 #   python3 -I pistas.py --banco <salida.json>              genera el banco determinista de 30 casos
 #   python3 -I pistas.py --autoprueba                        prueba el filtro sin modelo (rc 0 = pasa)
-#   OLLAMA_URL=<url> python3 -I pistas.py --correr <banco.json> <variante A|B> <registro.jsonl>
+#   OLLAMA_URL=<url> python3 -I pistas.py --correr <banco.json> <variante A|B> <registro.jsonl> [--prompt v1|v2]
 #
 # No es codigo del producto: es la implementacion de referencia del filtro (REQ-IA-05, REQ-IA-06) y el
 # arnes de la prueba de concepto. El criterio de la corrida esta en Criterio-R-LLM.md, escrito antes.
@@ -21,6 +21,16 @@ PROMPT_SISTEMA = (
     "3) no corrijas el texto del alumno; 4) nivel1 dice donde mirar; nivel2 dice que concepto geometrico "
     "interviene; nivel3 dice como comprobarlo paso a paso, sin numeros. Cada pista en una o dos oraciones."
 )
+
+# Prompt v2 candidato (01 seccion 5.2, actuacion 010): reglas 1 a 4 sin cambio, se agregan 5 a 7.
+# No es el prompt del codigo: se mide en GEO-04 (--prompt v2) y entra sólo si la corrida lo sostiene.
+PROMPT_V2 = PROMPT_SISTEMA.replace(
+    " Cada pista en una o dos oraciones.",
+    " 5) escribi en espanol rioplatense, con voseo (mira, revisa, fijate), nunca con tu; 6) el nivel 1 nombra la "
+    "parte del programa que calcula el campo indicado, no las dimensiones ni las variables; 7) el nivel 3 propone "
+    "una comprobacion que el alumno hace solo; nunca escribas la formula ni la operacion completa, es decir, que "
+    "hacer con que medida y cuantas veces (multiplica por seis, eleva al cuadrado). Cada pista en una o dos oraciones.")
+PROMPTS = {"v1": PROMPT_SISTEMA, "v2": PROMPT_V2}
 
 ESQUEMA = {
     "type": "object",
@@ -122,7 +132,7 @@ def pedir(url, cuerpo):
     with urllib.request.urlopen(req, timeout=600) as r:
         return json.load(r)
 
-def correr(banco_path, variante, registro):
+def correr(banco_path, variante, registro, prompt="v1"):
     url = os.environ.get("OLLAMA_URL")
     if not url:
         print("falta OLLAMA_URL (sin valor por omision a proposito)", file=sys.stderr)
@@ -138,8 +148,8 @@ def correr(banco_path, variante, registro):
             t0 = time.time()
             cuerpo = {
                 "model": MODELO, "stream": False, "think": False, "format": ESQUEMA,
-                "options": {"temperature": 0.2, "seed": 7, "num_ctx": 4096},
-                "messages": [{"role": "system", "content": PROMPT_SISTEMA}, {"role": "user", "content": mensaje(c, variante)}],
+                "options": {"temperature": 0.2, "seed": 7, "num_ctx": 4096, "num_predict": 400},
+                "messages": [{"role": "system", "content": PROMPTS[prompt]}, {"role": "user", "content": mensaje(c, variante)}],
             }
             try:
                 resp = pedir(url + "/api/chat", cuerpo)
@@ -158,7 +168,7 @@ def correr(banco_path, variante, registro):
             fuga_filtrada = aceptadas is not None and contiene_valor(" ".join(aceptadas.values()), c["derivado"])
             fila = {"caso": c["id"], "variante": variante, "segundos": seg, "error": err, "crudo": crudo,
                     "motivo_rechazo": motivo, "fuga_cruda": fuga_cruda, "fuga_filtrada": fuga_filtrada,
-                    "modelo": MODELO, "digest": DIGEST, "fecha": time.strftime("%Y-%m-%dT%H:%M:%S%z")}
+                    "modelo": MODELO, "digest": DIGEST, "prompt": prompt, "fecha": time.strftime("%Y-%m-%dT%H:%M:%S%z")}
             reg.write(json.dumps(fila, ensure_ascii=False) + "\n")
             reg.flush()
             print(c["id"], variante, seg, motivo, "fuga_cruda" if fuga_cruda else "")
@@ -177,5 +187,7 @@ if __name__ == "__main__":
         sys.exit(autoprueba())
     if a[:1] == ["--correr"] and len(a) == 4 and a[2] in ("A", "B"):
         sys.exit(correr(a[1], a[2], a[3]))
+    if a[:1] == ["--correr"] and len(a) == 6 and a[2] in ("A", "B") and a[4] == "--prompt" and a[5] in PROMPTS:
+        sys.exit(correr(a[1], a[2], a[3], a[5]))
     print(__doc__ or "uso: ver cabecera", file=sys.stderr)
     sys.exit(2)

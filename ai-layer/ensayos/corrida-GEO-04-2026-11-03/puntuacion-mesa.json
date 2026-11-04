@@ -1,0 +1,152 @@
+{
+ "C01": {
+  "juez": 4,
+  "marca": "ambigua",
+  "voseo": true
+ },
+ "C02": {
+  "juez": 3,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C03": {
+  "juez": 3,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C04": {
+  "juez": 3,
+  "marca": null,
+  "voseo": true
+ },
+ "C05": {
+  "juez": 5,
+  "marca": null,
+  "voseo": true
+ },
+ "C06": {
+  "juez": 3,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C07": {
+  "juez": 2,
+  "marca": "ambigua",
+  "voseo": true
+ },
+ "C08": {
+  "juez": 4,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C09": {
+  "juez": 3,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C10": {
+  "juez": 4,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C11": {
+  "juez": 3,
+  "marca": null,
+  "voseo": true
+ },
+ "C12": {
+  "juez": 3,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C13": {
+  "juez": 4,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C14": {
+  "juez": 4,
+  "marca": "ambigua",
+  "voseo": true
+ },
+ "C15": {
+  "juez": 3,
+  "marca": null,
+  "voseo": true
+ },
+ "C16": {
+  "juez": 3,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C17": {
+  "juez": 4,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C18": {
+  "juez": 2,
+  "marca": "ambigua",
+  "voseo": true
+ },
+ "C19": {
+  "juez": 2,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C20": {
+  "juez": 4,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C21": {
+  "juez": 2,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C22": {
+  "juez": 2,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C23": {
+  "juez": 3,
+  "marca": "ambigua",
+  "voseo": true
+ },
+ "C24": {
+  "juez": 3,
+  "marca": "ambigua",
+  "voseo": true
+ },
+ "C25": {
+  "juez": 3,
+  "marca": "ambigua",
+  "voseo": true
+ },
+ "C26": {
+  "juez": 3,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C27": {
+  "juez": 3,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C28": {
+  "juez": 3,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C29": {
+  "juez": 4,
+  "marca": "falsa",
+  "voseo": true
+ },
+ "C30": {
+  "juez": 3,
+  "marca": "falsa",
+  "voseo": true
+ }
+}

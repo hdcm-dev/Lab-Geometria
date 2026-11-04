@@ -1,0 +1,14 @@
+GEO-04 prompt v2 qwen3.5:4b think=false variante A
+casos 30
+aceptadas 30
+fuga_cruda 0
+fuga_filtrada 0
+errores 0
+frio 14.1
+p50 11.4
+p95 13.5
+max 14.1
+sobre_20s 0
+juez_media 3.17
+falsas 19
+ambiguas 7
