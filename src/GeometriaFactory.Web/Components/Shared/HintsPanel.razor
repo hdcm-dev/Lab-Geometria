@@ -39,8 +39,9 @@
 else if (Unavailable)
 {
     @* LA CAÍDA NO BORRA NADA: la advertencia sigue arriba, y abajo queda «Probar de nuevo» con el
-       mismo pedido, sin reenviar el trabajo. *@
-    <p class="gf-banner gf-banner--error gf-mt-3" role="alert" tabindex="-1" autofocus>
+       mismo pedido, sin reenviar el trabajo. Llega con la página nueva: el foco lo lee una vez;
+       `role="alert"` además lo haría leer dos. *@
+    <p class="gf-banner gf-banner--error gf-mt-3" tabindex="-1" autofocus>
         No pudimos traer pistas para esta advertencia. Tu trabajo ya quedó guardado.
     </p>
 }

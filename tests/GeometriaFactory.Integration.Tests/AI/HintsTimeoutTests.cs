@@ -27,6 +27,7 @@ public sealed class HintsTimeoutTests : IDisposable
     {
         Assert.Equal(8, AiOptions.DefaultTimeoutSeconds);
         Assert.True(new AiOptions().TimeoutSeconds < DataServiceClient.RequestTimeout.TotalSeconds);
+        Assert.True(new AiOptions().TimeoutSeconds < DataServiceClient.HintsRequestTimeout.TotalSeconds);
     }
 
     /// <summary>

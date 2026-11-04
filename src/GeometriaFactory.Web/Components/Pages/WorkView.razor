@@ -72,7 +72,7 @@
    con el mismo nombre no puede quedar cacheado (`Web ADR-10008`). *@
 <script src="js/geometriafactory-visor.js?v=@VisorSeal.Value" defer fetchpriority="low"></script>
 
-<PageTitle>Vista de trabajo</PageTitle>
+<PageTitle>@(CanAskForHints && HintsAsked ? "Pistas para tu advertencia" : "Vista de trabajo")</PageTitle>
 
 @* Vuelve al listado de donde vino la persona: el propio si es el alumno, el de la comisión si es
    el administrador. Con sesión el papel sale de la sesión; sin sesión se cae al repliegue de la
@@ -218,6 +218,8 @@ else
                                             <dt>La geometría da</dt><dd class="gf-num">@derived.ToString("N2")</dd>
                                         </dl>
                                     }
+                                    @* G3: LA EXPLICACIÓN TAMBIÉN EN EL DETALLE, como la maqueta. *@
+                                    <p class="gf-caption">@Explain(observation)</p>
                                     @* G2 Y G3 DE LA MESA UX DEL 2026-11-03: LAS PISTAS SE PIDEN DESDE EL
                                        TRABAJO GUARDADO, sin reenviarlo, y se dibujan ADENTRO de esta
                                        advertencia, debajo de sus valores, que siguen a la vista. Sólo
@@ -594,6 +596,21 @@ else
     private bool CanAskForHints =>
         HintsEnabled && _work is not null && Session.IsOpen && !Session.IsAdministrator
         && !string.IsNullOrWhiteSpace(_work.OriginalJson);
+
+    /// <summary>La explicación de la observación; el mismo texto que la pantalla de envío.</summary>
+    private static string Explain(WorkObservation observation)
+    {
+        if (observation.Kind == WorkObservationKind.Warning)
+        {
+            return $"El valor de «{observation.Field}» que trae tu texto no coincide con el que se "
+                + "deriva de las dimensiones que tu propio programa emitió.";
+        }
+
+        return observation.PiecePosition is null
+            ? "No se pudo interpretar el texto. Revisá que sea el que emite tu programa, pegado entero."
+            : $"No se pudo interpretar el campo «{observation.Field}» de esta figura, así que la "
+                + "figura no se reconstruyó. El resto del texto sí se interpretó.";
+    }
 
     /// <summary>Si esta petición pidió pistas.</summary>
     private bool HintsAsked => HintsInput is not null && HintsForm.Index >= 0;

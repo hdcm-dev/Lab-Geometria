@@ -118,12 +118,30 @@ public sealed class DataServiceClient
     private const string ServiceUnavailableMessage =
         "El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.";
 
-    private readonly HttpClient _httpClient;
+    /// <summary>
+    /// Nombre del cliente propio de las pistas (G1 de la mesa UX del 2026-11-03). Lleva la misma
+    /// dirección y el mismo reenvío de origen que el cliente común, con su plazo declarado aparte en
+    /// <see cref="HintsRequestTimeout"/>.
+    /// </summary>
+    public const string HintsClientName = "GeometriaFactory.Web.Hints";
 
-    public DataServiceClient(HttpClient httpClient)
+    /// <summary>
+    /// Plazo del cliente de pistas. Igual que <see cref="RequestTimeout"/>, tiene que quedar por
+    /// encima del tope del servicio de datos (`AI:TimeoutSeconds`). Lo fija `HintsTimeoutTests`.
+    /// </summary>
+    public static readonly TimeSpan HintsRequestTimeout = TimeSpan.FromSeconds(10);
+
+    private readonly HttpClient _httpClient;
+    private readonly IHttpClientFactory? _httpClientFactory;
+
+    public DataServiceClient(HttpClient httpClient, IHttpClientFactory? httpClientFactory = null)
     {
         _httpClient = httpClient;
+        _httpClientFactory = httpClientFactory;
     }
+
+    /// <summary>El cliente de pistas si está registrado; si no (pruebas), el común.</summary>
+    private HttpClient HintsClient => _httpClientFactory?.CreateClient(HintsClientName) ?? _httpClient;
 
     /// <summary>
     /// Consulta el punto de salud del servicio de datos y devuelve lo que el servidor respondió.
@@ -348,6 +366,7 @@ public sealed class DataServiceClient
         string? accessToken,
         CancellationToken cancellationToken = default) =>
         SendAsync<WorkHintsRequest, WorkHintsResponse>(
+            HintsClient,
             HttpMethod.Post,
             HintsPath,
             new WorkHintsRequest(originalJson),
@@ -462,7 +481,7 @@ public sealed class DataServiceClient
         TRequest request,
         string? accessToken,
         CancellationToken cancellationToken) =>
-        SendAsync<TRequest, TResponse>(HttpMethod.Post, path, request, accessToken, cancellationToken);
+        SendAsync<TRequest, TResponse>(_httpClient, HttpMethod.Post, path, request, accessToken, cancellationToken);
 
     /// <summary>
     /// El ÚNICO lugar por donde sale una solicitud hacia el servicio de datos, cualquiera sea su
@@ -475,7 +494,16 @@ public sealed class DataServiceClient
     /// sola vez. Un cuerpo nulo no se envía —es el caso del `GET`— y un `DELETE` **sí** lo lleva,
     /// porque el correo escrito como confirmación tiene que viajar en el cuerpo.
     /// </remarks>
+    private Task<DataServiceOutcome<TResponse>> SendAsync<TRequest, TResponse>(
+        HttpMethod method,
+        string path,
+        TRequest? request,
+        string? accessToken,
+        CancellationToken cancellationToken) =>
+        SendAsync<TRequest, TResponse>(_httpClient, method, path, request, accessToken, cancellationToken);
+
     private async Task<DataServiceOutcome<TResponse>> SendAsync<TRequest, TResponse>(
+        HttpClient httpClient,
         HttpMethod method,
         string path,
         TRequest? request,
@@ -494,7 +522,7 @@ public sealed class DataServiceClient
                 message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             }
 
-            using var response = await _httpClient
+            using var response = await httpClient
                 .SendAsync(message, cancellationToken)
                 .ConfigureAwait(false);
 

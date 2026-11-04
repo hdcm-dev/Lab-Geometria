@@ -155,6 +155,14 @@
             return;
         }
 
+        // LA REGIÓN VIVA SE ESCRIBE YA, sin esperar el turno siguiente: escribirla no
+        // toca ningún campo del envío, y cuanto antes se escriba, más margen tiene el
+        // lector para anunciarla antes de que llegue la página nueva.
+        const region = form.querySelector('[role="status"]');
+        if (region !== null) {
+            region.textContent = label;
+        }
+
         window.setTimeout(function () {
             // LA MARCA DE OCUPADO VA PRIMERO, y no es cosmética: es lo que le dice a
             // `guardConfirmationMatch` que no toque esta acción. Sin eso, el envío de
@@ -174,10 +182,6 @@
             announcement.textContent = label;
             action.appendChild(announcement);
 
-            const region = form.querySelector('[role="status"]');
-            if (region !== null) {
-                region.textContent = label;
-            }
         }, 0);
     }
 
