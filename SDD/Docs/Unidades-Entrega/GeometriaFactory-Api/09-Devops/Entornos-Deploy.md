@@ -502,7 +502,7 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 | --- | --- | --- | --- |
 | `AI__Endpoint` | servicio de datos | **vacía, sin valor por omisión** | Dirección del servidor de modelos. Sin ella (o sin `AI__Model`) no hay cliente y las pistas salen de plantilla |
 | `AI__Model` | servicio de datos | vacía | Nombre del modelo en ese servidor |
-| `AI__TimeoutSeconds` | servicio de datos | `20` | Tope de espera por llamada |
+| `AI__TimeoutSeconds` | servicio de datos | `8` | Tope de espera de un pedido de pistas, sumadas sus llamadas al modelo. Tiene que quedar por debajo de los 10 s con que la Web espera al servicio de datos (actuación 013, G1) |
 | `AI__MaxObservations` | servicio de datos | `5` | Advertencias por pedido que van al modelo |
 | `AI__KeepAlive` | servicio de datos | `30m` | Cuánto mantiene el servidor el modelo cargado después del último pedido; viaja en cada pedido (`ADR-14012`). Un valor sin forma de duración cae a `30m` con aviso |
 | `AI__HintsEnabled` | pieza pública | `false` | Muestra «Ver pistas». En `false` la pantalla no cambia y no pide nada |
@@ -522,7 +522,7 @@ que `AccessToken__SigningKey`; acá sólo se documenta qué variable lleva cada 
 | --- | --- | --- | --- |
 | `AI__Endpoint` | `http://localhost:11434` si hay un servidor local; si no, vacía | secreto `ai_endpoint` | secreto `ai_endpoint` |
 | `AI__Model` | el que haya en el servidor local | `qwen3.5:4b` | `qwen3.5:4b` (alternativa `gemma4:e4b-it-qat`) |
-| `AI__TimeoutSeconds` | `20` (omisión) | `20` (omisión) | `20` (omisión) |
+| `AI__TimeoutSeconds` | `8` (omisión) | `8` (omisión) | `8` (omisión; actuación 013 enmienda los 20 s de la 010) |
 | `AI__MaxObservations` | `5` | `3` | `3` |
 | `AI__KeepAlive` | `30m` (omisión) | `30m` (omisión) | `-1` |
 | `AI__HintsEnabled` (Web) | `false` | `true` | `false` hasta la revisión docente de REQ-IA-13; después `true` |

@@ -1,0 +1,84 @@
+@using GeometriaFactory.Contracts.Works
+
+@* PISTAS DE UNA ADVERTENCIA (expediente 0002, V1; mesa UX del 2026-11-03, G3 a G6). Lo usan la
+   pantalla de envío y la vista del trabajo guardado, y por eso vive acá: una sola redacción del
+   rótulo, de la espera y de la línea de acción para las dos superficies.
+
+   LO QUE ESTE COMPONENTE NO DIBUJA: la advertencia. Va ARRIBA, la dibuja la pantalla que lo usa y
+   queda a la vista (G3): las pistas son ayuda subordinada al dato verificado, nunca su reemplazo.
+
+   G4 · RÓTULO ÚNICO POR TARJETA, PEGADO AL TEXTO. «Pista redactada por IA: puede no ser exacta» o
+   «Pista general del laboratorio» (sin «plantilla», que es jerga, y sin «docente», decisión D-2).
+   Se ve una vez, arriba de la lista, y CADA NIVEL LO REPITE EN SU TEXTO ACCESIBLE junto con «Pista
+   n de 3»: quien recorre la lista con un lector de pantalla oye la marca en cada pista.
+
+   G5 · EL FOCO VA A LA PISTA NUEVA. La pantalla se vuelve a dibujar entera después del envío del
+   formulario, y `autofocus` sobre el último nivel lleva el foco ahí sin guion. La espera la dibuja
+   `markPending` (`surface-interaction.js`) sobre el formulario de la pantalla.
+
+   G6 · UNA LÍNEA FIJA DICE QUÉ HACER CON LA PISTA, también después del nivel 3. *@
+
+@if (Hints is { } hints)
+{
+    <p class="gf-caption gf-mt-3" id="@($"{IdPrefix}-origin")"><strong>@OriginLabel(hints.Origin)</strong></p>
+    <ol class="gf-mt-2">
+        @for (var level = 1; level <= ShownLevel; level++)
+        {
+            var text = level switch { 1 => hints.Level1, 2 => hints.Level2, _ => hints.Level3 };
+            var newest = level == ShownLevel;
+            <li tabindex="-1" autofocus="@newest" id="@($"{IdPrefix}-level-{level}")">
+                <span class="gf-sr-only">Pista @level de 3. @OriginLabel(hints.Origin). </span>
+                <p>@text</p>
+            </li>
+        }
+    </ol>
+    <p class="gf-caption gf-mt-3" id="@($"{IdPrefix}-next-step")">
+        @NextStepText <a href="/trabajo-nuevo">Cargar una versión nueva</a>
+    </p>
+}
+else if (Unavailable)
+{
+    @* LA CAÍDA NO BORRA NADA: la advertencia sigue arriba, y abajo queda «Probar de nuevo» con el
+       mismo pedido, sin reenviar el trabajo. Llega con la página nueva: el foco lo lee una vez;
+       `role="alert"` además lo haría leer dos. *@
+    <p class="gf-banner gf-banner--error gf-mt-3" tabindex="-1" autofocus>
+        No pudimos traer pistas para esta advertencia. Tu trabajo ya quedó guardado.
+    </p>
+}
+
+@Actions
+
+@code {
+    /// <summary>Rótulo de la pista que redactó el modelo (G4).</summary>
+    public const string ModelOriginLabel = "Pista redactada por IA: puede no ser exacta";
+
+    /// <summary>Rótulo de la pista de respaldo del laboratorio (G4; antes «Pista de plantilla»).</summary>
+    public const string TemplateOriginLabel = "Pista general del laboratorio";
+
+    /// <summary>Texto de la espera, que `markPending` escribe en el botón y en la región viva (G5).</summary>
+    public const string PendingLabel = "Buscando una pista…";
+
+    /// <summary>La línea fija de acción (G6).</summary>
+    public const string NextStepText = "Usá la pista para revisar tu programa. Para corregir el trabajo, cargá una versión nueva.";
+
+    /// <summary>Las pistas de la advertencia, o nada si todavía no se pidieron o no llegaron.</summary>
+    [Parameter] public WorkObservationHints? Hints { get; set; }
+
+    /// <summary>Hasta qué nivel se pidió (divulgación progresiva, D-NIVEL3).</summary>
+    [Parameter] public int Level { get; set; } = 1;
+
+    /// <summary>Si el pedido de pistas falló.</summary>
+    [Parameter] public bool Unavailable { get; set; }
+
+    /// <summary>Prefijo de los <c>id</c> del bloque, para que dos bloques no choquen en la misma página.</summary>
+    [Parameter] public string IdPrefix { get; set; } = "hints";
+
+    /// <summary>Los controles que pone la pantalla: otra pista, probar de nuevo, volver.</summary>
+    [Parameter] public RenderFragment? Actions { get; set; }
+
+    private int ShownLevel => Math.Clamp(Level, 1, 3);
+
+    /// <summary>El rótulo del origen (G4). Cualquier origen que no sea el modelo es del laboratorio.</summary>
+    public static string OriginLabel(string origin) =>
+        origin == "Model" ? ModelOriginLabel : TemplateOriginLabel;
+}

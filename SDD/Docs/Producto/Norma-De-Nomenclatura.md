@@ -2220,7 +2220,7 @@ antes del código de la Web, y la constancia del tramo T8 lo registra como apart
 | alta de la capa de IA y dirección del modelo | `AddAiLayer` / `ModelEndpointOf` | Miembros privados de `CompositionRoot` | `ADR-14007` |
 | ruta de pistas (cliente) | `HintsPath` | Constante de `DataServiceClient` | Espejo de `HintsRoute` |
 | formulario de pistas en la pantalla | `HintsInput` / `HintsForm` / `IsHintsPost` / `HintsLevel` | Miembros de `WorkSubmission.razor` | D-NIVEL3, divulgación progresiva |
-| rótulo de origen y posición | `OriginLabel` / `IndexOf` | Miembros privados de `WorkSubmission.razor` | El origen se ve: «Pista automática» o «Pista de plantilla» |
+| rótulo de origen y posición | `OriginLabel` / `IndexOf` | Miembros privados de `WorkSubmission.razor` | El origen se ve: «Pista automática» o «Pista de plantilla». **`OriginLabel` SUPERADO el 2026-11-03 por §6.27.5**: se muda a `HintsPanel` con los rótulos de G4 |
 | formulario de pistas (marcado) | `gf-hints` | Identificador de elemento (`id`), no atributo `data-gf-*` ni clase | El botón «Ver pistas» lo nombra con `form=`; no toca la lista cerrada de `C-4` |
 | dobles y arneses de prueba de la capa | `FakeChatClient` / `CapturingLogger` / `CapturingLoggerProvider` / `AiDataServiceHarness` | Tipos de prueba | `ai-layer/01` §5.1, «Doble»; sin librerías de mocking |
 
@@ -2241,6 +2241,35 @@ código, como manda §6.1.
 | servicio de precarga al arrancar | `ModelWarmupHostedService` | Tipo de la composición | REQ-IA-17 |
 | pruebas de la precarga y de las salidas reales | `ModelWarmupTests` / `HintFilterRealOutputsTests` | Tipos de prueba | REQ-IA-17 y 18; decisión D-09 de la actuación 010 |
 | versión del contrato de pistas y su prueba «código = ficha» | `ContractVersion` / `HintContractMatchesSpecTests` | Constante de `TemplateHints` y tipo de prueba | `ai-layer/01` §5.2; mesa 0004, K-1 y K-15 |
+
+#### 6.27.5 Mesa UX de la capa de IA, G1 a G6 (16 filas)
+
+Las trae la actuación 013 del expediente 0002 (mesa UX del 2026-11-03, «lo que se puede hacer ya» en
+Geometría). Entran **antes** del código, como manda §6.1. Los nombres de la pieza de pruebas de extremo a
+extremo siguen la convención en castellano de ese proyecto, ya declarada como deuda en §6.26.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| tope por omisión de un pedido de pistas | `DefaultTimeoutSeconds` | Constante de `AiOptions` | G1: 8 s, por debajo de los 10 s de la Web; `ADR-14012`, enmienda de la actuación 013 |
+| inicio del tope del pedido | `_budgetStarted` | Campo privado de `ModelObservationHintWriter` | G1: el tope cubre todas las llamadas de un pedido, no cada una |
+| espera de la Web al servicio de datos | `RequestTimeout` | Constante de `DataServiceClient` | G1: 10 s; tiene que superar a `AI:TimeoutSeconds` |
+| bloque de pistas de una advertencia | `HintsPanel` | Componente compartido de la Web | G3 a G6; lo usan `WorkSubmission.razor` y `WorkView.razor` |
+| rótulos de origen | `ModelOriginLabel` / `TemplateOriginLabel` | Constantes de `HintsPanel` | G4: «Pista redactada por IA: puede no ser exacta» / «Pista general del laboratorio» |
+| texto de la espera y línea de acción | `PendingLabel` / `NextStepText` | Constantes de `HintsPanel` | G5 («Buscando una pista…») y G6 |
+| parámetros del bloque | `Hints` / `Level` / `Unavailable` / `IdPrefix` / `Actions` | Parámetros de `HintsPanel` | `Hints` y `Level` homónimos declarados del tipo `Hints` y de los niveles de §6.27.1 (§4.1) |
+| nivel mostrado y rótulo de origen | `ShownLevel` / `OriginLabel` | Miembros de `HintsPanel` | `OriginLabel` se muda desde `WorkSubmission.razor` (§6.27.3) con los textos nuevos de G4 |
+| vista de pistas en la pantalla de envío | `ShowsHints` | Miembro de `WorkSubmission.razor` | G3/G5: título y `h1` propios de la vista de pistas |
+| formulario de pistas del trabajo guardado | `WorkViewHintsForm` / `Step` | Tipo y miembro de `WorkView.razor` | G2: `índice:nivel`; el texto no viaja, se toma del trabajo guardado |
+| quién puede pedir, si se pidió y armado del paso | `CanAskForHints` / `HintsAsked` / `StepOf` | Miembros de `WorkView.razor` | G2 y O14: sólo quien escribió el trabajo, con el flag encendido |
+| formulario de pistas en el detalle | `HintsInput` / `HintsForm` / `HintsLevel` / `HintsEnabled` / `ExplainAsync` / `work-hints` / `gf-hints` | Miembros, nombre de formulario e identificador de `WorkView.razor` | Los mismos nombres de §6.27.2 y §6.27.3 en la segunda superficie; mismo concepto |
+| ubicación de una advertencia (marcado) | `finding-location-{n}` | Identificador de elemento (`id`) | G6/F9: el `aria-describedby` de cada «Ver pistas» |
+| pruebas del tope | `HintsTimeoutTests` | Tipo de prueba | G1, REQ-IA-07 y REQ-IA-10 |
+| recorrido de pistas en el navegador | `PistasDeLaCapaDeIaTests` | Tipo de prueba de extremo a extremo | G1 a G6 |
+| servidor de modelos que no contesta | `ModeloQueNoContesta` | Tipo de la infraestructura de pruebas de extremo a extremo | G1: el modelo lento del banco local, sobre el bucle local |
+
+**`markPending` no cambia de nombre** (§6.17.2): ahora toma la acción que disparó el envío y escribe el texto
+de `data-gf-pending` también en la región viva del formulario. **No se agrega ningún atributo `data-gf-*`**:
+la lista cerrada de §6.17.3 y §6.26 queda igual.
 
 ## 7. Cómo se verifica esta norma
 
@@ -2464,6 +2493,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.35 | 2026-11-03 | **Agrega §6.27.5 con 16 filas de la mesa UX de la capa de IA (expediente 0002, actuación 013, G1 a G6)**, antes del código. Marca superada la fila de `OriginLabel` de §6.27.3. Ningún atributo `data-gf-*` nuevo; ningún código de condición nuevo; no renombra nada. | Implementador de la capa de IA, por la actuación 013 del expediente 0002 |
 | 1.34 | 2026-11-03 | **Agrega §6.27.4 con 10 filas de la permanencia y la precarga del modelo (expediente 0002, actuación 010, `ADR-14012`; la décima, `ContractVersion` y su prueba, por la mesa 0004)**, antes del código. Ningún código de condición nuevo; no renombra nada. | Implementador de la capa de IA, por la resolución de la actuación 010 del expediente 0002 |
 | 1.33 | 2026-11-02 | **Agrega §6.27.3 con 14 filas de miembros internos y de prueba de la capa de IA (expediente 0002)**, antes del código de la Web (tramo T6). Las de los tramos T3 y T4 llegan con atraso y se declaran como apartamiento de §6.1 en la constancia del expediente. | Implementador de la capa de IA |
 | 1.32 | 2026-11-02 | **Agrega §6.27 con los identificadores de la capa de IA (expediente 0002)**: las 19 filas de `ai-layer/04-Propuesta-Norma-De-Nomenclatura.md` §2 sin cambios —las cinco de V2 marcadas **reservadas** porque V2 quedó diferida— y 25 filas que la construcción de V1 necesitó, con su motivo. Entran antes del código, como manda §6.1 y `ADR-14010`. Ningún código de condición nuevo; un homónimo declarado (`Model`). No renombra nada. | Implementador de la capa de IA, por la resolución de la actuación 007 del expediente 0002 |

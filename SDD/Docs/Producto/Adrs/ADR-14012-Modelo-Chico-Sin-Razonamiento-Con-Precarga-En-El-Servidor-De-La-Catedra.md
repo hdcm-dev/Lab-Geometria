@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-14012-Modelo-Chico-Sin-Razonamiento-Con-Precarga-En-El-Servidor-De-La-Catedra.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** **Aceptada por la mesa** (expediente 0002, actuación 010), por delegación del Product Owner
 **Fecha:** 2026-11-03
 **Autor:** Mesa de Geometría (relator y especialistas en evaluación de modelos, seguridad de LLM, didáctica y despliegue; agentes)
@@ -55,6 +55,15 @@ pisa es un lugar más donde equivocarse.
    el modelo al arrancar (`ModelWarmup`) y cada pedido le pide al servidor que lo mantenga cargado
    (`keep_alive`: `-1` en producción, `30m` por omisión). La precarga es defensa en profundidad hoy y es
    necesaria si alguna vez se vuelve a un modelo grande.
+   **Enmienda 1.1 (actuación 013, mesa UX del 2026-11-03):** el tope pasa a **8 s por pedido de pistas**,
+   sumadas todas sus llamadas al modelo, y deja de ser «por llamada». Motivo: la Web espera al servicio de
+   datos 10 s, y con 20 s por llamada la Web cortaba primero y la alumna recibía un error en lugar de la
+   plantilla (REQ-IA-07 roto desde la pantalla, hallazgo F3, 6 de 6 intentos). La regla que rige ahora es
+   **el servicio de datos corta antes que la Web**. Consecuencia declarada: con el modelo en CPU compartida
+   (p95 12,6 s) la pista sale casi siempre de plantilla; la pista de modelo vuelve cuando GEO-05 fije modelo y
+   hardware. Es configuración (`AI__TimeoutSeconds`) y se revierte sin código, siempre por debajo de los 10 s
+   de la Web. El punto 4 (frío) queda como defensa en profundidad: con 8 s el frío ya no entra, y la precarga
+   pasa a ser necesaria.
 5. **Puesta en uso:** el flag de la Web sigue apagado en producción hasta que el docente puntúe la utilidad
    (REQ-IA-13). Esta ADR decide con qué se enciende, no cuándo.
 
@@ -83,4 +92,5 @@ entran antes a la Norma de Nomenclatura (`ADR-14010`).
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.1 | 2026-11-03 | Enmienda del punto 3 por la actuación 013 (mesa UX, G1): 8 s por pedido, el servicio de datos corta antes que la Web | Implementador de la capa de IA |
 | 1.0 | 2026-11-03 | Emisión: asienta ADR-IA-07 con número del repositorio, por la resolución de la actuación 010 del expediente 0002 | Mesa de Geometría |

@@ -57,6 +57,14 @@ public sealed class ModelObservationHintWriter : IObservationHintWriter
     private readonly ILogger<ModelObservationHintWriter> _logger;
     private readonly bool _includeContentInTelemetry;
 
+    /// <summary>
+    /// Cuándo empezó a correr el tope de ESTE pedido (G1 de la mesa UX del 2026-11-03). El redactor
+    /// es de alcance por petición, de modo que el tope cubre todas las llamadas de un mismo pedido
+    /// de pistas y no cada una: con tres advertencias, 3 × 8 s habrían vuelto a pasar los 10 s de la
+    /// Web y la alumna se quedaba sin la plantilla (REQ-IA-07). Cero mientras no hubo llamada.
+    /// </summary>
+    private long _budgetStarted;
+
     public ModelObservationHintWriter(
         IChatClient? chatClient,
         HintConcurrencyGate gate,
@@ -70,7 +78,7 @@ public sealed class ModelObservationHintWriter : IObservationHintWriter
 
         _chatClient = chatClient;
         _gate = gate;
-        _timeout = TimeSpan.FromSeconds(options.TimeoutSeconds > 0 ? options.TimeoutSeconds : 20);
+        _timeout = TimeSpan.FromSeconds(options.TimeoutSeconds > 0 ? options.TimeoutSeconds : AiOptions.DefaultTimeoutSeconds);
         _logger = logger;
         _includeContentInTelemetry = includeContentInTelemetry;
     }
@@ -92,17 +100,30 @@ public sealed class ModelObservationHintWriter : IObservationHintWriter
             return Trace(HintResult.Degraded(template, "sin-servidor"), 0);
         }
 
+        var started = Stopwatch.GetTimestamp();
+
+        if (_budgetStarted == 0)
+        {
+            _budgetStarted = started;
+        }
+
+        // LO QUE QUEDA DEL TOPE DEL PEDIDO. Agotado, la plantilla sale sin tocar el modelo ni el cupo.
+        var remaining = _timeout - Stopwatch.GetElapsedTime(_budgetStarted);
+
+        if (remaining <= TimeSpan.Zero)
+        {
+            return Trace(HintResult.Degraded(template, "fuera-de-tiempo"), 0);
+        }
+
         if (!_gate.TryEnter())
         {
             return Trace(HintResult.Degraded(template, "cupo-ocupado"), 0);
         }
 
-        var started = Stopwatch.GetTimestamp();
-
         try
         {
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-            timeout.CancelAfter(_timeout);
+            timeout.CancelAfter(remaining);
 
             var messages = MessagesFor(request);
 

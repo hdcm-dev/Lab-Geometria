@@ -208,10 +208,19 @@ var apiBaseUrl = builder.Configuration["ApiBaseUrl"]
 builder.Services.AddHttpClient<DataServiceClient>(client =>
 {
     client.BaseAddress = new Uri(apiBaseUrl, UriKind.Absolute);
-    client.Timeout = TimeSpan.FromSeconds(10);
+    client.Timeout = DataServiceClient.RequestTimeout;
 })
 // El servicio de datos limita lo anónimo por dirección de origen: sin esto, detrás del front toda
 // la comisión compartía una sola cuota (R-02). Ver `BrowserOriginForwardingHandler`.
+.AddHttpMessageHandler<BrowserOriginForwardingHandler>();
+
+// G1 DE LA MESA UX DEL 2026-11-03: LAS PISTAS VAN POR UN CLIENTE CON NOMBRE PROPIO, con su plazo
+// declarado aparte y por encima del tope del servicio de datos. Mismo origen reenviado (R-02).
+builder.Services.AddHttpClient(DataServiceClient.HintsClientName, client =>
+{
+    client.BaseAddress = new Uri(apiBaseUrl, UriKind.Absolute);
+    client.Timeout = DataServiceClient.HintsRequestTimeout;
+})
 .AddHttpMessageHandler<BrowserOriginForwardingHandler>();
 
 var app = builder.Build();

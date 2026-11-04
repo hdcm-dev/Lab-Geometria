@@ -79,7 +79,7 @@
    RA-01: el envío sale desde el servidor de esta pieza, por `DataServiceClient`.
    RA-03: ningún mensaje de esta superficie nombra una dirección interna. *@
 
-<PageTitle>Envío de trabajo</PageTitle>
+<PageTitle>@(ShowsHints ? "Pistas para tu advertencia" : "Envío de trabajo")</PageTitle>
 
 @* EL PAQUETE DEL VISOR SE CARGA ACÁ Y NO EN EL DOCUMENTO COMÚN, y no es una preferencia: el
    inventario de guiones de `verify-stage-c.sh` mide **un solo guion propio** sobre las ocho
@@ -103,8 +103,8 @@
    misma pantalla, y la de arriba es la que se lee primero. *@
 <div class="gf-page-header">
     <div>
-        <h1>@(_result is null ? Heading : "Tu trabajo se envió")</h1>
-        @if (_result is null)
+        <h1>@(ShowsHints ? "Pistas para tu advertencia" : _result is null ? Heading : "Tu trabajo se envió")</h1>
+        @if (_result is null && !ShowsHints)
         {
             <p class="gf-subtitle">Pegá el texto tal como lo devolvió tu programa. No hace falta que le cambies nada.</p>
         }
@@ -136,64 +136,64 @@ else if (_state is Outcome.NotFound)
     </p>
     <a class="gf-btn gf-btn--secondary gf-mt-3" href="/mis-trabajos">Volver a mis trabajos</a>
 }
-else if (HintsEnabled && IsHintsPost)
+else if (ShowsHints)
 {
     @* ---- Pistas sobre una advertencia (expediente 0002, V1). DIVULGACIÓN PROGRESIVA (decisión
        D-NIVEL3): el nivel 1 al pedirlas, el 2 con «Otra pista» y el 3 SÓLO con «Ver la última
        pista». Los niveles que no se pidieron NO ESTÁN en el marcado. El texto se dibuja
-       CODIFICADO, nunca como marcado. Cada pista dice su origen. ---- *@
-    <section class="gf-card" role="status" aria-labelledby="hints-heading" tabindex="-1">
-        <h2 id="hints-heading" class="gf-title">Pistas para tu advertencia</h2>
+       CODIFICADO, nunca como marcado.
+
+       G3 DE LA MESA UX DEL 2026-11-03: LA ADVERTENCIA COMPLETA QUEDA ARRIBA DE LAS PISTAS —dónde,
+       qué pasó y los dos valores—, también cuando las pistas no llegan. Antes sólo quedaba la
+       ubicación, y en la caída ni eso: la alumna perdía el dato verificado justo al pedir ayuda. ---- *@
+    <section class="gf-card" aria-labelledby="hints-heading">
+        <h2 id="hints-heading" class="gf-title">Tu advertencia</h2>
 
         @if (_hintsObservation is { } hinted)
         {
-            <p class="gf-finding-location gf-mt-2">@LocationOf(hinted)</p>
+            <div class="gf-finding gf-mt-3">
+                <span class="gf-badge gf-badge--warning">Advertencia</span>
+                <div class="gf-finding-body">
+                    <p class="gf-finding-location">@LocationOf(hinted)</p>
+                    <p>@Explain(hinted)</p>
+                    @if (hinted is { DeclaredValue: { } declared, DerivedValue: { } derived })
+                    {
+                        <dl class="gf-values">
+                            <dt>Tu programa declara</dt><dd class="gf-num">@declared.ToString("N2")</dd>
+                            <dt>La geometría da</dt><dd class="gf-num">@derived.ToString("N2")</dd>
+                        </dl>
+                    }
+                </div>
+            </div>
         }
 
-        @if (_hints is { } hints)
-        {
-            <ol class="gf-mt-3">
-                <li>
-                    <p>@hints.Level1</p>
-                    <p class="gf-caption">@OriginLabel(hints.Origin)</p>
-                </li>
-                @if (HintsLevel >= 2)
-                {
-                    <li>
-                        <p>@hints.Level2</p>
-                        <p class="gf-caption">@OriginLabel(hints.Origin)</p>
-                    </li>
-                }
-                @if (HintsLevel >= 3)
-                {
-                    <li>
-                        <p>@hints.Level3</p>
-                        <p class="gf-caption">@OriginLabel(hints.Origin)</p>
-                    </li>
-                }
-            </ol>
-        }
-        else if (_hintsUnavailable)
-        {
-            <p class="gf-banner gf-banner--error gf-mt-2" role="alert">
-                No pudimos traer pistas para esta advertencia. Tu trabajo ya quedó guardado.
-            </p>
-        }
-
-        <form id="gf-hints" method="post" @formname="work-hints" @onsubmit="ExplainAsync" class="gf-footer-actions gf-mt-3">
-            <AntiforgeryToken />
-            <input type="hidden" name="HintsInput.OriginalJson" value="@HintsForm.OriginalJson" />
-            <input type="hidden" name="HintsInput.Index" value="@HintsForm.Index" />
-            @if (_hints is not null && HintsLevel == 1)
-            {
-                <button type="submit" class="gf-btn gf-btn--secondary" name="HintsInput.Level" value="2">Otra pista</button>
-            }
-            else if (_hints is not null && HintsLevel == 2)
-            {
-                <button type="submit" class="gf-btn gf-btn--secondary" name="HintsInput.Level" value="3">Ver la última pista</button>
-            }
-            <a class="gf-btn gf-btn--primary" href="/mis-trabajos">Volver a mis trabajos</a>
-        </form>
+        <HintsPanel Hints="_hints" Level="HintsLevel" Unavailable="_hintsUnavailable">
+            <Actions>
+                @* La región viva está en el marcado desde el principio (G5): `markPending` escribe
+                   ahí «Buscando una pista…» y el lector de pantalla lo anuncia. *@
+                <form id="gf-hints" method="post" @formname="work-hints" @onsubmit="ExplainAsync"
+                      class="gf-footer-actions gf-mt-3" data-gf-pending="@HintsPanel.PendingLabel">
+                    <AntiforgeryToken />
+                    <p class="gf-sr-only" role="status" aria-live="polite"></p>
+                    <input type="hidden" name="HintsInput.OriginalJson" value="@HintsForm.OriginalJson" />
+                    <input type="hidden" name="HintsInput.Index" value="@HintsForm.Index" />
+                    @if (_hints is not null && HintsLevel == 1)
+                    {
+                        <button type="submit" class="gf-btn gf-btn--secondary" name="HintsInput.Level" value="2">Otra pista</button>
+                    }
+                    else if (_hints is not null && HintsLevel == 2)
+                    {
+                        <button type="submit" class="gf-btn gf-btn--secondary" name="HintsInput.Level" value="3">Ver la última pista</button>
+                    }
+                    else if (_hints is null)
+                    {
+                        @* «PROBAR DE NUEVO» CON EL MISMO PEDIDO: no reenvía el trabajo (F5). *@
+                        <button type="submit" class="gf-btn gf-btn--secondary" name="HintsInput.Level" value="@HintsLevel">Probar de nuevo</button>
+                    }
+                    <a class="gf-btn gf-btn--primary" href="/mis-trabajos">Volver a mis trabajos</a>
+                </form>
+            </Actions>
+        </HintsPanel>
     </section>
 }
 else if (_result is { } result)
@@ -246,7 +246,7 @@ else if (_result is { } result)
                             @(observation.Kind == WorkObservationKind.ValidationError ? "Error" : "Advertencia")
                         </span>
                         <div class="gf-finding-body">
-                            <p class="gf-finding-location">@LocationOf(observation)</p>
+                            <p class="gf-finding-location" id="@($"finding-location-{IndexOf(result.Observations, observation)}")">@LocationOf(observation)</p>
                             <p>@Explain(observation)</p>
                             @if (observation is { DeclaredValue: { } declared, DerivedValue: { } derived })
                             {
@@ -263,8 +263,11 @@ else if (_result is { } result)
                                    omisión este bloque no existe y la pantalla queda como antes. El
                                    botón envía el formulario de pistas de abajo con el índice de
                                    ESTA advertencia. *@
+                                @* G6/F9: cada «Ver pistas» se describe con la ubicación de SU advertencia,
+                                   así dos botones no se anuncian igual. *@
                                 <button type="submit" form="gf-hints" class="gf-btn gf-btn--secondary gf-mt-2"
-                                        name="HintsInput.Index" value="@IndexOf(result.Observations, observation)">
+                                        name="HintsInput.Index" value="@IndexOf(result.Observations, observation)"
+                                        aria-describedby="@($"finding-location-{IndexOf(result.Observations, observation)}")">
                                     Ver pistas
                                 </button>
                             }
@@ -278,8 +281,11 @@ else if (_result is { } result)
         {
             @* EL FORMULARIO DE PISTAS LLEVA EL TEXTO QUE SE ACABA DE ENVIAR, Y NADA MÁS: el servicio
                lo vuelve a interpretar, no guarda nada y devuelve las pistas. *@
-            <form id="gf-hints" method="post" @formname="work-hints" @onsubmit="ExplainAsync">
+            <form id="gf-hints" method="post" @formname="work-hints" @onsubmit="ExplainAsync"
+                  data-gf-pending="@HintsPanel.PendingLabel">
                 <AntiforgeryToken />
+                @* REGIÓN VIVA PERMANENTE (G5): existe antes de pedir, para que el anuncio se oiga. *@
+                <p class="gf-sr-only" role="status" aria-live="polite"></p>
                 <input type="hidden" name="HintsInput.OriginalJson" value="@Form.OriginalJson" />
                 <input type="hidden" name="HintsInput.Level" value="1" />
             </form>
@@ -632,6 +638,9 @@ else
 
     private int HintsLevel => Math.Clamp(HintsForm.Level, 1, 3);
 
+    /// <summary>Si la pantalla dibuja la vista de pistas (y no el formulario ni el resultado).</summary>
+    private bool ShowsHints => HintsEnabled && IsHintsPost && Session.IsOpen && !Session.IsAdministrator && _state is not Outcome.NotFound;
+
     private WorkObservationHints? _hints;
     private WorkObservation? _hintsObservation;
     private bool _hintsUnavailable;
@@ -894,13 +903,6 @@ else
             : null;
         _hintsUnavailable = _hints is null;
     }
-
-    /// <summary>
-    /// El rótulo discreto del origen. Las plantillas son provisionales hasta que el docente las fije
-    /// (decisión D-2), y por eso no se rotulan como «del docente».
-    /// </summary>
-    private static string OriginLabel(string origin) =>
-        origin == "Model" ? "Pista automática" : "Pista de plantilla";
 
     private static int IndexOf(IReadOnlyList<WorkObservation> observations, WorkObservation observation)
     {

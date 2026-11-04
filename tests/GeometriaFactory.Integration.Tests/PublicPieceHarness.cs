@@ -67,8 +67,15 @@ public sealed class PublicPieceHarness : WebApplicationFactory<SessionTokenStore
         }
 
         builder.ConfigureTestServices(services =>
+        {
             services.AddHttpClient<DataServiceClient>(client =>
                     client.BaseAddress = new Uri("http://el-servicio-de-datos/", UriKind.Absolute))
-                .ConfigurePrimaryHttpMessageHandler(() => _dataServiceHandler));
+                .ConfigurePrimaryHttpMessageHandler(() => _dataServiceHandler);
+
+            // El cliente propio de las pistas (G1) va al mismo servicio falso.
+            services.AddHttpClient(DataServiceClient.HintsClientName, client =>
+                    client.BaseAddress = new Uri("http://el-servicio-de-datos/", UriKind.Absolute))
+                .ConfigurePrimaryHttpMessageHandler(() => _dataServiceHandler);
+        });
     }
 }

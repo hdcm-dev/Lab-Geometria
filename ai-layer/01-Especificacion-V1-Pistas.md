@@ -3,9 +3,9 @@
 | Campo | Valor |
 |---|---|
 | Documento | `ai-layer/01-Especificacion-V1-Pistas.md` |
-| Versión | 0.2 (V1 construida y fusionada con el flag apagado; esta versión fija modelo, tiempo, permanencia, precarga y plantillas tras la evaluación completa) |
+| Versión | 0.3 (V1 construida y fusionada con el flag apagado; la 0.2 fijó modelo, tiempo, permanencia, precarga y plantillas tras la evaluación completa; la 0.3 integra las pistas en la pantalla según la mesa UX, G1 a G6, §3.4) |
 | Estado | Propuesta. No modifica el intake ni el código; su ingreso al alcance se eleva al Product Owner (`SDD/Expedientes/0002-Capa-De-IA-Pistas-Y-Borrador/`) |
-| Fecha | 2026-11-01 (0.1) · 2026-11-03 (0.2, actuación 010 del expediente 0002) |
+| Fecha | 2026-11-01 (0.1) · 2026-11-03 (0.2, actuación 010 del expediente 0002) · 2026-11-03 (0.3, actuación 013) |
 | Base | `main` `5f07b12` |
 | Método | Conocimiento de especificación de la capa de IA, versión 0.1 (v0), aplicado **sin la guía** de la capa de IA; las remisiones `[Con §x]` son a ese conocimiento |
 | Contexto | CTX-EXISTENTE · CTX-PROTO (ver §1.3) |
@@ -156,14 +156,38 @@ propuesta y entran primero a la Norma de Nomenclatura §6 (§6, ADR-IA-05).
 
 ### 3.2 Recorrido de un pedido
 
-1. La Web, después de mostrar la interpretación de A-18, pide las pistas con el mismo texto.
+1. La Web pide las pistas de una advertencia con el texto del trabajo: el que se acaba de enviar (pantalla de
+   resultado) o **el guardado** (detalle del trabajo, §3.4). Pedir pistas no guarda ni reenvía nada.
 2. El caso de uso corre `IFigureValidator.Interpret` (el validador **decide**: G-6, G-7) y toma sólo las
    observaciones `Warning` con campo permitido.
-3. Por cada una, con un tope por pedido (REQ-IA-10), llama a `IObservationHintWriter`.
+3. Por cada una, hasta el tope de observaciones (REQ-IA-10), llama a `IObservationHintWriter`. **El tope de
+   tiempo es del pedido entero**, no de cada llamada: agotado, las advertencias que faltan salen de plantilla
+   sin tocar el modelo (§4.5, G1).
 4. El adaptador arma el mensaje (§2.2), llama al modelo, pasa la respuesta por el filtro (§4.2) y devuelve
    *ok*, *degradado* o *rechazado*.
 5. *Degradado* y *rechazado* se resuelven con la **plantilla** del par (figura, campo). La respuesta dice el
    origen de cada pista (`modelo` o `plantilla`); nada se guarda (REQ-IA-09).
+
+### 3.4 Cómo se ve en la pantalla (mesa UX del 2026-11-03, G1 a G6)
+
+La mesa UX de la capa de IA (actuación 013 del expediente 0002) observó la pantalla en ejecución y fijó **dónde
+vive** la pista, **cómo se marca**, **cómo espera** y **cómo falla**. La regla general: la pista es **ayuda
+subordinada al dato verificado y en el lugar donde la alumna puede actuar**. Maquetas:
+`SDD/Maquetas/GeometriaFactory-Web/Envio-De-Trabajo.html` y `Vista-De-Trabajo.html` (estados «Pistas …»).
+
+| # | Regla | En la superficie |
+|---|---|---|
+| G1 | El servicio de datos corta **antes** que la Web (8 s contra 10 s): la alumna siempre recibe al menos la pista general (REQ-IA-07) | `AiOptions.TimeoutSeconds` = 8 por pedido; `DataServiceClient.RequestTimeout` = 10 s |
+| G2 | Las pistas se piden **desde el detalle del trabajo guardado**, sin reenviar; «Probar de nuevo» repite el mismo pedido | `WorkView.razor`: «Ver pistas» por advertencia, sólo para quien escribió el trabajo y con el flag |
+| G3 | La advertencia completa (dónde, qué pasó, «Tu programa declara» / «La geometría da») queda **a la vista arriba** de las pistas, también si no llegan | En el detalle, las pistas van dentro del `<li>` de la advertencia; en la pantalla de envío, la advertencia encabeza la vista de pistas |
+| G4 | Rótulo único por tarjeta: «**Pista redactada por IA: puede no ser exacta**» (modelo) o «**Pista general del laboratorio**» (plantilla). Cada nivel lleva la marca en su texto accesible («Pista n de 3. …») | `HintsPanel.razor` |
+| G5 | Espera anunciada: «Buscando una pista…» en el botón y en una región viva (`role="status"`) presente antes del pedido; el foco va a la pista nueva | `markPending` (`surface-interaction.js`) con la acción que disparó el envío; `autofocus` en el último nivel |
+| G6 | Una línea fija dice qué hacer: «Usá la pista para revisar tu programa. Para corregir el trabajo, cargá una versión nueva.» con enlace a `/trabajo-nuevo`; cada «Ver pistas» se describe con la ubicación de su advertencia | `HintsPanel.razor`; `aria-describedby` a `finding-location-{n}` |
+
+**El contrato HTTP no cambia:** `POST /v1/interpretaciones/pistas` recibe el mismo cuerpo; el detalle manda el
+texto guardado que ya trae `GET /v1/trabajos/{id}`. Lo que queda diferido (caché de niveles, feedback
+persistente, estado de entrega con advertencia, voseo y exactitud de la pista de modelo) está en el plan de la
+mesa y depende de REQ-IA-09, del Product Owner y de GEO-05.
 
 ### 3.3 Contrato del puerto
 
@@ -245,15 +269,16 @@ nunca la dirección (QG-06013).
 
 ### 4.5 Límites de consumo, tiempo, permanencia y precarga
 
-Hasta 5 observaciones por pedido (el resto, plantilla), 20 s de tiempo por llamada, un pedido al modelo a la
-vez por instancia; lo que no entra devuelve *degradado* (REQ-IA-10). Son **parámetros del piloto, no norma**
+Hasta 5 observaciones por pedido (el resto, plantilla), **8 s de tiempo por pedido** (sumadas sus llamadas;
+hasta la 0.2, 20 s por llamada), un pedido al modelo a la vez por instancia; lo que no entra devuelve *degradado* (REQ-IA-10). Son **parámetros del piloto, no norma**
 [Con §0]: el código conserva esos valores por omisión, y el despliegue los ajusta por entorno.
 
 **Valores del despliegue (actuación 010; reemplazan los de la 009).**
 
 | Parámetro | Valor | Motivo medido |
 |---|---|---|
-| Tiempo por llamada | **20 s** (el valor por omisión del código; ningún entorno lo pisa) | regla del banco: timeout = p95 en caliente + 50 % de margen, redondeado. Con `qwen3.5:4b` el p95 es 12,6 s → 18,9 s → **20 s**. El frío del mismo modelo (13,3 s) también entra, así que ni siquiera la primera llamada después de una descarga cae a plantilla. Con la alternativa (`gemma4:e4b-it-qat`: p95 11,5 s, frío 15,6 s) alcanzan los mismos 20 s. Los 40 s de la actuación 009 existían sólo para cubrir el frío de 33,6 s del modelo de 35 B |
+| Tiempo por pedido (**0.3**, actuación 013) | **8 s** por pedido de pistas, sumadas sus llamadas (valor por omisión del código; ningún entorno lo pisa). **Supera los 20 s por llamada de la fila siguiente**: la Web espera 10 s, y con 20 s cortaba primero y la alumna recibía un error en lugar de la plantilla (REQ-IA-07). Consecuencia declarada: con el modelo en CPU compartida la pista sale casi siempre de plantilla, hasta GEO-05 |
+| Tiempo por llamada (0.2, **superado**) | **20 s** (el valor por omisión del código; ningún entorno lo pisa) | regla del banco: timeout = p95 en caliente + 50 % de margen, redondeado. Con `qwen3.5:4b` el p95 es 12,6 s → 18,9 s → **20 s**. El frío del mismo modelo (13,3 s) también entra, así que ni siquiera la primera llamada después de una descarga cae a plantilla. Con la alternativa (`gemma4:e4b-it-qat`: p95 11,5 s, frío 15,6 s) alcanzan los mismos 20 s. Los 40 s de la actuación 009 existían sólo para cubrir el frío de 33,6 s del modelo de 35 B |
 | Observaciones por pedido | 3 | el cupo de un pedido a la vez serializa las llamadas: con p50 de 11,6 s, 3 observaciones ≈ 35 s y 5 ≈ 58 s de espera para el alumno. Con 3 la espera queda por debajo de la de la actuación 009 (≈ 40 s); las restantes reciben plantilla, que es el piso de calidad (§5.3) |
 | Pedidos simultáneos | 1 | el servidor es sólo CPU: dos pedidos a la vez no terminan antes, se reparten el mismo cómputo y ambos se acercan al tope. Se revisa si el servidor pasa a GPU |
 | Permanencia del modelo (`AI__KeepAlive`) | **`-1` en producción** (sin descarga); `30m` por omisión del código | el modelo ocupa 3 GB: tenerlo siempre cargado en un servidor compartido es barato y elimina el frío. Viaja **en cada pedido** (`keep_alive`), no en la configuración del servidor, para no depender de cómo otro equipo configure un servidor compartido. Si el servidor igual lo descarga por presión de memoria, el frío de 13,3 s sigue entrando en 20 s |
@@ -544,7 +569,7 @@ Las ADR completas están en `03-ADR.md`. Resumen:
 | ADR-IA-03 (ADR-11) | capas como proyectos (ya lo son); la pieza de IA es una carpeta de Infrastructure con prueba de arquitectura | REQ-IA-01, REQ-IA-02 |
 | ADR-IA-04 | endpoint propio bajo `/v1/` separado de A-18, con respaldo de plantilla | REQ-IA-07, REQ-IA-08 |
 | ADR-IA-05 | nombres de la capa en la Norma de Nomenclatura §6 antes que en el código | — (regla C-6.7 del repo) |
-| ADR-IA-07 (`ADR-14012`) | modelo `qwen3.5:4b` sin razonamiento en el servidor de la cátedra; 20 s; permanencia en cada pedido; precarga al arrancar | REQ-IA-10, REQ-IA-17, REQ-IA-18 |
+| ADR-IA-07 (`ADR-14012`) | modelo `qwen3.5:4b` sin razonamiento en el servidor de la cátedra; 20 s por llamada, **enmendado a 8 s por pedido (1.1, actuación 013)**; permanencia en cada pedido; precarga al arrancar | REQ-IA-10, REQ-IA-17, REQ-IA-18 |
 
 ADR-06 y ADR-07 **no aplican**: nivel A0, sin herramientas [Con §7].
 
@@ -561,10 +586,10 @@ no es compuerta [Con §8], [Con §2, P-10]. Las pruebas se **especifican**; se e
 | REQ-IA-04 | Al modelo no viajan el JSON del alumno, el valor derivado ni datos de persona | DEBE | DEBE | con un doble que captura los mensajes, ninguno contiene el texto original, el derivado ni un identificador de cuenta o trabajo | `HintRequest_CarriesOnlyTypeFieldDeclaredDirection` | garantía |
 | REQ-IA-05 | El filtro rechaza toda respuesta con el valor derivado | DEBE | DEBE | las variantes `54`, `54.0`, `54,00`, `54.004` se rechazan; `36.00` (el declarado) pasa | `HintFilter_RejectsDerivedValue`; con salidas reales de la evaluación completa, `RealOutput_WithTheDerivedValueAdded_IsRejected` y `RealOutputs_PassTheFilter_EvenWhenTheyTeachBadly` (fija el límite: el filtro no juzga didáctica, LLM09) | garantía |
 | REQ-IA-06 | El filtro rechaza JSON de figura y código C# | DEBE | DEBE | llaves, `"clave":`, `class`, `return`, `=>` se rechazan | `HintFilter_RejectsFigureJsonAndCode` | garantía |
-| REQ-IA-07 | Sin modelo, sin respuesta, fuera de tiempo o con rechazo, el alumno recibe la plantilla | DEBE | DEBE | con el doble en cada falla, la respuesta es 200 con origen `plantilla` en cada pista | `HintPort_FallsBackToTemplate` | garantía |
+| REQ-IA-07 | Sin modelo, sin respuesta, fuera de tiempo o con rechazo, el alumno recibe la plantilla | DEBE | DEBE | con el doble en cada falla, la respuesta es 200 con origen `plantilla` en cada pista; **con un modelo que no contesta, la pantalla muestra «Pista general del laboratorio» y no el error** (G1) | `HintPort_FallsBackToTemplate`; `HintsWebSurfaceTests.ASlowModel_StillGivesTheLabHint`; `HintsTimeoutTests.TheDataServiceGivesUpBeforeTheWeb`; E2E `PistasDeLaCapaDeIaTests` | garantía |
 | REQ-IA-08 | A-18 no cambia: no llama al puerto de pistas y su contrato queda igual | DEBE | DEBE | la batería de A-18 pasa sin cambios y el endpoint no resuelve `IObservationHintWriter` | `InterpretationsEndpoint_DoesNotUseHintPort` | garantía |
 | REQ-IA-09 | Las pistas no se guardan | DEBE | DEBE | después de pedir pistas, el almacén no cambia | `Hints_AreNotPersisted` | garantía |
-| REQ-IA-10 | Tope de observaciones, tiempo y concurrencia | DEBE | DEBE | 6 observaciones dan 5 al modelo y 1 de plantilla; una demora mayor que el tope da plantilla; un segundo pedido simultáneo da plantilla | `HintPort_RespectsLimits` | garantía |
+| REQ-IA-10 | Tope de observaciones, tiempo y concurrencia | DEBE | DEBE | 6 observaciones dan 5 al modelo y 1 de plantilla; una demora mayor que el tope da plantilla; **el tope es del pedido: con varias advertencias y un modelo que no contesta, el pedido entero termina dentro del tope**; un segundo pedido simultáneo da plantilla | `HintPort_RespectsLimits`; `HintsTimeoutTests` | garantía |
 | REQ-IA-11 | El contenido de los mensajes sale en la telemetría sólo en desarrollo | DEBERÍA | DEBE | fuera de desarrollo las trazas no traen mensajes | `HintTelemetry_ContentOnlyInDevelopment` | garantía |
 | REQ-IA-12 | Fuga de la solución en el banco | DEBE | DEBE | 0 respuestas entregadas con el valor derivado, JSON o código en un banco de 30–50 casos, informado como k de n con Clopper-Pearson | corrida rotulada `ensayos/pistas.py --correr` | conducta |
 | REQ-IA-13 | Utilidad para el alumno | DEBERÍA | DEBE | media ≥ 4 de 5 puntuada por el docente sobre el banco, y superior a la de la plantilla | revisión docente rotulada sobre el registro de la corrida | conducta |
@@ -634,5 +659,6 @@ Ficha de riesgo de cada fila activada (forma propia: el v0 remite a una ficha de
 
 | Versión | Fecha | Cambios |
 |---|---|---|
+| 0.3 | 2026-11-03 | Actuación 013 del expediente 0002, mesa UX de la capa de IA (G1 a G6): el tope pasa a 8 s **por pedido** y el servicio de datos corta antes que la Web (§3.2, §4.5, REQ-IA-07 y 10); nueva §3.4 con dónde vive la pista (también en el detalle del trabajo guardado), cómo se marca, cómo espera y qué hacer después. El contrato HTTP no cambia |
 | 0.2 | 2026-11-03 | Actuación 010 del expediente 0002, con la evaluación completa de diez configuraciones: modelo `qwen3.5:4b` sin razonamiento (alternativa `gemma4:e4b-it-qat`) en lugar de `qwen3.5:35b-a3b`; tope de 20 s en todos los entornos; permanencia del modelo en cada pedido y precarga al arrancar (REQ-IA-17 y 18, `ADR-14012`); marco NIST AI RMF, OWASP LLM 2025 e ISO/IEC 42001 por paso (§4.7); alternativas de servidor de PROD (§4.3); prompt v2 candidato (§5.2); tabla del texto de las doce plantillas y corrección de Círculo · Area en términos de proporción y excepciones anotadas (§5.3); regla 7 del prompt v2 alineada con la rúbrica y rúbrica con registro separado de la didáctica (§5.2); LLM09 observado (§8); §4.6 y §4.7 en orden. Mesa 0004: prompt y plantillas como un solo contrato de pistas 1.1, vigente y versionado, con condición de revisión y prueba bloqueante código = ficha (§5.2) |
 | 0.1 | 2026-11-01 | Emisión |

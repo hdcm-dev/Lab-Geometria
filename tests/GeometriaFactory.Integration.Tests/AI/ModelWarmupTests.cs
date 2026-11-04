@@ -111,13 +111,16 @@ public sealed class ModelWarmupTests
         Assert.False(OllamaRequestDefaults.HasInvalidKeepAlive(new AiOptions { KeepAlive = "" }));
     }
 
-    /// <summary>Los valores por omisión del código son los de la evaluación completa del 2026-11-03.</summary>
+    /// <summary>
+    /// Los valores por omisión del código: los de la evaluación completa del 2026-11-03, salvo el tope,
+    /// que la mesa UX del mismo día bajó a 8 s para que el servicio de datos corte antes que la Web (G1).
+    /// </summary>
     [Fact]
     public void Defaults_MatchTheEvaluation()
     {
         var ai = new AiOptions();
 
-        Assert.Equal(20, ai.TimeoutSeconds);
+        Assert.Equal(8, ai.TimeoutSeconds);
         Assert.Equal("30m", ai.KeepAlive);
         Assert.Equal(string.Empty, ai.Endpoint);
         Assert.Equal(string.Empty, ai.Model);

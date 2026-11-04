@@ -85,11 +85,20 @@ public static class BancoLocal
         // niega a versionar.
         var claveDeFirma = Convert.ToBase64String(System.Security.Cryptography.RandomNumberGenerator.GetBytes(48));
 
+        // UN SERVIDOR DE MODELOS QUE NO CONTESTA NUNCA (G1 de la mesa UX del 2026-11-03). Acepta la
+        // conexión y no responde: es el peor modelo lento posible. Con él, la capa de IA está
+        // encendida en el banco y `PistasDeLaCapaDeIaTests` mide que la alumna reciba la pista
+        // general del laboratorio antes de que la Web se canse. Vive en el bucle local de la
+        // corrida: no es, ni nombra, ningún servidor de modelos real.
+        var urlModelo = ModeloQueNoContesta.Levantar();
+
         _servicioDeDatos = Arrancar(api, "GeometriaFactory.Api.dll", new()
         {
             ["ConnectionStrings__Store"] = $"Data Source={Path.Combine(_trabajo, "banco.db")}",
             ["AccessToken__SigningKey"] = claveDeFirma,
             ["Kestrel__Endpoints__Http__Url"] = urlApi,
+            ["AI__Endpoint"] = urlModelo,
+            ["AI__Model"] = "modelo-que-no-contesta",
         });
 
         await EsperarAsync($"{urlApi}/salud", "el servicio de datos", _servicioDeDatos);
@@ -100,6 +109,7 @@ public static class BancoLocal
             // sobre esta dirección, y sin ella `Uri` se come el último segmento.
             ["ApiBaseUrl"] = urlApi + "/",
             ["Kestrel__Endpoints__Http__Url"] = urlWeb,
+            ["AI__HintsEnabled"] = "true",
         });
 
         await EsperarAsync($"{urlWeb}/ingreso", "la pieza pública", _piezaPublica);
@@ -118,6 +128,7 @@ public static class BancoLocal
     /// </remarks>
     public static void Bajar()
     {
+        ModeloQueNoContesta.Bajar();
         Matar(ref _piezaPublica);
         Matar(ref _servicioDeDatos);
 
