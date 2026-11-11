@@ -124,8 +124,8 @@ dicha con otras palabras ni el concepto corrompido: eso lo decide la lectura doc
 
 ## 7. Rondas adversariales del enrutador y límite declarado
 
-Después del §6 se sometió `ConceptRouter` a rondas adversariales: en cada una, 60 frases nuevas (mitad preguntas de
-concepto que no deben ir a `pide-resolver`, mitad pedidos de valor que sí) escritas sin mirar el código. Cada falla se
+Después del §6 se sometió `ConceptRouter` a rondas adversariales: en cada una, 60 frases nuevas (preguntas de
+concepto que no deben ir a `pide-resolver` y pedidos de valor que sí). Cada falla se
 corrigió y quedó en la **sonda permanente** `tests/GeometriaFactory.Application.Tests/ConceptRouterSondaTests.cs`
 (`Concepto_NoPideResolver` y `Valor_PideResolver`), sin romper las de las rondas anteriores.
 
