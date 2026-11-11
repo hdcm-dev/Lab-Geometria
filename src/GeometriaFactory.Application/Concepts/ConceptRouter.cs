@@ -59,7 +59,9 @@ public static class ConceptRouter
     private static readonly Regex Magnitude = new(
         @"\barea|\bvolumen|\bperimetro|\bsuperficie|\bradio\b|\baltura\b|\bdiagonal|\bhipotenusa|\bcateto"
         // Ronda 3: «cuánto ocupa una caja de dos por tres por cuatro» pide un volumen sin nombrarlo.
-        + @"|\bocupa|\bcabe|\bcapacidad",
+        + @"|\bocupa|\bcabe|\bcapacidad"
+        // Ronda 5: «cuántos centímetros cuadrados tiene…» pide un área por su unidad, sin nombrarla.
+        + @"|\b(centimetros|metros|milimetros|kilometros|unidades) (cuadrados|cubicos|cuadradas|cubicas)\b|\b(cm|m|mm)[23]\b",
         RegexOptions.CultureInvariant, RegexTimeout);
 
     // EL DÍGITO CUENTA COMO DATO junto a una magnitud. El número EN LETRAS, en cambio, sólo cuando funciona como
@@ -91,7 +93,9 @@ public static class ConceptRouter
     // Preguntas sobre la fórmula, no pedido de ella (ronda 3): «hay dos fórmulas…», «qué significa el dos en la
     // fórmula…». Igual que «por qué», sólo un valor de medida las vuelve pedido.
     private static readonly Regex Explains = new(
-        @"^ (por que|que significa|que quiere decir|hay|existe|existen|de donde sale|para que sirve) ",
+        @"^ (por que|que significa|que quiere decir|hay|existe|existen|de donde sale|para que sirven?) "
+        // Ronda 5: la pregunta explicativa también va al final («…aparece cuatro tercios, de dónde sale»).
+        + @"|\b(de donde salen?|para que sirven?|que significa|que quiere decir)\b",
         RegexOptions.CultureInvariant, RegexTimeout);
 
     private static readonly HashSet<string> UnitWords = new(StringComparer.Ordinal)
