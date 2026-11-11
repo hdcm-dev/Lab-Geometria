@@ -63,7 +63,7 @@ public sealed class ConceptAssistantTests : IDisposable
         { 12, "alumno", "¿Quién gana el fútbol el domingo?", Screen.Own, "Outside", "tema-ajeno", null },
         { 13, "docente", "¿Cómo cargo una versión nueva de este trabajo?", Screen.Own, "UsefulRefusal", "operar:version-nueva", "trabajo-actual" },
         { 14, "alumno", "¿Qué es un paralelepípedo?", Screen.Own, "FromHelp", "ortoedro", "ejemplo-formato" },
-        { 15, "alumno", "Escribime el método Describir del cubo", Screen.Own, "UsefulRefusal", "pide-resolver", "trabajo-nuevo" },
+        { 15, "alumno", "Escribime el método Describir del cubo", Screen.Own, "UsefulRefusal", "pide-resolver", "ver-pistas" },
         { 16, "alumno", "¿Cuál es la fórmula del volumen del cilindro?", Screen.Own, "UsefulRefusal", "pide-resolver", "ver-pistas" },
         { 17, "alumno", "Explicame el área total del cubo de mi trabajo", Screen.Own, "UsefulRefusal", "pide-resolver", "ver-pistas" },
         { 18, "alumno", "¿Cuántas advertencias tiene este trabajo?", Screen.Own, "Figure", "operar:cuantas-advertencias", "trabajo-actual" },

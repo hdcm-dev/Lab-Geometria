@@ -132,10 +132,13 @@ public sealed class AskConceptUseCase
         var normalized = ConceptRouter.Normalize(question);
 
         // EL CHIP DE LA NEGATIVA LLEVA A LO QUE SÍ AYUDA, NUNCA A LA RESPUESTA.
+        // Y DEPENDE DEL ESTADO (H2, act. 003): «Cargar un trabajo» sólo sin trabajo o con uno en borrador; sobre un
+        // trabajo ya enviado no se ofrece (no hay nada que cargar ahí): quedan las pistas si hay advertencias.
+        var asksForCode = normalized.Contains("describir", StringComparison.Ordinal) || normalized.Contains(" metodo", StringComparison.Ordinal)
+            || normalized.Contains(" codigo", StringComparison.Ordinal);
         string? destinationId =
             normalized.Contains(" json ", StringComparison.Ordinal) ? DestinationCatalog.FormatExample
-            : normalized.Contains("describir", StringComparison.Ordinal) || normalized.Contains(" metodo", StringComparison.Ordinal)
-                || normalized.Contains(" codigo", StringComparison.Ordinal) ? DestinationCatalog.NewWork
+            : asksForCode && (work is null || work.Status == WorkStatus.Draft) ? DestinationCatalog.NewWork
             : work is not null && work.Observations.Any(o => o.Kind == ObservationKind.Warning) ? DestinationCatalog.SeeHints
             : null;
 

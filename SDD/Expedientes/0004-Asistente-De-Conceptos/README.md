@@ -4,7 +4,7 @@
 |---|---|
 | Número | **EXP-0004** |
 | Título | Rebanada del asistente de conceptos: fichas de ayuda, frontera didáctica, destinos y huella |
-| Estado | **en trámite** (actuaciones 001 y 002): construido en `feat/asistente-rebanada`, apagado por omisión (`AI__ConceptsEnabled=false`); las nueve fichas en `borrador` hasta la firma del PO |
+| Estado | **en trámite** (actuaciones 001 a 003): construido en `feat/asistente-rebanada`, apagado por omisión (`AI__ConceptsEnabled=false`); las nueve fichas en `borrador` hasta la firma del PO |
 | Apertura | 2026-11-11 |
 | Rama | `feat/asistente-rebanada` desde `main` `53a2810` |
 | Partes | **Product Owner** (firma las fichas y decide encender); **banco de traslado de Lab-Documentos** (agente, aplica los conocimientos de la guía de IA a un segundo sistema real) |
@@ -21,6 +21,7 @@ se reescriben y evidencia con SHA-256.
 |---|---|---|---|---|---|
 | 001 | 2026-11-11 | constancia | banco de traslado (agente) | Rebanada construida; 874 pruebas en verde y 1 omitida; batería ×3 contra el modelo 24/24 en las tres; ADR-14013 a 14015; apartamientos declarados | [001](actuaciones/001-constancia-construccion-de-la-rebanada.md) |
 | 002 | 2026-11-11 | constancia | banco de traslado (agente) | Criterios 8, 13, 27, 29, 30 y 31 cerrados; batería ×3 con modelo y con fichas, 24/24 en las seis, PENDIENTE de lectura docente; pendientes del PO nombrados | [002](actuaciones/002-constancia-cierre-de-criterios-abiertos.md) |
+| 003 | 2026-11-11 | constancia | banco de traslado (agente) | Hallazgos H1–H4: enrutador y filtro endurecidos (13 rojas con el código previo), ficha visible en la negativa y chip según estado, `ficha-dicta` en docs-as-code, desborde de Observaciones (previo a #266) corregido; batería v2 ×3 con modelo 24/24, PENDIENTE de lectura docente; CLS 0 y sin tema oscuro; sesión docente y `/estado` | [003](actuaciones/003-constancia-hallazgos-h1-h4.md) |
 
 ## 2. Índice de evidencia
 
@@ -31,6 +32,7 @@ se reescriben y evidencia con SHA-256.
 | E-004 | recall@3 por rol y su autoprueba | [E-004](evidencia/E-004-recall-por-rol.txt) |
 | E-005 | veredictos recalculados de las tres carpetas de corridas, con SHA-256 | [E-005](evidencia/E-005-bateria-v2-veredicto.txt) |
 | E-006 | pruebas de la solución en contenedor tras la act. 002: 884 en verde, 1 omitida (95 · 90 · 699) | [E-006](evidencia/E-006-pruebas-act-002.txt) |
+| E-007 | H1: pruebas nuevas contra el código de `bcb0896` (13 rojas) y la batería completa con el código corregido (95 · 99 · 707, 1 omitida) | [E-007](evidencia/E-007-h1-pruebas-rojo-verde.txt) · capturas en [`evidencia/capturas-act-003/`](evidencia/capturas-act-003/) |
 | E-002 | batería v1 ×3 contra el modelo, con SHA-256 de cada corrida | [E-002](evidencia/E-002-bateria-x3.txt) · corridas en [`ai-layer/ensayos/corrida-conceptos-2026-11-11/`](../../../ai-layer/ensayos/corrida-conceptos-2026-11-11/) |
 
 ## 3. Punto de continuación

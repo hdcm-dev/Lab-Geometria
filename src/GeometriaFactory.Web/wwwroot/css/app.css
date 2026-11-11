@@ -739,11 +739,14 @@ body.gf-inert .gf-canvas { pointer-events: none; filter: grayscale(.35) opacity(
 
 /* Lista de observaciones (Representacion-Lista-De-Observaciones §2) */
 .gf-findings { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
-.gf-finding { display: flex; gap: var(--space-3); align-items: flex-start; }
-.gf-finding-body { min-width: 0; }
+.gf-finding { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-3); align-items: flex-start; }
+.gf-finding-body { flex: 1 1 12rem; min-width: 0; }
 .gf-finding-location { font-size: var(--type-caption-size); color: var(--color-text-secondary); }
-.gf-values { display: grid; grid-template-columns: max-content max-content; gap: 2px var(--space-4); margin-top: var(--space-1); }
-.gf-values dt { font-size: var(--type-caption-size); color: var(--color-text-secondary); margin: 0; }
+/* H4 (EXP-0004 act. 003; previo a #266): con dos columnas max-content, en la columna de datos de 1280 (unos
+   287 px) «Tu programa declara» + el número no entraban y 36/54 salían de la tarjeta. La insignia baja cuando falta
+   ancho, la etiqueta se parte por palabras y el número nunca. */
+.gf-values { display: grid; grid-template-columns: minmax(0, max-content) max-content; gap: 2px var(--space-4); margin-top: var(--space-1); }
+.gf-values dt { font-size: var(--type-caption-size); color: var(--color-text-secondary); margin: 0; overflow-wrap: break-word; }
 .gf-values dd { margin: 0; font-variant-numeric: tabular-nums; font-size: var(--type-body-size); }
 
 /* Bloque de comentario del docente: contenedor propio, tono neutro, sin severidad */
@@ -1279,4 +1282,7 @@ main[tabindex="-1"]:focus-visible {
   text-decoration: none;
   font-weight: 600;
 }
+.gf-concept__card { margin-top: var(--space-3); }
+.gf-concept__card > summary { cursor: pointer; color: var(--color-brand-primary); font-weight: 600; }
+.gf-concept__card[open] > summary { margin-bottom: var(--space-2); }
 .gf-concept__chip:hover, .gf-concept__chip:focus-visible { background: var(--color-brand-primary-tint); }
