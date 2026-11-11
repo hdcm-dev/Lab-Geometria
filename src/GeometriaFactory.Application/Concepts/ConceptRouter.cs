@@ -43,7 +43,9 @@ public static class ConceptRouter
     // El pedido de resolver: el valor, la fórmula, el resultado, el JSON, el código o la corrección.
     private static readonly Regex AsksToSolve = new(
         @"\bcuanto (da|tiene que dar|deberia|debe|vale|mide|es)\b|\bcual es (el valor|la formula|el resultado|el area|el volumen)"
-        + @"|\bformula|\bpasame|\bescribime|\bhaceme|\bhace(me)? (el|la|mi)\b|\bdame (el|la)\b|\bresolv|\bcorregi|\bcorrigi"
+        // Ronda 4: «fórmula» en singular pide LA fórmula; en plural («las dos fórmulas del cono») se habla de
+        // fórmulas, no se pide un valor.
+        + @"|\bformula\b|\bpasame|\bescribime|\bhaceme|\bhace(me)? (el|la|mi)\b|\bdame (el|la)\b|\bresolv|\bcorregi|\bcorrigi"
         + @"|(?<!\bse )\bcalcula|\barmame|\bdecime (el|la|cuanto)|\bque valor (va|pongo|tiene que)|\bcomo (lo )?calculo"
         // H1 (act. 003): el pedido del valor que va en un campo, dicho sin «cuánto» ni «fórmula».
         + @"|\bque (tengo|tenes|hay|tendria|deberia) que (poner|escribir|cargar|completar)|\bque (pongo|escribo|cargo) en"

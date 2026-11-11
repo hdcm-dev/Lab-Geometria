@@ -33,6 +33,8 @@ public sealed class ConceptRouterSondaTests
     // Ronda 3.
     [InlineData("hay dos fórmulas para el área del cilindro?")]
     [InlineData("qué significa el dos en la fórmula del área del cilindro")]
+    // Ronda 4.
+    [InlineData("tengo dudas con las dos fórmulas del cono")]
     public void Concepto_NoPideResolver(string question) =>
         Assert.NotEqual(ConceptRouter.Intents.AsksToSolve, ConceptRouter.Route(question, Cards).Intent);
 
