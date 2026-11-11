@@ -59,6 +59,7 @@ public sealed class ConceptRouterSondaTests
     [InlineData("hola, tengo un triángulo de catetos tres y cuatro, la hipotenusa?")]
     // Ronda 5.
     [InlineData("cuántos centímetros cuadrados tiene un cuadrado de cinco centímetros de lado")]
+    [InlineData("cuánto pinto si la pared es de tres metros por dos metros")]
     public void Valor_PideResolver(string question) =>
         Assert.Equal(ConceptRouter.Intents.AsksToSolve, ConceptRouter.Route(question, Cards).Intent);
 }

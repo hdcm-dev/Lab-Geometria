@@ -40,6 +40,16 @@ public static class ConceptRouter
         @"\bdepur|\bdebug|breakpoint|\bserializ|\bcompil|visual studio|\bexcepcion|\bnullreference",
         RegexOptions.CultureInvariant, RegexTimeout);
 
+    // Ronda 6: «cuánto pinto si la pared es de tres metros por dos metros» pide un cálculo sin nombrar la
+    // magnitud: «N unidad por N unidad» con un verbo de cálculo es dato.
+    private static readonly Regex Dimensions = new(
+        @"\b(metros?|centimetros?|milimetros?|kilometros?|cm|m|mm|km) por\b",
+        RegexOptions.CultureInvariant, RegexTimeout);
+
+    private static readonly Regex CalcVerb = new(
+        @"\b(pinto|pintar|necesito|necesita|alcanza|alcanzan|compro|comprar|gasto|gastar|cubro|cubrir|lleva|llevan)\b",
+        RegexOptions.CultureInvariant, RegexTimeout);
+
     // El pedido de resolver: el valor, la fórmula, el resultado, el JSON, el código o la corrección.
     private static readonly Regex AsksToSolve = new(
         @"\bcuanto (da|tiene que dar|deberia|debe|vale|mide|es)\b|\bcual es (el valor|la formula|el resultado|el area|el volumen)"
@@ -175,7 +185,8 @@ public static class ConceptRouter
 
         if ((!explains && AsksToSolve.IsMatch(text))
             || (OwnFigure.IsMatch(text) && Magnitude.IsMatch(text))
-            || (SpokenValue(question) && Magnitude.IsMatch(text)))
+            || (SpokenValue(question) && Magnitude.IsMatch(text))
+            || (Dimensions.IsMatch(text) && CalcVerb.IsMatch(text) && SpokenValue(question)))
         {
             return new(ConceptRing.Outside, Intents.AsksToSolve, null);
         }
