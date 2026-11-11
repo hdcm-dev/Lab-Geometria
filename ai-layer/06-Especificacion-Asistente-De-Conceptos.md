@@ -229,7 +229,7 @@ firma» la bloquean para PROD (§11.1).
 | `mis-trabajos` | Abrir mis trabajos | `/mis-trabajos` | `estado` (existe `[SupplyParameterFromQuery(Name="estado")]`) | alumno | — | — | filtro aplicado si la pregunta nombra un estado |
 | `trabajo-nuevo` | Cargar un trabajo | `/trabajo-nuevo` | — | alumno | alumno | — | sí: es la pantalla de carga |
 | `ejemplo-formato` | Ver el ejemplo de formato | `/trabajo-nuevo` | **falta** un parámetro que abra «Ver un ejemplo» (`WorkSubmission.razor:429`) | alumno | — | — | **no** hoy: deuda del producto (R-06), D-2 |
-| `trabajo-actual` | Volver a tu trabajo | `/trabajos/{WorkId}` | `WorkId` de la pantalla, nunca del texto | alumno dueño, docente | — | `WorkOperation.View` sobre esa instancia | — |
+| `trabajo-actual` | Volver a tu trabajo (alumno) · Volver al trabajo del alumno (docente) | `/trabajos/{WorkId}` | `WorkId` de la pantalla, nunca del texto | alumno dueño, docente | — | `WorkOperation.View` sobre esa instancia | — |
 | `ver-pistas` | Ver pistas de tu advertencia | `/trabajos/{WorkId}` | **falta** parámetro que abra `HintsPanel` | alumno dueño | alumno dueño, sólo si `AI:HintsEnabled` | `View` + bandera | **no** hoy: D-3 |
 | `editar-trabajo` | Cargar una versión nueva | `/trabajos/{WorkId}/editar` | `WorkId` | alumno dueño | **sólo alumno dueño** (`WorkOperation.Edit`) | `Edit` sobre esa instancia; docente → F6; ajeno → «no encontrado» | sí |
 | `entrega-comision` | Abrir la entrega de la comisión | `/entrega-comision` | `alumno`, `estado`, `resuelto`, `trabajo` | docente | — | — | filtro aplicado |

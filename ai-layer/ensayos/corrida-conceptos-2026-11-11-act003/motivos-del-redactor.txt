@@ -1,0 +1,6 @@
+     16 Conceptos: Degraded fuera-de-tiempo
+     22 Conceptos: Ok -
+      1 Conceptos: Rejected numero
+      9 Conceptos: Rejected operacion
+      2 Conceptos: Rejected primera-persona
+      1 Conceptos: Rejected procedimiento

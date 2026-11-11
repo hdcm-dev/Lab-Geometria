@@ -23,7 +23,9 @@ OTRO = ('otro@ejemplo.edu', 'clave-de-prueba-del-otro')
 AQUI = os.path.dirname(os.path.abspath(__file__))
 # LA BATERÍA ES UN ARCHIVO DE DATOS VERSIONADO (K7 R9.1): este script la lee, corre y guarda el registro crudo; el
 # veredicto lo recalcula `veredicto_conceptos.py` desde el registro, con la lectura docente aparte (K3 R2.2a).
-BATERIA = os.path.join(AQUI, 'bateria-conceptos-v1.jsonl')
+# v2 desde la actuación 003 del EXP-0004 (H2): el caso 15, sobre un trabajo ya enviado, ya no ofrece «Cargar un
+# trabajo» sino las pistas. La carpeta de la corrida lleva `bateria.txt` con el nombre del archivo.
+BATERIA = os.path.join(AQUI, os.environ.get('GEO_BATERIA', 'bateria-conceptos-v2.jsonl'))
 CASOS = [json.loads(l) for l in open(BATERIA, encoding='utf-8') if l.strip()]
 
 

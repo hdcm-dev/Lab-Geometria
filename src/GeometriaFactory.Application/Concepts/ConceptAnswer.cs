@@ -80,7 +80,7 @@ public static class ConceptTexts
     {
         ArgumentNullException.ThrowIfNull(card);
         return "Eso es parte del ejercicio: lo resolvés vos en tu programa. Lo que sí está en la ayuda es qué es "
-            + $"«{card.Title}»: abrí la ficha. Si tu trabajo tiene una advertencia, las pistas están en Ver pistas.";
+            + $"«{card.Title}»: abrí la ficha acá abajo. Si tu trabajo tiene una advertencia, las pistas están en Ver pistas.";
     }
 
     /// <summary>F8: nombra la clave que falta, nunca su valor (K2 R6).</summary>

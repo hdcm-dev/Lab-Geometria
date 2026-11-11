@@ -1,0 +1,3 @@
+     18 Conceptos: Ok -
+      3 Conceptos: Rejected numero
+      6 Conceptos: Rejected operacion

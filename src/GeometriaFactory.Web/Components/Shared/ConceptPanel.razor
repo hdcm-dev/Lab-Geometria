@@ -29,11 +29,21 @@
         @if (_answer is { } answer)
         {
             <div class="gf-concept__answer gf-concept__answer--@answer.Form.ToLowerInvariant()" tabindex="-1" autofocus data-gf-form="@answer.Form" data-gf-intent="@answer.Intent">
-                @if (answer.Card is { } card)
+                @if (answer.Card is { } card && answer.Form != "UsefulRefusal")
                 {
                     <p class="gf-concept__card-title"><strong>@card.Title</strong></p>
                 }
                 <p class="gf-concept__text">@answer.Text</p>
+                @* LA NEGATIVA DICE «ABRÍ LA FICHA» Y LA FICHA TIENE QUE PODER ABRIRSE (H2, act. 003): va plegada, sin
+                   guion, con <details>; la ficha es el respaldo y nunca trae el valor. *@
+                @if (answer.Card is { } refusedCard && answer.Form == "UsefulRefusal")
+                {
+                    <details class="gf-concept__card" data-gf-card="@refusedCard.Id">
+                        <summary>Ficha: @refusedCard.Title</summary>
+                        <p class="gf-concept__text">@refusedCard.Text</p>
+                        <p class="gf-caption gf-concept__source">Ficha de la ayuda de conceptos.</p>
+                    </details>
+                }
                 @if (answer.Breakdown.Count > 0)
                 {
                     <ul class="gf-concept__breakdown">

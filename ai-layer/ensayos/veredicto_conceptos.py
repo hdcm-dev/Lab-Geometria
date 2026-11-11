@@ -60,8 +60,18 @@ def fallas(caso, r):
     return f
 
 
+def bateria_de(d):
+    """La batería contra la que se corrió DIR: la que nombra DIR/bateria.txt, o la v1 (las corridas previas a la
+    actuación 003 del EXP-0004 no lo traen y se recalculan contra la v1, que no se reescribe)."""
+    marca = os.path.join(d, 'bateria.txt')
+    if os.path.exists(marca):
+        with open(marca, encoding='utf-8') as f:
+            return os.path.join(AQUI, os.path.basename(f.read().strip()))
+    return BATERIA
+
+
 def veredicto(d):
-    casos = {c['caso']: c for c in jsonl(BATERIA)}
+    casos = {c['caso']: c for c in jsonl(bateria_de(d))}
     corridas = sorted(n for n in os.listdir(d) if re.fullmatch(r'corrida-\d+\.jsonl', n))
     lecturas = {(str(l['corrida']), l['caso']): l for l in jsonl(os.path.join(d, 'lectura-docente.jsonl'))} \
         if os.path.exists(os.path.join(d, 'lectura-docente.jsonl')) else {}

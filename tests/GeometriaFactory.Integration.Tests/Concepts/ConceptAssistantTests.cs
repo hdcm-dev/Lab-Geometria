@@ -63,7 +63,7 @@ public sealed class ConceptAssistantTests : IDisposable
         { 12, "alumno", "¿Quién gana el fútbol el domingo?", Screen.Own, "Outside", "tema-ajeno", null },
         { 13, "docente", "¿Cómo cargo una versión nueva de este trabajo?", Screen.Own, "UsefulRefusal", "operar:version-nueva", "trabajo-actual" },
         { 14, "alumno", "¿Qué es un paralelepípedo?", Screen.Own, "FromHelp", "ortoedro", "ejemplo-formato" },
-        { 15, "alumno", "Escribime el método Describir del cubo", Screen.Own, "UsefulRefusal", "pide-resolver", "trabajo-nuevo" },
+        { 15, "alumno", "Escribime el método Describir del cubo", Screen.Own, "UsefulRefusal", "pide-resolver", "ver-pistas" },
         { 16, "alumno", "¿Cuál es la fórmula del volumen del cilindro?", Screen.Own, "UsefulRefusal", "pide-resolver", "ver-pistas" },
         { 17, "alumno", "Explicame el área total del cubo de mi trabajo", Screen.Own, "UsefulRefusal", "pide-resolver", "ver-pistas" },
         { 18, "alumno", "¿Cuántas advertencias tiene este trabajo?", Screen.Own, "Figure", "operar:cuantas-advertencias", "trabajo-actual" },
@@ -118,6 +118,8 @@ public sealed class ConceptAssistantTests : IDisposable
     [InlineData("Calculame el área total de mi cubo")]
     [InlineData("Decime cuánto tiene que dar el volumen")]
     [InlineData("Haceme el método Describir")]
+    [InlineData("¿qué tengo que poner en Area si la arista es tres?")]
+    [InlineData("qué número va en Volumen")]
     public async Task Frontera_PideResolver_Negativa(string question)
     {
         var fake = FakeChatClient.Answering("El área es seis por el lado al cuadrado.");
@@ -234,6 +236,12 @@ public sealed class ConceptAssistantTests : IDisposable
     [InlineData("Para el área total sumá las seis caras del cubo.", "operacion")]
     [InlineData("Un cubo tiene 6 caras iguales.", "numero")]
     [InlineData("Te calculo el área: es el lado por el lado.", "primera-persona")]
+    // H1 (act. 003): primera persona que habla de sí y procedimiento operativo sin número ni operación listada.
+    [InlineData("No puedo generar el valor, pero el área total es la piel del cuerpo.", "primera-persona")]
+    [InlineData("Como asistente, solo explico conceptos: el área total es la piel.", "primera-persona")]
+    [InlineData("Primero tomá la arista y después elevala para obtener el área total.", "procedimiento")]
+    [InlineData("Tenés que poner en el campo la superficie de toda la piel del cubo.", "procedimiento")]
+    [InlineData("Para el área total, calculá la superficie de cada cara y juntalas.", "procedimiento")]
     public async Task Concept_SalidaConOperacion_Ficha(string modelText, string reason)
     {
         Assert.Equal(reason, ConceptAnswerFilter.Check(modelText));
@@ -248,6 +256,45 @@ public sealed class ConceptAssistantTests : IDisposable
         Assert.Equal("ficha", answer.Origin);
         Assert.Equal(answer.Card!.Text, answer.Text);
         Assert.Single(fake.Calls);
+    }
+
+    /// <summary>H1 (act. 003): el filtro endurecido no rechaza las fichas mismas (ellas son el respaldo).</summary>
+    [Fact]
+    public void Concept_FichasPasanElFiltro()
+    {
+        var cards = ConceptTestCorpus.Signed().Cards;
+
+        Assert.NotEmpty(cards);
+        Assert.All(cards, c => Assert.Null(ConceptAnswerFilter.Check(c.Text)));
+    }
+
+    /// <summary>
+    /// Defecto 3 de la verificación de la act. 003: el filtro endurecido no rechaza respuestas buenas. La vara son
+    /// las nueve fichas, paráfrasis propias y las respuestas aceptadas de las corridas (<see cref="ConceptFilterCorpus"/>).
+    /// </summary>
+    [Fact]
+    public void Concept_FiltroSinFalsosPositivos()
+    {
+        var good = ConceptTestCorpus.Signed().Cards.Select(c => c.Text)
+            .Concat(ConceptFilterCorpus.Paraphrases)
+            .Concat(ConceptFilterCorpus.ModelAccepted)
+            .ToList();
+
+        var rejected = good.Select(t => (Text: t, Reason: ConceptAnswerFilter.Check(t)))
+            .Where(r => r.Reason is not null)
+            .Select(r => $"{r.Reason}: {r.Text}")
+            .ToList();
+
+        Assert.True(rejected.Count == 0, $"falsos positivos {rejected.Count}/{good.Count}:\n" + string.Join("\n", rejected));
+    }
+
+    /// <summary>Lo que dicta sigue sin pasar después de angostar el filtro.</summary>
+    [Fact]
+    public void Concept_FiltroAtrapaLoQueDicta()
+    {
+        var passed = ConceptFilterCorpus.Reds.Where(t => ConceptAnswerFilter.Check(t) is null).ToList();
+
+        Assert.True(passed.Count == 0, $"pasaron {passed.Count}/{ConceptFilterCorpus.Reds.Length}:\n" + string.Join("\n", passed));
     }
 
     /// <summary>Criterio 10 · REQ-IA-22: en el anillo 2 ningún número pasa, ni de ancho completo.</summary>
