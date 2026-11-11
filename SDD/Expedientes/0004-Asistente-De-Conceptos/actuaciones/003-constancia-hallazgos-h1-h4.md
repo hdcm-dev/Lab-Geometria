@@ -121,3 +121,57 @@ plantilla). Motivos del redactor con modelo: 18 aceptadas, 9 rechazadas por el f
 **Abierto.** El dígito junto a una magnitud sigue contando siempre («el volumen tiene 3 dimensiones» va a la
 negativa): la verificación habló del número en letras y no se amplió el alcance. El filtro sigue sin ver la operación
 dicha con otras palabras ni el concepto corrompido: eso lo decide la lectura docente.
+
+## 7. Rondas adversariales del enrutador y límite declarado
+
+Después del §6 se sometió `ConceptRouter` a rondas adversariales: en cada una, 60 frases nuevas (mitad preguntas de
+concepto que no deben ir a `pide-resolver`, mitad pedidos de valor que sí) escritas sin mirar el código. Cada falla se
+corrigió y quedó en la **sonda permanente** `tests/GeometriaFactory.Application.Tests/ConceptRouterSondaTests.cs`
+(`Concepto_NoPideResolver` y `Valor_PideResolver`), sin romper las de las rondas anteriores.
+
+| Ronda adversarial | 1 | 2 | 3 | 4 | 5 | control |
+|---|---|---|---|---|---|---|
+| Fallas | 8 / 60 | 4 / 60 | 1 / 60 | 3 / 60 | 1 / 60 | 16 / 54 |
+
+Las correcciones son los commits `991a194` (ronda 1 del enrutador: número en letras por su función sintáctica y sonda
+acumulada) a `e7bc2b0` (ronda 6: dimensiones con verbo de cálculo son dato). La ronda de control **no se corrigió**:
+sus 16 fallas quedaron como casos conocidos con `Skip` y motivo.
+
+**Diseño: la regla mira la función sintáctica del número, no su presencia.** Un número (en cifras o en letras) es
+dato sólo cuando funciona como **valor de una medida**: detrás de «es/mide/vale/igual a», del nombre de la medida
+(«arista tres»), de «de» («de tres por cuatro»), delante de una unidad o de «por» y otro número. No es dato cuando
+cuenta partes («seis caras», «dos bases») ni cuando lo sigue un sustantivo de partes. La ronda 5 sumó la conjunción
+de tres señales para la vida cotidiana: unidad seguida de «por» + verbo de cálculo (pinto, necesito, alcanza, compro,
+gasto, cubro, lleva…) + número con función de medida («cuánto pinto si la pared es de tres metros por dos metros»).
+
+**Ronda de control (54 frases, 16 fallas).** Se dejaron como casos conocidos, con `Skip` y su motivo, en lugar de
+seguir agregando reglas:
+
+- 2 de concepto que caen en `pide-resolver`: el número cita un coeficiente de la fórmula («para qué está el tres en
+  la fórmula del volumen del cono», «el un medio de la fórmula del triángulo»).
+- 14 pedidos de la vida cotidiana sin magnitud geométrica nombrada (soga, zócalo, baldosas, pileta, mantel, alambre,
+  pasto…) que el enrutador no ve como pedido.
+
+**Límite declarado.** El enrutador es **heurístico** y la convergencia (8 → 4 → 1 → 3 → 1) no lo vuelve completo: el
+lenguaje cotidiano abre más formas de pedir un valor de las que una regla puede listar. La garantía didáctica no
+descansa en él sino en que **la configuración por omisión contesta con la ficha** (IA apagada; con IA encendida y
+`AI__ConceptsModelWriter=false`, origen `ficha`): un pedido que se escapa del enrutador recibe la explicación del
+concepto, nunca la solución. Con el redactor de modelo encendido, el filtro (`ConceptAnswerFilter`) es la segunda
+barrera, y la lectura docente la tercera.
+
+**Pruebas.** `scripts/test.sh` en contenedor (SDK 10.0.403, usuario no root; `HOME`, `NUGET_PACKAGES` y `/tmp` en el
+disco del sistema; `SkipVisorBuild=true`): Domain 95/95, Application 168 aprobadas y 16 omitidas (los casos conocidos)
+de 184, Integration 709/710 (1 omitida, la previa). 0 rojas.
+
+**Batería v2 ×3, con modelo y sin modelo**, misma instancia propia que en el §6 (sólo `127.0.0.1`, fichas `vigente`
+fuera del repositorio, servidor de modelos por variable de entorno, 65 s entre corridas; ningún `appsettings` ni el
+manifiesto tocados: **la IA sigue apagada por omisión**):
+
+| Carpeta | Corrida | Código | Origen (fijo · modelo · ficha · caso de uso) | p95 |
+|---|---|---|---|---|
+| [`control-sin-modelo`](../../../../ai-layer/ensayos/corrida-conceptos-2026-11-11-control-sin-modelo/) | 1 · 2 · 3 | 24/24 · 24/24 · 24/24 | 13 · 0 · 9 · 2 (las tres) | 61 · 67 · 34 ms |
+| [`control-modelo`](../../../../ai-layer/ensayos/corrida-conceptos-2026-11-11-control-modelo/) | 1 · 2 · 3 | 24/24 · 24/24 · 24/24 | 13 · 6 · 3 · 2 (las tres) | 1481 · 1439 · 1390 ms |
+
+Veredicto de las dos: **PENDIENTE DE LECTURA DOCENTE** (0/27 leídas). Redactor con modelo: 18 aceptadas, 9 rechazadas
+por el filtro (6 `operacion`, 3 `numero`), 0 fuera de tiempo; ninguna respuesta del modelo con dígitos.
+`veredicto_conceptos.py --verificar` reproduce las siete carpetas.
