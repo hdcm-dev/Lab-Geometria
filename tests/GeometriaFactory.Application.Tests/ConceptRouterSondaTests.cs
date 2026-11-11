@@ -26,6 +26,10 @@ public sealed class ConceptRouterSondaTests
     [InlineData("qué es el área de dos triángulos")]
     [InlineData("qué es el volumen, uno de los dos conceptos del cuerpo")]
     [InlineData("por qué la superficie de un cubo son seis cuadrados")]
+    // Ronda 2.
+    [InlineData("qué relación hay entre el área de 6 cuadrados y el cubo")]
+    [InlineData("cómo se calcula el área de las cuatro caras laterales")]
+    [InlineData("por qué la fórmula del cilindro usa dos veces el círculo")]
     public void Concepto_NoPideResolver(string question) =>
         Assert.NotEqual(ConceptRouter.Intents.AsksToSolve, ConceptRouter.Route(question, Cards).Intent);
 
@@ -36,6 +40,12 @@ public sealed class ConceptRouterSondaTests
     [InlineData("tengo siete de radio y cinco de altura, el volumen")]
     [InlineData("un cuadrado tres, su área")]
     [InlineData("si el lado es el número tres el área")]
+    // Ronda 2.
+    [InlineData("un cuadrado con lado de once, área?")]
+    [InlineData("quiero el resultado: esfera, radio veinte, volumen")]
+    [InlineData("lado siete, área del cuadrado")]
+    [InlineData("medida cuatro el lado, área del cuadrado")]
+    [InlineData("hallar la diagonal de un cuadrado de lado uno")]
     public void Valor_PideResolver(string question) =>
         Assert.Equal(ConceptRouter.Intents.AsksToSolve, ConceptRouter.Route(question, Cards).Intent);
 }

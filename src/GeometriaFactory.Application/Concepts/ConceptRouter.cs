@@ -44,7 +44,7 @@ public static class ConceptRouter
     private static readonly Regex AsksToSolve = new(
         @"\bcuanto (da|tiene que dar|deberia|debe|vale|mide|es)\b|\bcual es (el valor|la formula|el resultado|el area|el volumen)"
         + @"|\bformula|\bpasame|\bescribime|\bhaceme|\bhace(me)? (el|la|mi)\b|\bdame (el|la)\b|\bresolv|\bcorregi|\bcorrigi"
-        + @"|\bcalcula|\bcalculame|\barmame|\bdecime (el|la|cuanto)|\bque valor (va|pongo|tiene que)|\bcomo (lo )?calculo"
+        + @"|(?<!\bse )\bcalcula|\barmame|\bdecime (el|la|cuanto)|\bque valor (va|pongo|tiene que)|\bcomo (lo )?calculo"
         // H1 (act. 003): el pedido del valor que va en un campo, dicho sin «cuánto» ni «fórmula».
         + @"|\bque (tengo|tenes|hay|tendria|deberia) que (poner|escribir|cargar|completar)|\bque (pongo|escribo|cargo) en"
         + @"|\bque numero (va|pongo|tengo|le|hay|deberia|corresponde)|\bque (va|iria) en (el |la )?(area|volumen|perimetro|campo)",
@@ -55,7 +55,7 @@ public static class ConceptRouter
         RegexOptions.CultureInvariant, RegexTimeout);
 
     private static readonly Regex Magnitude = new(
-        @"\barea|\bvolumen|\bperimetro|\bsuperficie|\bradio\b|\baltura\b",
+        @"\barea|\bvolumen|\bperimetro|\bsuperficie|\bradio\b|\baltura\b|\bdiagonal",
         RegexOptions.CultureInvariant, RegexTimeout);
 
     // EL DÍGITO CUENTA COMO DATO junto a una magnitud. El número EN LETRAS, en cambio, sólo cuando funciona como
@@ -74,7 +74,7 @@ public static class ConceptRouter
     private static readonly HashSet<string> MeasureNouns = new(StringComparer.Ordinal)
     {
         "arista", "lado", "radio", "altura", "base", "largo", "ancho", "alto", "diametro", "profundidad", "apotema",
-        "generatriz", "area", "volumen", "perimetro", "superficie",
+        "generatriz", "area", "volumen", "perimetro", "superficie", "diagonal", "medida",
     };
 
     private static readonly HashSet<string> UnitWords = new(StringComparer.Ordinal)
@@ -148,9 +148,13 @@ public static class ConceptRouter
             return new(ConceptRing.Adjacent, Intents.Adjacent, null);
         }
 
-        if (AsksToSolve.IsMatch(text)
+        // «por qué …» pide una explicación: la palabra «fórmula» ahí no pide la fórmula (ronda 2); sólo un valor
+        // de medida lo vuelve pedido.
+        var explains = text.StartsWith(" por que ", StringComparison.Ordinal);
+
+        if ((!explains && AsksToSolve.IsMatch(text))
             || (OwnFigure.IsMatch(text) && Magnitude.IsMatch(text))
-            || ((Digit.IsMatch(text) || SpokenValue(question)) && Magnitude.IsMatch(text)))
+            || (SpokenValue(question) && Magnitude.IsMatch(text)))
         {
             return new(ConceptRing.Outside, Intents.AsksToSolve, null);
         }
@@ -207,7 +211,17 @@ public static class ConceptRouter
         // «=» se pliega a espacio en Normalize; se lo nombra antes para no perderlo.
         var tokens = SpokenNumber.Tokens(Normalize(question.Replace("=", " igual ", StringComparison.Ordinal)));
 
-        foreach (var span in SpokenNumber.Find(tokens))
+        // El dígito sigue la misma regla que la letra (ronda 2: «el área de 6 cuadrados» cuenta cuadrados).
+        var spans = SpokenNumber.Find(tokens).ToList();
+        for (var d = 0; d < tokens.Length; d++)
+        {
+            if (Digit.IsMatch(tokens[d]) && !spans.Any(s => s.Start <= d && d < s.End))
+            {
+                spans.Add(new(d, d + 1, 0));
+            }
+        }
+
+        foreach (var span in spans)
         {
             string? At(int i) => i >= 0 && i < tokens.Length ? tokens[i] : null;
             var next = At(span.End);
@@ -237,8 +251,10 @@ public static class ConceptRouter
                 continue;
             }
 
-            // Cuenta un sustantivo: cualquier palabra de contenido detrás del número.
-            if (next is not null && !FunctionWords.Contains(next) && !SpokenNumber.IsNumberWord(next))
+            // Cuenta un sustantivo: cualquier palabra de contenido detrás del número. Una medida en singular no se
+            // cuenta: abre otra cláusula («lado siete, área», «radio veinte, volumen»). «N veces» es multiplicativo.
+            if (next is not null && !FunctionWords.Contains(next) && !SpokenNumber.IsNumberWord(next)
+                && (next == "veces" || !MeasureNouns.Contains(next)))
             {
                 continue;
             }
