@@ -1,0 +1,25 @@
+# E-008 · Verificación de la act. 003: pruebas nuevas contra el código de e6b0371 (enrutador, filtro y catálogo previos)
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "¿En el medio del cilindro la altura cambia?") [37 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "qué es la altura de un cilindro, la que pasa por e"···) [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "¿Por qué el área total junta las seis caras?") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "¿Qué es el volumen de un cuerpo con cuatro vértice"···) [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "qué es el área de las dos bases de un prisma") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "¿El área de las dos tapas del cilindro cuenta en e"···) [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "¿Qué diferencia hay entre el área de una cara y el"···) [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "por qué el volumen tiene tres dimensiones") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "qué es la superficie lateral de un cubo de seis ca"···) [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "¿Qué es el área de una cara si el cubo tiene doce "···) [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "¿El perímetro de un rectángulo junta sus cuatro la"···) [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto(question: "¿La altura de un ortoedro es una de sus tres medid"···) [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_ValorDeUnaMedida_PideResolver(question: "el volumen de un cubo de lado diecisiete") [1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.NumeroEnLetras_ValorDeUnaMedida_PideResolver(question: "el área total de un ortoedro de trece por catorce "···) [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.Catalogo_TrabajoActual_TextoSegunRol [< 1 ms]
+Failed!  - Failed:    15, Passed:   127, Skipped:     0, Total:   142, Duration: 107 ms - GeometriaFactory.Application.Tests.dll (net10.0)
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Concept_FiltroSinFalsosPositivos [46 ms]
+   falsos positivos 13/56:
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 53 ms - GeometriaFactory.Integration.Tests.dll (net10.0)
+
+# Con el código corregido: scripts/test.sh (SkipVisorBuild=true en el contenedor, sin Node)
+Passed!  - Failed:     0, Passed:    95, Skipped:     0, Total:    95 - GeometriaFactory.Domain.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   142, Skipped:     0, Total:   142 - GeometriaFactory.Application.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   709, Skipped:     1, Total:   710 - GeometriaFactory.Integration.Tests.dll (net10.0)

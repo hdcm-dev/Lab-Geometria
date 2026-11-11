@@ -37,6 +37,12 @@ public static class DestinationCatalog
     public const string EditWork = "editar-trabajo";
     public const string CommissionList = "entrega-comision";
 
+    /// <summary>
+    /// El chip de <see cref="CurrentWork"/> para el docente: el trabajo que mira es de un alumno, no «tuyo»
+    /// (verificación de la act. 003 del EXP-0004, defecto 4).
+    /// </summary>
+    public const string CurrentWorkLabelForAdministrator = "Volver al trabajo del alumno";
+
     private static readonly Role[] Student = [Role.Student];
     private static readonly Role[] Both = [Role.Student, Role.Administrator];
 
@@ -82,7 +88,9 @@ public static class DestinationCatalog
             path += "?estado=" + Uri.EscapeDataString(state);
         }
 
-        return new(entry.Id, entry.Label, path);
+        var label = entry.Id == CurrentWork && role == Role.Administrator ? CurrentWorkLabelForAdministrator : entry.Label;
+
+        return new(entry.Id, label, path);
     }
 
     /// <summary>

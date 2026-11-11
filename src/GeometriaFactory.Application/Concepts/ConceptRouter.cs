@@ -58,11 +58,41 @@ public static class ConceptRouter
         @"\barea|\bvolumen|\bperimetro|\bsuperficie|\bradio\b|\baltura\b",
         RegexOptions.CultureInvariant, RegexTimeout);
 
-    // EL NÚMERO EN LETRAS CUENTA COMO NÚMERO (H1, act. 003): «si la arista es tres» esquivaba la regla del dígito.
-    // «uno» y «una» quedan afuera porque son artículos («una arista»).
-    private static readonly Regex Digit = new(
-        @"\d|\b(dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce|quince|veinte|treinta|cuarenta|cincuenta|cien|ciento|mil|medio)\b",
-        RegexOptions.CultureInvariant, RegexTimeout);
+    // EL DÍGITO CUENTA COMO DATO junto a una magnitud. El número EN LETRAS, en cambio, sólo cuando funciona como
+    // valor de una medida (ver SpokenValue): la act. 003 lo contaba siempre y mandaba a la negativa «qué es el
+    // área de las dos bases» o «la altura, la que pasa por el medio» (regresión de la verificación, defecto 1).
+    private static readonly Regex Digit = new(@"\d", RegexOptions.CultureInvariant, RegexTimeout);
+
+    // Lo que viene DESPUÉS de un cardinal de partes: «dos bases», «tres dimensiones», «seis caras». No es un dato.
+    private static readonly HashSet<string> PartNouns = new(StringComparer.Ordinal)
+    {
+        "cara", "caras", "base", "bases", "dimension", "dimensiones", "lado", "lados", "arista", "aristas", "vertice",
+        "vertices", "medida", "medidas", "valor", "valores", "parte", "partes", "vez", "veces", "figura", "figuras",
+        "cuerpo", "cuerpos", "tapa", "tapas", "circulo", "circulos", "rectangulo", "rectangulos", "numero", "numeros",
+        "campo", "campos", "forma", "formas", "tipo", "tipos", "cosa", "cosas", "pregunta", "preguntas", "punto",
+        "puntos", "eje", "ejes", "angulo", "angulos", "segmento", "segmentos", "trabajo", "trabajos", "advertencia",
+        "advertencias", "observacion", "observaciones", "version", "versiones", "pasos", "maneras", "clases",
+    };
+
+    // Lo que viene ANTES de un valor: «es tres», «mide tres», «igual a tres», «= tres».
+    private static readonly HashSet<string> ValueVerbs = new(StringComparer.Ordinal)
+    {
+        "es", "son", "mide", "miden", "mida", "midan", "medira", "vale", "valen", "valga", "sea", "sean", "fuera",
+        "fueran", "da", "dan", "igual", "tiene", "tienen",
+    };
+
+    // La medida de la que el número es valor: «arista tres», «de radio dos».
+    private static readonly HashSet<string> MeasureNouns = new(StringComparer.Ordinal)
+    {
+        "arista", "lado", "radio", "altura", "base", "largo", "ancho", "alto", "diametro", "profundidad", "apotema",
+        "generatriz", "area", "volumen", "perimetro", "superficie",
+    };
+
+    private static readonly HashSet<string> UnitWords = new(StringComparer.Ordinal)
+    {
+        "cm", "centimetro", "centimetros", "m", "metro", "metros", "mm", "milimetro", "milimetros", "km",
+        "kilometros", "unidad", "unidades", "u", "cm2", "cm3", "m2", "m3", "pulgadas",
+    };
 
     private static readonly Regex CountWarnings = new(
         @"\bcuantas (advertencias|observaciones)", RegexOptions.CultureInvariant, RegexTimeout);
@@ -131,7 +161,7 @@ public static class ConceptRouter
 
         if (AsksToSolve.IsMatch(text)
             || (OwnFigure.IsMatch(text) && Magnitude.IsMatch(text))
-            || (Digit.IsMatch(text) && Magnitude.IsMatch(text)))
+            || ((Digit.IsMatch(text) || SpokenValue(question)) && Magnitude.IsMatch(text)))
         {
             return new(ConceptRing.Outside, Intents.AsksToSolve, null);
         }
@@ -166,6 +196,43 @@ public static class ConceptRouter
         return best is null
             ? new(ConceptRing.Concepts, Intents.NoCard, null)
             : new(ConceptRing.Concepts, best.Id, best);
+    }
+
+    /// <summary>
+    /// Si la pregunta trae un número en letras que funciona como VALOR de una medida: detrás de «es/mide/vale/igual
+    /// a/=», detrás del nombre de la medida («arista tres»), detrás de «de» («de tres por cuatro») o delante de una
+    /// unidad o de «por» y otro número. Nunca cuando lo sigue un sustantivo de partes («dos bases», «tres
+    /// dimensiones», «seis caras»): ahí es un cardinal y la pregunta sigue siendo de concepto.
+    /// </summary>
+    public static bool SpokenValue(string question)
+    {
+        ArgumentNullException.ThrowIfNull(question);
+
+        // «=» se pliega a espacio en Normalize; se lo nombra antes para no perderlo.
+        var tokens = SpokenNumber.Tokens(Normalize(question.Replace("=", " igual ", StringComparison.Ordinal)));
+
+        foreach (var span in SpokenNumber.Find(tokens))
+        {
+            var next = span.End < tokens.Length ? tokens[span.End] : null;
+            var prev = span.Start > 0 ? tokens[span.Start - 1] : null;
+            var prev2 = span.Start > 1 ? tokens[span.Start - 2] : null;
+
+            if (next is not null && PartNouns.Contains(next))
+            {
+                continue;
+            }
+
+            if ((next is not null && UnitWords.Contains(next))
+                || (next == "por" && span.End + 1 < tokens.Length
+                    && (SpokenNumber.IsNumberWord(tokens[span.End + 1]) || char.IsDigit(tokens[span.End + 1][0])))
+                || (prev is not null && (ValueVerbs.Contains(prev) || MeasureNouns.Contains(prev) || prev == "de"))
+                || (prev == "a" && prev2 == "igual"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /// <summary>

@@ -268,6 +268,35 @@ public sealed class ConceptAssistantTests : IDisposable
         Assert.All(cards, c => Assert.Null(ConceptAnswerFilter.Check(c.Text)));
     }
 
+    /// <summary>
+    /// Defecto 3 de la verificación de la act. 003: el filtro endurecido no rechaza respuestas buenas. La vara son
+    /// las nueve fichas, paráfrasis propias y las respuestas aceptadas de las corridas (<see cref="ConceptFilterCorpus"/>).
+    /// </summary>
+    [Fact]
+    public void Concept_FiltroSinFalsosPositivos()
+    {
+        var good = ConceptTestCorpus.Signed().Cards.Select(c => c.Text)
+            .Concat(ConceptFilterCorpus.Paraphrases)
+            .Concat(ConceptFilterCorpus.ModelAccepted)
+            .ToList();
+
+        var rejected = good.Select(t => (Text: t, Reason: ConceptAnswerFilter.Check(t)))
+            .Where(r => r.Reason is not null)
+            .Select(r => $"{r.Reason}: {r.Text}")
+            .ToList();
+
+        Assert.True(rejected.Count == 0, $"falsos positivos {rejected.Count}/{good.Count}:\n" + string.Join("\n", rejected));
+    }
+
+    /// <summary>Lo que dicta sigue sin pasar después de angostar el filtro.</summary>
+    [Fact]
+    public void Concept_FiltroAtrapaLoQueDicta()
+    {
+        var passed = ConceptFilterCorpus.Reds.Where(t => ConceptAnswerFilter.Check(t) is null).ToList();
+
+        Assert.True(passed.Count == 0, $"pasaron {passed.Count}/{ConceptFilterCorpus.Reds.Length}:\n" + string.Join("\n", passed));
+    }
+
     /// <summary>Criterio 10 · REQ-IA-22: en el anillo 2 ningún número pasa, ni de ancho completo.</summary>
     [Theory]
     [InlineData("Tiene 12 aristas.")]

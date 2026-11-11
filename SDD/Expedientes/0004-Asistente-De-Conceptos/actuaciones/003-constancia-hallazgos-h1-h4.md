@@ -82,4 +82,42 @@ Capturas en [`evidencia/capturas-act-003/`](../evidencia/capturas-act-003/).
   Web de ensayo usó una copia del bundle ya construido.
 - Los 16 «fuera de tiempo» del redactor: el servidor de modelos es compartido; p95 de 7–8 s contra un tope de 8 s.
 - Sigue todo lo pendiente del PO de la 002 (firma de fichas, lectura docente, puntuación, preguntas reales, encendido).
-- Texto del chip del docente («Volver a tu trabajo»), anotado arriba.
+- ~~Texto del chip del docente («Volver a tu trabajo»), anotado arriba.~~ Corregido en el §6.
+
+## 6. Verificación de esta actuación: cuatro defectos y lo que se hizo
+
+La verificación posterior a `e6b0371` encontró cuatro defectos en lo de arriba. Se agregan acá (la actuación es la misma
+rama y todavía no se fusionó); lo de los §1–§5 no se reescribe salvo el tachado del último punto del §5.
+
+| Defecto | Qué se cambió | Prueba que falla con `e6b0371` | Evidencia |
+|---|---|---|---|
+| **1 · regresión de H1** — el número en letras junto a una magnitud mandaba a `pide-resolver` preguntas de concepto («qué es el área de las dos bases de un prisma», «por qué el volumen tiene tres dimensiones», «la altura, la que pasa por el medio», «un cubo de seis caras») | `ConceptRouter.SpokenValue`: el número en letras cuenta como dato **sólo cuando es valor de una medida** — detrás de «es/mide/vale/igual a/=», del nombre de la medida («arista tres»), de «de» («de tres por cuatro»), o delante de una unidad o de «por» y otro número — y **nunca** cuando lo sigue un sustantivo de partes (caras, bases, dimensiones, lados, aristas, medidas…). «medio» suelto no es número. El dígito sigue contando como antes | `NumeroEnLetras_CardinalDePartes_SigueSiendoConcepto`, 13 frases (las cuatro de la verificación y nueve propias): **12 rojas** con `e6b0371` (la del radio no lleva número; queda como guarda). `NumeroEnLetras_ValorDeUnaMedida_PideResolver`, 12 frases (incluida la de H1) verdes; 2 rojas con `e6b0371` («diecisiete», «trece por catorce por noventa») | [E-008](../evidencia/E-008-verificacion-rojo-verde.txt) |
+| **2 · lista incompleta** | `SpokenNumber`: parser y no lista — unidades, diez a quince, dieci-, veinti-, decenas «y» unidad, cien/ciento y centenas, «mil», «y medio», «coma». «un/una» no abren número (artículos) | `SpokenNumber_Parsea` (13 casos: 13, 17, 23, 35, 99, 100, 120, 241, 1000, 2300, 3,5, 2,5) y `SpokenNumber_NoEsNumero` | E-008 |
+| **3 · filtro demasiado amplio** | Corpus de respuestas buenas `ConceptFilterCorpus`: las **9 fichas**, **30 paráfrasis** propias que usan a propósito «primero», «finalmente», «deberías», «usá», «yo», «mí», «podría», «calcular» en tercera persona, y las **17 respuestas aceptadas** (origen `modelo`) de las cuatro corridas del 2026-11-11 — 56 textos. **Con `e6b0371`: 13/56 falsos positivos** (9 `procedimiento`, 3 `primera-persona`, 1 `operacion`: «dos caras vecinas»), todos en las paráfrasis; 0 en fichas y en respuestas del modelo. Ajuste: conectores de secuencia sólo pegados a un verbo de cálculo; «tenés/deberías/hay que» sólo con el verbo que dicta; fuera «usá» y el infinitivo; «yo/mí» sólo pegados a lo que el asistente haría; «podría» sólo con «no/te/le»; fuera «dos caras» de la lista de operaciones. **Después: 0/56.** Las que dictan (`Reds`, 14, incluidas las 8 de H1) siguen rechazadas: 14/14 | `Concept_FiltroSinFalsosPositivos` (roja con `e6b0371`: 13/56), `Concept_FiltroAtrapaLoQueDicta` | E-008 |
+| **4 · chip del docente** | `DestinationCatalog.Resolve`: `trabajo-actual` dice «Volver a tu trabajo» al alumno y **«Volver al trabajo del alumno»** al docente; la especificación (`ai-layer/06-…`, tabla del catálogo) lo declara | `Catalogo_TrabajoActual_TextoSegunRol` (roja con `e6b0371`) | E-008 |
+
+**Pruebas.** `scripts/test.sh` en contenedor (SDK 10.0.403, usuario no root; `HOME`, `NUGET_PACKAGES` y `/tmp` en el
+disco del sistema, fuera de `/vm`; `SkipVisorBuild=true`): Domain 95/95, Application 142/142, Integration 709/710
+(1 omitida, la previa). 0 rojas. Con `ConceptRouter.cs`, `DestinationCatalog.cs` y `ConceptAnswerFilter.cs` de
+`e6b0371`: **16 rojas** (Application 15, Integration 1).
+
+**Batería v2 ×3, con modelo y sin modelo.** Instancia propia del servicio en contenedor (publicada sólo en
+`127.0.0.1`), corpus de ensayo con las nueve fichas en `vigente` fuera del repositorio, `AI__ConceptsEnabled=true`,
+dirección del servidor de modelos sólo por variable de entorno, modelo de ADR-14012. Ningún `appsettings` ni el
+manifiesto se tocaron: **la IA sigue apagada por omisión**. Un primer intento corrió las tres corridas seguidas y la
+tercera dio 4 × `429` (límite de tasa por persona de la instancia, 60/min: el ensayo sin modelo es más rápido que la
+ventana); se descartó y se repitió con 65 s entre corridas.
+
+| Carpeta | Corrida | Código | Origen (fijo · modelo · ficha · caso de uso) | p95 |
+|---|---|---|---|---|
+| [`verif-sin-modelo`](../../../../ai-layer/ensayos/corrida-conceptos-2026-11-11-verif-sin-modelo/) (`AI__ConceptsModelWriter=false`) | 1 · 2 · 3 | 24/24 · 24/24 · 24/24 | 13 · 0 · 9 · 2 (las tres) | 42 · 15 · 13 ms |
+| [`verif-modelo`](../../../../ai-layer/ensayos/corrida-conceptos-2026-11-11-verif-modelo/) (`AI__ConceptsModelWriter=true`) | 1 · 2 · 3 | 24/24 · 24/24 · 24/24 | 13 · 6 · 3 · 2 (las tres) | 1640 · 2505 · 1605 ms |
+
+Veredicto de las dos carpetas: **PENDIENTE DE LECTURA DOCENTE** (0/27 leídas cada una; `lectura-docente.jsonl` en
+plantilla). Motivos del redactor con modelo: 18 aceptadas, 9 rechazadas por el filtro (6 `operacion`, 3 `numero`),
+0 `primera-persona`, 0 `procedimiento`, 0 fuera de tiempo; ninguna respuesta del modelo con dígitos.
+`veredicto_conceptos.py --verificar` reproduce las seis carpetas.
+
+**Abierto.** El dígito junto a una magnitud sigue contando siempre («el volumen tiene 3 dimensiones» va a la
+negativa): la verificación habló del número en letras y no se amplió el alcance. El filtro sigue sin ver la operación
+dicha con otras palabras ni el concepto corrompido: eso lo decide la lectura docente.
