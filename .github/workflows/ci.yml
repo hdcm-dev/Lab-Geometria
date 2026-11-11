@@ -83,6 +83,15 @@ jobs:
       - name: Recálculo de corridas citadas · las cifras del repo
         run: python3 -I ai-layer/ensayos/recalcular.py
 
+      # VEREDICTO DE LA BATERÍA DEL ASISTENTE DE CONCEPTOS (expediente 0004, K7 R9.1 y K3 R2.2a). Sin modelo: recalcula
+      # desde el registro crudo y la lectura docente el `veredicto.txt` de cada corrida versionada; par rojo/verde antes.
+      - name: Veredicto de la batería de conceptos · par rojo/verde y reproducción
+        run: |
+          for d in ai-layer/ensayos/corrida-conceptos-*/; do
+            python3 -I ai-layer/ensayos/veredicto_conceptos.py --autoprueba "$d"
+            python3 -I ai-layer/ensayos/veredicto_conceptos.py --verificar "$d"
+          done
+
       - name: Puerta QG-01 · construir sin advertencias, con el bundle del visor
         run: ./scripts/build.sh
 

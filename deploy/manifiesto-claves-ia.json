@@ -1,0 +1,20 @@
+{
+  "_": "Manifiesto de las claves de configuración de la capa de IA que el código lee (K7 R5.4). Lo exporta este repositorio y lo contrasta `ConfigurationKeysManifestTests`; el repositorio del despliegue (Container.Lab-Geometria) compara su plantilla `docker/.env-example` contra este archivo. Sólo nombres y valores por omisión: la dirección del servidor de modelos y el nombre del modelo NUNCA se escriben acá, llegan por variable de entorno.",
+  "version": 1,
+  "piezas": {
+    "api": {
+      "AI__Endpoint":            { "omision": "", "por_entorno": true },
+      "AI__Model":               { "omision": "", "por_entorno": true },
+      "AI__TimeoutSeconds":      { "omision": "8" },
+      "AI__MaxObservations":     { "omision": "5" },
+      "AI__KeepAlive":           { "omision": "30m" },
+      "AI__HintsEnabled":        { "omision": "false" },
+      "AI__ConceptsEnabled":     { "omision": "false", "enciende": "PO" },
+      "AI__ConceptsModelWriter": { "omision": "false", "enciende": "PO" }
+    },
+    "web": {
+      "AI__HintsEnabled":        { "omision": "false" },
+      "AI__ConceptsEnabled":     { "omision": "false", "enciende": "PO" }
+    }
+  }
+}

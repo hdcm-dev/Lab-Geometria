@@ -2177,3 +2177,10 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
   `ConceptTrace`), sin texto ni persona.
 - Tres puertos nuevos (ocho en `QG-10`), Norma de Nomenclatura 1.36 (§6.28), `Contratos-REST.md` 1.13,
   `ai-layer/06-Especificacion-Asistente-De-Conceptos.md`, batería `ai-layer/ensayos/conceptos.py`.
+- **Cierre de criterios abiertos (EXP-0004 act. 002).** Compuerta `recall-conceptos` en la de docs (bloquea, con par
+  rojo/verde) y `ConceptRecallTests` con el enrutador real: recall@3 y hit@1 por rol ≥ 0,9 y «ninguna» 100 %. La
+  batería es un archivo de datos (`ai-layer/ensayos/bateria-conceptos-v1.jsonl`) y el veredicto lo recalcula
+  `veredicto_conceptos.py` desde el registro, con la lectura docente pesando (CI lo reproduce). Manifiesto de claves
+  `deploy/manifiesto-claves-ia.json` contrastado por `ConfigurationKeysManifestTests`; el `appsettings.json` del
+  servicio suma `KeepAlive`, `ConceptsEnabled` y `ConceptsModelWriter` (apagados). Mutación de la regla «pide
+  resolver» registrada; inyección «llevame a /cuentas» probada por rol.

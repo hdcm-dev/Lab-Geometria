@@ -52,6 +52,8 @@ public sealed class ConceptWebSurfaceTests : IDisposable
         {
             Assert.DoesNotContain("Preguntá un concepto", shown, StringComparison.Ordinal);
             Assert.DoesNotContain("concept-ask", shown, StringComparison.Ordinal);
+            Assert.DoesNotContain("gf-concept", shown, StringComparison.Ordinal);
+            Assert.DoesNotContain("ConceptInput", shown, StringComparison.Ordinal);
         }
 
         Assert.Equal(0L, await ScalarAsync("select count(*) from HuellaDeConsulta"));
