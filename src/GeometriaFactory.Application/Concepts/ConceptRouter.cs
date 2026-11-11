@@ -63,17 +63,6 @@ public static class ConceptRouter
     // área de las dos bases» o «la altura, la que pasa por el medio» (regresión de la verificación, defecto 1).
     private static readonly Regex Digit = new(@"\d", RegexOptions.CultureInvariant, RegexTimeout);
 
-    // Lo que viene DESPUÉS de un cardinal de partes: «dos bases», «tres dimensiones», «seis caras». No es un dato.
-    private static readonly HashSet<string> PartNouns = new(StringComparer.Ordinal)
-    {
-        "cara", "caras", "base", "bases", "dimension", "dimensiones", "lado", "lados", "arista", "aristas", "vertice",
-        "vertices", "medida", "medidas", "valor", "valores", "parte", "partes", "vez", "veces", "figura", "figuras",
-        "cuerpo", "cuerpos", "tapa", "tapas", "circulo", "circulos", "rectangulo", "rectangulos", "numero", "numeros",
-        "campo", "campos", "forma", "formas", "tipo", "tipos", "cosa", "cosas", "pregunta", "preguntas", "punto",
-        "puntos", "eje", "ejes", "angulo", "angulos", "segmento", "segmentos", "trabajo", "trabajos", "advertencia",
-        "advertencias", "observacion", "observaciones", "version", "versiones", "pasos", "maneras", "clases",
-    };
-
     // Lo que viene ANTES de un valor: «es tres», «mide tres», «igual a tres», «= tres».
     private static readonly HashSet<string> ValueVerbs = new(StringComparer.Ordinal)
     {
@@ -199,10 +188,17 @@ public static class ConceptRouter
     }
 
     /// <summary>
-    /// Si la pregunta trae un número en letras que funciona como VALOR de una medida: detrás de «es/mide/vale/igual
-    /// a/=», detrás del nombre de la medida («arista tres»), detrás de «de» («de tres por cuatro») o delante de una
-    /// unidad o de «por» y otro número. Nunca cuando lo sigue un sustantivo de partes («dos bases», «tres
-    /// dimensiones», «seis caras»): ahí es un cardinal y la pregunta sigue siendo de concepto.
+    /// Si la pregunta trae un número en letras que funciona como VALOR de una medida. La regla mira la FUNCIÓN
+    /// SINTÁCTICA del número, no una lista de sustantivos (EXP-0004, sonda de la ronda 1):
+    /// <list type="bullet">
+    /// <item>Es dato: delante de una unidad («dos metros»), de «por» y otro número («tres por cuatro»), de «de» +
+    /// medida («siete de lado», «tres de radio»); detrás de una medida o figura («arista tres», «un cuadrado
+    /// tres»), de «el número», de «es/mide/vale/igual a/=», o de «de» («cubo de tres»).</item>
+    /// <item>No es dato: cuando CUENTA un sustantivo, es decir, lo sigue cualquier palabra de contenido que no
+    /// sea unidad («dos bases», «tres cubos iguales», «son seis cuadrados», «tiene doce aristas»), o en «uno de
+    /// los/las».</item>
+    /// </list>
+    /// Ante la duda se prefiere concepto: la ficha es inocua y la negativa a un concepto legítimo no lo es.
     /// </summary>
     public static bool SpokenValue(string question)
     {
@@ -213,20 +209,49 @@ public static class ConceptRouter
 
         foreach (var span in SpokenNumber.Find(tokens))
         {
-            var next = span.End < tokens.Length ? tokens[span.End] : null;
-            var prev = span.Start > 0 ? tokens[span.Start - 1] : null;
-            var prev2 = span.Start > 1 ? tokens[span.Start - 2] : null;
+            string? At(int i) => i >= 0 && i < tokens.Length ? tokens[i] : null;
+            var next = At(span.End);
+            var next2 = At(span.End + 1);
+            var prev = At(span.Start - 1);
+            var prev2 = At(span.Start - 2);
 
-            if (next is not null && PartNouns.Contains(next))
+            // Delante: unidad, «por N», «de <medida>».
+            if (next is not null && UnitWords.Contains(next))
+            {
+                return true;
+            }
+
+            if (next == "por" && next2 is not null && (SpokenNumber.IsNumberWord(next2) || char.IsDigit(next2[0])))
+            {
+                return true;
+            }
+
+            if (next == "de" && next2 is not null && MeasureNouns.Contains(next2))
+            {
+                return true;
+            }
+
+            // «uno de los dos conceptos»: partitivo, no valor.
+            if (next == "de" && next2 is "los" or "las" or "sus" or "estos" or "estas")
             {
                 continue;
             }
 
-            if ((next is not null && UnitWords.Contains(next))
-                || (next == "por" && span.End + 1 < tokens.Length
-                    && (SpokenNumber.IsNumberWord(tokens[span.End + 1]) || char.IsDigit(tokens[span.End + 1][0])))
-                || (prev is not null && (ValueVerbs.Contains(prev) || MeasureNouns.Contains(prev) || prev == "de"))
-                || (prev == "a" && prev2 == "igual"))
+            // Cuenta un sustantivo: cualquier palabra de contenido detrás del número.
+            if (next is not null && !FunctionWords.Contains(next) && !SpokenNumber.IsNumberWord(next))
+            {
+                continue;
+            }
+
+            // Detrás: verbo de valor, medida o figura, «el número», «de», «igual a».
+            if (prev is not null
+                && (ValueVerbs.Contains(prev) || MeasureNouns.Contains(prev) || FigureNouns.Contains(prev)
+                    || prev == "numero" || prev == "de"))
+            {
+                return true;
+            }
+
+            if (prev == "a" && prev2 == "igual")
             {
                 return true;
             }
@@ -234,6 +259,24 @@ public static class ConceptRouter
 
         return false;
     }
+
+    // Palabras de función: detrás de un número no son el sustantivo que cuenta («la arista es tres y el área»,
+    // «un cuadrado tres, su área»). Clase cerrada: no crece con el vocabulario de la geometría.
+    private static readonly HashSet<string> FunctionWords = new(StringComparer.Ordinal)
+    {
+        "y", "e", "o", "ni", "pero", "entonces", "si", "que", "cual", "cuales", "cuanto", "cuanta", "cuantos",
+        "cuantas", "como", "donde", "cuando", "el", "la", "los", "las", "lo", "un", "una", "al", "del", "de", "a",
+        "en", "con", "para", "sin", "su", "sus", "mi", "mis", "tu", "tus", "este", "esta", "ese", "esa", "no", "se",
+        "es", "son", "da", "dan", "mide", "miden", "vale", "valen", "seria", "sera", "queda", "tiene", "hay", "me",
+        "te", "le", "les", "ya", "mas", "menos", "por", "igual", "medio", "coma",
+    };
+
+    // Figuras: «un cuadrado tres» nombra la figura y su medida en el mismo giro.
+    private static readonly HashSet<string> FigureNouns = new(StringComparer.Ordinal)
+    {
+        "cubo", "cuadrado", "circulo", "cilindro", "ortoedro", "rectangulo", "triangulo", "prisma", "esfera",
+        "cono", "piramide",
+    };
 
     /// <summary>
     /// La ficha que nombra la pregunta, o <c>null</c>. El sinónimo más largo gana («rectángulo
