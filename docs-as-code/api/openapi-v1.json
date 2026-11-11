@@ -1414,6 +1414,78 @@
           }
         ]
       }
+    },
+    "/v1/conceptos/consultas": {
+      "post": {
+        "tags": [
+          "GeometriaFactory.Api"
+        ],
+        "summary": "Pregunta un concepto al asistente (apagado por omisión)",
+        "operationId": "AskConcept",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConceptQuestionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConceptAnswerResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -1618,6 +1690,155 @@
           }
         }
       },
+      "ConceptAnswerResponse": {
+        "required": [
+          "form",
+          "ring",
+          "intent",
+          "text",
+          "card",
+          "destination",
+          "origin",
+          "note",
+          "breakdown"
+        ],
+        "type": "object",
+        "properties": {
+          "form": {
+            "type": "string"
+          },
+          "ring": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "intent": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "card": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ConceptCardReference"
+              }
+            ]
+          },
+          "destination": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ConceptDestinationChip"
+              }
+            ]
+          },
+          "origin": {
+            "type": "string"
+          },
+          "note": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "breakdown": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConceptBreakdownEntry"
+            }
+          }
+        }
+      },
+      "ConceptBreakdownEntry": {
+        "required": [
+          "label",
+          "count"
+        ],
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "ConceptCardReference": {
+        "required": [
+          "id",
+          "title",
+          "text",
+          "source"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      },
+      "ConceptDestinationChip": {
+        "required": [
+          "id",
+          "label",
+          "path"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      },
+      "ConceptQuestionRequest": {
+        "required": [
+          "question",
+          "workId"
+        ],
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "workId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
       "CredentialExchangeRequest": {
         "required": [
           "email",
@@ -1760,6 +1981,12 @@
           "serverTimeUtc": {
             "type": "string",
             "format": "date-time"
+          },
+          "assistantAi": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },

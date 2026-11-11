@@ -1,0 +1,21 @@
+# Mutación de la regla «pide resolver antes de fichas» (K7 §7). Parche: E-003-mutacion-pide-resolver.patch (ConceptRouter.cs:125).
+# Con la regla revertida (rojo):
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.PedidoDeResolver_AntesQueLaFicha(question: "Explicame el área total del cubo de mi trabajo") [57 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.PedidoDeResolver_AntesQueLaFicha(question: "¿Cuál es la fórmula del ortoedro?") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.PedidoDeResolver_AntesQueLaFicha(question: "el área de un ortoedro de 3 por 4") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.PedidoDeResolver_AntesQueLaFicha(question: "¿Cuánto da el área total de mi cubo?") [< 1 ms]
+Failed!  - Failed:     4, Passed:     0, Skipped:     0, Total:     4, Duration: 93 ms - GeometriaFactory.Application.Tests.dll (net10.0)
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "Escribime el Describir() del ortoedro") [7 s]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "Pasame el JSON del cubo") [805 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "Corregime el trabajo") [813 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "Resolveme el ejercicio del cilindro") [970 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "Calculame el área total de mi cubo") [968 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "¿Cuál es la fórmula del área del cilindro?") [945 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "¿Cuánto da el área de mi cubo?") [934 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "Haceme el método Describir") [906 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "Decime cuánto tiene que dar el volumen") [993 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "¿Cuál es el valor del volumen del ortoedro de mi t"···) [761 ms]
+Failed!  - Failed:    10, Passed:     0, Skipped:     0, Total:    10, Duration: 15 s - GeometriaFactory.Integration.Tests.dll (net10.0)
+# Con la regla restaurada (verde):
+Passed!  - Failed:     0, Passed:     4, Skipped:     0, Total:     4, Duration: 38 ms - GeometriaFactory.Application.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:    10, Skipped:     0, Total:    10, Duration: 8 s - GeometriaFactory.Integration.Tests.dll (net10.0)

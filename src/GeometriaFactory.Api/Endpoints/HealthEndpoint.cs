@@ -1,6 +1,7 @@
 using System.Reflection;
 using GeometriaFactory.Api.Composition;
 using GeometriaFactory.Contracts.Service;
+using GeometriaFactory.Infrastructure.AI;
 using GeometriaFactory.Infrastructure.Persistence;
 
 namespace GeometriaFactory.Api.Endpoints;
@@ -38,6 +39,7 @@ public static class HealthEndpoint
 
         endpoints.MapGet(Route, async (
             TwoPhaseStartup startup,
+            AiEnablement assistantAi,
             StoreHealth store,
             ILoggerFactory registros,
             CancellationToken cancellationToken) =>
@@ -63,7 +65,8 @@ public static class HealthEndpoint
             var health = new ServiceHealth(
                 Ready: listo,
                 Version: ReadVersion(),
-                ServerTimeUtc: DateTimeOffset.UtcNow);
+                ServerTimeUtc: DateTimeOffset.UtcNow,
+                AssistantAi: assistantAi.Display);
 
             // EL MOTIVO VA AL REGISTRO Y NO A LA RESPUESTA. `RA-03` gobierna lo que el
             // servicio dice, y este punto es anónimo: quien lo consulta puede ser cualquiera.

@@ -75,4 +75,16 @@ public sealed class AiOptions
     /// pantalla no cambia y no pide nada.
     /// </summary>
     public bool HintsEnabled { get; set; }
+
+    /// <summary>
+    /// El asistente de conceptos (ADR-14013). <c>false</c> por omisión: la pantalla no cambia y el
+    /// servicio de datos contesta <c>404</c> en su punto. Fusionar no lo enciende (D-6).
+    /// </summary>
+    public bool ConceptsEnabled { get; set; }
+
+    /// <summary>
+    /// Pide que el modelo redacte sobre la ficha. <c>false</c> por omisión: contesta la ficha. Sólo se
+    /// enciende para medir si la redacción supera a la ficha (criterio 17 de la rebanada).
+    /// </summary>
+    public bool ConceptsModelWriter { get; set; }
 }

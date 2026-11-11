@@ -1,3 +1,5 @@
+using GeometriaFactory.Application.Ports;
+using GeometriaFactory.Integration.Tests.Concepts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,6 +41,10 @@ internal sealed class AiDataServiceHarness : DataServiceHarness
         builder.ConfigureTestServices(services =>
         {
             services.AddSingleton<ILoggerProvider>(Logs);
+
+            // Las fichas del repo están en borrador hasta la firma del PO: el servicio de las pruebas sirve la
+            // copia sintética firmada (ConceptTestCorpus). Una prueba que necesite otro corpus lo reemplaza en _services.
+            services.AddSingleton<IConceptCorpus>(ConceptTestCorpus.Signed());
             _services?.Invoke(services);
         });
     }

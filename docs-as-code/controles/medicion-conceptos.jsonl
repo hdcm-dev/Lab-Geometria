@@ -1,0 +1,18 @@
+{"rol": "ambos", "pregunta": "¿Qué es un ortoedro?", "esperada": "ortoedro", "origen": "bateria-v1 caso 1"}
+{"rol": "Student", "pregunta": "¿Qué significa valor derivado?", "esperada": "declarado-vs-derivado", "origen": "bateria-v1 caso 2"}
+{"rol": "Student", "pregunta": "No entiendo qué es el rectángulo desarrollado", "esperada": "rectangulo-desarrollado", "origen": "bateria-v1 caso 3"}
+{"rol": "Student", "pregunta": "¿Diferencia entre área total y área de una cara?", "esperada": "area-total-vs-cara", "origen": "bateria-v1 caso 4"}
+{"rol": "Student", "pregunta": "¿Qué es una arista?", "esperada": "arista", "origen": "bateria-v1 caso 5"}
+{"rol": "Student", "pregunta": "¿Qué quiere decir la advertencia amarilla?", "esperada": "advertencia", "origen": "bateria-v1 caso 6"}
+{"rol": "Student", "pregunta": "¿Qué es un paralelepípedo?", "esperada": "ortoedro", "origen": "bateria-v1 caso 14"}
+{"rol": "Student", "pregunta": "¿Qué significa Pendiente?", "esperada": "estado-pendiente", "origen": "bateria-v1 caso 21"}
+{"rol": "Administrator", "pregunta": "¿Qué es el rectángulo desarrollado?", "esperada": "rectangulo-desarrollado", "origen": "bateria-v1 caso 22"}
+{"rol": "Administrator", "pregunta": "¿Qué ve el alumno cuando hay una advertencia?", "esperada": "advertencia", "origen": "docente (redactada por el banco; reemplazar por preguntas reales)"}
+{"rol": "Administrator", "pregunta": "¿Qué quiere decir valor declarado?", "esperada": "declarado-vs-derivado", "origen": "docente (redactada por el banco; reemplazar por preguntas reales)"}
+{"rol": "ambos", "pregunta": "¿Qué es un tetraedro?", "esperada": "ninguna", "origen": "no-respondible (bateria-v1 caso 9)"}
+{"rol": "ambos", "pregunta": "¿Qué es el perímetro?", "esperada": "ninguna", "origen": "no-respondible cercana"}
+{"rol": "ambos", "pregunta": "¿Qué es una pirámide?", "esperada": "ninguna", "origen": "no-respondible cercana"}
+{"rol": "ambos", "pregunta": "¿Qué es un prisma triangular?", "esperada": "ninguna", "origen": "no-respondible cercana"}
+{"rol": "ambos", "pregunta": "¿Qué es la diagonal de una cara?", "esperada": "ninguna", "origen": "no-respondible cercana"}
+{"rol": "ambos", "pregunta": "¿Qué es una esfera?", "esperada": "ninguna", "origen": "no-respondible"}
+{"rol": "Administrator", "pregunta": "¿Cómo pongo la nota de un trabajo?", "esperada": "ninguna", "origen": "no-respondible del docente"}

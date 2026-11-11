@@ -24,4 +24,9 @@ namespace GeometriaFactory.Contracts.Service;
 /// </param>
 /// <param name="Version">Versión del ensamblado que está atendiendo.</param>
 /// <param name="ServerTimeUtc">Momento del servidor en tiempo universal coordinado.</param>
-public sealed record ServiceHealth(bool Ready, string Version, DateTimeOffset ServerTimeUtc);
+/// <param name="AssistantAi">
+/// Motivo de habilitación de la IA del asistente de conceptos (REQ-IA-29): <c>Habilitada</c>,
+/// <c>FaltaEndpoint</c>, <c>FaltaModelo</c>, <c>ApagadaPorParametro</c> o <c>ClaveDesconocida</c>, con la
+/// clave entre paréntesis. Nunca la dirección ni el nombre del modelo.
+/// </param>
+public sealed record ServiceHealth(bool Ready, string Version, DateTimeOffset ServerTimeUtc, string? AssistantAi = null);

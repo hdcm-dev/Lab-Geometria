@@ -2154,3 +2154,33 @@ Lo mismo sobre el volumen de claves del front, si la composición lo monta desde
 - Norma de Nomenclatura 1.32 y 1.33 (§6.27), `ADR-14006` a `ADR-14010`, `Contratos-REST.md` 1.12.
 - **V2** (borrador de comentario) especificada y **diferida**. El ingreso de V1 al intake como F-n sigue
   pendiente del Product Owner.
+
+## Asistente de conceptos · «Preguntá un concepto» (expediente 0004)
+
+**Rama:** `feat/asistente-rebanada`, desde `main` `53a2810`. Escrita **en la rama**, como manda el intake §16.
+
+- **Asistente de conceptos, apagado por omisión** (`AI__ConceptsEnabled=false` en el servicio de datos y en la Web).
+  Ruta nueva `POST /v1/conceptos/consultas` (`IA-V3`), que apagada responde `404`. Panel «Preguntá un concepto» en
+  la vista del trabajo (al lado de las pistas) y en la carga, fuera del formulario de envío.
+- **Ayuda a entender y a encontrar, no hace el ejercicio** (`ADR-10010`): todo pedido de resolver —valor, fórmula,
+  JSON, `Describir()`, corrección— es negativa útil con texto fijo, **antes** de buscar fichas y sin modelo
+  (`ADR-14014`). Sin ficha, «No está en la ayuda de conceptos».
+- **Nueve fichas** en `docs-as-code/ayuda/conceptos/`, embebidas al compilar; control nuevo
+  `docs-as-code/controles/cobertura_conceptos.py` (9/9 términos ★, sin dígitos, «fórmula», verbos de operación ni
+  cantidad de caras). El modelo sólo redacta sobre la ficha con `AI__ConceptsModelWriter=true`, para medir
+  (`ADR-14013`); si no supera a la ficha, queda apagado.
+- Anillo 1 mínimo: dónde veo mis trabajos, cómo cargo una versión nueva (el docente recibe la negativa: ver ≠ hacer),
+  cuántas advertencias tiene este trabajo (cifra del trabajo validado), cuántos trabajos tengo (total con desglose).
+  El trabajo ajeno es «no encontrado».
+- `/salud` suma `AssistantAi` y `/estado` lo muestra: el motivo de habilitación con la **clave**, nunca la
+  dirección ni el modelo (`ADR-14015`). Huella del turno en la tabla `HuellaDeConsulta` (migración
+  `ConceptTrace`), sin texto ni persona.
+- Tres puertos nuevos (ocho en `QG-10`), Norma de Nomenclatura 1.36 (§6.28), `Contratos-REST.md` 1.13,
+  `ai-layer/06-Especificacion-Asistente-De-Conceptos.md`, batería `ai-layer/ensayos/conceptos.py`.
+- **Cierre de criterios abiertos (EXP-0004 act. 002).** Compuerta `recall-conceptos` en la de docs (bloquea, con par
+  rojo/verde) y `ConceptRecallTests` con el enrutador real: recall@3 y hit@1 por rol ≥ 0,9 y «ninguna» 100 %. La
+  batería es un archivo de datos (`ai-layer/ensayos/bateria-conceptos-v1.jsonl`) y el veredicto lo recalcula
+  `veredicto_conceptos.py` desde el registro, con la lectura docente pesando (CI lo reproduce). Manifiesto de claves
+  `deploy/manifiesto-claves-ia.json` contrastado por `ConfigurationKeysManifestTests`; el `appsettings.json` del
+  servicio suma `KeepAlive`, `ConceptsEnabled` y `ConceptsModelWriter` (apagados). Mutación de la regla «pide
+  resolver» registrada; inyección «llevame a /cuentas» probada por rol.

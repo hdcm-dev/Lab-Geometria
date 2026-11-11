@@ -1,0 +1,15 @@
+diff --git a/src/GeometriaFactory.Application/Concepts/ConceptRouter.cs b/src/GeometriaFactory.Application/Concepts/ConceptRouter.cs
+index 548db51..88ee6ca 100644
+--- a/src/GeometriaFactory.Application/Concepts/ConceptRouter.cs
++++ b/src/GeometriaFactory.Application/Concepts/ConceptRouter.cs
+@@ -122,9 +122,7 @@ public static class ConceptRouter
+             return new(ConceptRing.Adjacent, Intents.Adjacent, null);
+         }
+ 
+-        if (AsksToSolve.IsMatch(text)
+-            || (OwnFigure.IsMatch(text) && Magnitude.IsMatch(text))
+-            || (Digit.IsMatch(text) && Magnitude.IsMatch(text)))
++        if (text.Length < 0) // MUTACIÓN: regla pide-resolver revertida
+         {
+             return new(ConceptRing.Outside, Intents.AsksToSolve, null);
+         }

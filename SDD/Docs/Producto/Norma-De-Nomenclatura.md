@@ -56,6 +56,7 @@
   - [6.25 Agregados por el árbol del texto, etapa `g`, fuera de los 155](#625-agregados-por-el-árbol-del-texto-etapa-g-fuera-de-los-155)
   - [6.26 Atributos de marcado autorizados por la mesa del 2026-09-14, fuera de los 155](#626-atributos-de-marcado-autorizados-por-la-mesa-del-2026-09-14-fuera-de-los-155)
   - [6.27 Agregados por la capa de IA, expediente 0002, fuera de los 155](#627-agregados-por-la-capa-de-ia-expediente-0002-fuera-de-los-155)
+  - [6.28 Agregados por el asistente de conceptos, expediente 0004, fuera de los 155](#628-agregados-por-el-asistente-de-conceptos-expediente-0004-fuera-de-los-155)
 - [7. Cómo se verifica esta norma](#7-cómo-se-verifica-esta-norma)
 - [8. El plan de renombre](#8-el-plan-de-renombre)
   - [8.1 Los siete tramos](#81-los-siete-tramos)
@@ -372,6 +373,7 @@ La versión 1.0 emitió **42 conceptos** y dejó fuera los 101 códigos, porque 
 | Agregados por el árbol del texto (1.23), **fuera de los 155** | 14 | 14 | §6.25 |
 | Atributos de marcado autorizados por la mesa del 2026-09-14 (1.31), **fuera de los 155** | 13 | 13 | §6.26 |
 | Capa de IA, expediente 0002 (1.32, 1.33 y 1.34), **fuera de los 155** | 68 | 68 | §6.27 |
+| Asistente de conceptos, expediente 0004 (1.36), **fuera de los 155** | 17 | 17 | §6.28 |
 
 **Las cinco filas agregadas por la etapa `a` tampoco entran en los 155, y por el mismo motivo que las de §6.11:** son conceptos que **no existían** cuando se contaron las seis clases —el cuerpo de la respuesta del punto de salud y el nombre propio del *bundle* en `window`—, y entran por el corolario 4 de §6.1, que es lo que esta norma manda hacer cuando aparece un concepto sin fila. **Los recuentos de las seis clases no cambian**: 155 sigue siendo 155, y el control `V-1` cuadra contra las ocho tablas más estas cinco filas, que llevan su marca. **Lo mismo vale para las 214 que agrega la etapa `b` en §6.12**, que desde la 1.6 es la novena tabla del rango, **para las 109 que agrega la etapa `c` en §6.13** —106 propias más las tres que la 1.8 sumó—, que desde la 1.7 es la décima, **para las 39 que agrega §6.14**, que desde la 1.8 es la undécima —27 las trajo la marca de sesión, 5 más el guardián de sesión de la 1.9, 5 más el arreglo del cambio forzado de la 1.10 y 2 más la guardia de arranque de la clave de firma de la 1.11— **para las 36 que agrega §6.15**, que desde la 1.12 es la duodécima —16 tipos y 20 miembros del ciclo de vida de la cuenta de alumno del lado del servicio— **para las 41 que agrega §6.16**, que desde la 1.13 es la decimotercera —2 tipos, 35 miembros, propiedades y valores, y 4 iconos de la interfaz de esa misma etapa— **y para las 19 que agrega §6.17**, que desde la 1.14 es la decimocuarta —2 superficies derivadas, 8 funciones del guion de interacción y 9 atributos de marcado que ese guion lee— **para las 8 que agrega §6.18**, que desde la 1.15 es la decimoquinta —3 tipos y 5 miembros del guardián 1 de `Web ADR-10003` §2 y del punto de acceso anónimo que lo hace posible— **para las 47 que agrega §6.19**, que desde la 1.16 es la decimosexta —16 tipos, 4 valores de conjunto cerrado y 27 miembros del trabajo con dueño, estado y persistencia— **y para las 27 que agrega §6.20**, que desde la 1.17 es la decimoséptima —3 tipos, 22 miembros, propiedades y valores, y 2 iconos de la interfaz de esa misma etapa—. Y la etapa `c` deja además una constancia que vale la pena leer al revés: **de los veinte códigos de condición que escribió, cero necesitaron fila nueva**, porque los veinte ya estaban en §6.8 con su nombre inglés fijado por `F-03`. El glosario hizo exactamente lo que §6.1 promete. **La etapa `e` la reproduce sobre la población más grande de las tres**: de los **diecisiete** códigos que escribió —catorce del dominio, tres propios de la aplicación y tres del contrato— **cero necesitaron fila nueva**, y entre ellos está el homónimo declarado de §6.9, `WORK_NOT_FOUND`, que la etapa escribió **dos veces, una por catálogo, y no unificó**, porque lo que los separa es el tipo que los contiene. **La etapa `d` reproduce la constancia sobre una población mayor**: de los **quince** códigos que escribió —siete del dominio, tres propios de la aplicación, uno de infraestructura y cuatro del contrato— **cero necesitaron fila nueva**, y entre ellos están los dos casos difíciles que `F-03` había dejado resueltos de antemano: la **unificación** de §6.9, que le da a `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` y a `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` el mismo nombre inglés, y los **dos identificadores retirados por RN-02016** de §6.8.5, que la etapa `d` **no recicló**.
 
@@ -2271,6 +2273,32 @@ extremo siguen la convención en castellano de ese proyecto, ya declarada como d
 de `data-gf-pending` también en la región viva del formulario. **No se agrega ningún atributo `data-gf-*`**:
 la lista cerrada de §6.17.3 y §6.26 queda igual.
 
+### 6.28 Agregados por el asistente de conceptos, expediente 0004, fuera de los 155
+
+Los trae la rebanada «Preguntá un concepto» (expediente 0004). Entran **antes** del código, como manda §6.1;
+la tabla `HuellaDeConsulta` y sus columnas (`Anillo`, `Intencion`, `Forma`, `Resultado`, `VersionDelCorpus`,
+`Dia`) siguen la regla de columnas en castellano de las tablas `Pieza`, `Componente` y `Observacion`.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| asistente de conceptos (caso de uso) | `AskConceptUseCase` | Tipo, caso de uso | `ai-layer/06` §4; `ADR-14013` |
+| enrutador del asistente | `ConceptRouter` | Tipo, función pura | `ai-layer/06` §3 y §4; `ADR-14014` |
+| decisión del enrutador | `ConceptRoute` | Tipo | ídem |
+| ficha de concepto | `ConceptCard` | Tipo | `ai-layer/06` §4 (ARQ-4) |
+| respuesta del asistente | `ConceptAnswer` / `ConceptAnswerResponse` | Tipo / contrato | `ai-layer/06` §5 |
+| forma de respuesta | `ConceptForm` | Tipo, conjunto cerrado (F1–F8 y `NotFound`) | conocimiento de diseño conversacional, catálogo F1–F8 |
+| anillo | `ConceptRing` | Tipo, conjunto cerrado | `ai-layer/06` §3 |
+| textos fijos del asistente | `ConceptTexts` | Tipo | `ai-layer/06` rebanada §4 |
+| catálogo de destinos / destino | `DestinationCatalog` / `Destination` / `ResolvedDestination` | Tipos | `ai-layer/06` §11 |
+| corpus de fichas | `IConceptCorpus` / `DocsAsCodeConceptCorpus` | Puerto / adaptador | `ai-layer/06` §4 |
+| redacción sobre la ficha | `IConceptAnswerWriter` / `ModelConceptAnswerWriter` / `ConceptAnswerResult` | Puerto / adaptador / tipo | `ai-layer/06` §5 |
+| filtro de la redacción | `ConceptAnswerFilter` | Tipo | CON-REQ-IA-13 y 22 |
+| huella del turno | `ConceptTrace` / `IConceptTraceStore` / `EfCoreConceptTraceStore` / `ConceptTraceRow` | Tipo / puerto / adaptador / fila | CON-REQ-IA-30; tabla `HuellaDeConsulta` |
+| motivo de habilitación | `AiEnablement` / `AiEnablementReason` | Tipos; valores en castellano por ser lo que la persona lee en `/estado` (§6.7) | CON-REQ-IA-29; `ADR-14015` |
+| asistente encendido / redacción con modelo | `ConceptsEnabled` / `ConceptsModelWriter` | Miembros de `AiOptions` (claves `AI__ConceptsEnabled`, `AI__ConceptsModelWriter`) | `ai-layer/06` §9 |
+| IA del asistente (salud) | `AssistantAi` | Miembro de `ServiceHealth` | `ADR-14015` |
+| panel del asistente | `ConceptPanel` | Componente | `ai-layer/06` rebanada §3 |
+
 ## 7. Cómo se verifica esta norma
 
 Una norma sin instrumento de verificación es una intención. Siete controles, y **la 1.4 declara cuál de ellos se verifica tal como está escrito y cuál exige que alguien lo interprete** —la tabla está debajo de las tres formulaciones completas—:
@@ -2493,6 +2521,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.36 | 2026-11-11 | **Agrega §6.28 con 17 filas del asistente de conceptos (expediente 0004, `ADR-14013` a `ADR-14015`)**, antes del código. Ningún código de condición nuevo; no renombra nada. | Implementador del asistente de conceptos (agente), banco de traslado de los conocimientos de la capa de IA |
 | 1.35 | 2026-11-03 | **Agrega §6.27.5 con 16 filas de la mesa UX de la capa de IA (expediente 0002, actuación 013, G1 a G6)**, antes del código. Marca superada la fila de `OriginLabel` de §6.27.3. Ningún atributo `data-gf-*` nuevo; ningún código de condición nuevo; no renombra nada. | Implementador de la capa de IA, por la actuación 013 del expediente 0002 |
 | 1.34 | 2026-11-03 | **Agrega §6.27.4 con 10 filas de la permanencia y la precarga del modelo (expediente 0002, actuación 010, `ADR-14012`; la décima, `ContractVersion` y su prueba, por la mesa 0004)**, antes del código. Ningún código de condición nuevo; no renombra nada. | Implementador de la capa de IA, por la resolución de la actuación 010 del expediente 0002 |
 | 1.33 | 2026-11-02 | **Agrega §6.27.3 con 14 filas de miembros internos y de prueba de la capa de IA (expediente 0002)**, antes del código de la Web (tramo T6). Las de los tramos T3 y T4 llegan con atraso y se declaran como apartamiento de §6.1 en la constancia del expediente. | Implementador de la capa de IA |

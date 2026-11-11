@@ -120,6 +120,7 @@ contrato.MapAuthenticationEndpoints();
 contrato.MapAccountEndpoints();
 contrato.MapCommissionAccountEndpoints();
 contrato.MapWorkEndpoints();
+contrato.MapConceptEndpoints();
 
 await app.RunAsync();
 

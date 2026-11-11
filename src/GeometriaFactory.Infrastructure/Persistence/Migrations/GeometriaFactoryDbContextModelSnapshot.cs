@@ -242,6 +242,50 @@ namespace GeometriaFactory.Infrastructure.Persistence.Migrations
                     b.ToTable("Work", (string)null);
                 });
 
+            modelBuilder.Entity("GeometriaFactory.Infrastructure.Persistence.ConceptTraceRow", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("CorpusVersion")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("VersionDelCorpus");
+
+                    b.Property<DateOnly>("Day")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Dia");
+
+                    b.Property<int>("Form")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Forma");
+
+                    b.Property<string>("Intent")
+                        .IsRequired()
+                        .HasMaxLength(48)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Intencion");
+
+                    b.Property<string>("Outcome")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Resultado");
+
+                    b.Property<int>("Ring")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Anillo");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Day");
+
+                    b.ToTable("HuellaDeConsulta", (string)null);
+                });
+
             modelBuilder.Entity("GeometriaFactory.Domain.Entities.Component", b =>
                 {
                     b.HasOne("GeometriaFactory.Domain.Entities.Piece", null)

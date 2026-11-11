@@ -1,0 +1,8 @@
+recall-conceptos: Student: recall@3 32/32 = 1.00  hit@1 32/32  MRR 1.00  ninguna 6/6 = 100%  en orden
+recall-conceptos: Administrator: recall@3 28/28 = 1.00  hit@1 28/28  MRR 1.00  ninguna 7/7 = 100%  en orden
+recall-conceptos: léxico (sin embeddings: el producto no los tiene); 9 fichas medidas; umbral recall@3 y hit@1 >= 0.9 por rol, ninguna 100 %, una pregunta en una sola ficha
+  ok    verde: el repo en orden
+  ok    rojo: ficha «aaa-ladrona» sembrada
+  ok    rojo: ficha «aab-duplicada» sembrada
+  ok    rojo: ficha «perimetro» sembrada
+recall-conceptos: autoprueba en orden

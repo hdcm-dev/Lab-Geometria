@@ -60,6 +60,8 @@ public sealed class ContractRoutePrefixTests : IDisposable
         ("A-18", "POST", "/v1/interpretaciones"),
         // Alta del expediente 0002 (capa de IA, V1, `ADR-14009`).
         ("IA-V1", "POST", "/v1/interpretaciones/pistas"),
+        // Alta del asistente de conceptos (`ADR-14013`).
+        ("IA-V3", "POST", "/v1/conceptos/consultas"),
     ];
 
     private readonly string _storePath = DataServiceHarness.ReserveStorePath();
@@ -141,17 +143,17 @@ public sealed class ContractRoutePrefixTests : IDisposable
     /// direcciones no cierren por casualidad con listas de distinto tamaño.
     /// </summary>
     [Fact]
-    public void EighteenPointsSeventeenUnderThePrefixAndOneExempt()
+    public void NineteenPointsEighteenUnderThePrefixAndOneExempt()
     {
-        Assert.Equal(18, Contrato.Length);
-        Assert.Equal(17, Contrato.Count(p => p.Ruta.StartsWith("/v1/", StringComparison.Ordinal)));
+        Assert.Equal(19, Contrato.Length);
+        Assert.Equal(18, Contrato.Count(p => p.Ruta.StartsWith("/v1/", StringComparison.Ordinal)));
         Assert.Single(Contrato, p => IsExempt(p.Ruta));
 
         var publicadasDelContrato = PublishedRoutes()
             .Where(r => r.Ruta.StartsWith("/v1/", StringComparison.Ordinal))
             .Distinct()
             .Count();
-        Assert.Equal(17, publicadasDelContrato);
+        Assert.Equal(18, publicadasDelContrato);
     }
 
     // ------------------------------------------------------------ sin prefijo: 404 ----------

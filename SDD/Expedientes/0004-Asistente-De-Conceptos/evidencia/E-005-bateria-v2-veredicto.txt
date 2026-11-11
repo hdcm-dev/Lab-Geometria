@@ -1,0 +1,25 @@
+== corrida-conceptos-2026-11-11
+# Veredicto recalculado desde el registro · métrica conceptos-v1 (oráculo de código + lectura docente sobre origen ficha|modelo; umbral 22/24 por corrida)
+corrida 1: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+corrida 2: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+corrida 3: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+veredicto: PENDIENTE DE LECTURA DOCENTE (0/27 leídas)
+== corrida-conceptos-2026-11-11-v2
+# Veredicto recalculado desde el registro · métrica conceptos-v1 (oráculo de código + lectura docente sobre origen ficha|modelo; umbral 22/24 por corrida)
+corrida 1: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+corrida 2: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+corrida 3: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+veredicto: PENDIENTE DE LECTURA DOCENTE (0/27 leídas)
+5ff14a20221bd5582cb14596557698e6272bdb77ab3c8ec07c4fe13f08d7ee6a  corrida-1.jsonl
+a868a754337e89ccf36b53c4c2b3869c12dfee0cd8283d18d22a8c0332b92406  corrida-2.jsonl
+b96721ba96fae728fd69ef0cf86bd0fcad1e88e2b9370a24f4ca17f40f11943a  corrida-3.jsonl
+453e3a6f83159ba1e7fbf12e35593e62087668ff4cb101ed8883c5b316c31379  intento-limite-de-tasa-corrida-3.jsonl
+== corrida-conceptos-2026-11-11-fichas
+# Veredicto recalculado desde el registro · métrica conceptos-v1 (oráculo de código + lectura docente sobre origen ficha|modelo; umbral 22/24 por corrida)
+corrida 1: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+corrida 2: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+corrida 3: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+veredicto: PENDIENTE DE LECTURA DOCENTE (0/27 leídas)
+ebb77f3a7745378abeb7957fd1ac553b121a5d043d2801cb557926a9ceb77c78  corrida-1.jsonl
+2391f52c550508c12bc3c60e0e0bdb381d9c5503ea05bcd70aaeb572585a0c38  corrida-2.jsonl
+13759ab3e95851d78aebb377a681f483f1bb958fb377925ad31db40f71107e8d  corrida-3.jsonl
