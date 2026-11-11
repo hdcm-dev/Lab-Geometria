@@ -1,0 +1,106 @@
+@using GeometriaFactory.Contracts.Concepts
+@inject DataServiceClient DataService
+@inject SessionState Session
+@inject IConfiguration Configuration
+
+@* «PREGUNTÁ UN CONCEPTO» (ADR-14013; rebanada del banco de traslado del 2026-11-11).
+   AYUDA A ENTENDER Y A ENCONTRAR, NO HACE EL EJERCICIO: la respuesta es una ficha, un paso fijo o una
+   negativa útil; nunca el valor, la fórmula, el JSON ni el método. Lo de la advertencia concreta es de
+   «Ver pistas», que sigue al lado.
+   APAGADO (`AI:ConceptsEnabled` en `false`, el valor por omisión) NO SE DIBUJA NADA y no hay pedido nuevo.
+   Es un formulario de página entera, como el de pistas: sin guion propio y con región viva. *@
+
+@if (Visible)
+{
+    <section class="gf-card gf-concept" aria-labelledby="concept-heading" data-gf-concept>
+        <h2 class="gf-concept__title" id="concept-heading">Preguntá un concepto</h2>
+        <p class="gf-caption">Qué es un ortoedro, qué significa valor derivado, dónde ves tus trabajos. No resuelve el ejercicio.</p>
+
+        <form method="post" @formname="concept-ask" @onsubmit="AskAsync" class="gf-concept__form" data-gf-pending="Buscando en la ayuda…">
+            <AntiforgeryToken />
+            <label class="gf-sr-only" for="concept-question">Tu pregunta</label>
+            <input class="gf-input gf-concept__input" id="concept-question" name="ConceptInput.Question" type="text"
+                   maxlength="300" autocomplete="off" required value="@ConceptInput?.Question"
+                   placeholder="Por ejemplo: ¿qué es el rectángulo desarrollado?" />
+            <button type="submit" class="gf-btn gf-btn--secondary">Preguntar</button>
+            <p class="gf-sr-only" role="status" aria-live="polite"></p>
+        </form>
+
+        @if (_answer is { } answer)
+        {
+            <div class="gf-concept__answer gf-concept__answer--@answer.Form.ToLowerInvariant()" tabindex="-1" autofocus data-gf-form="@answer.Form" data-gf-intent="@answer.Intent">
+                @if (answer.Card is { } card)
+                {
+                    <p class="gf-concept__card-title"><strong>@card.Title</strong></p>
+                }
+                <p class="gf-concept__text">@answer.Text</p>
+                @if (answer.Breakdown.Count > 0)
+                {
+                    <ul class="gf-concept__breakdown">
+                        @foreach (var item in answer.Breakdown)
+                        {
+                            <li>@item.Label: @item.Count</li>
+                        }
+                    </ul>
+                }
+                @if (answer.Note is { } note)
+                {
+                    <p class="gf-caption gf-concept__note">@note</p>
+                }
+                @if (answer.Card is { } source && answer.Form is "FromHelp" or "AiOff")
+                {
+                    <p class="gf-caption gf-concept__source">
+                        @(answer.Origin == "modelo" ? "Redactado por IA sobre la ficha: puede no ser exacto." : "Ficha de la ayuda de conceptos.")
+                    </p>
+                }
+                @if (answer.Destination is { } chip)
+                {
+                    <a class="gf-concept__chip" href="@chip.Path" data-gf-destination="@chip.Id">@chip.Label</a>
+                }
+            </div>
+        }
+        else if (_unavailable)
+        {
+            <p class="gf-banner gf-banner--error gf-mt-3" tabindex="-1" autofocus>
+                No pudimos consultar la ayuda de conceptos. Probá de nuevo en un rato.
+            </p>
+        }
+    </section>
+}
+
+@code {
+    /// <summary>El trabajo de la pantalla; el servicio lo revalida (ARQ-2).</summary>
+    [Parameter]
+    public Guid? WorkId { get; set; }
+
+    private sealed class ConceptForm
+    {
+        public string Question { get; set; } = string.Empty;
+    }
+
+    [SupplyParameterFromForm(FormName = "concept-ask")]
+    private ConceptForm? ConceptInput { get; set; }
+
+    private ConceptAnswerResponse? _answer;
+    private bool _unavailable;
+
+    /// <summary><c>AI:ConceptsEnabled</c>; <c>false</c> por omisión (REQ-IA-17).</summary>
+    private bool Enabled => Configuration.GetValue("AI:ConceptsEnabled", false);
+
+    private bool Visible => Enabled && Session.IsOpen;
+
+    private async Task AskAsync()
+    {
+        _answer = null;
+        _unavailable = false;
+
+        if (!Visible || string.IsNullOrWhiteSpace(ConceptInput?.Question))
+        {
+            return;
+        }
+
+        var outcome = await DataService.AskConceptAsync(ConceptInput.Question, WorkId, Session.UseAccessToken());
+        _answer = outcome.Succeeded ? outcome.Value : null;
+        _unavailable = !outcome.Succeeded;
+    }
+}

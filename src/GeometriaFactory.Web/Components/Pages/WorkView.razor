@@ -311,6 +311,10 @@ else
                 }
             </section>
 
+            @* EL ASISTENTE DE CONCEPTOS VA AL LADO DE LAS PISTAS Y NO LAS REEMPLAZA: explica conceptos; la
+               advertencia concreta sigue siendo de «Ver pistas». Apagado no dibuja nada (REQ-IA-17). *@
+            <ConceptPanel WorkId="_work.WorkId" />
+
             <section class="gf-card" aria-labelledby="work-text-heading">
                 <h2 id="work-text-heading" class="gf-sr-only">Texto original del trabajo</h2>
                 @* COLAPSADO POR OMISIÓN Y DENTRO DE SU PROPIO CONTENEDOR DESPLAZABLE, que es lo que

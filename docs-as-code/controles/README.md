@@ -30,6 +30,7 @@ probar» en el sentido de la ficha hasta que el check `docs` dé verde en un PR 
 | [`enlaces_internos.py`](enlaces_internos.py) | Extensión `enlaces-internos`: destinos relativos y anclas, sin red |
 | [`anclas.py`](anclas.py) | Extensión `anclas` (tramo T-3): cada fila del [catálogo del punto de uso](../punto-de-uso/catalogo.md) resuelve a un id y a un texto del `.razor` que cita |
 | [`limite_didactico.py`](limite_didactico.py) | Extensión `limite-didactico` (tramo T-3): las prohibiciones verificables de [RD-01](../reglas/RD-01-ayuda-no-resuelve.md), incluida la de no repetir las plantillas de la capa de IA |
+| [`cobertura_conceptos.py`](cobertura_conceptos.py) | Extensión `cobertura-conceptos` (expediente 0004): los nueve términos ★ del asistente de conceptos con ficha, `status` (sólo `vigente` se sirve) y 2 a 5 `preguntas:`, sin dígitos ni operación en el cuerpo. El recall@3 por rol lo mide `ConceptRecallTests` en `ci.yml` |
 | [`pista_sin_enlaces.py`](pista_sin_enlaces.py) | Extensión `pista-sin-enlaces` (tramo T-3): la capa `pista` del catálogo no lleva enlaces |
 | [`catalogo_pu.py`](catalogo_pu.py) | Lector del catálogo que comparten las tres extensiones del punto de uso; no es un control |
 | [`recuento_openapi.py`](recuento_openapi.py) | Extensión `recuento-openapi` (tramo T-6): la [instantánea OpenAPI](../api/openapi-v1.json) contra la tabla de operaciones de `Contratos-REST.md` §3 y §3.1 (cifra del título, rutas de más o de menos y códigos sin documentar) |

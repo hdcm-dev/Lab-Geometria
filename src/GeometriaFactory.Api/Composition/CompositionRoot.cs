@@ -2,7 +2,9 @@ using System.Text;
 using GeometriaFactory.Application.Accounts;
 using GeometriaFactory.Application.Works;
 using GeometriaFactory.Application.Ports;
+using GeometriaFactory.Application.Concepts;
 using GeometriaFactory.Infrastructure.AI;
+using GeometriaFactory.Infrastructure.Concepts;
 using GeometriaFactory.Infrastructure.Figures;
 using GeometriaFactory.Infrastructure.Persistence;
 using GeometriaFactory.Infrastructure.Security;
@@ -48,6 +50,10 @@ public static class CompositionRoot
         typeof(ISystemClock),
         // EL QUINTO, del expediente 0002 (`ADR-14006`): el redactor de pistas de la capa de IA.
         typeof(IObservationHintWriter),
+        // Los del asistente de conceptos (ADR-14013): el corpus, la redacción opcional y la huella.
+        typeof(IConceptCorpus),
+        typeof(IConceptAnswerWriter),
+        typeof(IConceptTraceStore),
     ];
 
     /// <summary>
@@ -62,6 +68,9 @@ public static class CompositionRoot
         [typeof(IWorkRepository)] = typeof(EfCoreWorkRepository),
         [typeof(IFigureValidator)] = typeof(LocalFigureValidator),
         [typeof(IObservationHintWriter)] = typeof(ModelObservationHintWriter),
+        [typeof(IConceptCorpus)] = typeof(DocsAsCodeConceptCorpus),
+        [typeof(IConceptAnswerWriter)] = typeof(ModelConceptAnswerWriter),
+        [typeof(IConceptTraceStore)] = typeof(EfCoreConceptTraceStore),
     };
 
     /// <summary>Nombre de la cadena de conexión del almacén. Su valor llega por configuración.</summary>
@@ -297,6 +306,49 @@ public static class CompositionRoot
             provider.GetRequiredService<IFigureValidator>(),
             provider.GetRequiredService<IObservationHintWriter>(),
             ai.MaxObservations));
+
+        AddConceptAssistant(services, configuration, ai);
+    }
+
+    /// <summary>
+    /// El asistente de conceptos. LA REDACCIÓN CON MODELO SÓLO SE REGISTRA SI SE PIDIÓ Y HAY CLIENTE: sin
+    /// eso, el caso de uso contesta con la ficha y, si se pidió, dice qué clave falta (F8).
+    /// </summary>
+    private static void AddConceptAssistant(IServiceCollection services, IConfiguration configuration, AiOptions ai)
+    {
+        var enablement = AiEnablement.Evaluate(
+            ai,
+            configuration.GetSection(AiOptions.SectionName).GetChildren().Select(child => child.Key),
+            configuration.GetChildren().Select(child => child.Key));
+        services.AddSingleton(enablement);
+
+        if (enablement.Reason == AiEnablementReason.ClaveDesconocida)
+        {
+            // LA CLAVE, NUNCA EL VALOR (K2 R6).
+            Console.Error.WriteLine($"La configuración trae '{enablement.Key}', que el producto no lee.");
+        }
+
+        services.AddSingleton<IConceptCorpus, DocsAsCodeConceptCorpus>();
+        services.AddScoped<IConceptTraceStore, EfCoreConceptTraceStore>();
+
+        var missingKey = enablement.Reason is AiEnablementReason.Habilitada ? null : enablement.Key;
+        services.AddSingleton(new ConceptWriterSettings(ai.ConceptsModelWriter, missingKey));
+
+        services.AddScoped(provider => new AskConceptUseCase(
+            provider.GetRequiredService<IConceptCorpus>(),
+            provider.GetRequiredService<IWorkRepository>(),
+            provider.GetRequiredService<IConceptTraceStore>(),
+            // EL CLIENTE EXISTE SÓLO CON DIRECCIÓN Y MODELO (o el doble de las pruebas): mismo criterio
+            // que el redactor de pistas.
+            ai.ConceptsModelWriter && provider.GetService<IChatClient>() is { } chatClient
+                ? new ModelConceptAnswerWriter(
+                    chatClient,
+                    provider.GetRequiredService<HintConcurrencyGate>(),
+                    ai,
+                    provider.GetRequiredService<ILogger<ModelConceptAnswerWriter>>())
+                : null,
+            provider.GetRequiredService<ConceptWriterSettings>(),
+            provider.GetRequiredService<ISystemClock>()));
     }
 
     /// <summary>La dirección del servidor de modelos, sólo si es absoluta http o https y hay modelo.</summary>

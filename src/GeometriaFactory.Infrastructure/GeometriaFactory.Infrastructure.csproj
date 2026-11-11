@@ -30,4 +30,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <!-- LAS FICHAS DEL ASISTENTE SE EMBEBEN DESDE docs-as-code (ARQ-4, ADR-14013): lo que se publica y lo que
+       contesta el servicio son el mismo archivo, y no hay una copia que se desincronice. -->
+  <ItemGroup>
+    <EmbeddedResource Include="../../docs-as-code/ayuda/conceptos/*.md" LogicalName="Conceptos/%(Filename)%(Extension)" />
+  </ItemGroup>
+
 </Project>

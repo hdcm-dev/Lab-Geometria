@@ -33,6 +33,9 @@ public sealed class GeometriaFactoryDbContext : DbContext
     /// <summary>Los trabajos de la comisión, en sus cuatro estados.</summary>
     public DbSet<Work> Works => Set<Work>();
 
+    /// <summary>La huella del asistente de conceptos (REQ-IA-30).</summary>
+    public DbSet<ConceptTraceRow> ConceptTraces => Set<ConceptTraceRow>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         ArgumentNullException.ThrowIfNull(modelBuilder);

@@ -1,0 +1,13 @@
+1d3c8666ec6bb7d89aa3d52c766b520ea69e7edabdd9744b5169cd07a6cce2e1  corrida-1.jsonl
+b616a88aaeea7e5014a09f46044de84b70a6348d3a805c6a19fe48896e8f3a77  corrida-2.jsonl
+d7dab46cca9a1e4356ab89d2e0f318335793de92962e1a3770a25cb12f4c2ce5  corrida-3.jsonl
+# Batería v1 del asistente de conceptos ×3 (2026-11-11), instancia propia del servicio de datos en contenedor
+# (puerto 5080 dentro, publicado sólo en 127.0.0.1), modelo de producción de ADR-14012, redactor con modelo
+# encendido (AI__ConceptsModelWriter=true) y dirección del servidor por variable de entorno fuera del repo.
+# Corpus: copia de ensayo con las nueve fichas en `vigente` (las del repo siguen en `borrador` hasta la firma).
+# corrida 1: 24/24 · p95 4756 ms · origen ficha 4, modelo 5, fijo 13, caso-de-uso 2
+# corrida 2: 24/24 · p95 4690 ms · igual reparto
+# corrida 3: 24/24 · p95 4809 ms · igual reparto
+# Composición antes y después de cada corrida: 1 modelo en memoria, con aceleración. No hubo frío: el modelo ya
+# estaba cargado al empezar la corrida 1; el frío medido de la sonda (109 s) sigue siendo la única cifra de frío.
+# Respuestas del modelo con dígitos: 0 de 15.

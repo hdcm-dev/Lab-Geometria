@@ -25,15 +25,16 @@ public sealed class CompositionGateTests
     }
 
     [Fact]
-    public void CompositionRootDeclaresTheFivePorts()
+    public void CompositionRootDeclaresTheEightPorts()
     {
         // Mitad izquierda de `QG-10`. La mitad derecha —un adaptador por puerto— se completa
         // entre las etapas `c` y `f`, y esta prueba crece con ella.
         //
         // ALTA DECLARATIVA DEL EXPEDIENTE 0002 (tramo T4): el quinto puerto es el redactor de
         // pistas de la capa de IA (`ADR-14006`). El cuadre sigue exacto: cinco de cinco.
-        Assert.Equal(5, CompositionRoot.DeclaredPorts.Count);
-        Assert.Equal(5, CompositionRoot.DeclaredPorts.Distinct().Count());
+        // EL ASISTENTE DE CONCEPTOS (ADR-14013) suma tres: corpus, redacción opcional y huella.
+        Assert.Equal(8, CompositionRoot.DeclaredPorts.Count);
+        Assert.Equal(8, CompositionRoot.DeclaredPorts.Distinct().Count());
         Assert.All(CompositionRoot.DeclaredPorts, port => Assert.True(port.IsInterface));
     }
 
@@ -45,7 +46,7 @@ public sealed class CompositionGateTests
         // tienen adaptador. El cuadre deja de tener una mitad incompleta, que es la condición que
         // esta prueba viene arrastrando desde entonces y que crecía con cada etapa.
         // El expediente 0002 suma el quinto, con su adaptador (tramo T4).
-        Assert.Equal(5, CompositionRoot.ConnectedPorts.Count);
+        Assert.Equal(8, CompositionRoot.ConnectedPorts.Count);
         Assert.Equal(CompositionRoot.DeclaredPorts.Count, CompositionRoot.ConnectedPorts.Count);
         Assert.All(CompositionRoot.ConnectedPorts, pair => Assert.Contains(pair.Key, CompositionRoot.DeclaredPorts));
         Assert.All(CompositionRoot.ConnectedPorts, pair => Assert.True(pair.Key.IsAssignableFrom(pair.Value)));

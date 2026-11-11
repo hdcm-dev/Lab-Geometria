@@ -61,8 +61,11 @@ public sealed class AdministratorLifecycleTests : IDisposable
         // El recuento crece con el linaje, y crecerlo acá es lo que impide que una transformación
         // entre sin que nadie la mire. **Ninguna anterior se editó**: una ya fusionada no se toca
         // (intake §17.3.P.7).
-        Assert.Equal(5L, await ScalarAsync(connection,
+        // La sexta, del asistente de conceptos: la huella `HuellaDeConsulta` (REQ-IA-30).
+        Assert.Equal(6L, await ScalarAsync(connection,
             "select count(*) from __EFMigrationsHistory"));
+        Assert.Equal(1L, await ScalarAsync(connection,
+            "select count(*) from sqlite_master where type = 'table' and name = 'HuellaDeConsulta'"));
 
         // LAS CINCO TABLAS DEL MODELO DE DATOS EXISTEN, por primera vez desde que se declararon.
         Assert.Equal(5L, await ScalarAsync(connection,

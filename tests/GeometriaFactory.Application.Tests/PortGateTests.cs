@@ -46,7 +46,7 @@ public sealed class PortGateTests
     /// cuatro de antes siguen siendo exactamente los mismos.
     /// </remarks>
     [Fact]
-    public void TheFivePortsAreDeclared()
+    public void TheEightPortsAreDeclared()
     {
         var ports = typeof(ISystemClock).Assembly
             .GetTypes()
@@ -56,7 +56,7 @@ public sealed class PortGateTests
             .ToArray();
 
         Assert.Equal(
-            new[] { "IAccountRepository", "IFigureValidator", "IObservationHintWriter", "ISystemClock", "IWorkRepository" },
+            new[] { "IAccountRepository", "IConceptAnswerWriter", "IConceptCorpus", "IConceptTraceStore", "IFigureValidator", "IObservationHintWriter", "ISystemClock", "IWorkRepository" },
             ports);
     }
 

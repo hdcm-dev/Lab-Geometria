@@ -88,6 +88,9 @@ public sealed class DataServiceClient
     /// </summary>
     private const string InterpretationsPath = ContractPrefix + "interpretaciones";
 
+    /// <summary>`GeometriaFactory.Api.Endpoints.ConceptEndpoints.QuestionsRoute`. [derivado]</summary>
+    private const string ConceptQuestionsPath = ContractPrefix + "conceptos/consultas";
+
     /// <summary>
     /// Cuánto espera la Web al servicio de datos en cada pedido (10 s, la ventana de Nielsen).
     /// </summary>
@@ -370,6 +373,24 @@ public sealed class DataServiceClient
             HttpMethod.Post,
             HintsPath,
             new WorkHintsRequest(originalJson),
+            accessToken,
+            cancellationToken);
+
+    /// <summary>
+    /// Pregunta al asistente de conceptos (ADR-14013). SÓLO LA LLAMA <c>ConceptPanel</c>, y sólo con
+    /// <c>AI:ConceptsEnabled</c> en <c>true</c>. Usa el cliente de pistas: el mismo plazo, por encima del
+    /// corte del servicio (REQ-IA-42).
+    /// </summary>
+    public Task<DataServiceOutcome<GeometriaFactory.Contracts.Concepts.ConceptAnswerResponse>> AskConceptAsync(
+        string question,
+        Guid? workId,
+        string? accessToken,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<GeometriaFactory.Contracts.Concepts.ConceptQuestionRequest, GeometriaFactory.Contracts.Concepts.ConceptAnswerResponse>(
+            HintsClient,
+            HttpMethod.Post,
+            ConceptQuestionsPath,
+            new GeometriaFactory.Contracts.Concepts.ConceptQuestionRequest(question, workId),
             accessToken,
             cancellationToken);
 

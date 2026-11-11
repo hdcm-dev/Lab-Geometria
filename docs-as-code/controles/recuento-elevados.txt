@@ -8,4 +8,4 @@
 # Vigente, ese error exacto cuenta como aviso y la compuerta, que corre el control en bloquea, sigue verde. Si el
 # mensaje cambia (otra cifra, otra ruta), vuelve a ser error. Vencida, deja de aplicarse. Sin uso, se avisa para
 # borrarla. Agregar una línea es una decisión del PR que la trae, con su folio.
-recuento-cifra | el título declara «diecisiete» puntos y la instantánea trae 18 operaciones | EXP-0003 folios 009, 016 y 023 | vence 2027-02-03
+recuento-cifra | el título declara «diecisiete» puntos y la instantánea trae 19 operaciones | EXP-0003 folios 009, 016 y 023; EXP-0004 actuación 002 (suma IA-V3) | vence 2027-02-03

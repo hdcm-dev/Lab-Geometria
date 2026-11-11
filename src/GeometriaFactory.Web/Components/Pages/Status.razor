@@ -7,6 +7,7 @@
 @inject DataProtectionState Claves
 @inject StartupObservations Arranque
 @inject ILogger<Status> Logger
+@inject IConfiguration Configuration
 
 @* APARTAMIENTO AP-03 (`Plan-Etapa-A.md` §2.3): esta página NO es una de las once superficies
    aprobadas de `Linea-Base-Visual.md`. Es andamiaje de la etapa `a` y se declara expresamente
@@ -47,6 +48,14 @@
 
         <dt>Momento del servidor (UTC)</dt>
         <dd>@_health.ServerTimeUtc.ToString("O")</dd>
+
+        @* EL MOTIVO DE LA IA DEL ASISTENTE SE VE ACÁ (REQ-IA-29, ADR-14015): la IA apagada no puede ser
+           silenciosa. Nombra la clave que falta, nunca la dirección ni el modelo. *@
+        <dt>IA del asistente de conceptos</dt>
+        <dd data-gf-assistant-ai>@(_health.AssistantAi ?? "Sin informar")</dd>
+
+        <dt>Asistente de conceptos en esta pantalla</dt>
+        <dd>@(Configuration.GetValue("AI:ConceptsEnabled", false) ? "Encendido" : "Apagado (AI__ConceptsEnabled)")</dd>
     </dl>
     <p class="read-at">Leído a las @_readAt.ToString("HH:mm:ss") del reloj de esta página.</p>
 }

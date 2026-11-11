@@ -99,6 +99,11 @@ paso "docs-as-code · anclas"            avisa python3 -I "$CTL/anclas.py" docs-
 paso "docs-as-code · limite-didactico"  avisa python3 -I "$CTL/limite_didactico.py" docs-as-code
 paso "docs-as-code · pista-sin-enlaces" avisa python3 -I "$CTL/pista_sin_enlaces.py" docs-as-code
 
+# Asistente de conceptos (expediente 0004): cada término ★ con ficha, `status` y `preguntas:` declarados (K6 R1 y §4).
+# Bloquea desde que entra: es un corpus nuevo. El recall@3 por rol corre en ci.yml con el enrutador real
+# (`ConceptRecallTests`), porque este workflow no compila (K-06).
+paso "docs-as-code · cobertura-conceptos" bloquea python3 -I "$CTL/cobertura_conceptos.py"
+
 # Recuento OpenAPI (tramo T-6): en bloquea desde PR-P6 del portal (folio 018 §7: «pasa a bloquea antes de publicar»).
 # Lo que encuentra en el contrato del SDD se eleva, no se corrige: un hallazgo ya elevado va con su folio y su
 # vencimiento a docs-as-code/controles/recuento-elevados.txt y cuenta como aviso mientras siga idéntico.
