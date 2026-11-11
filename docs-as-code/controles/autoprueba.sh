@@ -11,6 +11,8 @@
 #   anclas            un texto de la pantalla que cambió y un id que no existe
 #   limite-didactico  un envío JSON completo, una clase C# y una plantilla de la capa de IA copiada en el catálogo
 #   pista-sin-enlaces un enlace en la capa pista
+# y, desde el expediente 0004 (actuación 003, H3), el cuerpo de las fichas de concepto:
+#   limite-didactico  una ficha que dicta la operación, una que dice el número en letras y una con «primero tomá»
 # y, desde el tramo T-6, el del recuento OpenAPI sobre un contrato y una instantánea mínimos:
 #   recuento-openapi  una operación de más en la instantánea y una cifra del título que no coincide
 # y, desde la revisión externa R-G2, el de enlaces externos contra un servidor local que devuelve 404:
@@ -217,6 +219,28 @@ esperar limite-didactico 1 'rojo clase C#'
 armar
 sed -i 's/^| `web\/campo-prueba` | info | .*$/| `web\/campo-prueba` | info | Revisá cómo calcula el área tu figura de prueba. | `docs-as-code\/a.md` |/' "$TMP/c/docs-as-code/punto-de-uso/catalogo.md"
 esperar limite-didactico 1 'rojo plantilla de IA duplicada'
+
+ficha() {  # nombre, cuerpo → una ficha de concepto mínima en el corpus temporal
+  mkdir -p "$TMP/c/docs-as-code/ayuda/conceptos"
+  printf -- '---\ntitle: "Ficha"\ntopic: concepto\nstatus: borrador\n---\n\n# Ficha\n\n%s\n' "$2" \
+    > "$TMP/c/docs-as-code/ayuda/conceptos/$1.md"
+}
+
+armar
+ficha volumen 'El volumen mide el espacio que ocupa un cuerpo. La app calcula el derivado y lo compara.'
+esperar limite-didactico 0 'verde ficha que explica'
+
+armar
+ficha volumen 'Para el volumen multiplicá la arista tres veces.'
+esperar limite-didactico 1 'rojo ficha que dicta la operación'
+
+armar
+ficha area 'El área total de un cubo junta seis caras iguales.'
+esperar limite-didactico 1 'rojo ficha con el número en letras'
+
+armar
+ficha area 'Primero tomá la arista y después juntá las caras.'
+esperar limite-didactico 1 'rojo ficha con procedimiento'
 
 armar
 sed -i 's/tal como lo imprime tu programa\. |/tal como lo imprime tu programa, ver [la guía](..\/a.md). |/' "$TMP/c/docs-as-code/punto-de-uso/catalogo.md"

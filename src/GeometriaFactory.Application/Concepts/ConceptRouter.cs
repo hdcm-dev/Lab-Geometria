@@ -44,7 +44,10 @@ public static class ConceptRouter
     private static readonly Regex AsksToSolve = new(
         @"\bcuanto (da|tiene que dar|deberia|debe|vale|mide|es)\b|\bcual es (el valor|la formula|el resultado|el area|el volumen)"
         + @"|\bformula|\bpasame|\bescribime|\bhaceme|\bhace(me)? (el|la|mi)\b|\bdame (el|la)\b|\bresolv|\bcorregi|\bcorrigi"
-        + @"|\bcalcula|\bcalculame|\barmame|\bdecime (el|la|cuanto)|\bque valor (va|pongo|tiene que)|\bcomo (lo )?calculo",
+        + @"|\bcalcula|\bcalculame|\barmame|\bdecime (el|la|cuanto)|\bque valor (va|pongo|tiene que)|\bcomo (lo )?calculo"
+        // H1 (act. 003): el pedido del valor que va en un campo, dicho sin «cuánto» ni «fórmula».
+        + @"|\bque (tengo|tenes|hay|tendria|deberia) que (poner|escribir|cargar|completar)|\bque (pongo|escribo|cargo) en"
+        + @"|\bque numero (va|pongo|tengo|le|hay|deberia|corresponde)|\bque (va|iria) en (el |la )?(area|volumen|perimetro|campo)",
         RegexOptions.CultureInvariant, RegexTimeout);
 
     private static readonly Regex OwnFigure = new(
@@ -55,7 +58,11 @@ public static class ConceptRouter
         @"\barea|\bvolumen|\bperimetro|\bsuperficie|\bradio\b|\baltura\b",
         RegexOptions.CultureInvariant, RegexTimeout);
 
-    private static readonly Regex Digit = new(@"\d", RegexOptions.CultureInvariant, RegexTimeout);
+    // EL NÚMERO EN LETRAS CUENTA COMO NÚMERO (H1, act. 003): «si la arista es tres» esquivaba la regla del dígito.
+    // «uno» y «una» quedan afuera porque son artículos («una arista»).
+    private static readonly Regex Digit = new(
+        @"\d|\b(dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce|quince|veinte|treinta|cuarenta|cincuenta|cien|ciento|mil|medio)\b",
+        RegexOptions.CultureInvariant, RegexTimeout);
 
     private static readonly Regex CountWarnings = new(
         @"\bcuantas (advertencias|observaciones)", RegexOptions.CultureInvariant, RegexTimeout);

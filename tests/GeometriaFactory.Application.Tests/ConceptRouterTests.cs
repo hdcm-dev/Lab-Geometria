@@ -35,6 +35,13 @@ public sealed class ConceptRouterTests
     [InlineData("Explicame el área total del cubo de mi trabajo")]
     [InlineData("el área de un ortoedro de 3 por 4")]
     [InlineData("¿Cuál es la fórmula del ortoedro?")]
+    // H1 (act. 003): el número en letras y el valor del campo, sin «cuánto» ni «fórmula».
+    [InlineData("¿qué tengo que poner en Area si la arista es tres?")]
+    [InlineData("qué número va en Volumen")]
+    [InlineData("el área total de un ortoedro de tres por cuatro")]
+    [InlineData("¿Qué pongo en el área del cubo?")]
+    [InlineData("¿qué va en el volumen?")]
+    [InlineData("¿Qué hay que escribir en Area?")]
     public void PedidoDeResolver_AntesQueLaFicha(string question)
     {
         var route = ConceptRouter.Route(question, Cards);
@@ -52,6 +59,14 @@ public sealed class ConceptRouterTests
     [InlineData("¿Cómo cargo una versión nueva?", ConceptRouter.Intents.NewVersion)]
     [InlineData("¿Dónde veo mis trabajos?", ConceptRouter.Intents.MyWorks)]
     public void Frontera_PorOrden(string question, string intent) =>
+        Assert.Equal(intent, ConceptRouter.Route(question, Cards).Intent);
+
+    /// <summary>H1: el número en letras no vuelve pedido de resolver lo que no nombra una magnitud.</summary>
+    [Theory]
+    [InlineData("¿Qué es un ortoedro?", "ortoedro")]
+    [InlineData("¿Qué significa derivado si hay dos valores?", "declarado-vs-derivado")]
+    [InlineData("¿Qué es el área total?", "area-total-vs-cara")]
+    public void NumeroEnLetras_SinMagnitud_SigueSiendoConcepto(string question, string intent) =>
         Assert.Equal(intent, ConceptRouter.Route(question, Cards).Intent);
 
     /// <summary>R4: el enrutador sólo elige entre las fichas que recibe, ya filtradas por rol.</summary>

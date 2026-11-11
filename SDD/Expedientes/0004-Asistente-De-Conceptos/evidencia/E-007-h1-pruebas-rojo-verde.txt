@@ -1,0 +1,21 @@
+# E-007 · H1: pruebas nuevas contra el código de main bcb0896 (enrutador y filtro previos)
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.PedidoDeResolver_AntesQueLaFicha(question: "el área total de un ortoedro de tres por cuatro") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.PedidoDeResolver_AntesQueLaFicha(question: "¿Qué hay que escribir en Area?") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.PedidoDeResolver_AntesQueLaFicha(question: "qué número va en Volumen") [3 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.PedidoDeResolver_AntesQueLaFicha(question: "¿Qué pongo en el área del cubo?") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.PedidoDeResolver_AntesQueLaFicha(question: "¿qué tengo que poner en Area si la arista es tres?") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.PedidoDeResolver_AntesQueLaFicha(question: "¿qué va en el volumen?") [< 1 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Concept_SalidaConOperacion_Ficha(modelText: "Como asistente, solo explico conceptos: el área to"···, reason: "primera-persona") [< 1 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Concept_SalidaConOperacion_Ficha(modelText: "No puedo generar el valor, pero el área total es l"···, reason: "primera-persona") [12 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Concept_SalidaConOperacion_Ficha(modelText: "Para el área total, calculá la superficie de cada "···, reason: "procedimiento") [10 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Concept_SalidaConOperacion_Ficha(modelText: "Primero tomá la arista y después elevala para obte"···, reason: "procedimiento") [< 1 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Concept_SalidaConOperacion_Ficha(modelText: "Tenés que poner en el campo la superficie de toda "···, reason: "procedimiento") [< 1 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "qué número va en Volumen") [411 ms]
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Frontera_PideResolver_Negativa(question: "¿qué tengo que poner en Area si la arista es tres?") [418 ms]
+Failed!  - Failed:     6, Passed:    23, Skipped:     0, Total:    29, Duration: 224 ms - GeometriaFactory.Application.Tests.dll (net10.0)
+Failed!  - Failed:     7, Passed:    74, Skipped:     0, Total:    81, Duration: 32 s - GeometriaFactory.Integration.Tests.dll (net10.0)
+
+# Con el código corregido: scripts/test.sh (SkipVisorBuild=true en el contenedor, sin Node)
+Passed!  - Failed:     0, Passed:    95, Skipped:     0, Total:    95, Duration: 171 ms - GeometriaFactory.Domain.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:    99, Skipped:     0, Total:    99, Duration: 230 ms - GeometriaFactory.Application.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   707, Skipped:     1, Total:   708, Duration: 50 s - GeometriaFactory.Integration.Tests.dll (net10.0)

@@ -24,8 +24,24 @@ public static class ConceptAnswerFilter
 
     private static readonly Regex Route = new(@"(^|\s)/[a-z][\w-]*", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase, RegexTimeout);
 
+    // PRIMERA PERSONA DEL ASISTENTE (H1, act. 003): no sólo la de acción («te lo armo») sino la que habla de sí
+    // («no puedo generar», «como asistente», «lo siento»). La ficha habla del concepto, nunca de quien responde.
     private static readonly Regex FirstPerson = new(
-        @"\b(te (lo |la )?(armo|hago|corrijo|calculo|paso|llevo|muestro)|voy a|armar[eé]|pondr[eé]|calcular[eé])\b",
+        @"\b(te (lo |la )?(armo|hago|corrijo|calculo|paso|llevo|muestro|doy|digo|ayudo)|voy a|armar[eé]|pondr[eé]|calcular[eé]"
+        + @"|(no )?(puedo|podr[eé]|podr[ií]a|quiero|debo|tengo permitido)|yo s[eé]|no s[eé] (c[oó]mo|qu[eé]|si|eso|la respuesta)|lo siento|disculp[aá]|perd[oó]n"
+        + @"|como (asistente|modelo|ia|inteligencia)|mi (funci[oó]n|rol|tarea|objetivo)|me (piden|ped[ií]s|pediste|corresponde)"
+        + @"|(yo|m[ií]|conmigo)\b)",
+        RegexOptions.CultureInvariant | RegexOptions.IgnoreCase, RegexTimeout);
+
+    // PROCEDIMIENTO OPERATIVO (H1, act. 003): el modelo dictaba los pasos («primero tomá la arista, después…»,
+    // «tenés que poner…») sin decir un número ni una palabra de la lista de operaciones. La ficha explica qué es,
+    // no qué hacer en el campo.
+    private static readonly Regex Procedure = new(
+        @"\b(paso (uno|dos|tres|[0-9])|primer paso|los pasos|primero[,]? |a continuaci[oó]n|por [uú]ltimo|finalmente"
+        + @"|ten[eé]s que|tendr[ií]as que|deber[ií]as|hay que (poner|calcular|escribir|cargar|completar|tomar|elevar|obtener)"
+        + @"|(calcul|tom|elev|obten|reemplaz|pon|escrib|agreg|complet|carg|aplic|multiplic|sum|us|med)[áéí]\b"
+        + @"|(calcul|elev|obten|multiplic|sum|reemplaz)(ar|as|alo|ala|ando)\b"
+        + @"|en el campo|en (el|la) (area|[aá]rea|volumen|per[ií]metro)\b (pon|va|escrib|carg))",
         RegexOptions.CultureInvariant | RegexOptions.IgnoreCase, RegexTimeout);
 
     /// <summary>Devuelve <c>null</c> si el texto pasa, o el motivo del rechazo.</summary>
@@ -52,6 +68,11 @@ public static class ConceptAnswerFilter
             return "ruta";
         }
 
-        return FirstPerson.IsMatch(text!) ? "primera-persona" : null;
+        if (FirstPerson.IsMatch(text!))
+        {
+            return "primera-persona";
+        }
+
+        return Procedure.IsMatch(text!) ? "procedimiento" : null;
     }
 }
