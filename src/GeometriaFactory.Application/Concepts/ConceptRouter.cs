@@ -55,7 +55,9 @@ public static class ConceptRouter
         RegexOptions.CultureInvariant, RegexTimeout);
 
     private static readonly Regex Magnitude = new(
-        @"\barea|\bvolumen|\bperimetro|\bsuperficie|\bradio\b|\baltura\b|\bdiagonal",
+        @"\barea|\bvolumen|\bperimetro|\bsuperficie|\bradio\b|\baltura\b|\bdiagonal|\bhipotenusa|\bcateto"
+        // Ronda 3: «cuánto ocupa una caja de dos por tres por cuatro» pide un volumen sin nombrarlo.
+        + @"|\bocupa|\bcabe|\bcapacidad",
         RegexOptions.CultureInvariant, RegexTimeout);
 
     // EL DÍGITO CUENTA COMO DATO junto a una magnitud. El número EN LETRAS, en cambio, sólo cuando funciona como
@@ -74,8 +76,21 @@ public static class ConceptRouter
     private static readonly HashSet<string> MeasureNouns = new(StringComparer.Ordinal)
     {
         "arista", "lado", "radio", "altura", "base", "largo", "ancho", "alto", "diametro", "profundidad", "apotema",
-        "generatriz", "area", "volumen", "perimetro", "superficie", "diagonal", "medida",
+        "generatriz", "area", "volumen", "perimetro", "superficie", "diagonal", "medida", "cateto", "hipotenusa",
     };
+
+    // Medidas en plural: sólo DELANTE del valor («catetos tres y cuatro», «lados dos y cinco»). Detrás del número
+    // cuentan («tiene doce aristas»), por eso no van en MeasureNouns (ronda 3).
+    private static readonly HashSet<string> MeasurePlurals = new(StringComparer.Ordinal)
+    {
+        "catetos", "lados", "aristas", "radios", "alturas", "bases", "diagonales", "medidas", "dimensiones",
+    };
+
+    // Preguntas sobre la fórmula, no pedido de ella (ronda 3): «hay dos fórmulas…», «qué significa el dos en la
+    // fórmula…». Igual que «por qué», sólo un valor de medida las vuelve pedido.
+    private static readonly Regex Explains = new(
+        @"^ (por que|que significa|que quiere decir|hay|existe|existen|de donde sale|para que sirve) ",
+        RegexOptions.CultureInvariant, RegexTimeout);
 
     private static readonly HashSet<string> UnitWords = new(StringComparer.Ordinal)
     {
@@ -150,7 +165,7 @@ public static class ConceptRouter
 
         // «por qué …» pide una explicación: la palabra «fórmula» ahí no pide la fórmula (ronda 2); sólo un valor
         // de medida lo vuelve pedido.
-        var explains = text.StartsWith(" por que ", StringComparison.Ordinal);
+        var explains = Explains.IsMatch(text);
 
         if ((!explains && AsksToSolve.IsMatch(text))
             || (OwnFigure.IsMatch(text) && Magnitude.IsMatch(text))
@@ -261,7 +276,8 @@ public static class ConceptRouter
 
             // Detrás: verbo de valor, medida o figura, «el número», «de», «igual a».
             if (prev is not null
-                && (ValueVerbs.Contains(prev) || MeasureNouns.Contains(prev) || FigureNouns.Contains(prev)
+                && (ValueVerbs.Contains(prev) || MeasureNouns.Contains(prev) || MeasurePlurals.Contains(prev)
+                    || FigureNouns.Contains(prev)
                     || prev == "numero" || prev == "de"))
             {
                 return true;

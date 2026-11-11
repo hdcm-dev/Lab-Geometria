@@ -30,6 +30,9 @@ public sealed class ConceptRouterSondaTests
     [InlineData("qué relación hay entre el área de 6 cuadrados y el cubo")]
     [InlineData("cómo se calcula el área de las cuatro caras laterales")]
     [InlineData("por qué la fórmula del cilindro usa dos veces el círculo")]
+    // Ronda 3.
+    [InlineData("hay dos fórmulas para el área del cilindro?")]
+    [InlineData("qué significa el dos en la fórmula del área del cilindro")]
     public void Concepto_NoPideResolver(string question) =>
         Assert.NotEqual(ConceptRouter.Intents.AsksToSolve, ConceptRouter.Route(question, Cards).Intent);
 
@@ -46,6 +49,9 @@ public sealed class ConceptRouterSondaTests
     [InlineData("lado siete, área del cuadrado")]
     [InlineData("medida cuatro el lado, área del cuadrado")]
     [InlineData("hallar la diagonal de un cuadrado de lado uno")]
+    // Ronda 3.
+    [InlineData("cuánto ocupa una caja de dos por tres por cuatro")]
+    [InlineData("hola, tengo un triángulo de catetos tres y cuatro, la hipotenusa?")]
     public void Valor_PideResolver(string question) =>
         Assert.Equal(ConceptRouter.Intents.AsksToSolve, ConceptRouter.Route(question, Cards).Intent);
 }
