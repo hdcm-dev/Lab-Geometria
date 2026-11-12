@@ -160,4 +160,40 @@ public sealed class ConceptRouterTests
         Assert.Null(DestinationCatalog.Resolve(DestinationCatalog.CurrentWork, Role.Student, null));
         Assert.Null(DestinationCatalog.Resolve("/cuentas", Role.Student, id));
     }
+
+    /// <summary>
+    /// EXP-0005 (D-2, D-3): «Ver pistas» y «Ver un ejemplo» abren la acción. El catálogo emite el parámetro con valor
+    /// fijo, conserva la revalidación por rol e instancia, y no lo emite en ningún otro destino.
+    /// </summary>
+    [Fact]
+    public void Catalogo_PistasYEjemplo_AbrenLaAccion()
+    {
+        var id = Guid.NewGuid();
+        Assert.Equal($"/trabajos/{id:D}?pistas=1", DestinationCatalog.Resolve(DestinationCatalog.SeeHints, Role.Student, id)!.Path);
+        Assert.Equal("/trabajo-nuevo?ejemplo=1", DestinationCatalog.Resolve(DestinationCatalog.FormatExample, Role.Student, null)!.Path);
+
+        // Ver no es hacer y la instancia se revalida igual que antes.
+        Assert.Null(DestinationCatalog.Resolve(DestinationCatalog.SeeHints, Role.Administrator, id));
+        Assert.Null(DestinationCatalog.Resolve(DestinationCatalog.SeeHints, Role.Student, null));
+        Assert.Null(DestinationCatalog.Resolve(DestinationCatalog.FormatExample, Role.Administrator, null));
+
+        // Ningún otro destino lleva esos parámetros, y todos los del catálogo abren la acción o lo dicen.
+        Assert.Equal("/trabajo-nuevo", DestinationCatalog.Resolve(DestinationCatalog.NewWork, Role.Student, null)!.Path);
+        Assert.Equal($"/trabajos/{id:D}", DestinationCatalog.Resolve(DestinationCatalog.CurrentWork, Role.Student, id)!.Path);
+        Assert.All(
+            DestinationCatalog.All.Where(d => d.Id is DestinationCatalog.SeeHints or DestinationCatalog.FormatExample),
+            d => Assert.True(d.OpensAction, d.Id));
+    }
+
+    /// <summary>EXP-0005: un destino que abre con un parámetro que no declara es un catálogo inválido.</summary>
+    [Fact]
+    public void Catalogo_AbreConParametroNoDeclarado_EsInvalido()
+    {
+        var problems = DestinationCatalog.Validate(
+            [new Destination("x", "Ir", "/trabajo-nuevo", [Role.Student], [], true, "ejemplo")],
+            ["/trabajo-nuevo"],
+            _ => ["ejemplo"]);
+
+        Assert.Single(problems);
+    }
 }

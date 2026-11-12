@@ -569,6 +569,7 @@ else
         if (outcome.Succeeded)
         {
             _work = outcome.Value!;
+            await OpenHintsFromLinkAsync();
             return;
         }
 
@@ -616,14 +617,57 @@ else
                 + "figura no se reconstruyó. El resto del texto sí se interpretó.";
     }
 
-    /// <summary>Si esta petición pidió pistas.</summary>
-    private bool HintsAsked => HintsInput is not null && HintsForm.Index >= 0;
+    /// <summary>
+    /// <c>?pistas=1</c>: el chip «Ver pistas de tu advertencia» del asistente abre la acción (EXP-0005, D-3; K2 §5.4).
+    /// </summary>
+    [SupplyParameterFromQuery(Name = "pistas")]
+    private string? HintsLink { get; set; }
+
+    /// <summary>La advertencia que abrió el enlace; -1 si el enlace no abrió nada.</summary>
+    private int _linkedHintIndex = -1;
+
+    /// <summary>
+    /// Con <c>?pistas=1</c>, en un pedido sin formulario, abre el nivel 1 de la PRIMERA advertencia, como si se
+    /// hubiera tocado su «Ver pistas»; el foco lo lleva el mismo <c>autofocus</c> de <see cref="HintsPanel"/>.
+    /// </summary>
+    /// <remarks>
+    /// SIN ADVERTENCIAS, CON LAS PISTAS APAGADAS O PARA EL DOCENTE, LA PÁGINA QUEDA IGUAL QUE SIN EL PARÁMETRO:
+    /// <see cref="CanAskForHints"/> es la misma condición que dibuja el botón, de modo que el enlace no abre nada
+    /// que la pantalla no ofrezca. Un valor distinto de <c>1</c> no abre nada. El envío del formulario manda.
+    /// </remarks>
+    private async Task OpenHintsFromLinkAsync()
+    {
+        if (!string.Equals(HintsLink, "1", StringComparison.Ordinal) || HintsInput is not null || !CanAskForHints)
+        {
+            return;
+        }
+
+        var first = _work!.Observations
+            .Select((observation, index) => (observation, index))
+            .FirstOrDefault(pair => pair.observation.Kind == WorkObservationKind.Warning);
+
+        if (first.observation is null)
+        {
+            return;
+        }
+
+        _linkedHintIndex = first.index;
+        await ExplainAsync();
+    }
+
+    /// <summary>Si esta petición pidió pistas (por el formulario o por el enlace).</summary>
+    private bool HintsAsked => (HintsInput is not null || _linkedHintIndex >= 0) && HintsForm.Index >= 0;
 
     /// <summary>El pedido leído: advertencia y nivel. Un valor sin forma no pide nada.</summary>
     private (int Index, int Level) HintsForm
     {
         get
         {
+            if (HintsInput is null && _linkedHintIndex >= 0)
+            {
+                return (_linkedHintIndex, 1);
+            }
+
             var parts = (HintsInput?.Step ?? string.Empty).Split(':');
             return parts.Length == 2
                 && int.TryParse(parts[0], System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var index)

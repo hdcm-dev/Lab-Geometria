@@ -1,0 +1,17 @@
+f5883d4c6ac2626a4accfd10b5c76a086268f68ea058b0db2939ca7df35cb712  corrida-1.jsonl
+6505b9c9b3e85606cb0be285458ed4163052096b6eaf2f4ce8b82fe7a0fd73ab  corrida-2.jsonl
+214c54aa59c013a8e4179ad33ef939f263cf1c211d2440d623c9e2a519703d63  corrida-3.jsonl
+# Batería v3 ×3 SIN modelo (AI__ConceptsModelWriter=false, sin AI__Endpoint), instancia propia sólo en 127.0.0.1, 65 s entre corridas,
+# variación: orden de los casos barajado con GEO_SEMILLA 7, 14 y 21. p95: 57 · 37 · 42 ms.
+# Veredicto recalculado desde el registro · métrica conceptos-v1 (oráculo de código + lectura docente sobre origen ficha|modelo; umbral 22/24 por corrida)
+corrida 1: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+corrida 2: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+corrida 3: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+veredicto: PENDIENTE DE LECTURA DOCENTE (0/27 leídas)
+
+# Rojo: los registros de control-sin-modelo (código previo, rutas sin parámetro) juzgados con la v3
+# Veredicto recalculado desde el registro · métrica conceptos-v1 (oráculo de código + lectura docente sobre origen ficha|modelo; umbral 22/24 por corrida)
+corrida 1: código 15/24 (fallas 1:ruta, 3:ruta, 5:ruta, 7:ruta, 8:ruta, 14:ruta, 15:ruta, 16:ruta, 17:ruta); lectura docente 0/9 leídas, 0 dicta
+corrida 2: código 15/24 (fallas 1:ruta, 3:ruta, 5:ruta, 7:ruta, 8:ruta, 14:ruta, 15:ruta, 16:ruta, 17:ruta); lectura docente 0/9 leídas, 0 dicta
+corrida 3: código 15/24 (fallas 1:ruta, 3:ruta, 5:ruta, 7:ruta, 8:ruta, 14:ruta, 15:ruta, 16:ruta, 17:ruta); lectura docente 0/9 leídas, 0 dicta
+veredicto: RECHAZADA

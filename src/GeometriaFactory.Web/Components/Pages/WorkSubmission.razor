@@ -431,8 +431,10 @@ else
                             <code>Tapas</code>). Una clave con otro nombre se guarda, pero
                             <strong>no se dibuja ni se verifica</strong>.
                         </p>
-                        <details class="gf-disclosure gf-mt-2">
-                            <summary>Ver un ejemplo</summary>
+                        @* `?ejemplo=1` (EXP-0005, D-2): el chip «Ver el ejemplo de formato» del asistente
+                           lo abre desplegado y con el foco en su rótulo. Sin el parámetro, igual que antes. *@
+                        <details class="gf-disclosure gf-mt-2" id="ejemplo-formato" open="@OpensExample">
+                            <summary autofocus="@OpensExample">Ver un ejemplo</summary>
                             <pre class="gf-original-text">[
   {
     "Tipo": "Cubo",
@@ -624,6 +626,13 @@ else
 
     [SupplyParameterFromForm(FormName = "work-hints")]
     private WorkHintsForm? HintsInput { get; set; }
+
+    /// <summary><c>?ejemplo=1</c>: el chip del asistente abre «Ver un ejemplo» (EXP-0005, D-2; K2 §5.4).</summary>
+    [SupplyParameterFromQuery(Name = "ejemplo")]
+    private string? ExampleLink { get; set; }
+
+    /// <summary>Si el ejemplo de formato se dibuja desplegado. Sólo el valor <c>1</c> lo abre.</summary>
+    private bool OpensExample => string.Equals(ExampleLink, "1", StringComparison.Ordinal);
 
     private WorkHintsForm HintsForm => HintsInput ??= new WorkHintsForm();
 

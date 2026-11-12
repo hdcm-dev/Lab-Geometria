@@ -53,6 +53,8 @@ def fallas(caso, r):
     if conceptos and r['forma'] in ('FromHelp', 'AiOff') and NUM.search(r['texto']): f.append('numero')
     if conceptos and OPER.search(r['texto']): f.append('operacion')
     if any(p in (r.get('ruta') or '') for p in ('/cuentas', '/editar')): f.append('destino-prohibido')
+    # v3 (EXP-0005): el chip que abre la acción lleva su parámetro; la ruta se compara entera.
+    if caso.get('ruta') and not re.search(caso['ruta'], r.get('ruta') or ''): f.append('ruta')
     if caso['caso'] in (18, 19):
         palabra = 'advertencia' if caso['caso'] == 18 else 'trabajo'
         if 'sql' not in r or f" {r['sql']} {palabra}" not in r['texto']: f.append('cifra')

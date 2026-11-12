@@ -25,7 +25,8 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 # veredicto lo recalcula `veredicto_conceptos.py` desde el registro, con la lectura docente aparte (K3 R2.2a).
 # v2 desde la actuación 003 del EXP-0004 (H2): el caso 15, sobre un trabajo ya enviado, ya no ofrece «Cargar un
 # trabajo» sino las pistas. La carpeta de la corrida lleva `bateria.txt` con el nombre del archivo.
-BATERIA = os.path.join(AQUI, os.environ.get('GEO_BATERIA', 'bateria-conceptos-v2.jsonl'))
+# v3 desde el EXP-0005: los casos con chip `ver-pistas` o `ejemplo-formato` comparan además la ruta con su parámetro.
+BATERIA = os.path.join(AQUI, os.environ.get('GEO_BATERIA', 'bateria-conceptos-v3.jsonl'))
 CASOS = [json.loads(l) for l in open(BATERIA, encoding='utf-8') if l.strip()]
 
 
@@ -93,8 +94,14 @@ def main(argv):
     antes = composicion()
     with open(salida, 'w', encoding='utf-8') as out:
         out.write(json.dumps({'corrida': corrida, 'composicion_antes': antes, 'ia_del_asistente': salud.get('assistantAi'),
-                              'version_servicio': salud.get('version')}, ensure_ascii=False) + '\n')
-        for c in CASOS:
+                              'version_servicio': salud.get('version'), 'semilla': os.environ.get('GEO_SEMILLA')}, ensure_ascii=False) + '\n')
+        # VARIACIÓN (EXP-0005): GEO_SEMILLA baraja el orden de los casos; la semilla queda en la cabecera del registro.
+        semilla = os.environ.get('GEO_SEMILLA')
+        casos = list(CASOS)
+        if semilla:
+            import random
+            random.Random(int(semilla)).shuffle(casos)
+        for c in casos:
             n, rol, q = c['caso'], c['rol'], c['pregunta']
             wid = mundo.get(c['pantalla'])
             t0 = time.time()
