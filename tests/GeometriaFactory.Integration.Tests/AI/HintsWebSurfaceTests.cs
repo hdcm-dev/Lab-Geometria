@@ -221,6 +221,129 @@ public sealed class HintsWebSurfaceTests : IDisposable
         Assert.Equal(0, calls.Count);
     }
 
+    // ------------------------------------------------- EXP-0005: el chip abre la acción ----------------
+
+    /// <summary>
+    /// D-3 · <c>?pistas=1</c> abre el nivel 1 de la PRIMERA advertencia dentro de esa advertencia, con el foco en la
+    /// pista y sin reenviar el trabajo; la otra advertencia sigue ofreciendo su «Ver pistas».
+    /// </summary>
+    [Fact]
+    public async Task WorkView_ConPistas1_AbrePanelYEnfoca()
+    {
+        var calls = new CountingScriptedWriter(new Hints("PRIMERA pista", "SEGUNDA pista", "TERCERA pista", HintOrigin.Template));
+        Start(hintsEnabled: "true", services => services.AddScoped<IObservationHintWriter>(_ => calls));
+        var detailRoute = await SavedWorkRouteAsync(Scenarios.E1);
+
+        using var detail = await GetAsync(detailRoute + "?pistas=1", _mark);
+        var html = Read(await detail.Content.ReadAsStringAsync());
+
+        Assert.Equal(HttpStatusCode.OK, detail.StatusCode);
+        Assert.Contains("PRIMERA pista", html, StringComparison.Ordinal);
+        Assert.DoesNotContain("SEGUNDA pista", html, StringComparison.Ordinal);
+        Assert.Contains("Otra pista", html, StringComparison.Ordinal);
+        Assert.Matches("<li[^>]*autofocus[^>]*id=\"hints-\\d+-level-1\"|<li[^>]*id=\"hints-\\d+-level-1\"[^>]*autofocus", html);
+        Assert.True(
+            html.IndexOf("La geometría da", StringComparison.Ordinal) < html.IndexOf("PRIMERA pista", StringComparison.Ordinal),
+            "La advertencia tiene que seguir arriba de las pistas.");
+        Assert.Single(Regex.Matches(html, "Ver pistas"));
+        Assert.Contains("<title>Pistas para tu advertencia</title>", html, StringComparison.Ordinal);
+    }
+
+    /// <summary>D-3 · Sobre un trabajo sin advertencias, <c>?pistas=1</c> deja la página igual que sin el parámetro.</summary>
+    [Fact]
+    public async Task WorkView_ConPistas1_SinAdvertencias_IgualQueSinParametro()
+    {
+        var calls = new CountingWriter();
+        Start(hintsEnabled: "true", services => services.AddScoped<IObservationHintWriter>(_ => calls));
+        var detailRoute = await SavedWorkRouteAsync(Scenarios.E4);
+
+        Assert.Equal(await NormalizedAsync(detailRoute), await NormalizedAsync(detailRoute + "?pistas=1"));
+        Assert.Equal(0, calls.Count);
+    }
+
+    /// <summary>
+    /// D-3 · Con las pistas apagadas (configuración por omisión), <c>?pistas=1</c> sobre un trabajo CON advertencias
+    /// tampoco cambia nada y no pide nada: el enlace no abre lo que la pantalla no ofrece.
+    /// </summary>
+    [Fact]
+    public async Task WorkView_ConPistas1_PistasApagadas_IgualQueSinParametro()
+    {
+        var calls = new CountingWriter();
+        Start(hintsEnabled: null, services => services.AddScoped<IObservationHintWriter>(_ => calls));
+        var detailRoute = await SavedWorkRouteAsync(Scenarios.E1);
+
+        var plain = await NormalizedAsync(detailRoute);
+        Assert.Equal(plain, await NormalizedAsync(detailRoute + "?pistas=1"));
+        Assert.DoesNotContain("Ver pistas", plain, StringComparison.Ordinal);
+        Assert.Equal(0, calls.Count);
+    }
+
+    /// <summary>D-3 · Un valor distinto de 1 no abre nada.</summary>
+    [Fact]
+    public async Task WorkView_ConPistasDeOtroValor_IgualQueSinParametro()
+    {
+        var calls = new CountingWriter();
+        Start(hintsEnabled: "true", services => services.AddScoped<IObservationHintWriter>(_ => calls));
+        var detailRoute = await SavedWorkRouteAsync(Scenarios.E1);
+
+        Assert.Equal(await NormalizedAsync(detailRoute), await NormalizedAsync(detailRoute + "?pistas=si"));
+        Assert.Equal(0, calls.Count);
+    }
+
+    /// <summary>D-2 · <c>?ejemplo=1</c> despliega «Ver un ejemplo» y le da el foco; sin el parámetro, colapsado.</summary>
+    [Fact]
+    public async Task WorkSubmission_ConEjemplo1_DespliegaYEnfoca()
+    {
+        Start(hintsEnabled: null, _ => { });
+        _mark = await SignInAsStudentAsync();
+
+        using var opened = await GetAsync(NewWorkRoute + "?ejemplo=1", _mark);
+        var html = Read(await opened.Content.ReadAsStringAsync());
+
+        Assert.Equal(HttpStatusCode.OK, opened.StatusCode);
+        Assert.Matches("<details[^>]*id=\"ejemplo-formato\"[^>]*\\sopen", html);
+        Assert.Matches("<summary[^>]*autofocus[^>]*>Ver un ejemplo</summary>", html);
+    }
+
+    /// <summary>D-2 · Sin el parámetro, o con otro valor, la pantalla de carga queda igual que antes.</summary>
+    [Fact]
+    public async Task WorkSubmission_SinEjemplo1_IgualQueSinParametro()
+    {
+        Start(hintsEnabled: null, _ => { });
+        _mark = await SignInAsStudentAsync();
+
+        var plain = await NormalizedAsync(NewWorkRoute);
+        Assert.DoesNotMatch("<details[^>]*\\sopen", plain);
+        Assert.DoesNotContain("autofocus", plain, StringComparison.Ordinal);
+        Assert.Equal(plain, await NormalizedAsync(NewWorkRoute + "?ejemplo=0"));
+    }
+
+    private async Task<string> SavedWorkRouteAsync(string text)
+    {
+        var (page, html) = await SubmitAsync(text);
+        page.Dispose();
+        var route = Regex.Match(html, "href=\"(?<r>/trabajos/[0-9a-f-]{36})\"").Groups["r"].Value;
+        Assert.NotEmpty(route);
+        return route;
+    }
+
+    /// <summary>
+    /// El marcado de una página sin lo que cambia en cada pedido: las marcas protegidas y el eco de la propia
+    /// dirección (el <c>action</c> de los formularios repite la consulta tal como llegó).
+    /// </summary>
+    private async Task<string> NormalizedAsync(string route)
+    {
+        using var response = await GetAsync(route, _mark);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        var bare = route.Split('?')[0];
+        var html = Read(await response.Content.ReadAsStringAsync())
+            .Replace(route, bare, StringComparison.Ordinal)
+            .Replace(Uri.EscapeDataString(route), Uri.EscapeDataString(bare), StringComparison.Ordinal);
+        // Toda marca protegida por la Web (antifalsificación y estado del formulario) empieza con el prefijo de
+        // Data Protection y cambia en cada pedido.
+        return Regex.Replace(html, "CfDJ8[A-Za-z0-9_\\-+/=]+", "MARCA");
+    }
+
     private void Start(string? hintsEnabled, Action<IServiceCollection> services)
     {
         _dataService = new AiDataServiceHarness(_storePath, services);
@@ -374,6 +497,19 @@ public sealed class HintsWebSurfaceTests : IDisposable
     {
         public Task<HintResult> WriteAsync(ObservationHintRequest request, CancellationToken cancellationToken = default) =>
             Task.FromResult(hints.Origin == HintOrigin.Model ? HintResult.Ok(hints) : HintResult.Degraded(hints, "guion"));
+
+        public Hints TemplateFor(ObservationHintRequest request) => hints;
+    }
+
+    private sealed class CountingScriptedWriter(Hints hints) : IObservationHintWriter
+    {
+        public int Count { get; private set; }
+
+        public Task<HintResult> WriteAsync(ObservationHintRequest request, CancellationToken cancellationToken = default)
+        {
+            Count++;
+            return Task.FromResult(HintResult.Degraded(hints, "guion"));
+        }
 
         public Hints TemplateFor(ObservationHintRequest request) => hints;
     }

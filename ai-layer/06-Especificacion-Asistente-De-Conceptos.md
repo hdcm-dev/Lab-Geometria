@@ -228,9 +228,9 @@ firma» la bloquean para PROD (§11.1).
 |---|---|---|---|---|---|---|---|
 | `mis-trabajos` | Abrir mis trabajos | `/mis-trabajos` | `estado` (existe `[SupplyParameterFromQuery(Name="estado")]`) | alumno | — | — | filtro aplicado si la pregunta nombra un estado |
 | `trabajo-nuevo` | Cargar un trabajo | `/trabajo-nuevo` | — | alumno | alumno | — | sí: es la pantalla de carga |
-| `ejemplo-formato` | Ver el ejemplo de formato | `/trabajo-nuevo` | **falta** un parámetro que abra «Ver un ejemplo» (`WorkSubmission.razor:429`) | alumno | — | — | **no** hoy: deuda del producto (R-06), D-2 |
+| `ejemplo-formato` | Ver el ejemplo de formato | `/trabajo-nuevo` | `?ejemplo=1` despliega «Ver un ejemplo» y lo enfoca | alumno | — | — | **sí** desde EXP-0005 (D-2 resuelta) |
 | `trabajo-actual` | Volver a tu trabajo (alumno) · Volver al trabajo del alumno (docente) | `/trabajos/{WorkId}` | `WorkId` de la pantalla, nunca del texto | alumno dueño, docente | — | `WorkOperation.View` sobre esa instancia | — |
-| `ver-pistas` | Ver pistas de tu advertencia | `/trabajos/{WorkId}` | **falta** parámetro que abra `HintsPanel` | alumno dueño | alumno dueño, sólo si `AI:HintsEnabled` | `View` + bandera | **no** hoy: D-3 |
+| `ver-pistas` | Ver pistas de la primera advertencia | `/trabajos/{WorkId}` | `?pistas=1` abre el nivel 1 de la primera advertencia y lo enfoca; sin advertencias o con pistas apagadas, igual que sin el parámetro | alumno dueño | alumno dueño, sólo si `AI:HintsEnabled` (en la Api, la misma llave: apagada, la negativa no ofrece el chip ni nombra las pistas) | `View` + bandera | **sí** desde EXP-0005 (D-3 resuelta) |
 | `editar-trabajo` | Cargar una versión nueva | `/trabajos/{WorkId}/editar` | `WorkId` | alumno dueño | **sólo alumno dueño** (`WorkOperation.Edit`) | `Edit` sobre esa instancia; docente → F6; ajeno → «no encontrado» | sí |
 | `entrega-comision` | Abrir la entrega de la comisión | `/entrega-comision` | `alumno`, `estado`, `resuelto`, `trabajo` | docente | — | — | filtro aplicado |
 
@@ -240,7 +240,7 @@ que termine en el rechazo de la página.
 
 **Dónde no alcanzó el conocimiento:** K2 §5.4 pide que el chip abra la acción; en Geometría dos acciones útiles
 («Ver un ejemplo», «Ver pistas») no tienen parámetro de consulta. Abrirlas exige tocar páginas, que es otra zona
-(UX, expediente 0002). Se registran como deuda (R-06) y la rebanada ofrece el chip a la pantalla, declarado.
+(UX, expediente 0002). Se registraron como deuda (R-06) y la rebanada ofreció el chip a la pantalla, declarado. **Resuelta en EXP-0005**: `?ejemplo=1` y `?pistas=1`, con la conformidad catálogo ↔ página al arrancar.
 
 ## 12. Batería v1 (congelada el 2026-11-11, antes de la primera corrida)
 

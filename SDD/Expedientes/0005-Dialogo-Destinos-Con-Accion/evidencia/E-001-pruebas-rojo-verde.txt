@@ -1,0 +1,17 @@
+# E-001 · Pruebas nuevas contra el código de main a672f85 (catálogo y páginas previos; pruebas de EXP-0005)
+  Failed GeometriaFactory.Application.Tests.ConceptRouterTests.Catalogo_PistasYEjemplo_AbrenLaAccion [5 ms]
+Failed!  - Failed:     1, Passed:     2, Skipped:     0, Total:     3, Duration: 129 ms - GeometriaFactory.Application.Tests.dll (net10.0)
+  Failed GeometriaFactory.Integration.Tests.AI.HintsWebSurfaceTests.WorkView_ConPistas1_AbrePanelYEnfoca [2 s]
+  Failed GeometriaFactory.Integration.Tests.AI.HintsWebSurfaceTests.WorkSubmission_ConEjemplo1_DespliegaYEnfoca [2 s]
+Failed!  - Failed:     2, Passed:    12, Skipped:     0, Total:    14, Duration: 49 s - GeometriaFactory.Integration.Tests.dll (net10.0)
+
+# Mutación: el catálogo emite el parámetro y las páginas lo ignoran (sin [SupplyParameterFromQuery])
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Catalogo_RutasYParametros_ConformanConLasPaginas [428 ms]
+  Failed GeometriaFactory.Integration.Tests.AI.HintsWebSurfaceTests.WorkView_ConPistas1_AbrePanelYEnfoca [3 s]
+  Failed GeometriaFactory.Integration.Tests.AI.HintsWebSurfaceTests.WorkSubmission_ConEjemplo1_DespliegaYEnfoca [2 s]
+Failed!  - Failed:     3, Passed:    11, Skipped:     0, Total:    14, Duration: 50 s - GeometriaFactory.Integration.Tests.dll (net10.0)
+
+# Batería completa con el código de EXP-0005 (scripts/test.sh, SDK 10.0.403 en contenedor, usuario no root, SkipVisorBuild=true)
+Passed!  - Failed:     0, Passed:    95, Skipped:     0, Total:    95, Duration: 915 ms - GeometriaFactory.Domain.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   170, Skipped:    16, Total:   186, Duration: 969 ms - GeometriaFactory.Application.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   715, Skipped:     1, Total:   716, Duration: 4 m 20 s - GeometriaFactory.Integration.Tests.dll (net10.0)
