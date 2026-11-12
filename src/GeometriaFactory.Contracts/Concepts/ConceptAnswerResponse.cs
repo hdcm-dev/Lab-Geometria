@@ -2,7 +2,8 @@ namespace GeometriaFactory.Contracts.Concepts;
 
 /// <summary>
 /// La respuesta del asistente. <c>Form</c> es F1…F8 o <c>NotFound</c>; <c>Origin</c> es <c>ficha</c>,
-/// <c>modelo</c>, <c>fijo</c> o <c>caso-de-uso</c>. El destino, si lo hay, sale del catálogo por id.
+/// <c>modelo</c>, <c>fijo</c> o <c>caso-de-uso</c>. El destino, si lo hay, sale del catálogo por id. Una pregunta
+/// compuesta trae <c>Form</c> <c>Compound</c> y en <c>Parts</c> una respuesta por parte.
 /// </summary>
 public sealed record ConceptAnswerResponse(
     string Form,
@@ -13,7 +14,8 @@ public sealed record ConceptAnswerResponse(
     ConceptDestinationChip? Destination,
     string Origin,
     string? Note,
-    IReadOnlyList<ConceptBreakdownEntry> Breakdown);
+    IReadOnlyList<ConceptBreakdownEntry> Breakdown,
+    IReadOnlyList<ConceptAnswerResponse>? Parts = null);
 
 /// <summary>La ficha en juego: id, título, texto y fuente.</summary>
 public sealed record ConceptCardReference(string Id, string Title, string Text, string Source);

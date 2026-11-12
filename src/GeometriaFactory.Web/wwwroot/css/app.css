@@ -1269,6 +1269,7 @@ main[tabindex="-1"]:focus-visible {
 .gf-concept__answer--abstention,
 .gf-concept__answer--notfound { background: var(--color-background-tertiary); border-color: var(--color-border-secondary); }
 .gf-concept__card-title { margin: 0 0 var(--space-1); }
+.gf-concept__part + .gf-concept__part { margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--color-border-secondary); }
 .gf-concept__text { margin: 0; }
 .gf-concept__breakdown { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
 .gf-concept__note, .gf-concept__source { margin: var(--space-2) 0 0; }

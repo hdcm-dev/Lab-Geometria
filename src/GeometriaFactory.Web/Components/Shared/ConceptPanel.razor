@@ -29,43 +29,19 @@
         @if (_answer is { } answer)
         {
             <div class="gf-concept__answer gf-concept__answer--@answer.Form.ToLowerInvariant()" tabindex="-1" autofocus data-gf-form="@answer.Form" data-gf-intent="@answer.Intent">
-                @if (answer.Card is { } card && answer.Form != "UsefulRefusal")
+                @if (answer.Parts is { Count: > 0 } parts)
                 {
-                    <p class="gf-concept__card-title"><strong>@card.Title</strong></p>
+                    @* UNA COMPUESTA SE MUESTRA PARTE POR PARTE (juicio R1): cada parte con su ficha y su chip. *@
+                    @foreach (var part in parts)
+                    {
+                        <div class="gf-concept__part" data-gf-form="@part.Form" data-gf-intent="@part.Intent">
+                            @AnswerBody(part)
+                        </div>
+                    }
                 }
-                <p class="gf-concept__text">@answer.Text</p>
-                @* LA NEGATIVA DICE «ABRÍ LA FICHA» Y LA FICHA TIENE QUE PODER ABRIRSE (H2, act. 003): va plegada, sin
-                   guion, con <details>; la ficha es el respaldo y nunca trae el valor. *@
-                @if (answer.Card is { } refusedCard && answer.Form == "UsefulRefusal")
+                else
                 {
-                    <details class="gf-concept__card" data-gf-card="@refusedCard.Id">
-                        <summary>Ficha: @refusedCard.Title</summary>
-                        <p class="gf-concept__text">@refusedCard.Text</p>
-                        <p class="gf-caption gf-concept__source">Ficha de la ayuda de conceptos.</p>
-                    </details>
-                }
-                @if (answer.Breakdown.Count > 0)
-                {
-                    <ul class="gf-concept__breakdown">
-                        @foreach (var item in answer.Breakdown)
-                        {
-                            <li>@item.Label: @item.Count</li>
-                        }
-                    </ul>
-                }
-                @if (answer.Note is { } note)
-                {
-                    <p class="gf-caption gf-concept__note">@note</p>
-                }
-                @if (answer.Card is { } source && answer.Form is "FromHelp" or "AiOff")
-                {
-                    <p class="gf-caption gf-concept__source">
-                        @(answer.Origin == "modelo" ? "Redactado por IA sobre la ficha: puede no ser exacto." : "Ficha de la ayuda de conceptos.")
-                    </p>
-                }
-                @if (answer.Destination is { } chip)
-                {
-                    <a class="gf-concept__chip" href="@chip.Path" data-gf-destination="@chip.Id">@chip.Label</a>
+                    @AnswerBody(answer)
                 }
             </div>
         }
@@ -79,6 +55,49 @@
 }
 
 @code {
+
+    private RenderFragment AnswerBody(GeometriaFactory.Contracts.Concepts.ConceptAnswerResponse item) => __builder =>
+    {
+    if (item.Card is { } card && item.Form != "UsefulRefusal")
+    {
+        <p class="gf-concept__card-title"><strong>@card.Title</strong></p>
+    }
+    <p class="gf-concept__text">@item.Text</p>
+    @* LA NEGATIVA DICE «ABRÍ LA FICHA» Y LA FICHA TIENE QUE PODER ABRIRSE (H2, act. 003): va plegada, sin
+       guion, con <details>; la ficha es el respaldo y nunca trae el valor. *@
+    if (item.Card is { } refusedCard && item.Form == "UsefulRefusal")
+    {
+        <details class="gf-concept__card" data-gf-card="@refusedCard.Id">
+            <summary>Ficha: @refusedCard.Title</summary>
+            <p class="gf-concept__text">@refusedCard.Text</p>
+            <p class="gf-caption gf-concept__source">Ficha de la ayuda de conceptos.</p>
+        </details>
+    }
+    if (item.Breakdown.Count > 0)
+    {
+        <ul class="gf-concept__breakdown">
+            @foreach (var entry in item.Breakdown)
+            {
+                <li>@entry.Label: @entry.Count</li>
+            }
+        </ul>
+    }
+    if (item.Note is { } note)
+    {
+        <p class="gf-caption gf-concept__note">@note</p>
+    }
+    if (item.Card is { } source && item.Form is "FromHelp" or "AiOff")
+    {
+        <p class="gf-caption gf-concept__source">
+            @(item.Origin == "modelo" ? "Redactado por IA sobre la ficha: puede no ser exacto." : "Ficha de la ayuda de conceptos.")
+        </p>
+    }
+    if (item.Destination is { } chip)
+    {
+        <a class="gf-concept__chip" href="@chip.Path" data-gf-destination="@chip.Id">@chip.Label</a>
+    }
+    };
+
     /// <summary>El trabajo de la pantalla; el servicio lo revalida (ARQ-2).</summary>
     [Parameter]
     public Guid? WorkId { get; set; }

@@ -43,6 +43,7 @@ public sealed class AskConceptUseCase
     private readonly IConceptAnswerWriter? _writer;
     private readonly ConceptWriterSettings _settings;
     private readonly ISystemClock _clock;
+    private readonly IAccountRepository? _accounts;
 
     public AskConceptUseCase(
         IConceptCorpus corpus,
@@ -50,7 +51,8 @@ public sealed class AskConceptUseCase
         IConceptTraceStore traces,
         IConceptAnswerWriter? writer,
         ConceptWriterSettings settings,
-        ISystemClock clock)
+        ISystemClock clock,
+        IAccountRepository? accounts = null)
     {
         ArgumentNullException.ThrowIfNull(corpus);
         ArgumentNullException.ThrowIfNull(works);
@@ -63,6 +65,7 @@ public sealed class AskConceptUseCase
         _writer = writer;
         _settings = settings;
         _clock = clock;
+        _accounts = accounts;
     }
 
     /// <summary>Las fichas que ve un rol. El filtro va antes de elegir (R4, REQ-IA-26).</summary>
@@ -82,7 +85,7 @@ public sealed class AskConceptUseCase
         CancellationToken cancellationToken = default)
     {
         var cards = CardsFor(role);
-        var route = ConceptRouter.Route(question, cards);
+        var routes = ConceptRouter.RouteParts(question, cards);
 
         // EL TRABAJO DE LA PANTALLA SE VALIDA UNA SOLA VEZ, con la misma regla que la vista (`View`).
         Work? work = null;
@@ -99,7 +102,44 @@ public sealed class AskConceptUseCase
             }
         }
 
-        var answer = route.Intent switch
+        // UNA PREGUNTA COMPUESTA SE RESPONDE PARTE POR PARTE (juicio R1): cada parte con su forma, su ficha y su chip;
+        // si una parte pide resolver, esa parte recibe la negativa y la otra se responde.
+        var answers = new List<ConceptAnswer>(routes.Count);
+        foreach (var (part, route) in routes)
+        {
+            var single = await AnswerAsync(route, part, requesterId, role, cards, work, workIsForeign, cancellationToken).ConfigureAwait(false);
+            await TraceAsync(single, cancellationToken).ConfigureAwait(false);
+            answers.Add(single);
+        }
+
+        return answers.Count == 1 ? answers[0] : Compound(answers);
+    }
+
+    private static ConceptAnswer Compound(IReadOnlyList<ConceptAnswer> parts) => new(
+        ConceptForm.Compound,
+        parts[0].Ring,
+        string.Join('+', parts.Select(p => p.Intent)),
+        string.Join(' ', parts.Select(p => p.Text)),
+        parts.Select(p => p.Card).FirstOrDefault(c => c is not null),
+        parts.Select(p => p.Destination).LastOrDefault(d => d is not null),
+        "compuesta",
+        null,
+        [])
+    {
+        Parts = parts,
+    };
+
+    private async Task<ConceptAnswer> AnswerAsync(
+        ConceptRoute route,
+        string question,
+        Guid requesterId,
+        Role role,
+        IReadOnlyList<ConceptCard> cards,
+        Work? work,
+        bool workIsForeign,
+        CancellationToken cancellationToken)
+    {
+        return route.Intent switch
         {
             ConceptRouter.Intents.Injection or ConceptRouter.Intents.Unrelated or ConceptRouter.Intents.TooLong =>
                 Fixed(route, ConceptForm.Outside, ConceptTexts.Outside, null),
@@ -116,11 +156,43 @@ public sealed class AskConceptUseCase
             ConceptRouter.Intents.NewWork => role == Role.Administrator
                 ? Fixed(route, ConceptForm.UsefulRefusal, ConceptTexts.TeacherCannotEdit, null)
                 : Fixed(route, ConceptForm.FromHelp, ConceptTexts.NewWork, DestinationCatalog.Resolve(DestinationCatalog.NewWork, role, null)),
+            ConceptRouter.Intents.RemoveWarning => RemoveWarning(route, role, work, _settings.HintsEnabled),
+            ConceptRouter.Intents.CountPendingStudents => await CountPendingStudentsAsync(route, role, cancellationToken).ConfigureAwait(false),
+            ConceptRouter.Intents.EnableStudent => role == Role.Administrator
+                ? Fixed(route, ConceptForm.FromHelp, ConceptTexts.EnableStudent, DestinationCatalog.Resolve(DestinationCatalog.Accounts, role, null))
+                : Fixed(route, ConceptForm.FromHelp, ConceptTexts.EnableStudentForStudent, DestinationCatalog.Resolve(DestinationCatalog.MyWorks, role, null)),
             _ => await FromCardAsync(route, question!, role, work, cancellationToken).ConfigureAwait(false),
         };
+    }
 
-        await TraceAsync(answer, cancellationToken).ConfigureAwait(false);
-        return answer;
+    private static ConceptAnswer RemoveWarning(ConceptRoute route, Role role, Work? work, bool hintsEnabled)
+    {
+        if (role == Role.Administrator)
+        {
+            return Fixed(route, ConceptForm.FromHelp, ConceptTexts.RemoveWarningForTeacher,
+                DestinationCatalog.Resolve(work is null ? DestinationCatalog.CommissionList : DestinationCatalog.CurrentWork, role, work?.Id));
+        }
+
+        var destination = work is null ? DestinationCatalog.MyWorks
+            : hintsEnabled && work.Observations.Any(o => o.Kind == ObservationKind.Warning) ? DestinationCatalog.SeeHints
+            : work.Status == WorkStatus.Draft ? DestinationCatalog.EditWork
+            : DestinationCatalog.CurrentWork;
+
+        return Fixed(route, ConceptForm.FromHelp, ConceptTexts.RemoveWarningFor(hintsEnabled), DestinationCatalog.Resolve(destination, role, work?.Id));
+    }
+
+    private async Task<ConceptAnswer> CountPendingStudentsAsync(ConceptRoute route, Role role, CancellationToken cancellationToken)
+    {
+        if (role != Role.Administrator || _accounts is null)
+        {
+            return Fixed(route, ConceptForm.FromHelp, ConceptTexts.PendingStudentsForStudent, DestinationCatalog.Resolve(DestinationCatalog.MyWorks, role, null));
+        }
+
+        var accounts = await _accounts.ListAsync(cancellationToken).ConfigureAwait(false);
+        var count = accounts.Count(a => a.Role == Role.Student && a.Status == AccountStatus.Pending);
+
+        return new(ConceptForm.Figure, route.Ring, route.Intent, ConceptTexts.PendingStudents(count), null,
+            DestinationCatalog.Resolve(DestinationCatalog.Accounts, role, null), "caso-de-uso", ConceptTexts.PendingStudentsNote, []);
     }
 
     private static bool CanView(Work work, Guid requesterId, Role role) => role == Role.Administrator
@@ -134,6 +206,15 @@ public sealed class AskConceptUseCase
     {
         var card = ConceptRouter.MatchCard(question, cards);
         var normalized = ConceptRouter.Normalize(question);
+
+        // LA NEGATIVA DEL DOCENTE TIENE SU VOZ (juicio R1, Q25): el docente no resuelve un ejercicio; corregir o
+        // aprobar lo decide él en la entrega de la comisión.
+        if (role == Role.Administrator)
+        {
+            return new(ConceptForm.UsefulRefusal, route.Ring, route.Intent, ConceptTexts.TeacherRefusal, card,
+                DestinationCatalog.Resolve(work is null ? DestinationCatalog.CommissionList : DestinationCatalog.CurrentWork, role, work?.Id),
+                "fijo", null, []);
+        }
 
         // EL CHIP DE LA NEGATIVA LLEVA A LO QUE SÍ AYUDA, NUNCA A LA RESPUESTA.
         // Y DEPENDE DEL ESTADO (H2, act. 003): «Cargar un trabajo» sólo sin trabajo o con uno en borrador; sobre un
@@ -228,6 +309,23 @@ public sealed class AskConceptUseCase
     {
         var card = route.Card!;
         var destination = DestinationCatalog.Resolve(card.Destination, role, work?.Id);
+
+        // EL TRABAJO ABIERTO SE USA Y SE NOMBRA (juicio R1, Q14/Q23, R9): «¿por qué mi trabajo tiene una advertencia?»
+        // con el trabajo en pantalla responde la ficha y dice qué campos del trabajo abierto la tienen, sin valores.
+        var aboutWork = work is not null && ConceptRouter.Normalize(question).Contains(" trabajo ", StringComparison.Ordinal);
+        if (aboutWork && card.Id == "advertencia")
+        {
+            var fields = work!.Observations.Where(o => o.Kind == ObservationKind.Warning).Select(o => o.Field).Distinct(StringComparer.Ordinal).ToList();
+            var hints = _settings.HintsEnabled && role == Role.Student && fields.Count > 0;
+            return new(ConceptForm.FromHelp, route.Ring, route.Intent, card.Text + " " + ConceptTexts.OpenWorkWarnings(fields, role, hints), card,
+                DestinationCatalog.Resolve(hints ? DestinationCatalog.SeeHints : DestinationCatalog.CurrentWork, role, work.Id), "ficha", null, []);
+        }
+
+        if (aboutWork && card.Id == "estado-pendiente")
+        {
+            return new(ConceptForm.FromHelp, route.Ring, route.Intent, card.Text + " " + ConceptTexts.OpenWorkStatus(StatusLabels[work!.Status]), card,
+                DestinationCatalog.Resolve(DestinationCatalog.CurrentWork, role, work.Id), "ficha", null, []);
+        }
 
         if (!_settings.ModelWriterRequested)
         {

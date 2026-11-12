@@ -26,6 +26,9 @@ public enum ConceptForm
 
     /// <summary>El trabajo de la pantalla no existe o no es de quien pregunta.</summary>
     NotFound = 9,
+
+    /// <summary>Compuesta: una respuesta por parte, cada una con su forma (juicio R1).</summary>
+    Compound = 10,
 }
 
 /// <summary>Anillo de la frontera de competencia.</summary>

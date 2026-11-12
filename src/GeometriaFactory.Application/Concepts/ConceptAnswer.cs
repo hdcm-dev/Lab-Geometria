@@ -1,3 +1,5 @@
+using GeometriaFactory.Domain.Values;
+
 namespace GeometriaFactory.Application.Concepts;
 
 /// <summary>Una porción del desglose de F2: etiqueta del estado y su cantidad.</summary>
@@ -22,7 +24,11 @@ public sealed record ConceptAnswer(
     ResolvedDestination? Destination,
     string Origin,
     string? Note,
-    IReadOnlyList<ConceptBreakdownItem> Breakdown);
+    IReadOnlyList<ConceptBreakdownItem> Breakdown)
+{
+    /// <summary>Las respuestas de cada parte de una compuesta (forma <see cref="ConceptForm.Compound"/>); vacía si no lo es.</summary>
+    public IReadOnlyList<ConceptAnswer> Parts { get; init; } = [];
+}
 
 /// <summary>Los textos fijos del asistente (K5; voseo, sin primera persona de acción, CD-6).</summary>
 public static class ConceptTexts
@@ -35,7 +41,7 @@ public static class ConceptTexts
         + "¿qué significa valor derivado?, ¿dónde veo mis trabajos?";
 
     public const string Adjacent =
-        "Depurar o serializar es parte de programar en C# y esta ayuda no lo cubre: consultalo con tu docente "
+        "Programar, depurar o serializar en C# es parte de la materia y esta ayuda no lo cubre: consultalo con tu docente "
         + "o en el material de la materia. Cuando tengas el texto que emite tu programa, cargalo acá.";
 
     /// <summary>Frase de las pistas en la negativa; sólo con <c>AI:HintsEnabled</c> (EXP-0005).</summary>
@@ -75,6 +81,56 @@ public static class ConceptTexts
 
     public const string NewVersionNotDraft =
         "Este trabajo ya se envió: una versión nueva sólo se carga mientras está en borrador.";
+
+    public const string TeacherRefusal =
+        "Corregir, aprobar o rechazar un trabajo lo decidís vos al revisarlo; esta ayuda explica conceptos y no "
+        + "resuelve el ejercicio. Los trabajos enviados están en la entrega de la comisión.";
+
+    public const string RemoveWarningForTeacher =
+        "La advertencia la saca el alumno cargando una versión corregida de su programa; vos la ves al revisar el trabajo.";
+
+    /// <summary>Qué hacer con una advertencia, sin decir el valor.</summary>
+    public static string RemoveWarningFor(bool hintsEnabled) =>
+        "La advertencia se va cuando el valor que declara tu programa coincide con el que se deriva de tus dimensiones: "
+        + "revisá cómo lo calcula tu programa y cargá una versión nueva."
+        + (hintsEnabled ? " Las pistas de la primera advertencia están en Ver pistas." : string.Empty);
+
+    public const string EnableStudent =
+        "Las cuentas de los alumnos se habilitan en Cuentas: ahí están las pendientes y las habilitás de a una.";
+
+    public const string EnableStudentForStudent =
+        "Tu cuenta la habilita el docente de la comisión; cuando esté habilitada, tus trabajos están en Mis trabajos.";
+
+    public const string PendingStudentsForStudent =
+        "Las cuentas pendientes las ve el docente de la comisión. Tus trabajos están en Mis trabajos.";
+
+    public const string PendingStudentsNote = "Cuenta las cuentas de alumnos en estado Pendiente, que esperan habilitación.";
+
+    /// <summary>F1 de cuentas pendientes.</summary>
+    public static string PendingStudents(int count) => count switch
+    {
+        0 => "No hay alumnos pendientes de habilitar.",
+        1 => "Hay 1 alumno pendiente de habilitar.",
+        _ => $"Hay {count} alumnos pendientes de habilitar.",
+    };
+
+    /// <summary>El supuesto dicho: el trabajo abierto y los campos con advertencia, sin valores.</summary>
+    public static string OpenWorkWarnings(IReadOnlyList<string> fields, Role role, bool hints)
+    {
+        ArgumentNullException.ThrowIfNull(fields);
+        var whose = role == Role.Administrator ? "En el trabajo abierto" : "En tu trabajo abierto";
+        if (fields.Count == 0)
+        {
+            return whose + " no hay advertencias.";
+        }
+
+        var list = fields.Count == 1 ? $"«{fields[0]}»" : string.Join(", ", fields.Take(fields.Count - 1).Select(f => $"«{f}»")) + $" y «{fields[^1]}»";
+        return $"{whose}, la advertencia está en {list}: lo declarado no coincide con lo que se deriva de las dimensiones."
+            + (hints ? " Las pistas están en Ver pistas." : string.Empty);
+    }
+
+    /// <summary>El supuesto dicho: el estado del trabajo abierto.</summary>
+    public static string OpenWorkStatus(string status) => $"El trabajo abierto está en {status}.";
 
     public const string WarningNote = "Cuenta advertencias (discrepancias entre lo declarado y lo derivado), no errores.";
 

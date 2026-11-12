@@ -45,7 +45,10 @@ public static class ConceptRouter
         Linear, RegexTimeout);
 
     private static readonly Regex Adjacent = new(
-        @"\bdepur|\bdebug|breakpoint|\bserializ|\bcompil|visual studio|\bexcepcion|\bnullreference",
+        @"\bdepur|\bdebug|breakpoint|\bserializ|\bcompil|visual studio|\bexcepcion|\bnullreference"
+        // Juicio R1 (Q18): «escribime un programa en C#» es programar, no un concepto ni el valor del ejercicio. El
+        // «#» se pliega a espacio en Normalize.
+        + @"|\bprograma en c\b|\bcodigo en c\b|\ben c sharp",
         Linear, RegexTimeout);
 
     // Ronda 6: «cuánto pinto si la pared es de tres metros por dos metros» pide un cálculo sin nombrar la
@@ -143,7 +146,21 @@ public static class ConceptRouter
         Linear, RegexTimeout);
 
     private static readonly Regex NewWork = new(
-        @"\b(cargar|subir|enviar|entregar|pegar) (un |el |mi )?trabajo", Linear, RegexTimeout);
+        @"\b(cargar|subir|enviar|entregar|pegar|cargo|subo|envio|entrego|pego) (un |el |mi )?trabajo", Linear, RegexTimeout);
+
+    // Juicio R1 (Q11): «cómo la saco de mi trabajo» pregunta qué hacer con la advertencia, no su valor: se lleva a las
+    // pistas y a la versión nueva, sin decir qué número va.
+    private static readonly Regex RemoveWarning = new(
+        @"\bcomo (la |las |lo |los )?(saco|quito|elimino|arreglo|soluciono|resuelvo)\b|\b(sacar|quitar|eliminar|arreglar) (la |las |una )?advertencia",
+        Linear, RegexTimeout);
+
+    // Juicio R1 (Q22, N09): el docente pregunta por las cuentas que esperan habilitación. Es una cifra del producto.
+    private static readonly Regex CountPendingStudents = new(
+        @"\bcuant(os|as) (alumnos|alumnas|estudiantes|cuentas)\b.*\b(pendiente|habilit|sin habilitar)", Linear, RegexTimeout);
+
+    // Juicio R1 (Q24): dónde se habilita a un alumno.
+    private static readonly Regex EnableStudent = new(
+        @"\bhabilit", Linear, RegexTimeout);
 
     /// <summary>Intenciones fijas del enrutador (las de ficha usan el id de la ficha).</summary>
     public static class Intents
@@ -157,6 +174,9 @@ public static class ConceptRouter
         public const string NewVersion = "operar:version-nueva";
         public const string MyWorks = "operar:mis-trabajos";
         public const string NewWork = "operar:trabajo-nuevo";
+        public const string RemoveWarning = "operar:sacar-advertencia";
+        public const string CountPendingStudents = "operar:cuantos-pendientes";
+        public const string EnableStudent = "operar:habilitar-alumno";
         public const string NoCard = "sin-ficha";
         public const string TooLong = "sobre-el-tope";
     }
@@ -220,6 +240,21 @@ public static class ConceptRouter
             return new(ConceptRing.Outside, Intents.AsksToSolve, null);
         }
 
+        if (CountPendingStudents.IsMatch(text))
+        {
+            return new(ConceptRing.Operate, Intents.CountPendingStudents, null);
+        }
+
+        if (EnableStudent.IsMatch(text))
+        {
+            return new(ConceptRing.Operate, Intents.EnableStudent, null);
+        }
+
+        if (RemoveWarning.IsMatch(text))
+        {
+            return new(ConceptRing.Operate, Intents.RemoveWarning, null);
+        }
+
         if (CountWarnings.IsMatch(text))
         {
             return new(ConceptRing.Operate, Intents.CountWarnings, null);
@@ -250,6 +285,100 @@ public static class ConceptRouter
         return best is null
             ? new(ConceptRing.Concepts, Intents.NoCard, null)
             : new(ConceptRing.Concepts, best.Id, best);
+    }
+
+    // Las palabras que abren una pregunta nueva detrás de «y»: «qué es X y dónde veo Y», «qué es X y calculame Y».
+    private static readonly HashSet<string> PartStarters = new(StringComparer.Ordinal)
+    {
+        "que", "como", "donde", "cuanto", "cuanta", "cuantos", "cuantas", "cual", "cuales", "cuando", "quien",
+        "por", "para", "decime", "explicame", "pasame", "dame", "haceme", "escribime", "resolveme", "corregime",
+        "mostrame", "contame",
+    };
+
+    /// <summary>
+    /// Parte una pregunta compuesta (juicio R1): en cada «?» que cierra una pregunta y en cada «y»/«e» seguido de una palabra que abre una
+    /// pregunta («y dónde», «y qué», «y calculame»). Una enumeración («largo, ancho y altura», «el área y el volumen»)
+    /// no se parte. Devuelve las partes normalizadas; una sola parte si no es compuesta.
+    /// </summary>
+    public static IReadOnlyList<string> SplitParts(string? question)
+    {
+        if (string.IsNullOrWhiteSpace(question) || question.Length > MaxQuestionLength)
+        {
+            return [question ?? string.Empty];
+        }
+
+        var parts = new List<string>();
+
+        // Sólo «?» cierra una pregunta: «Si la arista mide 4, ¿el volumen…?» es UNA pregunta con su condición (Q07).
+        foreach (var segment in question.Split('?', StringSplitOptions.RemoveEmptyEntries))
+        {
+            var tokens = Normalize(segment).Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var current = new List<string>();
+
+            for (var i = 0; i < tokens.Length; i++)
+            {
+                var next = i + 1 < tokens.Length ? tokens[i + 1] : null;
+                if (tokens[i] is "y" or "e" && current.Count > 0 && next is not null
+                    && (PartStarters.Contains(next) || next.StartsWith("calcul", StringComparison.Ordinal)))
+                {
+                    parts.Add(string.Join(' ', current));
+                    current.Clear();
+                    continue;
+                }
+
+                current.Add(tokens[i]);
+            }
+
+            if (current.Count > 0)
+            {
+                parts.Add(string.Join(' ', current));
+            }
+        }
+
+        return parts.Count == 0 ? [question] : parts;
+    }
+
+    /// <summary>
+    /// Enruta cada parte de una compuesta. Devuelve una sola ruta cuando la pregunta no es compuesta o cuando partirla
+    /// no cambia nada. LA PARTICIÓN NUNCA DEBILITA LA FRONTERA: lo que entero es inyección, ajeno o lo de al lado no
+    /// se parte, y si la pregunta entera pide resolver y ninguna parte lo pide sola (el dato y la pregunta quedaron en
+    /// partes distintas), vale la negativa entera.
+    /// </summary>
+    public static IReadOnlyList<(string Part, ConceptRoute Route)> RouteParts(string? question, IReadOnlyList<ConceptCard> visibleCards)
+    {
+        var whole = Route(question, visibleCards);
+
+        if (whole.Intent is Intents.Injection or Intents.Unrelated or Intents.TooLong or Intents.Adjacent)
+        {
+            return [(question ?? string.Empty, whole)];
+        }
+
+        var parts = SplitParts(question);
+        if (parts.Count < 2)
+        {
+            return [(question ?? string.Empty, whole)];
+        }
+
+        var routed = parts.Select(p => (Part: p, Route: Route(p, visibleCards))).ToList();
+
+        if (whole.Intent == Intents.AsksToSolve && routed.All(r => r.Route.Intent != Intents.AsksToSolve))
+        {
+            return [(question ?? string.Empty, whole)];
+        }
+
+        // La misma intención repetida es una sola respuesta; una parte sin ficha no tapa a las que sí la tienen.
+        var distinct = routed
+            .GroupBy(r => r.Route.Intent, StringComparer.Ordinal)
+            .Select(g => g.First())
+            .ToList();
+        if (distinct.Count > 1)
+        {
+            // Una parte sin ficha que no es pregunta («me llamo Ana») se descarta; si es pregunta, recibe la abstención.
+            distinct.RemoveAll(r => r.Route.Intent == Intents.NoCard && distinct.Any(o => o.Route.Intent != Intents.NoCard)
+                && !PartStarters.Contains(r.Part.Split(' ', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? string.Empty));
+        }
+
+        return distinct.Count < 2 ? [(question ?? string.Empty, whole)] : distinct;
     }
 
     /// <summary>

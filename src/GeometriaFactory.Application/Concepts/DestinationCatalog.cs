@@ -42,6 +42,7 @@ public static class DestinationCatalog
     public const string SeeHints = "ver-pistas";
     public const string EditWork = "editar-trabajo";
     public const string CommissionList = "entrega-comision";
+    public const string Accounts = "cuentas";
 
     /// <summary>`?pistas=1` en `/trabajos/{WorkId}`: abre las pistas de la primera advertencia (EXP-0005, D-3);
     /// por eso el rótulo dice «de la primera advertencia»: la negativa no sabe por cuál se preguntó.</summary>
@@ -59,7 +60,7 @@ public static class DestinationCatalog
     private static readonly Role[] Student = [Role.Student];
     private static readonly Role[] Both = [Role.Student, Role.Administrator];
 
-    /// <summary>Las siete entradas.</summary>
+    /// <summary>Las ocho entradas.</summary>
     public static IReadOnlyList<Destination> All { get; } =
     [
         new(MyWorks, "Abrir mis trabajos", "/mis-trabajos", Student, ["estado"], true),
@@ -69,6 +70,7 @@ public static class DestinationCatalog
         new(SeeHints, "Ver pistas de la primera advertencia", "/trabajos/{WorkId}", Student, [HintsParameter], true, HintsParameter),
         new(EditWork, "Cargar una versión nueva", "/trabajos/{WorkId}/editar", Student, [], true),
         new(CommissionList, "Abrir la entrega de la comisión", "/entrega-comision", [Role.Administrator], ["alumno", "estado", "resuelto", "trabajo"], true),
+        new(Accounts, "Abrir las cuentas", "/cuentas", [Role.Administrator], [], true),
     ];
 
     /// <summary>

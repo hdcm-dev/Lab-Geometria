@@ -47,16 +47,7 @@ public static class ConceptEndpoints
                 .ExecuteAsync(accountId, role, request?.Question, request?.WorkId, cancellationToken)
                 .ConfigureAwait(false);
 
-            return Results.Ok(new ConceptAnswerResponse(
-                answer.Form.ToString(),
-                (int)answer.Ring,
-                answer.Intent,
-                answer.Text,
-                answer.Card is { } card ? new ConceptCardReference(card.Id, card.Title, card.Text, card.Source) : null,
-                answer.Destination is { } d ? new ConceptDestinationChip(d.Id, d.Label, d.Path) : null,
-                answer.Origin,
-                answer.Note,
-                [.. answer.Breakdown.Select(b => new ConceptBreakdownEntry(b.Label, b.Count))]));
+            return Results.Ok(ToResponse(answer));
         })
         .WithName("AskConcept")
         .WithSummary("Pregunta un concepto al asistente (apagado por omisión)")
@@ -68,6 +59,18 @@ public static class ConceptEndpoints
 
         return endpoints;
     }
+
+    private static ConceptAnswerResponse ToResponse(ConceptAnswer answer) => new(
+        answer.Form.ToString(),
+        (int)answer.Ring,
+        answer.Intent,
+        answer.Text,
+        answer.Card is { } card ? new ConceptCardReference(card.Id, card.Title, card.Text, card.Source) : null,
+        answer.Destination is { } d ? new ConceptDestinationChip(d.Id, d.Label, d.Path) : null,
+        answer.Origin,
+        answer.Note,
+        [.. answer.Breakdown.Select(b => new ConceptBreakdownEntry(b.Label, b.Count))],
+        answer.Parts.Count > 0 ? [.. answer.Parts.Select(ToResponse)] : null);
 
     private static Role RoleOf(ClaimsPrincipal principal)
     {

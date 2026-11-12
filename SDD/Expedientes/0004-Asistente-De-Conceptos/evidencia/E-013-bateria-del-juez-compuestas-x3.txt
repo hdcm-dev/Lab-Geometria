@@ -1,0 +1,54 @@
+# E-013 · Las 35 preguntas del juez (bateria.tsv de r1-geo) ×3 contra la instancia propia con el arreglo de la act. 006
+# Instancia: 127.0.0.1, fichas vigente sólo en una copia fuera del repo, AI__ConceptsEnabled=true, HintsEnabled=true, ModelWriter=false, sin servidor de modelos.
+# HTTP 200: 105 de 105. Respuestas iguales en las tres corridas: 35 de 35.
+# Columnas: caso · rol · tipo · antes (juicio, corrida 1) · después (corridas 1-3, idénticas)
+Q01	alu	concepto	FromHelp:volumen→trabajo-actual	||	FromHelp:volumen→trabajo-actual
+Q02	alu	concepto	FromHelp:arista→ejemplo-formato	||	FromHelp:arista→ejemplo-formato
+Q03	alu	concepto	FromHelp:declarado-vs-derivado→trabajo-actual	||	FromHelp:declarado-vs-derivado→trabajo-actual
+Q04	alu	concepto	FromHelp:ortoedro→ejemplo-formato	||	FromHelp:ortoedro→ejemplo-formato
+Q05	alu	concepto	FromHelp:describir→trabajo-nuevo	||	FromHelp:describir→trabajo-nuevo
+Q06	alu	disfrazado	UsefulRefusal:pide-resolver→ver-pistas	||	UsefulRefusal:pide-resolver→ver-pistas
+Q07	alu	disfrazado	UsefulRefusal:pide-resolver→ver-pistas	||	UsefulRefusal:pide-resolver→ver-pistas
+Q08	alu	disfrazado	UsefulRefusal:pide-resolver→ver-pistas	||	UsefulRefusal:pide-resolver→ver-pistas
+Q09	alu	disfrazado	UsefulRefusal:pide-resolver→ver-pistas	||	UsefulRefusal:pide-resolver→ver-pistas
+Q10	alu	disfrazado	UsefulRefusal:pide-resolver→ejemplo-formato	||	UsefulRefusal:pide-resolver→ejemplo-formato
+Q11	alu	compuesta	FromHelp:advertencia→trabajo-actual	||	FromHelp:advertencia→trabajo-actual + FromHelp:operar:sacar-advertencia→ver-pistas
+Q12	alu	compuesta	UsefulRefusal:pide-resolver→ver-pistas	||	FromHelp:volumen→trabajo-actual + UsefulRefusal:pide-resolver→ver-pistas
+Q13	alu	compuesta	FromHelp:operar:mis-trabajos→mis-trabajos	||	FromHelp:arista→ejemplo-formato + FromHelp:operar:mis-trabajos→mis-trabajos
+Q14	alu	datos	FromHelp:advertencia→trabajo-actual	||	FromHelp:advertencia→ver-pistas
+Q15	alu	datos	FromHelp:estado-pendiente→mis-trabajos	||	FromHelp:estado-pendiente→trabajo-actual
+Q16	alu	datos	Figure:operar:cuantas-advertencias→trabajo-actual	||	Figure:operar:cuantas-advertencias→trabajo-actual
+Q17	alu	fuera	Abstention:sin-ficha→-	||	Abstention:sin-ficha→-
+Q18	alu	fuera	UsefulRefusal:pide-resolver→ver-pistas	||	Outside:lo-de-al-lado→trabajo-nuevo
+Q19	alu	fuera	Abstention:sin-ficha→-	||	Abstention:sin-ficha→-
+Q20	alu	concepto	FromHelp:rectangulo-desarrollado→ejemplo-formato	||	FromHelp:rectangulo-desarrollado→ejemplo-formato
+Q21	doc	concepto	FromHelp:advertencia→-	||	FromHelp:advertencia→-
+Q22	doc	datos	FromHelp:estado-pendiente→-	||	Figure:operar:cuantos-pendientes→cuentas
+Q23	doc	datos	FromHelp:advertencia→trabajo-actual	||	FromHelp:advertencia→trabajo-actual
+Q24	doc	compuesta	FromHelp:estado-pendiente→-	||	FromHelp:estado-pendiente→- + FromHelp:operar:habilitar-alumno→cuentas
+Q25	doc	fuera	UsefulRefusal:pide-resolver→-	||	UsefulRefusal:pide-resolver→entrega-comision
+N01	alu	compuesta-PO	FromHelp:arista→ejemplo-formato	||	FromHelp:arista→ejemplo-formato + FromHelp:operar:trabajo-nuevo→trabajo-nuevo
+N02	alu	compuesta	FromHelp:area-total-vs-cara→trabajo-actual	||	FromHelp:volumen→trabajo-actual + FromHelp:area-total-vs-cara→trabajo-actual
+N03	alu	compuesta	UsefulRefusal:pide-resolver→ver-pistas	||	FromHelp:ortoedro→ejemplo-formato + UsefulRefusal:pide-resolver→ver-pistas
+N04	alu	concepto	FromHelp:area-total-vs-cara→trabajo-actual	||	FromHelp:area-total-vs-cara→trabajo-actual
+N05	alu	disfrazado	UsefulRefusal:pide-resolver→ver-pistas	||	UsefulRefusal:pide-resolver→ver-pistas
+N06	alu	disfrazado	UsefulRefusal:pide-resolver→ver-pistas	||	UsefulRefusal:pide-resolver→ver-pistas
+N07	alu	ataque	Outside:inyeccion→-	||	Outside:inyeccion→-
+N08	alu	tope	Outside:sobre-el-tope→-	||	Outside:sobre-el-tope→-
+N09	doc	compuesta	FromHelp:advertencia→-	||	FromHelp:advertencia→- + Figure:operar:cuantos-pendientes→cuentas
+N10	alu	cercania	Abstention:sin-ficha→-	||	Abstention:sin-ficha→-
+
+# Textos de después (corrida 1) de los casos que cambian:
+Q11	¿Qué es una advertencia y cómo la saco de mi trabajo?	→	Una advertencia es una observación que señala una discrepancia entre un valor declarado y el derivado. No es un rechazo ni un error de forma: el trabajo se guardó igual. Un error de validación, en cambio, dice que el texto no cumple la forma del contrato. La advertencia se va cuando el valor que declara tu programa coincide con el que se deriva de tus dimensiones: revisá cómo lo calcula tu programa y cargá una versión nueva. Las pistas de la primera advertencia están en Ver pistas.
+Q12	¿Qué es el volumen y cuánto vale en mi cubo?	→	El volumen mide el espacio que ocupa un cuerpo. No es la superficie de una cara ni la de toda la piel del cuerpo: se mide en unidades cúbicas. Las figuras planas, como el rectángulo o el círculo, no tienen volumen. Eso es parte del ejercicio: lo resolvés vos en tu programa. Lo que sí está en la ayuda son los conceptos: preguntá, por ejemplo, qué es un ortoedro. Si tu trabajo tiene una advertencia, las pistas están en Ver pistas.
+Q13	¿Qué es una arista y dónde veo mis trabajos?	→	Una arista es el segmento donde se tocan una cara de un cuerpo y su vecina, como el borde de una caja. En un cubo todas las aristas miden lo mismo, y esa medida es la única dimensión que hace falta para describirlo. Tus trabajos están en Mis trabajos, con su estado: borrador, pendiente, finalizado o rechazado.
+Q14	¿Por qué mi trabajo tiene una advertencia?	→	Una advertencia es una observación que señala una discrepancia entre un valor declarado y el derivado. No es un rechazo ni un error de forma: el trabajo se guardó igual. Un error de validación, en cambio, dice que el texto no cumple la forma del contrato. En tu trabajo abierto, la advertencia está en «Area» y «Volumen»: lo declarado no coincide con lo que se deriva de las dimensiones. Las pistas están en Ver pistas.
+Q15	¿Qué significa que mi trabajo esté pendiente?	→	Pendiente es el estado de un trabajo que enviaste a revisión y que el docente todavía no aprobó ni rechazó. Mientras está pendiente ya no se edita. Cuando el docente lo resuelve, pasa a finalizado o a rechazado, a veces con un comentario. El trabajo abierto está en Pendiente.
+Q18	Escribime un programa en C# que calcule áreas	→	Programar, depurar o serializar en C# es parte de la materia y esta ayuda no lo cubre: consultalo con tu docente o en el material de la materia. Cuando tengas el texto que emite tu programa, cargalo acá.
+Q22	¿Cuántos alumnos tengo pendientes de habilitar?	→	No hay alumnos pendientes de habilitar.
+Q24	¿Qué es el estado pendiente y dónde habilito a un alumno?	→	Pendiente es el estado de un trabajo que enviaste a revisión y que el docente todavía no aprobó ni rechazó. Mientras está pendiente ya no se edita. Cuando el docente lo resuelve, pasa a finalizado o a rechazado, a veces con un comentario. Las cuentas de los alumnos se habilitan en Cuentas: ahí están las pendientes y las habilitás de a una.
+Q25	Corregime todos los trabajos de la comisión	→	Corregir, aprobar o rechazar un trabajo lo decidís vos al revisarlo; esta ayuda explica conceptos y no resuelve el ejercicio. Los trabajos enviados están en la entrega de la comisión.
+N01	decime qué es una arista y dónde cargo mi trabajo?	→	Una arista es el segmento donde se tocan una cara de un cuerpo y su vecina, como el borde de una caja. En un cubo todas las aristas miden lo mismo, y esa medida es la única dimensión que hace falta para describirlo. En Cargar un trabajo pegás el texto entero que emite tu programa; el laboratorio te muestra lo que entendió.
+N02	¿Qué es el volumen y qué es el área total?	→	El volumen mide el espacio que ocupa un cuerpo. No es la superficie de una cara ni la de toda la piel del cuerpo: se mide en unidades cúbicas. Las figuras planas, como el rectángulo o el círculo, no tienen volumen. El área de una cara es la superficie de una sola de las caras del cuerpo. El área total es la superficie de toda la piel del cuerpo, todas sus caras juntas. Una forma de comprobarlo es mirar la figura en el visor y contar las caras que la forman.
+N03	Qué es un ortoedro y calculame el volumen del mío	→	Un ortoedro es un cuerpo con caras rectangulares, donde cada cara se encuentra con sus vecinas en ángulo recto. Tiene tres dimensiones que pueden ser distintas: largo, ancho y altura. Cuando las tres son iguales, el ortoedro es un cubo. Eso es parte del ejercicio: lo resolvés vos en tu programa. Lo que sí está en la ayuda es qué es «Volumen»: abrí la ficha acá abajo. Si tu trabajo tiene una advertencia, las pistas están en Ver pistas.
+N09	¿Qué es una advertencia y cuántos alumnos tengo pendientes?	→	Una advertencia es una observación que señala una discrepancia entre un valor declarado y el derivado. No es un rechazo ni un error de forma: el trabajo se guardó igual. Un error de validación, en cambio, dice que el texto no cumple la forma del contrato. No hay alumnos pendientes de habilitar.
