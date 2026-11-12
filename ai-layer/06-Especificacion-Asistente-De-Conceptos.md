@@ -230,7 +230,7 @@ firma» la bloquean para PROD (§11.1).
 | `trabajo-nuevo` | Cargar un trabajo | `/trabajo-nuevo` | — | alumno | alumno | — | sí: es la pantalla de carga |
 | `ejemplo-formato` | Ver el ejemplo de formato | `/trabajo-nuevo` | `?ejemplo=1` despliega «Ver un ejemplo» y lo enfoca | alumno | — | — | **sí** desde EXP-0005 (D-2 resuelta) |
 | `trabajo-actual` | Volver a tu trabajo (alumno) · Volver al trabajo del alumno (docente) | `/trabajos/{WorkId}` | `WorkId` de la pantalla, nunca del texto | alumno dueño, docente | — | `WorkOperation.View` sobre esa instancia | — |
-| `ver-pistas` | Ver pistas de tu advertencia | `/trabajos/{WorkId}` | `?pistas=1` abre el nivel 1 de la primera advertencia y lo enfoca; sin advertencias o con pistas apagadas, igual que sin el parámetro | alumno dueño | alumno dueño, sólo si `AI:HintsEnabled` | `View` + bandera | **sí** desde EXP-0005 (D-3 resuelta) |
+| `ver-pistas` | Ver pistas de la primera advertencia | `/trabajos/{WorkId}` | `?pistas=1` abre el nivel 1 de la primera advertencia y lo enfoca; sin advertencias o con pistas apagadas, igual que sin el parámetro | alumno dueño | alumno dueño, sólo si `AI:HintsEnabled` (en la Api, la misma llave: apagada, la negativa no ofrece el chip ni nombra las pistas) | `View` + bandera | **sí** desde EXP-0005 (D-3 resuelta) |
 | `editar-trabajo` | Cargar una versión nueva | `/trabajos/{WorkId}/editar` | `WorkId` | alumno dueño | **sólo alumno dueño** (`WorkOperation.Edit`) | `Edit` sobre esa instancia; docente → F6; ajeno → «no encontrado» | sí |
 | `entrega-comision` | Abrir la entrega de la comisión | `/entrega-comision` | `alumno`, `estado`, `resuelto`, `trabajo` | docente | — | — | filtro aplicado |
 

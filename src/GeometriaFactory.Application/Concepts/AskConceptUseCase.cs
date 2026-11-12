@@ -7,7 +7,11 @@ namespace GeometriaFactory.Application.Concepts;
 /// <summary>Cómo está configurada la redacción con modelo (la decide la raíz de composición).</summary>
 /// <param name="ModelWriterRequested"><c>AI:ConceptsModelWriter</c>: se pidió redactar con el modelo.</param>
 /// <param name="MissingKey">Si se pidió y no está habilitada, la clave que falta (nunca su valor).</param>
-public sealed record ConceptWriterSettings(bool ModelWriterRequested, string? MissingKey);
+/// <param name="HintsEnabled">
+/// <c>AI:HintsEnabled</c>, la misma llave que lee la Web para dibujar «Ver pistas». Apagada, la negativa no ofrece el
+/// chip de pistas ni las nombra (crítica de diseño del EXP-0005): no se manda a la alumna a un botón que no existe.
+/// </param>
+public sealed record ConceptWriterSettings(bool ModelWriterRequested, string? MissingKey, bool HintsEnabled = false);
 
 /// <summary>
 /// «Preguntá un concepto» (ADR-14013, ADR-14014): enruta, resuelve con la ficha o con un caso de uso,
@@ -101,7 +105,7 @@ public sealed class AskConceptUseCase
                 Fixed(route, ConceptForm.Outside, ConceptTexts.Outside, null),
             ConceptRouter.Intents.Adjacent =>
                 Fixed(route, ConceptForm.Outside, ConceptTexts.Adjacent, DestinationCatalog.Resolve(DestinationCatalog.NewWork, role, null)),
-            ConceptRouter.Intents.AsksToSolve => Refusal(route, question!, cards, role, work),
+            ConceptRouter.Intents.AsksToSolve => Refusal(route, question!, cards, role, work, _settings.HintsEnabled),
             ConceptRouter.Intents.NoCard => Fixed(route, ConceptForm.Abstention, ConceptTexts.Abstention, null),
             ConceptRouter.Intents.CountWarnings => CountWarnings(route, role, work, workIsForeign),
             ConceptRouter.Intents.CountWorks => await CountWorksAsync(route, requesterId, role, cancellationToken).ConfigureAwait(false),
@@ -126,27 +130,28 @@ public sealed class AskConceptUseCase
     private static ConceptAnswer Fixed(ConceptRoute route, ConceptForm form, string text, ResolvedDestination? destination) =>
         new(form, route.Ring, route.Intent, text, null, destination, "fijo", null, []);
 
-    private static ConceptAnswer Refusal(ConceptRoute route, string question, IReadOnlyList<ConceptCard> cards, Role role, Work? work)
+    private static ConceptAnswer Refusal(ConceptRoute route, string question, IReadOnlyList<ConceptCard> cards, Role role, Work? work, bool hintsEnabled)
     {
         var card = ConceptRouter.MatchCard(question, cards);
         var normalized = ConceptRouter.Normalize(question);
 
         // EL CHIP DE LA NEGATIVA LLEVA A LO QUE SÍ AYUDA, NUNCA A LA RESPUESTA.
         // Y DEPENDE DEL ESTADO (H2, act. 003): «Cargar un trabajo» sólo sin trabajo o con uno en borrador; sobre un
-        // trabajo ya enviado no se ofrece (no hay nada que cargar ahí): quedan las pistas si hay advertencias.
+        // trabajo ya enviado no se ofrece (no hay nada que cargar ahí): quedan las pistas si hay advertencias Y si
+        // las pistas están encendidas (AI:HintsEnabled); apagadas, la página no tiene el botón y el chip no se ofrece.
         var asksForCode = normalized.Contains("describir", StringComparison.Ordinal) || normalized.Contains(" metodo", StringComparison.Ordinal)
             || normalized.Contains(" codigo", StringComparison.Ordinal);
         string? destinationId =
             normalized.Contains(" json ", StringComparison.Ordinal) ? DestinationCatalog.FormatExample
             : asksForCode && (work is null || work.Status == WorkStatus.Draft) ? DestinationCatalog.NewWork
-            : work is not null && work.Observations.Any(o => o.Kind == ObservationKind.Warning) ? DestinationCatalog.SeeHints
+            : hintsEnabled && work is not null && work.Observations.Any(o => o.Kind == ObservationKind.Warning) ? DestinationCatalog.SeeHints
             : null;
 
         return new(
             ConceptForm.UsefulRefusal,
             route.Ring,
             route.Intent,
-            card is null ? ConceptTexts.RefusalWithoutConcept : ConceptTexts.RefusalFor(card),
+            card is null ? ConceptTexts.RefusalWithoutConceptFor(hintsEnabled) : ConceptTexts.RefusalFor(card, hintsEnabled),
             card,
             DestinationCatalog.Resolve(destinationId, role, work?.Id),
             "fijo",

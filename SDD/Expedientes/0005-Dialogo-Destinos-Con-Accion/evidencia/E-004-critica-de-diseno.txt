@@ -1,0 +1,27 @@
+# EXP-0005 · Actuación 002 — evidencia de la crítica de diseño (7,5)
+
+## Prueba nueva contra el código de 82eb21e (src de HEAD, pruebas nuevas), compilación limpia
+Failed ConceptAssistantTests.Negativa_ChipDePistas_SigueAlEstadoDeLasPistas
+  Assert.Null() Failure: Value is not null
+  Actual: ConceptDestinationChip { Id = ver-pistas, Label = Ver pistas de tu advertencia, Path = /trabajos/…?pistas=1 }
+Failed!  - Failed: 1, Passed: 24, Skipped: 0, Total: 25   (filtro: la nueva + ConceptRouter_TablaDeReferencia)
+
+## scripts/test.sh en contenedor (SDK 10.0.403, usuario no root, HOME/NUGET_PACKAGES/TMPDIR en el disco del sistema, SkipVisorBuild=true)
+Passed!  - Failed: 0, Passed:  95, Skipped:  0, Total:  95 - GeometriaFactory.Domain.Tests.dll
+Passed!  - Failed: 0, Passed: 170, Skipped: 16, Total: 186 - GeometriaFactory.Application.Tests.dll
+Passed!  - Failed: 0, Passed: 716, Skipped:  1, Total: 717 - GeometriaFactory.Integration.Tests.dll
+
+## Batería v3 ×3 sin modelo, AI__HintsEnabled=true (sin AI__Endpoint: pistas de plantilla), semillas 7, 14, 21
+f663c066c56a81406fc1bb15db3b9b143e646e5f878faf8b36b5a2811543c8e0  corrida-1.jsonl
+d8b40fa0dc9a60b96d0ed0f1391bd769e8d4f638de5b4a5866c80e5d28d37a35  corrida-2.jsonl
+eea255d6dfcd2defa1a4c2d540c0a8878d8bffadd480c2e3cabeb20229e93152  corrida-3.jsonl
+corrida 1: código 24/24 · corrida 2: código 24/24 · corrida 3: código 24/24 · p95 159 · 68 · 50 ms
+veredicto: PENDIENTE DE LECTURA DOCENTE (0/27 leídas)
+
+## Control con las pistas apagadas (configuración por omisión), una corrida, semilla 7
+corrida 1: código 20/24 (fallas 7, 15, 16, 17: destino+ruta) — esperado: la v3 pide `ver-pistas` y con las pistas
+apagadas la negativa ya no lo ofrece ni dice «Ver pistas».
+
+## Capturas
+Las cuatro «-oscuro» eran copias byte a byte de las «-claro» (el laboratorio no tiene tema oscuro): se retiran.
+Quedan cuatro archivos con cuatro SHA-256 distintos (SHA256SUMS en capturas/).

@@ -43,7 +43,8 @@ public static class DestinationCatalog
     public const string EditWork = "editar-trabajo";
     public const string CommissionList = "entrega-comision";
 
-    /// <summary>`?pistas=1` en `/trabajos/{WorkId}`: abre las pistas de la primera advertencia (EXP-0005, D-3).</summary>
+    /// <summary>`?pistas=1` en `/trabajos/{WorkId}`: abre las pistas de la primera advertencia (EXP-0005, D-3);
+    /// por eso el rótulo dice «de la primera advertencia»: la negativa no sabe por cuál se preguntó.</summary>
     public const string HintsParameter = "pistas";
 
     /// <summary>`?ejemplo=1` en `/trabajo-nuevo`: despliega «Ver un ejemplo» y lo enfoca (EXP-0005, D-2).</summary>
@@ -65,7 +66,7 @@ public static class DestinationCatalog
         new(NewWork, "Cargar un trabajo", "/trabajo-nuevo", Student, [], true),
         new(FormatExample, "Ver el ejemplo de formato", "/trabajo-nuevo", Student, [ExampleParameter], true, ExampleParameter),
         new(CurrentWork, "Volver a tu trabajo", "/trabajos/{WorkId}", Both, [], true),
-        new(SeeHints, "Ver pistas de tu advertencia", "/trabajos/{WorkId}", Student, [HintsParameter], true, HintsParameter),
+        new(SeeHints, "Ver pistas de la primera advertencia", "/trabajos/{WorkId}", Student, [HintsParameter], true, HintsParameter),
         new(EditWork, "Cargar una versión nueva", "/trabajos/{WorkId}/editar", Student, [], true),
         new(CommissionList, "Abrir la entrega de la comisión", "/entrega-comision", [Role.Administrator], ["alumno", "estado", "resuelto", "trabajo"], true),
     ];

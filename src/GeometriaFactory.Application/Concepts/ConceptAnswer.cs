@@ -38,9 +38,16 @@ public static class ConceptTexts
         "Depurar o serializar es parte de programar en C# y esta ayuda no lo cubre: consultalo con tu docente "
         + "o en el material de la materia. Cuando tengas el texto que emite tu programa, cargalo acá.";
 
+    /// <summary>Frase de las pistas en la negativa; sólo con <c>AI:HintsEnabled</c> (EXP-0005).</summary>
+    public const string HintsSentence = " Si tu trabajo tiene una advertencia, las pistas están en Ver pistas.";
+
     public const string RefusalWithoutConcept =
         "Eso es parte del ejercicio: lo resolvés vos en tu programa. Lo que sí está en la ayuda son los conceptos: "
-        + "preguntá, por ejemplo, qué es un ortoedro. Si tu trabajo tiene una advertencia, las pistas están en Ver pistas.";
+        + "preguntá, por ejemplo, qué es un ortoedro." + HintsSentence;
+
+    /// <summary>F6 sin concepto; nombra las pistas sólo si están encendidas.</summary>
+    public static string RefusalWithoutConceptFor(bool hintsEnabled) =>
+        hintsEnabled ? RefusalWithoutConcept : RefusalWithoutConcept[..^HintsSentence.Length];
 
     public const string TeacherCannotEdit =
         "Una versión nueva la carga el alumno desde su trabajo. Vos podés verlo o eliminarlo.";
@@ -76,11 +83,11 @@ public static class ConceptTexts
     public const string CommissionTotalNote = "Cuenta los trabajos enviados de la comisión; los borradores no se ven.";
 
     /// <summary>F6 cuando la pregunta nombra un concepto.</summary>
-    public static string RefusalFor(ConceptCard card)
+    public static string RefusalFor(ConceptCard card, bool hintsEnabled = true)
     {
         ArgumentNullException.ThrowIfNull(card);
         return "Eso es parte del ejercicio: lo resolvés vos en tu programa. Lo que sí está en la ayuda es qué es "
-            + $"«{card.Title}»: abrí la ficha acá abajo. Si tu trabajo tiene una advertencia, las pistas están en Ver pistas.";
+            + $"«{card.Title}»: abrí la ficha acá abajo." + (hintsEnabled ? HintsSentence : string.Empty);
     }
 
     /// <summary>F8: nombra la clave que falta, nunca su valor (K2 R6).</summary>

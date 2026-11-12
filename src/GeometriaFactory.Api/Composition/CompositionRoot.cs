@@ -332,7 +332,7 @@ public static class CompositionRoot
         services.AddScoped<IConceptTraceStore, EfCoreConceptTraceStore>();
 
         var missingKey = enablement.Reason is AiEnablementReason.Habilitada ? null : enablement.Key;
-        services.AddSingleton(new ConceptWriterSettings(ai.ConceptsModelWriter, missingKey));
+        services.AddSingleton(new ConceptWriterSettings(ai.ConceptsModelWriter, missingKey, ai.HintsEnabled));
 
         services.AddScoped(provider => new AskConceptUseCase(
             provider.GetRequiredService<IConceptCorpus>(),

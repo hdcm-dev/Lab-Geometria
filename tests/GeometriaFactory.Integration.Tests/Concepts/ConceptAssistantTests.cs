@@ -35,6 +35,13 @@ public sealed class ConceptAssistantTests : IDisposable
 
     private static readonly Dictionary<string, string?> On = new() { ["AI:ConceptsEnabled"] = "true" };
 
+    /// <summary>Conceptos y pistas encendidos: la tabla espera el chip <c>ver-pistas</c> (EXP-0005).</summary>
+    private static readonly Dictionary<string, string?> OnWithHints = new()
+    {
+        ["AI:ConceptsEnabled"] = "true",
+        ["AI:HintsEnabled"] = "true",
+    };
+
     private static readonly Dictionary<string, string?> OnWithModel = new()
     {
         ["AI:ConceptsEnabled"] = "true",
@@ -81,7 +88,7 @@ public sealed class ConceptAssistantTests : IDisposable
     public async Task ConceptRouter_TablaDeReferencia(int n, string role, string question, Screen screen, string form, string intent, string? destination)
     {
         var fake = FakeChatClient.Answering("no debería llamarse");
-        using var harness = new AiDataServiceHarness(_storePath, s => s.AddSingleton<IChatClient>(fake), settings: On);
+        using var harness = new AiDataServiceHarness(_storePath, s => s.AddSingleton<IChatClient>(fake), settings: OnWithHints);
         using var client = harness.CreateClient();
         var world = await WorldAsync(client);
 
@@ -133,6 +140,47 @@ public sealed class ConceptAssistantTests : IDisposable
         Assert.Equal("fijo", answer.Origin);
         Assert.StartsWith("Eso es parte del ejercicio", answer.Text, StringComparison.Ordinal);
         Assert.Empty(fake.Calls);
+    }
+
+    /// <summary>
+    /// EXP-0005, crítica de diseño: con <c>AI:HintsEnabled</c> apagada la negativa no ofrece «Ver pistas» ni las nombra
+    /// (la página no tiene el botón); encendida, el chip dice que abre la PRIMERA advertencia, que es lo que hace.
+    /// </summary>
+    [Fact]
+    public async Task Negativa_ChipDePistas_SigueAlEstadoDeLasPistas()
+    {
+        const string question = "¿Cuánto tiene que dar el área de mi cubo de arista 3?";
+
+        using (var off = new AiDataServiceHarness(_storePath, settings: On))
+        using (var client = off.CreateClient())
+        {
+            var world = await WorldAsync(client);
+            var answer = await AskAsync(client, world.Student, question, world.OwnWork);
+
+            Assert.Equal("UsefulRefusal", answer.Form);
+            Assert.Null(answer.Destination);
+            Assert.DoesNotContain("pistas", answer.Text, StringComparison.OrdinalIgnoreCase);
+        }
+
+        var secondStore = DataServiceHarness.ReserveStorePath();
+        try
+        {
+        using (var on = new AiDataServiceHarness(secondStore, settings: OnWithHints))
+        using (var client = on.CreateClient())
+        {
+            var world = await WorldAsync(client);
+            var answer = await AskAsync(client, world.Student, question, world.OwnWork);
+
+            Assert.Equal("ver-pistas", answer.Destination?.Id);
+            Assert.Equal("Ver pistas de la primera advertencia", answer.Destination?.Label);
+            Assert.EndsWith("?pistas=1", answer.Destination?.Path, StringComparison.Ordinal);
+            Assert.Contains("Ver pistas", answer.Text, StringComparison.Ordinal);
+        }
+        }
+        finally
+        {
+            DataServiceHarness.DiscardStore(secondStore);
+        }
     }
 
     /// <summary>Criterio 7 · REQ-IA-33: sin ficha, «No está en la ayuda de conceptos» y sin pedido.</summary>

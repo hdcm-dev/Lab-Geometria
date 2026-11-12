@@ -1,0 +1,3 @@
+# Veredicto recalculado desde el registro · métrica conceptos-v1 (oráculo de código + lectura docente sobre origen ficha|modelo; umbral 22/24 por corrida)
+corrida 1: código 20/24 (fallas 16:destino+ruta, 15:destino+ruta, 7:destino+ruta, 17:destino+ruta); lectura docente 0/9 leídas, 0 dicta
+veredicto: RECHAZADA
