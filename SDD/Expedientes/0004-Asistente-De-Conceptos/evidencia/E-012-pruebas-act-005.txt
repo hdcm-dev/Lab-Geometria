@@ -1,0 +1,9 @@
+# E-012 · scripts/test.sh en contenedor (sdk:10.0.403, SkipVisorBuild=true: el visor no cambia; host con carga ~50)
+Passed!  - Failed:     0, Passed:    95, Skipped:     0, Total:    95, Duration: 1 s - GeometriaFactory.Domain.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   192, Skipped:    16, Total:   208, Duration: 10 s - GeometriaFactory.Application.Tests.dll (net10.0)
+  Failed GeometriaFactory.Integration.Tests.RateLimitingTests.ABurstOfTheWholePersonQuotaOfWritesLandsEntirelyOnTheSingleWriter [1 m 43 s]
+Failed!  - Failed:     1, Passed:   715, Skipped:     1, Total:   717, Duration: 33 m 30 s - GeometriaFactory.Integration.Tests.dll (net10.0)
+# La única roja es de tiempo (ráfaga de cuota, 1 m 43 s con carga ~50) y no toca el enrutador. Repetida sola:
+Passed!  - Failed:     0, Passed:    22, Skipped:     0, Total:    22, Duration: 2 m 41 s - GeometriaFactory.Integration.Tests.dll (net10.0)
+# Sonda permanente y enrutador:
+ConceptRouterSondaTests y ConceptRouterLinealTests dentro de Application.Tests: 192 pasan, 0 fallan

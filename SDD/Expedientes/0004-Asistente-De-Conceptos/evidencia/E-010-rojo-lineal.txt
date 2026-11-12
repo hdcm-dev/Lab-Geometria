@@ -1,0 +1,17 @@
+# E-010 · Rojo de ConceptRouterLinealTests sobre el código previo (fd5abb4)
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "Unrelated") [53 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "OwnFigure") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "Digit") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "AsksToSolve") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "CountWarnings") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "Magnitude") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "CountWorks") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "NewWork") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "NewVersion") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "Explains") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "CalcVerb") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "Adjacent") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "Dimensions") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "MyWorks") [< 1 ms]
+  Failed GeometriaFactory.Application.Tests.ConceptRouterLinealTests.CadaExpresion_EsLinealYSinReloj(name: "Injection") [< 1 ms]
+Failed!  - Failed:    15, Passed:     4, Skipped:     0, Total:    19, Duration: 1 s - GeometriaFactory.Application.Tests.dll (net10.0)

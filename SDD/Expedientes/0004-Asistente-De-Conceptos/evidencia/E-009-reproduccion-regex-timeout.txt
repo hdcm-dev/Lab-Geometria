@@ -1,0 +1,13 @@
+# E-009 · Reproducción del 500 (juicio 2026-11-12, R1) con la frase del juez «¿Qué es un ortoedro?»
+# Arnés: ConceptRouter.Route en 4000 llamadas, 256 hilos, contenedor aspnet:10.0 con --cpus=0.1
+## Antes (origin/main fd5abb4, intérprete + tope de 250 ms)
+¿Qué es un ortoedro? -> 36 timeouts de 4000
+## Después (NonBacktracking, sin tope de reloj, abstención de defensa), tres corridas
+¿Qué es un ortoedro? -> 0 timeouts de 4000
+¿Qué es un ortoedro? -> 0 timeouts de 4000
+¿Qué es un ortoedro? -> 0 timeouts de 4000
+## Registro original del juez (api-regex-timeout.log)
+      System.Text.RegularExpressions.RegexMatchTimeoutException: The Regex engine has timed out while trying to match a pattern to an input string. This can occur for many reasons, including very large inputs or excessive backtracking caused by nested quantifiers, back-references and other factors.
+         at System.Text.RegularExpressions.RegexRunner.<CheckTimeout>g__ThrowRegexTimeout|25_0()
+         at System.Text.RegularExpressions.RegexInterpreter.TryMatchAtCurrentPosition(ReadOnlySpan`1 inputSpan)
+         at System.Text.RegularExpressions.Regex.IsMatch(String input)
