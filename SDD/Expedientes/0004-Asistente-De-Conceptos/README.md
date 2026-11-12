@@ -4,7 +4,7 @@
 |---|---|
 | Número | **EXP-0004** |
 | Título | Rebanada del asistente de conceptos: fichas de ayuda, frontera didáctica, destinos y huella |
-| Estado | **en trámite** (actuaciones 001 a 003): construido en `feat/asistente-rebanada`, apagado por omisión (`AI__ConceptsEnabled=false`); las nueve fichas en `borrador` hasta la firma del PO |
+| Estado | **en trámite** (actuaciones 001 a 004): construido en `feat/asistente-rebanada`, apagado por omisión (`AI__ConceptsEnabled=false`); las nueve fichas en `borrador` hasta la firma del PO |
 | Apertura | 2026-11-11 |
 | Rama | `feat/asistente-rebanada` desde `main` `53a2810` |
 | Partes | **Product Owner** (firma las fichas y decide encender); **banco de traslado de Lab-Documentos** (agente, aplica los conocimientos de la guía de IA a un segundo sistema real) |
@@ -22,6 +22,7 @@ se reescriben y evidencia con SHA-256.
 | 001 | 2026-11-11 | constancia | banco de traslado (agente) | Rebanada construida; 874 pruebas en verde y 1 omitida; batería ×3 contra el modelo 24/24 en las tres; ADR-14013 a 14015; apartamientos declarados | [001](actuaciones/001-constancia-construccion-de-la-rebanada.md) |
 | 002 | 2026-11-11 | constancia | banco de traslado (agente) | Criterios 8, 13, 27, 29, 30 y 31 cerrados; batería ×3 con modelo y con fichas, 24/24 en las seis, PENDIENTE de lectura docente; pendientes del PO nombrados | [002](actuaciones/002-constancia-cierre-de-criterios-abiertos.md) |
 | 003 | 2026-11-11 | constancia | banco de traslado (agente) | Hallazgos H1–H4: enrutador y filtro endurecidos (13 rojas con el código previo), ficha visible en la negativa y chip según estado, `ficha-dicta` en docs-as-code, desborde de Observaciones (previo a #266) corregido; batería v2 ×3 con modelo 24/24, PENDIENTE de lectura docente; CLS 0 y sin tema oscuro; sesión docente y `/estado`; verificación: número en letras sólo como valor de una medida (parser), filtro sin falsos positivos (13/56 → 0/56), chip del docente según el rol, batería v2 ×3 con y sin modelo 24/24 | [003](actuaciones/003-constancia-hallazgos-h1-h4.md) |
+| 004 | 2026-11-12 | constancia | banco de traslado (agente) | Juicio con el marco R1–R14: producción 0/28 (no desplegado, 404) y main encendido local 13/28 (R3=0), no se acepta; 500 intermitente por timeout de regex; plan P0 (atrapar el timeout, fichas vigentes, encender y desplegar) a P2 | [004](actuaciones/004-constancia-juicio-con-el-marco.md) |
 
 ## 2. Índice de evidencia
 
