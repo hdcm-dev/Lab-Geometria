@@ -348,7 +348,8 @@ public static class CompositionRoot
                     provider.GetRequiredService<ILogger<ModelConceptAnswerWriter>>())
                 : null,
             provider.GetRequiredService<ConceptWriterSettings>(),
-            provider.GetRequiredService<ISystemClock>()));
+            provider.GetRequiredService<ISystemClock>(),
+            provider.GetRequiredService<IAccountRepository>()));
     }
 
     /// <summary>La dirección del servidor de modelos, sólo si es absoluta http o https y hay modelo.</summary>

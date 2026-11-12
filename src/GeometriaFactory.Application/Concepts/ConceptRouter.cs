@@ -25,30 +25,41 @@ public static class ConceptRouter
     /// <summary>Tope de la pregunta, en caracteres (REQ-IA-21).</summary>
     public const int MaxQuestionLength = 300;
 
-    private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(250);
+    // SIN RETROCESO Y SIN RELOJ (juicio 2026-11-12, R1): con el intérprete y un tope de 250 ms de reloj, la
+    // misma frase («¿Qué es un ortoedro?») vencía bajo carga y la API devolvía 500. El motor NonBacktracking
+    // es lineal en la entrada y la entrada está topeada en MaxQuestionLength: el tiempo está acotado por
+    // construcción, y un tope de reloj sólo convierte la carga del servidor en una falla de la pregunta.
+    private const RegexOptions Linear = RegexOptions.CultureInvariant | RegexOptions.NonBacktracking;
+
+    private static readonly TimeSpan RegexTimeout = Regex.InfiniteMatchTimeout;
+
+    private static readonly Regex Spaces = new(@"\s+", Linear, RegexTimeout);
 
     private static readonly Regex Injection = new(
         @"\bignora|\bolvida(te)? (de )?(lo|las|todo)|instrucciones (anteriores|previas)|system prompt|prompt del sistema"
         + @"|llevame a /|\s/[a-z][\w-]*|contrasena|password|clave de (la|el|otr)|token",
-        RegexOptions.CultureInvariant, RegexTimeout);
+        Linear, RegexTimeout);
 
     private static readonly Regex Unrelated = new(
         @"\bfutbol|\bpartido\b|\bclima\b|\breceta|\bchiste|\bbitcoin|\bnoticias|\bpelicula|\bquien gana",
-        RegexOptions.CultureInvariant, RegexTimeout);
+        Linear, RegexTimeout);
 
     private static readonly Regex Adjacent = new(
-        @"\bdepur|\bdebug|breakpoint|\bserializ|\bcompil|visual studio|\bexcepcion|\bnullreference",
-        RegexOptions.CultureInvariant, RegexTimeout);
+        @"\bdepur|\bdebug|breakpoint|\bserializ|\bcompil|visual studio|\bexcepcion|\bnullreference"
+        // Juicio R1 (Q18): «escribime un programa en C#» es programar, no un concepto ni el valor del ejercicio. El
+        // «#» se pliega a espacio en Normalize.
+        + @"|\bprograma en c\b|\bcodigo en c\b|\ben c sharp",
+        Linear, RegexTimeout);
 
     // Ronda 6: «cuánto pinto si la pared es de tres metros por dos metros» pide un cálculo sin nombrar la
     // magnitud: «N unidad por N unidad» con un verbo de cálculo es dato.
     private static readonly Regex Dimensions = new(
         @"\b(metros?|centimetros?|milimetros?|kilometros?|cm|m|mm|km) por\b",
-        RegexOptions.CultureInvariant, RegexTimeout);
+        Linear, RegexTimeout);
 
     private static readonly Regex CalcVerb = new(
         @"\b(pinto|pintar|necesito|necesita|alcanza|alcanzan|compro|comprar|gasto|gastar|cubro|cubrir|lleva|llevan)\b",
-        RegexOptions.CultureInvariant, RegexTimeout);
+        Linear, RegexTimeout);
 
     // El pedido de resolver: el valor, la fórmula, el resultado, el JSON, el código o la corrección.
     private static readonly Regex AsksToSolve = new(
@@ -56,15 +67,21 @@ public static class ConceptRouter
         // Ronda 4: «fórmula» en singular pide LA fórmula; en plural («las dos fórmulas del cono») se habla de
         // fórmulas, no se pide un valor.
         + @"|\bformula\b|\bpasame|\bescribime|\bhaceme|\bhace(me)? (el|la|mi)\b|\bdame (el|la)\b|\bresolv|\bcorregi|\bcorrigi"
-        + @"|(?<!\bse )\bcalcula|\barmame|\bdecime (el|la|cuanto)|\bque valor (va|pongo|tiene que)|\bcomo (lo )?calculo"
+        + @"|\barmame|\bdecime (el|la|cuanto)|\bque valor (va|pongo|tiene que)|\bcomo (lo )?calculo"
         // H1 (act. 003): el pedido del valor que va en un campo, dicho sin «cuánto» ni «fórmula».
         + @"|\bque (tengo|tenes|hay|tendria|deberia) que (poner|escribir|cargar|completar)|\bque (pongo|escribo|cargo) en"
         + @"|\bque numero (va|pongo|tengo|le|hay|deberia|corresponde)|\bque (va|iria) en (el |la )?(area|volumen|perimetro|campo)",
-        RegexOptions.CultureInvariant, RegexTimeout);
+        Linear, RegexTimeout);
+
+    // «cómo se calcula» pregunta por el concepto; «calculá» lo pide. NonBacktracking no admite la mirada atrás que
+    // lo distinguía, así que se cuentan las dos formas: hay pedido si algún «calcula» no va detrás de «se».
+    private static readonly Regex Calcula = new(@"\bcalcula", Linear, RegexTimeout);
+
+    private static readonly Regex SeCalcula = new(@"\bse calcula", Linear, RegexTimeout);
 
     private static readonly Regex OwnFigure = new(
         @"\bde mi (trabajo|cubo|cilindro|ortoedro|rectangulo|circulo|figura)|\bmi (cubo|cilindro|ortoedro|rectangulo|circulo|figura)",
-        RegexOptions.CultureInvariant, RegexTimeout);
+        Linear, RegexTimeout);
 
     private static readonly Regex Magnitude = new(
         @"\barea|\bvolumen|\bperimetro|\bsuperficie|\bradio\b|\baltura\b|\bdiagonal|\bhipotenusa|\bcateto"
@@ -72,12 +89,12 @@ public static class ConceptRouter
         + @"|\bocupa|\bcabe|\bcapacidad"
         // Ronda 5: «cuántos centímetros cuadrados tiene…» pide un área por su unidad, sin nombrarla.
         + @"|\b(centimetros|metros|milimetros|kilometros|unidades) (cuadrados|cubicos|cuadradas|cubicas)\b|\b(cm|m|mm)[23]\b",
-        RegexOptions.CultureInvariant, RegexTimeout);
+        Linear, RegexTimeout);
 
     // EL DÍGITO CUENTA COMO DATO junto a una magnitud. El número EN LETRAS, en cambio, sólo cuando funciona como
     // valor de una medida (ver SpokenValue): la act. 003 lo contaba siempre y mandaba a la negativa «qué es el
     // área de las dos bases» o «la altura, la que pasa por el medio» (regresión de la verificación, defecto 1).
-    private static readonly Regex Digit = new(@"\d", RegexOptions.CultureInvariant, RegexTimeout);
+    private static readonly Regex Digit = new(@"\d", Linear, RegexTimeout);
 
     // Lo que viene ANTES de un valor: «es tres», «mide tres», «igual a tres», «= tres».
     private static readonly HashSet<string> ValueVerbs = new(StringComparer.Ordinal)
@@ -106,7 +123,7 @@ public static class ConceptRouter
         @"^ (por que|que significa|que quiere decir|hay|existe|existen|de donde sale|para que sirven?) "
         // Ronda 5: la pregunta explicativa también va al final («…aparece cuatro tercios, de dónde sale»).
         + @"|\b(de donde salen?|para que sirven?|que significa|que quiere decir)\b",
-        RegexOptions.CultureInvariant, RegexTimeout);
+        Linear, RegexTimeout);
 
     private static readonly HashSet<string> UnitWords = new(StringComparer.Ordinal)
     {
@@ -115,21 +132,35 @@ public static class ConceptRouter
     };
 
     private static readonly Regex CountWarnings = new(
-        @"\bcuantas (advertencias|observaciones)", RegexOptions.CultureInvariant, RegexTimeout);
+        @"\bcuantas (advertencias|observaciones)", Linear, RegexTimeout);
 
     private static readonly Regex CountWorks = new(
-        @"\bcuantos trabajos", RegexOptions.CultureInvariant, RegexTimeout);
+        @"\bcuantos trabajos", Linear, RegexTimeout);
 
     private static readonly Regex NewVersion = new(
         @"version nueva|nueva version|\breeditar|\beditar (el|mi|este) trabajo|volver a cargar|cargar (otra|de nuevo)",
-        RegexOptions.CultureInvariant, RegexTimeout);
+        Linear, RegexTimeout);
 
     private static readonly Regex MyWorks = new(
         @"\bdonde (veo|estan|encuentro|quedan) mis trabajos|\bver mis (trabajos|entregas)|\bmis entregas",
-        RegexOptions.CultureInvariant, RegexTimeout);
+        Linear, RegexTimeout);
 
     private static readonly Regex NewWork = new(
-        @"\b(cargar|subir|enviar|entregar|pegar) (un |el |mi )?trabajo", RegexOptions.CultureInvariant, RegexTimeout);
+        @"\b(cargar|subir|enviar|entregar|pegar|cargo|subo|envio|entrego|pego) (un |el |mi )?trabajo", Linear, RegexTimeout);
+
+    // Juicio R1 (Q11): «cómo la saco de mi trabajo» pregunta qué hacer con la advertencia, no su valor: se lleva a las
+    // pistas y a la versión nueva, sin decir qué número va.
+    private static readonly Regex RemoveWarning = new(
+        @"\bcomo (la |las |lo |los )?(saco|quito|elimino|arreglo|soluciono|resuelvo)\b|\b(sacar|quitar|eliminar|arreglar) (la |las |una )?advertencia",
+        Linear, RegexTimeout);
+
+    // Juicio R1 (Q22, N09): el docente pregunta por las cuentas que esperan habilitación. Es una cifra del producto.
+    private static readonly Regex CountPendingStudents = new(
+        @"\bcuant(os|as) (alumnos|alumnas|estudiantes|cuentas)\b.*\b(pendiente|habilit|sin habilitar)", Linear, RegexTimeout);
+
+    // Juicio R1 (Q24): dónde se habilita a un alumno.
+    private static readonly Regex EnableStudent = new(
+        @"\bhabilit", Linear, RegexTimeout);
 
     /// <summary>Intenciones fijas del enrutador (las de ficha usan el id de la ficha).</summary>
     public static class Intents
@@ -143,14 +174,32 @@ public static class ConceptRouter
         public const string NewVersion = "operar:version-nueva";
         public const string MyWorks = "operar:mis-trabajos";
         public const string NewWork = "operar:trabajo-nuevo";
+        public const string RemoveWarning = "operar:sacar-advertencia";
+        public const string CountPendingStudents = "operar:cuantos-pendientes";
+        public const string EnableStudent = "operar:habilitar-alumno";
         public const string NoCard = "sin-ficha";
         public const string TooLong = "sobre-el-tope";
     }
 
-    /// <summary>Enruta una pregunta contra las fichas que el rol ve.</summary>
+    /// <summary>Enruta una pregunta contra las fichas que el rol ve. Nunca lanza por el motor de expresiones.</summary>
     public static ConceptRoute Route(string? question, IReadOnlyList<ConceptCard> visibleCards)
     {
         ArgumentNullException.ThrowIfNull(visibleCards);
+
+        try
+        {
+            return RouteCore(question, visibleCards);
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            // Defensa de última línea: con el motor lineal no debería pasar. Si pasa, la abstención es inocua
+            // (no resuelve nada) y la pantalla recibe una respuesta, nunca un 500.
+            return new(ConceptRing.Concepts, Intents.NoCard, null);
+        }
+    }
+
+    private static ConceptRoute RouteCore(string? question, IReadOnlyList<ConceptCard> visibleCards)
+    {
 
         if (string.IsNullOrWhiteSpace(question))
         {
@@ -183,12 +232,27 @@ public static class ConceptRouter
         // de medida lo vuelve pedido.
         var explains = Explains.IsMatch(text);
 
-        if ((!explains && AsksToSolve.IsMatch(text))
+        if ((!explains && (AsksToSolve.IsMatch(text) || Calcula.Count(text) > SeCalcula.Count(text)))
             || (OwnFigure.IsMatch(text) && Magnitude.IsMatch(text))
             || (SpokenValue(question) && Magnitude.IsMatch(text))
             || (Dimensions.IsMatch(text) && CalcVerb.IsMatch(text) && SpokenValue(question)))
         {
             return new(ConceptRing.Outside, Intents.AsksToSolve, null);
+        }
+
+        if (CountPendingStudents.IsMatch(text))
+        {
+            return new(ConceptRing.Operate, Intents.CountPendingStudents, null);
+        }
+
+        if (EnableStudent.IsMatch(text))
+        {
+            return new(ConceptRing.Operate, Intents.EnableStudent, null);
+        }
+
+        if (RemoveWarning.IsMatch(text))
+        {
+            return new(ConceptRing.Operate, Intents.RemoveWarning, null);
         }
 
         if (CountWarnings.IsMatch(text))
@@ -221,6 +285,100 @@ public static class ConceptRouter
         return best is null
             ? new(ConceptRing.Concepts, Intents.NoCard, null)
             : new(ConceptRing.Concepts, best.Id, best);
+    }
+
+    // Las palabras que abren una pregunta nueva detrás de «y»: «qué es X y dónde veo Y», «qué es X y calculame Y».
+    private static readonly HashSet<string> PartStarters = new(StringComparer.Ordinal)
+    {
+        "que", "como", "donde", "cuanto", "cuanta", "cuantos", "cuantas", "cual", "cuales", "cuando", "quien",
+        "por", "para", "decime", "explicame", "pasame", "dame", "haceme", "escribime", "resolveme", "corregime",
+        "mostrame", "contame",
+    };
+
+    /// <summary>
+    /// Parte una pregunta compuesta (juicio R1): en cada «?» que cierra una pregunta y en cada «y»/«e» seguido de una palabra que abre una
+    /// pregunta («y dónde», «y qué», «y calculame»). Una enumeración («largo, ancho y altura», «el área y el volumen»)
+    /// no se parte. Devuelve las partes normalizadas; una sola parte si no es compuesta.
+    /// </summary>
+    public static IReadOnlyList<string> SplitParts(string? question)
+    {
+        if (string.IsNullOrWhiteSpace(question) || question.Length > MaxQuestionLength)
+        {
+            return [question ?? string.Empty];
+        }
+
+        var parts = new List<string>();
+
+        // Sólo «?» cierra una pregunta: «Si la arista mide 4, ¿el volumen…?» es UNA pregunta con su condición (Q07).
+        foreach (var segment in question.Split('?', StringSplitOptions.RemoveEmptyEntries))
+        {
+            var tokens = Normalize(segment).Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var current = new List<string>();
+
+            for (var i = 0; i < tokens.Length; i++)
+            {
+                var next = i + 1 < tokens.Length ? tokens[i + 1] : null;
+                if (tokens[i] is "y" or "e" && current.Count > 0 && next is not null
+                    && (PartStarters.Contains(next) || next.StartsWith("calcul", StringComparison.Ordinal)))
+                {
+                    parts.Add(string.Join(' ', current));
+                    current.Clear();
+                    continue;
+                }
+
+                current.Add(tokens[i]);
+            }
+
+            if (current.Count > 0)
+            {
+                parts.Add(string.Join(' ', current));
+            }
+        }
+
+        return parts.Count == 0 ? [question] : parts;
+    }
+
+    /// <summary>
+    /// Enruta cada parte de una compuesta. Devuelve una sola ruta cuando la pregunta no es compuesta o cuando partirla
+    /// no cambia nada. LA PARTICIÓN NUNCA DEBILITA LA FRONTERA: lo que entero es inyección, ajeno o lo de al lado no
+    /// se parte, y si la pregunta entera pide resolver y ninguna parte lo pide sola (el dato y la pregunta quedaron en
+    /// partes distintas), vale la negativa entera.
+    /// </summary>
+    public static IReadOnlyList<(string Part, ConceptRoute Route)> RouteParts(string? question, IReadOnlyList<ConceptCard> visibleCards)
+    {
+        var whole = Route(question, visibleCards);
+
+        if (whole.Intent is Intents.Injection or Intents.Unrelated or Intents.TooLong or Intents.Adjacent)
+        {
+            return [(question ?? string.Empty, whole)];
+        }
+
+        var parts = SplitParts(question);
+        if (parts.Count < 2)
+        {
+            return [(question ?? string.Empty, whole)];
+        }
+
+        var routed = parts.Select(p => (Part: p, Route: Route(p, visibleCards))).ToList();
+
+        if (whole.Intent == Intents.AsksToSolve && routed.All(r => r.Route.Intent != Intents.AsksToSolve))
+        {
+            return [(question ?? string.Empty, whole)];
+        }
+
+        // La misma intención repetida es una sola respuesta; una parte sin ficha no tapa a las que sí la tienen.
+        var distinct = routed
+            .GroupBy(r => r.Route.Intent, StringComparer.Ordinal)
+            .Select(g => g.First())
+            .ToList();
+        if (distinct.Count > 1)
+        {
+            // Una parte sin ficha que no es pregunta («me llamo Ana») se descarta; si es pregunta, recibe la abstención.
+            distinct.RemoveAll(r => r.Route.Intent == Intents.NoCard && distinct.Any(o => o.Route.Intent != Intents.NoCard)
+                && !PartStarters.Contains(r.Part.Split(' ', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? string.Empty));
+        }
+
+        return distinct.Count < 2 ? [(question ?? string.Empty, whole)] : distinct;
     }
 
     /// <summary>
@@ -392,7 +550,7 @@ public static class ConceptRouter
             folded.Append(char.IsLetterOrDigit(plain) || plain is '/' or '-' ? plain : ' ');
         }
 
-        return " " + Regex.Replace(folded.ToString(), @"\s+", " ", RegexOptions.CultureInvariant, RegexTimeout).Trim() + " ";
+        return " " + Regex.Replace(folded.ToString(), @"\s+", " ", Linear, RegexTimeout).Trim() + " ";
     }
 
     private static bool ContainsWord(string text, string needle)

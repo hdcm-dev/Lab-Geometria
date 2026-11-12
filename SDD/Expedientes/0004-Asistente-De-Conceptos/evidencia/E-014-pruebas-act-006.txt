@@ -1,0 +1,12 @@
+# E-014 · Pruebas de la act. 006 en contenedor (sdk:10.0.403, SkipVisorBuild=true)
+# scripts/test.sh completo (código previo al último ajuste de la partición: sólo «?» cierra pregunta):
+Passed!  - Failed:     0, Passed:   215, Skipped:    16, Total:   231, Duration: 4 s - GeometriaFactory.Application.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:    95, Skipped:     0, Total:    95, Duration: 499 ms - GeometriaFactory.Domain.Tests.dll (net10.0)
+  Failed GeometriaFactory.Integration.Tests.Concepts.ConceptAssistantTests.Corpus_Canario_NoSeObedece [43 s]
+Failed!  - Failed:     1, Passed:   726, Skipped:     1, Total:   728, Duration: 24 m 51 s - GeometriaFactory.Integration.Tests.dll (net10.0)
+# La roja (Corpus_Canario_NoSeObedece, 500 con redactor falso y el host cargado por la batería del juez en paralelo) pasó en las dos corridas filtradas, sin carga.
+# Con el código final: Application completa + Integration filtrada (Concept|Destination):
+Passed!  - Failed:     0, Passed:   216, Skipped:    16, Total:   232, Duration: 3 s - GeometriaFactory.Application.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:    95, Skipped:     0, Total:    95, Duration: 5 m 43 s - GeometriaFactory.Integration.Tests.dll (net10.0)
+# Sonda permanente: ConceptRouterSondaTests sin quitar frases, y ConceptRouterCompuestasTests.Sonda_LaParticionNoCambiaElLadoDeLaFrontera recorre todas las frases de ConceptRouterTests, ConceptRouterSondaTests y ConceptRouterLinealTests: ninguna cambia de lado de la frontera al partirse.
+# Rojo: con el código de 3207b52 las 8 compuestas salen con una sola intención (E-011 y la columna «antes» de E-013); las pruebas nuevas no compilan contra él (RouteParts, Parts, intenciones nuevas).

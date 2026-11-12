@@ -1,0 +1,5 @@
+# Veredicto recalculado desde el registro · métrica conceptos-v1 (oráculo de código + lectura docente sobre origen ficha|modelo; umbral 22/24 por corrida)
+corrida 1: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+corrida 2: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+corrida 3: código 24/24 (fallas —); lectura docente 0/9 leídas, 0 dicta
+veredicto: PENDIENTE DE LECTURA DOCENTE (0/27 leídas)

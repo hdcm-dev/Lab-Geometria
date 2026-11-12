@@ -707,6 +707,107 @@ public sealed class ConceptAssistantTests : IDisposable
         Assert.Equal(sqlTotal, total.Breakdown.Sum(b => b.Count));
     }
 
+    // ------------------------------------------------- compuestas y primer turno (juicio R1) ---------
+
+    /// <summary>
+    /// Juicio R1 (2026-11-12): las compuestas se responden parte por parte, y la parte de resolver recibe la negativa
+    /// mientras la otra se responde. Cada fila: rol, pregunta y, por parte, «forma:intención:destino».
+    /// </summary>
+    public static TheoryData<string, string, string> Compound => new()
+    {
+        { "alumno", "¿Qué es una advertencia y cómo la saco de mi trabajo?", "FromHelp:advertencia:trabajo-actual|FromHelp:operar:sacar-advertencia:ver-pistas" },
+        { "alumno", "¿Qué es el volumen y cuánto vale en mi cubo?", "FromHelp:volumen:trabajo-actual|UsefulRefusal:pide-resolver:ver-pistas" },
+        { "alumno", "¿Qué es una arista y dónde veo mis trabajos?", "FromHelp:arista:ejemplo-formato|FromHelp:operar:mis-trabajos:mis-trabajos" },
+        { "alumno", "decime qué es una arista y dónde cargo mi trabajo?", "FromHelp:arista:ejemplo-formato|FromHelp:operar:trabajo-nuevo:trabajo-nuevo" },
+        { "alumno", "¿Qué es el volumen y qué es el área total?", "FromHelp:volumen:trabajo-actual|FromHelp:area-total-vs-cara:trabajo-actual" },
+        { "alumno", "Qué es un ortoedro y calculame el volumen del mío", "FromHelp:ortoedro:ejemplo-formato|UsefulRefusal:pide-resolver:ver-pistas" },
+        { "docente", "¿Qué es el estado pendiente y dónde habilito a un alumno?", "FromHelp:estado-pendiente:-|FromHelp:operar:habilitar-alumno:cuentas" },
+        { "docente", "¿Qué es una advertencia y cuántos alumnos tengo pendientes?", "FromHelp:advertencia:-|Figure:operar:cuantos-pendientes:cuentas" },
+    };
+
+    [Theory]
+    [MemberData(nameof(Compound))]
+    public async Task Compuesta_UnaRespuestaPorParte(string role, string question, string expected)
+    {
+        var fake = FakeChatClient.Answering("no debería llamarse");
+        using var harness = new AiDataServiceHarness(_storePath, s => s.AddSingleton<IChatClient>(fake), settings: OnWithHints);
+        using var client = harness.CreateClient();
+        var world = await WorldAsync(client);
+
+        var answer = await AskAsync(client, role == "docente" ? world.Administrator : world.Student, question, role == "docente" ? null : world.OwnWork);
+
+        Assert.Equal("Compound", answer.Form);
+        Assert.NotNull(answer.Parts);
+        var got = string.Join('|', answer.Parts!.Select(p => $"{p.Form}:{p.Intent}:{p.Destination?.Id ?? "-"}"));
+        Assert.Equal(expected, got);
+        Assert.Empty(fake.Calls);
+
+        // La parte de concepto trae la ficha; la negativa no trae el valor.
+        Assert.All(answer.Parts!.Where(p => p.Form == "UsefulRefusal"), p => Assert.DoesNotMatch(@"\d", p.Text));
+        Assert.All(answer.Parts!, p => Assert.False(string.IsNullOrWhiteSpace(p.Text)));
+    }
+
+    /// <summary>Juicio R1, Q14: con el trabajo abierto, la respuesta lo nombra y dice dónde está la advertencia.</summary>
+    [Fact]
+    public async Task PrimerTurno_PorQueMiTrabajoTieneAdvertencia_UsaElTrabajoAbierto()
+    {
+        using var harness = new AiDataServiceHarness(_storePath, settings: OnWithHints);
+        using var client = harness.CreateClient();
+        var world = await WorldAsync(client);
+
+        var answer = await AskAsync(client, world.Student, "¿Por qué mi trabajo tiene una advertencia?", world.OwnWork);
+
+        Assert.Equal("advertencia", answer.Intent);
+        Assert.Contains("En tu trabajo abierto", answer.Text, StringComparison.Ordinal);
+        Assert.Equal("ver-pistas", answer.Destination?.Id);
+        Assert.DoesNotMatch(@"\d", answer.Text);
+
+        var teacher = await AskAsync(client, world.Administrator, "¿Por qué este trabajo tiene una advertencia en Volumen?", world.OwnWork);
+        Assert.Contains("En el trabajo abierto", teacher.Text, StringComparison.Ordinal);
+        Assert.Equal("trabajo-actual", teacher.Destination?.Id);
+    }
+
+    /// <summary>Juicio R1, Q22: la cifra de alumnos pendientes sale de las cuentas, no de la ficha del estado.</summary>
+    [Fact]
+    public async Task PrimerTurno_AlumnosPendientes_EsCifraDelDocente()
+    {
+        using var harness = new AiDataServiceHarness(_storePath, settings: On);
+        using var client = harness.CreateClient();
+        var world = await WorldAsync(client);
+        using (var pending = await client.PostAsJsonAsync("/v1/cuentas", new AccountRegistrationRequest("espera@frre.utn.edu.ar", "Eva", "Sosa")))
+        {
+            Assert.True(pending.IsSuccessStatusCode);
+        }
+
+        var answer = await AskAsync(client, world.Administrator, "¿Cuántos alumnos tengo pendientes de habilitar?", null);
+
+        Assert.Equal("Figure", answer.Form);
+        Assert.Equal("Hay 1 alumno pendiente de habilitar.", answer.Text);
+        Assert.Equal("cuentas", answer.Destination?.Id);
+
+        var student = await AskAsync(client, world.Student, "¿Cuántos alumnos tengo pendientes de habilitar?", null);
+        Assert.DoesNotMatch(@"\d", student.Text);
+        Assert.NotEqual("cuentas", student.Destination?.Id);
+    }
+
+    /// <summary>Juicio R1, Q18 y Q25: programar en C# es lo de al lado; el docente recibe su propia negativa.</summary>
+    [Fact]
+    public async Task PrimerTurno_ProgramaYCorreccionDelDocente_ConSuMotivo()
+    {
+        using var harness = new AiDataServiceHarness(_storePath, settings: On);
+        using var client = harness.CreateClient();
+        var world = await WorldAsync(client);
+
+        var program = await AskAsync(client, world.Student, "Escribime un programa en C# que calcule áreas", world.OwnWork);
+        Assert.Equal("lo-de-al-lado", program.Intent);
+        Assert.DoesNotContain("parte del ejercicio", program.Text, StringComparison.Ordinal);
+
+        var grade = await AskAsync(client, world.Administrator, "Corregime todos los trabajos de la comisión", null);
+        Assert.Equal("UsefulRefusal", grade.Form);
+        Assert.Equal(ConceptTexts.TeacherRefusal, grade.Text);
+        Assert.Equal("entrega-comision", grade.Destination?.Id);
+    }
+
     // --------------------------------------------------------------- mundo ----------------------
 
     private sealed record World(string Student, string Administrator, Guid OwnWork, Guid ForeignWork);

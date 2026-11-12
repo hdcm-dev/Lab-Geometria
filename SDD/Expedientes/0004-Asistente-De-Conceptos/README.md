@@ -23,6 +23,8 @@ se reescriben y evidencia con SHA-256.
 | 002 | 2026-11-11 | constancia | banco de traslado (agente) | Criterios 8, 13, 27, 29, 30 y 31 cerrados; batería ×3 con modelo y con fichas, 24/24 en las seis, PENDIENTE de lectura docente; pendientes del PO nombrados | [002](actuaciones/002-constancia-cierre-de-criterios-abiertos.md) |
 | 003 | 2026-11-11 | constancia | banco de traslado (agente) | Hallazgos H1–H4: enrutador y filtro endurecidos (13 rojas con el código previo), ficha visible en la negativa y chip según estado, `ficha-dicta` en docs-as-code, desborde de Observaciones (previo a #266) corregido; batería v2 ×3 con modelo 24/24, PENDIENTE de lectura docente; CLS 0 y sin tema oscuro; sesión docente y `/estado`; verificación: número en letras sólo como valor de una medida (parser), filtro sin falsos positivos (13/56 → 0/56), chip del docente según el rol, batería v2 ×3 con y sin modelo 24/24 | [003](actuaciones/003-constancia-hallazgos-h1-h4.md) |
 | 004 | 2026-11-12 | constancia | banco de traslado (agente) | Juicio con el marco R1–R14: producción 0/28 (no desplegado, 404) y main encendido local 13/28 (R3=0), no se acepta; 500 intermitente por timeout de regex; plan P0 (atrapar el timeout, fichas vigentes, encender y desplegar) a P2 | [004](actuaciones/004-constancia-juicio-con-el-marco.md) |
+| 005 | 2026-11-12 | constancia | banco de traslado (agente) | P0: sin 500 por vencimiento del regex (motor lineal); batería del juez ×3 75/75 con HTTP 200 | [005](actuaciones/005-constancia-p0-sin-500-por-regex.md) |
+| 006 | 2026-11-12 | constancia | banco de traslado (agente) | P1: compuestas parte por parte (8/8), trabajo abierto, cifra de alumnos pendientes, voz del docente, programar en C# como lo de al lado; batería del juez ×3 105/105 con HTTP 200 y v3 ×3 24/24 | [006](actuaciones/006-constancia-compuestas-y-primer-turno.md) |
 
 ## 2. Índice de evidencia
 
@@ -36,6 +38,8 @@ se reescriben y evidencia con SHA-256.
 | E-007 | H1: pruebas nuevas contra el código de `bcb0896` (13 rojas) y la batería completa con el código corregido (95 · 99 · 707, 1 omitida) | [E-007](evidencia/E-007-h1-pruebas-rojo-verde.txt) · capturas en [`evidencia/capturas-act-003/`](evidencia/capturas-act-003/) |
 | E-008 | verificación de la 003: pruebas nuevas contra `e6b0371` (16 rojas) y la batería completa con el código corregido (95 · 142 · 709, 1 omitida) | [E-008](evidencia/E-008-verificacion-rojo-verde.txt) |
 | E-002 | batería v1 ×3 contra el modelo, con SHA-256 de cada corrida | [E-002](evidencia/E-002-bateria-x3.txt) · corridas en [`ai-layer/ensayos/corrida-conceptos-2026-11-11/`](../../../ai-layer/ensayos/corrida-conceptos-2026-11-11/) |
+| E-013 | batería del juez (35 preguntas) ×3 antes/después de la act. 006 | [E-013](evidencia/E-013-bateria-del-juez-compuestas-x3.txt) |
+| E-014 | pruebas de la act. 006 en contenedor | [E-014](evidencia/E-014-pruebas-act-006.txt) |
 
 ## 3. Punto de continuación
 
