@@ -1755,6 +1755,15 @@
             "items": {
               "$ref": "#/components/schemas/ConceptBreakdownEntry"
             }
+          },
+          "parts": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ConceptAnswerResponse"
+            }
           }
         }
       },
