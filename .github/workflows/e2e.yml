@@ -63,17 +63,13 @@ concurrency:
 jobs:
   banco-local:
     name: Recorrido sobre el banco local
-    # CORRE EN EL RUNNER PROPIO IGUAL QUE EL OTRO, pero por un motivo distinto: acá no hay ninguna
-    # red que alcanzar —el laboratorio se levanta adentro del propio trabajo—, lo que hace falta es
-    # una máquina que aguante publicar dos piezas y abrir un navegador sin cobrar por minuto.
-    runs-on: [self-hosted, e2e-geometria]
-    # EL RUNNER PROPIO NO EJECUTA CODIGO DE UN FORK. El repositorio es público: un pull request
-    # desde un fork corre acá sólo si viene de una rama de este mismo repositorio. El de un fork
-    # salta este trabajo, y el Resumen lo acepta como salto y no como rojo (mesa
-    # `SDD/Docs/Audit/Mesa-2026-09-14.md`, R-01).
-    if: >-
-      github.event_name != 'pull_request' ||
-      github.event.pull_request.head.repo.full_name == github.repository
+    # CORRE EN UN RUNNER DE GITHUB, a diferencia del modo desplegado. Acá no hay ninguna red que
+    # alcanzar —el laboratorio se levanta adentro del propio trabajo— y el repositorio es público
+    # y de demostración: los minutos son gratis. Hasta el 2026-11-22 corría en el runner propio
+    # (`e2e-geometria`) con una guarda que saltaba los pull request desde un fork; en un runner de
+    # GitHub el código de un fork no toca ninguna máquina nuestra, así que la guarda ya no hace
+    # falta y el recorrido corre también para ellos.
+    runs-on: ubuntu-latest
     steps:
       - name: Descargar el código
         uses: actions/checkout@v4
@@ -229,7 +225,7 @@ jobs:
           # se pone en rojo sola se termina apagando —este repositorio ya lo pagó con `C-3`,
           # catorce días en rojo sin que nadie lo leyera—.
           malo=0
-          # El banco local SALTA en un pull request desde un fork (el runner propio no lo corre).
+          # El banco local ya no salta en los forks; `skipped` queda aceptado por si se lo apaga a mano.
           case "$banco" in
             success|skipped) ;;
             *) echo "::error::El recorrido sobre el banco local falló."; malo=1 ;;
